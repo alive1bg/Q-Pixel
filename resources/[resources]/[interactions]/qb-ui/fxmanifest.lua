@@ -24,7 +24,7 @@ client_scripts {
 }
 
 -- server_scripts {
---   -- '@qb-lib/server/sv_rpc.lua',
+--   -- '@np-lib/server/sv_rpc.lua',
 --   'server/sv_*.lua'
 --   'server/sv_*.js'
 -- }

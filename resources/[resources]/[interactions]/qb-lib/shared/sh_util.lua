@@ -10,14 +10,14 @@ end
 function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
-        Wait(0)
+        Citizen.Wait(0)
     end
 end
 
 function loadModel(pModelName)
   RequestModel(pModelName)
   while not HasModelLoaded(pModelName) do
-      Wait(100)
+      Citizen.Wait(100)
   end
 end
 

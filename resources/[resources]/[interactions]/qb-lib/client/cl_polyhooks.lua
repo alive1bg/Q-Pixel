@@ -17,7 +17,7 @@ function PolyZoneInteraction(pZone, pText, pKey, pAction)
 
             exports['qb-ui']:showInteraction(pText);
 
-            CreateThread(function ()
+            Citizen.CreateThread(function ()
                 local keys = type(pKey) == 'table' and pKey or { pKey }
 
                 while ActiveInteractions[pZone] do
@@ -26,7 +26,7 @@ function PolyZoneInteraction(pZone, pText, pKey, pAction)
                             pAction(data, key)
                         end
                     end
-                    Wait(0)
+                    Citizen.Wait(0)
                 end
             end)
         end,
@@ -38,13 +38,13 @@ function PolyZoneInteraction(pZone, pText, pKey, pAction)
     })
 end
 
-AddEventHandler('qb-polyzone:enter', function(zone, data)
+AddEventHandler('np-polyzone:enter', function(zone, data)
     if not PolyZoneHooks[zone] then return end
 
     PolyZoneHooks[zone]['enter'](data)
 end)
 
-AddEventHandler('qb-polyzone:exit', function(zone, data)
+AddEventHandler('np-polyzone:exit', function(zone, data)
     if not PolyZoneHooks[zone] then return end
 
     PolyZoneHooks[zone]['exit']()

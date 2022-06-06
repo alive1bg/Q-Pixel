@@ -171,8 +171,8 @@ RegisterNetEvent('fishing:SkillBar', function(message)
 				end
 			end
 		end
-	elseif Config.Skillbar == "np-skillbar" then 
-		local finished = exports["np-skillbar"]:taskBar(1000,math.random(3,5))
+	elseif Config.Skillbar == "qb-skillbar" then 
+		local finished = exports["qb-skillbar"]:taskBar(1000,math.random(3,5))
 		if finished ~= 100 then
 			QBCore.Functions.Notify('The Fish Got Away!', 'error')
 			loseBait()

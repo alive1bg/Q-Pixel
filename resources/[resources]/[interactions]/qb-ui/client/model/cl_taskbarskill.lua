@@ -184,4 +184,17 @@ function taskBarSkillCheck(difficulty, skillGapSent, cb, reverse, usePrev)
   return minigameResult
 end
 
+-- Citizen.CreateThread(function()
+--   while true do
+--     Wait(0)
+--     if IsControlJustPressed(0, 38) then
+--       if not tbsListening then
+--         for i=1,10 do
+--           local result = taskBarSkillCheck(math.random(3000, 4000), math.random(5, 25), function(result) return end, false, false)
+--           print('succeeded?', result == 100)
+--         end
+--       end
+--     end
+--   end
+-- end)
 exports("taskBarSkill", taskBarSkillCheck)

@@ -93,7 +93,7 @@ end)
 RegisterNetEvent('qb-drugprocessing:processingThiChlo', function()
 	local coords = GetEntityCoords(PlayerPedId(source))
 	
-	if #(coords-coordsConfig.CircleZones.thionylchlorideProcessing.coords) < 5 then
+	if #(coords-Config.CircleZones.thionylchlorideProcessing.coords) < 5 then
 		if not isProcessing then
 			QBCore.Functions.TriggerCallback('qb-drugprocessing:validate_items', function(result)
 				if result then

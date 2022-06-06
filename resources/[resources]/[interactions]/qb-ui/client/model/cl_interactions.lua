@@ -1,22 +1,23 @@
 local lastMessage = ""
-exports("showInteraction", function(message, type)
+exports("showInteraction", function(message, type, opts)
     if not type then type = "info" end
+    if not opts then opts = {} end
     lastMessage = message
     SendUIMessage({
-        source = "qb-nui",
+        source = "np-nui",
         app = "interactions",
         data = {
             message = message,
+            opts = opts,
             show = true,
             type = type,
         }
     })
 end)
-
 exports("hideInteraction", function(type)
     type = type and type or "info"
     SendUIMessage({
-        source = "qb-nui",
+        source = "np-nui",
         app = "interactions",
         data = {
             message = lastMessage,
@@ -28,7 +29,7 @@ end)
 
 exports("showContextMenu", function(options, position)
     SendUIMessage({
-        source = "qb-nui",
+        source = "np-nui",
         app = "contextmenu",
         show = true,
         data = {
@@ -36,5 +37,18 @@ exports("showContextMenu", function(options, position)
             options = options
         }
     })
-    exports['qb-lib']:SetUIFocus(true, true)
+    SetUIFocus(true, true)
+end)
+
+exports("hideContextMenu", function()
+    SendUIMessage({
+        source = "np-nui",
+        app = "contextmenu",
+        show = false,
+        data = {
+            position = "right",
+            options = nil
+        }
+    })
+    SetUIFocus(false, false)
 end)

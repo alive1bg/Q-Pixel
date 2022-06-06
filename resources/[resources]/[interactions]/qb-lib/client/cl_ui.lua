@@ -11,26 +11,26 @@ function RegisterUICallback(name, cb)
   end
   AddEventHandler(('_npx_uiReq:%s'):format(name), interceptCb)
 
-  if (GetResourceState('qb-ui') == "started") then exports['qb-ui']:RegisterUIEvent(name) end
+  if (GetResourceState("qb-ui") == "started") then exports["qb-ui"]:RegisterUIEvent(name) end
 
   registered[#registered + 1] = name
 end
 
 function SendUIMessage(data)
-  exports['qb-ui']:SendUIMessage(data)
+  exports["qb-ui"]:SendUIMessage(data)
 end
 
 function SetUIFocus(hasFocus, hasCursor)
-  exports['qb-ui']:SetUIFocus(hasFocus, hasCursor)
+  exports["qb-ui"]:SetUIFocus(hasFocus, hasCursor)
 end
 exports('SetUIFocus', SetUIFocus)
 
 function GetUIFocus()
-  return exports['qb-ui']:GetUIFocus()
+  return exports["qb-ui"]:GetUIFocus()
 end
 
 AddEventHandler("_npx_uiReady", function()
   for _, eventName in ipairs(registered) do
-    exports['qb-ui']:RegisterUIEvent(eventName)
+    exports["qb-ui"]:RegisterUIEvent(eventName)
   end
 end)

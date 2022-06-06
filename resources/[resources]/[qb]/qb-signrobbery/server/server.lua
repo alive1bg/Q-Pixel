@@ -22,7 +22,7 @@ AddEventHandler('qb-signrobbery:server:delete', function(object)
         elseif object.model == 1191039009 then
             Player.Functions.AddItem("dontblockintersectionsign", 1, false)
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['dontblockintersectionsign'], "add")
-        elseif object.model == -156356737 then
+        elseif object.model == 4138610559 then
             Player.Functions.AddItem("uturnsign", 1, false)
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['uturnsign'], "add")
         elseif object.model == 3830972543 then
@@ -109,13 +109,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 	if data == 1 then
 		if Player.Functions.GetItemByName('stopsign') ~= nil and Player.Functions.GetItemByName('stopsign').amount >= 1 then
 			Player.Functions.RemoveItem("stopsign", 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-                Wait(500)
+                Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Don't Have Enough Items")
@@ -124,13 +124,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('walkingmansign') ~= nil and Player.Functions.GetItemByName('walkingmansign').amount >= 1 then
 			Player.Functions.RemoveItem("walkingmansign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["walkingmansign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -139,13 +139,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('dontblockintersectionsign') ~= nil and Player.Functions.GetItemByName('dontblockintersectionsign').amount >= 1 then
 			Player.Functions.RemoveItem("dontblockintersectionsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["dontblockintersectionsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -154,13 +154,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('uturnsign') ~= nil and Player.Functions.GetItemByName('uturnsign').amount >= 1 then
 			Player.Functions.RemoveItem("uturnsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["uturnsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -169,13 +169,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('noparkingsign') ~= nil and Player.Functions.GetItemByName('noparkingsign').amount >= 1 then
 			Player.Functions.RemoveItem("noparkingsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["noparkingsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -184,13 +184,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('leftturnsign') ~= nil and Player.Functions.GetItemByName('leftturnsign').amount >= 1 then
 			Player.Functions.RemoveItem("leftturnsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["leftturnsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -199,13 +199,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('rightturnsign') ~= nil and Player.Functions.GetItemByName('rightturnsign').amount >= 1 then
 			Player.Functions.RemoveItem("rightturnsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rightturnsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -214,13 +214,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('notrespassingsign') ~= nil and Player.Functions.GetItemByName('notrespassingsign').amount >= 1 then
 			Player.Functions.RemoveItem("notrespassingsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["notrespassingsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")
@@ -229,13 +229,13 @@ RegisterServerEvent("SignRobbery:TradeItems", function(data)
 		if Player.Functions.GetItemByName('yieldsign') ~= nil and Player.Functions.GetItemByName('yieldsign').amount >= 1 then
 			Player.Functions.RemoveItem("yieldsign", "1")
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["yieldsign"], 'remove', 1)
-			Wait(500)
+			Citizen.Wait(500)
 			for i = 1, 5, math.random(1,2) do
 				randomItem = Config.Items[math.random(1, #Config.Items)]
 				amount = math.random(Config.min, Config.max)
 				Player.Functions.AddItem(randomItem, amount, false, {["quality"] = nil})
 				TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[randomItem], 'add', amount)
-				Wait(500)
+				Citizen.Wait(500)
 			end
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You Do Not Have Enough Items")

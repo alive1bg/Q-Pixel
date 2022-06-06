@@ -12,6 +12,24 @@ CreateThread(function()
     end
 end)
 
+local RightClick = false
+Citizen.CreateThread(function()
+    while true do
+        DisableControlAction(0, 140, true)
+    DisableControlAction(0, 263, true)
+    if RightClick == false then
+        DisableControlAction(0,24,true)
+    end
+    if IsControlPressed(0, 25) then
+        RightClick = true
+    end
+    if IsControlJustReleased(0, 25) then
+        RightClick = false
+    end
+        Wait(1)
+    end
+end)
+
 AddEventHandler("populationPedCreating", function(x, y, z, model)
 	Wait(500)	-- Give the entity some time to be created
 	local found, handle = GetClosestPed(x, y, z, 1.0) -- Get the entity handle

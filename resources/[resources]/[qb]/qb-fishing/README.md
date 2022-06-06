@@ -47,7 +47,7 @@
 
 **[reload-skillbar](https://github.com/Utinax/reload-skillbar)**
 
-**[np-skillbar](https://drive.google.com/drive/folders/17xznaEcn5rmP0aOKL5XIj6SIfqQVB8iH?usp=sharing)**
+**[qb-skillbar](https://drive.google.com/drive/folders/17xznaEcn5rmP0aOKL5XIj6SIfqQVB8iH?usp=sharing)**
 
 **[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)**
 
