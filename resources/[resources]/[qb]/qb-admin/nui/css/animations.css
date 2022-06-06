@@ -1,0 +1,80 @@
+.dropdown-open {
+    -webkit-animation: open-dropdown 0.3s ease-in-out;
+    animation: open-dropdown 0.3s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.dropdown-closed {
+   -webkit-animation: closed-dropdown 0.3s ease-in-out;
+   animation: closed-dropdown 0.3s ease-in-out;
+   -webkit-animation-fill-mode: forwards;
+   animation-fill-mode: forwards;
+}
+
+
+@-webkit-keyframes open-dropdown {
+   100% {
+       transform: rotateZ(-180deg);
+   }
+}
+
+@keyframes open-dropdown {
+   100% {
+       transform: rotateZ(-180deg);
+   }
+}
+
+@-webkit-keyframes closed-dropdown {
+   0% {
+       transform: rotateZ(-180deg);
+   }
+   100% {
+       transform: rotateZ(0deg);
+   }
+}
+
+@keyframes closed-dropdown {
+   0% {
+       transform: rotateZ(-180deg);
+   }
+   100% {
+       transform: rotateZ(0deg);
+   } 
+}
+
+@-webkit-keyframes shake-icon {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    75% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(5deg);
+    }
+ }
+
+@keyframes shake-icon {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    75% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(5deg);
+    }
+}
