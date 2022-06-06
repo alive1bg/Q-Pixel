@@ -558,7 +558,7 @@ Config.TargetModels = {
         },
         options = {
             {
-                event = "np-paintball:game:pickupFlag",
+                event = "qb-paintball:game:pickupFlag",
                 icon = "fas fa-flag",
                 label = "Pickup Flag!",
             },

@@ -37,6 +37,21 @@ local function doCreateZone(options)
   return true
 end
 
+local function addZoneEvent(eventName, zoneName)
+  if comboZone.events and comboZone.events[eventName] ~= nil then
+    return
+  end
+  comboZone:addEvent(eventName, zoneName)
+end
+
+local function addZoneEvents(zone, zoneEvents)
+  if zoneEvents == nil then return end
+
+  for _, v in ipairs(zoneEvents) do
+    addZoneEvent(v, zone.name)
+  end
+end
+
 exports("AddBoxZone", function(name, vectors, length, width, options)
     if not options then options = {} end
     options.name = name

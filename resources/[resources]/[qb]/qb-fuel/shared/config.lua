@@ -451,4 +451,14 @@ Config.GasStations = { -- gas station polyzones
         minz = 25.855251312256,
   		maxz = 42.217918395996,
     },
+    [35] = { --- Ottos
+        zones = {
+            vector2(800.63,-793.93),
+            vector2(800.04,-785.21),
+            vector2(719.09,-785.21),
+            vector2(819.41,-796.25),
+        },
+        minz = 25.1,
+        maxz = 30.0,
+    },
 }

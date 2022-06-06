@@ -3,7 +3,7 @@ AnimationTask = {}
 local function TaskBar(pLength, pName, pRunCheck, pHidden)
     local p = promise:new()
 
-    CreateThread(function ()
+    Citizen.CreateThread(function ()
         if pName then
             exports['np-taskbar']:taskBar(pLength, pName, pRunCheck, true, nil, false, function (result)
                 p:resolve(result)
@@ -24,7 +24,7 @@ local function LoadAnimDict(animDict)
         Citizen.SetTimeout(60000, function () timeout = false end)
 
         while not HasAnimDictLoaded(animDict) and not timeout do
-            Wait(0)
+            Citizen.Wait(0)
         end
     end
 end
@@ -55,7 +55,7 @@ function AnimationTask:start(pTask)
         LoadAnimDict(self.dictionary)
     end
 
-    CreateThread(function ()
+    Citizen.CreateThread(function ()
         while self.active do
             if self.animation and not IsEntityPlayingAnim(self.ped, self.dictionary, self.animation, 3) then
                 TaskPlayAnim(self.ped, self.dictionary, self.animation, -8.0, -8.0, -1, self.flag, 0, false, false, false);
@@ -67,7 +67,7 @@ function AnimationTask:start(pTask)
                 pTask(self)
             end
             
-            Wait(100)
+            Citizen.Wait(100)
         end
     end)
 

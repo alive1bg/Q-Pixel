@@ -122,7 +122,7 @@ AddEventHandler("DamageEvents:EntityDamaged", function(victim, attacker, pWeapon
   if tranqed then return end
   tranqed = true
   SetPedToRagdoll(playerPed, 1000, 10000, 0, false, false, false)
-  TriggerEvent("np-voice:setTransmissionDisabled", { 
+  TriggerEvent("qb-voice:setTransmissionDisabled", { 
     ["phone"] = true,
     ["proximity"] = true,
     ["radio"] = true,
@@ -146,7 +146,7 @@ AddEventHandler("DamageEvents:EntityDamaged", function(victim, attacker, pWeapon
     tranqed = false
     StopScreenEffect("DrugsMichaelAliensFight")
     ClearPedTasks(playerPed)
-    TriggerEvent("np-voice:setTransmissionDisabled", {
+    TriggerEvent("qb-voice:setTransmissionDisabled", {
       ["phone"] = false,
       ["proximity"] = false,
       ["radio"] = isDead,

@@ -21,8 +21,8 @@ exports('RegisterUIEvent', RegisterUIEvent)
 function SetUIFocusCustom(hasKeyboard, hasMouse)
   HasNuiFocus = hasKeyboard or hasMouse
 
-  SetUIFocus(hasKeyboard, hasMouse)
-  SetUIFocusKeepInput(HasNuiFocus)
+  SetNuiFocus(hasKeyboard, hasMouse)
+  SetNuiFocusKeepInput(HasNuiFocus)
 end
 
 exports('SetUIFocusCustom', SetUIFocusCustom)
@@ -34,7 +34,7 @@ end
 
 exports('GetUIFocus', GetUIFocus)
 
-CreateThread(function()
+Citizen.CreateThread(function()
     TriggerEvent('_npx_uiReady')
 end)
 
@@ -46,7 +46,7 @@ function cashFlash(pCash, pChange)
         amountAdjustment = pChange
         -- duration = 5 // optional duration for fade, default 4 seconds
       },
-      source = "qb-nui",
+      source = "np-nui",
   })
 end
 
@@ -55,7 +55,7 @@ exports("cashFlash", cashFlash)
 function openApplication(app, data, stealFocus)
   stealFocus = stealFocus == nil and true or false
   SendUIMessage({
-      source = "qb-nui",
+      source = "np-nui",
       app = app,
       show = true,
       data = data or {},
@@ -72,7 +72,7 @@ AddEventHandler("qb-ui:open-application", openApplication)
 
 function closeApplication(app, data)
   SendUIMessage({
-      source = "qb-nui",
+      source = "np-nui",
       app = app,
       show = false,
       data = data or {},
@@ -87,7 +87,7 @@ function sendAppEvent(app, data, withExtra)
     local sentData = {
         app = app,
         data = data or {},
-        source = "qb-nui",
+        source = "np-nui",
     }
     if withExtra then
       for k, v in pairs(withExtra) do
@@ -107,7 +107,7 @@ end
 function soundPlay(name, volume, loop)
   local id = getSoundId()
   SendUIMessage({
-      source = "qb-nui",
+      source = "np-nui",
       app = "sounds",
       data = {
         action = 'play',
@@ -129,7 +129,7 @@ exports("soundPlay", soundPlay)
 
 function soundVolume(id, volume)
   SendUIMessage({
-      source = "qb-nui",
+      source = "np-nui",
       app = "sounds",
       data = {
         action = "volume",
@@ -143,7 +143,7 @@ exports("soundVolume", soundVolume)
 
 function soundStop(id)
   SendUIMessage({
-      source = "qb-nui",
+      source = "np-nui",
       app = "sounds",
       data = {
         action = 'stop',
