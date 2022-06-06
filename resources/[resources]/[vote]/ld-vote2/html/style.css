@@ -1,0 +1,261 @@
+* {
+    user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+
+body {
+    overflow-y: hidden; 
+    overflow-x: hidden;
+}
+
+.enustyazi{
+    color: white;
+    position: absolute;
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: medium;
+    padding-left: 1.8%;
+    bottom: 89.6%;
+}
+
+.sagyazii{
+    color: white;
+    position: absolute;
+    font-size: 23px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: medium;
+    margin-left: 82%;
+    bottom: 89.6%;
+}
+
+#icon{
+    font-size: 16px; 
+    position: absolute; 
+    margin-left: 77.5%; 
+    bottom: 93%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 5px;
+}
+
+.cizgi{
+    height: 1px;
+    width: 825px;
+    color: white;
+    position: absolute;
+    bottom: 91%;
+    background-color: white;
+    margin-left: 1.5%;
+}
+
+.belediye{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    margin-left: 1.6%;
+    top: 9%;
+}
+
+.enfazla{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: medium;
+    color: white;
+    position: absolute;
+    top: 9%;
+    margin-left: 71.85%;
+}
+
+.arkaplan{
+    background-color: #20262f;
+    width: 850px;
+    height: 700px;
+    border-radius: 5px;  
+    position: absolute;
+    top: 15%;
+    left: 28%;
+    padding: 5px;
+    animation: Slide_Up 0.8s;
+}
+
+.adaylar{
+    padding: 10px;
+}
+
+.aday1{
+    position: absolute;
+    bottom: 69%;
+    background-color: #30475e;
+    width: 825px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+
+.aday2{
+    position: absolute;
+    bottom: 53%;
+    background-color: #30475e;
+    width: 825px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.aday3{
+    position: absolute;
+    bottom: 37%;
+    background-color: #30475e;
+    width: 825px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.aday2yaz{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 23px;
+    font-weight: bolder;
+    padding-left: 20px;
+    position: absolute;
+    bottom: 40%;
+}
+
+.aday3alt {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 15px;
+    font-weight: bolder;
+    padding-left: 20px;
+    position: absolute;
+    bottom: 0%;
+}
+
+#adayicon{
+    font-size: 45px;
+    color: white;
+    position: absolute;
+    top: 25%;
+    left: 76%;
+}
+
+.yesil{
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    background-color: #8fe47a;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 8%;
+    left: 84%;
+    box-shadow: 5 5px 5px black;
+    cursor:pointer;
+    opacity: 0;
+    display: none;
+    
+}
+
+.gonder{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: medium;
+    margin: auto;
+    padding-left: 19%;
+    padding-top: 5%;
+}
+
+.yesil:hover{
+    background-color: #7cc06b;
+}
+
+.yesil:active{
+    background-color: #66965a;
+}
+
+@keyframes Slide_Up{
+    0%{
+          transform: translateX(-1920px);
+    }
+    100%{
+          transform: translateX(0px);
+    }
+}
+
+
+@keyframes Slide_right{
+    0%{
+          transform: translateX(0px);
+    }
+    100%{
+          transform: translateX(1920px);
+    }
+}
+
+.slide-out{
+    animation: Slide_right 0.5s forwards;
+    -webkit-animation: Slide_right 0.5s forwards;
+
+  }
+
+.enustyazi{
+    color: white;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 2%;
+}
+
+/* .sagusticon{
+    color: white;
+    position: flex;
+    font-size: 20px;
+    font-weight: medium;
+    padding-left: 2%;
+    margin-bottom: 5%;
+} */
+
+.arkaplan{
+    background-color: #20262f;
+    width: 850px;
+    height: 700px;
+    border-radius: 5px;  
+    position: absolute;
+    top: 15%;
+    left: 28%;
+    padding: 5px;
+}
+
+.skrticon{
+    color:#20262f;
+    background-color: white;
+}
+
+.voteCircle {
+    margin-top: 1.4%;
+    margin-right: 5%;
+    height: 75%;
+    width: 9%;
+    background-color: white;
+    border-radius: 12%;
+    display: inline-block;
+}
+
+/* .voteCircle:active {
+    background-image: url('images/yes.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position-x: center;
+    background-position-y: center;
+} */
+
+.voteCircle:hover {
+    cursor: pointer;
+}
+
+

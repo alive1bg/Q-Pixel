@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="css/all.css"/>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="skrt.js"></script> 
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+    <div class="arkaplan" stlye="display:none;">
+        <p class="enustyazi">Voting for:</p>
+        <i id="icon" class="far fa-chart-bar skrticon"></i>
+        <p class="sagyazii">#Elections</p>
+        <div class="cizgi"></div>
+        <p class="belediye">Mayor</p>
+        <p class="enfazla">SELECT ATLEAST ONE</p>
+        <div class="adaylar">
+            <div class="aday1">
+                <p class="aday2yaz">Lorem Ipsum</p>
+                <p class="aday3alt">Lorem</p>
+                <i id="adayicon" class="fas fa-user"></i>
+                <a onClick="vote('1')" id="childDiv" class="voteCircle" style="float:right;"></a>
+            </div>
+            <div class="aday2">
+                <p class="aday2yaz">Lorem Ipsum</p>
+                <p class="aday3alt">Lorem</p>
+                <i id="adayicon" class="fas fa-user"></i>
+                <a onClick="vote('2')" id="childDiv" class="voteCircle" style="float:right;"></a>
+            </div>
+            <div class="aday3">
+                <p class="aday2yaz">Lorem Ipsum</p>
+                <p class="aday3alt">Lorem</p>
+                <i id="adayicon" class="fas fa-user"></i>
+                <a onClick="vote('3')" id="childDiv" class="voteCircle" style="float:right;"></a>
+            </div>
+        </div>
+        <div class="yesil">
+            <p class="gonder">
+                SUBMIT
+            </p>
+        </div>
+</body>
+
+</html>

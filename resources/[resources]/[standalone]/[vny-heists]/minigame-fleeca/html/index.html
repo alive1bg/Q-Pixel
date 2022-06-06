@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>NoPixel Fleeca Minigame</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/solid.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+<div class="minigame hidden">
+    <div class="splash">
+        <div class="fa hacker">&#xf21b;</div>
+        <span class="message">Fleeca Hacking Minigame</span>
+        <audio preload="auto">
+            <source src="audio_splash.ogg" type="audio/ogg">
+        </audio>
+    </div>
+    <div class="groups hidden">
+        <div class="group">
+            <div class="real_number">&nbsp;</div>
+            <div class="shape hidden"></div>
+            <div class="text hidden">&nbsp;</div>
+            <div class="number hidden">&nbsp;</div>
+        </div>
+        <div class="group">
+            <div class="real_number">&nbsp;</div>
+            <div class="shape hidden"></div>
+            <div class="text hidden">&nbsp;</div>
+            <div class="number hidden">&nbsp;</div>
+        </div>
+        <div class="group">
+            <div class="real_number">&nbsp;</div>
+            <div class="shape hidden"></div>
+            <div class="text hidden">&nbsp;</div>
+            <div class="number hidden">&nbsp;</div>
+        </div>
+        <div class="group">
+            <div class="real_number">&nbsp;</div>
+            <div class="shape hidden"></div>
+            <div class="text hidden">&nbsp;</div>
+            <div class="number hidden">&nbsp;</div>
+        </div>
+    </div>
+    <div class="inputs hidden">
+        <div class="timer">
+            <div class="progress active"><div class="progress-bar timer-progress"></div></div>
+            <audio preload="auto" loop>
+                <source src="audio_timer.ogg" type="audio/ogg">
+            </audio>
+        </div>
+        <div class="question">
+            ENTER THE <span class="quiz1">$nbsp;</span> AND <span class="quiz2">$nbsp;</span>
+        </div>
+        <div class="answer">
+            <div class="answer-wrapper">
+                <label for="answer">Answer</label>
+                <input id="answer" type="text" autocomplete="off" placeholder="blue square" autofocus>
+            </div>
+        </div>
+        <div class="solution hidden">
+            Real numbers: <span class="real_numbers">&nbsp;</span><br>
+            Solution: <span class="solution_text">&nbsp;</span>
+        </div>
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="nui://game/ui/jquery.js"></script>
+</body>
+</html>

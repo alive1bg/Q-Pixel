@@ -1,0 +1,41 @@
+body {
+    background-color: transparent !important;
+}
+
+.template, .notification {
+    display: none;
+}
+
+.notif-container {
+    width: 20%;
+    position: absolute;
+    right: 22%;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.notification {
+    padding: 8px;
+    width: fit-content;
+    border-radius: 3px;
+    margin: 6px;
+    font: caption;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.success {
+    background: rgb(21, 100, 15, 0.95);
+    color: #fff;
+}
+
+.inform {
+    background-color: rgb(51, 112, 165, 0.85);
+    color: #ffffff;
+}
+
+.error {
+    background: rgb(181, 82, 85, 0.85);
+    color: #fff;
+}
