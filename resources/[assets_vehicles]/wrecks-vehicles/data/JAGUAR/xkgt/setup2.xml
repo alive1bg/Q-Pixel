@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SSetupData>
+  <deviceName>dlc_XKGT</deviceName>
+  <datFile>content.xml</datFile>
+  <timeStamp>25/02/2014 14:11:09</timeStamp>
+  <nameHash>XKGT</nameHash>
+  <contentChangeSetGroups>
+    <Item>
+      <NameHash>GROUP_STARTUP</NameHash>
+      <ContentChangeSets>
+        <Item>XKGT_AUTOGEN</Item>
+        <Item>XKGT_UNLOCKS_AUTOGEN</Item>
+      </ContentChangeSets>
+    </Item>
+  </contentChangeSetGroups>
+  <type>EXTRACONTENT_COMPAT_PACK</type>
+  <order value="9" />
+</SSetupData>

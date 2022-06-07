@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDataFileMgr__ContentsOfDataFileXml>
+  <disabledFiles />
+  <includedXmlFiles />
+  <includedDataFiles />
+  <dataFiles>
+    <Item>
+      <filename>dlc_amghammer:/data/vehicles.meta</filename>
+      <fileType>VEHICLE_METADATA_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_amghammer:/data/carcols.meta</filename>
+      <fileType>CARCOLS_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_amghammer:/data/carvariations.meta</filename>
+      <fileType>VEHICLE_VARIATION_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_amghammer:/data/dlctext.meta</filename>
+      <fileType>TEXTFILE_METAFILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_amghammer:/data/handling.meta</filename>
+      <fileType>HANDLING_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>	
+    <Item>
+      <filename>dlc_amghammer:/%PLATFORM%/vehicles.rpf</filename>
+      <fileType>RPF_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+	
+  </dataFiles>
+  <contentChangeSets>
+	<Item>
+	  <changeSetName>amghammer_AUTOGEN</changeSetName>
+	  <filesToDisable />
+	  <filesToEnable>
+        <Item>dlc_amghammer:/data/handling.meta</Item>
+        <Item>dlc_amghammer:/data/vehicles.meta</Item>
+        <Item>dlc_amghammer:/data/carcols.meta</Item>
+        <Item>dlc_amghammer:/data/carvariations.meta</Item>
+        <Item>dlc_amghammer:/data/dlctext.meta</Item>		
+        <Item>dlc_amghammer:/%PLATFORM%/vehicles.rpf</Item>
+	  </filesToEnable>
+	  <txdToLoad />
+	  <txdToUnload />
+	  <residentResources />
+	  <unregisterResources />
+	</Item>
+  </contentChangeSets>
+  <patchFiles />
+</CDataFileMgr__ContentsOfDataFileXml>

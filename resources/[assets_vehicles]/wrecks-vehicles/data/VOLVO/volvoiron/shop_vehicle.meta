@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ShopVehicleDataArray>
+	<Vehicles>
+
+		<Item>
+			<lockHash>CU_VEH_s19tahoe</lockHash>
+			<modelNameHash>s19tahoe</modelNameHash>
+			<cost value="100"/>
+			<textLabel>s19tahoe</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_volvoiron</lockHash>
+			<modelNameHash>volvoiron</modelNameHash>
+			<cost value="100"/>
+			<textLabel>volvoiron</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_volvoiron2</lockHash>
+			<modelNameHash>volvoiron2</modelNameHash>
+			<cost value="100"/>
+			<textLabel>volvoiron2</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_prado14</lockHash>
+			<modelNameHash>prado14</modelNameHash>
+			<cost value="100"/>
+			<textLabel>prado14</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_prado14m</lockHash>
+			<modelNameHash>prado14m</modelNameHash>
+			<cost value="100"/>
+			<textLabel>prado14m</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_lx570invader</lockHash>
+			<modelNameHash>lx570invader</modelNameHash>
+			<cost value="100"/>
+			<textLabel>lx570invader</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_VEH_lx570invader2</lockHash>
+			<modelNameHash>lx570invader2</modelNameHash>
+			<cost value="100"/>
+			<textLabel>lx570invader2</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+
+
+	</Vehicles>	
+</ShopVehicleDataArray>
