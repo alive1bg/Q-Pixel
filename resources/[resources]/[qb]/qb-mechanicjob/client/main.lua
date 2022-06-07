@@ -1,6 +1,6 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-local ModdedVehicles = {}
+--local ModdedVehicles = {}
 VehicleStatus = {}
 local ClosestPlate = nil
 local PlayerJob = {}
@@ -930,7 +930,7 @@ CreateThread(function()
     end
 end)
 
- CreateThread(function() -- Not event sure what this is even for
+--[[  CreateThread(function() -- Not event sure what this is even for
      while true do
          Wait(1)
          if (IsPedInAnyVehicle(PlayerPedId(), false)) then
@@ -1010,7 +1010,7 @@ end)
              Wait(2000)
          end
      end
- end)
+ end) ]]
 
 CreateThread(function()
     while true do
