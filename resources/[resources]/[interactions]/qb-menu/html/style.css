@@ -54,7 +54,7 @@ body::-webkit-scrollbar {
     width: auto;
     max-width: 45%;
     height: 10%;
-    background: #192e46;
+    background: #1b2027;
     color: white;
     margin: auto;
     position: relative;
@@ -77,14 +77,14 @@ body::-webkit-scrollbar {
 }
 
 .button:hover {
-    background-color: #356192;
+    background-color: #3b5572;
 }
 
 .title {
     width: auto;
     max-width: 45%;
     height: 10%;
-    background: #192e46;
+    background: #1b2027;
     color: white;
     margin: auto;
     position: relative;
