@@ -83,7 +83,7 @@ CreateThread(function()
 			pause = true
 			correct = 1
 			TriggerEvent('3dme:triggerDisplay', 'Fishing Rod Starts to Tug!')
-			exports['qb-ui']:showInteraction("Press [F] to Catch Fish!")
+			exports['np-ui']:showInteraction("Press [F] to Catch Fish!")
 			input = 0
 			pausetimer = 0
 		end
@@ -268,7 +268,7 @@ RegisterNetEvent('fishing:fishstart', function()
 		local time = 1000
 		QBCore.Functions.Notify('Using Fishing Rod', 'primary', time)
 		Wait(time)
-		exports['qb-ui']:showInteraction("Press [X] to stop fishing at any time")
+		exports['np-ui']:showInteraction("Press [X] to stop fishing at any time")
 		fishAnimation()
 	else
 		QBCore.Functions.Notify('You need to go further away from the shore', 'error')
@@ -518,7 +518,7 @@ loseBaitAnimation = function()
 	end
 	TaskPlayAnim(ped, animDict, animName, 1.0, -1.0, 1.0, 0, 0, 0, 48, 0)
 	RemoveAnimDict(animDict)
-	exports['qb-ui']:showInteraction("Fish took your bait!")
+	exports['np-ui']:showInteraction("Fish took your bait!")
 	Wait(2000)
 	exports['textUi']:DrawTextUi('hide')
 	fishAnimation()

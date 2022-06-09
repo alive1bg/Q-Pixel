@@ -771,9 +771,9 @@ end
 
 
 CreateThread(function()
-    local alreadyEnteredZone = false
     while true do
-        inZone = false
+        local alreadyEnteredZone = false
+        local inZone = false
         local plyPed = PlayerPedId()
 
         if IsPedInAnyVehicle(plyPed, false) then
@@ -786,8 +786,8 @@ CreateThread(function()
                     bennyLocation = vector3(v.coords.x, v.coords.y, v.coords.z)
                     if nearDefault then
                         if not isPlyInBennys then
-                            inZone = true
-                            exports['qb-ui']:showInteraction('[E] Tuner Shop')
+                            inZone  = true
+                            text = "[E] Tuner Shop"
                             if IsControlJustReleased(1, 38) then
                                 if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then
                                     if (v.useJob and isAuthorized((QBCore.Functions.GetPlayerData().job.name), k)) or not v.useJob then
@@ -803,19 +803,16 @@ CreateThread(function()
                     end
                 end
             end
-        else
-            Wait(2000)
         end
         if inZone and not alreadyEnteredZone then
              alreadyEnteredZone = true
-             exports['qb-ui']:showInteraction()
+             exports['np-ui']:showInteraction(text)
         end
 
         if not inZone and alreadyEnteredZone then
              alreadyEnteredZone = false
-             exports['qb-ui']:hideInteraction()
-         end
-
+             exports['np-ui']:hideInteraction()
+        end
         Wait(1)
     end
 end)
@@ -886,7 +883,7 @@ CreateThread(function()
             if nearDefault then
                 if not isPlyInBennys then
                     inZone = true
-                    exports['qb-ui']:showInteraction('[E] Repair Vehicle')
+                    exports['np-ui']:showInteraction('[E] Repair Vehicle')
                     if IsControlJustReleased(1, 38) then
                         playSoundEffect("wrench", 0.4)
                         SetVehicleEngineOn(plyVeh, false, false, true)
@@ -920,12 +917,12 @@ CreateThread(function()
         end
         if inZone and not alreadyEnteredZone then
              alreadyEnteredZone = true
-             exports['qb-ui']:showInteraction()
+             exports['np-ui']:showInteraction()
         end
 
         if not inZone and alreadyEnteredZone then
              alreadyEnteredZone = false
-             exports['qb-ui']:hideInteraction()
+             exports['np-ui']:hideInteraction()
          end
 
         Wait(1)

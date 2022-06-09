@@ -427,7 +427,7 @@ RegisterNetEvent('qb-tow:client:markVehicle', function()
         local coordB = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
         veh = getVehicleInDirection(coordA, coordB)
     end
-    local fine = exports['qb-ui']:OpenInputMenu({
+    local fine = exports['np-ui']:OpenInputMenu({
         {
             label = 'Enter Fine Amount',
             name = 'amount',

@@ -303,7 +303,7 @@ CreateThread(function()
                             if CurrentCops >= Config.MinimumHouseRobberyPolice then
                                 if Config.Houses[k]["opened"] then
                                     --DrawText3Ds(Config.Houses[k]["coords"]["x"], Config.Houses[k]["coords"]["y"], Config.Houses[k]["coords"]["z"], '~g~E~w~ - To Enter')
-                                    exports['qb-ui']:showInteraction('[E] Enter')
+                                    exports['np-ui']:showInteraction('[E] Enter')
                                     if IsControlJustPressed(0, 38) then
                                         enterRobberyHouse(k)
                                     end
@@ -330,12 +330,12 @@ CreateThread(function()
         Wait(5)
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['qb-ui']:showInteraction()
+            exports['np-ui']:showInteraction()
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['qb-ui']:hideInteraction()
+            exports['np-ui']:hideInteraction()
         end
     end
 end)
@@ -351,7 +351,7 @@ local alreadyEnteredZone = false
             if #(pos - vector3(Config.Houses[currentHouse]["coords"]["x"] + POIOffsets.exit.x, Config.Houses[currentHouse]["coords"]["y"] + POIOffsets.exit.y, Config.Houses[currentHouse]["coords"]["z"] - Config.MinZOffset + POIOffsets.exit.z)) < 1.5 then
                 --DrawText3Ds(Config.Houses[currentHouse]["coords"]["x"] + POIOffsets.exit.x, Config.Houses[currentHouse]["coords"]["y"] + POIOffsets.exit.y, Config.Houses[currentHouse]["coords"]["z"] - Config.MinZOffset + POIOffsets.exit.z, '~g~E~w~ - To leave home')
                 inZone = true
-                exports['qb-ui']:showInteraction('[E] Leave Home')
+                exports['np-ui']:showInteraction('[E] Leave Home')
                 if IsControlJustPressed(0, 38) then
                     leaveRobberyHouse(currentHouse)
                 end
@@ -362,7 +362,7 @@ local alreadyEnteredZone = false
                     if not Config.Houses[currentHouse]["furniture"][k]["searched"] then
                         if not Config.Houses[currentHouse]["furniture"][k]["isBusy"] then
                             inZone = true
-                            exports['qb-ui']:showInteraction('[E] Search')
+                            exports['np-ui']:showInteraction('[E] Search')
                             --DrawText3Ds(Config.Houses[currentHouse]["coords"]["x"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["x"], Config.Houses[currentHouse]["coords"]["y"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["y"], Config.Houses[currentHouse]["coords"]["z"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["z"] - Config.MinZOffset, '~g~E~w~ - '..Config.Houses[currentHouse]["furniture"][k]["text"])
                             if not IsLockpicking then
                                 if IsControlJustReleased(0, 38) then
@@ -371,12 +371,12 @@ local alreadyEnteredZone = false
                             end
                         else
                             inZone = true
-                            exports['qb-ui']:showInteraction('Searching..')
+                            exports['np-ui']:showInteraction('Searching..')
                             --DrawText3Ds(Config.Houses[currentHouse]["coords"]["x"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["x"], Config.Houses[currentHouse]["coords"]["y"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["y"], Config.Houses[currentHouse]["coords"]["z"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["z"] - Config.MinZOffset, 'Searching..')
                         end
                     else
                         inZone = true
-                        exports['qb-ui']:showInteraction('Empty..')
+                        exports['np-ui']:showInteraction('Empty..')
                         --DrawText3Ds(Config.Houses[currentHouse]["coords"]["x"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["x"], Config.Houses[currentHouse]["coords"]["y"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["y"], Config.Houses[currentHouse]["coords"]["z"] + Config.Houses[currentHouse]["furniture"][k]["coords"]["z"] - Config.MinZOffset, 'Empty..')
                     end
                 end
@@ -389,12 +389,12 @@ local alreadyEnteredZone = false
         Wait(3)
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['qb-ui']:showInteraction()
+            exports['np-ui']:showInteraction()
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['qb-ui']:hideInteraction()
+            exports['np-ui']:hideInteraction()
         end
     end
 end)

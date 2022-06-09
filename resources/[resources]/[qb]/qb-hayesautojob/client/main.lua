@@ -804,7 +804,7 @@ CreateThread(function()
 
                         if StashDistance < 2 then
                             inZone = true
-                            exports['qb-ui']:showInteraction('[E] Stash')
+                            exports['np-ui']:showInteraction('[E] Stash')
                             --DrawText3Ds(Config.Locations["stash"].x, Config.Locations["stash"].y, Config.Locations["stash"].z, "[E] Open Stash")
                             if IsControlJustReleased(0, 38) then
                                 TriggerEvent("inventory:client:SetCurrentStash", "mechanicstash")
@@ -825,10 +825,10 @@ CreateThread(function()
                             local InVehicle = IsPedInAnyVehicle(PlayerPedId())
 
                             if InVehicle then
-                                exports['qb-ui']:showInteraction('Parking')
+                                exports['np-ui']:showInteraction('Parking')
                                 --DrawText3Ds(Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z, 'Parking')
                             else
-                                exports['qb-ui']:showInteraction('Parking')
+                                exports['np-ui']:showInteraction('Parking')
                                 --DrawText3Ds(Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z, 'Parking')
                             end
                         end
@@ -862,7 +862,7 @@ CreateThread(function()
                                     local veh = GetVehiclePedIsIn(PlayerPedId())
                                     if IsPedInAnyVehicle(PlayerPedId()) then
                                         if not IsThisModelABicycle(GetEntityModel(veh)) then
-                                            exports['qb-ui']:showInteraction('[E] - Place The Vehicle On The Platform')
+                                            exports['np-ui']:showInteraction('[E] - Place The Vehicle On The Platform')
                                             --DrawText3Ds(v.coords.x, v.coords.y, v.coords.z + 0.3, "[E] Place The Vehicle On The Platform")
                                             if IsControlJustPressed(0, 38) then
                                                 DoScreenFadeOut(150)
@@ -886,7 +886,7 @@ CreateThread(function()
                             if PlateDistance < 3 then
                                 inRange = true
                                 inZone = true
-                                exports['qb-ui']:showInteraction('[E] - Open Menu')
+                                exports['np-ui']:showInteraction('[E] - Open Menu')
                                 --DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, "[E] Open Menu")
                                 if IsControlJustPressed(0, 38) then
                                     OpenMenu()
@@ -907,12 +907,12 @@ CreateThread(function()
         end
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['qb-ui']:showInteraction()
+            exports['np-ui']:showInteraction()
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['qb-ui']:hideInteraction()
+            exports['np-ui']:hideInteraction()
         end
         Wait(3)
     end

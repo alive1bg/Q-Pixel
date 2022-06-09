@@ -159,7 +159,7 @@ RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
     local getPlate = true
     local plateAvailable = ''
     while getPlate do
-        Wait(0)
+        Citizen.Wait(0)
         local plateNumbers = math.random(1000,9999)
         local testplate = plate..plateNumbers
         local result = exports.oxmysql:scalarSync('SELECT * from player_vehicles WHERE plate=  = ?', {plate})

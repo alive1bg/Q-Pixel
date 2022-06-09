@@ -440,24 +440,24 @@ CreateThread(function()
                         DrawMarker(2, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 0, 0, 222, false, false, false, true, false, false, false)
                         if dist < 1.5 then
                             if IsPedInAnyVehicle(ped, false) then
-                                exports['qb-ui']:showInteraction(Lang:t('text.storeveh_button'))
+                                exports['np-ui']:showInteraction(Lang:t('text.storeveh_button'))
                                 --DrawText3D(v.x, v.y, v.z, Lang:t('text.storeveh_button'))
                             else
-                                exports['qb-ui']:showInteraction(Lang:t('text.veh_button'))
+                                exports['np-ui']:showInteraction(Lang:t('text.veh_button'))
                                 --DrawText3D(v.x, v.y, v.z, Lang:t('text.veh_button'))
                             end
                             if IsControlJustReleased(0, 38) then
                                 if IsPedInAnyVehicle(ped, false) then
-                                    exports['qb-ui']:hideInteraction()
+                                    exports['np-ui']:hideInteraction()
                                     QBCore.Functions.DeleteVehicle(GetVehiclePedIsIn(ped))
                                 else
                                     MenuGarage()
                                     currentGarage = k
-                                    exports['qb-ui']:hideInteraction()
+                                    exports['np-ui']:hideInteraction()
                                 end
                             end
                         else
-                            exports['qb-ui']:hideInteraction()
+                            exports['np-ui']:hideInteraction()
                         end
                     end
                 end]] -- -- VEHICLE MARKER AND DRAWTEXT
@@ -470,11 +470,11 @@ CreateThread(function()
                             DrawMarker(2, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 0, 0, 222, false, false, false, true, false, false, false)
                             if dist < 1.5 then
                                 if IsPedInAnyVehicle(ped, false) then
-                                    exports['qb-ui']:showInteraction(Lang:t('text.storeheli_button'))
+                                    exports['np-ui']:showInteraction(Lang:t('text.storeheli_button'))
                                     --DrawText3D(v.x, v.y, v.z, Lang:t('text.storeheli_button'))
                                 else
                                     --DrawText3D(v.x, v.y, v.z, Lang:t('text.heli_button'))
-                                    exports['qb-ui']:showInteraction(Lang:t('text.heli_button'))
+                                    exports['np-ui']:showInteraction(Lang:t('text.heli_button'))
                                 end
                                 if IsControlJustReleased(0, 38) then
                                     if IsPedInAnyVehicle(ped, false) then
@@ -493,7 +493,7 @@ CreateThread(function()
                                     end
                                 end
                             else
-                                exports['qb-ui']:hideInteraction()
+                                exports['np-ui']:hideInteraction()
                             end
                         end
                     end

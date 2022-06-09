@@ -133,10 +133,10 @@ AddEventHandler('playerDropped',function(reason)
     end
 end)
 
-CreateThread(
+Citizen.CreateThread(
     function()
         while true do
-            Wait(1000)
+            Citizen.Wait(1000)
 
             for rulettIndex, v in pairs(aktivRulettek) do
                 if v.statusz == false then
@@ -158,11 +158,11 @@ CreateThread(
                         aktivRulettek[rulettIndex].WinningBetIndex = WinningBetIndex
                         TriggerClientEvent('client:rulett:updateStatusz', -1, rulettIndex, v.ido, v.statusz)
 
-                        CreateThread(
+                        Citizen.CreateThread(
                             function()
                                 Config.DebugMsg('time remaining 0, starting the spin events.')
                                 TriggerClientEvent('casino:rulett:startSpin', -1, rulettIndex, randomSpinNumber)
-                                Wait(15500)
+                                Citizen.Wait(15500)
 
                                 if #v.bets > 0 then
                                     CheckWinners(v.bets, aktivRulettek[rulettIndex].WinningBetIndex)

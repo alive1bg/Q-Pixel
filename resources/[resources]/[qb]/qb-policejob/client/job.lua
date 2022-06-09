@@ -431,7 +431,7 @@ RegisterNetEvent('police:client:EvidenceStashDrawer', function(data)
                 }
             }
         })]]
-        local drawer = exports['qb-ui']:OpenInputMenu({
+        local drawer = exports['np-ui']:OpenInputMenu({
             {
                 label = Lang:t('info.evidence_stash', {value = currentEvidence}), Lang:t('info.slot'),
                 name = 'slot',
@@ -700,10 +700,10 @@ end)
 --                         --DrawMarker(2, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 0, 0, 222, false, false, false, true, false, false, false)
 --                         if #(pos - vector3(v.x, v.y, v.z)) <= 1.5 then
 --                             inZone = true
---                             exports['qb-ui']:showInteraction('Vehicle Impound')
+--                             exports['np-ui']:showInteraction('Vehicle Impound')
 --                             if IsPedInAnyVehicle(PlayerPedId(), false) then
 --                                 --DrawText3D(v.x, v.y, v.z, Lang:t('info.impound_veh'))
---                                 exports['qb-ui']:showInteraction('[E] Impound Vehicle')
+--                                 exports['np-ui']:showInteraction('[E] Impound Vehicle')
 --                             else
 --                                 if not headerDrawn then
 --                                     headerDrawn = true
@@ -738,12 +738,12 @@ end)
 --         end
 --         if inZone and not alreadyEnteredZone then
 --             alreadyEnteredZone = true
---             exports['qb-ui']:showInteraction()
+--             exports['np-ui']:showInteraction()
 --         end
 
 --         if not inZone and alreadyEnteredZone then
 --             alreadyEnteredZone = false
---             exports['qb-ui']:hideInteraction()
+--             exports['np-ui']:hideInteraction()
 --         end
 --         Wait(sleep) 
 --     end

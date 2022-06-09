@@ -8,9 +8,9 @@ CreateThread(function()
             local coords = GetEntityCoords(ped)
             if GetDistanceBetweenCoords(v.x, v.y, v.z, coords.x, coords.y, coords.z, true) < 2 then
                 sleep = 100
-                exports["qb-ui"]:showInteraction("Vote Cabin")
+                exports["np-ui"]:showInteraction("Vote Cabin")
             else 
-                exports["qb-ui"]:hideInteraction()
+                exports["np-ui"]:hideInteraction()
             end
         end
         Wait(sleep)

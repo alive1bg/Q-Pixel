@@ -11,8 +11,6 @@ currentBetAmount = 0
 idleTimer = 0
 aimingAtBet = -1
 lastAimedBet = -1
-local scaleType = nil
-local scaleString = ""
 
 createRulettAsztal = function(index, data)
     local self = {}
@@ -735,8 +733,8 @@ function Draw3DText(coords, text, size, font)
 end
 
 function hideUi()
-	exports['qb-ui']:hideInteraction()
-	exports['qb-casinoui']:HideCasinoUi('hide') 
+	exports['textUi']:HideTextUi('hide')
+	exports['casinoUi']:HideCasinoUi('hide') 
 end
 
 function changeBetAmount(amount)
@@ -809,7 +807,7 @@ CreateThread(function()
                     local dist = Vdist(playerpos, objcoords)
                     if dist < 2.4 then
                         if dist < 2.3 then
-                            exports['qb-ui']:showInteraction("[E] Play Roulette")
+                            exports['textUi']:DrawTextUi('show',"Diamond Casino Roulette</p>Press [E] to sit down")
                             local closestChairData = getClosestChairData(v.tableObject)
 
                             if closestChairData == nil then
@@ -826,7 +824,7 @@ CreateThread(function()
                             end
                             break
                         end
-                        exports['qb-ui']:hideInteraction()
+                        hideUi()
                     end
                 end
             end
@@ -838,6 +836,7 @@ end)
 RegisterNetEvent('client_callback:rulett:taskSitDown')
 AddEventHandler('client_callback:rulett:taskSitDown',
     function(rulettIndex, chairData)
+        -- exports['progressBars']:drawBar(4000, 'Sitting...')
         QBCore.Functions.Notify("Sitting...", "primary", 3200)
 
         SELECTED_CHAIR_ID = chairData.chairId
@@ -918,21 +917,15 @@ function casinoNuiUpdateGame(rulettIndex, ido, statusz)
         retval = result
         if selectedRulett == rulettIndex then
             if not statusz then
-                exports['qb-casinoui']:DrawCasinoUi('show', "Diamond Casino Roulette</p>"..ido.." Seconds Left</p>Current Bet: "..currentBetAmount.." chips</p>Availble chips: "..retval)
-                Wait(100)
+                exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>"..ido.." Seconds Left</p>Current Bet: "..currentBetAmount.." chips</p>Availble chips: "..retval)
                 if Config.allowCustomBet then
-                    CreateScale("OpenShop")
-					DrawScaleformMovieFullscreen(scaleType, 255, 255, 255, 255, 0)
-                    --QBCore.Functions.Notify("Adjust Bet: ↑/↓ | LEFT CLICK: Bet number | SPACEBAR: Custom Amount | E: Change camera | BACKSPACE: Exit", 5000)
-                    --exports['qb-ui']:showInteraction("Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>SPACEBAR: Custom Amount</p>E: Change camera</p>BACKSPACE: Exit")
+                    exports['textUi']:DrawTextUi('show', "Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>SPACEBAR: Custom Amount</p>E: Change camera</p>ESC: Exit")
                 else
-                    CreateScale("Control")
-					DrawScaleformMovieFullscreen(scaleType, 255, 255, 255, 255, 0)
-                    --QBCore.Functions.Notify("Adjust Bet: ↑/↓ | LEFT CLICK: Bet number | E: Change camera | BACKSPACE: Exit", 5000)
-                    --exports['qb-ui']:showInteraction("Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>E: Change camera</p>BACKSPACE: Exit")
+                    exports['textUi']:DrawTextUi('show', "Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>E: Change camera</p>ESC: Exit")
                 end
             else
-                QBCore.Funtions.Notify("The game is starting..", 5000) 
+                exports['textUi']:DrawTextUi('show', "The game is starting..") 
+                hideUi()
             end
         end
     end)
@@ -1272,99 +1265,4 @@ function addRandomClothes(ped)
         SetPedComponentVariation(ped, 10, 0, 0, 0)
         SetPedComponentVariation(ped, 11, 0, 0, 0)
     end
-end
-
-function CreateScale(sType)
-	if scaleString ~= sType and sType == "OpenShop" then
-		scaleType = setupScaleform("instructional_buttons", "Open Tattoo Shop", 38)
-		scaleString = sType
-	elseif scaleString ~= sType and sType == "Control" then
-		scaleType = setupScaleform2("instructional_buttons", "Change Camera View", 21, "Change Opacity", {90, 89}, "Buy/Remove Tattoo", 191)
-		scaleString = sType
-	end
-end
-
-function ButtonMessage(text)
-    BeginTextCommandScaleformString("STRING")
-    AddTextComponentScaleform(text)
-    EndTextCommandScaleformString()
-end
-
-function Button(ControlButton)
-    PushScaleformMovieMethodParameterButtonName(ControlButton)
-end
-
-function setupScaleform2(scaleform, message, button, message2, buttons, message3, button2)
-    local scaleform = RequestScaleformMovie(scaleform)
-    while not HasScaleformMovieLoaded(scaleform) do
-        Wait(0)
-    end
-    PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
-    PopScaleformMovieFunctionVoid()
-    
-    PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
-    PushScaleformMovieFunctionParameterInt(200)
-    PopScaleformMovieFunctionVoid()
-	
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(0)
-    Button(GetControlInstructionalButton(2, buttons[1], true))
-    Button(GetControlInstructionalButton(2, buttons[2], true))
-    ButtonMessage(message2)
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(1)
-    Button(GetControlInstructionalButton(2, button, true))
-    ButtonMessage(message)
-    PopScaleformMovieFunctionVoid()
-	
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(2)
-    Button(GetControlInstructionalButton(2, button2, true))
-    ButtonMessage(message3)
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(80)
-    PopScaleformMovieFunctionVoid()
-
-    return scaleform
-end
-
-function setupScaleform(scaleform, message, button)
-    local scaleform = RequestScaleformMovie(scaleform)
-    while not HasScaleformMovieLoaded(scaleform) do
-        Wait(0)
-    end
-    PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
-    PopScaleformMovieFunctionVoid()
-    
-    PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
-    PushScaleformMovieFunctionParameterInt(200)
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(0)
-    Button(GetControlInstructionalButton(2, button, true))
-    ButtonMessage(message)
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PopScaleformMovieFunctionVoid()
-
-    PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(80)
-    PopScaleformMovieFunctionVoid()
-
-    return scaleform
 end

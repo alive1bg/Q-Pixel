@@ -224,7 +224,7 @@ RegisterNetEvent('qb-realestate:client:changetier', function(data)
             }
         }
     })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
+    local dialog = exports['np-ui']:OpenInputMenu({
         {
             label = 'Tier change | Max. ' ..Config.MaxTier,
             name = 'tier',
@@ -259,7 +259,7 @@ RegisterNetEvent('qb-realestate:client:changeprice', function(data)
             }
         }
     })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
+    local dialog = exports['np-ui']:OpenInputMenu({
         {
             label = 'Price change',
             name = 'price',

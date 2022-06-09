@@ -22,7 +22,7 @@
     height: 100%;
     text-align: center;
     line-height: 6vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
     transition: .08s;
 }
@@ -88,7 +88,7 @@
     top: 1vh;
     left: 2vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.3vh;
 }
 .bank-app-invoice-amount {
@@ -96,7 +96,7 @@
     bottom: 1vh;
     left: 2vh;
     color: rgba(255, 255, 255, 0.781);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.22vh;
 }
 .bank-app-invoice-buttons {
@@ -157,7 +157,7 @@
     position: absolute;
     top: 1vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     letter-spacing: .1vh;
     color: white;
     font-size: 1.1vh;
@@ -166,7 +166,7 @@
     position: absolute;
     top: 3vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     letter-spacing: .1vh;
     width: 100%;
     color: white;
@@ -185,7 +185,7 @@
     position: absolute;
     top: 6.5vh;
     left: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     letter-spacing: .1vh;
     color: white;
     font-size: 1.5vh;
@@ -240,7 +240,7 @@
     left: 9vh;
     font-size: 4.5vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     z-index: 100;
     opacity: 0;
 }
@@ -250,7 +250,7 @@
     top: 5.5vh;
     left: 6vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 2vh;
 }
 
@@ -262,7 +262,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #f5f6fa;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -287,7 +287,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #f5f6fa;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -343,7 +343,7 @@
     height: 100%;
     text-align: center;
     line-height: 4.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
     font-size: 1.4vh;
     transition: .1s;
@@ -372,7 +372,7 @@
 .bank-app-my-contacts-header {
     position: relative;
     padding: 5vh 0 0 8vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 2vh;
     color: white;
 }
@@ -411,14 +411,14 @@
     text-align: center;
     line-height: 3.6vh;
     border-radius: 50%;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
 }
 .bank-app-my-contact-name {
     position: absolute;
     left: 5vh;
     line-height: 4.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.4vh;
     color: white;
 }
@@ -449,7 +449,7 @@
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
 }
 #bank-app-my-contact-search::placeholder{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
 .bank-app-my-contacts-list-back {
     position: absolute;
@@ -460,7 +460,7 @@
     line-height: 5vh;
     text-transform: uppercase;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.4vh;
     transition: .1s;
 }

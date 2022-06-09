@@ -10,7 +10,7 @@ IsPlayerAdmin = function()
     return AdminPromise
 end
 
--- [ Events ] -- 
+-- [ Events ] --
 
 RegisterNetEvent("Admin:Godmode", function(Result)
     if IsPlayerAdmin() then

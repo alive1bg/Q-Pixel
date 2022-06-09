@@ -194,3 +194,27 @@ local function CarBoosting(vehicle)
         job = {"police"} -- jobs that will get the alerts
     })
 end exports('CarBoosting', CarBoosting)
+
+local function BankTruckRobbery()
+    local currentPos = GetEntityCoords(PlayerPedId())
+    local locationInfo = getStreetandZone(currentPos)
+    local gender = GetPedGender()
+    TriggerServerEvent("dispatch:server:notify",{
+        dispatchcodename = "banktruckrobbery", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+        dispatchCode = "10-90",
+        firstStreet = locationInfo,
+        gender = gender,
+        model = nil,
+        plate = nil,
+        priority = 2, -- priority
+        firstColor = nil,
+        automaticGunfire = false,
+        origin = {
+            x = currentPos.x,
+            y = currentPos.y,
+            z = currentPos.z
+        },
+        dispatchMessage = ('Fleeca Truck Robbery'), -- message
+        job = {"police"} -- jobs that will get the alerts
+    })
+end exports('BankTruckRobbery', BankTruckRobbery)

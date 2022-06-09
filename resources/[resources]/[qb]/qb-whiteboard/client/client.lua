@@ -41,24 +41,24 @@ AddEventHandler("qb-polyzone:enter", function(zone)
   local currentZone = zoneData[zone]
   if zone == "mrpd_classroom" then
     if not dui then
-      dui = exports["qb-lib"]:getDui(currentBoardUrl)
+      dui = exports["np-lib"]:getDui(currentBoardUrl)
       AddReplaceTexture('prop_planning_b1', 'prop_base_white_01b', dui.dictionary, dui.texture)
     else
-      exports["qb-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
+      exports["np-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
     end
     inClassRoom = true
   elseif zone == "mrpd_meetingroom" then
     if not dui then
-      dui = exports["qb-lib"]:getDui(currentMeetingRoomBoardUrl)
+      dui = exports["np-lib"]:getDui(currentMeetingRoomBoardUrl)
       AddReplaceTexture('prop_planning_b1', 'prop_base_white_01b', dui.dictionary, dui.texture)
     else
-      exports["qb-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
+      exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
     end
     inMeetingRoom = true
   elseif currentZone then --and isCop
     currentPrompt = zone
     local prompt = type(currentZone.promptText) == 'function' and currentZone.promptText() or currentZone.promptText
-    exports["qb-ui"]:showInteraction(prompt)
+    exports["np-ui"]:showInteraction(prompt)
     listenForKeypress(zone)
   end
 end)
@@ -68,19 +68,19 @@ AddEventHandler("qb-polyzone:exit", function(zone)
   if zone == "mrpd_classroom" then
     RemoveReplaceTexture('prop_planning_b1', 'prop_base_white_01b')
     if dui ~= nil then
-      exports["qb-lib"]:releaseDui(dui.id)
+      exports["np-lib"]:releaseDui(dui.id)
       dui = nil
     end
     inClassRoom = false
   elseif zone == "mrpd_meetingroom" then
     RemoveReplaceTexture('prop_planning_b1', 'prop_base_white_01b')
     if dui ~= nil then
-      exports["qb-lib"]:releaseDui(dui.id)
+      exports["np-lib"]:releaseDui(dui.id)
       dui = nil
     end
     inMeetingRoom = false
   elseif currentZone then
-    exports["qb-ui"]:hideInteraction()
+    exports["np-ui"]:hideInteraction()
     listening = false
     currentPrompt = nil
   end
@@ -90,21 +90,21 @@ end)
 AddEventHandler("police:changewhiteboardcli", function(pUrl, pRoom)
   if pRoom == "mrpd_classroom" and inClassRoom and dui then
     currentBoardUrl = pUrl
-    exports["qb-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
+    exports["np-lib"]:changeDuiUrl(dui.id, currentBoardUrl)
   elseif pRoom == "mrpd_meetingroom" and inMeetingRoom and dui then
     currentMeetingRoomBoardUrl = pUrl
-    exports["qb-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
+    exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
   end
 end)]]
 
 RegisterNetEvent("police:changewhiteboardcli")
 AddEventHandler("police:changewhiteboardcli", function(pUrl)
     currentMeetingRoomBoardUrl = pUrl
-    exports["qb-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
+    exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
 end)
 
-QBCore.Functions.TriggerCallback("qb-ui:policechangeurl", function(data, cb)
+QBCore.Functions.TriggerCallback("np-ui:policechangeurl", function(data, cb)
   cb({ data = {}, meta = { ok = true, message = '' } })
-  exports['qb-ui']:closeApplication('textbox')
+  exports['np-ui']:closeApplication('textbox')
   TriggerServerEvent("police:changewhiteboard", data.values.url, data.hiddenItems.room)
 end)

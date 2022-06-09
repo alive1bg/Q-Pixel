@@ -19,25 +19,6 @@ local function loadAnimDict(dict)
 	end
 end
 
-local function displayNUIText(text)
-	local color = Config.ChangeColor and (closestDoor.data.locked and Config.LockedColor or Config.UnlockedColor) or Config.DefaultColor
-	SendNUIMessage({
-		type = "setDoorText",
-		enable = true,
-		text = text,
-		color = color
-	})
-	Wait(1)
-end
-
-local function hideNUI()
-	SendNUIMessage({
-		type = "setDoorText",
-		enable = false
-	})
-	Wait(1)
-end
-
 local function raycastWeapon()
     local offset = GetOffsetFromEntityInWorldCoords(GetCurrentPedWeaponEntityIndex(playerPed), 0, 0, -0.01)
     local direction = GetGameplayCamRot()
@@ -74,8 +55,8 @@ local function playSound(door, src, enableSounds)
 	if distance < 10 then
 		if not door.audioLock then
 			if door.audioRemote then
-				door.audioLock = {['file'] = 'button-remote.ogg', ['volume'] = 0.08}
-				door.audioUnlock = {['file'] = 'button-remote.ogg', ['volume'] = 0.08}
+				door.audioLock = PlaySoundFromEntity(-1, "Keycard_Success", PlayerPedId(), "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 1, 5.0);
+				door.audioUnlock = PlaySoundFromEntity(-1, "Keycard_Success", PlayerPedId(), "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 1, 5.0);
 			else
 				door.audioLock = {['file'] = 'door-bolt-4.ogg', ['volume'] = 0.1}
 				door.audioUnlock = {['file'] = 'door-bolt-4.ogg', ['volume'] = 0.1}
@@ -677,7 +658,7 @@ CreateThread(function()
 			if closestDoor.id then
 				while isLoggedIn do
 					if not paused and IsPauseMenuActive() then
-						--hideNUI()
+						--exports['np-ui']:hideInteraction()
 						paused = true
 					elseif paused then
 						if not IsPauseMenuActive() then paused = false end
@@ -687,24 +668,24 @@ CreateThread(function()
 						if closestDoor.distance < (closestDoor.data.distance or closestDoor.data.maxDistance) then
 							local authorized = isAuthorized(closestDoor.data)
 							if not closestDoor.data.locked and not authorized then
-								exports['qb-ui']:showInteraction('Unlocked', 'success')
+								exports['np-ui']:showInteraction('Unlocked', 'success')
 							elseif not closestDoor.data.locked and authorized then
-								exports['qb-ui']:showInteraction('[E] Unlocked', 'success')
+								exports['np-ui']:showInteraction('[E] Unlocked', 'success')
 							elseif closestDoor.data.locked and not authorized then
-								exports['qb-ui']:showInteraction('Locked', 'error')
+								exports['np-ui']:showInteraction('Locked', 'error')
 							elseif closestDoor.data.locked and authorized then
-								exports['qb-ui']:showInteraction('[E] Locked', 'error')
+								exports['np-ui']:showInteraction('[E] Locked', 'error')
 							end
 						else
 							local authorized = isAuthorized(closestDoor.data)
 							if not closestDoor.data.locked and not authorized then
-								exports['qb-ui']:hideInteraction('success')
+								exports['np-ui']:hideInteraction('success')
 							elseif not closestDoor.data.locked and authorized then
-								exports['qb-ui']:hideInteraction('success')
+								exports['np-ui']:hideInteraction('success')
 							elseif closestDoor.data.locked and not authorized then
-								exports['qb-ui']:hideInteraction('error')
+								exports['np-ui']:hideInteraction('error')
 							elseif closestDoor.data.locked and authorized then
-								exports['qb-ui']:hideInteraction('error')
+								exports['np-ui']:hideInteraction('error')
 							end
 							break
 						end
@@ -712,9 +693,9 @@ CreateThread(function()
 					Wait(100)
 				end
 				closestDoor = {}
-				sleep = 0
+				sleep = 100
 			end
 		end
-		Wait(sleep)
+		Wait(100)
 	end
 end)

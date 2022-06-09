@@ -236,6 +236,12 @@ CreateThread(function()
     end
 end)
 
+
+
+
+
+
+
 RegisterNetEvent('doj:client:openBetMenu', function() 
     exports['qb-menu']:openMenu({
         {
@@ -259,14 +265,6 @@ RegisterNetEvent('doj:client:openBetMenu', function()
             }
         },
         {
-            header = "Custom Bet", 
-            txt = "",
-            params = {
-                event = "doj:client:startingBets",
-                args = 4
-            }
-        },
-        {
             header = "Submit bet", 
             txt = "",
             params = {
@@ -274,8 +272,16 @@ RegisterNetEvent('doj:client:openBetMenu', function()
                 args = 3
             }
         },
+        -- {
+        --     header = "Custom Bet", 
+        --     txt = "",
+        --     params = {
+        --         event = "doj:client:startingBets",
+        --         args = 4
+        --     }
+        -- },
         {
-            header = "Stand Up", 
+            header = "Exit", 
             txt = "",
             params = {
                 event = "doj:client:startingBets",
@@ -304,7 +310,7 @@ RegisterNetEvent("doj:client:startingBets", function(args)
             end
         elseif args == 3 then 
             -- -- print("submitting bet")
-            if tonumber(currentBetAmount) >= 1 then
+            if tonumber(currentBetAmount) >= 0 then
                 TriggerServerEvent("Blackjack:setBlackjackBet",globalGameId,currentBetAmount,closestChair)
                 closestDealerPed = getClosestDealer()
                 PlayAmbientSpeech1(closestDealerPed,"MINIGAME_DEALER_PLACE_CHIPS","SPEECH_PARAMS_FORCE_NORMAL_CLEAR",1) --TODO check this is the right sound?
@@ -313,25 +319,16 @@ RegisterNetEvent("doj:client:startingBets", function(args)
             else
                 QBCore.Functions.Notify("Invalid amount.", "error", 3500)
             end
-        elseif args == 4 then
-            local tmpInput = exports['qb-ui']:openApplication('textbox', {
-                callbackUrl = 'doj:client:openBetMenu',
-                key = data.key,
-                items = {
-                  {
-                    icon = "sack-dollar",
-                    label = "Custom Bet",
-                    name = "custombet",
-                  },
-                },
-                show = true,
-            })
+        elseif args == 4 then 
+            -- -- print("custom bet")
+            local tmpInput = getGenericTextInput("Bet Amount")
             if tonumber(tmpInput) then
                 tmpInput = tonumber(tmpInput) 
                 if tmpInput > 0 then
                     currentBetAmount = tmpInput
                 end
             end
+            TriggerEvent("doj:client:openBetMenu")
         else
             -- print('exit')
             shouldForceIdleCardGames = false
@@ -345,7 +342,7 @@ RegisterNetEvent("doj:client:startingBets", function(args)
             sittingAtBlackjackTable = false
             drawTimerBar = false
             drawCurrentHand = false
-            exports['qb-casinoui']:HideCasinoUi('hide') 
+            exports['casinoUi']:HideCasinoUi('hide') 
             waitingForBetState = false
             TriggerServerEvent("Blackjack:leaveBlackjackTable")
             closestDealerPed, closestDealerPedDistance = getClosestDealer()
@@ -436,7 +433,7 @@ CreateThread(function()
         if not sittingAtBlackjackTable then
             if closestChair ~= nil and closestChairDist < 1.3 then
                 inZone  = true
-                text = "[E] Play BlackJack"
+                text = "<b>Diamond Casino Blackjack</b></p>Press [E] to sit"
                 if not timeoutHowToBlackjack then
                     if IsControlJustPressed(0, 38) then
                         if blackjackTableData[closestChair] == false then
@@ -450,11 +447,11 @@ CreateThread(function()
             end
             if inZone and not alreadyEnteredZone then
                 alreadyEnteredZone = true
-                exports['qb-ui']:showInteraction(text)  
+                exports['textUi']:DrawTextUi('show', text)  
             end
             if not inZone and alreadyEnteredZone then
                 alreadyEnteredZone = false
-                exports['qb-ui']:hideInteraction()
+                exports['textUi']:HideTextUi('hide')
             end
         end
         Wait(sleep)		
@@ -475,6 +472,7 @@ CreateThread(function()
                     closestChair = i
                 end
             end
+            -- -- print("closestChair = ",closestChair)
         end
         Wait(100)
     end
@@ -483,10 +481,13 @@ end)
 CreateThread(function()
     while true do
         if drawTimerBar then
-            exports['qb-casinoui']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount))  
+            -- QBCore.Functions.TriggerCallback('BLACKJACK:server:blackChipsAmount', function(result)
+            --     exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount).."</p>Availble chips: "..tostring(result))   
+	        -- end) 
+            exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount))  
         end
         if drawCurrentHand then
-            exports['qb-casinoui']:DrawCasinoUi('show', "Your hand: "..tostring(currentHand).."</p>Dealers Hand: "..tostring(dealersHand))
+            exports['textUi']:DrawTextUi('show', "Your hand: "..tostring(currentHand).."</p>Dealers Hand: "..tostring(dealersHand))  
         end
         Wait(500)
     end
@@ -502,7 +503,8 @@ end)
 RegisterNetEvent("Blackjack:beginBetsBlackjack")
 AddEventHandler("Blackjack:beginBetsBlackjack",function(gameID,tableId)
     globalGameId = gameID
-    exports['qb-ui']:hideInteraction()
+    -- blackjackInstructional = setupBlackjackInstructionalScaleform("instructional_buttons")
+    exports['textUi']:HideTextUi('hide')
     TriggerEvent("doj:client:openBetMenu")
     QBCore.Functions.Notify("Place your bets", 'primary', 3500)
     bettedThisRound = false
@@ -526,6 +528,10 @@ AddEventHandler("Blackjack:beginBetsBlackjack",function(gameID,tableId)
         end
         timeLeft = 20
         drawTimerBar = false
+        -- if not bettedThisRound then
+                --QBCore.Functions.Notify("No bet placed, round skipped", 'primary', 3500)
+
+        -- end
     end)
 end)
 
@@ -533,7 +539,7 @@ RegisterNetEvent("Blackjack:beginCardGiveOut")
 AddEventHandler("Blackjack:beginCardGiveOut",function(gameId,cardData,chairId,cardIndex,gotCurrentHand,tableId)
     if closeToCasino then
         blackjackGameInProgress = true
-        exports['qb-casinoui']:HideCasinoUi('hide') 
+        exports['casinoUi']:HideCasinoUi('hide') 
         blackjackAnimsToLoad = {
             "anim_casino_b@amb@casino@games@blackjack@dealer",
             "anim_casino_b@amb@casino@games@shared@dealer@",
@@ -553,10 +559,12 @@ AddEventHandler("Blackjack:beginCardGiveOut",function(gameId,cardData,chairId,ca
         cardObj = startDealing(dealerPed,gameId,cardData,chairId,cardIndex+1,gotCurrentHand,((tableId+1)*4)-1)
         if blackjack_func_368(closestChair) == tableId and gameId == chairId and cardIndex == 0 then
             dealersHand = gotCurrentHand
+            -- blackjackInstructional = nil
         end
         dealerSecondCardFromGameId[gameId] = cardObj
         if chairId == closestChair and gameId ~= chairId then
             currentHand = gotCurrentHand
+            -- blackjackInstructional = nil
         end
     end
 end)
@@ -598,14 +606,17 @@ AddEventHandler("Blackjack:standOrHit",function(gameId,chairId,nextCardCount,tab
                             PlayAmbientSpeech1(dealerPed,"MINIGAME_DEALER_COMMENT_SLOW","SPEECH_PARAMS_FORCE_NORMAL_CLEAR",1) --TODO check this is the right sound?
                         end
                         if standOrHitThisRound then
+                            -- -- print("terminating standorhit timer thread")
                             timeLeft = 20
                             drawTimerBar = false
                             return
+                            -- -- print("failed it didnt terminate!")
                         end
                         Wait(1000)
                     end
                 end
                 if not standOrHitThisRound and sittingAtBlackjackTable then
+                    -- print("you took too long fam standing shit")
                     waitingForStandOrHitState = false
                     TriggerServerEvent("Blackjack:standBlackjack",globalGameId,globalNextCardCount)
                     declineCard()
@@ -624,12 +635,15 @@ function getClosestDealer()
     local playerCoords = GetEntityCoords(PlayerPedId())
     for k,v in pairs(dealerPeds) do 
         local dealerPed = v
+        -- -- print("Entity ID of this dealer ped: " .. tostring(dealerPed))
         local distanceToDealer = #(playerCoords - GetEntityCoords(dealerPed))
+        -- -- print("Distance to dealer ped: " .. tostring(distanceToDealer))
         if distanceToDealer < tmpclosestDealerPedDistance then 
             tmpclosestDealerPedDistance = distanceToDealer
             tmpclosestDealerPed = dealerPed
         end
     end
+    -- -- print("Closest dealer ped is: " .. tostring(tmpclosestDealerPed))
     closestDealerPed = tmpclosestDealerPed
     closestDealerPedDistance = tmpclosestDealerPedDistance
     return closestDealerPed, closestDealerPedDistance
@@ -657,6 +671,10 @@ function goToBlackjackSeat(blackjackSeatID)
     closestDealerPed, closestDealerPedDistance = getClosestDealer()
     PlayAmbientSpeech1(closestDealerPed,"MINIGAME_DEALER_GREET","SPEECH_PARAMS_FORCE_NORMAL_CLEAR",1)
 
+    
+    -- print("[CMG Casino] start sit at blackjack seat") 
+    -- exports['textUi']:DrawTextUi('show', "Waiting for next game to start...") 
+
     blackjackAnimsToLoad = {
       "anim_casino_b@amb@casino@games@blackjack@dealer",
       "anim_casino_b@amb@casino@games@shared@dealer@",
@@ -669,11 +687,13 @@ function goToBlackjackSeat(blackjackSeatID)
             Wait(10)
         end
     end
+    -- print("[CMG Casino] blackjack anims loaded") 
     Local_198f_247 = blackjackSeatID
     print("blackjackSeatID: " .. blackjackSeatID)
     fVar3 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 0), 1)
     fVar4 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 1), 1)
     fVar5 = blackjack_func_217(PlayerPedId(),blackjack_func_218(Local_198f_247, 2), 1)
+    -- print("[CMG Casino] fVars passed")
     if (fVar4 < fVar5 and fVar4 < fVar3) then 
       Local_198f_251 = 1
     elseif (fVar5 < fVar4 and fVar5 < fVar3) then 
@@ -681,23 +701,34 @@ function goToBlackjackSeat(blackjackSeatID)
     else
       Local_198f_251 = 0
     end
-
+    --blackjack_func_218 is get_anim_offset
+    --param0 is 0-3 && param1 is 0-15? (OF blackjack_func_218)
     local walkToVector = blackjack_func_218(Local_198f_247, Local_198f_251)
     local targetHeading = blackjack_func_216(Local_198f_247, Local_198f_251)
+    -- -- print("[CMG Casino] walking to seat, x: " .. tostring(walkToVector.x) .. " y: " .. tostring(walkToVector.y) .. " z: " .. tostring(walkToVector.z))
     TaskGoStraightToCoord(PlayerPedId(), walkToVector.x, walkToVector.y, walkToVector.z, 1.0, 5000, targetHeading, 0.01)
 
     local goToVector = blackjack_func_348(Local_198f_247)
     local xRot,yRot,zRot = blackjack_func_215(Local_198f_247)
+    -- -- print("[CMG Casino] Blackjack sit at table net scene starting")
+    -- -- print("[CMG Casino] creating Scene at, x: " .. tostring(goToVector.x) .. " y: " .. tostring(goToVector.y) .. " z: " .. tostring(goToVector.z))
     Local_198f_255 = NetworkCreateSynchronisedScene(goToVector.x, goToVector.y, goToVector.z, xRot, yRot, zRot, 2, 1, 0, 1065353216, 0, 1065353216)
     NetworkAddPedToSynchronisedScene(PlayerPedId(), Local_198f_255, "anim_casino_b@amb@casino@games@shared@player@", blackjack_func_213(Local_198f_251), 2.0, -2.0, 13, 16, 2.0, 0) -- 8.0, -1.5, 157, 16, 1148846080, 0) ?
     NetworkStartSynchronisedScene(Local_198f_255)
+    -- -- print("[CMG Casino] Blackjack sit at table net scene started")
+    --Local_198.f_255 = NETWORK::NETWORK_CREATE_SYNCHRONISED_SCENE(func_348(Local_198.f_247), func_215(Local_198.f_247), 2, 1, 0, 1065353216, 0, 1065353216)
+    --NETWORK::NETWORK_ADD_PED_TO_SYNCHRONISED_SCENE(PLAYER::PLAYER_PED_ID(), Local_198.f_255, "anim_casino_b@amb@casino@games@shared@player@", blackjack_func_213(Local_198f_251), 2f, -2f, 13, 16, 2f, 0)
+    --NETWORK::NETWORK_START_SYNCHRONISED_SCENE(Local_198.f_255)
 
+    --NEXT --> Line 5552
     Citizen.InvokeNative(0x79C0E43EB9B944E2, -2124244681)
     Wait(6000)
+    -- -- print("STOP STITTING ")
+    --Wait for sit down anim to end
     Locali98f_55 = NetworkCreateSynchronisedScene(goToVector.x, goToVector.y, goToVector.z, xRot, yRot, zRot, 2, 1, 1, 1065353216, 0, 1065353216)
     NetworkAddPedToSynchronisedScene(PlayerPedId(), Locali98f_55, "anim_casino_b@amb@casino@games@shared@player@", "idle_cardgames", 2.0, -2.0, 13, 16, 1148846080, 0)
     NetworkStartSynchronisedScene(Locali98f_55)
-    StartAudioScene("DLC_VW_Casino_Table_Games")
+    StartAudioScene("DLC_VW_Casino_Table_Games") --need to stream this
     Citizen.InvokeNative(0x79C0E43EB9B944E2, -2124244681)
     waitingForSitDownState = false
     shouldForceIdleCardGames = true
@@ -705,18 +736,32 @@ end
 
 function betBlackjack(amount,chairId)
     local chipsProp = getChipPropFromAmount(amount)
+    --betChipsForNextHand(100,chipsProp,pos,chairId,false,stack/100) --false or true no clue
+    -- for stack=1,10,1 do 
+    --     for pos=0,1,1 do  --can be 0 to 3, however last 2 chip x/y positions are for a split I think
+            
+    --     end
+    -- end
     for i,v in ipairs(chipsProp) do 
         betChipsForNextHand(100,v,0,chairId,false,(i-1)/200) --false or true no clue
     end
 end
 
 function startSingleDealerDealing(dealerPed,gameId,cardData,nextCardCount,gotCurrentHand,chairId,tableId)
+    -- -- print("startSingleDealerDealing", chairId)
     N_0x469f2ecdec046337(1)
     StartAudioScene("DLC_VW_Casino_Cards_Focus_Hand") --need to stream this
-    ensureCardModelsLoaded()
+    ensureCardModelsLoaded() --request all 52 card models
+    --AUDIO::_0xF8AD2EED7C47E8FE(iVar1, false, 1); call sound on dealer
+    ----------------THIS CREATES A CARD AT THE MACHINE WHERE THE CARD COMES OUT OF-----------------------
+    -- -- print("dealerPed: " .. tostring(dealerPed))
+    -- -- print("DoesEntityExist(dealerPed): " .. tostring(DoesEntityExist(dealerPed)))
+    -- -- print("NetworkHasControlOfEntity(dealerPed): " .. tostring(NetworkHasControlOfEntity(dealerPed)))
     local gender = getDealerGenderFromPed(dealerPed)
+    -- -- print("getLocalChairIdFromGlobalChairId: " .. tostring(getLocalChairIdFromGlobalChairId))
     if DoesEntityExist(dealerPed) then
         cardPosition = nextCardCount
+        -- -- print("getLocalChairIdFromGlobalChairId: " .. tostring(getLocalChairIdFromGlobalChairId))
         nextCard = getCardFromNumber(cardData,true)
         local nextCardObj = getNewCardFromMachine(nextCard,chairId,gameId)
         AttachEntityToEntity(nextCardObj, dealerPed, GetPedBoneIndex(dealerPed,28422), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 1, 2, 1)
@@ -728,6 +773,8 @@ function startSingleDealerDealing(dealerPed,gameId,cardData,nextCardCount,gotCur
         end 
         dealerGiveSelfCard(genderAnimString,dealerPed,3,nextCardObj)
         DetachEntity(nextCardObj,false,true)
+        -- -- print("blackjack_func_368(closestChair)",blackjack_func_368(closestChair))
+        -- -- print("tableId",tableId)
         if blackjack_func_368(closestChair) == tableId then
             dealersHand = gotCurrentHand
         end
@@ -735,12 +782,14 @@ function startSingleDealerDealing(dealerPed,gameId,cardData,nextCardCount,gotCur
         PlayAmbientSpeech1(dealerPed,soundCardString,"SPEECH_PARAMS_FORCE_NORMAL_CLEAR",1)
         vVar8 =  vector3(0.0, 0.0, getTableHeading(blackjack_func_368(chairId)))
         local tablePosX,tablePosY,tablePosZ = getTableCoords(blackjack_func_368(chairId))
-        local cardQueue = cardPosition
+        local cardQueue = cardPosition -- number of card
         local iVar5 = cardQueue
-        cardOffsetX,cardOffsetY,cardOffsetZ = blackjack_func_377(iVar5, 4, 1)
+        cardOffsetX,cardOffsetY,cardOffsetZ = blackjack_func_377(iVar5, 4, 1) --iVar9 is seat number 0-3
         local cardPos = GetObjectOffsetFromCoords(tablePosX, tablePosY, tablePosZ, vVar8.z, cardOffsetX, cardOffsetY, cardOffsetZ)
         SetEntityCoordsNoOffset(nextCardObj, cardPos.x, cardPos.y, cardPos.z, 0, 0, 1)
         Wait(400)
+    else 
+        -- -- print("Failed to deal cards, entity doesn't exist or we don't have control")
     end
 end
 

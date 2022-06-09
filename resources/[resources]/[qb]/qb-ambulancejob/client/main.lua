@@ -700,9 +700,9 @@ CreateThread(function()
         if isInHospitalBed and canLeaveBed then
             sleep = 0
             local pos = GetEntityCoords(PlayerPedId())
-            exports['qb-ui']:showInteraction('[E] To get out of bed..')
+            exports['np-ui']:showInteraction('[E] To get out of bed..')
             if IsControlJustReleased(0, 38) then
-                exports['qb-ui']:hideInteraction()
+                exports['np-ui']:hideInteraction()
                 LeaveBed()
             end
         end
@@ -804,9 +804,9 @@ CreateThread(function()
                 if #(pos - checkins) < 1.0 then
                     sleep = 5
                     if doctorCount >= Config.MinimalDoctors then
-                        exports['qb-ui']:showInteraction('Call Doctor')
+                        exports['np-ui']:showInteraction('Call Doctor')
                     else
-                        exports['qb-ui']:showInteraction('Check In')
+                        exports['np-ui']:showInteraction('Check In')
                     end
                     if IsControlJustReleased(0, 38) then                        
                         if doctorCount >= Config.MinimalDoctors then                           
@@ -835,9 +835,9 @@ CreateThread(function()
                 elseif #(pos - checkins) < 4.5 then
                     sleep = 5
                     if doctorCount >= Config.MinimalDoctors then
-                        exports['qb-ui']:hideInteraction()
+                        exports['np-ui']:hideInteraction()
                     else
-                        exports['qb-ui']:hideInteraction()
+                        exports['np-ui']:hideInteraction()
                     end
                 end
             end

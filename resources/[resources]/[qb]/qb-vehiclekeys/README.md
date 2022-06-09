@@ -1,5 +1,16 @@
 # qb-vehiclekeys
+
 Vehicle Keys System For QB-Core
+
+Add this to your shared items
+```lua
+    ['security_system_device']         = {['name'] = 'security_system_device',        ['label'] = 'Security System Hacking Device', ['weight'] = 100,    ['type'] = 'item',        ['image'] = 'security_system_device.png',['unique'] = true,        ['useable'] = true,        ['shouldClose'] = true,       ['combinable'] = nil,   ['description'] = 'This device look sus', ["created"] = nil,    ["decay"] = 0},
+
+```
+## Dependencies
+
+1. [boostinghack](https://github.com/Lionh34rt/boostinghack)
+2. [qb-lock](https://github.com/Nathan-FiveM/qb-lock)
 
 # License
 

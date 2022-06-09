@@ -106,7 +106,7 @@
     text-align: center;
     line-height: 4.4vh;
     font-size: 1.2vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     transition: .05s ease-in-out;
 }
 
@@ -142,7 +142,7 @@
     width: 33.33%;
     text-align: center;
     top: 2.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.2vh;
 }
 
@@ -223,7 +223,7 @@
     position: absolute;
     top: 1.5vh;
     left: 4.7vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.4vh;
     color: white;
 }
@@ -232,7 +232,7 @@
     position: absolute;
     bottom: 1.5vh;
     left: 4.7vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
     font-size: 1.1vh;
 }
@@ -277,7 +277,7 @@
     position: absolute;
     top: 1.5vh;
     left: 4.7vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.3vh;
     color: white;
 }
@@ -286,7 +286,7 @@
     position: absolute;
     bottom: 1.5vh;
     left: 4.7vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
     font-size: 1.1vh;
 }
@@ -366,7 +366,7 @@
     background: none;
     border: none;
     outline: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -402,7 +402,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #000000;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -437,7 +437,7 @@
     background: none;
     border: none;
     outline: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -473,7 +473,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #000000;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -505,7 +505,7 @@
     position: absolute;
     left: 3vh;
     top: 6.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.8vh;
     color: white;
 }
@@ -514,7 +514,7 @@
     position: absolute;
     left: 3vh;
     top: 11vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.3vh;
     color: white;
 }
@@ -527,7 +527,7 @@
     width: 100%;
     text-align: center;
     bottom: 4vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
 }
 
@@ -539,7 +539,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #000000;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;
@@ -572,7 +572,7 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #000000;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     height: 3.5vh;
     width: 18vh;
     text-indent: .4vh;

@@ -1,6 +1,6 @@
 # Beta Released
 
-Integrated with https://github.com/Project-Sloth/qb-mdt
+Integrated with https://github.com/Project-Sloth/ps-mdt
 
 For all support questions, ask in our Discord support chat. Do not create issues if you need help. Issues are for bug reporting and new features only.
 
@@ -30,15 +30,15 @@ https://www.discord.gg/projectsloth
 
 - exports['qb-dispatch']:StoreRobbery(camId)
 
-- exports['qb-dispatch']:FleecaBankRobbery()
+- exports['qb-dispatch']:FleecaBankRobbery(camId)
 
-- exports['qb-dispatch']:PaletoBankRobbery()
+- exports['qb-dispatch']:PaletoBankRobbery(camId)
 
-- exports['qb-dispatch']:PacificBankRobbery()
+- exports['qb-dispatch']:PacificBankRobbery(camId)
 
 - exports['qb-dispatch']:PrisonBreak()
 
-- exports['qb-dispatch']:VangelicoRobbery()
+- exports['qb-dispatch']:VangelicoRobbery(camId)
 
 - exports['qb-dispatch']:HouseRobbery()
 
@@ -67,6 +67,8 @@ https://www.discord.gg/projectsloth
 - exports['qb-dispatch']:CarJacking(vehicle)
 
 - exports['qb-dispatch']:VehicleTheft(vehicle)
+
+- exports['qb-dispatch']:SuspiciousActivity()
 ```
 
 # Steps to Create New Alert
@@ -74,7 +76,7 @@ https://www.discord.gg/projectsloth
 1. Create a client event that will be triggered from whatever script you want
 
 ```lua
-local function FleecaBankRobbery()
+local function FleecaBankRobbery(camId)
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
     local gender = GetPedGender()
@@ -83,6 +85,7 @@ local function FleecaBankRobbery()
         dispatchCode = "10-90",
         firstStreet = locationInfo,
         gender = gender,
+        camId = camId,
         model = nil,
         plate = nil,
         priority = 2, -- priority

@@ -48,7 +48,7 @@ CreateThread(function()
                     inZone = true
                     if not interacting then
                         if not dealerIsHome then
-                            exports['qb-ui']:showInteraction('[E] Knock')
+                            exports['np-ui']:showInteraction('[E] Knock')
                             --DrawText3D(dealer["coords"]["x"], dealer["coords"]["y"], dealer["coords"]["z"], Lang:t("info.knock_button"))
 
                             if IsControlJustPressed(0, 38) then
@@ -57,10 +57,10 @@ CreateThread(function()
                             end
                         elseif dealerIsHome then
                             if dealer["name"] == "grandma" then
-                                exports['qb-ui']:showInteraction('[E] Buy or [G] Help your guy ($5000)')
+                                exports['np-ui']:showInteraction('[E] Buy or [G] Help your guy ($5000)')
                                 --DrawText3D(dealer["coords"]["x"], dealer["coords"]["y"], dealer["coords"]["z"], Lang:t("info.grandma_man_button"))
                             else
-                                exports['qb-ui']:showInteraction('[E] Buy or [G] Start a mission')
+                                exports['np-ui']:showInteraction('[E] Buy or [G] Start a mission')
                                 --DrawText3D(dealer["coords"]["x"], dealer["coords"]["y"], dealer["coords"]["z"], Lang:t("info.other_dealers_button"))
                             end
                             if IsControlJustPressed(0, 38) then
@@ -119,12 +119,12 @@ CreateThread(function()
         Wait(3)
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['qb-ui']:showInteraction()
+            exports['np-ui']:showInteraction()
        end
 
        if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['qb-ui']:hideInteraction()
+            exports['np-ui']:hideInteraction()
         end
     end
 end)

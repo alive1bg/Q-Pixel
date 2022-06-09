@@ -35,7 +35,7 @@ end)
 -- this ped is in MS-PEDS because i ran out of casino peds to use -- had to do it like this so every ped in casino cant be accessed to spin wheel lol
 CreateThread(function()
     if Config.UseThirdEyeInteraction then
-        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(987.95, 42.32, 71.27), 0.5, 0.5, {
+        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(988.47, 43.18, 71.27), 0.5, 0.5, {
             name = "CasinoLuckyWheel",
             heading = 58.0,
             debugPoly = false,

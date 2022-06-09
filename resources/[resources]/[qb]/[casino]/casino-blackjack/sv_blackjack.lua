@@ -294,7 +294,7 @@ for i=0,31,1 do
                                                     nextCardCount = 0
                                                     blackjackGameData[gameId][source]["status"] = "bust"
                                                     local lostAmount = blackjackGameData[gameId][source][1]
-                                                    TriggerClientEvent('QBCore:Notify', source, 'Lost '..tostring(lostAmount).." chips", 'error')
+                                                    TriggerClientEvent('QBCore:Notify', source, 'Lost -'..tostring(lostAmount).." chips", 'error')
                                                     if lostAmount > 10000000 then
                                                         TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has LOST " .. tostring(getMoneyStringFormatted(lostAmount)) .. " chips!")
                                                     end
@@ -405,7 +405,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! You won '..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
@@ -418,7 +418,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! You won '..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
@@ -438,7 +438,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackLose",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You lost! '..tostring(potentialPushAmount)..' chips', 'error')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'You lost! -'..tostring(potentialPushAmount)..' chips', 'error')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has LOST " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end

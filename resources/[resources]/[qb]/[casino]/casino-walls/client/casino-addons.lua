@@ -9,7 +9,7 @@ RegisterNetEvent('qb-casino:client:openCasinoShop', function()
 end)
 
 RegisterNetEvent('doj:casinoChipMenu', function()
-    exports['qb-ui']:hideInteraction()
+    TriggerEvent('drawtextui:HideUI')
     exports['qb-menu']:openMenu({
         {
             header = "Diamond Casino Chip Exchange",
@@ -78,7 +78,7 @@ CreateThread(function()
     local CasinoShop = CircleZone:Create(vector3(989.35, 31.8, 71.47), 2.0, {
         name="CasinoShop",
         heading=160,
-        debugpoly = false,
+        debugPoly=false,
         useZ=true,
     })
     CasinoShop:onPlayerInOut(function(isPointInside)
@@ -86,8 +86,8 @@ CreateThread(function()
             if Config.CasinoEmployeePrompt == 'walk-up' then 
                 TriggerEvent('doj:casinoMenuHeader') 
             elseif Config.CasinoEmployeePrompt == 'peek' then
-                text = 'Diamond Casino Exchange'
-                exports['qb-ui']:showInteraction(text)
+                text = '<b>Diamond Casino Exchange</b>'
+                exports['textUi']:DrawTextUi('show', text)
                 exports['qb-target']:AddTargetModel(`U_F_M_CasinoCash_01`, {
                     options = {
                         { 
@@ -101,7 +101,7 @@ CreateThread(function()
             end
         else
             exports['qb-menu']:closeMenu()
-            exports['qb-ui']:hideInteraction()
+            exports['textUi']:HideTextUi('hide')
         end
     end)
 end)
@@ -137,7 +137,7 @@ RegisterNetEvent('doj:casinoMenuHeader', function()
 end)
 
 RegisterNetEvent('doj:casinoMainMenu', function()
-    exports['qb-ui']:hideInteraction()
+    exports['textUi']:HideTextUi('hide')
     exports['qb-menu']:openMenu({
         {
             header = "Diamond Casino",
@@ -177,7 +177,7 @@ end)
 exports['qb-target']:AddBoxZone("casinogeneralsafestorage", vector3(989.39, 30.18, 71.47), 0.5, 0.5, {       
 	name="casinogeneralsafestorage",
 	heading=-53,
-	debugpoly = false,
+	debugPoly=false,
 	minZ=71.17,
 	maxZ=71.57
     }, {
@@ -196,7 +196,7 @@ exports['qb-target']:AddBoxZone("casinogeneralsafestorage", vector3(989.39, 30.1
     exports['qb-target']:AddBoxZone("casinogeneralsafestorage2", vector3(991.49, 32.71, 71.47), 0.5, 0.5, {       
         name="casinogeneralsafestorage2",
         heading=-53,
-        debugpoly = false,
+        debugPoly=false,
         minZ=71.17,
         maxZ=71.57
         }, {

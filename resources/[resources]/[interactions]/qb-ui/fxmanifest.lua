@@ -1,30 +1,16 @@
-fx_version 'cerulean'
+fx_version 'bodacious'
+game 'gta5'
 
-games { 'rdr3', 'gta5' }
+author "Zea Ra"
+description 'Ui Text For Khmer OBCore'
+version '1.0'
 
-version '1.0.0'
+client_script 'client.lua'
 
-ui_page 'build/index.html'
+ui_page 'html/index.html'
 
 files {
-  'build/index.html',
-  'build/static/js/*.js',
-  'build/static/css/*.css',
-  'build/static/media/*.ttf',
-  'build/static/media/*.png',
-  'build/static/media/*.jpg',
-  'build/static/media/*.gif',
-  'build/static/media/*.ogg',
+    'html/index.html',
+    'html/drawtext.js',
+    'html/drawtext.css'
 }
-
-client_scripts {
-  '@qb-lib/client/cl_ui.lua',
-  'client/cl_exports.lua',
-  'client/model/*.lua'
-}
-
--- server_scripts {
---   -- '@np-lib/server/sv_rpc.lua',
---   'server/sv_*.lua'
---   'server/sv_*.js'
--- }

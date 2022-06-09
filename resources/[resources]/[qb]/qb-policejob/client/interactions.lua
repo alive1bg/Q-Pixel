@@ -188,7 +188,7 @@ RegisterNetEvent('police:client:JailPlayer', function()
                 }
             }
         })]]
-        local dialog = exports['qb-ui']:OpenInputMenu({
+        local dialog = exports['np-ui']:OpenInputMenu({
             {
                 label = Lang:t('info.jail_time_input'), Lang:t('info.time_months'),
                 name = 'jailtime',
@@ -221,7 +221,7 @@ RegisterNetEvent('police:client:BillPlayer', function()
                 }
             }
         })]]
-        local dialog = exports['qb-ui']:OpenInputMenu({
+        local dialog = exports['np-ui']:OpenInputMenu({
             {
                 label = Lang:t('info.bill'), Lang:t('info.amount'),
                 name = 'bill',

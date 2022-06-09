@@ -29,7 +29,7 @@
     padding-top: 1.3vh;
     padding-left: 2vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.5vh;
 }
 #whatsapp-search-chats {
@@ -57,7 +57,7 @@
     height: 2.5vh;
     border-radius: 1vh;
     box-shadow: 0 0 .2vh 0 rgba(0, 0, 0, 0.281);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     outline: none;
     text-indent: 1vh;
     z-index: 100;
@@ -70,7 +70,7 @@
 .whatsapp-chats {
     position: absolute;
     width: 100%;
-    height: 84%;
+    height: 85.2%;
     top: 9vh;
     background: #202731;
     overflow-y: scroll;
@@ -102,7 +102,7 @@
     border-radius: 50%;
     text-align: center;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1vh;
     line-height: 1.9vh;
 }
@@ -156,7 +156,7 @@
     left: 7vh;
     color: white;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.5vh;
     letter-spacing: 1px;
 }
@@ -165,7 +165,7 @@
     position: absolute;
     bottom: .6vh;
     left: 7vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.1vh;
     color: white;
     max-width: 17vh;
@@ -181,7 +181,7 @@
     position: absolute;
     top: 1.35vh;
     right: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1vh;
     color: white;
 }
@@ -216,7 +216,7 @@
     left: 8vh;
     color: white;
     font-size: 1.5vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.5vh;
 }
 
@@ -244,7 +244,7 @@
     padding-top: 1.3vh;
     padding-left: 2vh;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.5vh;
 }
 
@@ -269,7 +269,7 @@
     width: 3.5vh;
     height: 3.5vh;
     border-radius: 1vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1.4vh;
     z-index: 100;
     top: 1.3vh;
@@ -412,7 +412,7 @@
     text-align: right;
     padding-left: 3.7vh;
     margin-top: -0.25vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     color: #ffffff;
 }
 
@@ -433,7 +433,7 @@
     width: fit-content;
     padding: 0.4vh;
     height: 2vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 1vh;
     border-radius: 0.4vh;
     text-transform: uppercase;

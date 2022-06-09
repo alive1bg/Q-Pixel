@@ -5,7 +5,7 @@
 --     local TeleportUpZone = CircleZone:Create(vector3(930.251, 34.324, 81.089), 1.5, {
 --         name="TeleportUp",
 --         heading=328.0,
---         debugpoly = false,
+--         debugPoly=false,
 --         useZ=true,
 --     })
 --     TeleportUpZone:onPlayerInOut(function(isPointInside)
@@ -21,7 +21,7 @@
 --     local TeleportDownZone = CircleZone:Create(vector3(964.737, 58.743, 112.553), 1.5, {
 --         name="TeleportDown",
 --         heading=328.0,
---         debugpoly = false,
+--         debugPoly=false,
 --         useZ=true,
 --     })
 --     TeleportDownZone:onPlayerInOut(function(isPointInside)

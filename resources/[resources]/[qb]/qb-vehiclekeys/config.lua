@@ -9,6 +9,24 @@ Config.AlertCooldown = 10000 -- 10 seconds
 Config.PoliceAlertChance = 0.5 -- Chance of alerting police during the day
 Config.PoliceNightAlertChance = 0.25 -- Chance of alerting police at night (times:01-06)
 
+
+-- Vehicle that require hacking to get keys/unlock doors
+Config.Vehicle = {
+    -- https://wiki.gtanet.work/index.php?title=Vehicle_Classes
+    ['vehicle_class'] = {
+        'emergency'
+    },
+    -- QBCore.Shared.Vehicles brand
+    ['brand'] = {
+    },
+
+    ['name'] = {
+        -- 'blista'
+    }
+ }
+
+
+
 Config.NoRobWeapons = {
     "WEAPON_UNARMED",
     "WEAPON_Knife",
@@ -37,9 +55,5 @@ Config.NoRobWeapons = {
     "WEAPON_Flare",
     "WEAPON_Ball",
     "WEAPON_Snowball",
-    "WEAPON_Shoe",
-    "WEAPON_Brick",
-    "WEAPON_Cash",
-    "WEAPON_Book",
     "WEAPON_SmokeGrenade",
 }

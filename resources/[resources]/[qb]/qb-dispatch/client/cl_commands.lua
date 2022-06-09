@@ -124,9 +124,9 @@ RegisterCommand('911a', function(source, args, rawCommand)
                     name = "Anonymous",
                     number = "Hidden Number",
                     origin = {
-                        x = 759.26,
-                        y = 1274.29,
-                        z = 360.3
+                        x = currentPos.x,
+                        y = currentPos.y,
+                        z = currentPos.z
                     },
                     dispatchMessage = "Incoming Anonymous Call", -- message
                     information = msg,
@@ -210,9 +210,9 @@ RegisterCommand('311a', function(source, args, rawCommand)
                     name = "Anonymous",
                     number = "Hidden Number",
                     origin = {
-                        x = 759.26,
-                        y = 1274.29,
-                        z = 360.3
+                        x = currentPos.x,
+                        y = currentPos.y,
+                        z = currentPos.z
                     },
                     dispatchMessage = "Incoming Call", -- message
                     information = msg,
@@ -233,7 +233,7 @@ RegisterCommand('311a', function(source, args, rawCommand)
 end)
 
 
-CreateThread(function()
+Citizen.CreateThread(function()
     TriggerEvent('chat:addSuggestion', '/911', 'Send a message to the police.', {{ name="message", help="Message to police."}})
     TriggerEvent('chat:addSuggestion', '/911a', 'Send a message to the police anonymously.', {{ name="message", help="Message to police anonymous."}})
     TriggerEvent('chat:addSuggestion', '/311', 'Send a message to the EMS.', {{ name="message", help="Message to EMS."}})

@@ -35,10 +35,10 @@ Config.MinOffset = 1
 Config.MaxOffset = 120
 ---------------------------------------------------------------
 
-CreateThread(function()
+Citizen.CreateThread(function()
     -- if not GetPlayerPed(-1) then return end
     -- while not firstname do
-    --     Wait(10)
+    --     Citizen.Wait(10)
     -- end
 
     -- if notLoaded then
