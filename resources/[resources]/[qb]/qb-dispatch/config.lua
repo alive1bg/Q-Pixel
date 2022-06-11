@@ -241,5 +241,4 @@ Citizen.CreateThread(function()
         ['159'] = "Brushed Gold",
         ['160'] = "MP100"
     }
-
 end)

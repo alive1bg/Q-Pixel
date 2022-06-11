@@ -800,11 +800,7 @@ CreateThread(function()
                 if onDuty then
                     if StashDistance < 20 then
                         inRange = true
-                        --DrawMarker(2, Config.Locations["stash"].x, Config.Locations["stash"].y, Config.Locations["stash"].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 210, 50, 9, 255, false, false, false, true, false, false, false)
                         if StashDistance < 2 then
-                            inZone = true
-                            exports['np-ui']:showInteraction('[E] Tuner Stash')
-                            --DrawText3Ds(Config.Locations["stash"].x, Config.Locations["stash"].y, Config.Locations["stash"].z, "[E] Open Stash")
                             if IsControlJustReleased(0, 38) then
                                 TriggerEvent("inventory:client:SetCurrentStash", "mechanicstash")
                                 TriggerServerEvent("inventory:server:OpenInventory", "stash", "mechanicstash", {
@@ -819,20 +815,19 @@ CreateThread(function()
                 if onDuty then
                     if VehicleDistance < 20 then
                         inRange = true
-                        --DrawMarker(2, Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 210, 50, 9, 255, false, false, false, true, false, false, false)
                         if VehicleDistance < 8 then
                             local InVehicle = IsPedInAnyVehicle(PlayerPedId())
 
                             if InVehicle then
                                 inZone = true
-                                exports['np-ui']:showInteraction('Put away vehicle')
+                                text = 'Put away vehicle'
                                 --DrawText3Ds(Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z, '[E] Hide Vehicle')
                                 -- if IsControlJustPressed(0, 38) then
                                 --     DeleteVehicle(GetVehiclePedIsIn(PlayerPedId()))
                                 -- end
                             else
                                 inZone = true
-                                exports['np-ui']:showInteraction('Take out vehicle')
+                                text = 'Take out vehicle'
                                 --DrawText3Ds(Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z, '[E] Get Vehicle')
                                 -- if IsControlJustPressed(0, 38) then
                                 --     if IsControlJustPressed(0, 38) then
@@ -844,36 +839,18 @@ CreateThread(function()
                     end
                 end
 
-                -- if OnDutyDistance < 20 then
-                --     inRange = true
-                --     DrawMarker(2, Config.Locations["duty"].x, Config.Locations["duty"].y, Config.Locations["duty"].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 210, 50, 9, 255, false, false, false, true, false, false, false)
-
-                --     if OnDutyDistance < 1 then
-                --         if onDuty then
-                --             DrawText3Ds(Config.Locations["duty"].x, Config.Locations["duty"].y, Config.Locations["duty"].z, "[E] Off Duty")
-                --         else
-                --             DrawText3Ds(Config.Locations["duty"].x, Config.Locations["duty"].y, Config.Locations["duty"].z, "[E] On Duty")
-                --         end
-                --         if IsControlJustReleased(0, 38) then
-                --             TriggerServerEvent("QBCore:ToggleDuty")
-                --         end
-                --     end
-                -- end
-
                 if onDuty then
                     for k, v in pairs(Config.Plates) do
                         if v.AttachedVehicle == nil then
                             local PlateDistance = #(pos - vector3(v.coords.x, v.coords.y, v.coords.z))
                             if PlateDistance < 20 then
                                 inRange = true
-                                --DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 255, 255, 255, 255, 0, 0, 0, 1, 0, 0, 0)
                                 if PlateDistance < 3 then
                                     local veh = GetVehiclePedIsIn(PlayerPedId())
                                     if IsPedInAnyVehicle(PlayerPedId()) then
                                         if not IsThisModelABicycle(GetEntityModel(veh)) then
                                             inZone = true
-                                            exports['np-ui']:showInteraction('[E] Place The Vehicle On The Platform')
-                                            --DrawText3Ds(v.coords.x, v.coords.y, v.coords.z + 0.3, "[E] Place The Vehicle On The Platform")
+                                            text = '[E] Place The Vehicle On The Platform'
                                             if IsControlJustPressed(0, 38) then
                                                 DoScreenFadeOut(150)
                                                 Wait(150)
@@ -896,8 +873,7 @@ CreateThread(function()
                             if PlateDistance < 3 then
                                 inRange = true
                                 inZone = true
-                                exports['np-ui']:showInteraction('[E] Open menu')
-                                --DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, "[E] Open Menu")
+                                text = '[E] Open menu'
                                 if IsControlJustPressed(0, 38) then
                                     OpenMenu()
                                 end
@@ -919,7 +895,7 @@ CreateThread(function()
         Wait(3)
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['np-ui']:showInteraction()
+            exports['np-ui']:showInteraction(text)
         end
 
         if not inZone and alreadyEnteredZone then
@@ -929,90 +905,6 @@ CreateThread(function()
         Wait(waitTime)
     end
 end)
-
--- CreateThread(function() -- Not event sure what this is even for
---     while true do
---         Wait(1)
---         if (IsPedInAnyVehicle(PlayerPedId(), false)) then
---             local veh = GetVehiclePedIsIn(PlayerPedId(),false)
---             if ModdedVehicles[tostring(veh)] == nil and not IsThisModelABicycle(GetEntityModel(veh)) then
---                 --[[local fSteeringLock = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fSteeringLock')
---                 fSteeringLock = math.ceil((fSteeringLock * 0.6)) + 0.1
-
---                 SetVehicleHandlingFloat(veh, 'CHandlingData', 'fSteeringLock', fSteeringLock)
---                 SetVehicleHandlingField(veh, 'CHandlingData', 'fSteeringLock', fSteeringLock)]]--
-
---                 local fInitialDriveMaxFlatVel = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveMaxFlatVel')
-
---                 if IsThisModelABike(GetEntityModel(veh)) then
---                     local fTractionCurveMin = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fTractionCurveMin')
-
---                     fTractionCurveMin = fTractionCurveMin * 0.6
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fTractionCurveMin', fTractionCurveMin)
---                     SetVehicleHandlingField(veh, 'CHandlingData', 'fTractionCurveMin', fTractionCurveMin)
-
---                     -- local fTractionCurveMax = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fTractionCurveMax')
---                     -- fTractionCurveMax = fTractionCurveMax * 0.6
---                     -- SetVehicleHandlingFloat(veh, 'CHandlingData', 'fTractionCurveMax', fTractionCurveMax)
---                     -- SetVehicleHandlingField(veh, 'CHandlingData', 'fTractionCurveMax', fTractionCurveMax)
-
---                     local fInitialDriveForce = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveForce')
---                     fInitialDriveForce = fInitialDriveForce * 2.4
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveForce', fInitialDriveForce)
-
---                     local fBrakeForce = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fBrakeForce')
---                     fBrakeForce = fBrakeForce * 1.4
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fBrakeForce', fBrakeForce)
-
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fSuspensionReboundDamp', 5.000000)
---                     SetVehicleHandlingField(veh, 'CHandlingData', 'fSuspensionReboundDamp', 5.000000)
-
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fSuspensionCompDamp', 5.000000)
---                     SetVehicleHandlingField(veh, 'CHandlingData', 'fSuspensionCompDamp', 5.000000)
-
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fSuspensionForce', 22.000000)
---                     SetVehicleHandlingField(veh, 'CHandlingData', 'fSuspensionForce', 22.000000)
-
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fCollisionDamageMult', 2.500000)
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fEngineDamageMult', 0.120000)
---                 else
---                     local fBrakeForce = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fBrakeForce')
---                     fBrakeForce = fBrakeForce * 0.5
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fBrakeForce', fBrakeForce)
-
---                     local fInitialDriveForce = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveForce')
---                     if fInitialDriveForce < 0.289 then
---                         fInitialDriveForce = fInitialDriveForce * 1.2
---                         SetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveForce', fInitialDriveForce)
---                     else
---                         fInitialDriveForce = fInitialDriveForce * 0.9
---                         SetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDriveForce', fInitialDriveForce)
---                     end
-
---                     local fInitialDragCoeff = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDragCoeff')
---                     fInitialDragCoeff = fInitialDragCoeff * 0.3
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fInitialDragCoeff', fInitialDragCoeff)
-
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fEngineDamageMult', 0.100000)
---                     SetVehicleHandlingFloat(veh, 'CHandlingData', 'fCollisionDamageMult', 2.900000)
-
---                 end
---                 SetVehicleHandlingFloat(veh, 'CHandlingData', 'fDeformationDamageMult', 1.000000)
---                 SetVehicleHasBeenOwnedByPlayer(veh,true)
---                 ModdedVehicles[tostring(veh)] = {
---                     ["fInitialDriveMaxFlatVel"] = fInitialDriveMaxFlatVel,
---                     ["fSteeringLock"] = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fSteeringLock'),
---                     ["fTractionLossMult"] = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fTractionLossMult'),
---                     ["fLowSpeedTractionLossMult"] = GetVehicleHandlingFloat(veh, 'CHandlingData', 'fLowSpeedTractionLossMult')
---                 }
---             else
---                 Wait(1000)
---             end
---         else
---             Wait(2000)
---         end
---     end
--- end)
 
 CreateThread(function()
     while true do
@@ -1139,24 +1031,3 @@ exports['qb-target']:AddBoxZone("TunerPersonalStash", vector3(145.69, -3007.8, 7
     },
     distance = 3.5
 })
-
---[[RegisterNetEvent("washer:compressor:createobject")
-AddEventHandler("washer:compressor:createobject",function(f)
-    local hash = GetHashKey("prop_compressor_02")
-    local CreateObject(GetHashKey, 845.97, -2111.59, 30.58, true, false)
-end)]]
-
-CreateThread(function()
-    local hash = GetHashKey('prop_compressor_02')
-    RequestModel(hash)
-    while not HasModelLoaded(hash) do
-        Wait(10)
-    end
-    local prop = CreateObject(hash, 846.22, -2111.98, 30.58, true, false)
-    SetModelAsNoLongerNeeded(hash)
-    SetEntityAsMissionEntity(prop, true, true)
-    PlaceObjectOnGroundProperly(prop)
-    SetEntityInvincible(prop, true)
-    FreezeEntityPosition(prop,true)
-    SetEntityHeading(prop, 85.0)
-end)

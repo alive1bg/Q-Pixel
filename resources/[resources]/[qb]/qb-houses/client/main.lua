@@ -1232,7 +1232,6 @@ CreateThread(function()
                 inRange = true
                 if HasHouseKey then
                     -- ENTER HOUSE
-
                     if not IsInside then
                         if ClosestHouse ~= nil then
                             if #(pos - dist2) <= 1.5 then
@@ -1269,7 +1268,6 @@ CreateThread(function()
                         end
                     end
                 else
-
                     if ClosestHouse ~= nil and not IsInside  then
                         if not isOwned then
                             local houseCoords = vector3(Config.Houses[ClosestHouse].coords.enter.x, Config.Houses[ClosestHouse].coords.enter.y, Config.Houses[ClosestHouse].coords.enter.z)

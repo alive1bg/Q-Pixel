@@ -772,8 +772,6 @@ end
 
 CreateThread(function()
     while true do
-        local alreadyEnteredZone = false
-        local inZone = false
         local plyPed = PlayerPedId()
 
         if IsPedInAnyVehicle(plyPed, false) then
@@ -786,8 +784,6 @@ CreateThread(function()
                     bennyLocation = vector3(v.coords.x, v.coords.y, v.coords.z)
                     if nearDefault then
                         if not isPlyInBennys then
-                            inZone  = true
-                            text = "[E] Tuner Shop"
                             if IsControlJustReleased(1, 38) then
                                 if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then
                                     if (v.useJob and isAuthorized((QBCore.Functions.GetPlayerData().job.name), k)) or not v.useJob then
@@ -803,15 +799,6 @@ CreateThread(function()
                     end
                 end
             end
-        end
-        if inZone and not alreadyEnteredZone then
-             alreadyEnteredZone = true
-             exports['np-ui']:showInteraction(text)
-        end
-
-        if not inZone and alreadyEnteredZone then
-             alreadyEnteredZone = false
-             exports['np-ui']:hideInteraction()
         end
         Wait(1)
     end
@@ -869,9 +856,7 @@ local function playSoundEffect(soundEffect, volume)
 end
 
 CreateThread(function()
-    local alreadyEnteredZone = false
     while true do
-        inZone = false
         local plyPed = PlayerPedId()
         local plyVeh = GetVehiclePedIsIn(plyPed, false)
 
@@ -882,8 +867,6 @@ CreateThread(function()
 
             if nearDefault then
                 if not isPlyInBennys then
-                    inZone = true
-                    exports['np-ui']:showInteraction('[E] Repair Vehicle')
                     if IsControlJustReleased(1, 38) then
                         playSoundEffect("wrench", 0.4)
                         SetVehicleEngineOn(plyVeh, false, false, true)
@@ -915,48 +898,8 @@ CreateThread(function()
         else
             Wait(2000)
         end
-        if inZone and not alreadyEnteredZone then
-             alreadyEnteredZone = true
-             exports['np-ui']:showInteraction()
-        end
-
-        if not inZone and alreadyEnteredZone then
-             alreadyEnteredZone = false
-             exports['np-ui']:hideInteraction()
-         end
-
         Wait(1)
     end
 end)
 
 ----------------------------------------------- end benny repair point event + function
-
-
--- hayes auto boss menu 3rd eye
--- 3rd eye target hayes auto boss menu
-exports['qb-target']:AddBoxZone("hayes", vector3(-1426.99, -458.2, 35.81), 0.5, 0.5, {
-    name = "hayes",
-    heading = 90.0,
-    debugPoly = false,
-    minZ = 35.71,
-    maxZ = 36.01,
-    }, {
-        options = {
-            {
-                type = "client",
-                event = "qb-management:client:OpenMenu",
-                icon = "fas fa-sign-in-alt",
-                label = "Open Boss Menu",
-                job = "hayesauto",
-            },
-			{
-                type = "server",
-                event = "QBCore:ToggleDuty",
-                icon = "fas fa-sign-in-alt",
-                label = "Go On/Off Duty",
-                job = "hayesauto",
-            },
-        },
-        distance = 2.5
-})
-

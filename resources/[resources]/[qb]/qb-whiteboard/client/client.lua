@@ -7,7 +7,6 @@ local inClassRoom, inMeetingRoom = false, false
 local dui = nil
 
 CreateThread(function()
-
   exports["qb-polyzone"]:AddPolyZone("mrpd_classroom", {
     vector2(448.41372680664, -990.47613525391),
     vector2(439.50704956055, -990.55731201172),
@@ -57,7 +56,7 @@ AddEventHandler("qb-polyzone:enter", function(zone)
     inMeetingRoom = true
   elseif currentZone then --and isCop
     currentPrompt = zone
-    local prompt = type(currentZone.promptText) == 'function' and currentZone.promptText() or currentZone.promptText
+    local prompt = type(currentPrompt.promptText) == 'function' and currentPrompt.promptText() or currentPrompt.promptText
     exports["np-ui"]:showInteraction(prompt)
     listenForKeypress(zone)
   end

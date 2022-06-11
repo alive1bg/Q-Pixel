@@ -1,48 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
---[[CreateThread(function()
-    while true do
-        local sleep = 500
-        for k, v in pairs(Config.VoteLocations) do
-            local ped = PlayerPedId()
-            local coords = GetEntityCoords(ped)
-            if GetDistanceBetweenCoords(v.x, v.y, v.z, coords.x, coords.y, coords.z, true) < 2 then
-                sleep = 300
-                exports["np-ui"]:showInteraction("Vote Cabin")
-            else 
-                exports["np-ui"]:hideInteraction()
-            end
-        end
-        Wait(sleep)
-   end
-end)]]
-
-CreateThread(function()
-    exports["qb-polyzone"]:AddBoxZone("votecabin", vector3(-542.11, -180.91, 38.23), 4.7, 1.6, {
-        heading=30,
-        debugPoly = false,
-        minZ=37.23,
-        maxZ=39.63
-    })
-end)
-
-RegisterNetEvent('qb-polyzone:enter')
-AddEventHandler('qb-polyzone:enter', function(name)
-    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-    if name == "votecabin" then
-        inVoteCabin = true
-        exports['np-ui']:showInteraction('Vote Cabin')
-    end
-end)
-
-RegisterNetEvent('qb-polyzone:exit')
-AddEventHandler('qb-polyzone:exit', function(name)
-    if name == "votecabin" then
-        inVoteCabin = false
-        exports['np-ui']:hideInteraction()
-    end
-end)
-
 RegisterNetEvent('qb-vote:client:vote', function()
     for k, v in pairs(Config.VoteLocations) do
         local ped = PlayerPedId()

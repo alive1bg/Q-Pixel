@@ -159,7 +159,6 @@ RegisterNetEvent('Garages:Store', function()
                 TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                 TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods) 
                 TriggerServerEvent('qb-garages:server:modifystate', vehicleProps)
-                --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                 RemoveOutsideVeh(plate)
                 QBCore.Functions.DeleteVehicle(curVeh)
                 QBCore.Functions.Notify("Vehicle Parked In : "..Garages[pGarage].label, "success", 44)
@@ -173,7 +172,6 @@ RegisterNetEvent('Garages:Store', function()
                             TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                             TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                             TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods)
-                            --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                             RemoveOutsideVeh(plate)
                             QBCore.Functions.DeleteVehicle(curVeh)
                             QBCore.Functions.Notify("Vehicle Parked In : "..JobGarages[pGarage].label, "success", 4500)
@@ -188,7 +186,6 @@ RegisterNetEvent('Garages:Store', function()
                             TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                             TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                             TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods)
-                            --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                             RemoveOutsideVeh(plate)
                             QBCore.Functions.DeleteVehicle(curVeh)
                             QBCore.Functions.Notify("Vehicle Parked In : "..GangGarages[pGarage].label, "success", 4500)
@@ -208,7 +205,6 @@ RegisterNetEvent('Garages:Store', function()
                         TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage, true)
                         TriggerServerEvent('qb-garage:server:updateSharedVehState', 'Stored', plate, pGarage)
                         TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods, true)
-                        --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                         QBCore.Functions.DeleteVehicle(curVeh)
                     else
                         QBCore.Functions.Notify("You are not Authorized!", "error", 3000)
@@ -239,7 +235,6 @@ RegisterNetEvent('Garages:StoreInHouseGarage', function()
                     if result then
                         TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                         TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
-                        --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                         RemoveOutsideVeh(plate)
                         QBCore.Functions.DeleteVehicle(curVeh)
                         QBCore.Functions.Notify("Vehicle Parked In : "..HouseGarages[pGarage].label, "success", 4500)
@@ -311,7 +306,6 @@ RegisterNetEvent('qb-garages:VehicleList', function()
                         }
                     })
                     exports['qb-menu']:openMenu(menu)
-                    --TriggerEvent('context-menu:client:openMenu', menu)
                 end
             else
                 QBCore.Functions.Notify("You need to be near a free parking spot!")
@@ -366,7 +360,6 @@ RegisterNetEvent('qb-garages:HouseVehicleList', function(Data)
                     }
                 })
                 exports['qb-menu']:openMenu(menu)
-                --TriggerEvent('context-menu:client:openMenu', menu)
             end
         else
             TriggerEvent('QBCore:Notify', "You Have No Vehicles Parked in Garage!", "error")
@@ -431,7 +424,6 @@ RegisterNetEvent('qb-garages:JobVehicleList', function()
                         }
                     })
                     exports['qb-menu']:openMenu(menu)
-                    --TriggerEvent('context-menu:client:openMenu', menu)
                 end
             else
                 QBCore.Functions.Notify("You need to be near a free parking spot!")
@@ -473,7 +465,6 @@ RegisterNetEvent('qb-garages:client:DepotVehicleList', function()
             end
             if NoVeh then
                 exports['qb-menu']:openMenu(menu)
-                --TriggerEvent('context-menu:client:openMenu', menu)
             end
         end
         if not NoVeh then
@@ -514,7 +505,6 @@ RegisterNetEvent('qb-garages:client:SharedVehicleMenu', function()
                     })
                 end
                 exports['qb-menu']:openMenu(menu)
-                --TriggerEvent('context-menu:client:openMenu', menu)
             else
                 TriggerEvent('QBCore:Notify', "No Vehicles!", "error")
             end
@@ -555,7 +545,6 @@ RegisterNetEvent('qb-garages:client:SharedHeliGarage', function()
                     }
                 })
                 exports['qb-menu']:openMenu(menu)
-                --TriggerEvent('context-menu:client:openMenu', menu)
             end
         else
             TriggerEvent('QBCore:Notify', "No Vehicles!", "error")
@@ -595,7 +584,6 @@ RegisterNetEvent('qb-garages:client:SharedVehicleList', function(Data)
                     }
                 })
                 exports['qb-menu']:openMenu(menu)
-                --TriggerEvent('context-menu:client:openMenu', menu)
             end
         else
             TriggerEvent('QBCore:Notify', "You Have No Vehicles Parked here!", "error")
@@ -877,7 +865,6 @@ RegisterNetEvent('qb-garages:client:ParkingLog', function(Data)
             end
         end
         exports['qb-menu']:openMenu(menu)
-        --TriggerEvent('context-menu:client:openMenu', menu)
     end, Data.plate)
 end)
 
@@ -905,7 +892,6 @@ RegisterNetEvent('qb-garages:client:AddSharedVehicle', function(garage, faction,
         local plate = GetVehicleNumberPlateText(curVeh)
         local model = nil
         for k, v in pairs(QBCore.Shared.Vehicles) do
-            --print("a:", dump(QBCore.Shared.Vehicles.model))
             if vehhash == QBCore.Shared.Vehicles[k].hash then
                 model = QBCore.Shared.Vehicles[k].model  
                 break
@@ -945,11 +931,31 @@ RegisterNetEvent('garages:Blips')
 AddEventHandler('garages:Blips', function()
     ToggleGarageBlips()
 end)
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --
+
+CreateThread(function()
+    local alreadyEnteredZone = false
+    while true do
+        Wait(500)
+        local inZone = false
+        for k, v in pairs(HouseGarages) do
+            if HouseGarages[k].takeVehicle.x ~= nil and HouseGarages[k].takeVehicle.y ~= nil and HouseGarages[k].takeVehicle.z ~= nil then
+                if #(GetEntityCoords(PlayerPedId()) - vector3(HouseGarages[k].takeVehicle.x, HouseGarages[k].takeVehicle.y, HouseGarages[k].takeVehicle.z)) < 5 then 
+                    inZone = true
+                    text = "Garage"
+                end
+            end
+            if inZone and not alreadyEnteredZone then
+                alreadyEnteredZone = true
+                exports['np-ui']:showInteraction(text)
+            end
+    
+            if not inZone and alreadyEnteredZone then
+                alreadyEnteredZone = false
+                exports['np-ui']:hideInteraction()
+            end
+        end
+    end
+end)
 
 GetVehicleProperties = function(vehicle)
     if DoesEntityExist(vehicle) then

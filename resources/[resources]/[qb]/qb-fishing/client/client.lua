@@ -86,6 +86,8 @@ CreateThread(function()
 			exports['np-ui']:showInteraction("Press [F] to Catch Fish!")
 			input = 0
 			pausetimer = 0
+		else
+			exports['np-ui']:hideInteraction()
 		end
 	end
 end)
@@ -271,6 +273,7 @@ RegisterNetEvent('fishing:fishstart', function()
 		exports['np-ui']:showInteraction("Press [X] to stop fishing at any time")
 		fishAnimation()
 	else
+		exports['np-ui']:hideInteraction()
 		QBCore.Functions.Notify('You need to go further away from the shore', 'error')
 	end
 end, false)
@@ -520,7 +523,8 @@ loseBaitAnimation = function()
 	RemoveAnimDict(animDict)
 	exports['np-ui']:showInteraction("Fish took your bait!")
 	Wait(2000)
-	exports['textUi']:DrawTextUi('hide')
+	exports['np-ui']:hideInteraction()
+	--exports['textUi']:DrawTextUi('hide')
 	fishAnimation()
 end
 

@@ -803,13 +803,13 @@ CreateThread(function()
             for k, checkins in pairs(Config.Locations["checking"]) do
                 if #(pos - checkins) < 1.0 then
                     sleep = 5
-                    if doctorCount >= Config.MinimalDoctors then
-                        exports['np-ui']:showInteraction('Call Doctor')
-                    else
-                        exports['np-ui']:showInteraction('Check In')
-                    end
+                    --if doctorCount >= Config.MinimalDoctors then
+                    --    exports['np-ui']:showInteraction('Call Doctor')
+                    --else
+                    --    exports['np-ui']:showInteraction('Check In')
+                    --end
                     if IsControlJustReleased(0, 38) then                        
-                        if doctorCount >= Config.MinimalDoctors then                           
+                        if doctorCount >= Config.MinimalDoctors then
                             TriggerServerEvent("hospital:server:SendDoctorAlert")
                         else
                             TriggerEvent('animations:client:EmoteCommandStart', {"notepad"})
@@ -832,13 +832,13 @@ CreateThread(function()
                             end)
                         end
                     end
-                elseif #(pos - checkins) < 4.5 then
+                --[[elseif #(pos - checkins) < 4.5 then
                     sleep = 5
                     if doctorCount >= Config.MinimalDoctors then
                         exports['np-ui']:hideInteraction()
                     else
                         exports['np-ui']:hideInteraction()
-                    end
+                    end]]
                 end
             end
 
@@ -931,29 +931,45 @@ exports['qb-target']:AddBoxZone("EMSBossMenu", vector3(335.4, -594.29, 43.23), 0
 })
 
 -- TARGET CHECKIN
-exports['qb-target']:AddBoxZone("hospitalCheckin", vector3(307.54, -595.3, 43.28), 0.5, 0.35, {
-    name = "hospitalCheckin",
-    heading = 337,
-    debugpoly = false,
-    minZ=43.08,
-    maxZ=43.18,
-    }, {
-        options = {
-            {
-                type = "client",
-                event = "ambulance:client:checkin",
-                icon = "fas fa-sign-in-alt",
-                label = "Check In",
+CreateThread(function()
+    if doctorCount >= Config.MinimalDoctors then
+        exports['qb-target']:AddBoxZone("hospitalCheckin", vector3(307.54, -595.3, 43.28), 0.5, 0.35, {
+            name = "hospitalCheckin",
+            heading = 337,
+            debugpoly = false,
+            minZ=43.08,
+            maxZ=43.18,
+            }, {
+            options = {
+                {
+                    type = "client",
+                    event = "hospital:client:deskAlert",
+                    icon = "fas fa-sign-in-alt",
+                    label = "Page Doctors",
+                },
             },
-            {
-                type = "client",
-                event = "hospital:client:deskAlert",
-                icon = "fas fa-sign-in-alt",
-                label = "Page Doctors",
+            distance = 2.5
+        })
+    else
+        exports['qb-target']:AddBoxZone("hospitalCheckin", vector3(307.54, -595.3, 43.28), 0.5, 0.35, {
+            name = "hospitalCheckin",
+            heading = 337,
+            debugpoly = false,
+            minZ=43.08,
+            maxZ=43.18,
+            }, {
+            options = {
+                {
+                    type = "client",
+                    event = "ambulance:client:checkin",
+                    icon = "fas fa-sign-in-alt",
+                    label = "Check In",
+                },
             },
-        },
-        distance = 2.5
-})
+            distance = 2.5
+        })
+    end
+end)
 
 -- TARGET ARMORY
 -- Event
