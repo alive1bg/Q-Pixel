@@ -3,4 +3,14 @@ game 'gta5'
 
 this_is_a_map 'yes'
 
-data_file 'SCALEFORM_DLC_FILE' 'stream/minimap/int2056887296.gfx'
+files {
+	'popcycle.dat'
+}
+
+data_file 'POPSCHED_FILE' 'popcycle.dat'
+data_file 'DLC_ITYP_REQUEST' 'stream/ytyp/np_misc_load.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/ytyp/np_misc.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/interior_props/discoverybuilder.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/greenwarehouse/warehouse_gnp_milo_.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/pride_month/pride_month.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/Chessboard/np_chess.ytyp'
