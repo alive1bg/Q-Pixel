@@ -8,7 +8,7 @@ barberShops = {
 	{-1283.2886962891, -1117.3210449219, 6.9901118278503}
 }
 
-CreateThread(function()
+Citizen.CreateThread(function()
 	exports["qb-polyzone"]:AddBoxZone("barber_shop", vector3(1931.27, 3730.69, 32.84), 4.8, 4.6, {
 		heading=30,
 		minZ=31.84,

@@ -70,6 +70,14 @@ QBShared.SetDefaultVehicleExtras = function (vehicle, config)
     end
 end
 
+QBShared.FormatThousand = function(v)
+    local s = string.format("%d", math.floor(v))
+    local pos = string.len(s) % 3
+    if pos == 0 then pos = 3 end
+    return string.sub(s, 1, pos)
+    .. string.gsub(string.sub(s, pos+1), "(...)", ",%1")
+end
+
 QBShared.StarterItems = {
     ['phone'] = { amount = 1, item = 'phone' },
     ['id_card'] = { amount = 1, item = 'id_card' },

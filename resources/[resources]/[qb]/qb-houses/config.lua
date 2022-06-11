@@ -5,6 +5,17 @@ Config.RamsNeeded = 2
 Config.UnownedBlips = false
 
 Config.Houses = {}
+Config.HouseGarages = {}
+--[[
+    tier 1 = tier1 House / Standard House
+    tier 2 = Trevors House S/ tandard House
+    tier 3 = Michaels House / Pricey House
+    tier 4 = Apartment / Standard Apartment
+    tier 5 = Caravan / Shit Box
+    tier 6 = Franklins / Rich
+    tier 7 = Franklins Aunt / Standard House
+    tier 8 = Ranch / Rich
+]]
 
 Config.StashSize = {
     [1] = 1000000,

@@ -54,7 +54,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     isLoggedIn = false
 end)
 
-CreateThread(function()
+Citizen.CreateThread(function()
     local blip = AddBlipForCoord(-270.96, -957.76, 31.24)
     SetBlipSprite(blip, 475)
     SetBlipAsShortRange(blip, true)
@@ -102,8 +102,8 @@ local function openHouseAnim()
 end
 
 RegisterNetEvent('apartments:client:Logout', function(source)
-    --local src = source
-    TriggerServerEvent('qb-houses:server:LogoutLocation', source)
+    local src = source
+    TriggerServerEvent('qb-houses:server:LogoutLocation', src)
 end)
 
 local function EnterApartment(house, apartmentId, new)
@@ -414,20 +414,20 @@ CreateThread(function()
                 local logoutdist = #(pos - vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z))
 
                 --Exit
-                if entrancedist <= 2 then
+                if entrancedist <= 1.5 then
                     inRange = true
                     text = 'Exit Apartment'
                 end
 
 
                 --Stash
-                if stashdist <= 2 then
+                if stashdist <= 1.5 then
                     inRange = true
                     text = 'Stash'
                 end
 
                 --Outfits
-                if outfitsdist <= 2 then
+                if outfitsdist <= 1.5 then
                     inRange = true
                     text = 'Outfits'
                     local x = Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x
@@ -435,19 +435,19 @@ CreateThread(function()
                     local z = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z
                 end
 
-                if logoutdist <= 2 then
+                if logoutdist <= 1.5 then
                     inRange = true
                     text = 'Logout'
                 end
 
                 if inRange and not shownHeader then
                     shownHeader = true
-                    exports['qb-ui']:showInteraction(text)
+                    exports['np-ui']:showInteraction(text)
                 end
 
                 if not inRange and shownHeader then
                     shownHeader = false
-                    exports['qb-ui']:hideInteraction()
+                    exports['np-ui']:hideInteraction()
                 end
 
             else
@@ -455,7 +455,7 @@ CreateThread(function()
                 local entrance = #(GetEntityCoords(PlayerPedId()) - vector3(-269.46, -961.2, 31.23))
 
                 if IsOwned then
-                    if entrance <= 2 then
+                    if entrance <= 1.5 then
                         inRange = true
                         text = 'Apartments'
                     end
@@ -463,12 +463,12 @@ CreateThread(function()
 
                 if inRange and not shownHeader then
                     shownHeader = true
-                    exports['qb-ui']:showInteraction(text)
+                    exports['np-ui']:showInteraction(text)
                 end
 
                 if not inRange and shownHeader then
                     shownHeader = false
-                    exports['qb-ui']:hideInteraction()
+                    exports['np-ui']:hideInteraction()
                 end
             end
         end

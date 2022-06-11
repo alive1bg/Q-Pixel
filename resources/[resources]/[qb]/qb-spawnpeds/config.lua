@@ -170,60 +170,6 @@ Config.PedList = {
 		coords = vector4(-1486.74, -377.58, 40.16, 129.07),
 		gender = 'male'
 	},
-	-- Ammunation 1
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(-659.09, -939.46, 21.83, 89.94),
-		gender = 'male'
-	},
-	-- Ammunation 2
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(2564.75, 298.44, 108.73, 278.42),
-		gender = 'male'
-	},
-	-- Ammunation 3
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(-326.26, 6081.35, 31.45, 140.12),
-		gender = 'male'
-	},
-	-- Ammunation 4
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(17.82, -1107.84, 29.8, 155.52),
-		gender = 'male'
-	},
-	-- Ammunation 5
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(247.31, -51.48, 69.94, 348.96),
-		gender = 'male'
-	},
-	-- Ammunation 6
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(1697.73, 3757.61, 34.71, 141.28),
-		gender = 'male'
-	},
-	-- Ammunation 7
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(-1112.72, 2697.41, 18.55, 145.98),
-		gender = 'male'
-	},
-	-- Ammunation 8
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(813.71, -2155.24, 29.62, 0.06),
-		gender = 'male'
-	},
-	-- Ammunation 9
-	{
-		model = `mp_m_shopkeep_01`,
-		coords = vector4(841.18, -1028.93, 28.19, 290.22),
-		gender = 'male'
-	},
 	-- Dons Country
 	{
 		model = `mp_m_shopkeep_01`,
@@ -248,128 +194,60 @@ Config.PedList = {
 		coords = vector4(2677.32, 3279.69, 55.24, 323.82),
 		gender = 'male'
 	},
-
-	-------------------- Clothing SHops
-	--[[{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(73.98, -1392.2, 29.38, 270.83),
+	-- Ammunation 1
+	{
+		model = `mp_m_weapexp_01`,
+		coords = vector4(-659.09, -939.46, 21.83, 89.94),
 		gender = 'male'
 	},
-	-- Barber Shops
+	-- Ammunation 2
 	{
-		model = `s_f_m_fembarber`, -- Model name as a hash.
-		coords = vector4(-34.42, -151.15, 57.09, 180.0), -- Hawick Ave (X, Y, Z, Heading)
-		gender = 'female' -- The gender of the ped, used for the CreatePed native.
+		model = `mp_m_weapexp_01`,
+		coords = vector4(2564.75, 298.44, 108.73, 278.42),
+		gender = 'male'
 	},
-
+	-- Ammunation 3
 	{
-		model = `s_f_m_fembarber`,
-		coords = vector4(-279.89, 6227.61, 31.71, 50.0), -- Paleto Bay
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(-326.26, 6081.35, 31.45, 140.12),
+		gender = 'male'
 	},
-
+	-- Ammunation 4
 	{
-		model = `s_f_m_fembarber`,
-		coords = vector4(1933.71, 3730.42, 32.85, 210.0), -- Sandy Shores
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(17.82, -1107.84, 29.8, 155.52),
+		gender = 'male'
 	},
-
+	-- Ammunation 5
 	{
-		model = `s_f_m_fembarber`,
-		coords = vector4(-817.19, -183.30, 37.57, 130.0), -- Mad Wayne Thunder Drive
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(247.31, -51.48, 69.94, 348.96),
+		gender = 'male'
 	},
-
+	-- Ammunation 6
 	{
-		model = `s_f_m_fembarber`,
-		coords = vector4(-1283.62, -1119.24, 7.00, 110.0), -- Magellan Ave
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(1697.73, 3757.61, 34.71, 141.28),
+		gender = 'male'
 	},
-
+	-- Ammunation 7
 	{
-		model = `s_f_m_fembarber`,
-		coords = vector4(137.61, -1709.78, 29.30, 320.0), -- Carson Ave
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(-1112.72, 2697.41, 18.55, 145.98),
+		gender = 'male'
 	},
-
-	-- Clothing Stores
+	-- Ammunation 8
 	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(1.20, 6508.53, 31.88, 330.0), -- Paleto Bay
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(813.71, -2155.24, 29.62, 0.06),
+		gender = 'male'
 	},
-
+	-- Ammunation 9
 	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(1695.00, 4817.49, 42.06, 360.0), -- Grapeseed
-		gender = 'female'
+		model = `mp_m_weapexp_01`,
+		coords = vector4(841.18, -1028.93, 28.19, 290.22),
+		gender = 'male'
 	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-709.06, -151.46, 37.42, 120.0), -- Portola Drive
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-1448.41, -237.54, 49.81, 60.0), -- Cougar Ave
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-165.24, -303.62, 39.73, 260.0), -- Las Lagunas Blvd
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-1194.10, -767.09, 17.32, 220.0), -- North Rockford Drive
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(425.88, -811.50, 29.49, 20.0), -- Sinner Street
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-818.20, -1070.43, 11.33, 120.0), -- South Rockford Drive
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(75.20, -1387.62, 29.38, 210.0), -- Innocence Blvd
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(613.04, 2762.49, 42.09, 280.0), -- Grapeseed
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(1201.97, 2710.80, 38.22, 100.0), -- Harmony
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-1097.96, 2714.62, 19.11, 140.0), -- Route 68
-		gender = 'female'
-	},
-
-	{
-		model = `a_f_y_bevhills_02`,
-		coords = vector4(-3169.38, 1043.18, 20.86, 50.0), -- Great Ocean Highway
-		gender = 'female'
-	},]]
 	
 	--------- BANK PEDS
 	{

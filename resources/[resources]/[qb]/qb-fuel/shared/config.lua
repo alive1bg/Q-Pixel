@@ -89,7 +89,8 @@ Config.GasStationsBlips = { -- gas station blips
     vector3(176.631, -1562.025, 29.263),
     vector3(176.631, -1562.025, 29.263),
     vector3(-319.292, -1471.715, 30.549),
-    vector3(1784.324, 3330.55, 41.253)
+    vector3(1784.324, 3330.55, 41.253),
+    vector3(805.95, -790.08, 26.31)
 }
 
 Config.GasStations = { -- gas station polyzones
@@ -455,7 +456,7 @@ Config.GasStations = { -- gas station polyzones
         zones = {
             vector2(800.63,-793.93),
             vector2(800.04,-785.21),
-            vector2(719.09,-785.21),
+            vector2(819.09,-785.21),
             vector2(819.41,-796.25),
         },
         minz = 25.1,

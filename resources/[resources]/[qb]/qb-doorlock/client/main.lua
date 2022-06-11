@@ -658,7 +658,7 @@ CreateThread(function()
 			if closestDoor.id then
 				while isLoggedIn do
 					if not paused and IsPauseMenuActive() then
-						--exports['np-ui']:hideInteraction()
+						exports['np-ui']:hideInteraction()
 						paused = true
 					elseif paused then
 						if not IsPauseMenuActive() then paused = false end

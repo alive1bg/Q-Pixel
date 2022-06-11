@@ -159,6 +159,7 @@ RegisterNetEvent('Garages:Store', function()
                 TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                 TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods) 
                 TriggerServerEvent('qb-garages:server:modifystate', vehicleProps)
+                --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                 RemoveOutsideVeh(plate)
                 QBCore.Functions.DeleteVehicle(curVeh)
                 QBCore.Functions.Notify("Vehicle Parked In : "..Garages[pGarage].label, "success", 44)
@@ -172,6 +173,7 @@ RegisterNetEvent('Garages:Store', function()
                             TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                             TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                             TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods)
+                            --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                             RemoveOutsideVeh(plate)
                             QBCore.Functions.DeleteVehicle(curVeh)
                             QBCore.Functions.Notify("Vehicle Parked In : "..JobGarages[pGarage].label, "success", 4500)
@@ -186,6 +188,7 @@ RegisterNetEvent('Garages:Store', function()
                             TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                             TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
                             TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods)
+                            --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                             RemoveOutsideVeh(plate)
                             QBCore.Functions.DeleteVehicle(curVeh)
                             QBCore.Functions.Notify("Vehicle Parked In : "..GangGarages[pGarage].label, "success", 4500)
@@ -205,6 +208,7 @@ RegisterNetEvent('Garages:Store', function()
                         TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage, true)
                         TriggerServerEvent('qb-garage:server:updateSharedVehState', 'Stored', plate, pGarage)
                         TriggerServerEvent('qb-garages:server:SaveVehicleMods', plate, vehmods, true)
+                        --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                         QBCore.Functions.DeleteVehicle(curVeh)
                     else
                         QBCore.Functions.Notify("You are not Authorized!", "error", 3000)
@@ -235,6 +239,7 @@ RegisterNetEvent('Garages:StoreInHouseGarage', function()
                     if result then
                         TriggerServerEvent('qb-garage:server:updateVehicleStatus', totalFuel, engineDamage, bodyDamage, plate, pGarage)
                         TriggerServerEvent('qb-garage:server:updateVehicleState', 1, plate, pGarage)
+                        --TriggerEvent('qb-wheelfitmet:SyncWheelFitmentGarage', plate, veh)
                         RemoveOutsideVeh(plate)
                         QBCore.Functions.DeleteVehicle(curVeh)
                         QBCore.Functions.Notify("Vehicle Parked In : "..HouseGarages[pGarage].label, "success", 4500)
@@ -821,7 +826,11 @@ RegisterNetEvent('qb-garages:client:AttemptHouseSpawn', function(Data)
 end)
 
 RegisterNetEvent('qb-garages:client:SpawnVehicle', function(Data)
+    local plate = Data.vehicle
     SpawnVehicle(Data.vehicle, Data.garage, Data.fuel, Data.body, Data.engine, Data.plate, Data.gType, true, Data.isShared)
+    QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
+        TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+    end, plate)
     if Data.isShared then
         TriggerServerEvent('qb-garages:server:UpdateParkingLog', Data.plate)
     end
@@ -935,23 +944,6 @@ end)
 RegisterNetEvent('garages:Blips')
 AddEventHandler('garages:Blips', function()
     ToggleGarageBlips()
-end)
-
-CreateThread(function()
-    Wait(2000)
-    while true do
-        Wait(500)
-        for k, v in pairs(HouseGarages) do
-            if HouseGarages[k].takeVehicle.x ~= nil and HouseGarages[k].takeVehicle.y ~= nil and HouseGarages[k].takeVehicle.z ~= nil then
-                if #(GetEntityCoords(PlayerPedId()) - vector3(HouseGarages[k].takeVehicle.x, HouseGarages[k].takeVehicle.y, HouseGarages[k].takeVehicle.z)) < 5 then
-                    TriggerEvent('cd_drawtextui:ShowUI', 'show', "Parking")
-                    SetTimeout(500, function()
-                        TriggerEvent('cd_drawtextui:HideUI')
-                    end)
-                end
-            end
-        end
-    end
 end)
 -- Haritha#3955 --
 -- Haritha#3955 --

@@ -56,7 +56,7 @@ RegisterNetEvent('qb-garage:server:updateVehicleStatus', function(fuel, engine, 
 end)
 
 RegisterNetEvent('qb-garages:server:SaveSharedVehicle', function(plate, vehicle, category, hash, faction, garage, mods)
-    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, mods})
+    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods, noslevel, hasnitro, wheelfit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, mods, noslevel, hasnitro, wheelfit})
 end)
 
 RegisterNetEvent('qb-garages:server:SaveVehicleMods', function(plate, vehmods, isShared)
@@ -145,13 +145,16 @@ end)
 QBCore.Functions.CreateCallback("qb-garages:server:GetVehicleWheelfit", function(source, cb, plate)
     local src = source
     local wheelfit = nil
-    local result = exports.oxmysql:executeSync('SELECT wheelfit FROM player_vehicles WHERE plate = ?',
-		{
-			plate
-		}
-	)
-    if result[1] then
-        wheelfit = json.decode(result[1].wheelfit)
+    if isShared then
+        local result = exports.oxmysql:executeSync('SELECT wheelfit FROM shared_vehicles WHERE plate = ?', {plate})
+        if result[1] ~= nil then
+            wheelfit = json.decode(result[1].wheelfit)
+        end
+    else
+        local result = exports.oxmysql:executeSync('SELECT wheelfit FROM player_vehicles WHERE plate = ?', {plate})
+        if result[1] ~= nil then
+            wheelfit = json.decode(result[1].wheelfit)
+        end
     end
     cb(wheelfit)
 end)

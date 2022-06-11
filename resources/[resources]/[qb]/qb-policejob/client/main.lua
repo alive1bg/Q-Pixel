@@ -256,21 +256,31 @@ end)
 -- rifle rack in interceptor vehicles
 RegisterNetEvent('police:client:riflerack', function()
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-    if GetEntityModel(vehicle) == `npolchal` or GetEntityModel(vehicle) == `npolvette` or GetEntityModel(vehicle) == `npolstang` or GetEntityModel(vehicle) == `npolvic` or GetEntityModel(vehicle) == `npolchar` or GetEntityModel(vehicle) == `npolexp` or GetEntityModel(vehicle) == `npolretinue` then 
-        TriggerEvent('qb-inventory:client:set:busy', true)
-        QBCore.Functions.Progressbar("open-rifle-rack", "Opening Rifle Rack...", 2500, false, true, {
-            disableMovement = true,
-            disableCarMovement = false,
-            disableMouse = false,
-            disableCombat = true,
-        }, {}, {}, {}, function() -- Done
-            TriggerServerEvent("inventory:server:OpenInventory", "stash", 'Riflerack_'..QBCore.Functions.GetPlayerData().citizenid, {maxweight = 26000, slots = 2})
-            TriggerEvent("inventory:client:SetCurrentStash", 'Riflerack_'..QBCore.Functions.GetPlayerData().citizenid)
-        end, function()
-            TriggerEvent('qb-inventory:client:set:busy', false)
-            QBCore.Functions.Notify("Canceled..", "error")
-        end)
-    else
-        QBCore.Functions.Notify("Thats not a Police Vehicle!", "error")
-    end
+    QBCore.Functions.GetPlayerData(function(PlayerData)
+        if PlayerData.job.name == "police" then
+            if onDuty then
+                if GetEntityModel(vehicle) == `npolchal` or GetEntityModel(vehicle) == `npolvette` or GetEntityModel(vehicle) == `npolstang` or GetEntityModel(vehicle) == `npolvic` or GetEntityModel(vehicle) == `npolchar` or GetEntityModel(vehicle) == `npolexp` or GetEntityModel(vehicle) == `npolretinue` then 
+                    TriggerEvent('qb-inventory:client:set:busy', true)
+                    QBCore.Functions.Progressbar("open-rifle-rack", "Opening Rifle Rack...", 2500, false, true, {
+                        disableMovement = true,
+                        disableCarMovement = false,
+                        disableMouse = false,
+                        disableCombat = true,
+                    }, {}, {}, {}, function() -- Done
+                        TriggerServerEvent("inventory:server:OpenInventory", "stash", 'Riflerack_'..QBCore.Functions.GetPlayerData().citizenid, {maxweight = 26000, slots = 2})
+                        TriggerEvent("inventory:client:SetCurrentStash", 'Riflerack_'..QBCore.Functions.GetPlayerData().citizenid)
+                    end, function()
+                        TriggerEvent('qb-inventory:client:set:busy', false)
+                        QBCore.Functions.Notify("Canceled..", "error")
+                    end)
+                else
+                    QBCore.Functions.Notify("Thats not a Police Vehicle!", "error")
+                end
+            else
+                QBCore.Functions.Notify("You have to be On Duty!", "error")
+            end
+        else
+            QBCore.Functions.Notify("You are not Police Officer!", "error")
+        end
+    end)
 end)

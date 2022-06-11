@@ -1555,6 +1555,20 @@ QBCore.Commands.Add("giveitem", "Give An Item (Admin Only)", {{name="id", help="
                         info.lastname = Player.PlayerData.charinfo.lastname
                         info.birthdate = Player.PlayerData.charinfo.birthdate
                         info.type = "Class C Driver License"
+					elseif itemData["name"] == "weaponlicense" then
+						info.firstname = Player.PlayerData.charinfo.firstname
+						info.lastname = Player.PlayerData.charinfo.lastname
+						info.birthdate = Player.PlayerData.charinfo.birthdate
+					elseif itemData["name"] == "lawyerpass" then
+						info.firstname = Player.PlayerData.charinfo.firstname
+						info.lastname = Player.PlayerData.charinfo.lastname
+						info.birthdate = Player.PlayerData.charinfo.birthdate
+					elseif itemData["name"] == "policecard" then
+						info.firstname = Player.PlayerData.charinfo.firstname
+						info.lastname = Player.PlayerData.charinfo.lastname
+						info.birthdate = Player.PlayerData.charinfo.birthdate
+						info.gender = Player.PlayerData.charinfo.gender
+						info.nationality = Player.PlayerData.charinfo.nationality
                     elseif itemData["type"] == "weapon" then
                         amount = 1
                         info.serie = tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3) .. QBCore.Shared.RandomStr(4))
@@ -1618,7 +1632,7 @@ QBCore.Functions.CreateUseableItem("snowball", function(source, item)
     end
 end)
 
-QBCore.Functions.CreateUseableItem("driver_license", function(source, item)
+--[[QBCore.Functions.CreateUseableItem("driver_license", function(source, item)
 	local PlayerPed = GetPlayerPed(source)
 	local PlayerCoords = GetEntityCoords(PlayerPed)
 	for k, v in pairs(QBCore.Functions.GetPlayers()) do
@@ -1666,4 +1680,4 @@ QBCore.Functions.CreateUseableItem("id_card", function(source, item)
 			)
 		end
 	end
-end)
+end)]]

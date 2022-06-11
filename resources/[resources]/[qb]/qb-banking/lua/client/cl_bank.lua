@@ -21,7 +21,7 @@ AddEventHandler("qb-banking:client:ExtNotify", function(msg)
 end)
 
 --[[ Show Things ]]--
-CreateThread(function()
+Citizen.CreateThread(function()
 	for k,v in ipairs(banks) do
 	  local blip = AddBlipForCoord(v.x, v.y, v.z)
 	  SetBlipSprite(blip, v.id)

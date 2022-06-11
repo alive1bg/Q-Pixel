@@ -1,11 +1,11 @@
-CREATE TABLE IF NOT EXISTS `society` (
+CREATE TABLE IF NOT EXISTS `management_funds` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `money` longtext DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `society` (`id`, `name`, `money`) VALUES
+INSERT INTO `management_funds` (`id`, `name`, `money`) VALUES
 	(1, 'police', '0'),
 	(2, 'lostmc', '0');
 

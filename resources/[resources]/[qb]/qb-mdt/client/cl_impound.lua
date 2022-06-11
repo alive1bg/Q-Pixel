@@ -14,7 +14,7 @@ local function doCarDamage(currentVehicle, veh)
 	if body < 920.0 then damageOutside = true end
 	if body < 920.0 then damageOutside2 = true end
 
-    Wait(100)
+    Citizen.Wait(100)
     SetVehicleEngineHealth(currentVehicle, engine)
 
 	if smash then

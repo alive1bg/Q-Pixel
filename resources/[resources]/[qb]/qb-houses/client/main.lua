@@ -225,7 +225,7 @@ local function disableViewCam()
     end
 end
 
-local function SetClosestHouse() -- GARAGE EDIT
+local function SetClosestHouse() -- ORIGINAL FUNTION BEFORE GARAGE EDIT
     local pos = GetEntityCoords(PlayerPedId(), true)
     local current = nil
     local dist = nil
@@ -250,35 +250,8 @@ local function SetClosestHouse() -- GARAGE EDIT
             end, ClosestHouse)
         end
     end
+    TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
 end
-
--- local function SetClosestHouse() -- ORIGINAL FUNTION BEFORE GARAGE EDIT
---     local pos = GetEntityCoords(PlayerPedId(), true)
---     local current = nil
---     local dist = nil
---     if not IsInside then
---         for id, house in pairs(Config.Houses) do
---             local distcheck = #(pos - vector3(Config.Houses[id].coords.enter.x, Config.Houses[id].coords.enter.y, Config.Houses[id].coords.enter.z))
---             if current ~= nil then
---                 if distcheck < dist then
---                     current = id
---                     dist = distcheck
---                 end
---             else
---                 dist = distcheck
---                 current = id
---             end
---         end
---         ClosestHouse = current
---         if ClosestHouse ~= nil and tonumber(dist) < 30 then
---             QBCore.Functions.TriggerCallback('qb-houses:server:ProximityKO', function(key, owned)
---                 HasHouseKey = key
---                 isOwned = owned
---             end, ClosestHouse)
---         end
---     end
---     TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
--- end
 
 local function setHouseLocations()
     if ClosestHouse ~= nil then
@@ -440,27 +413,6 @@ local function optionMenu(citizenData)
 end
 
 -- Shell Configuration
--- local function getDataForHouseTier(house, coords)
---     local houseTier = Config.Houses[house].tier
---     local shells = {
---         [1] = function(coords) return exports['qb-interior']:CreateApartmentShell(coords) end,
---         [2] = function(coords) return exports['qb-interior']:CreateTier1House(coords) end,
---         [3] = function(coords) return exports['qb-interior']:CreateTrevorsShell(coords) end,
---         [4] = function(coords) return exports['qb-interior']:CreateCaravanShell(coords) end,
---         [5] = function(coords) return exports['qb-interior']:CreateLesterShell(coords) end,
---         [6] = function(coords) return exports['qb-interior']:CreateRanchShell(coords) end
---     }
-
---     if not shells[houseTier] then
---         QBCore.Functions.Notify(Lang:t("error.invalid_tier"), 'error')
---         return nil
---     else
---         return shells[houseTier](coords)
---     end
--- end
-
--- If you are using paid shells the comment function above and uncomment this or grab the ones you need
-
 local function getDataForHouseTier(house, coords)
     if Config.Houses[house].tier == 1 then
         return exports['qb-interior']:CreateApartmentShell(coords)
@@ -704,22 +656,13 @@ end)
 
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function() -- GARAGE EDIT
     TriggerServerEvent('qb-houses:client:setHouses')
+    TriggerServerEvent('qb-houses:server:FetchGarages')
     SetClosestHouse()
     TriggerEvent('qb-houses:client:setupHouseBlips')
     if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
     Wait(100)
     TriggerServerEvent("qb-houses:server:setHouses")
 end)
-
--- AddEventHandler('QBCore:Client:OnPlayerLoaded', function() -- ORIGINAL EVENT BEFORE GARAGE EDIT
---     TriggerServerEvent('qb-houses:server:setHouses')
---     SetClosestHouse()
---     TriggerEvent('qb-houses:client:setupHouseBlips')
---     if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
---     Wait(100)
---     TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
---     TriggerServerEvent("qb-houses:server:setHouses")
--- end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     IsInside = false
@@ -778,64 +721,21 @@ RegisterNetEvent('qb-houses:client:createHousesM', function()
     if Config.UnownedBlips then TriggerServerEvent('qb-houses:server:createBlip') end
 end)
 
-RegisterNetEvent('qb-houses:client:addGarage', function() -- EDIT FOR GARAGE
+RegisterNetEvent('qb-houses:client:addGarage', function() -- ORIGINAL EVENT BEFORE GARAGE EDIT
     if ClosestHouse ~= nil then
-        local ped = PlayerPedId()
-        if IsPedInAnyVehicle(ped, false) then            
-            local veh = GetVehiclePedIsIn(ped)
-			local vehpos = GetEntityCoords(veh)
-			local x = QBCore.Shared.Round(vehpos.x, 2)
-			local y = QBCore.Shared.Round(vehpos.y, 2)
-			local z = QBCore.Shared.Round(vehpos.z, 2)
-			local heading = GetEntityHeading(veh)
-			local h = QBCore.Shared.Round(heading, 2)
-			local forward, right, up, pos = GetEntityMatrix(veh)
-			local x1 = QBCore.Shared.Round(pos.x + (forward.x * (3.0)) + (right.x * (2.0)), 2)
-			local y1 = QBCore.Shared.Round(pos.y + (forward.y * (3.0)) + (right.y * (2.0)), 2)
-			local x2 = QBCore.Shared.Round(pos.x + (forward.x * (-3.0)) + (right.x * (2.0)), 2)
-			local y2 = QBCore.Shared.Round(pos.y + (forward.y * (-3.0)) + (right.y * (2.0)), 2)
-			local x3 = QBCore.Shared.Round(pos.x + (forward.x * (-3.0)) + (right.x * (-2.0)), 2)
-			local y3 = QBCore.Shared.Round(pos.y + (forward.y * (-3.0)) + (right.y * (-2.0)), 2)
-			local x4 = QBCore.Shared.Round(pos.x + (forward.x * (3.0)) + (right.x * (-2.0)), 2)
-			local y4 = QBCore.Shared.Round(pos.y + (forward.y * (3.0)) + (right.y * (-2.0)), 2)
-            local coords = {
-                x = x,
-				y = y,
-				z = z,
-				h = h,
-				x1 = x1,
-				y1 = y1,
-				x2 = x2,
-				y2 = y2,
-				x3 = x3,
-				y3 = y3,
-				x4 = x4,
-				y4 = y4,
-            }
-            TriggerServerEvent('qb-houses:server:addGarage', ClosestHouse, coords)
-        else
-            QBCore.Functions.Notify("You need to be in the vehicle..", "error")
-        end
+        local pos = GetEntityCoords(PlayerPedId())
+        local heading = GetEntityHeading(PlayerPedId())
+        local coords = {
+            x = pos.x,
+            y = pos.y,
+            z = pos.z,
+            h = heading,
+        }
+        TriggerServerEvent('qb-houses:server:addGarage', ClosestHouse, coords)
     else
-        QBCore.Functions.Notify("No house around..", "error")
+        QBCore.Functions.Notify(Lang:t("error.no_house"), "error")
     end
 end)
-
--- RegisterNetEvent('qb-houses:client:addGarage', function() -- ORIGINAL EVENT BEFORE GARAGE EDIT
---     if ClosestHouse ~= nil then
---         local pos = GetEntityCoords(PlayerPedId())
---         local heading = GetEntityHeading(PlayerPedId())
---         local coords = {
---             x = pos.x,
---             y = pos.y,
---             z = pos.z,
---             h = heading,
---         }
---         TriggerServerEvent('qb-houses:server:addGarage', ClosestHouse, coords)
---     else
---         QBCore.Functions.Notify(Lang:t("error.no_house"), "error")
---     end
--- end)
 
 RegisterNetEvent('qb-houses:client:toggleDoorlock', function()
     local pos = GetEntityCoords(PlayerPedId())
@@ -1214,15 +1114,6 @@ RegisterNetEvent('qb-houses:client:AnswerDoorbell', function()
     end
 end)
 
---[[RegisterNetEvent('qb-houses:client:OpenStash', function()
-    local stashLoc = vector3(stashLocation.x, stashLocation.y, stashLocation.z)
-    if CheckDistance(stashLoc, 1.5) then
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", CurrentHouse)
-        TriggerServerEvent("InteractSound_SV:PlayOnSource", "StashOpen", 0.4)
-        TriggerEvent("inventory:client:SetCurrentStash", CurrentHouse)
-    end
-end)]]
-
 RegisterNetEvent('qb-houses:client:OpenStash', function()
     local stashLoc = vector3(stashLocation.x, stashLocation.y, stashLocation.z)
     if CheckDistance(stashLoc, 1.5) then
@@ -1295,26 +1186,25 @@ end)
 
 -- Threads
 
-CreateThread(function() -- GARAGE EDIT
+CreateThread(function() -- ORIGINAL THREAD BEFORE GARAGE EDIT
     Wait(1000)
-    TriggerServerEvent('qb-houses:client:setHouses')
+    TriggerServerEvent('qb-houses:server:setHouses')
     SetClosestHouse()
     TriggerEvent('qb-houses:client:setupHouseBlips')
     if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
     Wait(100)
+    TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
     TriggerServerEvent("qb-houses:server:setHouses")
 end)
 
--- CreateThread(function() -- ORIGINAL THREAD BEFORE GARAGE EDIT
---     Wait(1000)
---     TriggerServerEvent('qb-houses:server:setHouses')
---     SetClosestHouse()
---     TriggerEvent('qb-houses:client:setupHouseBlips')
---     if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
---     Wait(100)
---     TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
---     TriggerServerEvent("qb-houses:server:setHouses")
--- end)
+Citizen.CreateThread(function()
+    if LocalPlayer.state['isLoggedIn'] then
+        isLoggedIn = true
+        TriggerServerEvent('qb-houses:server:setHouses')
+        TriggerServerEvent('qb-houses:server:FetchGarages')
+        currJob = QBCore.Functions.GetPlayerData().job.name
+    end
+end)
 
 CreateThread(function()
     while true do

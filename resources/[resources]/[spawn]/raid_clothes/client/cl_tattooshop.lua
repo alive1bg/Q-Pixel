@@ -5,7 +5,7 @@ tattoosShops = {
 	{-3170.071, 1075.059, 20.829},
 }
 
-CreateThread(function()
+Citizen.CreateThread(function()
 
 	exports["qb-polyzone"]:AddBoxZone("tattoo_shop", vector3(1323.0, -1652.8, 52.28), 4.2, 6.8, {
 		heading=40,

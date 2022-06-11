@@ -449,6 +449,12 @@ RegisterNetEvent("qb-wheelfitment_cl:forceMenuClose", function()
     DisplayMenu(false)
 end)
 
+RegisterNetEvent("qb-wheelfitmet:SyncWheelFitmentGarage", function()
+    SyncWheelFitment()
+end)
+
+--TriggerClientEvent('qb-wheelfitmet:SyncWheelFitmentGarage')
+
 RegisterCommand("leavefitment", function()
     TriggerEvent("qb-wheelfitment_cl:forceMenuClose")
 end)

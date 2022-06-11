@@ -195,7 +195,6 @@ rootMenuConfig =  {
         enableMenu = function()
             return (not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
-        
         subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar", "vehicle:extras", "vehicle:autodrive"}
     },
     {    
@@ -207,7 +206,7 @@ rootMenuConfig =  {
             return not isDead
         end
     },
-    {    
+    {
         id = "GiveCarKeys",
         displayName = "Give Car Keys",
         icon = "#car-key",
@@ -276,96 +275,23 @@ rootMenuConfig =  {
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and inGarage and isCloseVeh() and not IsPedInAnyVehicle(PlayerPedId(), false))
         end
     },
-    --[[{    
-        id = "PoliceGarage",
-        displayName = "Police Garage",
-        icon = "#garage",
-        enableMenu = function()
-            PlayerData = QBCore.Functions.GetPlayerData()
-			isInJobGarage, lastJobVehicle = exports["qb-garages"]:isInJobStation('police')
-            if not isDead and isPolice and isInJobGarage then  
-				return true
-			end
-			return false
-        end,
-        subMenus = {"police:opengarage", "police:storegarage"}
-    },
-    {    
-        id = "AmbulanceGarage",
-        displayName = "EMS Garage",
-        icon = "#garage",
-        enableMenu = function()
-            PlayerData = QBCore.Functions.GetPlayerData()
-			isInJobGarage, lastJobVehicle = exports["qb-garages"]:isInJobStation('ambulance')
-            if not isDead and isMedic and isInJobGarage then  
-				return true
-			end
-			return false
-        end,
-        subMenus = {"medic:opengarage", "medic:storegarage"}
-    },
-    {    
-        id = "publicGarage",
-        displayName = "Garage",
-        icon = "#garage-open",
-        enableMenu = function()
-            PlayerData = QBCore.Functions.GetPlayerData()
-			local isingarage, canStoreVehicle = exports["qb-garages"]:IsInGarage()
-			if not isDead and not IsPauseMenuActive() and isingarage then 
-				return true
-			end
-			return false
-        end,
-        subMenus = {"garage:opengarage", "garage:storegarage"}
-    },]]
-
-    -- NOTE
-    -- for add a new function button to menu:
-    -- {
-    --     id = "generalgarage", -- type group id name, can be any name
-    --     displayName = "Garage", -- Display Name
-    --     icon = "#general-garage", -- Icon, should be with `#` cuz from HTML and check HTML for edits
-    --     functionName = "qb-garages:takeout", -- THIS IS THE FUNCTION NAME THAT WILL BE TRIGGERED AFTER CLICKING THE BUTTON
-    --     enableMenu = function()
-    --         return (not isDead and inGarage and not isCloseVeh() and not IsPedInAnyVehicle(PlayerPedId(), false)) -- if person is dead or in vehicle. we don't want dead people to see this button if dead
-    --     end
-    -- }
-
-    -- for open a new menu from the button:
-    -- {
-    --     id = "general", -- type group id name, can be any name
-    --     displayName = "General", -- Display Name
-    --     icon = "#globe-europe", -- Icon, should be with `#` cuz from HTML and check HTML for edits
-    --     enableMenu = function()
-    --         return not isDead -- if person is dead or in vehicle. we don't want dead people to see this button if dead
-    --     end,
-    --     subMenus = {"general:escort", "general:emotes", "general:putinvehicle", "general:unseatnearest"} -- add submenu names that will be shown after clicking General button
-    -- }
-
-    -- NOTE
-    -- EXAMPLE:
-    -- {
-    --     id = "copDead",
-    --     displayName = "11-A",
-    --     icon = "#police-dead",
-    --     enableMenu = function()
-    --         return isPolice and isDead and onDuty -- here button checks if person is cop and dead and on duty. if 3 of them true then this will be shown
-    --     end,
-    --     subMenus = {"general:escort", "general:emotes", "general:putinvehicle", "general:unseatnearest"}
-    -- }
 }
 
 newSubMenus = { -- NOTE basicly, what will be happen after clicking these buttons and icon of them
     ['vehicle:radar'] = {
         title = 'Toggle Radar',
         icon = '#vehicle-options-vehicle',
-        functionName = "wk:toggleRadar"
+        functionName = "wk:toggleRadar",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and IsPedInAnyVehicle(PlayerPedId(), false))
+       end,
     },
-    ['vehicle:extras'] = {
+    --[[['vehicle:extras'] = {
         title = 'Toggle Extras',
         icon = '#vehicle-options-vehicle',
         functionName = "ccvehmenu:client:extrasMenu"
-    },
+    },]]
     ['vehicle:menu'] = {
         title = 'Vehicle Menu',
         icon = '#vehicle-options-vehicle',
@@ -376,16 +302,13 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = '#vehicle-options-vehicle',
         functionName = "police:client:riflerack",
         enableMenu = function()
-			if not isDead and isPolice then  
-				return true
-			end
-			return false
-		end 
+            return (not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
+        end
     },
     ['vehicle:flip'] = {
         title = 'Flip Vehicle',
         icon = '#vehicle-options-vehicle',
-        functionName = "jim-mechanic:flipvehicle"
+        functionName = "qb:flipvehicle"
     },
     ['vehicle:autodrive'] = {
         title = 'Auto Drive',
@@ -1074,7 +997,6 @@ AddEventHandler('pd:deathcheck', function()
         isDead = false
     end
 end)
---TriggerEvent("pd:deathcheck")
 
 
 RegisterNetEvent("police:currentHandCuffedState") -- add this your police:client:GetCuffed @qb-policejob\client\interactions.lua
@@ -1101,7 +1023,7 @@ Citizen.CreateThread(function()
             heading=Garages[k].heading,
             minZ = Garages[k].minZ,
             maxZ = Garages[k].maxZ,
-            debugPoly=false
+            debugPoly = true
         }) 
     end
     for k, v in pairs(GangGarages) do
@@ -1110,7 +1032,7 @@ Citizen.CreateThread(function()
             heading=GangGarages[k].heading,
             minZ = GangGarages[k].minZ,
             maxZ = GangGarages[k].maxZ,
-            debugPoly=false
+            debugPoly = true
         }) 
     end
     for k, v in pairs(JobGarages) do
@@ -1119,7 +1041,7 @@ Citizen.CreateThread(function()
             heading=JobGarages[k].heading,
             minZ = JobGarages[k].minZ,
             maxZ = JobGarages[k].maxZ,
-            debugPoly=false
+            debugPoly = true
         }) 
     end
     for k, v in pairs(Depots) do
@@ -1128,7 +1050,7 @@ Citizen.CreateThread(function()
             heading=Depots[k].heading,
             minZ = Depots[k].minZ,
             maxZ = Depots[k].maxZ,
-            debugPoly=false
+            debugPoly = true
         }) 
     end
 end)
@@ -1138,12 +1060,16 @@ AddEventHandler('qb-polyzone:enter', function(name)
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
     if name == "garages" then
         inGarage = true
+        exports['np-ui']:showInteraction('Parking')
     elseif name == "ganggarages" then
         inGarage = true
+        exports['np-ui']:showInteraction('Garage')
     elseif name == "jobgarages" then
         inGarage = true
+        exports['np-ui']:showInteraction('Job Garage')
     elseif name == "depots" then
         inDepots = true
+        exports['np-ui']:showInteraction('Depot')
     end
 end)
 
@@ -1151,11 +1077,15 @@ RegisterNetEvent('qb-polyzone:exit')
 AddEventHandler('qb-polyzone:exit', function(name)
     if name == "garages" then
         inGarage = false
+        exports['np-ui']:hideInteraction()
     elseif name == "ganggarages" then
         inGarage = false
+        exports['np-ui']:hideInteraction()
     elseif name == "jobgarages" then
         inGarage = false
+        exports['np-ui']:hideInteraction()
     elseif name == "depots" then
         inDepots = false
+        exports['np-ui']:hideInteraction()
     end
 end)

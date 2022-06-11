@@ -22,13 +22,13 @@ CreateThread(function()
   })
 
 
-  exports["qb-polytarget"]:AddBoxZone("mrdp_change_picture", vector3(439.44, -985.89, 34.97), 1.0, 0.4, {
+  exports["qb-polyzone"]:AddBoxZone("mrdp_change_picture", vector3(439.44, -985.89, 34.97), 1.0, 0.4, {
     heading=0,
     minZ=35.37,
     maxZ=36.17
   })
 
-  exports["qb-polytarget"]:AddBoxZone("mrpd_meetingroom_screen", vector3(474.02, -1001.79, 30.69), 3.6, 2.8, {
+  exports["qb-polyzone"]:AddBoxZone("mrpd_meetingroom_screen", vector3(474.02, -1001.79, 30.69), 3.6, 2.8, {
     heading=1,
     minZ=30.54,
     maxZ=32.54

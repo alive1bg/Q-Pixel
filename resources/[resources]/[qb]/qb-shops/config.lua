@@ -687,7 +687,7 @@ Config.Locations = {
     ["ammunation"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-662.1, -935.3, 21.8)
+            [1] = vector3(-659.09, -939.46, 21.83)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -696,7 +696,7 @@ Config.Locations = {
     ["ammunation2"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(810.2, -2157.3, 29.6)
+            [1] = vector3(2564.75, 298.44, 108.73)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -705,7 +705,7 @@ Config.Locations = {
     ["ammunation3"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(1693.4, 3759.5, 34.7)
+            [1] = vector3(-326.26, 6081.35, 31.45)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -714,7 +714,7 @@ Config.Locations = {
     ["ammunation4"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-330.2, 6083.8, 31.4)
+            [1] = vector3(17.82, -1107.84, 29.8)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -723,7 +723,7 @@ Config.Locations = {
     ["ammunation5"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(252.3, -50.0, 69.9)
+            [1] = vector3(247.31, -51.48, 69.94)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -732,7 +732,7 @@ Config.Locations = {
     ["ammunation6"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(22.0, -1107.2, 29.8)
+            [1] = vector3(1697.73, 3757.61, 34.71)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -741,7 +741,7 @@ Config.Locations = {
     ["ammunation7"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(2567.6, 294.3, 108.7)
+            [1] = vector3(-1112.72, 2697.41, 18.55)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -750,7 +750,7 @@ Config.Locations = {
     ["ammunation8"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(-1117.5, 2698.6, 18.5)
+            [1] = vector3(813.71, -2155.24, 29.62)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,
@@ -759,7 +759,7 @@ Config.Locations = {
     ["ammunation9"] = {
         ["label"] = "Ammunation",
         ["coords"] = {
-            [1] = vector3(842.4, -1033.4, 28.1)
+            [1] = vector3(841.18, -1028.93, 28.19)
         },
         ["products"] = Config.Products["weapons"],
         ["showblip"] = false,

@@ -16,7 +16,7 @@ files {
 }
 
 client_scripts {
-  '@qb-lib/client/cl_ui.lua',
+  '@np-lib/client/cl_ui.lua',
   'client/cl_tattooshop.lua',
   'client/cl_*.lua',
 }

@@ -71,7 +71,7 @@ RegisterCommand('mdt', function()
     end
 end, false)
 
-CreateThread(function()
+Citizen.CreateThread(function()
     TriggerEvent('chat:addSuggestion', '/mdt', 'Open the emergency services MDT', {})
 end)
 
@@ -79,10 +79,10 @@ local function doAnimation()
     if not isOpen then return end
     -- Animation
     RequestAnimDict(tabletDict)
-    while not HasAnimDictLoaded(tabletDict) do Wait(100) end
+    while not HasAnimDictLoaded(tabletDict) do Citizen.Wait(100) end
     -- Model
     RequestModel(tabletProp)
-    while not HasModelLoaded(tabletProp) do Wait(100) end
+    while not HasModelLoaded(tabletProp) do Citizen.Wait(100) end
 
     local plyPed = PlayerPedId()
     local tabletObj = CreateObject(tabletProp, 0.0, 0.0, 0.0, true, true, false)
@@ -101,7 +101,7 @@ local function doAnimation()
 
 
         ClearPedSecondaryTask(plyPed)
-        Wait(250)
+        Citizen.Wait(250)
         DetachEntity(tabletObj, true, false)
         DeleteEntity(tabletObj)
     end)
@@ -711,6 +711,11 @@ RegisterNUICallback("callDetach", function(data, cb)
     cb(true)
 end)
 
+RegisterNUICallback("removeCallBlip", function(data, cb)
+    TriggerEvent('qb-dispatch:client:removeCallBlip', data.callid)
+    cb(true)
+end)
+
 RegisterNUICallback("callAttach", function(data, cb)
     TriggerServerEvent('mdt:server:callAttach', data.callid)
     cb(true)
@@ -822,6 +827,11 @@ end)
 RegisterNUICallback("statusImpound", function(data, cb)
 	TriggerServerEvent('mdt:server:statusImpound', data['plate'])
 	cb('ok')
+end)
+
+RegisterNUICallback('openCamera', function(data)
+    local camId = tonumber(data.cam)
+    TriggerEvent('police:client:ActiveCamera', camId)
 end)
 
 RegisterNetEvent('mdt:client:attachedUnits', function(sentData, callid)

@@ -44,13 +44,13 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name = ?', {job.name})
         local data = result[1]
 
         if data then
             local sM = tonumber(data.money)
             if sM >= amount then
-                TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.owner)
+                TriggerEvent('qb-banking:management_funds:server:WithdrawMoney',src, amount, data.name)
 
                 AddTransaction(src, "business", -amount, "deposit", job.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. job.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)
@@ -75,13 +75,13 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
         local data = result[1]
 
         if data then
             local sM = tonumber(data.money)
             if sM >= amount then
-                TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.owner)
+                TriggerEvent('qb-banking:management_funds:server:WithdrawMoney',src, amount, data.name)
 
                 AddTransaction(src, "organization", -amount, "deposit", gang.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. gang.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)

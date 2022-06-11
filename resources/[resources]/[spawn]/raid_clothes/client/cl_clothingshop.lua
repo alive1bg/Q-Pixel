@@ -23,7 +23,7 @@ clothingShops = {
 	{100.39, 3615.53, 40.91},
 }
 
-CreateThread(function()
+Citizen.CreateThread(function()
 	exports["qb-polyzone"]:AddBoxZone("clothing_shop", vector3(1098.07, 203.27, -49.44), 1.8, 2.4, {
 			heading=315,
 			minZ=-50.44,

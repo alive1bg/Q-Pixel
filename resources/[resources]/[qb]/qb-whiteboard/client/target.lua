@@ -9,8 +9,8 @@ exports['qb-target']:AddBoxZone("mrpd_classroom", vector3(439.24, -985.8, 34.97)
         {
             type = "client",
             event = "qb-whiteboard:changewhiteboardcli",
-            icon = "fas fa-circle",
-            label = "Change URL",
+            icon = "fas fa-images",
+            label = "Change Dui",
             job = 'police',
         },
     },
@@ -28,8 +28,8 @@ exports['qb-target']:AddBoxZone("mrpd_meetingroom_screen", vector3(439.24, -985.
         {
             type = "client",
             event = "qb-whiteboard:changewhiteboardcli",
-            icon = "fas fa-circle",
-            label = "Change URL",
+            icon = "fas fa-images",
+            label = "Change Dui",
             job = 'police',
         },
     },
@@ -40,9 +40,9 @@ RegisterNetEvent("qb-whiteboard:changewhiteboardcli")
 AddEventHandler("qb-whiteboard:changewhiteboardcli", function()
     local dialog = exports['np-ui']:OpenInputMenu({
         {
-            label = 'Whiteboard URL',
-            name = 'mrpdurl',
-            icon = 'circle',
+            label = "Whiteboard URL",
+            name = 'URL',
+            icon = 'pencil-alt',
         }
     })
     --[[local dialog = exports['qb-input']:ShowInput({
