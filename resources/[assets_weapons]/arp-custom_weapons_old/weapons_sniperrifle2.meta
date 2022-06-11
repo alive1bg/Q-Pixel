@@ -79,7 +79,7 @@
           <HitLimbsDamageModifier value="0.500000" />
           <NetworkHitLimbsDamageModifier value="0.800000" />
           <LightlyArmouredDamageModifier value="0.750000" />
-          <VehicleDamageModifier value="0.000000" />
+          <VehicleDamageModifier value="0.200000" />
           <Force value="100.000000" />
           <ForceHitPed value="170.000000" />
           <ForceHitVehicle value="1500.000000" />

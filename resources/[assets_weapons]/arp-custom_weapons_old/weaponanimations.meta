@@ -425,8 +425,8 @@
 					<FromStrafeTransitionUpperBodyClipSetHash>weapons@rifle@</FromStrafeTransitionUpperBodyClipSetHash>
 					<SwapWeaponFilterHash />
 					<SwapWeaponInLowCoverFilterHash />
-					<AnimFireRateModifier value="1.000000" />
-					<AnimBlindFireRateModifier value="1.000000" />
+					<AnimFireRateModifier value="0.25000" />
+					<AnimBlindFireRateModifier value="0.25000" />
 					<AnimWantingToShootFireRateModifier value="-1.000000" />
 					<UseFromStrafeUpperBodyAimNetwork value="true" />
 					<AimingDownTheBarrel value="true" />
@@ -1483,8 +1483,8 @@
 					<FromStrafeTransitionUpperBodyClipSetHash>weapons@rifle@</FromStrafeTransitionUpperBodyClipSetHash>
 					<SwapWeaponFilterHash />
 					<SwapWeaponInLowCoverFilterHash />
-					<AnimFireRateModifier value="1.000000" />
-					<AnimBlindFireRateModifier value="1.000000" />
+					<AnimFireRateModifier value="0.25000" />
+					<AnimBlindFireRateModifier value="0.25000" />
 					<AnimWantingToShootFireRateModifier value="-1.000000" />
 					<UseFromStrafeUpperBodyAimNetwork value="true" />
 					<AimingDownTheBarrel value="true" />
@@ -2229,8 +2229,8 @@
 					<FromStrafeTransitionUpperBodyClipSetHash>weapons@rifle@</FromStrafeTransitionUpperBodyClipSetHash>
 					<SwapWeaponFilterHash />
 					<SwapWeaponInLowCoverFilterHash />
-					<AnimFireRateModifier value="1.000000" />
-					<AnimBlindFireRateModifier value="1.000000" />
+					<AnimFireRateModifier value="0.25000" />
+					<AnimBlindFireRateModifier value="0.25000" />
 					<AnimWantingToShootFireRateModifier value="-1.000000" />
 					<UseFromStrafeUpperBodyAimNetwork value="true" />
 					<AimingDownTheBarrel value="true" />
@@ -2954,8 +2954,8 @@
 					<FromStrafeTransitionUpperBodyClipSetHash>weapons@rifle@</FromStrafeTransitionUpperBodyClipSetHash>
 					<SwapWeaponFilterHash />
 					<SwapWeaponInLowCoverFilterHash />
-					<AnimFireRateModifier value="1.000000" />
-					<AnimBlindFireRateModifier value="1.000000" />
+					<AnimFireRateModifier value="0.25000" />
+					<AnimBlindFireRateModifier value="0.25000" />
 					<AnimWantingToShootFireRateModifier value="-1.000000" />
 					<UseFromStrafeUpperBodyAimNetwork value="true" />
 					<AimingDownTheBarrel value="true" />
@@ -3652,8 +3652,8 @@
 					<FromStrafeTransitionUpperBodyClipSetHash>weapons@rifle@</FromStrafeTransitionUpperBodyClipSetHash>
 					<SwapWeaponFilterHash />
 					<SwapWeaponInLowCoverFilterHash />
-					<AnimFireRateModifier value="1.000000" />
-					<AnimBlindFireRateModifier value="1.000000" />
+					<AnimFireRateModifier value="0.25000" />
+					<AnimBlindFireRateModifier value="0.25000" />
 					<AnimWantingToShootFireRateModifier value="-1.000000" />
 					<UseFromStrafeUpperBodyAimNetwork value="true" />
 					<AimingDownTheBarrel value="true" />

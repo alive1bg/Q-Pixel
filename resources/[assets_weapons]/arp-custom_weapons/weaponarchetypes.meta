@@ -129,6 +129,21 @@
 		<lodDist value="50"/>
 	</Item>
 	
+	<!-- VECTOR -->
+
+	<Item>
+		<modelName>w_sb_vector</modelName>
+		<txdName>w_sb_vector</txdName>
+		<ptfxAssetName>null</ptfxAssetName>
+		<lodDist value="50"/>
+	</Item>
+	<Item>
+		<modelName>w_sb_vector_mag1</modelName>
+		<txdName>w_sb_vector</txdName>
+		<ptfxAssetName>null</ptfxAssetName>
+		<lodDist value="50"/>
+	</Item>
+
 	<!-- MPX -->
 	
 	<Item>

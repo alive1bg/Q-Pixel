@@ -482,11 +482,11 @@
       <ClipSize value="20" />
       <ReloadData ref="RELOAD_DEFAULT" />
     </Item>
-	<Item type="CWeaponComponentScopeInfo">
+    <Item type="CWeaponComponentScopeInfo">
       <Name>COMPONENT_AT_SCOPE_ACOG</Name>
       <Model>w_at_scope_acog</Model>
-      <LocName>WCT_SCOPE_SML2</LocName>
-      <LocDesc>WCD_SCOPE_SML</LocDesc>
+      <LocName>WCT_SCOPE_LRG2</LocName>
+      <LocDesc>WCD_SCOPE_LRF</LocDesc>
       <AttachBone>AAPScop</AttachBone>
       <AccuracyModifier type="NULL" />
       <DamageModifier type="NULL" />
@@ -497,11 +497,10 @@
       <HudCapacity value="0" />
       <HudAccuracy value="5" />
       <HudRange value="0" />
-      <CameraHash />
-      <RecoilShakeAmplitude value="0.000000" />
-      <ExtraZoomFactorForAccurateMode value="1.500000" />
-      <Reticule value="0" />
-      <ReticuleHash />
+      <CameraHash>SNIPER_FIXED_ZOOM_AIM_CAMERA</CameraHash>
+      <RecoilShakeAmplitude value="0.280000" />
+      <ExtraZoomFactorForAccurateMode value="0.000000" />
+      <ReticuleHash>SNIPER_LARGE</ReticuleHash>
 	  <SpecialScopeType />
     </Item>
 	<Item type="CWeaponComponentClipInfo">
@@ -519,14 +518,14 @@
       <HudCapacity value="0" />
       <HudAccuracy value="0" />
       <HudRange value="0" />
-      <ClipSize value="20" />
+      <ClipSize value="10" />
       <ReloadData ref="RELOAD_DEFAULT" />
     </Item>
-	<Item type="CWeaponComponentScopeInfo">
+    <Item type="CWeaponComponentScopeInfo">
       <Name>COMPONENT_AT_SCOPE_SUSAT</Name>
       <Model>w_at_scope_susat</Model>
-      <LocName>WCT_SCOPE_SML2</LocName>
-      <LocDesc>WCD_SCOPE_SML</LocDesc>
+      <LocName>WCT_SCOPE_LRG2</LocName>
+      <LocDesc>WCD_SCOPE_LRF</LocDesc>
       <AttachBone>AAPScop</AttachBone>
       <AccuracyModifier type="NULL" />
       <DamageModifier type="NULL" />
@@ -537,11 +536,10 @@
       <HudCapacity value="0" />
       <HudAccuracy value="5" />
       <HudRange value="0" />
-      <CameraHash />
-      <RecoilShakeAmplitude value="0.000000" />
-      <ExtraZoomFactorForAccurateMode value="1.500000" />
-      <Reticule value="0" />
-      <ReticuleHash />
+      <CameraHash>SNIPER_FIXED_ZOOM_AIM_CAMERA</CameraHash>
+      <RecoilShakeAmplitude value="0.280000" />
+      <ExtraZoomFactorForAccurateMode value="0.000000" />
+      <ReticuleHash>SNIPER_LARGE</ReticuleHash>
 	  <SpecialScopeType />
     </Item>
 	<Item type="CWeaponComponentClipInfo">
@@ -785,6 +783,73 @@
       <ClipSize value="10" />
       <ReloadData ref="RELOAD_DEFAULT_WITH_EMPTIES" />
     </Item>
+    <Item type="CWeaponComponentClipInfo">
+      <Name>COMPONENT_VECTOR_CLIP_01</Name>
+      <Model>w_sb_vector_mag1</Model>
+      <LocName>WCT_CLIP1</LocName>
+      <LocDesc>WCD_CMPR_CLIP1</LocDesc>
+      <AttachBone>AAPClip</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+      <ClipSize value="20" />
+      <ReloadData ref="RELOAD_DEFAULT" />
+    </Item>
+	<Item type="CWeaponComponentVariantModelInfo">
+      <Name>COMPONENT_VECTOR</Name>
+      <Model>w_sb_vector</Model>
+      <LocName>WCT_INVALID</LocName>
+      <LocDesc>WCD_INVALID</LocDesc>
+      <AttachBone />
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="false" />
+      <CreateObject value="false" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+	  <TintIndexOverride value="0"/>
+    </Item>
+    <Item type="CWeaponComponentScopeInfo">
+      <Name>COMPONENT_AT_SCOPE_VECTOR</Name>
+      <Model>null</Model>
+      <LocName>WCT_SCOPE_VECTOR</LocName>
+      <LocDesc>WCD_SCOPE_VECTOR</LocDesc>
+      <AttachBone>AAPScop</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="5" />
+      <HudRange value="0" />
+    </Item>
+	<Item type="CWeaponComponentFlashLightInfo">
+      <Name>COMPONENT_AT_VECTOR</Name>
+      <Model>null</Model>
+      <LocName>WCT_FLASH</LocName>
+      <LocDesc>WCD_FLASH</LocDesc>
+      <AttachBone>AAPFlsh</AttachBone>
+      <AccuracyModifier type="NULL" />
+      <DamageModifier type="NULL" />
+      <bShownOnWheel value="true" />
+      <CreateObject value="true" />
+      <HudDamage value="0" />
+      <HudSpeed value="0" />
+      <HudCapacity value="0" />
+      <HudAccuracy value="0" />
+      <HudRange value="0" />
+	</Item>
   </Infos>
   <InfoBlobName>DLC - Custom shit</InfoBlobName>
 </CWeaponComponentInfoBlob>
