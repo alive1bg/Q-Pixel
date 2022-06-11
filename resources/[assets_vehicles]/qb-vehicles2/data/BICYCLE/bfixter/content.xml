@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDataFileMgr__ContentsOfDataFileXml>
+  <disabledFiles />
+  <includedXmlFiles />
+  <includedDataFiles />
+  <dataFiles>
+    <Item>
+      <filename>dlc_btb:/data/vehicles.meta</filename>
+      <fileType>VEHICLE_METADATA_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_btb:/data/carcols.meta</filename>
+      <fileType>CARCOLS_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_btb:/data/carvariations.meta</filename>
+      <fileType>VEHICLE_VARIATION_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_btb:/data/dlctext.meta</filename>
+      <fileType>TEXTFILE_METAFILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+    <Item>
+      <filename>dlc_btb:/data/handling.meta</filename>
+      <fileType>HANDLING_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>	
+    <Item>
+      <filename>dlc_btb:/%PLATFORM%/vehicles.rpf</filename>
+      <fileType>RPF_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+	<Item>
+      <filename>dlc_btb:/data/carraddonContentUnlocks.meta</filename>
+      <fileType>CONTENT_UNLOCKING_META_FILE</fileType>
+      <locked value="true"/>
+	  <disabled value="true"/>
+	  <persistent value="true"/>
+	  <overlay value="true"/>
+    </Item>
+  </dataFiles>
+  <contentChangeSets>
+	<Item>
+	  <changeSetName>btb_AUTOGEN</changeSetName>
+	  <filesToDisable />
+	  <filesToEnable>
+        <Item>dlc_btb:/data/handling.meta</Item>
+        <Item>dlc_btb:/data/vehicles.meta</Item>
+        <Item>dlc_btb:/data/carcols.meta</Item>
+        <Item>dlc_btb:/data/carvariations.meta</Item>
+        <Item>dlc_btb:/data/dlctext.meta</Item>	
+		<Item>dlc_btb:/data/carraddonContentUnlocks.meta</Item>	
+        <Item>dlc_btb:/%PLATFORM%/vehicles.rpf</Item>
+	  </filesToEnable>
+	  <txdToLoad />
+	  <txdToUnload />
+	  <residentResources />
+	  <unregisterResources />
+	</Item>
+  </contentChangeSets>
+  <patchFiles />
+</CDataFileMgr__ContentsOfDataFileXml>
