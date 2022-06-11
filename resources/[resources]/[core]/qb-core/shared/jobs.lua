@@ -89,6 +89,34 @@ QBShared.Jobs = {
             },
         },
     },
+    ['weedshop'] = {
+        label = 'Weed Dispensary',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Trainee',
+                payment = 500
+            },
+            ['1'] = {
+                name = 'Employee',
+                payment = 650
+            },
+            ['2'] = {
+                name = 'Sales Manager',
+                payment = 850
+            },
+            ['3'] = {
+                name = 'Manager',
+                payment = 1000
+            },
+            ['4'] = {
+                name = 'Boss',
+                isboss = true,
+                payment = 1500
+            },
+        },
+    },
     ['casino'] = {
 		label = 'Diamond Casino',
 		defaultDuty = true,

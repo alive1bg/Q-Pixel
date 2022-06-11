@@ -1,92 +1,40 @@
-# qb-garbagejob
- This is an edited version of qb-garagejob to allow the player to use qb-target and qb-radialmenu.
- 
- Pretty straight forward. Player gets truck from targeting ped. Drive to dumpster and use target to get the bag. Then, use target to put the bag inside the truck.
- 
- If you have any questions, reach out to me on the QBCore Framework Discord
- 
- Name - Mackaelroni#9537
- 
- Discord - https://discord.gg/pKUZvJBxq4
- 
- This is my first, edited, release with QBCore. I hope you guys enjoy!
- 
-# Dependecies
- qb-target | https://github.com/BerkieBb/qb-target
- 
- qb-radialmenu | https://github.com/qbcore-framework/qb-radialmenu
- 
- qb-fuel | https://github.com/loljoshie/qb-fuel
- 
-# Installation
+# Garbage Job V2 For QB-Core
 
-Put this snippet inside Config.JobInteractions in qb-radialmenu/config.lua
+Repost of the official qb-garbagejob, with QB-Target Interaction!
 
-        ["garbage"] = {
-            {
-                id = 'returnTruck',
-                title = 'Return Truck',
-                icon = 'torii-gate',
-                type = 'client',
-                event = 'garbage:returnTruck',
-                shouldClose = true
-            },
-        }
-Put this snippet inside Config.Peds in qb-target/config.lua
+You need to add your own Ped!
 
-        ["GarbagePed"] = {
-             model = 's_m_y_garbage', 
-             coords = vector4(-349.96, -1569.92, 25.22, 296.46),
-             minusOne = true, 
-             freeze = true, 
-             invincible = true, 
-             blockevents = true,
-             target = { 
-               options = {
-                  {
-                      type = "server",
-                      event = "garbage:server:getGarbageJob",
-                      icon = "fas fa-sign-in-alt",
-                      label = "Get Garbage Job",
-                  },
-                  {
-                      type = "client",
-                      event = "garbage:getTruck",
-                      icon = "fas fa-sign-in-alt",
-                      label = "Get Garbage Truck",
-                  },
-                  {
-                      type = "client",
-                      event = "garbage:returnTruck",
-                      icon = "fas fa-sign-in-alt",
-                      label = "Return Garbage Truck",
-                  },
-                  {
-                      type = "server",
-                      event = "garbagejob:server:PayShift",
-                      icon = "fas fa-sign-in-alt",
-                      label = "Collect Pay Check",
-                  },
-              },
-              distance = 1.5,
-          },
-      },
+# Rework Update
+- Job now pays per bag delivered on a configured scale.
+- Job Randomises the amount of stops and what stops the user goes to
+- Job traks rewards on the server rather than client
+- Optional Cryptostick find per stop
+- Highly Configurable.
 
+# QB-Target Interaction 
 
-# License
+Add this to your Config.TargetModels in the init.lua of the qb-target script, works alongside the ms-peds version available on this GitHub!
 
-    QBCore Framework
-    Copyright (C) 2021 Joshua Eger
+		["garbageman"] = {
+			models = { 
+				"s_m_y_garbage",
+			},
+				options = {
+					{
+						type = "client",
+						event = "getGarbagePaySlip",
+						icon = "fas fa-clipboard",
+						label = "Collect Paycheck",
+						job = "garbage"
+					},
+					{
+						type = "client",
+						event = "GarbageTruckSpawn",
+						icon = "fas fa-clipboard",
+						label = "Spawn Garbage-Truck",
+						job = "garbage"
+					},
+				},
+				distance = 2.5,
+			},
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>

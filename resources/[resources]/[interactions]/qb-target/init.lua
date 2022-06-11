@@ -374,48 +374,6 @@ Config.TargetEntities = {
 }
 
 Config.TargetModels = {
-    ["StopSign"] = {
-        models = {
-            `prop_sign_road_01a`
-        },
-        options = {
-            {
-                type = "client",
-                event = "stopsign:client:Target",
-                icon = "fas fa-user-secret",
-                label = "Steal Sign",
-            },
-        },
-        distance = 2.0
-    },
-    ["BikeRentalPrison"] = {
-        models = {
-            `csb_money`
-        },
-        options = {
-            {
-                type= "client",
-                event = "qb-bikerentals:openMenu2prison",
-                icon = "fas fa-bicycle",
-                label = "Rent Bike"
-            },
-        },
-        distance = 3.0
-    }, 
-    ["BikeRental"] = {
-        models = {
-            `s_m_y_strvend_01`
-        },
-        options = {
-            {
-                type= "client",
-                event = "qb-bikerentals:openMenu",
-                icon = "fas fa-bicycle",
-                label = "Rent Bike"
-            },
-        },
-        distance = 3.0
-    }, 
     ["bike"] = {
         models = {
             `bmx`,
@@ -436,18 +394,6 @@ Config.TargetModels = {
             },
         },
         distance = 2.0
-    },
-    ["PARKINGMETER"] = {
-        models = {-544726684, -1940238623, 2108567945},
-        options = {
-            {
-                type = "client",
-                event = "qb-parkingmeter",
-                icon = "fas fa-coins",
-                label = "Pay Parking Meter",
-            },
-        },
-        distance = 1.5
     },
     ["SellContabandMWShopSell"] = {
         models = {
@@ -506,20 +452,6 @@ Config.TargetModels = {
         },
         distance = 3.0
     },   
-    ["clothing"] = {
-        models = {
-            `a_f_y_bevhills_02`
-        },
-        options = {
-            {
-                type = "server",
-                event = "qb-outfits:server:callUI",
-                icon = "fas fa-person-booth",
-                label = "Select/Save Outfit",
-            },
-        },
-        distance = 10.0
-    },
     ["VehicleRental"] = {
         models = {
             `cs_andreas`,
@@ -534,36 +466,27 @@ Config.TargetModels = {
         },
         distance = 4.0
     },
-    ["emsgarage"] = {
-        models = {
-            `mp_m_securoguard_01`,
-        },
+    ["garbageman"] = {
+		models = { 
+			"s_m_y_garbage",
+		},
         options = {
             {
-                event = "emsgarage:menu",
-                icon = "fas fa-car",
-                label = "EMS Garage",
+                type = "client",
+                event = "getGarbagePaySlip",
+                icon = "fas fa-clipboard",
+                label = "Collect Paycheck",
+                job = "garbage"
             },
             {
-                event = "ems:storecar",
-                icon = "fas fa-car",
-                label = "Store Vehicle",
+                type = "client",
+                event = "GarbageTruckSpawn",
+                icon = "fas fa-clipboard",
+                label = "Spawn Garbage-Truck",
+                job = "garbage"
             },
         },
-        distance = 10.0
-    },
-    ["emsgarage"] = {
-        models = {
-            `prop_golfflag`,
-        },
-        options = {
-            {
-                event = "qb-paintball:game:pickupFlag",
-                icon = "fas fa-flag",
-                label = "Pickup Flag!",
-            },
-        },
-        distance = 10.0
+        distance = 2.5,
     },
 }
 

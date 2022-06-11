@@ -30,7 +30,7 @@ local function setupClient()
         garbageBlip = AddBlipForCoord(Config.Locations["main"].coords.x, Config.Locations["main"].coords.y, Config.Locations["main"].coords.z)
         SetBlipSprite(garbageBlip, 318)
         SetBlipDisplay(garbageBlip, 4)
-        SetBlipScale(garbageBlip, 1.0)
+        SetBlipScale(garbageBlip, 0.6)
         SetBlipAsShortRange(garbageBlip, true)
         SetBlipColour(garbageBlip, 39)
         BeginTextCommandSetBlipName("STRING")
@@ -130,7 +130,6 @@ end
 local function SetRouteBack()
     local inleverpunt = Config.Locations["vehicle"]
     endBlip = AddBlipForCoord(inleverpunt.coords.x, inleverpunt.coords.y, inleverpunt.coords.z)
-    exports['qb-target']:RemoveZone('trashcans')
     SetBlipSprite(endBlip, 1)
     SetBlipDisplay(endBlip, 2)
     SetBlipScale(endBlip, 1.0)
@@ -193,24 +192,6 @@ local function SetGarbageRoute()
     if deliveryBlip ~= nil then
         RemoveBlip(deliveryBlip)
     end
-    exports['qb-target']:AddBoxZone("trashcans", vector3(CurrentLocation.pz), CurrentLocation.length, CurrentLocation.width, {
-        name = "trashcans",
-        heading = CurrentLocation.heading,
-        debugPoly = false,
-        minZ = CurrentLocation.minZ,
-        maxZ = CurrentLocation.maxZ,
-        }, {
-            options = {
-                {
-                    type = "client",
-                    event = "garbage:takeBag",
-                    icon = "fas fa-sign-in-alt",
-                    label = "Get bag of trash",
-                    job = "garbage",
-                },
-            },
-            distance = 2.5
-    })
     deliveryBlip = AddBlipForCoord(CurrentLocation.coords.x, CurrentLocation.coords.y, CurrentLocation.coords.z)
     SetBlipSprite(deliveryBlip, 1)
     SetBlipDisplay(deliveryBlip, 2)
@@ -223,82 +204,113 @@ local function SetGarbageRoute()
     SetBlipRoute(deliveryBlip, true)
 end
 
-RegisterNetEvent('garbage:takeBag')
-AddEventHandler('garbage:takeBag', function()
-    if currentStop ~= 0 and deliveryBlip ~= nil then
-        if not hasBag and canTakeBag then
-            hasBag = true
-            TakeAnim()
-        end
-    else
-        QBCore.Functions.Notify("Go clock in to collect trash.", 'error')
-    end
-end)
+local function RunWorkLoop()
+    CreateThread(function()
+        while isWorking and LocalPlayer.state.isLoggedIn do
 
-RegisterNetEvent('garbage:putTrashTruck')
-AddEventHandler('garbage:putTrashTruck', function()
-    local ped = PlayerPedId()
-    local pos = GetEntityCoords(ped)
-    if hasBag then
-        LoadAnimation('missfbi4prepp1')
-        if DoesEntityExist(garbageVehicle) then
-            QBCore.Functions.Progressbar("deliverbag", "Putting bag in trashmaster ..", 2000, false, true, {
-                disableMovement = true,
-                disableCarMovement = true,
-                disableMouse = false,
-                disableCombat = true,
-            }, {}, {}, {}, function() -- Done
-                hasBag = false
-                -- Looks if you have delivered all bags
-                if (amountOfBags - 1) == 0 then
-                    QBCore.Functions.TriggerCallback('garbagejob:server:NextStop', function(hasMoreStops, nextStop, newBagAmount)
-                        if hasMoreStops and nextStop ~= 0 then
-                            -- Here he puts your next location and you are not finished working yet.
-                            currentStop = nextStop
-                            currentStopNum = currentStopNum + 1
-                            amountOfBags = newBagAmount
-                            SetGarbageRoute()
-                            QBCore.Functions.Notify("All garbage bags are done, proceed to the next location!")
-                        else
-                            if hasMoreStops and nextStop == currentStop then
-                                QBCore.Functions.Notify("There was an issue at the depot, please return immediately!")
-                                amountOfBags = 0
-                            else
-                                -- You are done with work here.
-                                QBCore.Functions.Notify("You are done working! Go back to the depot.")
-                                isWorking = false
-                                RemoveBlip(deliveryBlip)
-                                SetRouteBack()
-                                amountOfBags = 0
+            local ped = PlayerPedId()
+            local pos = GetEntityCoords(ped)
+
+            if playerJob ~= nil and playerJob.name == "garbage" and currentStop ~= 0 and deliveryBlip ~= nil then
+
+                local DeliveryData = Config.Locations["trashcan"][currentStop]
+                local Distance = #(pos - vector3(DeliveryData.coords.x, DeliveryData.coords.y, DeliveryData.coords.z))
+
+                if Distance < 20 or hasBag then
+                    LoadAnimation('missfbi4prepp1')
+                    DrawMarker(2, DeliveryData.coords.x, DeliveryData.coords.y, DeliveryData.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.3, 255, 55, 22, 255, false, false, false, false, false, false, false)
+
+                    if not hasBag and canTakeBag then
+                        if Distance < 1.5 then
+                            DrawText3D2(DeliveryData.coords, "~g~E~w~ - Grab a garbage bag")
+                            if IsControlJustPressed(0, 51) then
+
+                                hasBag = true
+                                TakeAnim()
                             end
+                        elseif Distance < 10 then
+                            DrawText3D2(DeliveryData.coords, "Stand here to grab a garbage bag.")
                         end
-                    end, currentStop, currentStopNum, pos)
-                    hasBag = false
-                else
-                    -- You haven't delivered all bags here
-                    amountOfBags = amountOfBags - 1
-                    if amountOfBags > 1 then
-                        QBCore.Functions.Notify("There are still "..amountOfBags.." bags left!")
                     else
-                        QBCore.Functions.Notify("There is still "..amountOfBags.." bags over there!")
+                        if DoesEntityExist(garbageVehicle) then
+                            local Coords = GetOffsetFromEntityInWorldCoords(garbageVehicle, 0.0, -4.5, 0.0)
+                            local TruckDist = #(pos - Coords)
+
+                            if Distance < 10 then
+                                DrawText3D2(DeliveryData.coords, "Put the bag in your truck..")
+                            end
+
+                            if TruckDist < 2 then
+                                DrawText3D(Coords.x, Coords.y, Coords.z, "~g~E~w~ - Dispose of Garbage Bag")
+                                if IsControlJustPressed(0, 51) then
+                                    QBCore.Functions.Progressbar("deliverbag", "Putting bag in trashmaster ..", 2000, false, true, {
+                                        disableMovement = true,
+                                        disableCarMovement = true,
+                                        disableMouse = false,
+                                        disableCombat = true,
+                                    }, {}, {}, {}, function() -- Done
+                                        hasBag = false
+                                        -- Looks if you have delivered all bags
+                                        if (amountOfBags - 1) == 0 then
+                                            QBCore.Functions.TriggerCallback('garbagejob:server:NextStop', function(hasMoreStops, nextStop, newBagAmount)
+                                                if hasMoreStops and nextStop ~= 0 then
+                                                    -- Here he puts your next location and you are not finished working yet.
+                                                    currentStop = nextStop
+                                                    currentStopNum = currentStopNum + 1
+                                                    amountOfBags = newBagAmount
+                                                    SetGarbageRoute()
+                                                    QBCore.Functions.Notify("All garbage bags are done, proceed to the next location!")
+                                                else
+                                                    if hasMoreStops and nextStop == currentStop then
+                                                        QBCore.Functions.Notify("There was an issue at the depot, please return immediately!")
+                                                        amountOfBags = 0
+                                                    else
+                                                        -- You are done with work here.
+                                                        QBCore.Functions.Notify("You are done working! Go back to the depot.")
+                                                        isWorking = false
+                                                        RemoveBlip(deliveryBlip)
+                                                        SetRouteBack()
+                                                        amountOfBags = 0
+                                                    end
+                                                end
+                                            end, currentStop, currentStopNum, pos)
+                                            hasBag = false
+                                        else
+                                            -- You haven't delivered all bags here
+                                            amountOfBags = amountOfBags - 1
+                                            if amountOfBags > 1 then
+                                                QBCore.Functions.Notify("There are still "..amountOfBags.." bags left!")
+                                            else
+                                                QBCore.Functions.Notify("There is still "..amountOfBags.." bags over there!")
+                                            end
+                                            hasBag = false
+                                        end
+
+                                        DeliverAnim()
+                                    end, function() -- Cancel
+                                        QBCore.Functions.Notify("Canceled", "error")
+                                    end)
+
+                                end
+                            elseif TruckDist < 10 then
+                                DrawText3D(Coords.x, Coords.y, Coords.z, "Stand here..")
+                            end
+                        else
+                            QBCore.Functions.Notify("You have no truck", "error")
+                            print("You no longer have a truck, contact an admin!")
+                            DeliverAnim()
+                            hasBag = false
+                        end
                     end
-                    hasBag = false
                 end
 
-                DeliverAnim()
-            end, function() -- Cancel
-                QBCore.Functions.Notify("Canceled", "error")
-            end)
-        else
-            QBCore.Functions.Notify("You have no truck", "error")
-            print("You no longer have a truck, contact an admin!")
-            DeliverAnim()
-            hasBag = false
+
+            end
+
+            Wait(1)
         end
-    else
-        QBCore.Functions.Notify("You don\'t have trash..", "error")
-    end
-end)
+    end)
+end
 
 -- Events
 
@@ -306,47 +318,83 @@ RegisterNetEvent('garbagejob:client:SetWaypointHome', function()
     SetNewWaypoint(Config.Locations["main"].coords.x, Config.Locations["main"].coords.y)
 end)
 
-RegisterNetEvent('garbage:paySlip', function()
-    TriggerServerEvent('garbagejob:server:PayShift')
+-- Threads
+
+CreateThread(function()
+    while true do
+        local sleep = 500
+        if LocalPlayer.state.isLoggedIn and playerJob ~= nil and playerJob.name == "garbage" then
+            sleep = 1
+            local ped = PlayerPedId()
+            local pos = GetEntityCoords(ped)
+            local InVehicle = IsPedInAnyVehicle(ped, false)
+            local distance = #(pos - vehCoords)
+            local payDistance = #(pos - payCoords)
+
+            if distance < 10.0 then
+                -- DrawMarker(2, vehCoords.x, vehCoords.y, vehCoords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 233, 55, 22, 222, false, false, false, true, false, false, false)
+                if distance < 1.5 then
+                    if InVehicle then
+                        DrawText3D(vehCoords.x, vehCoords.y, vehCoords.z, "~g~E~w~ - Store Garbage Truck")
+                        if IsControlJustReleased(0, 38) then
+                            QBCore.Functions.TriggerCallback('garbagejob:server:EndShift', function(endShift)
+                                if endShift then
+                                    BringBackCar()
+                                    QBCore.Functions.Notify("Truck returned, collect your payslip to recieve your pay and deposit back!")
+                                else
+                                    QBCore.Functions.Notify("You have no deposit paid on this vehicle..")
+                                    currentStopNum = 0
+                                    currentStop = 0
+                                end
+                            end, pos)
+                        end
+                    else
+                        -- DrawText3D(vehCoords.x, vehCoords.y, vehCoords.z, "~g~E~w~ - Garbage Truck")
+                    end
+                end
+            end
+
+            -- if payDistance < 20 then
+            --     DrawMarker(2, payCoords.x, payCoords.y, payCoords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 233, 55, 22, 222, false, false, false, true, false, false, false)
+            --     if payDistance < 1.5 then
+            --         DrawText3D(payCoords.x, payCoords.y, payCoords.z, "~g~E~w~ - Payslip")
+            --         if IsControlJustPressed(0, 38) then
+            --             TriggerServerEvent('garbagejob:server:PayShift')
+            --         end
+            --     elseif payDistance < 5 then
+            --         DrawText3D(payCoords.x, payCoords.y, payCoords.z, "Payslip")
+            --     end
+            -- end
+
+        end
+        Wait(sleep)
+    end
 end)
 
-RegisterNetEvent('garbage:getTruck')
-AddEventHandler('garbage:getTruck', function()
+RegisterNetEvent('GarbageTruckSpawn', function()
     QBCore.Functions.TriggerCallback('garbagejob:server:NewShift', function(shouldContinue, firstStop, totalBags)
         if shouldContinue then
-
             local coords = Config.Locations["vehicle"].coords
-            QBCore.Functions.SpawnVehicle("trash2", function(veh)
-                TaskWarpPedIntoVehicle(ped, veh, -1) -- hopefully this fixes an issue if something is delayed they'll get crushed
-                SetVehicleEngineOn(veh, true, true)
-                garbageVehicle = veh
-                NetworkRegisterEntityAsNetworked(garbageVehicle)
+            local ped = PlayerPedId()
+            QBCore.Functions.SpawnVehicle("trash2", function(vehicle)
+                TaskWarpPedIntoVehicle(ped, vehicle, -1) -- hopefully this fixes an issue if something is delayed they'll get crushed
+                SetVehicleEngineOn(vehicle, true, true)
+                garbageVehicle = vehicle
                 SetVehicleNumberPlateText(veh, "GARB"..tostring(math.random(1000, 9999)))
-                SetEntityHeading(veh, coords.w)
-                exports['qb-fuel']:SetFuel(veh, 100.0)
-                SetEntityAsMissionEntity(veh, true, true)
-                TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(veh))
-                exports['qb-target']:AddTargetEntity(garbageVehicle, {
-                    options = {
-                        {
-                            type = "client",
-                            event = "garbage:putTrashTruck",
-                            icon = "fas fa-sign-in-alt",
-                            label = "Put trash in truck",
-                            job = "garbage",
-                        },
-                    },
-                    distance = 3.0
-                })
+                SetEntityHeading(vehicle, coords.w)
+                exports['LegacyFuel']:SetFuel(vehicle, 100.0)
+                SetEntityAsMissionEntity(vehicle, true, true)
+                TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(vehicle))
                 currentStop = firstStop
                 currentStopNum = 1
                 amountOfBags = totalBags
                 isWorking = true
-                exports['qb-target']:RemoveZone('trashcans')
                 SetGarbageRoute()
                 QBCore.Functions.Notify("You have $"..Config.TruckPrice..", deposit paid!")
                 QBCore.Functions.Notify("You have started working, location marked on GPS!")
                 Wait(10)
+                -- Run the Work Loop to check for Garbo Bags.
+                RunWorkLoop()
             end, coords, true)
         else
             QBCore.Functions.Notify("You have not enough money for the deposit.. Deposit costs are $"..Config.TruckPrice)
@@ -354,24 +402,10 @@ AddEventHandler('garbage:getTruck', function()
     end)
 end)
 
-RegisterNetEvent('garbage:returnTruck')
-AddEventHandler('garbage:returnTruck', function()
-    local ped = PlayerPedId()
-    local pos = GetEntityCoords(ped)
-    local distance = #(pos - vehCoords)
-    local InVehicle = IsPedInAnyVehicle(ped, false)
-    if distance < 7.5 then
-        if InVehicle then
-            QBCore.Functions.TriggerCallback('garbagejob:server:EndShift', function(endShift)
-                if endShift then
-                    BringBackCar()
-                    QBCore.Functions.Notify("Truck returned, collect your payslip to recieve your pay and deposit back!")
-                else
-                    QBCore.Functions.Notify("You have no deposit paid on this vehicle..")
-                    currentStopNum = 0
-                    currentStop = 0
-                end
-            end, pos)
-        end
-    end
+RegisterNetEvent('getGarbagePaySlip', function()
+    TriggerServerEvent('garbagejob:server:PayShift')
+end)
+
+RegisterNetEvent('garbagejob:client:returnVehicle', function()
+    BringBackCar()
 end)
