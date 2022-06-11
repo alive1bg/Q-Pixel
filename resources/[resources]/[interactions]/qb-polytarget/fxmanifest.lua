@@ -1,15 +1,13 @@
 fx_version 'cerulean'
-games { 'gta5' }
+game 'gta5'
 
-dependencies {
-  "PolyZone"
+description 'QB-PolyTarget'
+version '1.0.0'
+
+shared_scripts {
+	'config.lua'
 }
 
 client_scripts {
-  "@PolyZone/client.lua",
-  "@PolyZone/BoxZone.lua",
-  "@PolyZone/CircleZone.lua",
-  "@PolyZone/ComboZone.lua",
-  "@PolyZone/EntityZone.lua",
-  'client/cl_*.lua'
+	'client/main.lua',
 }

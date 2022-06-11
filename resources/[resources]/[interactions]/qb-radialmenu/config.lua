@@ -13,6 +13,7 @@ local bennyscivpoly = false
 local onDuty = false
 local inGarage = false
 local inDepots = false
+local inHouses = false
 
 rootMenuConfig =  {
     {
@@ -287,11 +288,6 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and IsPedInAnyVehicle(PlayerPedId(), false))
        end,
     },
-    --[[['vehicle:extras'] = {
-        title = 'Toggle Extras',
-        icon = '#vehicle-options-vehicle',
-        functionName = "ccvehmenu:client:extrasMenu"
-    },]]
     ['vehicle:menu'] = {
         title = 'Vehicle Menu',
         icon = '#vehicle-options-vehicle',
@@ -542,45 +538,6 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         title = "Rob",
         icon = "#general-contact",
         functionName = "police:client:RobPlayer" -- must be client event, work same as TriggerEvent('emotes:OpenMenu')
-    },
-    ['garage:opengarage'] = {
-        title = 'Open Garage',
-		icon = '#garage-open',
-		functionName = 'qb-garages:client:openGarage',
-		enableMenu = function()
-			PlayerData = QBCore.Functions.GetPlayerData()
-			local isingarage, canStoreVehicle = exports["qb-garages"]:IsInGarage()
-			if not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and isingarage then 
-				local ped = PlayerPedId()
-				if not IsPedInAnyVehicle(ped, false) then
-					return true
-				end
-			end
-			return false
-		end    
-    },
-    ['garage:storegarage'] = {
-        title = 'Store Vehicle',
-		icon = '#general-parking',
-		functionName = 'qb-garages:client:storeVehicle',
-		enableMenu = function()
-			PlayerData = QBCore.Functions.GetPlayerData()
-			local isingarage, canStoreVehicle = exports["qb-garages"]:IsInGarage()
-			if not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and isingarage and canStoreVehicle then 
-				local ped = PlayerPedId()
-				local pos = GetEntityCoords(ped)
-				local ped = PlayerPedId()
-				local veh = QBCore.Functions.GetClosestVehicle(pos)
-				if IsPedInAnyVehicle(ped) then
-					veh = GetVehiclePedIsIn(ped)
-				end
-				local plate = QBCore.Functions.GetPlate(veh)
-				if exports["qb-vehiclekeys"]:HasVehicleKey(plate) then
-					return true
-				end
-			end
-			return false
-		end 
     },
     ['drug:sell'] = {
         title = "Cornersell",
@@ -1016,7 +973,7 @@ AddEventHandler('police:client:PutInVehicle', function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     for k, v in pairs(Garages) do 
         exports["qb-polyzone"]:AddBoxZone("garages", vector3(Garages[k].polyzone.x, Garages[k].polyzone.y, Garages[k].polyzone.z), Garages[k].polyzone1, Garages[k].polyzone2, {
             name="garages",
@@ -1063,10 +1020,10 @@ AddEventHandler('qb-polyzone:enter', function(name)
         exports['np-ui']:showInteraction('Parking')
     elseif name == "ganggarages" then
         inGarage = true
-        exports['np-ui']:showInteraction('Garage')
+        exports['np-ui']:showInteraction('Parking')
     elseif name == "jobgarages" then
         inGarage = true
-        exports['np-ui']:showInteraction('Job Garage')
+        exports['np-ui']:showInteraction('Parking')
     elseif name == "depots" then
         inDepots = true
         exports['np-ui']:showInteraction('Depot')
