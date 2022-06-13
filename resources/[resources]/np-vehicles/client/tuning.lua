@@ -1,3 +1,8 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
+
 DecorRegister(2, "jobVehicle")
 
 
@@ -449,6 +454,7 @@ AddEventHandler('baseevents:enteredVehicle', function(curVehicle, curSeat, dogsh
     end
 
     if veh.mySeat == -1 then
+        print("IM IN")
         CheckVehicleTuning()
         CheckStatus()
 		DoubleClutch()
@@ -484,7 +490,7 @@ AddEventHandler('baseevents:leftVehicle', function()
     SetAudioSubmixEffectParamInt(0, 0, `enabled`, 0)
 end)
 
-RegisterNetEvent('np-vehicles:client:tuningBody', function(bodyHealth)
+RegisterNetEvent('np_vehicles:client:tuningBody', function(bodyHealth)
 	local veh = QBCore.Functions.GetVehicleInFront()
 
 	NetworkRequestControlOfEntity(veh)

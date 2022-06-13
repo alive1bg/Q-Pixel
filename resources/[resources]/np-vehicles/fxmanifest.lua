@@ -7,7 +7,7 @@ shared_scripts {
 }
 
 client_scripts {
-	--'@rp_core/client/ped.lua',
+	'@qb-core/client/ped.lua',
 	'cl_main.lua',
     'client/*.lua',
 	'client/modules/module_*.lua'

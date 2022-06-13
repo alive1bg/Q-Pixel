@@ -1,3 +1,8 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
+
 local stalling = nil
 
 local function sendServerEventForPassengers(curVehicle, event, value)
@@ -32,7 +37,7 @@ local function ejectionLUL(veloc, currentVehicle)
 		TriggerEvent("civilian:alertPolice",50.0,"carcrash",0)
 		eject(veloc)
 	end
-	sendServerEventForPassengers(currentVehicle, 'np-vehicles:server:ejectPassengers', veloc)
+	sendServerEventForPassengers(currentVehicle, 'np_vehicles:server:ejectPassengers', veloc)
 end
 
 local wheels = {
@@ -121,7 +126,7 @@ AddEventHandler('baseevents:vehicleCrashed', function(CurrentVehicle, CurrentSea
 	end
 end)
 
-RegisterNetEvent('np-vehicles:client:ejectPassengers', function(pVelocity)
+RegisterNetEvent('np_vehicles:client:ejectPassengers', function(pVelocity)
 	local chance = math.random(60, 100)
 
 	if VehicleData.seatbelt then

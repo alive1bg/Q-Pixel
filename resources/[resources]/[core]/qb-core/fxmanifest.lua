@@ -21,7 +21,8 @@ client_scripts {
 	'client/functions.lua',
 	'client/loops.lua',
 	'client/events.lua',
-	'client/spawnmanager.lua'
+	'client/spawnmanager.lua',
+	'client/ped.lua'
 }
 
 server_scripts {
@@ -47,5 +48,8 @@ dependencies {
 	'progressbar',
 	'connectqueue'
 }
+
+--export 'isPed'
+--server_export 'isPed'
 
 lua54 'yes'

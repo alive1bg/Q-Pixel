@@ -1,3 +1,7 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
 local Speed = 0.0
 local cruiseSpeed = 0.0
 local lastVehicle = nil

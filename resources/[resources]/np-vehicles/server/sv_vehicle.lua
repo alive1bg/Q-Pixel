@@ -1,12 +1,14 @@
-RegisterNetEvent('np-vehicles:server:ejectPassengers', function(pID, pVelocity)
+local QBCore = exports['qb-core']:GetCoreObject()
+
+RegisterNetEvent('np_vehicles:server:ejectPassengers', function(pID, pVelocity)
 	if pID ~= nil then
         if GetPlayerPed(pID) ~= nil then
-            TriggerClientEvent('np-vehicles:client:ejectPassengers', pID, pVelocity)
+            TriggerClientEvent('np_vehicles:client:ejectPassengers', pID, pVelocity)
         end
     end
 end)
 
-QBCore.Functions.CreateCallback('np-vehicles:server:fetchClass', function(souce, cb, plate)
+QBCore.Functions.CreateCallback('np_vehicles:server:fetchClass', function(souce, cb, plate)
 	cb(nil)
 	--SetEntityDistanceCullingRadius(entity --[[ Entity ]], radius --[[ number ]])
 	print("Retured")

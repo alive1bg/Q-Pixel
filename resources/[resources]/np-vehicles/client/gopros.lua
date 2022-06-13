@@ -1,3 +1,8 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
+
 local streams = {}
 local goProActivated = false
 
@@ -18,7 +23,7 @@ local function prepareCameraSelf(activating, coords)
 	SetEntityCoords(me, coords)
   end
 
-RegisterNetEvent('np-vehicles:client:GoPro:attach', function(item, dashType)
+RegisterNetEvent('np_vehicles:client:GoPro:attach', function(item, dashType)
 	local ply = PlayerPedId()
 	local veh = GetVehiclePedIsIn(ply, false)
 
@@ -38,10 +43,10 @@ RegisterNetEvent('np-vehicles:client:GoPro:attach', function(item, dashType)
 	end
 
 	TriggerServerEvent("QBCore:Server:RemoveItem", item.name, 1, item.slot)
-	TriggerServerEvent('np-vehicles:server:GoPro:CreateStream', VehToNet(veh), dashType)
+	TriggerServerEvent('np_vehicles:server:GoPro:CreateStream', VehToNet(veh), dashType)
 end)
 
-RegisterNetEvent('np-vehicles:client:GoPro:AttachCam', function(netID, vehCoords)
+RegisterNetEvent('np_vehicles:client:GoPro:AttachCam', function(netID, vehCoords)
 	local alreadyActive = goProActivated
 	goProActivated = true
 	local coords = vector3(vehCoords.x, vehCoords.y, vehCoords.z - 10.0)
@@ -72,24 +77,24 @@ RegisterNetEvent('np-vehicles:client:GoPro:AttachCam', function(netID, vehCoords
 		RenderScriptCams(true, false, 0, 1, 0)
 	end
 
-	TriggerEvent('np-vehicles:client:GoPro:ListenKeypress')
+	TriggerEvent('np_vehicles:client:GoPro:ListenKeypress')
 end)
 
 local isListeningKeyPress = false
-AddEventHandler('np-vehicles:client:GoPro:ListenKeypress', function()
+AddEventHandler('np_vehicles:client:GoPro:ListenKeypress', function()
 	if isListeningKeyPress then return end
 	exports.rp_ui:ActionBox({action = 'show', title = nil, text = '[E] Exit Dash Cam', style = nil})
 	isListeningKeyPress = true
 	while isListeningKeyPress do
 		if IsControlJustReleased(0, 38) then
-			TriggerEvent('np-vehicles:server:GoPro:DetachCam')
+			TriggerEvent('np_vehicles:server:GoPro:DetachCam')
 		end
 		Wait(3)
 	end
 end)
 
-AddEventHandler('np-vehicles:client:GoPro:viewGoPro', function(data)
-	TriggerServerEvent('np-vehicles:server:GoPro:JoinStream', data)
+AddEventHandler('np_vehicles:client:GoPro:viewGoPro', function(data)
+	TriggerServerEvent('np_vehicles:server:GoPro:JoinStream', data)
 end)
 
 RegisterNetEvent('np-vehicles:server:GoPro:DetachCam', function()

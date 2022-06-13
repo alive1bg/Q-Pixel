@@ -1,3 +1,7 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
 local function ToggleEngine()
 	if Ped.isPaused then return end
 	if not Ped.Vehicle.isInVehicle then return end

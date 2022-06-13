@@ -1,3 +1,8 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
+
 local function ToggleNeons()
 	if Ped.isPaused then return end
 	if not Ped.Vehicle.isInVehicle then return end
@@ -6,7 +11,7 @@ local function ToggleNeons()
 
 	local veh = Ped.Vehicle.vehicleHandle
 
-	local hasNeons = exports.np-vehicles:hasFlag(veh, 'hasNeons')
+	local hasNeons = exports.np_vehicles:hasFlag(veh, 'hasNeons')
 	if hasNeons then
 		local neonsEnabled = false
 		for i = 0, 3 do

@@ -1,3 +1,7 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
 local restrictedClasses = {
 	[8] = true,
 	[13] = true,
@@ -35,7 +39,7 @@ function ToggleHarness()
 	end
 end
 
-RegisterNetEvent('np-vehicles:client:useHarness', function(itemData)
+RegisterNetEvent('np_vehicles:client:useHarness', function(itemData)
 	if Ped.isPaused then return end
 	if Ped.Vehicle.isInVehicle then
 		if Ped.Vehicle.vehicleSeat ~= -1 then return end

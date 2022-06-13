@@ -5,6 +5,11 @@
 	DECOR_TYPE_UNK = 4,
 	DECOR_TYPE_TIME = 5
 ]]
+
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
 DecorRegister('hasNeons', 2)
 DecorRegister('hasDriftTyres', 2)
 

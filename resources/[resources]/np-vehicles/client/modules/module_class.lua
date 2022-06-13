@@ -1,3 +1,7 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
 local Classes = {
 	[180] = "S",
 	[175] = "A",
@@ -46,7 +50,7 @@ end
 
 local function getClassByPlate(pVehicle)
 	--do some code here, probably need to call on server and check all vehicles
-	QBCore.Functions.TriggerCallback('np-vehicles:server:fetchClass', function(twat)
+	QBCore.Functions.TriggerCallback('np_vehicles:server:fetchClass', function(twat)
 	end)
 end
 

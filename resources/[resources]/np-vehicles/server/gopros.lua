@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local GoProStreams = {}
 local myStreams = {}
 
@@ -27,8 +29,8 @@ local function GenerateStreamID()
     return defaultID
 end
 
-RegisterNetEvent('np-vehicles:server:GoPro:CreateStream')
-AddEventHandler('np-vehicles:server:GoPro:CreateStream', function(veh, dashType)
+RegisterNetEvent('np_vehicles:server:GoPro:CreateStream')
+AddEventHandler('np_vehicles:server:GoPro:CreateStream', function(veh, dashType)
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
     local cid = Ply.PlayerData.citizenid
@@ -51,7 +53,7 @@ AddEventHandler('np-vehicles:server:GoPro:CreateStream', function(veh, dashType)
     --TriggerClientEvent('QBCore:Notify', src, "Your stream pin is: #"..GoProStreams[networkVehicleEntity].streamPin)
 end)
 
-RegisterNetEvent('np-vehicles:server:GoPro:JoinStream', function(data)
+RegisterNetEvent('np_vehicles:server:GoPro:JoinStream', function(data)
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
 
@@ -67,23 +69,23 @@ RegisterNetEvent('np-vehicles:server:GoPro:JoinStream', function(data)
 	end
 
 	local vehCoords = GetEntityCoords(vehData.vehicleEntity)
-    TriggerClientEvent('np-vehicles:client:GoPro:AttachCam', src, NetworkGetNetworkIdFromEntity(vehData.vehicleEntity), vehCoords)
+    TriggerClientEvent('np_vehicles:client:GoPro:AttachCam', src, NetworkGetNetworkIdFromEntity(vehData.vehicleEntity), vehCoords)
 end)
 
-RegisterNetEvent('np-vehicles:server:GoPro:LeaveStream', function()
+RegisterNetEvent('np_vehicles:server:GoPro:LeaveStream', function()
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
 
     if myStreams[Ply.PlayerData.citizenid] ~= nil then
-        TriggerClientEvent('np-vehicles:server:GoPro:DetachCam', src)
+        TriggerClientEvent('np_vehicles:server:GoPro:DetachCam', src)
     end
 end)
 
 QBCore.Functions.CreateUseableItem('pd_dashcam', function(source, item)
-	TriggerClientEvent('np-vehicles:client:GoPro:attach', source, item, 'pd')
+	TriggerClientEvent('np_vehicles:client:GoPro:attach', source, item, 'pd')
 end)
 
-QBCore.Functions.CreateCallback('np-vehicles:server:GoPro:GetDashCams', function(source, cb, camType)
+QBCore.Functions.CreateCallback('np_vehicles:server:GoPro:GetDashCams', function(source, cb, camType)
 	local retval = {}
 
 	for k,v in pairs(GoProStreams) do

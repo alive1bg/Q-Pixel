@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local VehicleStatus = {}
 local VehicleDrivingDistance = {}
 
@@ -31,25 +33,25 @@ end)
 
 RegisterServerEvent('qb-vehicletuning:server:UpdateDrivingDistance', function(amount, plate)
     if plate == nil then return end
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `plate` = @plate OR `fakeplate` = @plate", {['@plate'] = plate}, function(result)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `plate` = @plate OR `fakeplate` = @plate", {['@plate'] = plate}, function(result)
         if result[1] ~= nil then
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `drivingdistance` = @amount WHERE `plate` = @plate", {['@amount'] = amount, ['@plate'] = result[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `drivingdistance` = @amount WHERE `plate` = @plate", {['@amount'] = amount, ['@plate'] = result[1].plate})
         end
     end)
 end)
 
 RegisterServerEvent('qb-vehicletuning:server:UpdateVehicleFuel', function(amount, plate)
     if plate == nil then return end
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] ~= nil then
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `fuel` = @fuel WHERE `plate` = @plate", {['@fuel'] = amount, ['@plate'] = results[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `fuel` = @fuel WHERE `plate` = @plate", {['@fuel'] = amount, ['@plate'] = results[1].plate})
         end
     end)
 end)
 
 QBCore.Functions.CreateCallback('rp_vehicletuning:server:IsVehicleOwned', function(source, cb, plate)
     local retval = false
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] ~= nil then
             retval = results[1].drivingdistance
         end
@@ -62,7 +64,7 @@ RegisterServerEvent("vehiclemod:server:updatePart", function(plate, engineHealth
     local src = source
     --print(engineHealth, bodyHealth, wheels, doors, dirt)
     if (plate == nil or plate == "") then return end
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] then
             local oldStatus = json.decode(results[1].status)
             oldStatus.engine = engineHealth
@@ -70,7 +72,7 @@ RegisterServerEvent("vehiclemod:server:updatePart", function(plate, engineHealth
             oldStatus.StoredDamage.doors = doors
             oldStatus.StoredDamage.wheels = wheels
             oldStatus.dirt = dirt
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldStatus), ['@plate'] = results[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldStatus), ['@plate'] = results[1].plate})
         end
     end)
 end)
@@ -85,7 +87,7 @@ end)
 
 RegisterServerEvent('rp_vehicletuning:server:SetPartLevel', function(plate, data, extraData)
     local src = source
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] ~= nil then
             local oldResults = json.decode(results[1].status)
             if data.isEngine then
@@ -119,14 +121,14 @@ RegisterServerEvent('rp_vehicletuning:server:SetPartLevel', function(plate, data
 				oldResults["electronics"] = Config.MaxStatusValues["electronics"]
 			end
 			
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
         end
     end)
 end)
 
 --{"StoredDamage":{"doors":[{"doorID":0,"isBroken":false},{"doorID":1,"isBroken":false},{"doorID":2,"isBroken":false},{"doorID":3,"isBroken":false}],"wheels":[{"isBurst":false,"wheelID":0},{"isBurst":false,"wheelID":1},{"isBurst":false,"wheelID":2},{"isBurst":false,"wheelID":3},{"isBurst":false,"wheelID":4},{"isBurst":false,"wheelID":5},{"isBurst":false,"wheelID":6},{"isBurst":false,"wheelID":7},{"isBurst":false,"wheelID":8}]},"dirt":0.0,"engine":1000.0,"body":1000.0,"axle":100,"clutch":100,"brakes":100,"fuel":100,"radiator":100,"electronics":100}
 RegisterServerEvent("vehiclemod:server:fixEverything", function(plate)
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] ~= nil then
             local oldResults = json.decode(results[1].status)
             oldResults["engine"] = 1000.0
@@ -138,7 +140,7 @@ RegisterServerEvent("vehiclemod:server:fixEverything", function(plate)
             oldResults["radiator"] = 100
 			oldResults["electronics"] = 100
             oldResults["dirt"] = 0
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
             TriggerClientEvent('rp_vehicletuning:client:setStatus', src, oldResults)
         end
     end)
@@ -146,7 +148,7 @@ end)
 
 RegisterNetEvent('vehiclemod:server:updateDegredation', function(plate, degHealth)
     local src = source
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(results)
         if results[1] ~= nil then
             local oldResults = json.decode(results[1].status)
             for k,v in pairs(degHealth) do
@@ -154,7 +156,7 @@ RegisterNetEvent('vehiclemod:server:updateDegredation', function(plate, degHealt
                     oldResults[k] = v
                 end
             end
-            exports.oxmysql:query("UPDATE `character_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
+            exports.oxmysql:query("UPDATE `player_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(oldResults), ['@plate'] = results[1].plate})
             TriggerClientEvent('rp_vehicletuning:client:setStatus', src, oldResults)
         else
             VehicleStatus[plate] = degHealth
@@ -186,7 +188,7 @@ end)
 
 function IsVehicleOwned(plate)
     local retval = false
-    QBCore.Functions.ExecuteSql(true, "SELECT * FROM `character_vehicles` WHERE `plate` = '"..plate.."'", function(result)
+    QBCore.Functions.ExecuteSql(true, "SELECT * FROM `player_vehicles` WHERE `plate` = '"..plate.."'", function(result)
         if result[1] ~= nil then
             retval = true
         end
@@ -196,7 +198,7 @@ end
 
 exports('GetVehicleStatus', function(plate)
     local retval = nil
-	local result = exports.oxmysql:query_async('SELECT `status`, `drivingdistance` FROM `character_vehicles` WHERE `plate` = ? or `fakeplate` = ?', {plate, plate})
+	local result = exports.oxmysql:query_async('SELECT `status`, `drivingdistance` FROM `player_vehicles` WHERE `plate` = ? or `fakeplate` = ?', {plate, plate})
 	if result[1] ~= nil then
 		retval = {status = json.decode(result[1].status), mileage = result[1].drivingdistance}
 		goto return_values
@@ -217,7 +219,7 @@ end, "god")
 
 QBCore.Functions.CreateCallback('rp_vehicletuning:server:GetStatus', function(source, cb, plate)
     local retval = false
-    exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(result)
+    exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(result)
         if result[1] ~= nil then
             retval = json.decode(result[1].status)
             cb(retval)
@@ -229,7 +231,7 @@ QBCore.Functions.CreateCallback('rp_vehicletuning:server:GetStatus', function(so
     end)
 end)
 
-RegisterNetEvent('np-vehicles:server:tuning:FullReset', function(plate)
+RegisterNetEvent('np_vehicles:server:tuning:FullReset', function(plate)
     local src = source
     VehicleStatus[plate] = CreateArray('perfect')
     TriggerClientEvent('rp_vehicletuning:client:setStatus', src, VehicleStatus[plate])
@@ -251,8 +253,8 @@ local maxValues = {
 	["body"] = 1000.0
 }
 
-RegisterNetEvent('np-vehicles:server:updateTuning', function(plate, objToRepair, newAmount, pSrc)
-	exports.oxmysql:query("SELECT * FROM `character_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(result)
+RegisterNetEvent('np_vehicles:server:updateTuning', function(plate, objToRepair, newAmount, pSrc)
+	exports.oxmysql:query("SELECT * FROM `player_vehicles` WHERE `fakeplate` = ? OR `plate` = ?", {plate, plate}, function(result)
 		if result[1] ~= nil then
 			local vehStatus = json.decode(result[1].status)
 			local repairData = vehStatus[objToRepair]
@@ -263,9 +265,9 @@ RegisterNetEvent('np-vehicles:server:updateTuning', function(plate, objToRepair,
 			end
 
 			vehStatus[objToRepair] = repairData
-			exports.oxmysql:query("UPDATE `character_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(vehStatus), ['@plate'] = result[1].plate})
+			exports.oxmysql:query("UPDATE `player_vehicles` SET `status` = @newStatus WHERE `plate` = @plate", {['@newStatus'] = json.encode(vehStatus), ['@plate'] = result[1].plate})
 			if (objToRepair == "body") then
-				TriggerClientEvent('np-vehicles:client:tuningBody', pSrc, vehStatus[objToRepair])
+				TriggerClientEvent('np_vehicles:client:tuningBody', pSrc, vehStatus[objToRepair])
 			end
 		else
 			if VehicleStatus[plate] ~= nil then
@@ -279,7 +281,7 @@ RegisterNetEvent('np-vehicles:server:updateTuning', function(plate, objToRepair,
 
 				VehicleStatus[plate][objToRepair] = repairData
 				if (objToRepair == "body") then
-					TriggerClientEvent('np-vehicles:client:tuningBody', pSrc, VehicleStatus[plate][objToRepair])
+					TriggerClientEvent('np_vehicles:client:tuningBody', pSrc, VehicleStatus[plate][objToRepair])
 				end
 			end
 		end

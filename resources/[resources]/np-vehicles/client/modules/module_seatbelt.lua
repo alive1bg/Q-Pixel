@@ -1,3 +1,8 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = QBCore.Functions.GetPlayerData()
+local isLoggedIn = LocalPlayer.state['isLoggedIn']
+
+
 local restrictedClasses = {
 	[8] = true,
 	[13] = true,
@@ -8,10 +13,10 @@ local function ToggleSeatbelt()
 	if Ped.isPaused then return end
 	if Ped.Vehicle.isInVehicle then
 		if restrictedClasses[Ped.Vehicle.vehicleClass] then return end
-		local hasHarness = exports.np-vehicles:vehicleHasHarness(Ped.Vehicle.vehicleHandle)
+		local hasHarness = exports.np_vehicles:vehicleHasHarness(Ped.Vehicle.vehicleHandle)
 		if hasHarness then
 			if Ped.Vehicle.vehicleSeat ~= -1 then return end
-			exports.np-vehicles:ToggleHarness()
+			exports.np_vehicles:ToggleHarness()
 			return
 		end
 
