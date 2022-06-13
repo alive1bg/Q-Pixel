@@ -30,7 +30,7 @@ local CurrentRaceData = {
 
 AddEventHandler('onResourceStop', function(resource)
     if resource == GetCurrentResourceName() then
-        for k, v in pairs(CreatorData.Checkpoints) do
+        for k, _ in pairs(CreatorData.Checkpoints) do
             if CreatorData.Checkpoints[k].pileleft ~= nil then
                 local coords = CreatorData.Checkpoints[k].offset.right
                 local Obj = GetClosestObjectOfType(coords.x, coords.y, coords.z, 5.0, `prop_offroad_tyres02`, 0, 0, 0)
@@ -47,7 +47,7 @@ AddEventHandler('onResourceStop', function(resource)
             end
         end
 
-        for k, v in pairs(CurrentRaceData.Checkpoints) do
+        for k, _ in pairs(CurrentRaceData.Checkpoints) do
             if CurrentRaceData.Checkpoints[k] ~= nil then
                 if CurrentRaceData.Checkpoints[k].pileleft ~= nil then
                     local coords = CurrentRaceData.Checkpoints[k].offset.right
@@ -89,7 +89,7 @@ local function GetClosestCheckpoint()
     local pos = GetEntityCoords(PlayerPedId(), true)
     local current = nil
     local dist = nil
-    for id, house in pairs(CreatorData.Checkpoints) do
+    for id, _ in pairs(CreatorData.Checkpoints) do
         if current ~= nil then
             if #(pos - vector3(CreatorData.Checkpoints[id].coords.x, CreatorData.Checkpoints[id].coords.y, CreatorData.Checkpoints[id].coords.z)) < dist then
                 current = id
@@ -309,7 +309,7 @@ local function CreatorLoop()
                     CreatorData.ConfirmDelete = true
                     QBCore.Functions.Notify('Press [9] again to confirm', 'error', 5000)
                 else
-                    for id, CheckpointData in pairs(CreatorData.Checkpoints) do
+                    for _, CheckpointData in pairs(CreatorData.Checkpoints) do
                         if CheckpointData.blip ~= nil then
                             RemoveBlip(CheckpointData.blip)
                         end
@@ -391,13 +391,13 @@ local function RaceUI()
     end)
 end
 
-local function SetupRace(RaceData, Laps)
-    RaceData.RaceId = RaceData.RaceId
+local function SetupRace(sRaceData, Laps)
+    RaceData.RaceId = sRaceData.RaceId
     CurrentRaceData = {
-        RaceId = RaceData.RaceId,
-        Creator = RaceData.Creator,
-        RaceName = RaceData.RaceName,
-        Checkpoints = RaceData.Checkpoints,
+        RaceId = sRaceData.RaceId,
+        Creator = sRaceData.Creator,
+        RaceName = sRaceData.RaceName,
+        Checkpoints = sRaceData.Checkpoints,
         Started = false,
         CurrentCheckpoint = 1,
         TotalLaps = Laps,
@@ -436,7 +436,7 @@ local function SetupRace(RaceData, Laps)
     RaceUI()
 end
 
-local function showNonLoopParticle(dict, particleName, coords, scale, time)
+local function showNonLoopParticle(dict, particleName, coords, scale)
     RequestNamedPtfxAsset(dict)
     while not HasNamedPtfxAssetLoaded(dict) do
         Wait(0)
@@ -491,14 +491,14 @@ local function GetMaxDistance(OffsetCoords)
 end
 
 local function SecondsToClock(seconds)
-    local seconds = tonumber(seconds)
-    local retval = 0
+    seconds = tonumber(seconds)
+    local retval
     if seconds <= 0 then
         retval = "00:00:00";
     else
-        hours = string.format("%02.f", math.floor(seconds/3600));
-        mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
-        secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+        local hours = string.format("%02.f", math.floor(seconds/3600));
+        local mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+        local secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
         retval = hours..":"..mins..":"..secs
     end
     return retval
@@ -511,7 +511,7 @@ local function FinishRace()
     else
         QBCore.Functions.Notify('Race finished in '..SecondsToClock(CurrentRaceData.TotalTime))
     end
-    for k, v in pairs(CurrentRaceData.Checkpoints) do
+    for k, _ in pairs(CurrentRaceData.Checkpoints) do
         if CurrentRaceData.Checkpoints[k].blip ~= nil then
             RemoveBlip(CurrentRaceData.Checkpoints[k].blip)
             CurrentRaceData.Checkpoints[k].blip = nil
@@ -542,6 +542,14 @@ local function FinishRace()
     CurrentRaceData.BestLap = 0
     CurrentRaceData.RaceId = nil
     RaceData.InRace = false
+end
+
+local function Info()
+    local PlayerPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(PlayerPed, false)
+    local IsDriver = GetPedInVehicleSeat(plyVeh, -1) == PlayerPed
+    local returnValue = plyVeh ~= 0 and plyVeh ~= nil and IsDriver
+    return returnValue, plyVeh
 end
 
 local function IsInRace()
@@ -576,9 +584,9 @@ RegisterNetEvent('qb-lapraces:client:StartRaceEditor', function(RaceName)
     end
 end)
 
-RegisterNetEvent('qb-lapraces:client:UpdateRaceRacerData', function(RaceId, RaceData)
+RegisterNetEvent('qb-lapraces:client:UpdateRaceRacerData', function(RaceId, aRaceData)
     if (CurrentRaceData.RaceId ~= nil) and CurrentRaceData.RaceId == RaceId then
-        CurrentRaceData.Racers = RaceData.Racers
+        CurrentRaceData.Racers = aRaceData.Racers
     end
 end)
 
@@ -592,9 +600,9 @@ RegisterNetEvent('qb-lapraces:client:JoinRace', function(Data, Laps)
     end
 end)
 
-RegisterNetEvent('qb-lapraces:client:LeaveRace', function(data)
+RegisterNetEvent('qb-lapraces:client:LeaveRace', function(_)
     QBCore.Functions.Notify('You have completed the race!')
-    for k, v in pairs(CurrentRaceData.Checkpoints) do
+    for k, _ in pairs(CurrentRaceData.Checkpoints) do
         if CurrentRaceData.Checkpoints[k].blip ~= nil then
             RemoveBlip(CurrentRaceData.Checkpoints[k].blip)
             CurrentRaceData.Checkpoints[k].blip = nil
@@ -744,7 +752,7 @@ CreateThread(function()
 
         if CurrentRaceData.RaceName ~= nil then
             if CurrentRaceData.Started then
-                local cp = 0
+                local cp
                 if CurrentRaceData.CurrentCheckpoint + 1 > #CurrentRaceData.Checkpoints then
                     cp = 1
                 else
@@ -831,5 +839,21 @@ CreateThread(function()
             SetupPiles()
         end
         Wait(1000)
+    end
+end)
+
+CreateThread(function()
+    while true do
+        local Driver, plyVeh = Info()
+        if Driver then
+            if GetVehicleCurrentGear(plyVeh) < 3 and GetVehicleCurrentRpm(plyVeh) == 1.0 and math.ceil(GetEntitySpeed(plyVeh) * 2.236936) > 50 then
+              while GetVehicleCurrentRpm(plyVeh) > 0.6 do
+                  SetVehicleCurrentRpm(plyVeh, 0.3)
+                  Wait(1)
+              end
+              Wait(800)
+            end
+        end
+        Wait(500)
     end
 end)

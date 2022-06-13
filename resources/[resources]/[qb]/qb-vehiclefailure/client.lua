@@ -665,3 +665,47 @@ CreateThread(function()
 		end
 	end
 end)
+
+-- flip vehicle
+RegisterNetEvent("qb:flipvehicle", function()
+	local playerPed	= PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	local vehicle = nil
+	if IsPedSittingInAnyVehicle(playerPed) then
+        QBCore.Functions.Notify("Cannot flip while inside vehicle", "error")
+		ClearPedTasks(playerPed)
+		return
+	end
+	if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 3.5) then
+		vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 3.5, 0, 71)
+		SetVehicleModKit(vehicle, 0)
+		if DoesEntityExist(vehicle) then
+			QBCore.Functions.Progressbar("accepted_key", "Flipping Vehicle", 12000, false, true, {
+				disableMovement = true,
+				disableCarMovement = true,
+				disableMouse = false,
+				disableCombat = true,
+			}, {
+				task = "CODE_HUMAN_MEDIC_TEND_TO_DEAD"
+			}, {}, {}, function() -- Done
+				ClearPedTasks(playerPed)
+				FreezeEntityPosition(playerPed, false)
+				vehiclecoords = GetEntityCoords(vehicle)
+				SetEntityCoords(vehicle, vehiclecoords.x+0.5, vehiclecoords.y+0.5, vehiclecoords.z+1)
+				Wait(200)
+				SetEntityRotation(vehicle, GetEntityRotation(PlayerPedId(), 2), 2)
+				Wait(500)
+				SetVehicleOnGroundProperly(vehicle)
+                QBCore.Functions.Notify("Success! Vehicle Flipped", "success")
+			end, function() -- Cancel
+                QBCore.Functions.Notify("Vehicle flip failed!", "error")
+				FreezeEntityPosition(playerPed, false)
+				ClearPedTasks(playerPed)								
+			end)
+		else
+            QBCore.Functions.Notify("There is no vehicle nearby", "error")
+		end
+	else
+        QBCore.Functions.Notify("There is no vehicle nearby", "error")
+	end
+end)

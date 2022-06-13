@@ -1,6 +1,27 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
+-- CUSTOM ITEMS
 
+QBCore.Functions.CreateUseableItem("wingsuit_open",function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:UseWingsuit", source)
+    end
+end)
+
+RegisterNetEvent('qb-smallpenis:server:AddWingsuit', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.AddItem("wingsuit", 1)
+end)
+
+QBCore.Commands.Add("resetwingsuit", "Resets Parachute", {}, false, function(source)
+	TriggerClientEvent("consumables:client:ResetWingsuit", source)
+end)
+
+QBCore.Functions.CreateUseableItem("pailandshovel",function(source, item)
+    TriggerClientEvent("qb-sandcastles", source, item.name)
+end)
 
 -- RANDOM SHIT
 
@@ -97,156 +118,131 @@ end)
 ----------- / alcohol
 
 QBCore.Functions.CreateUseableItem("vodka", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", src, item.name)
+    TriggerClientEvent("consumables:client:vodka", source, item.name)
 end)
 
 QBCore.Functions.CreateUseableItem("beer", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", src, item.name)
+    TriggerClientEvent("consumables:client:beer", source, item.name)
 end)
 
 QBCore.Functions.CreateUseableItem("whiskey", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", src, item.name)
+    TriggerClientEvent("consumables:client:Whiskey", source, item.name)
 end)
 
 ----------- / Eat
 
 QBCore.Functions.CreateUseableItem("sandwich", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Eat", src, item.name)
+        TriggerClientEvent("consumables:client:sandwich", source, item.name)
     end
 end)
 
 QBCore.Functions.CreateUseableItem("twerks_candy", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Eat", src, item.name)
+        TriggerClientEvent("consumables:client:twerks_candy", source, item.name)
     end
 end)
 
 QBCore.Functions.CreateUseableItem("snikkel_candy", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Eat", src, item.name)
+        TriggerClientEvent("consumables:client:snikkel_candy", source, item.name)
     end
 end)
 
 QBCore.Functions.CreateUseableItem("tosti", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Eat", src, item.name)
+        TriggerClientEvent("consumables:client:tosti", source, item.name)
     end
 end)
 
 ----------- / Drink
 
 QBCore.Functions.CreateUseableItem("water_bottle", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Drink", src, item.name)
+        TriggerClientEvent("consumables:client:Drink", source, item.name)
     end
 end)
 
 QBCore.Functions.CreateUseableItem("coffee", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Drink", src, item.name)
+        TriggerClientEvent("consumables:client:coffee", source, item.name)
     end
 end)
 
 QBCore.Functions.CreateUseableItem("kurkakola", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Drink", src, item.name)
+        TriggerClientEvent("consumables:client:kurkakola", source, item.name)
     end
 end)
 
 ----------- / Drug
 
 QBCore.Functions.CreateUseableItem("joint", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:UseJoint", src)
+        TriggerClientEvent("consumables:client:UseJoint", source)
     end
 end)
 
-QBCore.Functions.CreateUseableItem("cokebaggy", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:Cokebaggy", src)
+QBCore.Functions.CreateUseableItem("cokebaggy", function(source)
+    TriggerClientEvent("consumables:client:Cokebaggy", source)
 end)
 
-QBCore.Functions.CreateUseableItem("crack_baggy", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:Crackbaggy", src)
+QBCore.Functions.CreateUseableItem("crack_baggy", function(source)
+    TriggerClientEvent("consumables:client:Crackbaggy", source)
 end)
 
-QBCore.Functions.CreateUseableItem("xtcbaggy", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:EcstasyBaggy", src)
+QBCore.Functions.CreateUseableItem("xtcbaggy", function(source, _)
+    TriggerClientEvent("consumables:client:EcstasyBaggy", source)
 end)
 
-QBCore.Functions.CreateUseableItem("oxy", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:oxy", src)
+QBCore.Functions.CreateUseableItem("oxy", function(source)
+    TriggerClientEvent("consumables:client:oxy", source)
 end)
 
-QBCore.Functions.CreateUseableItem("meth", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:meth", src)
+QBCore.Functions.CreateUseableItem("meth", function(source)
+    TriggerClientEvent("consumables:client:meth", source)
 end)
 
 ----------- / Tools
 
-QBCore.Functions.CreateUseableItem("armor", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:UseArmor", src)
+QBCore.Functions.CreateUseableItem("armor", function(source)
+    TriggerClientEvent("consumables:client:UseArmor", source)
 end)
 
-QBCore.Functions.CreateUseableItem("heavyarmor", function(source, item)
-    local src = source
-    TriggerClientEvent("consumables:client:UseHeavyArmor", src)
+QBCore.Functions.CreateUseableItem("heavyarmor", function(source)
+    TriggerClientEvent("consumables:client:UseHeavyArmor", source)
 end)
 
-QBCore.Commands.Add("resetarmor", "Resets Vest (Police Only)", {}, false, function(source, args)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+QBCore.Commands.Add("resetarmor", "Resets Vest (Police Only)", {}, false, function(source)
+    local Player = QBCore.Functions.GetPlayer(source)
     if Player.PlayerData.job.name == "police" then
-        TriggerClientEvent("consumables:client:ResetArmor", src)
+        TriggerClientEvent("consumables:client:ResetArmor", source)
     else
-        TriggerClientEvent('QBCore:Notify', src,  "For Police Officer Only", "error")
+        TriggerClientEvent('QBCore:Notify', source,  "For Police Officer Only", "error")
     end
 end)
 
-QBCore.Functions.CreateUseableItem("binoculars", function(source, item)
-    local src = source
-    TriggerClientEvent("binoculars:Toggle", src)
+QBCore.Functions.CreateUseableItem("binoculars", function(source)
+    TriggerClientEvent("binoculars:Toggle", source)
 end)
 
 QBCore.Functions.CreateUseableItem("parachute", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:UseParachute", src)
+        TriggerClientEvent("consumables:client:UseParachute", source)
     end
 end)
 
-QBCore.Commands.Add("resetparachute", "Resets Parachute", {}, false, function(source, args)
-    local src = source
-	TriggerClientEvent("consumables:client:ResetParachute", src)
+QBCore.Commands.Add("resetparachute", "Resets Parachute", {}, false, function(source)
+	TriggerClientEvent("consumables:client:ResetParachute", source)
 end)
 
 RegisterNetEvent('qb-smallpenis:server:AddParachute', function()
@@ -279,13 +275,11 @@ end)
 
 ----------- / Lockpicking
 
-QBCore.Functions.CreateUseableItem("lockpick", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
+QBCore.Functions.CreateUseableItem("lockpick", function(source)
     TriggerClientEvent("lockpicks:UseLockpick", source, false)
 end)
 
-QBCore.Functions.CreateUseableItem("advancedlockpick", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
+QBCore.Functions.CreateUseableItem("advancedlockpick", function(source)
     TriggerClientEvent("lockpicks:UseLockpick", source, true)
 end)
 

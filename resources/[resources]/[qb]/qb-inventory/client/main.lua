@@ -543,6 +543,7 @@ RegisterCommand('closeinv', function()
 end, false)
 
 RegisterCommand('inventory', function()
+    if LocalPlayer.state.inv_busy then QBCore.Functions.Notify('Not Accessible', 'error') return end
     if not isCrafting and not inInventory then
         if not PlayerData.metadata["isdead"] and not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["ishandcuffed"] and not IsPauseMenuActive() then
             local ped = PlayerPedId()
