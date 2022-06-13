@@ -23,3 +23,5 @@ client_scripts {
   'client/cl_lib.lua',
   'client/model/cl_*.lua'
 }
+
+export "restartUI"

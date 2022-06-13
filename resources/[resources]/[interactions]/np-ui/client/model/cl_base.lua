@@ -31,22 +31,23 @@ end, false)
 -- SMALL MAP
 RegisterCommand("np-ui:small-map", function()
   SetRadarBigmapEnabled(false, false)
-end, false)
+end, false) 
 
-local function restartUI(withMsg)
-  SendUIMessage({ source = "np-nui", app = "main", action = "restart" });
-  if withMsg then
-    TriggerEvent("DoLongHudText", "You can also use 'ui-r' as a shorter version to restart!")
-  end
-  Wait(5000)
-  TriggerEvent("np-ui:restarted")
-  SendUIMessage({ app = "hud", data = { display = true }, source = "np-nui" })
-  local cj = exports["police"]:getCurrentJob()
-  if cj ~= "unemployed" then
-    TriggerEvent("np-jobmanager:playerBecameJob", cj)
-    TriggerServerEvent("np-jobmanager:fixPaychecks", cj)
-  end
-  loadPublicData()
+function restartUI(withMsg)
+  --SendUIMessage({ source = "np-nui", app = "main", action = "restart" });
+  --if withMsg then
+  --  TriggerEvent("DoLongHudText", "You can also use 'ui-r' as a shorter version to restart!")
+  --end
+  --Wait(5000)
+  --TriggerEvent("np-ui:restarted")
+  print("Ui Resetting Before Display - [We Did It]")
+  SendUIMessage({ app = "hud", data = { display = false }, source = "np-nui" })
+  --local cj = exports["police"]:getCurrentJob()
+  --if cj ~= "unemployed" then
+  --  TriggerEvent("np-jobmanager:playerBecameJob", cj)
+  --  TriggerServerEvent("np-jobmanager:fixPaychecks", cj)
+  --end
+  --loadPublicData()
 end
 RegisterCommand("np-ui:restart", function() restartUI(true) end, false)
 RegisterCommand("ui-r", function() restartUI() end, false)
