@@ -619,11 +619,21 @@ BackItems = {
     },
 -- ITEMS ON BACK END
 
-    ["np_wingsuit"] = {
+    ["wingsuit_open"] = {
+        model="np_wingsuit_open", 
+        back_bone = 24818,
+        x = 0.00,
+        y = -0.10,
+        z = 0.0,
+        x_rotation = 0.0,
+        y_rotation = 90.0,
+        z_rotation = 0.0,
+    },
+    ["wingsuit_closed"] = {
         model="np_wingsuit_closed", 
         back_bone = 24818,
-        x = -0.00,
-        y = -0.00,
+        x = 0.00,
+        y = -0.10,
         z = 0.0,
         x_rotation = 0.0,
         y_rotation = 90.0,
