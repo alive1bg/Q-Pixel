@@ -56,8 +56,9 @@ local function InitiateSell()
 						AlreadySold = true							
 						TriggerServerEvent('qb-drugsales:initiatedrug', v)														
 					else
+						QBCore.Functions.Notify("You dont have nothing to sell")
 						if Config.Debug then print('You dont have ['..v.item..'] to sell') end
-					end			
+					end
 				end, v.item)
 			end
 		end

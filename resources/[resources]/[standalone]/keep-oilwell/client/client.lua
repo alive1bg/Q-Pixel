@@ -242,7 +242,7 @@ AddEventHandler('keep-oilrig:client:spawn', function()
                exports['qb-target']:AddEntityZone("oil-rig-" .. entity, entity, {
                     name = "oil-rig-" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {

@@ -56,7 +56,7 @@ RegisterNetEvent('qb-garage:server:updateVehicleStatus', function(fuel, engine, 
 end)
 
 RegisterNetEvent('qb-garages:server:SaveSharedVehicle', function(plate, vehicle, category, hash, faction, garage, mods)
-    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods, noslevel, hasnitro, wheelfit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, mods, noslevel, hasnitro, wheelfit})
+    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, mods, noslevel, hasnitro, wheelfit})
 end)
 
 RegisterNetEvent('qb-garages:server:SaveVehicleMods', function(plate, vehmods, isShared)

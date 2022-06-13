@@ -16,7 +16,7 @@ RegisterNUICallback('ThermiteResult', function(data, cb)
     -- TriggerEvent('progressbar:client:ToggleBusyness', false) -- To check if another progressbar is running
 end)
 
---[[ RegisterCommand('thermite', function(source, args)
+RegisterCommand('thermite', function(source, args)
     -- Please check the parameters below for exports
     exports["memorygame"]:thermiteminigame(10, 3, 3, 10,
     function() -- success
@@ -25,7 +25,7 @@ end)
     function() -- failure
         print("failure")
     end)
-end) ]]
+end)
 
 exports('thermiteminigame', function(correctBlocks, incorrectBlocks, timetoShow, timetoLose, success, fail)
     -- correctBlocks = Number of correct blocks the player needs to click

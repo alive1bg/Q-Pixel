@@ -931,7 +931,7 @@ exports['qb-target']:AddBoxZone("hayesboss", vector3(-1426.99, -458.2, 35.81), 0
 exports['qb-target']:AddBoxZone("hayesduty", vector3(-1430.24, -454.27, 35.91), 0.5, 0.5, {
     name="hayesduty",
     heading=0,
-    debugPoly = true,
+    debugPoly = false,
     minZ=35.91,
     maxZ=36.21
     }, {

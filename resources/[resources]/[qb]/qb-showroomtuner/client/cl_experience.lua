@@ -196,7 +196,7 @@ CreateThread(function()
   exports['qb-target']:AddCircleZone("showroomtuner", vector3(131.15, -3007.22, 7.04), 0.25, {
     name = "showroomtuner",
     useZ=true,
-    debugpoly = false,
+    debugPoly = false,
 }, {
     options = {
         {

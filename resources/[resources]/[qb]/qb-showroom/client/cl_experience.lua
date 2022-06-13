@@ -195,7 +195,7 @@ CreateThread(function()
   exports['qb-target']:AddCircleZone("showroom", vector3(-40.31, -1107.02, 26.42), 0.25, {
     name = "showroom",
     useZ=true,
-    debugpoly = false,
+    debugPoly = false,
   }, {
     options = {
         {
@@ -211,7 +211,7 @@ CreateThread(function()
   exports['qb-target']:AddCircleZone("showroom1", vector3(-33.48, -1103.72, 26.42), 0.25, {
     name = "showroom1",
     useZ=true,
-    debugpoly = false,
+    debugPoly = false,
   }, {
     options = {
         {

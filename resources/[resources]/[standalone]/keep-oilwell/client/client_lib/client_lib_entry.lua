@@ -115,7 +115,7 @@ function createOwnerQbTarget(entity)
      exports['qb-target']:AddEntityZone("oil-rig-" .. entity, entity, {
           name = "oil-rig-" .. entity,
           heading = GetEntityHeading(entity),
-          debugPoly = true,
+          debugPoly = false,
      }, {
           options = {
                {
@@ -169,7 +169,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("storage" .. entity, entity, {
                     name = "storage" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -189,7 +189,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("distillation" .. entity, entity, {
                     name = "distillation" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -208,7 +208,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("blender" .. entity, entity, {
                     name = "blender" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -227,7 +227,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("barrel_withdraw" .. entity, entity, {
                     name = "barrel_withdraw" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -249,7 +249,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
           exports['qb-target']:AddEntityZone("toggle_job" .. entity, entity, {
                name = "toggle_job" .. entity,
                heading = GetEntityHeading(entity),
-               debugPoly = true,
+               debugPoly = false,
           }, {
                options = {
                     {

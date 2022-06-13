@@ -6,7 +6,7 @@ QBCore.Functions.CreateUseableItem("np_wingsuit",function(source, item)
     TriggerClientEvent("qb-wingsuit-use", source, item.name)
 end)
 
-QBCore.Functions.CreateUseableItem("pailandshovel",function(source, item)
+QBCore.Functions.CreateUseableItem("np_pailandshovel",function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     TriggerClientEvent("qb-sandcastles", source, item.name)
 end)

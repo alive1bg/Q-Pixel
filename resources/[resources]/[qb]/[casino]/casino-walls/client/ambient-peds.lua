@@ -5,7 +5,7 @@ end)
 
 function CasinoPeds()
     -- Employee
-    model = GetHashKey("U_F_M_CasinoCash_01") -- cash zone
+    model = GetHashKey("u_f_m_casinocash_01") -- cash zone
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -31,19 +31,7 @@ function CasinoPeds()
 
 
 --     -- ambient workers
-    model = GetHashKey("S_F_Y_Casino_01") -- clothing part
-    RequestModel(model)
-    while not HasModelLoaded(model) do
-        Wait(1)
-    end
-    ped = CreatePed(0, model , 963.43, 18.92, 71.46 - 1.00, true)
-    FreezeEntityPosition(ped, true)
-    SetEntityHeading(ped, 283.35)
-    SetEntityInvincible(ped, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
-    TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
-
-    model = GetHashKey("S_F_Y_Casino_01") -- clothing 2
+    model = GetHashKey("u_f_m_casinoshop_01") -- clothing
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -67,7 +55,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_WINDOW_SHOP_BROWSE", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- front desk
+    model = GetHashKey("s_f_y_casino_01") -- front desk
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -91,7 +79,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- entrance of table games
+    model = GetHashKey("s_f_y_casino_01") -- entrance of table games
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -103,7 +91,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- 2nd car wheel close lady
+    model = GetHashKey("s_f_y_casino_01") -- 2nd car wheel close lady
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -116,7 +104,7 @@ function CasinoPeds()
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
 
-    model = GetHashKey("S_F_Y_Casino_01") -- back near pokies
+    model = GetHashKey("s_f_y_casino_01") -- back near pokies
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -152,7 +140,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- next to car spinner
+    model = GetHashKey("s_f_y_casino_01") -- next to car spinner
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -169,11 +157,11 @@ function CasinoPeds()
     while not HasModelLoaded(model) do
         Wait(1)
     end
-    ped = CreatePed(0, model , 980.4, 25.51, 71.46 - 1.00, true) 
+    ped = CreatePed(1, model , 980.4, 25.51, 71.46 - 1.00, true) 
     FreezeEntityPosition(ped, true)
     SetEntityHeading(ped, 332.13)
     SetEntityInvincible(ped, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
+    SetBlockingOfNonTemporaryEvents(ped, false)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
     model = GetHashKey("S_M_Y_Casino_01") -- front door
@@ -188,7 +176,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- front door -- need to fix arms
+    model = GetHashKey("s_f_y_casino_01") -- front door -- need to fix arms
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -200,7 +188,7 @@ function CasinoPeds()
     SetBlockingOfNonTemporaryEvents(ped, true)
     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_STAND_IMPATIENT", 0, true)
 
-    model = GetHashKey("S_F_Y_Casino_01") -- door bottom stairs
+    model = GetHashKey("s_f_y_casino_01") -- door bottom stairs
     RequestModel(model)
     while not HasModelLoaded(model) do
         Wait(1)
@@ -707,4 +695,3 @@ function CasinoPeds()
 --     SetBlockingOfNonTemporaryEvents(ped, true)
 --     TaskStartScenarioInPlace(ped, "WORLD_HUMAN_SMOKING", 0, true)
 end
-

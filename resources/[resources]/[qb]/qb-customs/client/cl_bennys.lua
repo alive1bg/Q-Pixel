@@ -702,6 +702,41 @@ RegisterNetEvent('event:control:bennys', function(useID)
     end
 end)
 
+RegisterNetEvent('event:control:bennys1', function()
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+        enterLocation1()
+    end
+end)
+
+function enterLocation1()
+    local plyPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+
+    if GetVehicleClass(plyVeh) == 8 then --Motorcycle
+        isMotorcycle = true
+    else
+        isMotorcycle = false
+    end
+
+    InitiateMenus(isMotorcycle, GetVehicleBodyHealth(plyVeh))
+
+    SetTimeout(100, function()
+        if GetVehicleBodyHealth(plyVeh) < 1000.0 then
+            DisplayMenu(true, "repairMenu")
+        else
+            DisplayMenu(true, "mainMenu")
+        end
+
+        DisplayMenuContainer(true)
+        PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end)
+end
+
 function enterLocation(locationsPos)
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
@@ -734,7 +769,6 @@ function enterLocation(locationsPos)
 
     isPlyInBennys = true
 end
-
 
 function disableControls()
     DisableControlAction(1, 38, true) --Key: E

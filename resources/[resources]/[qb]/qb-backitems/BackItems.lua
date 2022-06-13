@@ -662,7 +662,7 @@ BackItems = {
         z_rotation = -163.0,
     }, 
     ["cerberus_chain"] = {
-        model="cerberus_chain", 
+        model="cerberus_chain",
         back_bone = 10706,
         x = -0.02,
         y = 0.02,

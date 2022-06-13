@@ -888,8 +888,10 @@ RegisterNetEvent("raid_clothes:hasEnough", function(menu)
             Wait(1)
         end
     end
-
     OpenMenu(menu)
+end)
+RegisterNetEvent("raid_clothes:hasEnough1", function(menu)
+    OpenMenu()
 end)
 
 RegisterCommand("refreshchar", function()

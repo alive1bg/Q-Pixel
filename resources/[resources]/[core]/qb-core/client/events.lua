@@ -64,7 +64,7 @@ RegisterNetEvent('QBCore:Command:SpawnVehicle', function(vehName)
     SetVehicleModKit(vehicle, 0)
     SetVehicleMod(vehicle, 48, math.random(0, 9), false)
     SetVehicleLivery(vehicle, math.random(0, 9))
-    --exports['lj-fuel']:SetFuel(vehicle, 100)
+    exports['qb-fuel']:SetFuel(vehicle, 100)
     for i = 1, 9, 1 do
         SetVehicleExtra(vehicle, i, 0)
     end

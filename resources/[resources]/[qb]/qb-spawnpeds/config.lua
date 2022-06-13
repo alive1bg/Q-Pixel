@@ -196,55 +196,55 @@ Config.PedList = {
 	},
 	-- Ammunation 1
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(-659.09, -939.46, 21.83, 89.94),
 		gender = 'male'
 	},
 	-- Ammunation 2
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(2564.75, 298.44, 108.73, 278.42),
 		gender = 'male'
 	},
 	-- Ammunation 3
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(-326.26, 6081.35, 31.45, 140.12),
 		gender = 'male'
 	},
 	-- Ammunation 4
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(17.82, -1107.84, 29.8, 155.52),
 		gender = 'male'
 	},
 	-- Ammunation 5
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(247.31, -51.48, 69.94, 348.96),
 		gender = 'male'
 	},
 	-- Ammunation 6
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(1697.73, 3757.61, 34.71, 141.28),
 		gender = 'male'
 	},
 	-- Ammunation 7
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(-1112.72, 2697.41, 18.55, 145.98),
 		gender = 'male'
 	},
 	-- Ammunation 8
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(813.71, -2155.24, 29.62, 0.06),
 		gender = 'male'
 	},
 	-- Ammunation 9
 	{
-		model = `mp_m_weapexp_01`,
+		model = `s_m_y_ammucity_01`,
 		coords = vector4(841.18, -1028.93, 28.19, 290.22),
 		gender = 'male'
 	},

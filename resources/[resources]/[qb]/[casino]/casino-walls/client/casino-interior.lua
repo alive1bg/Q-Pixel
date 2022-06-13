@@ -125,7 +125,7 @@ CreateThread(function()
   local casinoCoords = vector3(945.85, 41.58, -170.50) -- this location works i guess
   while true do
     local pCoords = GetEntityCoords(PlayerPedId())
-        if #(pCoords - casinoCoords) < 275.0 then -- was 250
+        if #(pCoords - casinoCoords) < 220.0 then -- was 250
             if not inCasino then
                 enterCasino()
             end
