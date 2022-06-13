@@ -1,11 +1,9 @@
-/* Nice font for button from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
-    font-weight: bold;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 #container {
@@ -54,7 +52,7 @@ body::-webkit-scrollbar {
     width: auto;
     max-width: 45%;
     height: 10%;
-    background: #192e46;
+    background: #1b2027;
     color: white;
     margin: auto;
     position: relative;
@@ -77,25 +75,26 @@ body::-webkit-scrollbar {
 }
 
 .button:hover {
-    background-color: #356192;
+    background-color: #3b5572;
 }
 
 .title {
     width: auto;
     max-width: 45%;
     height: 10%;
-    background: #192e46;
+    background: #1b2027;
     color: white;
     margin: auto;
     position: relative;
     top: 10%;
     margin-top: 0.5rem;
+    font-size: 16px;
     overflow: hidden;
-    padding: 0.45rem;
+    padding: 0.50rem;
     border-radius: 0.15rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0rem 0rem 0.5rem 0.05rem #000000;
+    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
 }
 
 .title > div.header {
