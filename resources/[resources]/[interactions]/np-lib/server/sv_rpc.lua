@@ -2,6 +2,11 @@ local Resource, Promises, Functions, CallIdentifier = GetCurrentResourceName(), 
 
 RPC = {}
 
+function GetNextId(idx)
+    return idx + 1
+end
+    
+
 function ClearPromise(callID)
     Citizen.SetTimeout(5000, function()
         Promises[callID] = nil
@@ -35,21 +40,28 @@ function UnPacker(params, index)
 end
 
 ------------------------------------------------------------------
---                  (Trigger Server Calls)
+--                  (Trigger Client Calls)
 ------------------------------------------------------------------
+
+RPC = {
+    EXECUTE = {
+        
+    }
+}
 
 function RPC.execute(name, ...)
     local callID, solved = CallIdentifier, false
+	local src = source
     CallIdentifier = CallIdentifier + 1
 
     Promises[callID] = promise:new()
 
-    TriggerServerEvent("rpc:request", Resource, name, callID, ParamPacker(...), true)
+    TriggerClientEvent("rpc:request", src, Resource, name, callID, ParamPacker(...), true)
 
     Citizen.SetTimeout(20000, function()
         if not solved then
             Promises[callID]:resolve({nil})
-            TriggerServerEvent("rpc:server:timeout", Resource, name)
+            TriggerClientEvent("rpc:server:timeout", src, Resource, name)
         end
     end)
 
@@ -67,12 +79,12 @@ function RPC.executeLatent(name, timeout, ...)
     CallIdentifier = CallIdentifier + 1
     Promises[callID] = promise:new()
 
-    TriggerLatentServerEvent("rpc:latent:request", 50000, Resource, name, callID, ParamPacker(...), true)
+    TriggerLatentClientEvent("rpc:latent:request", 50000, Resource, name, callID, ParamPacker(...), true)
 
     Citizen.SetTimeout(timeout, function()
         if not solved then
             Promises[callID]:resolve({nil})
-            TriggerServerEvent("rpc:server:timeout", Resource, name)
+            TriggerClientEvent("rpc:server:timeout", src, srcResource, name)
         end
     end)
 
@@ -107,6 +119,7 @@ end
 RegisterNetEvent("rpc:request")
 AddEventHandler("rpc:request", function(origin, name, callID, params)
     local response
+    local src = source
 
     if Functions[name] == nil then return end
 
@@ -119,20 +132,21 @@ AddEventHandler("rpc:request", function(origin, name, callID, params)
     end)
 
     if not success then
-        TriggerServerEvent("rpc:client:error", Resource, origin, name, error)
+        TriggerClientEvent("rpc:client:error", src, Resource, origin, name, error)
     end
 
     if response == nil then
         response = {}
     end
 
-    TriggerServerEvent("rpc:response", origin, callID, response, true)
+    TriggerClientEvent("rpc:response", src, origin, callID, response)
 end)
 
 RegisterNetEvent("rpc:latent:request")
 AddEventHandler("rpc:latent:request", function(origin, name, callID, params)
-    local response
-
+    local respon 
+    local src = source
+	
     if Functions[name] == nil then return end
 
     local success, error = pcall(function()
@@ -144,12 +158,12 @@ AddEventHandler("rpc:latent:request", function(origin, name, callID, params)
     end)
 
     if not success then
-        TriggerServerEvent("rpc:client:error", Resource, origin, name, error)
+        TriggerClientEvent("rpc:client:error", src, Resource, origin, name, error)
     end
 
     if response == nil then
         response = {}
     end
 
-    TriggerLatentServerEvent("rpc:response", 50000, origin, callID, response,  true)
+    TriggerLatentClientEvent("rpc:response", 50000, src, origin, callID, response,  true)
 end)

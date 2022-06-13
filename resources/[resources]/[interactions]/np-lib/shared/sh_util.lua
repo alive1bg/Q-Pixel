@@ -14,14 +14,6 @@ function loadAnimDict(dict)
     end
 end
 
-function loadModel(pModelName)
-  RequestModel(pModelName)
-  while not HasModelLoaded(pModelName) do
-      Citizen.Wait(100)
-  end
-end
-
-
 function encodeAccountId(plain)
     if type(plain) == 'number' then
         return math.floor(exports["np-financials"]:EncodeId(plain))
