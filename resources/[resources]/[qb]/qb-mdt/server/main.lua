@@ -25,6 +25,18 @@ AddEventHandler("onResourceStart", function(resourceName)
     end
 end)
 
+if Config.UseWolfknightRadar == true then
+	RegisterNetEvent("wk:onPlateScanned")
+	AddEventHandler("wk:onPlateScanned", function(cam, plate, index)
+		local src = source
+		local Player = QBCore.Functions.GetPlayer(src)
+		local bolo = GetBoloStatus(plate)
+		print(cam, plate, index)
+		if bolo == true then
+			TriggerClientEvent("wk:togglePlateLock", Player.PlayerData.source, cam, beep, bolo)
+		end
+	end)
+end
 RegisterNetEvent("qb-mdt:server:OnPlayerUnload", function()
 	--// Delete player from the MDT on logout
 	local src = source
@@ -204,6 +216,13 @@ QBCore.Functions.CreateCallback('mdt:server:GetProfileData', function(source, cb
 	if type(target.charinfo) == 'string' then target.charinfo = json.decode(target.charinfo) end
 	if type(target.metadata) == 'string' then target.metadata = json.decode(target.metadata) end
 
+	local licencesdata = target.metadata['licences'] or {
+        ['driver'] = false,
+        ['business'] = false,
+        ['weapon'] = false,
+		['pilot'] = false
+	}
+
 	local job, grade = UnpackJob(target.job)
 
 	local person = {
@@ -213,7 +232,7 @@ QBCore.Functions.CreateCallback('mdt:server:GetProfileData', function(source, cb
 		job = job.label,
 		grade = grade.name,
 		pp = ProfPic(target.charinfo.gender),
-		licences = target.metadata['licences'],
+		licences = licencesdata,
 		dob = target.charinfo.birthdate,
 		mdtinfo = '',
 		fingerprint = '',

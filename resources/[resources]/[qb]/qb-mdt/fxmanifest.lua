@@ -23,8 +23,8 @@ client_scripts{
 ui_page 'ui/dashboard.html'
 
 files {
-    'ui/**/*.png',
-    'ui/**/*.jpg',
+    'ui/img/*.png',
+    'ui/img/*.webp',
     'ui/dashboard.html',
     'ui/dmv.html',
     'ui/bolos.html',
