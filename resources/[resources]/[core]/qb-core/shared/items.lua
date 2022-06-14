@@ -564,6 +564,10 @@ QBShared.Items = {
 	['pixellaptop'] 				 = {['name'] = 'pixellaptop', 			    	['label'] = 'Pixel Laptop', 				['weight'] = 2000, 		['type'] = 'item', 		['image'] = 'pixellaptop.png', 						['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'A fancy looking laptop there bud', ['created'] = nil, ['decay'] = 28.0},
 	['disabler'] 				 	 = {['name'] = 'disabler', 			    		['label'] = 'Disabler', 					['weight'] = 2000, 		['type'] = 'item', 		['image'] = 'disabler.png', 						['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Used to disable car tracking systems', ['created'] = nil, ['decay'] = 28.0},
 	
+    -- VOTING
+
+	['np_voted_sticker'] 		     = {['name'] = 'np_voted_sticker',              ['label'] = 'Voting Sticker',               ['weight'] = 10,        ['type'] = 'item',      ['image'] = 'np_voted_sticker.png',         ['unique'] = true,    ['useable'] = false,     ['shouldClose'] = true,     ['combinable'] = nil,   ['description'] = 'You have voted!', ['created'] = nil, ['decay'] = 28.0},
+	
 	--Magic
 	['bookofmagic']              = {['name'] = 'bookofmagic',                                   ['label'] = 'Book of Magic',         ['weight'] = 500,         ['type'] = 'item',      ['image'] = 'np_spellblue.png',               ['unique'] = true,  ['useable'] = true,     ['shouldClose'] = true,     ['combinable'] = nil,   ['description'] = 'Magic Item', ['created'] = nil, ['decay'] = 28.0},
 	['lightningbolt']            = {['name'] = 'lightningbolt',                                 ['label'] = 'Lightning Bolt',        ['weight'] = 500,         ['type'] = 'item',      ['image'] = 'lightningbolt.png',             ['unique'] = true,  ['useable'] = true,     ['shouldClose'] = true,     ['combinable'] = nil,   ['description'] = 'Magic Item', ['created'] = nil, ['decay'] = 28.0},

@@ -22,8 +22,11 @@ AddEventHandler("qb-vote:server:postedVote", function(who)
     end
     SaveResourceFile(GetCurrentResourceName(), "data.json", json.encode(vote))
     TriggerClientEvent("QBCore:Notify", src, "Your vote has been accepted", 'success', 7500)
-end)
 
+    TriggerClientEvent('inventory:client:ItemBox', src,  QBCore.Shared.Items["np_voted_sticker"], 'add')
+    xPlayer.Functions.AddItem('np_voted_sticker',  1, false, who) -- set to 1 still pulls the config spawned ammount...
+end)
+ 
 CreateThread(function()
     local result = json.decode(LoadResourceFile(GetCurrentResourceName(), "data.json"))
 
