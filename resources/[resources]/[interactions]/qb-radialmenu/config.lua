@@ -43,15 +43,6 @@ rootMenuConfig =  {
         end,
         subMenus = { "animations:brave", "animations:hurry", "animations:business", "animations:tipsy", "animations:injured","animations:tough", "animations:default", "animations:hobo", "animations:money", "animations:swagger", "animations:shady", "animations:maneater", "animations:chichi", "animations:sassy", "animations:sad", "animations:posh", "animations:alien" }
     },
-    --[[{
-        id = "General",
-        displayName = "General",
-        icon = "#globe-europe",
-        enableMenu = function()
-            return not isDead
-        end,
-        subMenus = {"general:givenum"}
-    },]]
     {
         id = "Interaction",
         displayName = "Interaction",
@@ -77,7 +68,16 @@ rootMenuConfig =  {
          icon = "#police-dead",
          functionName = "qb-dispatch:client:officerdown",
          enableMenu = function()
-            return isPolice and onDuty
+            return isDead and isPolice and onDuty
+        end,
+    },
+    {
+        id = "reinforcement",
+         displayName = "10-1",
+         icon = "#bell-exclamation-secondary",
+         functionName = "qb-dispatch:client:reinforcement",
+         enableMenu = function()
+            return not isDead and isPolice and onDuty
         end,
     },
     {
@@ -86,7 +86,7 @@ rootMenuConfig =  {
          icon = "#police-dead",
          functionName = "qb-dispatch:client:emsdown",
          enableMenu = function()
-            return isMedic and onDuty
+            return isDead and isMedic and onDuty
         end,
     },
     {    
@@ -583,7 +583,7 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
     ['police:mdt'] = {
         title = "MDT",
         icon = "#mdt",
-        functionName = "mdt:toggleVisibilty"    
+        functionName = "mdt:OpenMDT"    
     },
     ['police:takeoffmask'] = {
         title = "Mask",

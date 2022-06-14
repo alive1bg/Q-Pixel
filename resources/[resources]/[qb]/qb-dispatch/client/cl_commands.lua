@@ -58,6 +58,75 @@ local function PhoneCallAnim()
     end)
 end
 
+RegisterNetEvent('police:client:deskAlert', function()
+    if HasPhone() then
+        PhoneCallAnim()
+        Wait(math.random(3,8) * 1000)
+        playAnim = false
+        local plyData = QBCore.Functions.GetPlayerData()
+        local currentPos = GetEntityCoords(PlayerPedId())
+        local locationInfo = getStreetandZone(currentPos)
+        local gender = GetPedGender()
+        PlaySound(-1, "Lose_1st", "GTAO_FM_Events_Soundset", 0, 0, 1)
+        TriggerServerEvent("dispatch:server:notify",{
+            dispatchcodename = "deskcallpd", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+            dispatchCode = "1-1",
+            firstStreet = locationInfo,
+            priority = 2, -- priority
+            name = plyData.charinfo.firstname:sub(1,1):upper()..plyData.charinfo.firstname:sub(2).. " ".. plyData.charinfo.lastname:sub(1,1):upper()..plyData.charinfo.lastname:sub(2),
+            number = plyData.charinfo.phone,
+            origin = {
+                x = currentPos.x,
+                y = currentPos.y,
+                z = currentPos.z
+            },
+            dispatchMessage = "Need Officer in Station", -- message
+            information = msg,
+            job = {"police"} -- jobs that will get the alerts
+        })
+        Wait(1000)
+        DeletePhone()
+        StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+        QBCore.Functions.Notify("You call to offices. Now sit and wait!", "success", 4500)
+    else
+        QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
+    end
+end)
+
+RegisterNetEvent('hospital:client:deskAlert', function()
+    if HasPhone() then
+        PhoneCallAnim()
+        Wait(math.random(3,8) * 1000)
+        playAnim = false
+        local plyData = QBCore.Functions.GetPlayerData()
+        local currentPos = GetEntityCoords(PlayerPedId())
+        local locationInfo = getStreetandZone(currentPos)
+        local gender = GetPedGender()
+        PlaySound(-1, "Lose_1st", "GTAO_FM_Events_Soundset", 0, 0, 1)
+        TriggerServerEvent("dispatch:server:notify",{
+            dispatchcodename = "deskcallems", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+            dispatchCode = "1-1",
+            firstStreet = locationInfo,
+            priority = 2, -- priority
+            name = plyData.charinfo.firstname:sub(1,1):upper()..plyData.charinfo.firstname:sub(2).. " ".. plyData.charinfo.lastname:sub(1,1):upper()..plyData.charinfo.lastname:sub(2),
+            number = plyData.charinfo.phone,
+            origin = {
+                x = currentPos.x,
+                y = currentPos.y,
+                z = currentPos.z
+            },
+            dispatchMessage = "Need Doctor in Hopistal", -- message
+            information = msg,
+            job = {"ambulance"} -- jobs that will get the alerts
+        })
+        Wait(1000)
+        DeletePhone()
+        StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+        QBCore.Functions.Notify("You call to doctors. Now sit and wait!", "success", 4500)
+    else
+        QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
+    end
+end)
 
 -- Regular 911 call that goes straight to the Police
 RegisterCommand('911', function(source, args, rawCommand)
@@ -87,11 +156,12 @@ RegisterCommand('911', function(source, args, rawCommand)
                     },
                     dispatchMessage = "Incoming Call", -- message
                     information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
+                    job = {"police"} -- jobs that will get the alerts
                 })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                QBCore.Functions.Notify("You call to police. Now just wait!", "success", 4500)
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -130,11 +200,12 @@ RegisterCommand('911a', function(source, args, rawCommand)
                     },
                     dispatchMessage = "Incoming Anonymous Call", -- message
                     information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
+                    job = {"police"} -- jobs that will get the alerts
                 })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                QBCore.Functions.Notify("You call to police. Now just wait!", "success", 4500)
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -173,11 +244,12 @@ RegisterCommand('311', function(source, args, rawCommand)
                     },
                     dispatchMessage = "Incoming Call", -- message
                     information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
+                    job = {"ambulance"} -- jobs that will get the alerts
                 })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                QBCore.Functions.Notify("You call to EMS. Now just wait!", "success", 4500)
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end
@@ -216,11 +288,12 @@ RegisterCommand('311a', function(source, args, rawCommand)
                     },
                     dispatchMessage = "Incoming Call", -- message
                     information = msg,
-                    job = {"police", "ambulance"} -- jobs that will get the alerts
+                    job = {"ambulance"} -- jobs that will get the alerts
                 })
                 Wait(1000)
                 DeletePhone()
                 StopEntityAnim(PlayerPedId(), 'cellphone_text_to_call', "cellphone@", 3)
+                QBCore.Functions.Notify("You call to EMS. Now just wait!", "success", 4500)
             else
                 QBCore.Functions.Notify("You can't call without a Phone!", "error", 4500)
             end

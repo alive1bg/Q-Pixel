@@ -33,7 +33,7 @@ body {
     margin-top: 0vh;
     margin-right: 1vh;
     margin-bottom: .5vh;
-    background-color: rgba(21, 38, 56, 0.90);
+    background-color: rgba(21, 38, 56, 0.80);
     border-right: .75vh solid rgba(57, 59, 57, 0.80);
     width: 37.5vh;
     height: fit-content;
@@ -44,7 +44,7 @@ body {
 }
 
 .dispatch-item-true {
-    background-color: rgba(21, 38, 56, 0.80);
+    background-color: rgba(21, 38, 56);
 }
 
 .dispatch-item-false {
@@ -167,7 +167,7 @@ body {
     background: linear-gradient(270deg, #b70000, #0a24b0);
 	background-size: 400% 400%;
 	animation: gradient 3s ease infinite;
-    background-color: #097b9500;
+    background-color: linear-gradient(270deg, #b70000, #0a24b0);
 }
 
 .priority-2 {

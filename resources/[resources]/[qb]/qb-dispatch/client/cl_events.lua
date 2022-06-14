@@ -226,6 +226,10 @@ end
 
 exports('InjuriedPerson', InjuriedPerson)
 
+RegisterNetEvent("dispatch:client:InjuriedPerson", function ()
+    InjuriedPerson()
+end)
+
 local function DeceasedPerson()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
@@ -547,7 +551,7 @@ local function OfficerDown()
             z = currentPos.z
         },
         dispatchMessage = _U('officerdown'), -- message
-        job = { "ambulance" } -- jobs that will get the alerts
+        job = { "police", "ambulance" } -- jobs that will get the alerts
     })
 end
 
@@ -587,6 +591,38 @@ exports('EmsDown', EmsDown)
 
 RegisterNetEvent("qb-dispatch:client:emsdown", function ()
     EmsDown()
+end)
+
+local function Reinforcement()
+    local plyData = QBCore.Functions.GetPlayerData()
+    local currentPos = GetEntityCoords(PlayerPedId())
+    local locationInfo = getStreetandZone(currentPos)
+    local callsign = QBCore.Functions.GetPlayerData().metadata["callsign"]
+    TriggerServerEvent("dispatch:server:notify", {
+        dispatchcodename = "reinforcement", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+        dispatchCode = "10-1",
+        firstStreet = locationInfo,
+        name = "COP - " .. plyData.charinfo.firstname:sub(1, 1):upper() .. plyData.charinfo.firstname:sub(2) .. " " .. plyData.charinfo.lastname:sub(1, 1):upper() .. plyData.charinfo.lastname:sub(2),
+        model = nil,
+        plate = nil,
+        callsign = callsign,
+        priority = 1, -- priority
+        firstColor = nil,
+        automaticGunfire = false,
+        origin = {
+            x = currentPos.x,
+            y = currentPos.y,
+            z = currentPos.z
+        },
+        dispatchMessage = _U('reinforcement'), -- message
+        job = { "police" } -- jobs that will get the alerts
+    })
+end
+
+exports('Reinforcement', Reinforcement)
+
+RegisterNetEvent("qb-dispatch:client:reinforcement", function ()
+    Reinforcement()
 end)
 
 local function Explosion()
@@ -642,5 +678,5 @@ end
 exports('SuspiciousActivity', SuspiciousActivity)
 
 RegisterCommand('testdispatch', function()
-    TriggerEvent('')
+    TriggerEvent('qb-dispatch:client:reinforcement')
 end)

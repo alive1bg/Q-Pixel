@@ -43,6 +43,7 @@ Locales = {
         ['carjacking'] = "Car Jacking", 
         ['vehicletheft'] = "Vehicle Theft", 
         ['officerdown'] = "Officer is down",
+        ['reinforcement'] = "Need Reinforcement",
         ['emsdown'] = "EMS Down",
         ['artgalleryrobbery'] = "Art Gallery Robbery",
         ['humanerobbery'] = "Humane Labs Robbery",
