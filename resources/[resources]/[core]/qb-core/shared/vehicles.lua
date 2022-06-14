@@ -1641,6 +1641,15 @@ QBShared.Vehicles = {
 		['hash'] = `gtr50`,
 		['shop'] = 'tuner',
 	},
+	['gtz34'] = {
+		['name'] = 'R34 GTZ Drift',
+		['brand'] = 'Nissan',
+		['model'] = 'gtz34',
+		['price'] = 247000,
+		['category'] = 'nissan',
+		['hash'] = `gtz34`,
+		['shop'] = 'tuner',
+	},
 	['rmod240sx'] = {
 		['name'] = '240SX Rocket Bunny',
 		['brand'] = 'Nissan',
