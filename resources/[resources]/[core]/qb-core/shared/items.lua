@@ -1182,8 +1182,8 @@ QBShared.Items = {
 
 	-- Police Items
 	['gps'] 						 = {['name'] = 'gps', 						['label'] = 'Police GPS', 				['weight'] = 100, 		['type'] = 'item',		['image'] = 'gps.png', 					['unique'] = true, 	   ['useable'] = true, 	   ['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'GPS for Police Use', ['created'] = nil, ['decay'] = 28.0},
-	['bodycam'] 					 = {['name'] = 'bodycam', 					['label'] = 'Bodycam', 					['weight'] = 100, 		['type'] = 'item',		['image'] = 'bodycam.png', 					['unique'] = true, 	   ['useable'] = true, 	   ['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Bodycam for Police Use', ['created'] = nil, ['decay'] = 28.0},
-
+	['bodycam'] 					 = {['name'] = 'bodycam', 					['label'] = 'Bodycam', 					['weight'] = 100, 		['type'] = 'item',		['image'] = 'bodycam.png', 			    ['unique'] = true, 	   ['useable'] = true, 	   ['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Bodycam for Police Use', ['created'] = nil, ['decay'] = 28.0},
+	['policespikes'] 				 = {['name'] = 'policespikes',              ['label'] = 'Spike Strip',              ['weight'] = 1000,      ['type'] = 'item',      ['image'] = 'policespikes.png',         ['unique'] = false,    ['useable'] = true,     ['shouldClose'] = true,     ['combinable'] = nil,   ['description'] = 'Spikes to deflate tires', ['created'] = nil, ['decay'] = 28.0},
 	-- OIL
 	["oilbarell"] = {
 		["name"] = "oilbarell",

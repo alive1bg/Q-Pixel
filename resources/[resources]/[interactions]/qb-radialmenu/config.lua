@@ -105,7 +105,7 @@ rootMenuConfig =  {
         enableMenu = function()
              return isPolice and onDuty and not isDead
         end,
-        subMenus = {"police:spawnpion", "police:spawnhek", "police:spawnschotten", "police:spawntent", "police:spawnverlichting", "police:spike", "police:del" }
+        subMenus = {"police:spawnpion", "police:spawnhek", "police:spawnschotten", "police:spawntent", "police:spawnverlichting", "police:del" }
     },
     {    
         id = "Radio",

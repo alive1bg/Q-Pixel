@@ -1,9 +1,8 @@
 -- Variables
 local ObjectList = {}
 local SpawnedSpikes = {}
-local spikemodel = `P_ld_stinger_s`
-local ClosestSpike = nil
-
+local spikemodel = "p_stinger_04"
+local nearSpikes = false
 -- Functions
 local function GetClosestPoliceObject()
     local pos = GetEntityCoords(PlayerPedId(), true)
@@ -25,22 +24,6 @@ local function GetClosestPoliceObject()
     return current, dist
 end
 
-function GetClosestSpike()
-    local pos = GetEntityCoords(PlayerPedId(), true)
-    local current = nil
-
-    for id, data in pairs(SpawnedSpikes) do
-        if current then
-            if #(pos - vector3(SpawnedSpikes[id].coords.x, SpawnedSpikes[id].coords.y, SpawnedSpikes[id].coords.z)) < dist then
-                current = id
-            end
-        else
-            dist = #(pos - vector3(SpawnedSpikes[id].coords.x, SpawnedSpikes[id].coords.y, SpawnedSpikes[id].coords.z))
-            current = id
-        end
-    end
-    ClosestSpike = current
-end
 
 local function DrawText3D(x, y, z, text)
 	SetTextScale(0.35, 0.35)
@@ -197,102 +180,135 @@ RegisterNetEvent('police:client:spawnObject', function(objectId, type, player)
     }
 end)
 
-RegisterNetEvent('police:client:SpawnSpikeStrip', function()
-    if #SpawnedSpikes + 1 < Config.MaxSpikes then
-        if PlayerJob.name == "police" and PlayerJob.onduty then
-            local spawnCoords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 2.0, 0.0)
-            local spike = CreateObject(spikemodel, spawnCoords.x, spawnCoords.y, spawnCoords.z, 1, 1, 1)
-            local netid = NetworkGetNetworkIdFromEntity(spike)
-            SetNetworkIdExistsOnAllMachines(netid, true)
-            SetNetworkIdCanMigrate(netid, false)
-            SetEntityHeading(spike, GetEntityHeading(PlayerPedId()))
-            PlaceObjectOnGroundProperly(spike)
-            SpawnedSpikes[#SpawnedSpikes+1] = {
-                coords = vector3(spawnCoords.x, spawnCoords.y, spawnCoords.z),
-                netid = netid,
-                object = spike,
+
+RegisterNetEvent("spikestrips:client:usespikes")
+AddEventHandler("spikestrips:client:usespikes", function(config)
+    Animation()
+    Citizen.Wait(1700)
+    ClearPedTasksImmediately(PlayerPedId())
+    CreateSpikes(3)
+    TriggerServerEvent("qb-spikes-use")
+end)
+
+
+RegisterCommand("RemoveSpikes",function()
+    for a = 1, #SpawnedSpikes do
+        Animation()
+        TriggerServerEvent("qb-spikes-remove", SpawnedSpikes[a])
+    end
+    SpawnedSpikes = {}
+end)
+
+RegisterNetEvent("qb-spikes-delete")
+AddEventHandler("qb-spikes-delete", function(netid)
+    Citizen.Wait(1700)
+    ClearPedTasksImmediately(PlayerPedId())
+    local spike = NetworkGetEntityFromNetworkId(netid)
+    DeleteEntity(spike)
+    RemoveBlip(blip)
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        if IsPedInAnyVehicle(PlayerPedId(), false) then
+            local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+            if GetPedInVehicleSeat(vehicle, -1) == PlayerPedId() then
+                local vehiclePos = GetEntityCoords(vehicle, false)
+                local spikes = GetClosestObjectOfType(vehiclePos.x, vehiclePos.y, vehiclePos.z, 80.0, GetHashKey(spikemodel), 1, 1, 1)
+                local spikePos = GetEntityCoords(spikes, false)
+                local distance = Vdist(vehiclePos.x, vehiclePos.y, vehiclePos.z, spikePos.x, spikePos.y, spikePos.z)
+
+                if spikes ~= 0 then
+                    nearSpikes = true
+                else
+                    nearSpikes = false
+                end
+            else
+                nearSpikes = false
+            end
+        else
+            nearSpikes = false
+        end
+
+        Citizen.Wait(0)
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        if nearSpikes then
+            local tires = {
+                {bone = "wheel_lf", index = 0},
+                {bone = "wheel_rf", index = 1},
+                {bone = "wheel_lm", index = 2},
+                {bone = "wheel_rm", index = 3},
+                {bone = "wheel_lr", index = 4},
+                {bone = "wheel_rr", index = 5}
             }
-            TriggerServerEvent('police:server:SyncSpikes', SpawnedSpikes)
-        end
-    else
-        QBCore.Functions.Notify(Lang:t("error.no_spikestripe"), 'error')
-    end
-end)
 
-RegisterNetEvent('police:client:SyncSpikes', function(table)
-    SpawnedSpikes = table
-end)
+            for a = 1, #tires do
+                local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+                local tirePos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, tires[a].bone))
+                local spike = GetClosestObjectOfType(tirePos.x, tirePos.y, tirePos.z, 15.0, GetHashKey(spikemodel), 1, 1, 1)
+                local spikePos = GetEntityCoords(spike, false)
+                local distance = Vdist(tirePos.x, tirePos.y, tirePos.z, spikePos.x, spikePos.y, spikePos.z)
 
--- Threads
-CreateThread(function()
-    while true do
-        if LocalPlayer.state.isLoggedIn then
-            GetClosestSpike()
-        end
-        Wait(500)
-    end
-end)
-
-CreateThread(function()
-    while true do
-        if LocalPlayer.state.isLoggedIn then
-            if ClosestSpike then
-                local tires = {
-                    {bone = "wheel_lf", index = 0},
-                    {bone = "wheel_rf", index = 1},
-                    {bone = "wheel_lm", index = 2},
-                    {bone = "wheel_rm", index = 3},
-                    {bone = "wheel_lr", index = 4},
-                    {bone = "wheel_rr", index = 5}
-                }
-
-                for a = 1, #tires do
-                    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-                    local tirePos = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, tires[a].bone))
-                    local spike = GetClosestObjectOfType(tirePos.x, tirePos.y, tirePos.z, 15.0, spikemodel, 1, 1, 1)
-                    local spikePos = GetEntityCoords(spike, false)
-                    local distance = #(tirePos - spikePos)
-
-                    if distance < 1.8 then
-                        if not IsVehicleTyreBurst(vehicle, tires[a].index, true) or IsVehicleTyreBurst(vehicle, tires[a].index, false) then
-                            SetVehicleTyreBurst(vehicle, tires[a].index, false, 1000.0)
-                        end
+                if distance < 1.8 then
+                    if not IsVehicleTyreBurst(vehicle, tires[a].index, true) or IsVehicleTyreBurst(vehicle, tires[a].index, false) then
+                        SetVehicleTyreBurst(vehicle, tires[a].index, false, 1000.0)
                     end
                 end
             end
         end
 
-        Wait(3)
+        Citizen.Wait(0)
     end
 end)
 
-CreateThread(function()
-    while true do
-        local sleep = 1000
-        if LocalPlayer.state.isLoggedIn then
-            if ClosestSpike then
-                local ped = PlayerPedId()
-                local pos = GetEntityCoords(ped)
-                local dist = #(pos - SpawnedSpikes[ClosestSpike].coords)
-                if dist < 4 then
-                    if not IsPedInAnyVehicle(PlayerPedId()) then
-                        if PlayerJob.name == "police" and PlayerJob.onduty then
-                            sleep = 0
-                            DrawText3D(pos.x, pos.y, pos.z, Lang:t('info.delete_spike'))
-                            if IsControlJustPressed(0, 38) then
-                                NetworkRegisterEntityAsNetworked(SpawnedSpikes[ClosestSpike].object)
-                                NetworkRequestControlOfEntity(SpawnedSpikes[ClosestSpike].object)
-                                SetEntityAsMissionEntity(SpawnedSpikes[ClosestSpike].object)
-                                DeleteEntity(SpawnedSpikes[ClosestSpike].object)
-                                SpawnedSpikes[ClosestSpike] = nil
-                                ClosestSpike = nil
-                                TriggerServerEvent('police:server:SyncSpikes', SpawnedSpikes)
-                            end
-                        end
-                    end
-                end
-            end
-        end
-        Wait(sleep)
+function CreateSpikes(amount)
+    local spawnCoords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 3.2, 0.0)
+    for a = 1, amount do
+        local spike = CreateObject(GetHashKey(spikemodel), spawnCoords.x, spawnCoords.y, spawnCoords.z, 1, 1, 1)
+        local netid = NetworkGetNetworkIdFromEntity(spike)
+        SetNetworkIdExistsOnAllMachines(netid, true)
+        SetNetworkIdCanMigrate(netid, false)
+        SetEntityHeading(spike, GetEntityHeading(PlayerPedId()))
+        PlaceObjectOnGroundProperly(spike)
+        spawnCoords = GetOffsetFromEntityInWorldCoords(spike, 0.0, 3.2, 0.0)
+        table.insert(SpawnedSpikes, netid)
+
+        local blip = AddBlipForEntity(spike)
+        SetBlipAsFriendly(blip, true)
+        SetBlipSprite(blip, 238)
+        BeginTextCommandSetBlipName("STRING");
+        AddTextComponentString(tostring("SPIKES"))
+        EndTextCommandSetBlipName(blip)
     end
-end)
+end
+
+function loadAnimDict( dict )
+    while ( not HasAnimDictLoaded( dict ) ) do
+        RequestAnimDict( dict )
+        Citizen.Wait( 5 )
+    end
+end
+
+function Animation()
+	loadAnimDict( "pickup_object" )
+    TaskPlayAnim(PlayerPedId(), "pickup_object", "pickup_low", 1.0, 1, -1, 33, 0, 0, 0, 0)
+end
+
+local spikestrips = {
+    "p_stinger_04",
+}
+exports['qb-target']:AddTargetModel(spikestrips, {
+    options = {
+        {
+            type = "command",
+            event = "RemoveSpikes",
+            icon = "fas fa-hand-holding",
+            label = "Pick Up",
+        },
+    },
+    distance = 2.0
+})
