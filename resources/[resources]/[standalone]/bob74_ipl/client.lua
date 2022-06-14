@@ -23,7 +23,7 @@ CreateThread(function()
     TrevorsTrailer.LoadDefault()
 
     -- Bahama Mamas: -1388.0013, -618.41967, 30.819599
-    BahamaMamas.Enable(true)
+    BahamaMamas.Enable(false)
 
     -- Pillbox hospital: 307.1680, -590.807, 43.280
     PillboxHospital.Enable(false)--Pillbox map is installed by default when installing QB-Core. Check [default-maps] for the map.
@@ -44,7 +44,7 @@ CreateThread(function()
     UFO.Zancudo.Enable(false)   -- -2051.99463, 3237.05835, 1456.97021
     
     -- Red Carpet: 300.5927, 199.7589, 104.3776
-    RedCarpet.Enable(false)
+    RedCarpet.Enable(true)
     
     -- North Yankton: 3217.697, -4834.826, 111.8152
     NorthYankton.Enable(false)
@@ -140,10 +140,10 @@ CreateThread(function()
     -- ====================================================================
     -- =------------------- [DLC: Diamond Casino Resort] -----------------=
     -- ====================================================================
-    if GetGameBuildNumber() >= 2060 then
-        DiamondCasino.LoadDefault()                -- 1100.000, 220.000, -50.000
-        DiamondPenthouse.LoadDefault()             -- 976.636, 70.295, 115.164
-    end
+    --if GetGameBuildNumber() >= 2060 then
+    --    DiamondCasino.LoadDefault()                -- 1100.000, 220.000, -50.000
+    --    DiamondPenthouse.LoadDefault()             -- 976.636, 70.295, 115.164
+    --end
 
     -- ====================================================================
     -- =------------------- [DLC: Los Santos Tuners] ---------------------=
