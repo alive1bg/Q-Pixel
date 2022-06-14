@@ -117,7 +117,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
         anim = "idle_d",
         flags = 50,
     }, {}, {}, function() 
-        DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 64)
+        --[[ DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 64)
         local inputText = nil
         input = true
         while true do 
@@ -125,7 +125,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
             if input == true then
                 HideHudAndRadarThisFrame()
                 if UpdateOnscreenKeyboard() == 1 then
-                    inputText = GetOnscreenKeyboardResult()
+                    inputText = GetOnscreenKeyboardResult() 
                     if string.len(inputText) > 0 then
                         break
                     else
@@ -133,150 +133,168 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
                     end
                 end
             end
-        end
+        end ]]
 
-        local prop, hash, cam, dropCoords, itemname = nil, nil, nil, nil, nil
+        local dialog = exports['qb-input']:ShowInput({
+            header = "CAMERA SETUP",
+            info = "Name Your Camera",
+            submitText = "Bill",
+            inputs = {
+                {
+                    text = "Camera ID (#)", -- text you want to be displayed as a place holder
+                    name = "cameraid", -- name of the input should be unique otherwise it might override
+                    type = "text", -- type of the input
+                    isRequired = true -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+                }
+            },
+        })
+    
+        if dialog ~= nil then
+            local prop, hash, cam, dropCoords, itemname = nil, nil, nil, nil, nil
 
-        if is360 == 1 then 
-            -- prop = 'prop_cctv_pole_02'
-            prop = 'prop_cctv_cam_07a'
-            itemname = '360cctv'
-        else
-            -- prop = 'prop_cctv_pole_04'
-            prop = 'prop_cctv_cam_01b'      
-            itemname = 'cctv'
-        end
+            if is360 == 1 then 
+                -- prop = 'prop_cctv_pole_02'
+                prop = 'prop_cctv_cam_07a'
+                itemname = '360cctv'
+            else
+                -- prop = 'prop_cctv_pole_04'
+                prop = 'prop_cctv_cam_01b'      
+                itemname = 'cctv'
+            end
 
-        hash = GetHashKey(prop)
-        RequestModel(hash)
-        while not HasModelLoaded(prop) do 
-            Wait(500)
-        end
+            hash = GetHashKey(prop)
+            RequestModel(hash)
+            while not HasModelLoaded(prop) do 
+                Wait(500)
+            end
 
-        isPlacingCam = true
-        local color = {r = 255, g = 255, b = 255, a = 255}
+            isPlacingCam = true
+            local color = {r = 255, g = 255, b = 255, a = 255}
 
-        SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
-        cam = CreateObject(prop, 1.0, 1.0, 1.0, false, true, false)
-        CreatedEntities[GcamID] = cam
-        SetEntityHeading(cam, GetEntityHeading(PlayerPedId()))
-        SetEntityAlpha(cam, 200)
-        SetEntityCollision(cam, false, false)
-        SetEntityInvincible(cam, true)
-        FreezeEntityPosition(cam, true)
+            SetCurrentPedWeapon(PlayerPedId(), 0xA2719263) 
+            cam = CreateObject(prop, 1.0, 1.0, 1.0, false, true, false)
+            CreatedEntities[GcamID] = cam
+            SetEntityHeading(cam, GetEntityHeading(PlayerPedId()))
+            SetEntityAlpha(cam, 200)
+            SetEntityCollision(cam, false, false)
+            SetEntityInvincible(cam, true)
+            FreezeEntityPosition(cam, true)
 
-        -- CreateThread(function()	-- While loop needed for delete lazer
-            while true do
-                sleep = 1000
-                if isPlacingCam then
-                    sleep = 7
-                    local hit, coords, entity = RayCastGamePlayCamera(1000.0)
-                    if hit and #(GetEntityCoords(PlayerPedId()) - coords) < 8.0 then
-                        DrawLine(GetEntityCoords(PlayerPedId()), coords.x, coords.y, coords.z, color.r, color.g, color.b, color.a)
-                        SetEntityCoords(cam, coords.x, coords.y, coords.z)
-                        if IsControlJustReleased(0, 38) then
-                            isPlacingCam = false
-                            break
+            -- CreateThread(function()	-- While loop needed for delete lazer
+                while true do
+                    sleep = 1000
+                    if isPlacingCam then
+                        sleep = 7
+                        local hit, coords, entity = RayCastGamePlayCamera(1000.0)
+                        if hit and #(GetEntityCoords(PlayerPedId()) - coords) < 8.0 then
+                            DrawLine(GetEntityCoords(PlayerPedId()), coords.x, coords.y, coords.z, color.r, color.g, color.b, color.a)
+                            SetEntityCoords(cam, coords.x, coords.y, coords.z)
+                            if IsControlJustReleased(0, 38) then
+                                isPlacingCam = false
+                                break
+                            end
                         end
                     end
+                    Wait(sleep)
                 end
-                Wait(sleep)
-            end
-        -- end)
-        
-        if inputText ~= nil then 
-            QBCore.Functions.TriggerCallback('QBCore:HasItem', function(hasItem)
-                if hasItem then 
-                    QBCore.Functions.Progressbar("fixing camera", "Placing CCTV Camera", 2000, false, true, {
-                        disableMovement = true,
-                        disableCarMovement = true,
-                        disableMouse = false,
-                        disableCombat = true,
-                    }, {
-                        animDict = "amb@prop_human_movie_bulb@base",
-                        anim = "base",
-                        flags = 50,
-                    }, {}, {}, function() 
-
-                        SetEntityHeading(cam, GetEntityHeading(PlayerPedId()))
-                        SetEntityAlpha(cam, 255)
-                        FreezeEntityPosition(cam, true)
-                        SetEntityInvincible(cam, true)
-                        SetEntityAsMissionEntity(cam, true, true)
-
-                        local camCoords = GetEntityCoords(cam)
-                        if is360 == 1 then 
-                            local id = #Config.SecurityCameras.cameras + 1
-                            Config.SecurityCameras.cameras[id] = {
-                                label = inputText, 
-                                type = "360-Vision CCTV Camera",
-                                coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
-                                r = {x = -25.0, y = 0.0, z = GetEntityHeading(cam)}, 
-                                canRotate = true, 
-                                isOnline = true,
-                                camID = GcamID,
-                            }
-
-                            TriggerServerEvent("qb-cameras:server:AddCamera", Config.SecurityCameras.cameras[id], true, cam)
-
-                        else
-                            local id = #Config.SecurityCameras.cameras + 1
-                            Config.SecurityCameras.cameras[id] = {
-                                label = inputText, 
-                                type = "Single Vision CCTV Camera",
-                                coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
-                                r = {x = 200.0, y = 180.0, z = GetEntityHeading(cam)}, 
-                                canRotate = false, 
-                                isOnline = true,
-                                camID = GcamID,
-                            }
-
-                            TriggerServerEvent("qb-cameras:server:AddCamera", Config.SecurityCameras.cameras[id], false, cam)
-                        end
-                        exports['qb-target']:AddEntityZone("camera-"..GcamID, cam, {
-                            name = "camera-"..GcamID,
-                            heading = GetEntityHeading(cam),
-                            debugPoly = false,
+            -- end)
+            
+            --if inputText ~= nil then 
+                QBCore.Functions.TriggerCallback('QBCore:HasItem', function(hasItem)
+                    if hasItem then 
+                        QBCore.Functions.Progressbar("fixing camera", "Placing CCTV Camera", 2000, false, true, {
+                            disableMovement = true,
+                            disableCarMovement = true,
+                            disableMouse = false,
+                            disableCombat = true,
                         }, {
-                            options = {
-                                {
-                                    type = "server",
-                                    event = "qb-cameras:server:DisableCam",
-                                    icon = "fa fa-camera",
-                                    label = "Enable the Camera",
-                                    camera = GcamID,
-                                    enable = true,
-                                },
-                                {
-                                    type = "server",
-                                    event = "qb-cameras:server:DisableCam",
-                                    icon = "fa fa-camera",
-                                    label = "Disable the Camera",
-                                    camera = GcamID,
-                                    enable = false,
-                                },
-                                {
-                                    type = "server",
-                                    event = "qb-cameras:server:RemoveCamera",
-                                    icon = "fa fa-camera",
-                                    label = "Disconnect and Remove the Camera",
-                                    camera = GcamID,
-                                    ent = cam,
-                                },
-                            },
-                            distance = 3.0
-                        })
-                    end, function()
+                            animDict = "amb@prop_human_movie_bulb@base",
+                            anim = "base",
+                            flags = 50,
+                        }, {}, {}, function() 
 
-                        StopAnimTask(PlayerPedId(), "amb@prop_human_movie_bulb@base", "base", 1.0)
-                        QBCore.Functions.Notify("Canceled", "error")
-                        
-                    end)
-                else
-                    QBCore.Functions.Notify("You do not have the Required Item. Stop Exploiting Bugs!", "error", 5000)
-                end
-            end, itemname)
+                            SetEntityHeading(cam, GetEntityHeading(PlayerPedId()))
+                            SetEntityAlpha(cam, 255)
+                            FreezeEntityPosition(cam, true)
+                            SetEntityInvincible(cam, true)
+                            SetEntityAsMissionEntity(cam, true, true)
+
+                            local camCoords = GetEntityCoords(cam)
+                            if is360 == 1 then 
+                                local id = #Config.SecurityCameras.cameras + 1
+                                Config.SecurityCameras.cameras[id] = {
+                                    label = inputText, 
+                                    type = "360-Vision CCTV Camera",
+                                    coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
+                                    r = {x = -25.0, y = 0.0, z = GetEntityHeading(cam)}, 
+                                    canRotate = true, 
+                                    isOnline = true,
+                                    camID = GcamID,
+                                }
+
+                                TriggerServerEvent("qb-cameras:server:AddCamera", Config.SecurityCameras.cameras[id], true, cam)
+
+                            else
+                                local id = #Config.SecurityCameras.cameras + 1
+                                Config.SecurityCameras.cameras[id] = {
+                                    label = inputText, 
+                                    type = "Single Vision CCTV Camera",
+                                    coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
+                                    r = {x = 200.0, y = 180.0, z = GetEntityHeading(cam)}, 
+                                    canRotate = false, 
+                                    isOnline = true,
+                                    camID = GcamID,
+                                }
+
+                                TriggerServerEvent("qb-cameras:server:AddCamera", Config.SecurityCameras.cameras[id], false, cam)
+                            end
+                            exports['qb-target']:AddEntityZone("camera-"..GcamID, cam, {
+                                name = "camera-"..GcamID,
+                                heading = GetEntityHeading(cam),
+                                debugPoly = false,
+                            }, {
+                                options = {
+                                    {
+                                        type = "server",
+                                        event = "qb-cameras:server:DisableCam",
+                                        icon = "fa fa-camera",
+                                        label = "Enable the Camera",
+                                        camera = GcamID,
+                                        enable = true,
+                                    },
+                                    {
+                                        type = "server",
+                                        event = "qb-cameras:server:DisableCam",
+                                        icon = "fa fa-camera",
+                                        label = "Disable the Camera",
+                                        camera = GcamID,
+                                        enable = false,
+                                    },
+                                    {
+                                        type = "server",
+                                        event = "qb-cameras:server:RemoveCamera",
+                                        icon = "fa fa-camera",
+                                        label = "Disconnect and Remove the Camera",
+                                        camera = GcamID,
+                                        ent = cam,
+                                    },
+                                },
+                                distance = 3.0
+                            })
+                        end, function()
+
+                            StopAnimTask(PlayerPedId(), "amb@prop_human_movie_bulb@base", "base", 1.0)
+                            QBCore.Functions.Notify("Canceled", "error")
+                            
+                        end)
+                    else
+                        QBCore.Functions.Notify("You do not have the Required Item. Stop Exploiting Bugs!", "error", 5000)
+                    end
+                end, itemname)
+            --end
         end
+
+        
     end, function()
         StopAnimTask(PlayerPedId(), "amb@prop_human_bum_bin@idle_b", "idle_d", 1.0)
         QBCore.Functions.Notify("Canceled", "error")
