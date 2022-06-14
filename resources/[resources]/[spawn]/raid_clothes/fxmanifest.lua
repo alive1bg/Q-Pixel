@@ -30,6 +30,9 @@ server_scripts {
   'server/sv_*.lua',
 }
 
-export "CreateHashList"
-export "GetTatCategs"
-export "GetCustomSkins"
+exports {
+	'ExportRecords',
+  "GetCustomSkins",
+  "GetTatCategs",
+  "CreateHashList"
+}

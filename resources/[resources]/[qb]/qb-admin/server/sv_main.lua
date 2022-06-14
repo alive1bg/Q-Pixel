@@ -1,372 +1,423 @@
-local Mercy = exports['qb-core']:GetCoreObject()
+local CoreName = nil
 
-SpectateData = {}
+if Config['CoreSettings']["QBCORE"]["Version"] == "new" then
+  CoreName = Config['CoreSettings']["QBCORE"]["Export"]
+else
+  TriggerEvent(Config['CoreSettings']["QBCORE"]["Trigger"], function(obj) CoreName = obj end)
+end
 
--- [ Code ] --
 
--- [ Commands ] --
+function addLog(message)
+  local steamid  = false
+  local license  = false
+  local discord  = false
+  local xbl      = false
+  local liveid   = false
+  local ip       = false
+  for k,v in pairs(GetPlayerIdentifiers(source))do   
+    if string.sub(v, 1, string.len("steam:")) == "steam:" then
+      steamid = v
+    elseif string.sub(v, 1, string.len("license:")) == "license:" then
+      license = v
+    elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+      xbl  = v
+    elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+      ip = v
+    elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+      discord = v
+    elseif string.sub(v, 1, string.len("live:")) == "live:" then
+      liveid = v
+    end
+  end
+  local Execute = SQL("INSERT INTO ethicalpixel_admin_log(identifier , log , name , date) VALUES(@identifier , @log , @name , @date)",{["@identifier"]=license,['@log']=message,["@name"]=GetPlayerName(source) , ['@date'] = os.time()})
 
-Mercy.Commands.Add('menu', 'Open Admin menu', {}, false, function(source)
-    TriggerClientEvent('qb-admin:client:try-open-menu', source,  true)
+end
+
+function disp_time(time)
+  local t = (os.difftime(time, os.time()))
+  local d = math.floor(t / 86400)
+  local h = math.floor((t % 86400) / 3600)
+  local m = math.floor((t % 3600) / 60)
+  local s = math.floor((t % 60))
+  return {days = d , hours = h , minutes = m, seconds = s}
+end
+
+
+SQL = function(query, parameters, cb)
+  local res = nil
+  local IsBusy = true
+  if Config['General']["SQLWrapper"] == "mysql-async" then
+      if string.find(query, "SELECT") then
+          MySQL.Async.fetchAll(query, parameters, function(result)
+              if cb then
+                  cb(result)
+              else
+                  res = result
+                  IsBusy = false
+              end
+          end)
+      else
+          MySQL.Async.execute(query, parameters, function(result)
+              if cb then
+                  cb(result)
+              else
+                  res = result
+                  IsBusy = false
+              end
+          end)
+      end
+  elseif Config['General']["SQLWrapper"] == "oxmysql" then
+      exports.oxmysql:execute(query, parameters, function(result)
+          if cb then
+              cb(result)
+          else
+              res = result
+              IsBusy = false
+          end
+      end)
+  elseif Config['General']["SQLWrapper"] == "ghmattimysql" then
+      exports.ghmattimysql:execute(query, parameters, function(result)
+          if cb then
+              cb(result)
+          else
+              res = result
+              IsBusy = false
+          end
+      end)
+  end
+  while IsBusy do
+      Citizen.Wait(0)
+  end
+  return res
+end
+
+local webhookLink = Config['Webhooks']['Link']
+function SendWebhook(message)
+  local embed = {
+    {
+      ["color"] = 1184274,
+      ["title"] = "**Admin Menu LOG**",
+      ["description"] = message,
+      ["footer"] = {
+          ["text"] = '© EthicalPixel',
+      },
+    }
+  }
+
+  PerformHttpRequest(webhookLink, function(err, text, headers) 
+  end, 'POST', json.encode({username = 'EthicalPixel Admin', embeds = embed}), { ['Content-Type'] = 'application/json' })
+end
+
+RegisterServerEvent('qb-admin:server:SpawnItem')
+AddEventHandler('qb-admin:server:SpawnItem', function(ItemName, ItemAmount)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local steamid  = false
+    local license  = false
+    local discord  = false
+    local xbl      = false
+    local liveid   = false
+    local ip       = false
+    for k,v in pairs(GetPlayerIdentifiers(source))do   
+      if string.sub(v, 1, string.len("steam:")) == "steam:" then
+        steamid = v
+      elseif string.sub(v, 1, string.len("license:")) == "license:" then
+        license = v
+      elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+        xbl  = v
+      elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+        ip = v
+      elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+        discord = v
+      elseif string.sub(v, 1, string.len("live:")) == "live:" then
+        liveid = v
+      end
+    end
+    local Player = CoreName.Functions.GetPlayer(source)
+    Player.Functions.AddItem(ItemName, tonumber(ItemAmount))
+    TriggerClientEvent("inventory:client:ItemBox", source, CoreName.Shared.Items[ItemName], "add")
+    local Execute = SQL("INSERT INTO ethicalpixel_admin_log(identifier , log , name , date) VALUES(@identifier , @log , @name , @date)",{["@identifier"]=license,['@log']='Spawned Item: '..ItemName..' ( '..CoreName.Shared.Items[ItemName].label..' ) | Amount: '..ItemAmount,["@name"]=GetPlayerName(source) , ['@date'] = os.time()})
+  end
+end)
+
+
+RegisterServerEvent('qb-admin:server:Csay')
+AddEventHandler('qb-admin:server:Csay', function(msg)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or CoreName.Functions.HasPermission(src, 'god') then
+    --TriggerClientEvent("chatMessage", -1, "Admin: ", {255, 0, 0}, msg)
+    TriggerClientEvent("chatMessage", -1, "Staff Chat", "error", msg)
+    local Execute = SQL("INSERT INTO ethicalpixel_admin_log(identifier , log , name , date) VALUES(@identifier , @log , @name , @date)",{["@identifier"]=license,['@log']='cSaid: '..msg,["@name"]=GetPlayerName(source) , ['@date'] = os.time()})
+  end
+end)
+
+
+RegisterServerEvent('qb-admin:server:GetCoords')
+AddEventHandler('qb-admin:server:GetCoords', function(target, toggle)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local pSrc = tonumber(id)
+    local tSrc = tonumber(target)
+    local ped = GetPlayerPed(tSrc)
+    local playerCoords = GetEntityCoords(ped)
+    TriggerClientEvent("qb-admin:client:attach", source, tSrc, toggle)
+    TriggerClientEvent("qb-admin:client:sendCoords", source, playerCoords)
+  end
+end)
+
+
+RegisterServerEvent('qb-admin:server:bringPlayer')
+AddEventHandler('qb-admin:server:bringPlayer', function(target , pos)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    TriggerClientEvent('qb-admin:client:bringPlayer', tonumber(target),  pos)
+    local Execute = SQL("INSERT INTO ethicalpixel_admin_log(identifier , log , name , date) VALUES(@identifier , @log , @name , @date)",{["@identifier"]=license,['@log']='Bringed Player | ID: '..target..' | Display Name: '..GetPlayerName(target),["@name"]=GetPlayerName(source) , ['@date'] = os.time()})
+  end
+end)
+
+
+RegisterServerEvent('qb-admin:server:GiveCash')
+AddEventHandler('qb-admin:server:GiveCash', function(reciever, amount)
+  local src = source          
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local Player = CoreName.Functions.GetPlayer(tonumber(reciever))
+    Player.Functions.AddMoney('cash', amount)
+    TriggerClientEvent(Config['CoreSettings']["QBCORE"]["ServerNotificationEvent"], source, "You gave "..reciever.." "..amount.." $", 'success', 5000)
+    TriggerClientEvent(Config['CoreSettings']["QBCORE"]["ServerNotificationEvent"], reciever, "You have been handed "..amount.." $", 'success', 5000)
+    addLog('Gave $'..amount.." to " ..GetPlayerName(reciever) )
+  end
+end)
+
+
+
+RegisterNetEvent("qb-admin:server:DropPlayer")
+AddEventHandler("qb-admin:server:DropPlayer", function(target, pReason)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    DropPlayer(target, "You were kicked | Reason: " ..pReason)
+  end
+end)
+
+RegisterNetEvent("qb-admin:server:setFav")
+AddEventHandler("qb-admin:server:setFav", function(data)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local Player = CoreName.Functions.GetPlayer(source)
+    local cid = Player.PlayerData.citizenid
+    local result =  SQL("UPDATE ethicalpixel_admin SET favorite = @fav WHERE cid = @cid" , { ["@fav"] = json.encode(data),["@cid"] = cid})
+  end
+end)
+
+
+AddEventHandler("playerConnecting", function(playerName, setKickReason, deferrals)
+  local player = source
+  local steamIdentifier
+  local steamid  = false
+  local license  = false
+  local discord  = false
+  local xbl      = false
+  local liveid   = false
+  local ip       = false
+  for k,v in pairs(GetPlayerIdentifiers(player))do
+    if string.sub(v, 1, string.len("steam:")) == "steam:" then
+      steamid = v
+    elseif string.sub(v, 1, string.len("license:")) == "license:" then
+      license = v
+    elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+      xbl  = v
+    elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+      ip = v
+    elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+      discord = v
+    elseif string.sub(v, 1, string.len("live:")) == "live:" then
+      liveid = v
+    end
+  end
+  deferrals.defer()
+  deferrals.update(string.format(" Hello %s. Checking ban status!", playerName))
+  local data = SQL('SELECT * FROM ethicalpixel_admin_banned WHERE license = @license' , {['@license'] = license})
+  if data ~= nil then
+    if(data[1] == nil) then
+      deferrals.done()
+    else
+      local timeremaining = (disp_time(tonumber(data[1].length)))
+      if(os.time() > tonumber(data[1].length)) then
+          deferrals.done()
+          SQL('DELETE FROM ethicalpixel_admin_banned WHERE license = @license' , {['@license'] = license})
+      else
+          SendWebhook('__**Banned player\'s connecting**__ \n `'..playerName..'` Is trying to connect the server. \n Ban reason: `'..data[1].reason..'`' )
+          deferrals.done('\n [qb-Admin] '..playerName..', you are banned from this server! \n Your ban will be expired in '..timeremaining.days..' days, '..timeremaining.hours..' hours and '..timeremaining.seconds ..' seconds! ('..os.date("%Y-%m-%d %H:%M",data[1].length)..') ')
+      end
+    end
+  end
+end)
+
+
+
+
+CoreName.Functions.CreateCallback('qb-admin:GetPlayerData', function(source, cb)
+  local src = source
+  local pData = CoreName.Functions.GetPlayer(src)
+  local cid = pData.PlayerData.citizenid
+  local result =  SQL("SELECT * FROM ethicalpixel_admin WHERE cid = @cid" , {["@cid"] = cid})
+  if(result[1] == nil) then
+    SQL("INSERT INTO ethicalpixel_admin (cid , favorite) VALUES(@cid , @favorite)",{["@cid"]=cid,['@favorite']=json.encode({})})
+  end
+  cb(result)
+end)
+---------------------------------------------------------------------------------------------
+CoreName.Functions.CreateCallback('qb-admin:GetBannedPlayers', function(source, cb)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local result =  SQL("SELECT * FROM ethicalpixel_admin_banned" , {})
+    cb(result)
+  end
+end)
+---------------------------------------------------------------------------------------------
+CoreName.Functions.CreateCallback('qb-admin:GetLogs', function(source, cb)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local result =  SQL("SELECT * FROM ethicalpixel_admin_log" , {})
+    cb(result)
+  end
+end)
+
+---------------------------------------------------------------------------------------------
+CoreName.Functions.CreateCallback('qb-admin:GetServerName', function(source, cb)
+  local src = source     
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    cb(GetConvar("sv_hostname"))
+  end
+end)
+----------------------------------------------------------------------------------------
+CoreName.Functions.CreateCallback('qb-admin:GetOnlinePlayers', function(source, cb)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local players = {}
+    for k,v in pairs(GetPlayers()) do
+      table.insert(players , {DisplayName =  GetPlayerName(v) , PlayerID = v , Steam = GetPlayerIdentifier(v, steam)})
+    end
+    cb(players)
+  end
+end)
+
+CoreName.Functions.CreateCallback('qb-admin:CheckPerms', function(source, cb)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    cb(true)
+  else
+    cb(false)
+  end
+end)
+
+
+
+RegisterNetEvent("qb-admin:BanPlayer")
+AddEventHandler("qb-admin:BanPlayer", function(target , reason , length)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    if not target then return end
+    local TargetPlayer 
+    local Admin = CoreName.Functions.GetPlayer(source)
+    TargetPlayer = CoreName.Functions.GetPlayer(tonumber(target))
+    local identifiers = {}
+    local name = nil
+    local time = nil
+    local data = nil
+    local steamid  = false
+    local license  = false
+    local discord  = false
+    local xbl      = false
+    local liveid   = false
+    local ip       = false
+    for k,v in pairs(GetPlayerIdentifiers(source))do        
+        if string.sub(v, 1, string.len("steam:")) == "steam:" then
+          steamid = v
+        elseif string.sub(v, 1, string.len("license:")) == "license:" then
+          license = v
+        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+          xbl  = v
+        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+          ip = v
+        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+          discord = v
+        elseif string.sub(v, 1, string.len("live:")) == "live:" then
+          liveid = v
+        end
+      
+    end
+      identifiers = GetPlayerIdentifiers(target)
+
+      if length == "" then
+          length = nil
+      end
+      if (reason == ' ') then
+        reason = 'No reason provided!'
+      end
+      local nameofshit = GetPlayerName(source)
+
+      timestring=length
+      -- length = os.time({year=year,month=month,day=day,hour=hour,min=minute})
+      local Execute = SQL("INSERT INTO ethicalpixel_admin_banned(steam , reason , length , ip , discord , license, DisplayName) VALUES(@steam , @reason , @length , @ip , @discord, @license , @name)",{["@steam"]=steamid,['@reason']=reason,["@length"]=length,["@ip"]=ip , ['@discord'] = discord , ['license']= license , ['@name'] = GetPlayerName(target)})
+      SQL("INSERT INTO ethicalpixel_admin_log(identifier , log , name , date) VALUES(@identifier , @log , @name , @date)",{["@identifier"]=license,['@log']='Banned player: '..GetPlayerName(target)..' | Reason: '..reason..' | Banned till: '..os.date("%Y-%m-%d %H:%M",length)..'',["@name"]=nameofshit, ['@date'] = os.time()})
+      if TargetPlayer then
+        DropPlayer(target, '[qb-Admin] You have banned 🌶 \n reason: '..reason.. '. Your ban will be expired at: '..os.date("%Y-%m-%d %H:%M",length)..'!')
+      end
+    end
+end)
+
+RegisterServerEvent('qb-admin:GetPlayersForBlips')       
+AddEventHandler('qb-admin:GetPlayersForBlips', function()
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    local players = {}
+    for k, v in pairs(GetPlayers()) do
+      local targetped = GetPlayerPed(v)
+      local ped = GetPlayerServerId(v)
+      table.insert(players, {
+        id = v,
+      })
+    end
+    TriggerClientEvent('qb-admin:client:client:ShowBlips', src, players)  
+  end
+  
+end)
+
+RegisterServerEvent('qb-admin:server:tSay')       
+AddEventHandler('qb-admin:server:tSay', function(message)
+  local src = source                                            
+  if CoreName.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    TriggerClientEvent('chatMessage', -1, 'Announcement', 4, message)
+    addLog('Announced:  '..message)
+  end
+end)
+
+CoreName.Commands.Add('coords', "Coords", {}, false, function(source)
+  local src = source
+  TriggerClientEvent('qb-admin:client:ToggleCoords', src)
 end, 'admin')
 
--- [ Callbacks ] --
+CoreName.Commands.Add('admincar', "Save this vehicle into your garage", {}, false, function(source, args)
+  local ply = CoreName.Functions.GetPlayer(source)
+  TriggerClientEvent('qb-admin:client:SaveCar', source)
+end, 'admin')
 
-Mercy.Functions.CreateCallback('qb-admin:server:get-active-players-in-radius', function(Source, Cb, Coords, Radius)
-	local ActivePlayers = {}
-	local Coords, Radius = Coords ~= nil and vector3(Coords.x, Coords.y, Coords.z) or GetEntityCoords(GetPlayerPed(Source)), Radius ~= nil and Radius or 5.0
-	for k, v in pairs(Mercy.Functions.GetPlayers()) do
-		local Player = Mercy.Functions.GetPlayer(v)
-		if Player ~= nil then
-			local TargetCoords = GetEntityCoords(GetPlayerPed(v))
-			local TargetDistance = #(TargetCoords - Coords)
-			if TargetDistance <= Radius then
-				local ReturnData = {}
-				ReturnData['ServerId'] = Player.PlayerData.source
-				ReturnData['Name'] = GetPlayerName(Player.PlayerData.source)
-				table.insert(ActivePlayers, ReturnData)
-			end
-		end
-	end
-	Cb(ActivePlayers)
-end)
-
-Mercy.Functions.CreateCallback('qb-admin:server:get-permission', function(source, cb, Rank)
-    local Group = Mercy.Functions.GetPermission(source)
-    if Group[Rank] then
-        cb(true)
-    else
-        cb(false)
-    end
-end)
-
-Mercy.Functions.CreateCallback('qb-admin:server:get-bans', function(source, cb)
-    local BanList = {}
-    MySQL.Async.execute('SELECT * FROM bans', {}, function(Bans)
-         if Bans ~= nil then
-            for k, v in pairs(Bans) do
-                local TPlayer = Mercy.Functions.GetPlayerFromIdentifier(v.license)
-                local TSteam = Mercy.Functions.GetIdentifier(TPlayer.PlayerData.source, "steam")
-                local BannedPlayer = {}
-                BannedPlayer.Source = TPlayer.source
-                BannedPlayer.Steam = TSteam
-                table.insert(BanList, BannedPlayer)
-            end
-             cb(BanList)
-         else
-             cb({})
-         end
-     end)
- end)
- 
- Mercy.Functions.CreateCallback('qb-admin:server:get-players', function(source, cb)
-     local Players = Mercy.Functions.GetPlayers()
-     local PlayerList = {}
-     for k, v in pairs(Players) do
-         local Player = Mercy.Functions.GetPlayer(v)
-         local Steam = Mercy.Functions.GetIdentifier(v, "steam")
-         local License = Mercy.Functions.GetIdentifier(v, "license")
-         local NewPlayer = {}
-         NewPlayer.ServerId = v
-         NewPlayer.Name = Player.PlayerData.name
-         NewPlayer.Steam = Steam
-         NewPlayer.License = License
-         table.insert(PlayerList, NewPlayer)
-     end
-     cb(PlayerList)
- end)
-
- Mercy.Functions.CreateCallback('qb-admin:server:get-chardata', function(source, cb, License)
-    for LicenseId, veee in pairs(License) do
-        local TPlayer = Mercy.Functions.GetPlayerFromIdentifier(LicenseId)
-        local TSteam = Mercy.Functions.GetIdentifier(TPlayer.PlayerData.source, "steam")
-        local PlayerCharInfo = {}
-        PlayerCharInfo.Name = TPlayer.PlayerData.name
-        PlayerCharInfo.Steam = TSteam
-        PlayerCharInfo.CharName = TPlayer.PlayerData.charinfo.firstname..' '..TPlayer.PlayerData.charinfo.lastname
-        PlayerCharInfo.Source = TPlayer.PlayerData.source
-        PlayerCharInfo.CitizenId = TPlayer.PlayerData.citizenid
-        cb(PlayerCharInfo)
-    end
- end)
-
--- [ Events ] --
-
--- Spectate
-
-RegisterNetEvent('qb-admin:server:start-spectate', function(ServerId)
-    local src = source
-    if Mercy.Functions.HasPermission(src, "admin") then
-        -- Check if Person exists
-        local Target = GetPlayerPed(ServerId)
-        if not Target then
-            return TriggerClientEvent('QBCore:Notify', src, 'Player not found, leaving spectate..', 'error')
-        end
-
-        -- Make Check for Spectating
-        local SteamIdentifier = Mercy.Functions.GetIdentifier(src, "steam")
-        if SpectateData[SteamIdentifier] ~= nil then
-            SpectateData[SteamIdentifier]['Spectating'] = true
-        else
-            SpectateData[SteamIdentifier] = {}
-            SpectateData[SteamIdentifier]['Spectating'] = true
-        end
-
-        local tgtCoords = GetEntityCoords(Target)
-        TriggerClientEvent('Mercy/client/specPlayer', src, ServerId, tgtCoords)
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission..', 'error')
-    end
-end)
-
-RegisterNetEvent('qb-admin:server:stop-spectate', function()
-    local src = source
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local SteamIdentifier = Mercy.Functions.GetIdentifier(src, "steam")
-        if SpectateData[SteamIdentifier] ~= nil and SpectateData[SteamIdentifier]['Spectating'] then
-            SpectateData[SteamIdentifier]['Spectating'] = false
-        end
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission..', 'error')
-    end
-end)
-
--- Other
-
-RegisterNetEvent("qb-admin:server:toggle-blips", function()
-    local Players = Mercy.Functions.GetPlayers()
-    local BlipData = {}
-    for k, v in pairs(Players) do
-        local Player = Mercy.Functions.GetPlayer(v)
-        local NewPlayer = {}
-        NewPlayer.ServerId = v
-        NewPlayer.Name = Player.PlayerData.name
-        NewPlayer.Coords = GetEntityCoords(GetPlayerPed(v))
-        table.insert(BlipData, NewPlayer)
-    end
-    TriggerClientEvent('qb-admin:client:UpdatePlayerBlips', -1, BlipData)
-end)
-
-RegisterNetEvent("qb-admin:server:ban-player", function(ServerId, Expires, Reason)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local Time = os.time()
-        local Expiring = nil
-        local ExpireDate = nil
-        if Expires == '1 Hour' then
-            Expiring = os.date("*t", Time + 3600)
-            ExpireDate = tonumber(Time + 3600)
-        elseif Expires == '6 Hours' then
-            Expiring = os.date("*t", Time + 21600)
-            ExpireDate = tonumber(Time + 21600)
-        elseif Expires == '12 Hours' then
-            Expiring = os.date("*t", Time + 43200)
-            ExpireDate = tonumber(Time + 43200)
-        elseif Expires == '1 Day' then
-            Expiring = os.date("*t", Time + 86400)
-            ExpireDate = tonumber(Time + 86400)
-        elseif Expires == '3 Days' then
-            Expiring = os.date("*t", Time + 259200)
-            ExpireDate = tonumber(Time + 259200)
-        elseif Expires == '1 Week' then
-            Expiring = os.date("*t", Time + 604800)
-            ExpireDate = tonumber(Time + 604800)
-        elseif Expires == 'Permanent' then
-            Expiring = os.date("*t", Time + 315360000) -- 10 Years
-            ExpireDate = tonumber(Time + 315360000)
-        end         
-        MySQL.Async.insert('INSERT INTO bans (name, license, discord, ip, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?, ?, ?)', {
-            GetPlayerName(ServerId),
-            Mercy.Functions.GetIdentifier(ServerId, 'license'),
-            Mercy.Functions.GetIdentifier(ServerId, 'discord'),
-            Mercy.Functions.GetIdentifier(ServerId, 'ip'),
-            Reason,
-            ExpireDate,
-            GetPlayerName(src)
-        })
-        local ExpireHours = tonumber(Expiring['hour']) < 10 and "0"..Expiring['hour'] or Expiring['hour']
-        local ExpireMinutes = tonumber(Expiring['min']) < 10 and "0"..Expiring['min'] or Expiring['min']
-        if Expires == "Permanent" then
-            DropPlayer(ServerId, '\n🔰 You are permanently banned.'..'\n🛑 Reason:'..Reason)
-        else
-            DropPlayer(ServerId, '\n🔰 You are banned.' .. '\n🛑 Reason: ' .. Reason .. "\n\n⏰Ban expires on " .. Expiring['day'] .. '/' .. Expiring['month'] .. '/' .. Expiring['year'] .. ' '..ExpireHours..':'..ExpireMinutes..'.')
-        end
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:toggle-godmode", function(ServerId)
-    TriggerClientEvent('qb-admin:client:toggle-godmode', ServerId)
-end)
-
-RegisterNetEvent("qb-admin:server:fling-player", function(ServerId)
-    TriggerClientEvent('qb-admin:client:fling-player', ServerId)
-end)
-
-RegisterNetEvent("qb-admin:server:play-sound", function(ServerId, SoundId)
-    TriggerClientEvent('qb-admin:client:play-sound', ServerId, SoundId)
-end)
-
-RegisterNetEvent("qb-admin:server:kick-player", function(ServerId, Reason)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        DropPlayer(ServerId, Reason)
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully kicked player.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src,'No permission.', 'error')
-    end
-
-end)
-
-RegisterNetEvent("qb-admin:server:give-item", function(ServerId, ItemName, ItemAmount)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local TPlayer = Mercy.Functions.GetPlayer(ServerId)
-        if TPlayer ~= nil then
-            TPlayer.Functions.AddItem(ItemName, ItemAmount, 'Admin-Menu-Give')
-            TriggerClientEvent('QBCore:Notify', src, 'Successfully gave player x'..ItemAmount..' of '..ItemName..'.', 'success')
-        end
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:request-job", function(ServerId, JobName)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local TPlayer = Mercy.Functions.GetPlayer(ServerId)
-        if TPlayer ~= nil then
-            TPlayer.Functions.SetJob(JobName, 1, 'Admin-Menu-Give-Job')
-            TriggerClientEvent('QBCore:Notify', src, 'Successfully set player as '..JobName..'.', 'success')
-        end
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:set-food-drink", function(ServerId)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local TPlayer = Mercy.Functions.GetPlayer(ServerId)
-        if ServerId ~= nil then
-            TPlayer.Functions.SetMetaData('thirst', 100)
-            TPlayer.Functions.SetMetaData('hunger', 100)
-            TriggerClientEvent('hud:client:UpdateNeeds', ServerId, 100, 100)
-            TPlayer.Functions.Save();
-            TriggerClientEvent('QBCore:Notify', src, 'Successfully gave player food and water.', 'success')
-        end
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:remove-stress", function(ServerId)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local TPlayer = Mercy.Functions.GetPlayer(ServerId)
-        TPlayer.Functions.SetMetaData('stress', 0)
-        TPlayer.Functions.Save();
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully removed stress of player.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:set-armor", function(ServerId)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        local TPlayer = Mercy.Functions.GetPlayer(ServerId)
-        SetPedArmour(GetPlayerPed(ServerId), 100)
-        TPlayer.Functions.SetMetaData('armor', 100)
-        TPlayer.Functions.Save();
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully gave player shield.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:reset-skin", function(ServerId)
-    local Player = Mercy.Functions.GetPlayer(ServerId)
-    local result = MySQL.Sync.fetchAll('SELECT * FROM playerskins WHERE citizenid = ? AND active = ?', { Player.PlayerData.citizenid, 1 })
-    if result[1] ~= nil then
-        TriggerClientEvent("qb-clothes:loadSkin", ServerId, false, result[1].model, result[1].skin)
-    else
-        TriggerClientEvent("qb-clothes:loadSkin", ServerId, true)
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:set-model", function(ServerId, Model)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        TriggerClientEvent('qb-admin:client:set-model', ServerId, Model)
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:revive-in-distance", function()
-    local src = source
-    local Coords, Radius = GetEntityCoords(GetPlayerPed(src)), 5.0
-	for k, v in pairs(Mercy.Functions.GetPlayers()) do
-		local Player = Mercy.Functions.GetPlayer(v)
-		if Player ~= nil then
-			local TargetCoords = GetEntityCoords(GetPlayerPed(v))
-			local TargetDistance = #(TargetCoords - Coords)
-			if TargetDistance <= Radius then
-                TriggerClientEvent('hospital:client:Revive', v, true)
-			end
-		end
-	end
-end)
-
-RegisterNetEvent("qb-admin:server:revive-target", function(ServerId)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        TriggerClientEvent('hospital:client:Revive', ServerId, true)
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully revived player.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-
-end)
-
-RegisterNetEvent("qb-admin:server:open-clothing", function(ServerId)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    if Mercy.Functions.HasPermission(src, "admin") then
-        TriggerClientEvent('qb-clothing:client:openMenu', ServerId)
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully gave player clothing menu.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
-end)
-
-RegisterNetEvent("qb-admin:server:teleport-player", function(ServerId, Type)
-    local src = source
-    local Player = Mercy.Functions.GetPlayer(src)
-    local Msg = ""
-    if Mercy.Functions.HasPermission(src, "admin") then
-        if Type == 'Goto' then
-            Msg = 'teleported to'
-            local TCoords = GetEntityCoords(GetPlayerPed(ServerId))
-            TriggerClientEvent('qb-admin:client:teleport-player', src, TCoords)
-        elseif Type == 'Bring' then
-            Msg = 'brought'
-            local Coords = GetEntityCoords(GetPlayerPed(src))
-            TriggerClientEvent('qb-admin:client:teleport-player', ServerId, Coords)
-        end
-        TriggerClientEvent('QBCore:Notify', src, 'Successfully '..Msg..' player.', 'success')
-    else
-        TriggerClientEvent('QBCore:Notify', src, 'No permission.', 'error')
-    end
+RegisterNetEvent('qb-admin:server:SaveCar', function(mods, vehicle, hash, plate)
+  local src = source
+  local Player = CoreName.Functions.GetPlayer(src)
+  local result = SQL('SELECT plate FROM player_vehicles WHERE plate = ?', { plate })
+  if result[1] == nil then
+          SQL('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state) VALUES (?, ?, ?, ?, ?, ?, ?)', {
+          Player.PlayerData.license,
+          Player.PlayerData.citizenid,
+          vehicle.model,
+          vehicle.hash,
+          json.encode(mods),
+          plate,
+          0
+      })
+      TriggerClientEvent(Config['CoreSettings']["QBCORE"]["ServerNotificationEvent"], src, "Your proud owner of this vehicle", 'success', 5000)
+  else
+      TriggerClientEvent(Config['CoreSettings']["QBCORE"]["ServerNotificationEvent"], src, "Fuck u bastard", 'error', 3000)
+  end
 end)

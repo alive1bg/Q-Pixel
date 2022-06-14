@@ -1017,16 +1017,16 @@ AddEventHandler('qb-polyzone:enter', function(name)
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
     if name == "garages" then
         inGarage = true
-        exports['np-ui']:showInteraction('Parking')
+        exports['qb-ui']:showInteraction('Parking')
     elseif name == "ganggarages" then
         inGarage = true
-        exports['np-ui']:showInteraction('Parking')
+        exports['qb-ui']:showInteraction('Parking')
     elseif name == "jobgarages" then
         inGarage = true
-        exports['np-ui']:showInteraction('Parking')
+        exports['qb-ui']:showInteraction('Parking')
     elseif name == "depots" then
         inDepots = true
-        exports['np-ui']:showInteraction('Depot')
+        exports['qb-ui']:showInteraction('Depot')
     end
 end)
 
@@ -1034,15 +1034,15 @@ RegisterNetEvent('qb-polyzone:exit')
 AddEventHandler('qb-polyzone:exit', function(name)
     if name == "garages" then
         inGarage = false
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     elseif name == "ganggarages" then
         inGarage = false
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     elseif name == "jobgarages" then
         inGarage = false
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     elseif name == "depots" then
         inDepots = false
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     end
 end)

@@ -1,0 +1,31 @@
+#containerStatusHud {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0%);
+    background-color: #222832;
+    color: #fff;
+    height: fit-content; /*110px*/
+    width: 272px;
+    border:1px solid black;
+    z-index:1;
+}
+
+.status-title {
+    color: #fff;
+	margin-left: 20px;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif!important;
+	font-weight: 600!important;
+	text-shadow: -1px 1px 0 #37474f, 1px 1px 0 #37474f, 1px -1px 0 #37474f, -1px -1px 0 #37474f;
+}
+
+.status-values {
+    color: #fff;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif!important;
+	font-weight: 600!important;
+	text-shadow: -1px 1px 0 #37474f, 1px 1px 0 #37474f, 1px -1px 0 #37474f, -1px -1px 0 #37474f;
+}

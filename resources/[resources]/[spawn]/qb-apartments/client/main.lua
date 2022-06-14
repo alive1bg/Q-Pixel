@@ -442,12 +442,12 @@ CreateThread(function()
 
                 if inRange and not shownHeader then
                     shownHeader = true
-                    exports['np-ui']:showInteraction(text)
+                    exports['qb-ui']:showInteraction(text)
                 end
 
                 if not inRange and shownHeader then
                     shownHeader = false
-                    exports['np-ui']:hideInteraction()
+                    exports['qb-ui']:hideInteraction()
                 end
 
             else
@@ -463,12 +463,12 @@ CreateThread(function()
 
                 if inRange and not shownHeader then
                     shownHeader = true
-                    exports['np-ui']:showInteraction(text)
+                    exports['qb-ui']:showInteraction(text)
                 end
 
                 if not inRange and shownHeader then
                     shownHeader = false
-                    exports['np-ui']:hideInteraction()
+                    exports['qb-ui']:hideInteraction()
                 end
             end
         end

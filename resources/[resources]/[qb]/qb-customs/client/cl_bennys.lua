@@ -863,8 +863,6 @@ function isAuthorized(job, location)
     return false
 end
 
-
-
 -------------------------------------------------- benny repair point event + function
 function BennyRepair()
     local plyPed = PlayerPedId()

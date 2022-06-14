@@ -1,5 +1,19 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local model = vehicle
+
+CreateThread(function()
+  local Blip = AddBlipForCoord(-38.49, -1101.07, 26.42)
+  SetBlipSprite (Blip, 326)
+  SetBlipDisplay(Blip, 4)
+  SetBlipScale  (Blip, 0.75)
+  SetBlipAsShortRange(Blip, true)
+  SetBlipColour(Blip, 50)
+  SetBlipAlpha(Blip, 0.7)
+  BeginTextCommandSetBlipName("STRING")
+  AddTextComponentSubstringPlayerName("Vehicle Shop")
+  EndTextCommandSetBlipName(Blip)
+end)
+
 RegisterNUICallback("showroomPurchaseCurrentVehicle", function(data, cb)
   QBCore.Functions.TriggerCallback("qb-showroom:purchaseVehicle", function(success, vehicle, plate)
     local plate = QBCore.Functions.GetPlate(vehicle)

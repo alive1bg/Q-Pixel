@@ -83,11 +83,11 @@ CreateThread(function()
 			pause = true
 			correct = 1
 			TriggerEvent('3dme:triggerDisplay', 'Fishing Rod Starts to Tug!')
-			exports['np-ui']:showInteraction("Press [F] to Catch Fish!")
+			exports['qb-ui']:showInteraction("Press [F] to Catch Fish!")
 			input = 0
 			pausetimer = 0
 		else
-			exports['np-ui']:hideInteraction()
+			exports['qb-ui']:hideInteraction()
 		end
 	end
 end)
@@ -153,47 +153,17 @@ end)
 
 RegisterNetEvent('fishing:SkillBar', function(message)
 	exports['textUi']:DrawTextUi('hide')
-	if Config.Skillbar == "reload-skillbar" then
-		local finished = exports["reload-skillbar"]:taskBar(math.random(5000,7500),math.random(2,4))
-		if finished ~= 100 then
-			QBCore.Functions.Notify('The Fish Got Away!', 'error')
-			loseBait()
-		else
-			local finished2 = exports["reload-skillbar"]:taskBar(math.random(2500,5000),math.random(3,5))
-			if finished2 ~= 100 then
-				QBCore.Functions.Notify('The Fish Escaped!', 'error')
-				loseBait()
-			else
-				local finished3 = exports["reload-skillbar"]:taskBar(math.random(900,2000),math.random(5,7))
-				if finished3 ~= 100 then
-					QBCore.Functions.Notify('The Fish Got Away!', 'error')
-					loseBait()
-				else
-					catchAnimation()
-				end
-			end
-		end
-	elseif Config.Skillbar == "qb-skillbar" then 
-		local finished = exports["qb-skillbar"]:taskBar(1000,math.random(3,5))
-		if finished ~= 100 then
-			QBCore.Functions.Notify('The Fish Got Away!', 'error')
-			loseBait()
-		else
-			catchAnimation()
-		end
-	elseif Config.Skillbar == "qb-skillbar" then
-		local Skillbar = exports['qb-skillbar']:GetSkillbarObject()
-		Skillbar.Start({
-			duration = math.random(2500,5000),
-			pos = math.random(10, 30),
-			width = math.random(10, 20),
-		}, function()
-			catchAnimation()
-		end, function()
-			QBCore.Functions.Notify('The Fish Escaped!', 'error')
-			loseBait()
-		end)
+	--if Config.Skillbar == "qb-lock" then
+	local success = exports['qb-lock']:StartLockPickCircle(3,40)
+	if success then
+		QBCore.Functions.Notify('The Fish Got Away!', 'error')
+		loseBait()
+		ClearPedTasks(playerPed)
+	else
+		catchAnimation()
+		QBCore.Functions.Notify('Bingo!', 'success')
 	end
+	--end
 end) 
 
 RegisterNetEvent('fishing:client:spawnFish', function(args)
@@ -270,10 +240,10 @@ RegisterNetEvent('fishing:fishstart', function()
 		local time = 1000
 		QBCore.Functions.Notify('Using Fishing Rod', 'primary', time)
 		Wait(time)
-		exports['np-ui']:showInteraction("Press [X] to stop fishing at any time")
+		exports['qb-ui']:showInteraction("Press [X] to stop fishing at any time")
 		fishAnimation()
 	else
-		exports['np-ui']:hideInteraction()
+		exports['qb-ui']:hideInteraction()
 		QBCore.Functions.Notify('You need to go further away from the shore', 'error')
 	end
 end, false)
@@ -521,9 +491,9 @@ loseBaitAnimation = function()
 	end
 	TaskPlayAnim(ped, animDict, animName, 1.0, -1.0, 1.0, 0, 0, 0, 48, 0)
 	RemoveAnimDict(animDict)
-	exports['np-ui']:showInteraction("Fish took your bait!")
+	exports['qb-ui']:showInteraction("Fish took your bait!")
 	Wait(2000)
-	exports['np-ui']:hideInteraction()
+	exports['qb-ui']:hideInteraction()
 	--exports['textUi']:DrawTextUi('hide')
 	fishAnimation()
 end

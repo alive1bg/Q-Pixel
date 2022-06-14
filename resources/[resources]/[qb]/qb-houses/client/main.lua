@@ -1019,11 +1019,13 @@ RegisterNetEvent('qb-houses:client:HomeInvasion', function()
                     if Config.Houses[ClosestHouse].locked then
                         if not Config.Houses[ClosestHouse].IsRaming then
                             DoRamAnimation(true)
-                            Skillbar.Start({
+                            local success = exports['qb-lock']:StartLockPickCircle(3,40)
+	                        if success then
+                            --[[Skillbar.Start({
                                 duration = math.random(5000, 10000),
                                 pos = math.random(10, 30),
                                 width = math.random(10, 20),
-                            }, function()
+                            }, function()]]
                                 if RamsDone + 1 >= Config.RamsNeeded then
                                     TriggerServerEvent('qb-houses:server:lockHouse', false, ClosestHouse)
                                     QBCore.Functions.Notify(Lang:t("success.home_invasion"), 'success')
@@ -1031,20 +1033,23 @@ RegisterNetEvent('qb-houses:client:HomeInvasion', function()
                                     TriggerServerEvent('qb-houses:server:SetRamState', false, ClosestHouse)
                                     DoRamAnimation(false)
                                 else
-                                    DoRamAnimation(true)
-                                    Skillbar.Repeat({
+                                    if success then
+                                        DoRamAnimation(true)
+                                    --[[Skillbar.Repeat({
                                         duration = math.random(500, 1000),
                                         pos = math.random(10, 30),
                                         width = math.random(5, 12),
-                                    })
-                                    RamsDone = RamsDone + 1
+                                    })]]
+                                        RamsDone = RamsDone + 1
+                                    end
                                 end
-                            end, function()
+                            --end, function()
+                            else
                                 RamsDone = 0
                                 TriggerServerEvent('qb-houses:server:SetRamState', false, ClosestHouse)
                                 QBCore.Functions.Notify(Lang:t("error.failed_invasion"), 'error')
                                 DoRamAnimation(false)
-                            end)
+                            end
                             TriggerServerEvent('qb-houses:server:SetRamState', true, ClosestHouse)
                         else
                             QBCore.Functions.Notify(Lang:t("error.inprogress_invasion"), 'error')
@@ -1235,20 +1240,20 @@ CreateThread(function()
                     if not IsInside then
                         if ClosestHouse ~= nil then
                             if #(pos - dist2) <= 1.5 then
-                                exports['np-ui']:showInteraction("House")
+                                exports['qb-ui']:showInteraction("House")
                                 if IsControlJustPressed(0, 38) then
                                     TriggerEvent("qb-houses:client:EnterHouse")
                                 end
                                 nearLocation = true
                             elseif #(pos - dist2) <= 2.0 then
-                                exports['np-ui']:hideInteraction()
+                                exports['qb-ui']:hideInteraction()
                             end
                         end
                     else
                         if not entering and POIOffsets ~= nil then
                             local exitOffset = vector3(Config.Houses[CurrentHouse].coords.enter.x + POIOffsets.exit.x, Config.Houses[CurrentHouse].coords.enter.y + POIOffsets.exit.y, Config.Houses[CurrentHouse].coords.enter.z - Config.MinZOffset + POIOffsets.exit.z + 1.0)
                             if #(pos - exitOffset) <= 1.5 then
-                                exports['np-ui']:showInteraction("[E] Exit House [G] Front Camera")
+                                exports['qb-ui']:showInteraction("[E] Exit House [G] Front Camera")
                                 if IsControlJustPressed(0, 38) then
                                     TriggerEvent("qb-houses:client:ExitOwnedHouse")
                                 elseif IsControlJustPressed(0, 47) then
@@ -1256,14 +1261,14 @@ CreateThread(function()
                                 end
 
                                 if CurrentDoorBell ~= 0 then
-                                    exports['np-ui']:showInteraction("[H] Answer Door Bell")
+                                    exports['qb-ui']:showInteraction("[H] Answer Door Bell")
                                     if IsControlJustPressed(0, 74) then
                                         TriggerEvent("qb-houses:client:AnswerDoorbell")
                                     end
                                 end
                                 nearLocation = true
                             elseif #(pos - exitOffset) <= 2.0 then
-                                exports['np-ui']:hideInteraction()
+                                exports['qb-ui']:hideInteraction()
                             end
                         end
                     end
@@ -1273,14 +1278,14 @@ CreateThread(function()
                             local houseCoords = vector3(Config.Houses[ClosestHouse].coords.enter.x, Config.Houses[ClosestHouse].coords.enter.y, Config.Houses[ClosestHouse].coords.enter.z)
                             if #(pos - houseCoords) <= 1.5 then
                                 if not viewCam and Config.Houses[ClosestHouse].locked then
-                                    exports['np-ui']:showInteraction("[E] View House")
+                                    exports['qb-ui']:showInteraction("[E] View House")
                                     if IsControlJustPressed(0, 38) then
                                         TriggerEvent("qb-houses:client:ViewHouse")
                                     end
                                     nearLocation = true
                                 end
                             elseif #(pos - houseCoords) <= 2.0 then
-                                exports['np-ui']:hideInteraction()
+                                exports['qb-ui']:hideInteraction()
                             end
                         end
 
@@ -1288,26 +1293,26 @@ CreateThread(function()
                             local houseCoords = vector3(Config.Houses[ClosestHouse].coords.enter.x, Config.Houses[ClosestHouse].coords.enter.y, Config.Houses[ClosestHouse].coords.enter.z)
                             if #(pos - houseCoords) <= 1.5 then
                                 nearLocation = true
-                                exports['np-ui']:showInteraction("[G] Ring the Doorbell")
+                                exports['qb-ui']:showInteraction("[G] Ring the Doorbell")
                                 if IsControlJustPressed(0, 47) then
                                     TriggerEvent("qb-houses:client:RequestRing")
                                 end
 
                                 if not Config.Houses[ClosestHouse].locked then
-                                    exports['np-ui']:showInteraction("[E] Enter Unlocked House")
+                                    exports['qb-ui']:showInteraction("[E] Enter Unlocked House")
                                     if IsControlJustPressed(0, 38) then
                                         TriggerEvent("qb-houses:client:EnterHouse")
                                     end
 
                                     if QBCore.Functions.GetPlayerData().job.name == 'police' then
-                                        exports['np-ui']:showInteraction("[E] Lock Door")
+                                        exports['qb-ui']:showInteraction("[E] Lock Door")
                                         if IsControlJustPressed(0, 38) then
                                             TriggerEvent("qb-houses:client:ResetHouse")
                                         end
                                     end
                                 end
                             elseif #(pos - houseCoords) <= 2.0 then
-                                exports['np-ui']:hideInteraction()
+                                exports['qb-ui']:hideInteraction()
                             end
                         end
                     end
@@ -1316,7 +1321,7 @@ CreateThread(function()
                         if POIOffsets ~= nil then
                             local exitOffset = vector3(Config.Houses[CurrentHouse].coords.enter.x + POIOffsets.exit.x, Config.Houses[CurrentHouse].coords.enter.y + POIOffsets.exit.y, Config.Houses[CurrentHouse].coords.enter.z - Config.MinZOffset + POIOffsets.exit.z + 1.0)
                             if #(pos - exitOffset) <= 1.5 then
-                                exports['np-ui']:showInteraction("[E] Exit Property")
+                                exports['qb-ui']:showInteraction("[E] Exit Property")
                                 if IsControlJustPressed(0, 47) then
                                     TriggerEvent("qb-houses:client:ExitOwnedHouse")
                                 end
@@ -1330,37 +1335,37 @@ CreateThread(function()
                     if stashLocation ~= nil then
                         if #(pos - vector3(stashLocation.x, stashLocation.y, stashLocation.z)) <= 1.5 then
                             nearLocation = true
-                            exports['np-ui']:showInteraction("[E] Stash")
+                            exports['qb-ui']:showInteraction("[E] Stash")
                             if IsControlJustPressed(0, 38) then
                                 TriggerEvent("qb-houses:client:OpenStash")
                             end
 
                         elseif #(pos - vector3(stashLocation.x, stashLocation.y, stashLocation.z)) <= 2 then
-                            exports['np-ui']:hideInteraction()
+                            exports['qb-ui']:hideInteraction()
                         end
                     end
 
                     if outfitLocation ~= nil then
                         if #(pos - vector3(outfitLocation.x, outfitLocation.y, outfitLocation.z)) <= 1.5 then
                             nearLocation = true
-                            exports['np-ui']:showInteraction("[E] Outfits")
+                            exports['qb-ui']:showInteraction("[E] Outfits")
                             if IsControlJustPressed(0, 38) then
                                 TriggerEvent("raid_clothes:outfits")
                             end
                         elseif #(pos - vector3(outfitLocation.x, outfitLocation.y, outfitLocation.z)) <= 2 then
-                            exports['np-ui']:hideInteraction()
+                            exports['qb-ui']:hideInteraction()
                         end
                     end
 
                     if logoutLocation ~= nil then
                         if #(pos - vector3(logoutLocation.x, logoutLocation.y, logoutLocation.z)) <= 1.5 then
                             nearLocation = true
-                            exports['np-ui']:showInteraction("[E] Logout")
+                            exports['qb-ui']:showInteraction("[E] Logout")
                             if IsControlJustPressed(0, 38) then
                                 TriggerEvent("qb-houses:client:ChangeCharacter")
                             end
                         elseif #(pos - vector3(logoutLocation.x, logoutLocation.y, logoutLocation.z)) < 2 then
-                            exports['np-ui']:hideInteraction()
+                            exports['qb-ui']:hideInteraction()
                         end
                     end
                 end

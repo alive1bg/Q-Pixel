@@ -946,12 +946,12 @@ CreateThread(function()
             end
             if inZone and not alreadyEnteredZone then
                 alreadyEnteredZone = true
-                exports['np-ui']:showInteraction(text)
+                exports['qb-ui']:showInteraction(text)
             end
     
             if not inZone and alreadyEnteredZone then
                 alreadyEnteredZone = false
-                exports['np-ui']:hideInteraction()
+                exports['qb-ui']:hideInteraction()
             end
         end
     end

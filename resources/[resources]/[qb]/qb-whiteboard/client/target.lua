@@ -38,7 +38,7 @@ exports['qb-target']:AddBoxZone("mrpd_meetingroom_screen", vector3(439.24, -985.
 
 RegisterNetEvent("qb-whiteboard:changewhiteboardcli")
 AddEventHandler("qb-whiteboard:changewhiteboardcli", function()
-    local dialog = exports['np-ui']:OpenInputMenu({
+    local dialog = exports['qb-ui']:OpenInputMenu({
         {
             label = "Whiteboard URL",
             name = 'URL',

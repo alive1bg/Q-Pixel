@@ -65,7 +65,7 @@ CreateThread(function()
                     if dist < 4 then
                         if dist <= 1.5 then 
                             inZone = true
-                            exports['np-ui']:showInteraction("[E] Open Storage")
+                            exports['qb-ui']:showInteraction("[E] Open Storage")
                             if dist <= 2 then
                                 currentLocker = v
                                 lockerName = k
@@ -75,7 +75,7 @@ CreateThread(function()
                                 end
                             end
                         else
-                            exports['np-ui']:hideInteraction()
+                            exports['qb-ui']:hideInteraction()
                         end
                 
                 end
@@ -83,12 +83,12 @@ CreateThread(function()
         end
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['np-ui']:showInteraction()
+            exports['qb-ui']:showInteraction()
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     Wait(sleep)
     end
@@ -108,7 +108,7 @@ AddEventHandler('qb-storagelockers:buystorage', function()
             }
         },
     })
-    --[[local dialog = exports['np-ui']:OpenInputMenu({
+    --[[local dialog = exports['qb-ui']:OpenInputMenu({
         {
             label = 'Create Password',
             name = 'password',
@@ -140,7 +140,7 @@ AddEventHandler('qb-storagelockers:changePassword', function()
             }
         },
     })]]
-    local dialog = exports['np-ui']:OpenInputMenu({
+    local dialog = exports['qb-ui']:OpenInputMenu({
         {
             label = 'Change Password',
             name = 'password',
@@ -166,7 +166,7 @@ AddEventHandler('qb-storagelockers:openStorage', function()
             }
         },
     })]]
-    local dialog = exports['np-ui']:OpenInputMenu({
+    local dialog = exports['qb-ui']:OpenInputMenu({
         {
             label = 'Storage Password',
             name = 'password',

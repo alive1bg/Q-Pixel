@@ -23,7 +23,72 @@ QBShared.Jobs = {
             },
         },
 	},
-    ['maldinis'] = {
+    ["noodle"] = {
+        label = "Noodle",
+        defaultDuty = true,
+        grades = {
+            ['0'] = {
+                label = 'Worker',
+                payment = 30,
+            },
+            ['1'] = {
+                label = 'Vice Boss',
+                payment = 70,
+            },
+            ['2'] = {
+                label = 'Boss',
+                isboss = true,
+                payment = 130,
+            },
+        }
+    },
+    ["icecream"] = {
+        label = "IceCream",
+        offDutyPay = false,
+        defaultDuty = false,
+        grades = {
+            ['0'] = {
+                name = 'Worker',
+                payment = 30,
+            },
+            ['1'] = {
+                name = 'Vice Boss',
+                payment = 70,
+            },
+            ['2'] = {
+                name = 'Boss',
+                isboss = true,
+                payment = 130,
+            },
+        }
+    },
+    ['beanmachine'] = {
+		label = 'Bean Machine',
+		defaultDuty = true,
+		grades = {
+            ['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+        },
+	},
+    ['billiard'] = {
+        label = 'Billiard Bar',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Employee',
+                payment = 50
+            },
+            ['2'] = {
+                name = 'Boss',
+                payment = 100
+            },
+        },
+    },
+    ['pizzathis'] = {
 		label = 'Maldinis Pizza',
 		defaultDuty = true,
 		grades = {
@@ -167,6 +232,48 @@ QBShared.Jobs = {
             },
         },
 	},
+    ['vanilla'] = {
+		label = 'Vanilla Unicorn',
+		defaultDuty = true,
+		grades = {
+            ['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+        },
+	},
+    ["records"] = {
+        label = "Records",
+        offDutyPay = false,
+        defaultDuty = false,
+        grades = {
+            ['0'] = {
+                name = 'Worker',
+                payment = 30,
+            },
+            ['1'] = {
+                name = 'Vice Boss',
+                payment = 70,
+            },
+            ['2'] = {
+                name = 'Boss',
+                isboss = true,
+                payment = 130,
+            },
+        }
+    },
+    ['popsdiner'] = {
+		label = 'Pop\'s Diner',
+		defaultDuty = true,
+		grades = {
+            ['0'] = { name = 'Recruit', payment = 50 },
+			['1'] = { name = 'Novice', payment = 75 },
+			['2'] = { name = 'Experienced', payment = 100 },
+			['3'] = { name = 'Advanced', payment = 125 },
+			['4'] = { name = 'Manager', isboss = true, payment = 150 },
+        },
+	},
     ['gallery'] = {
 		label = 'Viva le Cultur',
 		defaultDuty = true,
@@ -184,6 +291,34 @@ QBShared.Jobs = {
         },
 	},
     ['uwu'] = {
+		label = 'uWu Cafe',
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+			['0'] = {
+				name = 'Recruit',
+				payment = 65
+			},
+			['1'] = {
+				name = 'Crew Member',
+				payment = 75
+			},
+			['2'] = {
+				name = 'Shift Manager',
+				payment = 95
+			},
+			['3'] = {
+				name = 'Manager',
+				payment = 110
+			},
+			['4'] = {
+				name = 'Owner',
+				isboss = true,
+				payment = 120
+			},
+		},
+	},
+    ['catcafe'] = {
 		label = 'uWu Cafe',
 		defaultDuty = true,
 		offDutyPay = false,

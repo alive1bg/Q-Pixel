@@ -13,7 +13,7 @@ function SpawnPeds()
         FreezeEntityPosition(model, true)
         SetEntityInvincible(model, true)
         SetBlockingOfNonTemporaryEvents(model, true)
-        if Config.Ped[i].type == "qb-clothing" then -- QB CLOTHING
+        --[[if Config.Ped[i].type == "raid_clothes" then -- QB CLOTHING
             local data = json.decode(Config.Ped[i].data)
             for i = 0, 11 do
                 SetPedComponentVariation(model, i, 0, 0, 0)
@@ -111,7 +111,7 @@ function SpawnPeds()
             SetPedFaceFeature(model, 17, (data['chimp_bone_width'].item / 10))
             SetPedFaceFeature(model, 18, (data['chimp_hole'].item / 10))
             SetPedFaceFeature(model, 19, (data['neck_thikness'].item / 10))
-        end
+        end]]
     end
 end
 
@@ -166,7 +166,6 @@ CreateThread(function()
                 FreezeEntityPosition(ped, true)
                 TaskPlayAnim(ped, "mp_ped_interaction", "kisses_guy_a", 8.00, -8.00, 5000, 51, 0.00, 0, 0, 0)
                 TaskPlayAnim(model, "mp_ped_interaction", "kisses_guy_a", 8.00, -8.00, 5000, 51, 0.00, 0, 0, 0)
-                --TriggerServerEvent('hud:server:RelieveStress', 100) -- stress from hud
                 TriggerServerEvent("qb-hugs:server:hug",spawn)
                 Wait(5000)
                 TriggerServerEvent('hud:server:RelieveStress', 100) -- stress from hud
@@ -179,12 +178,12 @@ CreateThread(function()
 
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['np-ui']:showInteraction(text)
+            exports['qb-ui']:showInteraction(text)
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     end
 end)
@@ -195,7 +194,7 @@ CreateThread(function()
     while not HasModelLoaded(model) do
         Wait(10)
     end
-    local veh = CreateVehicle(model, 1056.88, -387.13, 67.4, true, false)
+    local veh = CreateVehicle(model, 1056.88, -387.13, 67.0, true, false)
     SetModelAsNoLongerNeeded(model)
     SetEntityAsMissionEntity(veh, true, true)
     SetVehicleOnGroundProperly(veh)

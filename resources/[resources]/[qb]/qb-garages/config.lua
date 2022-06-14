@@ -584,6 +584,25 @@ Garages = {
             [6] = { ['x'] = 911.82989, ['y'] = -16.11595, ['z'] = 78.414123, ['h'] = 327.01995},  
         }
     },
+    ["viceroypublic"] = {
+        label = "Viceroy Public Garage",
+        Blip = vector3(-820.2373, -1198.296, 6.8947191),
+        polyzone = vector3(-820.02, -1198.43, 6.88),
+        polyzone1 = 22.6,
+        polyzone2 = 6.4,
+        heading=50,
+        minZ=5.28,
+        maxZ=9.88,
+        showBlip = true,
+        spawns = {
+            [1] = { ['x'] = -814.4332, ['y'] = -1203.186, ['z'] = 6.3287611, ['h'] = 139.38473},
+            [2] = { ['x'] = -816.9955, ['y'] = -1201.219, ['z'] = 6.3289775, ['h'] = 139.38473},
+            [3] = { ['x'] = -819.2673, ['y'] = -1199.026, ['z'] = 6.3171248, ['h'] = 139.38473},
+            [4] = { ['x'] = -821.6491, ['y'] = -11.82704, ['z'] = 6.2187552, ['h'] = 139.384731},
+            [5] = { ['x'] = -824.0814, ['y'] = -1196.678, ['z'] = 6.116651, ['h'] = 139.38473},
+            [6] = { ['x'] = -826.5748, ['y'] = -1192.677, ['z'] = 6.0056457, ['h'] = 139.38473},  
+        }
+    },
 }
 
 HouseGarages = {}
@@ -598,6 +617,7 @@ GangGarages = {
         heading = 320,
         minZ = 19.75,
         maxZ = 23.75,
+        showBlip = true,
         spawns = {
             [1] = { ['x'] = 95.19, ['y'] = -1960.34, ['z'] = 20.18, ['h'] = 319.61 },
         },
@@ -611,6 +631,7 @@ GangGarages = {
         heading = 330,
         minZ = 72.09,
         maxZ = 76.09,
+        showBlip = true,
         spawns = {
             [1] = { ['x'] = 986.14, ['y'] = -138.81, ['z'] = 73.09, ['h'] = 59.66 },
         },
@@ -624,6 +645,7 @@ GangGarages = {
         heading = 320,
         minZ = 19.2,
         maxZ = 23.8,
+        showBlip = true,
         spawns = {
             [1] = { ['x'] = 318.64, ['y'] = -2019.87, ['z'] = 20.15, ['h'] = 321.95},
             [2] = { ['x'] = 321.0, ['y'] = -2021.92, ['z'] = 20.24, ['h'] = 322.33},
@@ -759,5 +781,47 @@ JobGarages = {
         minZ = 27.8,
         maxZ = 31.8,
         showBlip = false
+    },
+    ["viceroy"] = {
+        label = "Viceroy Garage",
+        job = "ambulance", -- job which have access
+        isHelipad = false,
+        Blip = vector3(-846.4376, -1230.05, 6.9330425),
+        polyzone = vector3(-846.4376, -1230.05, 6.9330425),
+        polyzone1 = 18.6, 
+        polyzone2 = 7.0,
+        heading = 70,
+        minZ = 27.8,
+        maxZ = 31.8,
+        showBlip = true,
+        spawns = {
+            [1] = { ['x'] = -840.6776, ['y'] = -1234.959, ['z'] = 6.7159261, ['h'] = 320.18695},
+            [2] = { ['x'] = -844.1255, ['y'] = -1232.11, ['z'] = 6.7159261, ['h'] = 320.18695},
+            [3] = { ['x'] = -848.8594, ['y'] = -1227.905, ['z'] = 6.5704331, ['h'] = 320.18695},
+            [4] = { ['x'] = -852.4533, ['y'] = -1224.895, ['z'] = 6.4466891, ['h'] = 320.18695},
+        },
+    },
+    ["viceroy2"] = {
+        polyzone = vector3(-846.4376, -1230.05, 6.9330425),
+        polyzone1 = 20.4, 
+        polyzone2 = 6.0,
+        heading=50,
+        minZ=5.13,
+        maxZ=9.73,
+        showBlip = false
+    },
+    ["viceheli"] = {
+        label = "Viceroy HeliPad",
+        job = "ambulance",
+        isHelipad = true, -- must set as true, if garage is a helipad
+        Blip = vector3(-791.1046, -1191.664, 53.027042),
+        helipad = vector4(-791.1046, -1191.664, 53.027042, 50.2247),
+        polyzone = vector3(-790.7, -1191.92, 51.15),
+        polyzone1 = 20.4, 
+        polyzone2 = 18.6,
+        heading = 50,
+        minZ=50.15,
+        maxZ=62.35,
+        showBlip = true
     },
 }

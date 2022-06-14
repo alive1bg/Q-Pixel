@@ -260,7 +260,7 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
                             local heading = cfg_wheelFitmentPos[zone].heading
                             --DrawMarker(20, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
                             if isNear(plyPos, coords, 2.0) then
-                                exports["np-ui"]:showInteraction("[E] Adjust Wheel Fitment")
+                                --exports["qb-ui"]:showInteraction("[E] Adjust Wheel Fitment")
                                 --Draw3DText(coords.x, coords.y, coords.z, "[Press ~p~E~w~ - Adjust Wheel Fitment]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
 
                                 if IsControlJustReleased(1, 38) then -- Key: E
@@ -380,8 +380,8 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
 
                                     DisplayMenu(true, slider_wWidth, slider_wSize, slider_wfFL, slider_wfFR, slider_wfRL, slider_wfRR, slider_wfFLRO, slider_wfFRRO, slider_wfRLRO, slider_wfRRRO, sliderStartPos)
                                 end
-                            else 
-                                exports["np-ui"]:hideInteraction()
+                            --else 
+                                --exports["qb-ui"]:hideInteraction()
                             end
                         end
                     end

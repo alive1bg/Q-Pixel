@@ -798,7 +798,7 @@ Config.Locations = {
     },
 
     -- Bean Coffee Locations
-    ["beancoffee"] = {
+    --[[["beancoffee"] = {
         ["label"] = "Bean Machine Coffee",
         ["coords"] = {
             [1] = vector3(-633.72, 236.15, 81.88)
@@ -806,7 +806,7 @@ Config.Locations = {
         ["products"] = Config.Products["coffeeplace"],
         ["showblip"] = false,
         ["blipsprite"] = 52
-    },
+    },]]
 
     -- Sea Word Locations
     ["seaword1"] = {

@@ -1,17 +1,16 @@
 fx_version 'bodacious'
-games { 'gta5' }
+game 'gta5'
 
-author 'Leastjuh'
-description 'Lockpick Circle Mini-Game'
-version '1.0'
+description 'amir_expert#1911 - LockPick'
 
-client_scripts {
-    'client/*.lua',
-}
+version '1.0.3'
+
+client_script 'client/client.lua'
 
 ui_page {
     'html/index.html',
 }
+
 files {
     'html/index.html',
     'html/*.css',

@@ -14,6 +14,13 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
 	PlayerData.job = job
 end)
 
+function ExportRecords()
+    openMenu({
+		{menu = "character", label = "Clothing", selected = true},
+		{menu = "accessoires", label = "Accessories", selected = false}
+	})
+end
+
 local enabled = false
 local player = false
 local firstChar = false
@@ -1056,7 +1063,7 @@ local function listenForKeypress(zoneName, zoneData, isFree)
                 currentPrice = isFree and 0 or priceWithTax.total
                 priceWithTax.text = isFree and 0 or priceWithTax.text
                 OpenMenu(zoneName, priceWithTax.text, currentPrice)
-                exports['np-ui']:hideInteraction()
+                exports['qb-ui']:hideInteraction()
             end
             Wait(0)
         end
@@ -1157,7 +1164,7 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
     local currentZone = MenuData[zone]
     if currentZone then
         inzone = true
-        exports['np-ui']:showInteraction("[E] Store")
+        exports['qb-ui']:showInteraction("[E] Store")
         listenForKeypress(zone, currentZone, ((data and data.isFree) and true or false))
     end
 end)
@@ -1167,7 +1174,7 @@ AddEventHandler("qb-polyzone:exit", function(zone)
     if currentZone then
         inzone = false
         listening = false
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     end
 end)
 
@@ -1198,11 +1205,11 @@ AddEventHandler("np-inventory:itemUsed", function(item)
 end)
 
 
-RegisterUICallback("np-ui:raid_clothes:addOutfitPrompt", function(data, cb)
+RegisterUICallback("qb-ui:raid_clothes:addOutfitPrompt", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     Wait(1) --wait to fix ui bug?
-    exports['np-ui']:openApplication('textbox', {
-        callbackUrl = 'np-ui:raid_clothes:addOutfit',
+    exports['qb-ui']:openApplication('textbox', {
+        callbackUrl = 'qb-ui:raid_clothes:addOutfit',
         key = data.key,
         items = {
           {
@@ -1215,9 +1222,9 @@ RegisterUICallback("np-ui:raid_clothes:addOutfitPrompt", function(data, cb)
     })
 end)
 
-RegisterUICallback("np-ui:raid_clothes:addOutfit", function(data, cb)
+RegisterUICallback("qb-ui:raid_clothes:addOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = '' } })
-    exports['np-ui']:closeApplication('textbox')
+    exports['qb-ui']:closeApplication('textbox')
     local outfitSlot = data.key
     local outfitName = data.values.outfitname
     if outfitName == nil then outfitName = "" end
@@ -1225,13 +1232,13 @@ RegisterUICallback("np-ui:raid_clothes:addOutfit", function(data, cb)
     TriggerServerEvent("raid_clothes:set_outfit", outfitSlot, outfitName, GetCurrentPed())
 end)
 
-RegisterUICallback("np-ui:raid_clothes:changeOutfit", function(data, cb)
+RegisterUICallback("qb-ui:raid_clothes:changeOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     TriggerServerEvent("raid_clothes:get_outfit", data.key)
     TriggerEvent("backitems:displayItems", true)
 end)
 
-RegisterUICallback("np-ui:raid_clothes:deleteOutfit", function(data, cb)
+RegisterUICallback("qb-ui:raid_clothes:deleteOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     TriggerServerEvent('raid_clothes:remove_outfit', data.key)
 end)
@@ -1248,8 +1255,8 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                 description = '',
                 key = slot,
                 children = {
-                    { title = "Change Outfit", action = "np-ui:raid_clothes:changeOutfit", key = slot},
-                    { title = "Delete Outfit", action = "np-ui:raid_clothes:deleteOutfit", key = slot},
+                    { title = "Change Outfit", action = "qb-ui:raid_clothes:changeOutfit", key = slot},
+                    { title = "Delete Outfit", action = "qb-ui:raid_clothes:deleteOutfit", key = slot},
                 }
             }
         end
@@ -1266,18 +1273,18 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                     title = "Save Current Outfit",
                     description = '',
                     key = emptySlot,
-                    action = "np-ui:raid_clothes:addOutfitPrompt"
+                    action = "qb-ui:raid_clothes:addOutfitPrompt"
                 }
             end
-            exports['np-ui']:showContextMenu(menuData)
+            exports['qb-ui']:showContextMenu(menuData)
         else
             menuData[1] = {
                 title = "Save Current Outfit",
                 description = '',
                 key = 1,
-                action = "np-ui:raid_clothes:addOutfitPrompt"
+                action = "qb-ui:raid_clothes:addOutfitPrompt"
             }
-            exports['np-ui']:showContextMenu(menuData)
+            exports['qb-ui']:showContextMenu(menuData)
         end
     else
         QBCore.Functions.Notify("You have to be near clothing shop or in apartment or house")

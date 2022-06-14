@@ -142,7 +142,7 @@ AddEventHandler("DamageEvents:EntityDamaged", function(victim, attacker, pWeapon
       end
       Wait(waitTime)
     end
-    exports['np-ui']:hideInteraction("Tranquilized", "error")
+    exports['qb-ui']:hideInteraction("Tranquilized", "error")
     tranqed = false
     StopScreenEffect("DrugsMichaelAliensFight")
     ClearPedTasks(playerPed)
@@ -154,7 +154,7 @@ AddEventHandler("DamageEvents:EntityDamaged", function(victim, attacker, pWeapon
   end)
   CreateThread(function()
     Wait(5000)
-    exports['np-ui']:showInteraction("Tranquilized", "error")
+    exports['qb-ui']:showInteraction("Tranquilized", "error")
     DoScreenFadeIn(5000)
     StartScreenEffect("DrugsMichaelAliensFight", 3.0, 0)
   end)

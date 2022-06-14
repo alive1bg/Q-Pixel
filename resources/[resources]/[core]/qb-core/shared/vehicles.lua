@@ -467,10 +467,10 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	['e92lb'] = {
-		['name'] = 'E92 LB',
+		['name'] = 'E92 Libery Walk',
 		['brand'] = 'Bmw',
 		['model'] = 'e92lb',
-		['price'] = 47000,
+		['price'] = 87000,
 		['category'] = 'bmw',
 		['hash'] = `e92lb`,
 		['shop'] = 'tuner',
@@ -1522,15 +1522,6 @@ QBShared.Vehicles = {
 		['price'] = 260000,
 		['category'] = 'nissan',
 		['hash'] = `silvia3`,
-		['shop'] = 'tuner',
-	},
-	['er34'] = {
-		['name'] = 'Skyline R34',
-		['brand'] = 'Nissan',
-		['model'] = 'er34',
-		['price'] = 250000,
-		['category'] = 'nissan',
-		['hash'] = `er34`,
 		['shop'] = 'tuner',
 	},
 	['nis180'] = {

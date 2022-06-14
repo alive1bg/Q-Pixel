@@ -129,72 +129,99 @@ CreateThread(function()
         minZ=34.91,
         maxZ=37.11
     })
+
+    exports["qb-polyzone"]:AddBoxZone("tunerwheelfitment", vector3(135.97, -3030.48, 7.04), 3.55, 6.2, {
+        name="tunerwheelfitment",
+        heading=270,
+        debugPoly = true,
+        minZ=6.04,
+        maxZ=8.24
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("policerepair", vector3(452.08, -975.89, 25.7), 4.6, 12.4, {
+        name="policerepair",
+        heading=0,
+        debugPoly = true,
+        minZ=24.7,
+        maxZ=28.1
+    })
 end)
 
 RegisterNetEvent('qb-polyzone:enter')
 AddEventHandler('qb-polyzone:enter', function(name)
     local InVehicle = IsPedInAnyVehicle(PlayerPedId())
     if name == "votecabin" then
-        if not InVehicle then
+        --if not InVehicle then
             inVoteCabin = true
-            exports['np-ui']:showInteraction('Vote Cabin')
+            exports['qb-ui']:showInteraction('Vote Cabin')
+        --end
+    elseif name == "policerepair" then
+        if InVehicle then
+            if PlayerJob.name == "police" and onDuty then
+                exports['qb-ui']:showInteraction("Bennys")
+            end
         end
-    end
-    if name == "6strtunershopui" then
+    elseif name == "6strtunershopui" then
         if InVehicle then
             if PlayerJob.name == "tuner" and onDuty then
-                exports['np-ui']:showInteraction("6STR Tuner Shop")
+                exports['qb-ui']:showInteraction("6STR Tuner Shop")
+            end
+        end
+    elseif name == "tunerwheelfitment" then
+        if InVehicle then
+            if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 and onDuty then
+                exports['qb-ui']:showInteraction("[E] Adjust Wheelfitmet")
             end
         end
     elseif name == "pillboxcheckinui" then
         if doctorCount >= Config.MinimalDoctors then
-            exports['np-ui']:showInteraction("Call Doctor")
+            exports['qb-ui']:showInteraction("Call Doctor")
         else
-            exports['np-ui']:showInteraction('Check In')
+            exports['qb-ui']:showInteraction('Check In')
         end
     elseif name == "bennysrepairui" then
         if InVehicle then
-            exports['np-ui']:showInteraction("Bennys")
+            exports['qb-ui']:showInteraction("Bennys")
         end
     elseif name == "bennysrepair2ui" then
         if InVehicle then
-            exports['np-ui']:showInteraction("Bennys")
+            exports['qb-ui']:showInteraction("Bennys")
         end
     elseif name == "tunerrepairui" then
         if InVehicle then
             if PlayerJob.name == "tuner" and onDuty then
-                exports['np-ui']:showInteraction("Repair Station")
+                exports['qb-ui']:showInteraction("Repair Station")
             end
         end
     elseif name == "tunerstashui" then
         if PlayerJob.name == "tuner" and onDuty then
-            exports['np-ui']:showInteraction("[E] Stash")
+            exports['qb-ui']:showInteraction("[E] Stash")
         end
     elseif name == "tunerdutyui" then
         if PlayerJob.name == "tuner" then
-            exports['np-ui']:showInteraction("Duty")
+            exports['qb-ui']:showInteraction("Duty")
         end
     elseif name == "tunerbossui" then
         if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 then
-            exports['np-ui']:showInteraction("Boss Office")
+            exports['qb-ui']:showInteraction("Boss Office")
         end
     elseif name == "hayesrepairui" then
         if InVehicle then
             if PlayerJob.name == "hayesauto" and onDuty then
-                exports['np-ui']:showInteraction("Repair Station")
+                exports['qb-ui']:showInteraction("Repair Station")
             end
         end
     elseif name == "hayesstashui" then
         if PlayerJob.name == "hayesauto" and onDuty then
-            exports['np-ui']:showInteraction("[E] Stash")
+            exports['qb-ui']:showInteraction("[E] Stash")
         end
     elseif name == "hayesdutyui" then
         if PlayerJob.name == "hayesauto" then
-            exports['np-ui']:showInteraction("Duty")
+            exports['qb-ui']:showInteraction("Duty")
         end
     elseif name == "hayesbossui" then
         if PlayerJob.name == 'hayesauto' and PlayerJob.grade.level == 4 then
-            exports['np-ui']:showInteraction("Boss Office")
+            exports['qb-ui']:showInteraction("Boss Office")
         end
     end
 end)
@@ -203,62 +230,73 @@ RegisterNetEvent('qb-polyzone:exit')
 AddEventHandler('qb-polyzone:exit', function(name)
     local InVehicle = IsPedInAnyVehicle(PlayerPedId())
     if name == "votecabinui" then
-        if InVehicle then
+        --if InVehicle then
             inVoteCabin = false
-            exports['np-ui']:hideInteraction()
-        end
-    end
-    if name == "6strtunershopui" then
-        if not InVehicle then
-            if PlayerJob.name == "tuner" and onDuty then
-                exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
+        --end
+    elseif name == "policerepair" then
+        --if InVehicle then
+            if PlayerJob.name == "police" and onDuty then
+                exports['qb-ui']:hideInteraction()
             end
-        end
+        --end
+    elseif name == "6strtunershopui" then
+        --if not InVehicle then
+            if PlayerJob.name == "tuner" and onDuty then
+                exports['qb-ui']:hideInteraction()
+            end
+        --end
+    elseif name == "tunerwheelfitment" then
+        --if InVehicle then
+            if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 and onDuty then
+                exports['qb-ui']:hideInteraction()
+            end
+        --end
     elseif name == "pillboxcheckinui" then
         if doctorCount >= Config.MinimalDoctors then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         else
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "bennysrepairui" then
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     elseif name == "bennysrepair2ui" then
-        exports['np-ui']:hideInteraction()
+        exports['qb-ui']:hideInteraction()
     elseif name == "tunerrepairui" then
-        if not InVehicle then
+        --if not InVehicle then
             if PlayerJob.name == "tuner" and onDuty then
-                exports['np-ui']:hideInteraction()
+                exports['qb-ui']:hideInteraction()
             end
-        end
+        --end
     elseif name == "tunerstashui" then
         if PlayerJob.name == "tuner" and onDuty then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "tunerdutyui" then
         if PlayerJob.name == "tuner" then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "tunerbossui" then
         if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "hayesrepairui" then
-        if not InVehicle then
+        --if not InVehicle then
             if PlayerJob.name == "hayesauto" and onDuty then
-                exports['np-ui']:hideInteraction()
+                exports['qb-ui']:hideInteraction()
             end
-        end
+        --end
     elseif name == "hayesstashui" then
         if PlayerJob.name == "hayesauto" and onDuty then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "hayesdutyui" then
         if PlayerJob.name == "hayesauto" then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     elseif name == "hayesbossui" then
         if PlayerJob.name == 'hayesauto' and PlayerJob.grade.level == 4 then
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     end
 end)

@@ -145,7 +145,7 @@ Config.Shops = {
         },
         ['Job'] = 'police', -- Name of job or none
         ['ShopLabel'] = 'Police Vehicle Shop',
-        ['showBlip'] = true,  --- true or false
+        ['showBlip'] = false,  --- true or false
         ['Categories'] = {
             ['heavy'] = 'Heavy',
             ['polbike'] = 'Bikes',

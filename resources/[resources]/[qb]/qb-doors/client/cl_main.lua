@@ -88,9 +88,9 @@ local function ListenKeypress()
                 if (#GetOffsetFromEntityGivenWorldCoords(PlayerPedId(), currentDoorCoords)) <= 1.2 then
                     newLockState = currentDoorLockState
                     if hasAccess then
-                        exports["np-ui"]:showInteraction(("[E] %s"):format(newLockState and 'Zakljucano' or 'Otkljucano'), newLockState and 'error' or 'success')
+                        exports["qb-ui"]:showInteraction(("[E] %s"):format(newLockState and 'Locked' or 'Unlocked'), newLockState and 'error' or 'success')
                     else
-                        exports["np-ui"]:showInteraction(("%s"):format(newLockState and 'Locked' or 'Unlocked'), newLockState and 'error' or 'success')
+                        exports["qb-ui"]:showInteraction(("%s"):format(newLockState and 'Locked' or 'Unlocked'), newLockState and 'error' or 'success')
                     end
                 else
                     idle = 100
@@ -107,7 +107,7 @@ local function ListenKeypress()
             Wait(idle)
         end
 
-        exports["np-ui"]:hideInteraction((not hasAccess or newLockState) and 'error' or 'success')
+        exports["qb-ui"]:hideInteraction((not hasAccess or newLockState) and 'error' or 'success')
     end)
 end
 

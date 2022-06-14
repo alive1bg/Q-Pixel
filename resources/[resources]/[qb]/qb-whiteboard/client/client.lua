@@ -57,7 +57,7 @@ AddEventHandler("qb-polyzone:enter", function(zone)
   elseif currentZone then --and isCop
     currentPrompt = zone
     local prompt = type(currentPrompt.promptText) == 'function' and currentPrompt.promptText() or currentPrompt.promptText
-    exports["np-ui"]:showInteraction(prompt)
+    exports["qb-ui"]:showInteraction(prompt)
     listenForKeypress(zone)
   end
 end)
@@ -79,7 +79,7 @@ AddEventHandler("qb-polyzone:exit", function(zone)
     end
     inMeetingRoom = false
   elseif currentZone then
-    exports["np-ui"]:hideInteraction()
+    exports["qb-ui"]:hideInteraction()
     listening = false
     currentPrompt = nil
   end
@@ -102,8 +102,8 @@ AddEventHandler("police:changewhiteboardcli", function(pUrl)
     exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
 end)
 
-QBCore.Functions.TriggerCallback("np-ui:policechangeurl", function(data, cb)
+QBCore.Functions.TriggerCallback("qb-ui:policechangeurl", function(data, cb)
   cb({ data = {}, meta = { ok = true, message = '' } })
-  exports['np-ui']:closeApplication('textbox')
+  exports['qb-ui']:closeApplication('textbox')
   TriggerServerEvent("police:changewhiteboard", data.values.url, data.hiddenItems.room)
 end)

@@ -66,9 +66,9 @@ RegisterNetEvent('prison:client:Enter', function(time)
 	-- TriggerEvent('animations:client:EmoteCommandStart', {RandomStartPosition.animation})
 	DoScreenFadeIn(1000)
     TriggerClientEvent('QBCore:Notify', src, 'You have been jailed. You can pick up your shit when you leave')
-    exports['np-ui']:showInteraction("Started: Lockup - Hang out in the cells. Read a book, Nerd")
+    exports['qb-ui']:showInteraction("Started: Lockup - Hang out in the cells. Read a book, Nerd")
 	Wait(3000)
-    exports['np-ui']:hideInteraction()
+    exports['qb-ui']:hideInteraction()
 	inJail = true
 	jailTime = time
 	-- currentJob = "electrician"

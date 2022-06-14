@@ -46,6 +46,21 @@ function createBlips(job)
             end
         end
     end
+    for k, v in pairs(GangGarages) do
+        if v.showBlip then
+            if gang == v.gang then
+                local Garage = AddBlipForCoord(GangGarages[k].Blip.x, GangGarages[k].Blip.y, GangGarages[k].Blip.z)
+                SetBlipSprite (Garage, 357)
+                SetBlipDisplay(Garage, 4)
+                SetBlipScale  (Garage, 0.6)
+                SetBlipAsShortRange(Garage, true)
+                SetBlipColour(Garage, 38)
+                BeginTextCommandSetBlipName("STRING")
+                AddTextComponentSubstringPlayerName(GangGarages[k].label)
+                EndTextCommandSetBlipName(Garage)
+            end
+        end
+    end
     if Var.BlipsonStartup then
         ToggleGarageBlips()
     end
@@ -130,6 +145,8 @@ function GetJobGarage()
                 k = "mrpd"
             elseif k == "pillboxmd2" then
                 k = "pillboxmd"
+            elseif k == "viceroy2" then
+                k = "viceroy"
             end
             return k
         end

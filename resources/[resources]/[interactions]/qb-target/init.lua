@@ -360,7 +360,7 @@ Config.TargetBones = {
             },
             {
                 type = "client",
-                event = "jim-mechanic:flipvehicle",
+                event = "qb:flipvehicle",
                 icon = "fas fa-car",
                 label = "Flip Vehicle",
             },

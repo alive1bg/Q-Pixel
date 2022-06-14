@@ -258,7 +258,6 @@ local blips = {
    {title = "Ammunation",   colour=46, id=110, x = 842.4, y = -1033.4, z = 28.1},-- done
    {title = "Diamond Casino",  colour=0, id=617, x = 948.3834, y = 34.21247, z = 71.839},-- done
    {title = "Smoke On The Water",  colour=25, id=140, x = -1172.43, y = -1572.24, z = 4.66},-- done
-   {title = "Bean Machine",  colour=56, id=536, x = -633.72, y = 236.15, z = 81.88},-- done
    {title = "Gear Shop",  colour=25, id=176, x = -1686.9, y = -1072.23, z = 13.15},-- done
    {title = "Leisure Shop", colour=25, id=52, x = -1505.91, y = 1511.78, z = 115.29},-- done
    {title = "Robs Liquor", colour=25, id=52, x = -159.36, y = 6321.59, z = 31.58},
