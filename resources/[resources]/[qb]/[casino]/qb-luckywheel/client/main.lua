@@ -33,14 +33,14 @@ end)
 
 -- Interaction
 -- this ped is in MS-PEDS because i ran out of casino peds to use -- had to do it like this so every ped in casino cant be accessed to spin wheel lol
-CreateThread(function()
-    if Config.UseThirdEyeInteraction then
-        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(988.47, 43.18, 71.27), 0.5, 0.5, {
+--CreateThread(function()
+    --if Config.UseThirdEyeInteraction then
+        exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(987.93, 42.33, 71.27), 0.5, 0.45, {
             name = "CasinoLuckyWheel",
-            heading = 58.0,
-            debugPoly = false,
-            minZ=70.77,
-            maxZ=71.87
+            heading=0,
+            debugPoly = true,
+            minZ=70.27,
+            maxZ=72.27
             }, {
                 options = {
                     {
@@ -52,7 +52,7 @@ CreateThread(function()
                 },
                 distance = 2.5
         })
-    else
+    --[[else
         while true do
             local sleep = 500
             local coords = GetEntityCoords(PlayerPedId())
@@ -65,8 +65,8 @@ CreateThread(function()
             end
             Wait(sleep)
         end
-    end
-end)
+    end]]
+--end)
 
 -----------------------
 ---- Client Events ----
@@ -272,7 +272,7 @@ function doRoll()
                 TriggerServerEvent('qb-luckywheel:server:getLucky')
                 TaskPlayAnim(playerPed, lib, 'armraisedidle_to_spinningidle_high', 8.0, -8.0, -1, 0, 0, false, false, false)
             else
-                TriggerEvent('QBCore:Notify', 'You Need '..Config.Amount..' Chips To Spin!', 'error')
+                TriggerEvent('QBCore:Notify', 'You Need '..Config.Amount..' Green Chips To Spin!', 'error')
             end
         end)
     end
