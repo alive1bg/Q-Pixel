@@ -1,6 +1,3 @@
-print("Jim-Chairs - Portable Chair Script by Jimathy")
-
-
 -- Did I do a good job? Consider donating as this took me a long time to make for free.
 
 -- If you need support I now have a discord available, it helps me keep track of issues and give better support.
