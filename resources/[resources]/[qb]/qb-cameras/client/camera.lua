@@ -118,15 +118,15 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
         flags = 50,
     }, {}, {}, function() 
         --[[ DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 64)
-        local inputText = nil
+        local dialog.cameraid = nil
         input = true
         while true do 
             Wait(0)
             if input == true then
                 HideHudAndRadarThisFrame()
                 if UpdateOnscreenKeyboard() == 1 then
-                    inputText = GetOnscreenKeyboardResult() 
-                    if string.len(inputText) > 0 then
+                    dialog.cameraid = GetOnscreenKeyboardResult() 
+                    if string.len(dialog.cameraid) > 0 then
                         break
                     else
                         DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 10)
@@ -138,7 +138,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
         local dialog = exports['qb-input']:ShowInput({
             header = "CAMERA SETUP",
             info = "Name Your Camera",
-            submitText = "Bill",
+            submitText = "Confirm",
             inputs = {
                 {
                     text = "Camera ID (#)", -- text you want to be displayed as a place holder
@@ -148,16 +148,18 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
                 }
             },
         })
+
     
         if dialog ~= nil then
+            print(json.encode(dialog.cameraid))
             local prop, hash, cam, dropCoords, itemname = nil, nil, nil, nil, nil
 
             if is360 == 1 then 
-                -- prop = 'prop_cctv_pole_02'
+                --prop = 'prop_cctv_pole_02'
                 prop = 'prop_cctv_cam_07a'
                 itemname = '360cctv'
             else
-                -- prop = 'prop_cctv_pole_04'
+                --prop = 'prop_cctv_pole_04'
                 prop = 'prop_cctv_cam_01b'      
                 itemname = 'cctv'
             end
@@ -199,7 +201,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
                 end
             -- end)
             
-            --if inputText ~= nil then 
+            --if dialog.cameraid ~= nil then 
                 QBCore.Functions.TriggerCallback('QBCore:HasItem', function(hasItem)
                     if hasItem then 
                         QBCore.Functions.Progressbar("fixing camera", "Placing CCTV Camera", 2000, false, true, {
@@ -223,7 +225,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
                             if is360 == 1 then 
                                 local id = #Config.SecurityCameras.cameras + 1
                                 Config.SecurityCameras.cameras[id] = {
-                                    label = inputText, 
+                                    label = dialog.cameraid, 
                                     type = "360-Vision CCTV Camera",
                                     coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
                                     r = {x = -25.0, y = 0.0, z = GetEntityHeading(cam)}, 
@@ -237,7 +239,7 @@ AddEventHandler('qb-cameras:client:UseCCTVCamera', function(is360, GcamID)
                             else
                                 local id = #Config.SecurityCameras.cameras + 1
                                 Config.SecurityCameras.cameras[id] = {
-                                    label = inputText, 
+                                    label = dialog.cameraid, 
                                     type = "Single Vision CCTV Camera",
                                     coords = vector4(camCoords.x, camCoords.y, camCoords.z - 0.2, GetEntityHeading(cam)),
                                     r = {x = 200.0, y = 180.0, z = GetEntityHeading(cam)}, 
