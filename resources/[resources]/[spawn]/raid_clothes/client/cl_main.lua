@@ -1010,7 +1010,7 @@ RegisterNetEvent('raid_clothes:outfits', function(pAction, pId, pName)
     elseif pAction == 2 then
         TriggerServerEvent("raid_clothes:remove_outfit",pId)
     elseif pAction == 3 then 
-        TriggerEvent('InteractSound_CL:PlayOnOne','Clothes1', 0.6)
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.6)
         TriggerServerEvent("raid_clothes:get_outfit", pId)
         TriggerEvent("backitems:displayItems", true)
         TriggerEvent("backitems:start")

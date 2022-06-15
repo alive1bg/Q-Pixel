@@ -14,7 +14,7 @@ Config.GenderNumbers = { -- No reason to touch these.
 }
 
 Config.PedList = {
--- Hunting Stores --
+	-- Hunting Stores --
 	{
 		model = `ig_hunter`,
 		coords = vector4(-679.8, 5838.92, 17.33, 219.98),
@@ -44,6 +44,13 @@ Config.PedList = {
 	},
 	-- 24/7 Shops --
 
+	-- Ottos
+	-- Grove Street
+	{
+		model = `mp_m_shopkeep_01`,
+		coords = vector4(812.87493, -782.5263, 26.174972, 271.40286),
+		gender = 'male',
+	},
 	-- Grove Street
 	{
 		model = `mp_m_shopkeep_01`,
@@ -324,10 +331,8 @@ Config.PedList = {
 	},
 	-- pets
 	{
-		model = `S_M_M_StrVend_01`, -- wheelspin
+		model = `S_M_M_StrVend_01`, -- Pets Shop
 		coords = vector4(561.18, 2741.51, 42.87, 199.08), 		
 		gender = 'male'
 	},
-
-
 }

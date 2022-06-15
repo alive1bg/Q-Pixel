@@ -1145,6 +1145,7 @@ RegisterNetEvent('qb-houses:client:ChangeCharacter', function()
             SetEntityHeading(PlayerPedId(), Config.Houses[CurrentHouse].coords.enter.h)
             InOwnedHouse = false
             IsInside = false
+            --ExecuteCommand('logout')
             TriggerServerEvent('qb-houses:server:LogoutLocation')
         end)
     end
@@ -1154,8 +1155,7 @@ RegisterNetEvent('qb-houses:client:ChangeOutfit', function()
     local outfitLoc = vector3(outfitLocation.x, outfitLocation.y, outfitLocation.z)
     if CheckDistance(outfitLoc, 1.5) then
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.4)
-        TriggerEvent('qb-clothing:client:openOutfitMenu')
-        TriggerServerEvent('qb-outfits:server:callUI')
+        TriggerEvent('raid_clothes:outfits')
     end
 end)
 

@@ -426,18 +426,17 @@ RegisterNetEvent('qb-houses:server:savedecorations', function(house, decorations
 end)
 
 QBCore.Commands.Add("logout", "Logout of Character (Admin Only)", {}, false, function(source)
-    --local src = source
     TriggerEvent('qb-houses:server:LogoutLocation', source)
 end, "admin")
 
 RegisterNetEvent('qb-houses:server:LogoutLocation', function(source)
-    --local src = source
-    local Player = QBCore.Functions.GetPlayer(source)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
     local MyItems = Player.PlayerData.items
     MySQL.Async.execute('UPDATE players SET inventory = ? WHERE citizenid = ?',
         {json.encode(MyItems), Player.PlayerData.citizenid})
-    QBCore.Player.Logout(source)
-    TriggerClientEvent('PlayerSpawned2', source)
+    QBCore.Player.Logout(src)
+    TriggerClientEvent('PlayerSpawned', src)
 end)
 
 RegisterNetEvent('qb-houses:server:giveHouseKey', function(target, house)

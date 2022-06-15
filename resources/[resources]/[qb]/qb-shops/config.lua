@@ -592,6 +592,42 @@ Config.Products = {
             slot = 16
         },
     },
+    ["huntingshop"] = {
+        [1] = {
+            name = 'weapon_musket',
+            price = 1500,
+            amount = 10,
+            info = {},
+            type = 'weapon',
+            slot = 1,
+            requiresLicense = true
+        },
+        [2] = {
+            name = 'shotgun_ammo',
+            price = 100,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 2,
+            requiresLicense = true
+        },
+        [3] = {
+            name = 'huntingbait',
+            price = 150,
+            amount = 150,
+            info = {},
+            type = 'item',
+            slot = 3
+        },
+        [4] = {
+            name = 'weapon_knife',
+            price = 500,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 4
+        }
+    },
 }
 
 Config.Locations = {
@@ -691,6 +727,16 @@ Config.Locations = {
         ["coords"] = {
             [1] = vector3(373.55, 325.56, 103.56),
             [2] = vector3(374.29, 327.9, 103.56)
+        },
+        ["products"] = Config.Products["normal"],
+        ["showblip"] = false,
+        ["blipsprite"] = 52
+    },
+    ["247supermarket11"] = {
+        ["label"] = "24/7 Supermarket",
+        ["coords"] = {
+            [1] = vector3(814.15637, -782.6959, 26.174972),
+            [2] = vector3(814.24414, -781.0077, 26.174972)
         },
         ["products"] = Config.Products["normal"],
         ["showblip"] = false,
@@ -985,14 +1031,20 @@ Config.Locations = {
     },
     ["petshop"] = { 
         ["label"] = "Pet Shop",
-        
         ["coords"] = {
             [1] = vector3(561.18, 2741.51, 42.87)
         },
-
         ["products"] = Config.Products["petshop"],
         ["showblip"] = true,
         ["blipsprite"] = 267
-        --["blipcolor"] = 5
     },
+    ["huntingshop"] = {
+        ["label"] = "Hunting Shop",
+        ["coords"] = {
+            [1] = vector3(-679.8, 5838.92, 17.33)
+        },
+        ["products"] = Config.Products["huntingshop"],
+        ["showblip"] = true,
+        ["blipsprite"] = 626,
+    }
 }

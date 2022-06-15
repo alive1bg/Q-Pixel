@@ -61,7 +61,7 @@ Config.largeLootboxRewards = {                                  -- Rewards found
 -- [SOURCE: https://github.com/sjpfeiffer/ped_spawner]
 Config.PedList = {                                              -- Peds that will be spawned in (if you change a ped model here you need to also change the ped model in client/addons.lua qb-target exports)
 	{
-		model = "s_m_y_ammucity_01",                            -- Boat/Gear Menu
+		model = "mp_m_weapexp_01",                            -- Boat/Gear Menu
 		coords = vector3(-806.17, -1496.57, 0.6),               
 		heading = 100.0,
 		gender = "male",

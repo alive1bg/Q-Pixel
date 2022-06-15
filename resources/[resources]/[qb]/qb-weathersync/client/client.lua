@@ -103,6 +103,7 @@ CreateThread(function()
     end
 end)
 
+local hunting_h = 0 -- <------------- ADD THIS
 CreateThread(function()
     local hour = 0
     local minute = 0
@@ -124,9 +125,16 @@ CreateThread(function()
                 minute = math.floor((baseTime+timeOffset)%60)
                 second = 0
             end
+            hunting_h = hour -- <------------- ADD THIS
             NetworkOverrideClockTime(hour, minute, second)          --Send hour included seconds to network clock time
         else
             Wait(1000)
         end
     end
 end)
+
+function getHour() -- <------------- ADD THIS
+    return hunting_h -- <------------- ADD THIS
+end -- <------------- ADD THIS
+
+exports('getHour', getHour) -- <------------- ADD THIS
