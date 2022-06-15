@@ -460,6 +460,138 @@ Config.Products = {
             slot = 1,
         }
     },
+    -- add it at end of Config.Products table
+    ["petshop"] = {
+        [1] = {
+            name = 'keepcompanionwesty',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 1
+        },
+        [2] = {
+            name = 'keepcompanionshepherd',
+            price = 150000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 2
+        },
+        [3] = {
+            name = 'keepcompanionretriever',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 3
+        },
+        [4] = {
+            name = 'keepcompanionrottweiler',
+            price = 75000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 4
+        },
+        [5] = {
+            name = 'keepcompanionpug',
+            price = 95000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 5
+        },
+        [6] = {
+            name = 'keepcompanionpoodle',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 6
+        },
+
+        [7] = {
+            name = 'keepcompanionmtlion2',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 7
+        },
+        [8] = {
+            name = 'keepcompanioncat',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 8
+        },
+        [9] = {
+            name = 'keepcompanionmtlion',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 9
+        },
+        [10] = {
+            name = 'keepcompanionhusky',
+            price = 50000,
+            amount = 5,
+            info = {},
+            type = 'item',
+            slot = 10
+        },
+        [11] = {
+            name = 'petfood',
+            price = 500,
+            amount = 1000,
+            info = {},
+            type = 'item',
+            slot = 11
+        },
+        [12] = {
+            name = 'collarpet',
+            price = 50000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 12
+        },
+        [13] = {
+            name = 'firstaidforpet',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 13
+        },
+        [14] = {
+            name = 'petnametag',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 14
+        },
+        [15] = {
+            name = 'petwaterbottleportable',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 15
+        },
+        [16] = {
+            name = 'petgroomingkit',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 16
+        },
+    },
 }
 
 Config.Locations = {
@@ -850,5 +982,17 @@ Config.Locations = {
         ["products"] = Config.Products["normal"],
         ["showblip"] = false,
         ["blipsprite"] = 52
+    },
+    ["petshop"] = { 
+        ["label"] = "Pet Shop",
+        
+        ["coords"] = {
+            [1] = vector3(561.18, 2741.51, 42.87)
+        },
+
+        ["products"] = Config.Products["petshop"],
+        ["showblip"] = true,
+        ["blipsprite"] = 267
+        --["blipcolor"] = 5
     },
 }

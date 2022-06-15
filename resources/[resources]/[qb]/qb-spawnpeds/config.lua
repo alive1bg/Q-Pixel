@@ -322,4 +322,12 @@ Config.PedList = {
 		coords = vector4(987.95, 42.32, 71.27, 248.82), 		
 		gender = 'female'
 	},
+	-- pets
+	{
+		model = `S_M_M_StrVend_01`, -- wheelspin
+		coords = vector4(561.18, 2741.51, 42.87, 199.08), 		
+		gender = 'male'
+	},
+
+
 }
