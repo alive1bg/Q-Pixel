@@ -980,7 +980,7 @@ CreateThread(function()
             heading=Garages[k].heading,
             minZ = Garages[k].minZ,
             maxZ = Garages[k].maxZ,
-            debugPoly = true
+            debugPoly = false
         }) 
     end
     for k, v in pairs(GangGarages) do
@@ -989,7 +989,7 @@ CreateThread(function()
             heading=GangGarages[k].heading,
             minZ = GangGarages[k].minZ,
             maxZ = GangGarages[k].maxZ,
-            debugPoly = true
+            debugPoly = false
         }) 
     end
     for k, v in pairs(JobGarages) do
@@ -998,7 +998,7 @@ CreateThread(function()
             heading=JobGarages[k].heading,
             minZ = JobGarages[k].minZ,
             maxZ = JobGarages[k].maxZ,
-            debugPoly = true
+            debugPoly = false
         }) 
     end
     for k, v in pairs(Depots) do

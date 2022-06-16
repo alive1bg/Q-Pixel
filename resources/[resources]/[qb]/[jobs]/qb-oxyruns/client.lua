@@ -409,7 +409,7 @@ CreateThread(function()
 	exports['qb-target']:AddBoxZone("PDBADGE", vector3(1239.4278, -3173.459, 7.1048631), 2, 2, {
 		name = "PD Badge",
 		heading = 359,
-		debugPoly = true,
+		debugPoly = false,
 		minZ = 6.1048631,
 		maxZ = 8.1048631,
         options = {{

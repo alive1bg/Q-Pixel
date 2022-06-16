@@ -38,7 +38,7 @@ end)
         exports['qb-target']:AddBoxZone("CasinoLuckyWheel", vector3(987.93, 42.33, 71.27), 0.5, 0.45, {
             name = "CasinoLuckyWheel",
             heading=0,
-            debugPoly = true,
+            debugPoly = false,
             minZ=70.27,
             maxZ=72.27
             }, {

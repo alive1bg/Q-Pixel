@@ -37,7 +37,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("6strtunershopui", vector3(144.94, -3030.44, 7.04), 6.2, 3.6, {
         name="6strtunershopui",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=8.04
     })
@@ -45,7 +45,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("pillboxcheckinui", vector3(307.0, -595.09, 43.28), 1.8, 1.8, {
         name="pillboxcheckinui",
         heading=340,
-        debugPoly = true,
+        debugPoly = false,
         minZ=42.28,
         maxZ=44.68
     })
@@ -53,7 +53,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("bennysrepairui", vector3(-39.1, -1053.51, 28.4), 6.8, 4.8, {
         name="bennysrepairui",
         heading=339,
-        debugPoly = true,
+        debugPoly = false,
         minZ=27.4,
         maxZ=31.2
     })
@@ -61,7 +61,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("bennysrepair2ui", vector3(-32.22, -1066.17, 28.4), 9.6, 5.6, {
         name="bennysrepair2ui",
         heading=340,
-        debugPoly = true,
+        debugPoly = false,
         minZ=27.4,
         maxZ=30.4
     })
@@ -69,7 +69,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("tunerrepairui", vector3(124.68, -3047.27, 7.04), 5.8, 7.8, {
         name="tunerrepairui",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=8.84
     })
@@ -77,7 +77,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("tunerstashui", vector3(128.61, -3013.53, 7.04), 1.4, 2.8, {
         name="tunerstashui",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=9.04
     })
@@ -85,7 +85,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("tunerdutyui", vector3(126.09, -3007.98, 7.04), 1.2, 1, {
         name="tunerdutyui",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=8.44
     })
@@ -93,7 +93,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("tunerbossui", vector3(124.81, -3014.03, 7.04), 1.2, 1.4, {
         name="tunerbossui",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=8.04
     })
@@ -101,7 +101,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("hayesrepairui", vector3(-1411.4, -442.37, 35.91), 3.0, 7.0, {
         name="hayesrepairui",
         heading=302,
-        debugPoly = true,
+        debugPoly = false,
         minZ=34.91,
         maxZ=37.11
     })
@@ -109,7 +109,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("hayesstashui", vector3(-1410.19, -448.17, 35.91), 1.4, 1.8, {
         name="hayesstashui",
         heading=32,
-        debugPoly = true,
+        debugPoly = false,
         minZ=34.91,
         maxZ=37.11
     })
@@ -125,7 +125,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("hayesbossui", vector3(-1427.88, -458.42, 35.91), 2.0, 1.2, {
         name="hayesbossui",
         heading=32,
-        debugPoly = true,
+        debugPoly = false,
         minZ=34.91,
         maxZ=37.11
     })
@@ -133,7 +133,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("tunerwheelfitment", vector3(135.97, -3030.48, 7.04), 3.55, 6.2, {
         name="tunerwheelfitment",
         heading=270,
-        debugPoly = true,
+        debugPoly = false,
         minZ=6.04,
         maxZ=8.24
     })
@@ -141,7 +141,7 @@ CreateThread(function()
     exports["qb-polyzone"]:AddBoxZone("policerepair", vector3(452.08, -975.89, 25.7), 4.6, 12.4, {
         name="policerepair",
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=24.7,
         maxZ=28.1
     })
