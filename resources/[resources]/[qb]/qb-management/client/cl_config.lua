@@ -43,18 +43,6 @@ Config.BossMenuZones = {
     ['mechanic'] = {
         { coords = vector3(-339.53, -156.44, 44.59), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
     },
-    ['vanilla'] = {
-        { coords = vector3(95.36, -1293.61, 29.64), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
-    },
-    ['records'] = {
-        { coords = vector3(-816.4669, -700.5065, 32.140789), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
-    },
-    ['popsdiner'] = {
-        { coords = vector3(1590.57, 6457.95, 26.01), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
-    },
-    ['beanmachine'] = {
-        { coords = vector3(126.62, -1035.76, 29.28), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
-    },
 }
 
 Config.GangMenus = {

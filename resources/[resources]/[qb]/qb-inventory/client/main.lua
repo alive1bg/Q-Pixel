@@ -113,6 +113,14 @@ local function CloseTrunk()
     end
 end
 
+local function CloseStash()
+    while (not HasAnimDictLoaded("amb@prop_human_bum_bin@idle_b")) do
+        RequestAnimDict("amb@prop_human_bum_bin@idle_b")
+        Wait(100)
+    end
+    TaskPlayAnim(PlayerPedId(), "amb@prop_human_bum_bin@idle_b", "exit", 4.0, 4.0, -1, 50, 0, false, false, false)
+end
+
 local function closeInventory()
     SendNUIMessage({
         action = "close",
@@ -760,6 +768,7 @@ RegisterNUICallback("CloseInventory", function()
         TriggerServerEvent("inventory:server:SaveInventory", "glovebox", CurrentGlovebox)
         CurrentGlovebox = nil
     elseif CurrentStash ~= nil then
+        CloseStash()
         TriggerServerEvent("inventory:server:SaveInventory", "stash", CurrentStash)
         CurrentStash = nil
     else

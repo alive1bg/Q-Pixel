@@ -29,7 +29,7 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
         RefreshTransactions(src)
     end
 
-    if(account == "business") then
+    if(account == "boss") then
         local job = Player.PlayerData.job
 
         if not SimpleBanking.Config["business_ranks"][string.lower(job.grade.name)] and not SimpleBanking.Config["business_ranks_overrides"][string.lower(job.name)] then
@@ -44,13 +44,13 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name = ?', {job.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
         local data = result[1]
 
         if data then
             local sM = tonumber(data.money)
             if sM >= amount then
-                TriggerEvent('qb-banking:management_funds:server:WithdrawMoney',src, amount, data.name)
+                TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.owner)
 
                 AddTransaction(src, "business", -amount, "deposit", job.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. job.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)
@@ -60,7 +60,7 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
         end
     end
 
-    if(account == "organization") then
+    if(account == "gang") then
         local gang = Player.PlayerData.gang
 
         if not SimpleBanking.Config["gang_ranks"][string.lower(gang.grade.name)] and not SimpleBanking.Config["gang_ranks_overrides"][string.lower(gang.name)] then
@@ -75,13 +75,13 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
         local data = result[1]
 
         if data then
             local sM = tonumber(data.money)
             if sM >= amount then
-                TriggerEvent('qb-banking:management_funds:server:WithdrawMoney',src, amount, data.name)
+                TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.owner)
 
                 AddTransaction(src, "organization", -amount, "deposit", gang.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. gang.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)

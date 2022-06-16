@@ -29,7 +29,7 @@ AddEventHandler('qb-banking:server:Deposit', function(account, amount, note, fSt
         return
     end
 
-    if account == "business"  then
+    if account == "boss"  then
         local job = Player.PlayerData.job
         local job_grade = job.grade.name
 
@@ -45,18 +45,18 @@ AddEventHandler('qb-banking:server:Deposit', function(account, amount, note, fSt
         end
 
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {job.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
         local data = result[1]
 
         if data then
             local deposit = math.floor(amount)
 
             Player.Functions.RemoveMoney('cash', deposit)
-            TriggerEvent('qb-banking:management_funds:server:DepositMoney', src, deposit, data.name)
+            TriggerEvent('qb-banking:society:server:DepositMoney', src, deposit, data.owner)
             AddTransaction(src, "business", amount, "deposit", job.label, (note ~= "" and note or "Deposited $"..format_int(amount).." cash into ".. job.label .."'s business account."))        end
     end
 
-    if account == "organization"  then
+    if account == "gang"  then
         local gang = Player.PlayerData.gang
         local gang_grade = gang.grade.name
     
@@ -72,14 +72,14 @@ AddEventHandler('qb-banking:server:Deposit', function(account, amount, note, fSt
         end
     
     
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE owner= ?', {CitizenId})
         local data = result[1]
     
         if data then
             local deposit = math.floor(amount)
     
             Player.Functions.RemoveMoney('cash', deposit)
-            TriggerEvent('qb-banking:management_funds:server:DepositMoney',src, deposit, data.name)
+            TriggerEvent('qb-banking:society:server:DepositMoney',src, deposit, data.owner)
             AddTransaction(src, "organization", amount, "deposit", gang.label, (note ~= "" and note or "Deposited $"..format_int(amount).." cash into ".. gang.label .."'s account."))
             
         end

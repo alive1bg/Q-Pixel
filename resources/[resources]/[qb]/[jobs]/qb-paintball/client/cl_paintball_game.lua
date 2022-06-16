@@ -206,7 +206,7 @@ CreateThread(function()
             if not dead then
                 if IsEntityDead(ped) then
                     dead = true
-                    TriggerEvent('pd:deathcheck')
+                    TriggerEvent('pd:deathcheck', false)
                 end
             else
                 dead = false

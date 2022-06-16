@@ -167,7 +167,7 @@ function DisplayMenu(state, slider1, slider2, slider3, slider4, slider5, slider6
 
             isMenuShowing = true
 
-            CreateThread(function()
+            Citizen.CreateThread(function()
                 while isMenuShowing do 
                     DisableControlAction(1, 172, true) --Key: Up Arrow
                     DisableControlAction(1, 173, true) --Key: Down Arrow
@@ -180,44 +180,44 @@ function DisplayMenu(state, slider1, slider2, slider3, slider4, slider5, slider6
                         ScrollFunctionality("up")
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
         
-                        Wait(0)
+                        Citizen.Wait(0)
         
                         MenuManager("arrowup")
         
-                        Wait(149)
+                        Citizen.Wait(149)
                     end
         
                     if IsDisabledControlPressed(1, 173) then --Key: Arrow Down
                         ScrollFunctionality("down")
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
         
-                        Wait(0)
+                        Citizen.Wait(0)
         
                         MenuManager("arrowdown")
         
-                        Wait(149)
+                        Citizen.Wait(149)
                     end
         
                     if IsDisabledControlPressed(1, 174) then --Key: Arrow Left
                         ScrollFunctionality("left")
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
         
-                        Wait(0)
+                        Citizen.Wait(0)
         
                         MenuManager("arrowleft")
         
-                        Wait(149)
+                        Citizen.Wait(149)
                     end
         
                     if IsDisabledControlPressed(1, 175) then --Key: Arrow Right
                         ScrollFunctionality("right")
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
         
-                        Wait(0)
+                        Citizen.Wait(0)
         
                         MenuManager("arrowright")
         
-                        Wait(149)
+                        Citizen.Wait(149)
                     end
         
                     if IsDisabledControlJustReleased(1, 176) then --Key: Enter
@@ -230,7 +230,7 @@ function DisplayMenu(state, slider1, slider2, slider3, slider4, slider5, slider6
                         PlaySoundFrontend(-1, "NO", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
                     end
                     
-                    Wait(1)
+                    Citizen.Wait(1)
                 end
             end)
         end

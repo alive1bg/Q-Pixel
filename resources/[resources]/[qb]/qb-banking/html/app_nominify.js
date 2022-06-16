@@ -33,7 +33,7 @@ function ResetModals(type, sSteamID)
 
 var lang = [];
 lang["personal"] = "Personal Account";
-lang["business"] = "Buisness Account";
+lang["boss"] = "Buisness Account";
 lang["friend"] = "Shared Account"
 lang["deposit"] = "Deposit";
 lang["withdraw"] = "Withdrawal";
@@ -41,7 +41,7 @@ lang["transfer"] = "Transfer";
 
 var relang = [];
 relang["Personal Account"] = "personal";
-relang["Buisness Account"] = "business";
+relang["Buisness Account"] = "boss";
 relang["Shared Account"] = "friend";
 
 function AddAccount(account_name, account_type, bal, ply_Name, steamID)
@@ -194,7 +194,7 @@ function OpenATM(data, friends, transactions, name)
         for (var i = 0; i < tbl.length; i++)
         {
             let tTbl = tbl[i];
-            AddAccount((tTbl.type === "business" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name);
+            AddAccount((tTbl.type === "boss" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name);
         }
     }
 
@@ -357,7 +357,7 @@ Listeners["refresh_accounts"] = function() {
 
        let data = ValidAccounts[key];
 
-        if (data && data === "business" || data === "friend")
+        if (data && data === "boss" || data === "friend")
         {
             ValidAccounts[key] = null;
             $("#" + key).remove();
@@ -384,7 +384,7 @@ Listeners["refresh_balances"] = function(data) {
     {
         let tTbl = tbl[i];
 
-        let account_name = (tTbl.type === "business" && tTbl.name || "Personal Account");
+        let account_name = (tTbl.type === "boss" && tTbl.name || "Personal Account");
         let temp_name = account_name.replace(/"|'/g,'');
         let temp_Name = account_name.replace(/\s+/g, '');
 

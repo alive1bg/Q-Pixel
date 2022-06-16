@@ -35,7 +35,7 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
     PlayerJob = JobInfo
 end)
 
-RegisterNetEvent('qb-management:client:OpenMenu', function()
+RegisterNetEvent('qb-bossmenu:client:OpenMenu', function()
     if not PlayerJob.name or not PlayerJob.isboss then return end
 
     local bossMenu = {
@@ -49,7 +49,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
             txt = "Check your Employees List",
             icon = "fa-solid fa-list",
             params = {
-                event = "qb-management:client:employeelist",
+                event = "qb-bossmenu:client:employeelist",
             }
         },
         {
@@ -57,7 +57,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
             txt = "Hire Nearby Civilians",
             icon = "fa-solid fa-hand-holding",
             params = {
-                event = "qb-management:client:HireMenu",
+                event = "qb-bossmenu:client:HireMenu",
             }
         },
         {
@@ -65,7 +65,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
             txt = "Open Storage",
             icon = "fa-solid fa-box-open",
             params = {
-                event = "qb-management:client:Stash",
+                event = "qb-bossmenu:client:Stash",
             }
         },
         {
@@ -73,7 +73,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
             txt = "See Saved Outfits",
             icon = "fa-solid fa-shirt",
             params = {
-                event = "qb-management:client:Wardrobe",
+                event = "qb-bossmenu:client:Wardrobe",
             }
         },
         {
@@ -81,7 +81,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
             txt = "Check your Company Balance",
             icon = "fa-solid fa-sack-dollar",
             params = {
-                event = "qb-management:client:SocietyMenu",
+                event = "qb-bossmenu:client:SocietyMenu",
             }
         },
         {
@@ -95,7 +95,7 @@ RegisterNetEvent('qb-management:client:OpenMenu', function()
     exports['qb-menu']:openMenu(bossMenu)
 end)
 
-RegisterNetEvent('qb-management:client:employeelist', function()
+RegisterNetEvent('qb-bossmenu:client:employeelist', function()
     local EmployeesMenu = {
         {
             header = "Manage Employees - " .. string.upper(PlayerJob.label),
@@ -103,14 +103,14 @@ RegisterNetEvent('qb-management:client:employeelist', function()
             icon = "fa-solid fa-circle-info",
         },
     }
-    QBCore.Functions.TriggerCallback('qb-management:server:GetEmployees', function(cb)
+    QBCore.Functions.TriggerCallback('qb-bossmenu:server:GetEmployees', function(cb)
         for _, v in pairs(cb) do
             EmployeesMenu[#EmployeesMenu + 1] = {
                 header = v.name,
                 txt = v.grade.name,
                 icon = "fa-solid fa-circle-user",
                 params = {
-                    event = "qb-management:client:ManageEmployee",
+                    event = "qb-bossmenu:client:ManageEmployee",
                     args = {
                         player = v,
                         work = PlayerJob
@@ -122,14 +122,14 @@ RegisterNetEvent('qb-management:client:employeelist', function()
             header = "Return",
             icon = "fa-solid fa-angle-left",
             params = {
-                event = "qb-management:client:OpenMenu",
+                event = "qb-bossmenu:client:OpenMenu",
             }
         }
         exports['qb-menu']:openMenu(EmployeesMenu)
     end, PlayerJob.name)
 end)
 
-RegisterNetEvent('qb-management:client:ManageEmployee', function(data)
+RegisterNetEvent('qb-bossmenu:client:ManageEmployee', function(data)
     local EmployeeMenu = {
         {
             header = "Manage " .. data.player.name .. " - " .. string.upper(PlayerJob.label),
@@ -143,7 +143,7 @@ RegisterNetEvent('qb-management:client:ManageEmployee', function(data)
             txt = "Grade: " .. k,
             params = {
                 isServer = true,
-                event = "qb-management:server:GradeUpdate",
+                event = "qb-bossmenu:server:GradeUpdate",
                 icon = "fa-solid fa-file-pen",
                 args = {
                     cid = data.player.empSource,
@@ -158,7 +158,7 @@ RegisterNetEvent('qb-management:client:ManageEmployee', function(data)
         icon = "fa-solid fa-user-large-slash",
         params = {
             isServer = true,
-            event = "qb-management:server:FireEmployee",
+            event = "qb-bossmenu:server:FireEmployee",
             args = data.player.empSource
         }
     }
@@ -166,13 +166,13 @@ RegisterNetEvent('qb-management:client:ManageEmployee', function(data)
         header = "Return",
         icon = "fa-solid fa-angle-left",
         params = {
-            event = "qb-management:client:OpenMenu",
+            event = "qb-bossmenu:client:OpenMenu",
         }
     }
     exports['qb-menu']:openMenu(EmployeeMenu)
 end)
 
-RegisterNetEvent('qb-management:client:Stash', function()
+RegisterNetEvent('qb-bossmenu:client:Stash', function()
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "boss_" .. PlayerJob.name, {
         maxweight = 4000000,
         slots = 25,
@@ -180,11 +180,11 @@ RegisterNetEvent('qb-management:client:Stash', function()
     TriggerEvent("inventory:client:SetCurrentStash", "boss_" .. PlayerJob.name)
 end)
 
-RegisterNetEvent('qb-management:client:Wardrobe', function()
+RegisterNetEvent('qb-bossmenu:client:Wardrobe', function()
     TriggerEvent('qb-clothing:client:openOutfitMenu')
 end)
 
-RegisterNetEvent('qb-management:client:HireMenu', function()
+RegisterNetEvent('qb-bossmenu:client:HireMenu', function()
     local HireMenu = {
         {
             header = "Hire Employees - " .. string.upper(PlayerJob.label),
@@ -192,7 +192,7 @@ RegisterNetEvent('qb-management:client:HireMenu', function()
             icon = "fa-solid fa-circle-info",
         },
     }
-    QBCore.Functions.TriggerCallback('qb-management:getplayers', function(players)
+    QBCore.Functions.TriggerCallback('qb-bossmenu:getplayers', function(players)
         for _, v in pairs(players) do
             if v and v ~= PlayerId() then
                 HireMenu[#HireMenu + 1] = {
@@ -201,7 +201,7 @@ RegisterNetEvent('qb-management:client:HireMenu', function()
                     icon = "fa-solid fa-user-check",
                     params = {
                         isServer = true,
-                        event = "qb-management:server:HireEmployee",
+                        event = "qb-bossmenu:server:HireEmployee",
                         args = v.sourceplayer
                     }
                 }
@@ -211,15 +211,15 @@ RegisterNetEvent('qb-management:client:HireMenu', function()
             header = "Return",
             icon = "fa-solid fa-angle-left",
             params = {
-                event = "qb-management:client:OpenMenu",
+                event = "qb-bossmenu:client:OpenMenu",
             }
         }
         exports['qb-menu']:openMenu(HireMenu)
     end)
 end)
 
-RegisterNetEvent('qb-management:client:SocietyMenu', function()
-    QBCore.Functions.TriggerCallback('qb-management:server:GetAccount', function(cb)
+RegisterNetEvent('qb-bossmenu:client:SocietyMenu', function()
+    QBCore.Functions.TriggerCallback('qb-bossmenu:server:GetAccount', function(cb)
         local SocietyMenu = {
             {
                 header = "Balance: $" .. comma_value(cb) .. " - " .. string.upper(PlayerJob.label),
@@ -231,7 +231,7 @@ RegisterNetEvent('qb-management:client:SocietyMenu', function()
                 icon = "fa-solid fa-money-bill-transfer",
                 txt = "Deposit Money into account",
                 params = {
-                    event = "qb-management:client:SocetyDeposit",
+                    event = "qb-bossmenu:client:SocetyDeposit",
                     args = comma_value(cb)
                 }
             },
@@ -240,7 +240,7 @@ RegisterNetEvent('qb-management:client:SocietyMenu', function()
                 icon = "fa-solid fa-money-bill-transfer",
                 txt = "Withdraw Money from account",
                 params = {
-                    event = "qb-management:client:SocetyWithDraw",
+                    event = "qb-bossmenu:client:SocetyWithDraw",
                     args = comma_value(cb)
                 }
             },
@@ -248,7 +248,7 @@ RegisterNetEvent('qb-management:client:SocietyMenu', function()
                 header = "Return",
                 icon = "fa-solid fa-angle-left",
                 params = {
-                    event = "qb-management:client:OpenMenu",
+                    event = "qb-bossmenu:client:OpenMenu",
                 }
             },
         }
@@ -256,7 +256,7 @@ RegisterNetEvent('qb-management:client:SocietyMenu', function()
     end, PlayerJob.name)
 end)
 
-RegisterNetEvent('qb-management:client:SocetyDeposit', function(money)
+RegisterNetEvent('qb-bossmenu:client:SocetyDeposit', function(money)
     local deposit = exports['qb-input']:ShowInput({
         header = "Deposit Money <br> Available Balance: $" .. money,
         submitText = "Confirm",
@@ -271,11 +271,11 @@ RegisterNetEvent('qb-management:client:SocetyDeposit', function(money)
     })
     if deposit then
         if not deposit.amount then return end
-        TriggerServerEvent("qb-management:server:depositMoney", tonumber(deposit.amount))
+        TriggerServerEvent("qb-bossmenu:server:depositMoney", tonumber(deposit.amount))
     end
 end)
 
-RegisterNetEvent('qb-management:client:SocetyWithDraw', function(money)
+RegisterNetEvent('qb-bossmenu:client:SocetyWithDraw', function(money)
     local withdraw = exports['qb-input']:ShowInput({
         header = "Withdraw Money <br> Available Balance: $" .. money,
         submitText = "Confirm",
@@ -290,7 +290,7 @@ RegisterNetEvent('qb-management:client:SocetyWithDraw', function(money)
     })
     if withdraw then
         if not withdraw.amount then return end
-        TriggerServerEvent("qb-management:server:withdrawMoney", tonumber(withdraw.amount))
+        TriggerServerEvent("qb-bossmenu:server:withdrawMoney", tonumber(withdraw.amount))
     end
 end)
 
@@ -302,14 +302,14 @@ CreateThread(function()
                 exports['qb-target']:AddBoxZone(job.."-BossMenu-"..index, data.coords, data.length, data.width, {
                     name = job.."-BossMenu-"..index,
                     heading = data.heading,
-                    debugPoly = false,
+                    -- debugPoly = false,
                     minZ = data.minZ,
                     maxZ = data.maxZ,
                 }, {
                     options = {
                         {
                             type = "client",
-                            event = "qb-management:client:OpenMenu",
+                            event = "qb-bossmenu:client:OpenMenu",
                             icon = "fas fa-sign-in-alt",
                             label = "Boss Menu",
                             canInteract = function() return job == PlayerJob.name and PlayerJob.isboss end,
@@ -340,7 +340,7 @@ CreateThread(function()
                                     end
                                     if IsControlJustReleased(0, 38) then
                                         exports['qb-core']:HideText()
-                                        TriggerEvent("qb-management:client:OpenMenu")
+                                        TriggerEvent("qb-bossmenu:client:OpenMenu")
                                     end
                                 end
 

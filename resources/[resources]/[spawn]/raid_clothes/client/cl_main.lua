@@ -855,7 +855,7 @@ function Save(save, close)
             TriggerServerEvent("raid_clothes:insert_character_current", data)
             TriggerServerEvent("raid_clothes:insert_character_face", data)
             TriggerServerEvent("raid_clothes:set_tats", currentTats)
-            TriggerEvent("cn-spawn:finishedClothing","Finished")
+            TriggerEvent("qb-spawn:finishedClothing","Finished")
         elseif not passedClothing then 
             passedClothing = true
             Wait(2000)
@@ -863,7 +863,7 @@ function Save(save, close)
             return
         end
     else
-        TriggerEvent("cn-spawn:finishedClothing","Old")
+        TriggerEvent("qb-spawn:finishedClothing","Old")
         LoadPed(oldPed)
     end
 

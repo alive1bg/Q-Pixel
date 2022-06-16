@@ -436,8 +436,18 @@ RegisterNetEvent('qb-houses:server:LogoutLocation', function(source)
     MySQL.Async.execute('UPDATE players SET inventory = ? WHERE citizenid = ?',
         {json.encode(MyItems), Player.PlayerData.citizenid})
     QBCore.Player.Logout(src)
-    TriggerClientEvent('PlayerSpawned', src)
+    TriggerClientEvent('PlayerSpawned2', src)
 end)
+
+--[[RegisterNetEvent('qb-houses:server:LogoutLocation', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local MyItems = Player.PlayerData.items
+    MySQL.update('UPDATE players SET inventory = ? WHERE citizenid = ?',
+        {json.encode(MyItems), Player.PlayerData.citizenid})
+    QBCore.Player.Logout(src)
+    TriggerClientEvent('PlayerSpawned2', src)
+end)]]
 
 RegisterNetEvent('qb-houses:server:giveHouseKey', function(target, house)
     local src = source

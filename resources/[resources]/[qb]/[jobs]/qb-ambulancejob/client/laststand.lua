@@ -49,7 +49,7 @@ function SetLaststand(bool, spawn)
             Wait(10)
         end
 
-        TriggerEvent("pd:deathcheck")
+        TriggerEvent("pd:deathcheck1", true)
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "demo", 0.1)
 
         LaststandTime = Laststand.ReviveInterval

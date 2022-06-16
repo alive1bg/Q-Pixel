@@ -258,10 +258,9 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
                             local plyPos = GetEntityCoords(plyPed, false)
                             local coords = cfg_wheelFitmentPos[zone].coords
                             local heading = cfg_wheelFitmentPos[zone].heading
-                            --DrawMarker(20, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
+                            DrawMarker(20, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
                             if isNear(plyPos, coords, 2.0) then
-                                --exports["qb-ui"]:showInteraction("[E] Adjust Wheel Fitment")
-                                --Draw3DText(coords.x, coords.y, coords.z, "[Press ~p~E~w~ - Adjust Wheel Fitment]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
+                                Draw3DText(coords.x, coords.y, coords.z, "[Press ~p~E~w~ - Adjust Wheel Fitment]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
 
                                 if IsControlJustReleased(1, 38) then -- Key: E
                                     local slider_wWidth = {}
@@ -380,8 +379,6 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
 
                                     DisplayMenu(true, slider_wWidth, slider_wSize, slider_wfFL, slider_wfFR, slider_wfRL, slider_wfRR, slider_wfFLRO, slider_wfFRRO, slider_wfRLRO, slider_wfRRRO, sliderStartPos)
                                 end
-                            --else 
-                                --exports["qb-ui"]:hideInteraction()
                             end
                         end
                     end
@@ -448,12 +445,6 @@ RegisterNetEvent("qb-wheelfitment_cl:forceMenuClose", function()
     SyncWheelFitment()
     DisplayMenu(false)
 end)
-
-RegisterNetEvent("qb-wheelfitmet:SyncWheelFitmentGarage", function()
-    SyncWheelFitment()
-end)
-
---TriggerClientEvent('qb-wheelfitmet:SyncWheelFitmentGarage')
 
 RegisterCommand("leavefitment", function()
     TriggerEvent("qb-wheelfitment_cl:forceMenuClose")

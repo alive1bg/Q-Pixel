@@ -38,7 +38,7 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
         AddTransaction(targetPly.PlayerData.source, "personal", amount, "transfer", Player.PlayerData.charinfo.firstname, "Received $" .. format_int(amount) .. " from " ..Player.PlayerData.charinfo.firstname)
     end
 
-    if (account == "business") then
+    if (account == "boss") then
         local job = Player.PlayerData.job
 
         if (not SimpleBanking.Config["business_ranks"][string.lower(job.grade.name)] and not SimpleBanking.Config["business_ranks_overrides"][string.lower(job.name)]) then
@@ -52,19 +52,19 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {job.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {job.name})
         local data = result[1]
         if data then
-            local management_funds = data.name
+            local society = data.name
 
-            TriggerEvent('qb-banking:management_funds:server:WithdrawMoney', src, amount, management_funds)
+            TriggerEvent('qb-banking:society:server:WithdrawMoney', src, amount, society)
             Wait(50)
             targetPly.Functions.AddMoney('cash', amount)
             AddTransaction(src, "personal", -amount, "transfer", targetPly.PlayerData.charinfo.firstname, "Transfered $" .. format_int(amount) .. " to " .. targetPly.PlayerData.charinfo.firstname .. " from " .. job.label .. "'s account")
         end
     end
 
-    if (account == "organization") then
+    if (account == "gang") then
         local gang = Player.PlayerData.gang
 
         if (not SimpleBanking.Config["gang_ranks"][string.lower(gang.grade.name)] and not SimpleBanking.Config["gang_ranks_overrides"][string.lower(gang.name)]) then
@@ -78,12 +78,12 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {gang.name})
         local data = result[1]
         if data then
-            local management_funds = data.name
+            local society = data.name
 
-            TriggerEvent('qb-banking:management_funds:server:WithdrawMoney', src, amount, management_funds)
+            TriggerEvent('qb-banking:society:server:WithdrawMoney', src, amount, society)
             Wait(50)
             targetPly.Functions.AddMoney('cash', amount)
             AddTransaction(src, "personal", -amount, "transfer", targetPly.PlayerData.charinfo.firstname, "Transfered $" .. format_int(amount) .. " to " .. targetPly.PlayerData.charinfo.firstname .. " from " .. gang.label .. "'s account")

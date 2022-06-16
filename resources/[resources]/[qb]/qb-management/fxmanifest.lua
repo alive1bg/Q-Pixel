@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'qb-management'
+description 'qb-bossmenu'
 version '2.0.0'
 
 client_scripts {

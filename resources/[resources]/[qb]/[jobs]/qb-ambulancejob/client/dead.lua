@@ -15,7 +15,7 @@ end
 function OnDeath()
     if not isDead then
         isDead = true
-        TriggerEvent("pd:deathcheck")
+        TriggerEvent("pd:deathcheck1", true)
         TriggerServerEvent("hospital:server:SetDeathStatus", true)
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "demo", 0.1)
         local player = PlayerPedId()

@@ -1642,7 +1642,7 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	['gtz34'] = {
-		['name'] = 'R34 GTZ Drift',
+		['name'] = 'R34 GTZ Edition',
 		['brand'] = 'Nissan',
 		['model'] = 'gtz34',
 		['price'] = 247000,

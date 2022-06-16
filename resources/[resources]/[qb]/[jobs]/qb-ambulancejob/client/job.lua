@@ -132,6 +132,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
             else
                 TriggerServerEvent("hospital:server:SetDeathStatus", false)
                 TriggerServerEvent("hospital:server:SetLaststandStatus", false)
+                TriggerEvent("pd:deathcheck1", false)
             end
         end)
     end)

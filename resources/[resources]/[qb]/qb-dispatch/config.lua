@@ -6,7 +6,7 @@ Config.Timer = {}
 Config.PoliceJob = { "police", "bcso"}
 
 -- Enable if you only want to send alerts to onDuty officers
-Config.OnDutyOnly = false
+Config.OnDutyOnly = true
 
 Config.PoliceAndAmbulance = { "police", "ambulance", "bcso"}
 Config.PhoneModel = 'prop_npc_phone_02'

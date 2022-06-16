@@ -96,9 +96,18 @@ rootMenuConfig =  {
         enableMenu = function()
              return isPolice and onDuty and not isDead
         end,
-        subMenus = {"police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
+        subMenus = {"vehicle:riflerack", "police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
     },
-    {    
+    {
+        id = "Vehicle",
+        displayName = "Vehicle",
+        icon = "#general-car",
+        enableMenu = function()
+            return (isPolice and onDuty and not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
+        end,
+        subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar"}
+    },
+    {
         id = "PoliceObjects",
         displayName = "Police Objects",
         icon = "#police-objects",
@@ -107,7 +116,7 @@ rootMenuConfig =  {
         end,
         subMenus = {"police:spawnpion", "police:spawnhek", "police:spawnschotten", "police:spawntent", "police:spawnverlichting", "police:del" }
     },
-    {    
+    {
         id = "Radio",
         displayName = "Police Radio",
         icon = "#headset",
@@ -193,10 +202,10 @@ rootMenuConfig =  {
         id = "Vehicle",
         displayName = "Vehicle",
         icon = "#general-car",
+        functionName = "veh:options",
         enableMenu = function()
-            return (not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
+            return (not isDead and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
-        subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar", "vehicle:extras", "vehicle:autodrive"}
     },
     {    
         id = "Emotes",
@@ -298,7 +307,7 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = '#vehicle-options-vehicle',
         functionName = "police:client:riflerack",
         enableMenu = function()
-            return (not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
+            return not isDead and isPolice and onDuty
         end
     },
     ['vehicle:flip'] = {
@@ -945,9 +954,9 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
     if myJob == "realestate" then isRealestate = true onDuty = duty end
 end)
 
-RegisterNetEvent('pd:deathcheck') -- YOU SHOULD ADD THIS IN YOUR ambulancejob system, basically let the function trigger here when the ped playing anim and add this to
+RegisterNetEvent('pd:deathcheck1') -- YOU SHOULD ADD THIS IN YOUR ambulancejob system, basically let the function trigger here when the ped playing anim and add this to
 -- your revived function so everytime if person dies, this will be triggered to isDead = true, if he get revived this will be triggered to isDead = false
-AddEventHandler('pd:deathcheck', function()
+AddEventHandler('pd:deathcheck1', function()
     if not isDead then
         isDead = true
     else
@@ -1007,7 +1016,7 @@ CreateThread(function()
             heading=Depots[k].heading,
             minZ = Depots[k].minZ,
             maxZ = Depots[k].maxZ,
-            debugPoly = true
+            debugPoly = false
         }) 
     end
 end)

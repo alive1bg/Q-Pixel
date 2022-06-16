@@ -25,7 +25,12 @@ function AddMoney(account, amount)
 	end
 
 	Accounts[account] = Accounts[account] + amount
-	MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "business"', { Accounts[account], account })
+	MySQL.insert('INSERT INTO management_funds (job_name, amount, type) VALUES (:job_name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
+		{
+			['job_name'] = account,
+			['amount'] = Accounts[account],
+			['type'] = 'boss'
+		})
 end
 
 function RemoveMoney(account, amount)
@@ -40,13 +45,13 @@ function RemoveMoney(account, amount)
 			isRemoved = true
 		end
 
-		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "business"', { Accounts[account], account })
+		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "boss"', { Accounts[account], account })
 	end
 	return isRemoved
 end
 
 MySQL.ready(function ()
-	local bossmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "business"', {})
+	local bossmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "boss"', {})
 	if not bossmenu then return end
 
 	for _,v in ipairs(bossmenu) do
@@ -54,7 +59,7 @@ MySQL.ready(function ()
 	end
 end)
 
-RegisterNetEvent("qb-management:server:withdrawMoney", function(amount)
+RegisterNetEvent("qb-bossmenu:server:withdrawMoney", function(amount)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 
@@ -69,10 +74,10 @@ RegisterNetEvent("qb-management:server:withdrawMoney", function(amount)
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money in the account!", "error")
 	end
 
-	TriggerClientEvent('qb-management:client:OpenMenu', src)
+	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
-RegisterNetEvent("qb-management:server:depositMoney", function(amount)
+RegisterNetEvent("qb-bossmenu:server:depositMoney", function(amount)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 
@@ -87,16 +92,16 @@ RegisterNetEvent("qb-management:server:depositMoney", function(amount)
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money to add!", "error")
 	end
 
-	TriggerClientEvent('qb-management:client:OpenMenu', src)
+	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
-QBCore.Functions.CreateCallback('qb-management:server:GetAccount', function(_, cb, jobname)
+QBCore.Functions.CreateCallback('qb-bossmenu:server:GetAccount', function(_, cb, jobname)
 	local result = GetAccount(jobname)
 	cb(result)
 end)
 
 -- Get Employees
-QBCore.Functions.CreateCallback('qb-management:server:GetEmployees', function(source, cb, jobname)
+QBCore.Functions.CreateCallback('qb-bossmenu:server:GetEmployees', function(source, cb, jobname)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 
@@ -132,13 +137,14 @@ QBCore.Functions.CreateCallback('qb-management:server:GetEmployees', function(so
 end)
 
 -- Grade Change
-RegisterNetEvent('qb-management:server:GradeUpdate', function(data)
+RegisterNetEvent('qb-bossmenu:server:GradeUpdate', function(data)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	local Employee = QBCore.Functions.GetPlayerByCitizenId(data.cid)
 
 	if not Player.PlayerData.job.isboss then ExploitBan(src, 'GradeUpdate Exploiting') return end
-
+	if data.grade > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot promote to this rank!", "error") return end
+	
 	if Employee then
 		if Employee.Functions.SetJob(Player.PlayerData.job.name, data.grade) then
 			TriggerClientEvent('QBCore:Notify', src, "Sucessfulluy promoted!", "success")
@@ -149,11 +155,11 @@ RegisterNetEvent('qb-management:server:GradeUpdate', function(data)
 	else
 		TriggerClientEvent('QBCore:Notify', src, "Civilian not in city.", "error")
 	end
-	TriggerClientEvent('qb-management:client:OpenMenu', src)
+	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
 -- Fire Employee
-RegisterNetEvent('qb-management:server:FireEmployee', function(target)
+RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	local Employee = QBCore.Functions.GetPlayerByCitizenId(target)
@@ -162,6 +168,7 @@ RegisterNetEvent('qb-management:server:FireEmployee', function(target)
 
 	if Employee then
 		if target ~= Player.PlayerData.citizenid then
+			if Employee.PlayerData.job.grade.level > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot fire this citizen!", "error") return end
 			if Employee.Functions.SetJob("unemployed", '0') then
 				TriggerEvent("qb-log:server:CreateLog", "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
 				TriggerClientEvent('QBCore:Notify', src, "Employee fired!", "success")
@@ -176,6 +183,8 @@ RegisterNetEvent('qb-management:server:FireEmployee', function(target)
 		local player = MySQL.query.await('SELECT * FROM players WHERE citizenid = ? LIMIT 1', { target })
 		if player[1] ~= nil then
 			Employee = player[1]
+			Employee.job = json.decode(Employee.job)
+			if Employee.job.grade.level > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot fire this citizen!", "error") return end
 			local job = {}
 			job.name = "unemployed"
 			job.label = "Unemployed"
@@ -192,11 +201,11 @@ RegisterNetEvent('qb-management:server:FireEmployee', function(target)
 			TriggerClientEvent('QBCore:Notify', src, "Civilian not in city.", "error")
 		end
 	end
-	TriggerClientEvent('qb-management:client:OpenMenu', src)
+	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
 -- Recruit Player
-RegisterNetEvent('qb-management:server:HireEmployee', function(recruit)
+RegisterNetEvent('qb-bossmenu:server:HireEmployee', function(recruit)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	local Target = QBCore.Functions.GetPlayer(recruit)
@@ -208,11 +217,11 @@ RegisterNetEvent('qb-management:server:HireEmployee', function(recruit)
 		TriggerClientEvent('QBCore:Notify', Target.PlayerData.source , "You were hired as " .. Player.PlayerData.job.label .. "", "success")
 		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Recruit', "lightgreen", (Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname).. " successfully recruited " .. (Target.PlayerData.charinfo.firstname .. ' ' .. Target.PlayerData.charinfo.lastname) .. ' (' .. Player.PlayerData.job.name .. ')', false)
 	end
-	TriggerClientEvent('qb-management:client:OpenMenu', src)
+	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
 -- Get closest player sv
-QBCore.Functions.CreateCallback('qb-management:getplayers', function(source, cb)
+QBCore.Functions.CreateCallback('qb-bossmenu:getplayers', function(source, cb)
 	local src = source
 	local players = {}
 	local PlayerPed = GetPlayerPed(src)
