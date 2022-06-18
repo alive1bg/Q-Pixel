@@ -316,12 +316,6 @@ Config.PedList = {
 		coords = vector4(120.16, -220.06, 54.56, 249.76), 
 		gender = 'male'
 	},
-	-- casino wheel ped
-	{
-		model = `S_F_Y_Casino_01`, -- wheelspin
-		coords = vector4(987.95, 42.32, 71.27, 248.82), 		
-		gender = 'female'
-	},
 	-- pets
 	{
 		model = `S_M_M_StrVend_01`, -- Pets Shop
