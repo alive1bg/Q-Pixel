@@ -483,7 +483,7 @@ RegisterNetEvent('qb-vehicleshop:client:vehCategories', function()
     for k, v in pairs(Config.Shops[insideShop]['Categories']) do
         categoryMenu[#categoryMenu + 1] = {
             header = v,
-            icon = "fa-solid fa-circle",
+            icon = "fas fa-car-burst",
             params = {
                 event = 'qb-vehicleshop:client:openVehCats',
                 args = {

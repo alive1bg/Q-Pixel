@@ -192,35 +192,78 @@ end)
 
 
 CreateThread(function()
-  exports['qb-target']:AddCircleZone("showroom", vector3(-40.31, -1107.02, 26.42), 0.25, {
-    name = "showroom",
-    useZ=true,
-    debugPoly = false,
-  }, {
-    options = {
-        {
-            event = "qb-showroom:enterExperience",
-            icon = "far fa-newspaper",
-            label = "PDM Catalog"
+    exports['qb-target']:AddCircleZone("showroom", vector3(-38.98, -1100.29, 27.42), 0.48, {
+      name = "showroom",
+      useZ=true,
+      debugPoly = true,
+      }, {
+        options = {
+            {
+                event = "qb-showroom:enterExperience",
+                icon = "far fa-newspaper",
+                label = "PDM Catalog"
+            },
         },
-    },
-    job = {"all"},
-    distance = 1.5
-  })
+        distance = 1.5
+    })
 
-  exports['qb-target']:AddCircleZone("showroom1", vector3(-33.48, -1103.72, 26.42), 0.25, {
-    name = "showroom1",
-    useZ=true,
-    debugPoly = false,
-  }, {
-    options = {
-        {
-            event = "qb-showroom:enterExperience",
-            icon = "far fa-newspaper",
-            label = "PDM Catalog"
+    exports['qb-target']:AddCircleZone("showroom1", vector3(-40.29, -1094.49, 27.52), 0.47, {
+      name = "showroom1",
+      useZ=true,
+      debugPoly = true,
+      }, {
+        options = {
+            {
+                event = "qb-showroom:enterExperience",
+                icon = "far fa-newspaper",
+                label = "PDM Catalog"
+            },
         },
-    },
-    job = {"all"},
-    distance = 1.5
-  })
+        distance = 1.5
+    })
+
+    exports['qb-target']:AddCircleZone("showroom2", vector3(-46.95, -1095.4, 27.47), 0.47, {
+      name = "showroom2",
+      useZ=true,
+      debugPoly = true,
+      }, {
+        options = {
+            {
+                event = "qb-showroom:enterExperience",
+                icon = "far fa-newspaper",
+                label = "PDM Catalog"
+            },
+        },
+        distance = 1.5
+    })
+
+    exports['qb-target']:AddCircleZone("showroom3", vector3(-51.77, -1095.06, 27.5), 0.47, {
+      name = "showroom3",
+      useZ=true,
+      debugPoly = true,
+      }, {
+        options = {
+            {
+                event = "qb-showroom:enterExperience",
+                icon = "far fa-newspaper",
+                label = "PDM Catalog"
+            },
+        },
+        distance = 1.5
+    })
+
+    exports['qb-target']:AddCircleZone("showroom4", vector3(-51.04, -1086.82, 27.42), 0.47, {
+      name = "showroom4",
+      useZ=true,
+      debugPoly = true,
+      }, {
+        options = {
+            {
+                event = "qb-showroom:enterExperience",
+                icon = "far fa-newspaper",
+                label = "PDM Catalog"
+            },
+        },
+        distance = 1.5
+    })
 end)
