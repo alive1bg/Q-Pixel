@@ -31,9 +31,8 @@ if Config.UseWolfknightRadar == true then
 		local src = source
 		local Player = QBCore.Functions.GetPlayer(src)
 		local bolo = GetBoloStatus(plate)
-		print(cam, plate, index)
 		if bolo == true then
-			TriggerClientEvent("wk:togglePlateLock", Player.PlayerData.source, cam, beep, bolo)
+			TriggerClientEvent("wk:togglePlateLock", src, cam, true, bolo)
 		end
 	end)
 end
@@ -99,7 +98,7 @@ RegisterNetEvent('mdt:server:openMDT', function()
 	local JobType = GetJobType(PlayerData.job.name)
 	local bulletin = GetBulletins(JobType)
 
-	local calls = exports['qb-dispatch']:GetDispatchCalls()
+	local calls = exports['ps-dispatch']:GetDispatchCalls()
 
 	--TriggerClientEvent('mdt:client:dashboardbulletin', src, bulletin)
 	TriggerClientEvent('mdt:client:open', src, bulletin, activeUnits, calls, PlayerData.citizenid)
@@ -712,7 +711,7 @@ QBCore.Functions.CreateCallback('mdt:server:SearchVehicles', function(source, cb
 
 				value.code = false
 				value.stolen = false
-				value.image = "img/not-found.jpg"
+				value.image = "img/not-found.webp"
 				local info = GetVehicleInformation(value.plate)
 				if info then
 					value.code = info['code5']
@@ -769,7 +768,7 @@ RegisterNetEvent('mdt:server:getVehicleData', function(plate)
 						vehicle[1]['stolen'] = info['stolen']
 					end
 
-					if vehicle[1]['image'] == nil then vehicle[1]['image'] = "img/not-found.jpg" end -- Image
+					if vehicle[1]['image'] == nil then vehicle[1]['image'] = "img/not-found.webp" end -- Image
 				end
 
 				TriggerClientEvent('mdt:client:getVehicleData', src, vehicle)
@@ -1030,7 +1029,7 @@ RegisterNetEvent('mdt:server:setWaypoint', function(callid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['qb-dispatch']:GetDispatchCalls()
+			local calls = exports['ps-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:setWaypoint', src, calls[callid])
 		end
 	end
@@ -1081,7 +1080,7 @@ RegisterNetEvent('mdt:server:attachedUnits', function(callid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['qb-dispatch']:GetDispatchCalls()
+			local calls = exports['ps-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:attachedUnits', src, calls[callid]['units'], callid)
 		end
 	end
@@ -1114,7 +1113,7 @@ RegisterNetEvent('mdt:server:setDispatchWaypoint', function(callid, cid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['qb-dispatch']:GetDispatchCalls()
+			local calls = exports['ps-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:setWaypoint', src, calls[callid])
 		end
 	end
@@ -1190,7 +1189,7 @@ RegisterNetEvent('mdt:server:getCallResponses', function(callid)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	if IsPolice(Player.PlayerData.job.name) then
-		local calls = exports['qb-dispatch']:GetDispatchCalls()
+		local calls = exports['ps-dispatch']:GetDispatchCalls()
 		TriggerClientEvent('mdt:client:getCallResponses', src, calls[callid]['responses'], callid)
 	end
 end)

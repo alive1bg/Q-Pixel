@@ -523,7 +523,7 @@ CreateThread(function()
 					icon = "fa fa-shop",
 					label = "Open Shop",
 					job = Config.Job,
-				canInteract = function()
+					canInteract = function()
 					if not onDuty then
 						return false
 					else

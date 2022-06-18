@@ -21,7 +21,9 @@ rootMenuConfig =  {
         displayName = "Expressions",
         icon = "#expressions",
         enableMenu = function()
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return not pData.metadata["isdead"] and not pData.metadata["inlaststand"]
+            --return not isDead
         end,
         subMenus = { "expressions:normal", "expressions:drunk", "expressions:angry", "expressions:dumb", "expressions:electrocuted", "expressions:grumpy", "expressions:happy", "expressions:injured", "expressions:joyful", "expressions:mouthbreather", "expressions:oneeye", "expressions:shocked", "expressions:sleeping", "expressions:smug", "expressions:speculative", "expressions:stressed", "expressions:sulking", "expressions:weird", "expressions:weird2"}
     },
@@ -30,7 +32,8 @@ rootMenuConfig =  {
         displayName = "GPS",
         icon = "#blips",
         enableMenu = function()
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return not pData.metadata["isdead"] and not pData.metadata["inlaststand"]
         end,
         subMenus = { "blips:togglehair", "blips:toggletattoo", "blips:toggleclothing", "fk:galeri"}
     },
@@ -39,7 +42,8 @@ rootMenuConfig =  {
         displayName = "Walk style",
         icon = "#walking",
         enableMenu = function() 
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return not pData.metadata["isdead"] and not pData.metadata["inlaststand"]
         end,
         subMenus = { "animations:brave", "animations:hurry", "animations:business", "animations:tipsy", "animations:injured","animations:tough", "animations:default", "animations:hobo", "animations:money", "animations:swagger", "animations:shady", "animations:maneater", "animations:chichi", "animations:sassy", "animations:sad", "animations:posh", "animations:alien" }
     },
@@ -48,7 +52,8 @@ rootMenuConfig =  {
         displayName = "Interaction",
         icon = "#general-contact",
         enableMenu = function()
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return not pData.metadata["isdead"] and not pData.metadata["inlaststand"]
         end,
         
         subMenus = {"general:givenum", "general:cuff", "police:escort"}
@@ -59,7 +64,9 @@ rootMenuConfig =  {
          icon = "#police-dead",
          functionName = "dispatch:client:InjuriedPerson",
          enableMenu = function()
-            return isDead and not isPolice and not isMedic
+            local pData = QBCore.Functions.GetPlayerData()
+            return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and not isPolice and not isMedic)
+            --return isDead and not isPolice and not isMedic
         end,
     },
     {
@@ -68,7 +75,9 @@ rootMenuConfig =  {
          icon = "#police-dead",
          functionName = "qb-dispatch:client:officerdown",
          enableMenu = function()
-            return isDead and isPolice and onDuty
+            local pData = QBCore.Functions.GetPlayerData()
+            return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and isPolice)
+            --return isDead and isPolice and onDuty
         end,
     },
     {
@@ -77,7 +86,9 @@ rootMenuConfig =  {
          icon = "#bell-exclamation-secondary",
          functionName = "qb-dispatch:client:reinforcement",
          enableMenu = function()
-            return not isDead and isPolice and onDuty
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return not isDead and isPolice and onDuty
         end,
     },
     {
@@ -86,7 +97,9 @@ rootMenuConfig =  {
          icon = "#police-dead",
          functionName = "qb-dispatch:client:emsdown",
          enableMenu = function()
-            return isDead and isMedic and onDuty
+            local pData = QBCore.Functions.GetPlayerData()
+            return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and isMedic)
+            --return isDead and isMedic and onDuty
         end,
     },
     {    
@@ -94,7 +107,9 @@ rootMenuConfig =  {
         displayName = "Police",
         icon = "#badge-sheriff",
         enableMenu = function()
-             return isPolice and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"vehicle:riflerack", "police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
     },
@@ -103,7 +118,9 @@ rootMenuConfig =  {
         displayName = "Vehicle",
         icon = "#general-car",
         enableMenu = function()
-            return (isPolice and onDuty and not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
+            --return (isPolice and onDuty and not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
         subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar"}
     },
@@ -112,7 +129,9 @@ rootMenuConfig =  {
         displayName = "Police Objects",
         icon = "#police-objects",
         enableMenu = function()
-             return isPolice and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"police:spawnpion", "police:spawnhek", "police:spawnschotten", "police:spawntent", "police:spawnverlichting", "police:del" }
     },
@@ -122,7 +141,9 @@ rootMenuConfig =  {
         icon = "#headset",
         item = "radio",
         enableMenu = function()
-             return isPolice and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"joinradio1", "joinradio2", "joinradio3", "joinradio4", "joinradio5", "joinradio6", "joinradio7" }
     },
@@ -131,26 +152,21 @@ rootMenuConfig =  {
         displayName = "Ambulance",
         icon = "#hospital-amb",
         enableMenu = function()
-            return isMedic and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isMedic and onDuty)
+            --return isMedic and onDuty and not isDead
         end,
         subMenus = {"medic:status", "medic:revive", "medic:treat"}
     },
-    --[[{
-        id = "RealEstate",
-        displayName = "Real Estate",
-        icon = "#house-home",
-        enableMenu = function()
-            return isRealestate and onDuty and not isDead
-        end,
-        subMenus = {"realestate:listofhouses", "realestate:addgarage"}
-    },]]
     {
         id = "housemenu",
         displayName = "Realestate",
         icon = "#animation-business",
         functionName = "qb-realestate:client:OpenHouseListMenu",
         enableMenu = function()
-            return isRealestate and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isRealestate)
+            --return isRealestate and not isDead
         end,
     },
     {
@@ -158,7 +174,9 @@ rootMenuConfig =  {
         displayName = "Home",
         icon = "#house-home",
         enableMenu = function()
-            return not isDead and exports['qb-houses']:isInHouse()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and exports['qb-houses']:isInHouse())
+            --return not isDead and exports['qb-houses']:isInHouse()
         end,
         subMenus = {"house:setstash", "house:setoutfit", "house:setlogout", "house:givekeys", "house:decorate"}
     },
@@ -167,7 +185,9 @@ rootMenuConfig =  {
         displayName = "Home",
         icon = "#house-home",
         enableMenu = function()
-            return not isDead and not exports['qb-houses']:isInHouse()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and not exports['qb-houses']:isInHouse())
+            --return not isDead and not exports['qb-houses']:isInHouse()
         end,
         subMenus = {"house:doorlock", "house:givekeys", "house:enter"}
     },
@@ -176,7 +196,9 @@ rootMenuConfig =  {
         displayName = "Stretcher",
         icon = "#hospital-amb",
         enableMenu = function()
-            return  (not isDead and isCloseVeh() and isMedic and not IsPedInAnyVehicle(PlayerPedId(), false))
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCloseVeh() and isMedic and onDuty and not IsPedInAnyVehicle(PlayerPedId(), false))
+            --return  (not isDead and isCloseVeh() and isMedic and not IsPedInAnyVehicle(PlayerPedId(), false))
         end,
         subMenus ={"medic:stretcherspawn", "medic:stretcherremove"}
     },
@@ -185,7 +207,9 @@ rootMenuConfig =  {
         displayName = "Tow",
         icon = "#tow-job",
         enableMenu = function()
-            return isTow and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isTow)
+            --return isTow and onDuty and not isDead
         end,
         subMenus = {"tow:togglenpc", "tow:vehicle"}
     },
@@ -194,7 +218,9 @@ rootMenuConfig =  {
         displayName = "Taxi",
         icon = "#tow-job",
         enableMenu = function()
-            return isTaxi and onDuty and not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isTaxi)
+            --return isTaxi and onDuty and not isDead
         end,
         subMenus = {"taxi:npc", "taxi-meter", "taxi:startmeter"}
     },
@@ -204,7 +230,9 @@ rootMenuConfig =  {
         icon = "#general-car",
         functionName = "veh:options",
         enableMenu = function()
-            return (not isDead and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
+            --return (not isDead and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
     },
     {    
@@ -213,7 +241,8 @@ rootMenuConfig =  {
         icon = "#general-emotes",
         functionName = "animations:client:EmoteMenu",
         enableMenu = function()
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"])
         end
     },
     {
@@ -222,7 +251,9 @@ rootMenuConfig =  {
         icon = "#car-key",
         functionName = "vehiclekeys:client:GiveClosestKeys",
         enableMenu = function()
-            return (not isDead and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))
+            --return (not isDead and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))
         end
     },
     {
@@ -307,7 +338,9 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = '#vehicle-options-vehicle',
         functionName = "police:client:riflerack",
         enableMenu = function()
-            return not isDead and isPolice and onDuty
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return not isDead and isPolice and onDuty
         end
     },
     ['vehicle:flip'] = {
@@ -740,7 +773,9 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = "#police-chechvehiclestatus",
         functionName = "jl-carboost:client:checkvin",
         enableMenu = function()
-            return not isDead
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
+            --return not isDead
         end
     },
     -- HOSPITAL
@@ -881,8 +916,8 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = "#house-decorate",
         functionName = "qb-houses:client:decorate",
         enableMenu = function()
-            local Data = QBCore.Functions.GetPlayerData()
-            return not Data.metadata["isdead"] and not Data.metadata["inlaststand"]
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and exports['qb-houses']:isInHouse())
         end,
     },
 }

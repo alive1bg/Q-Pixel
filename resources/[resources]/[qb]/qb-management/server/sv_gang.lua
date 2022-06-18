@@ -15,7 +15,7 @@ function AddGangMoney(account, amount)
 		{
 			['job_name'] = account,
 			['amount'] = GangAccounts[account],
-			['type'] = 'gang'
+			['type'] = 'organization'
 		})
 end
 
@@ -31,13 +31,13 @@ function RemoveGangMoney(account, amount)
 			isRemoved = true
 		end
 
-		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "gang"', { GangAccounts[account], account })
+		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "organization"', { GangAccounts[account], account })
 	end
 	return isRemoved
 end
 
 MySQL.ready(function ()
-	local gangmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "gang"', {})
+	local gangmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "organization"', {})
 	if not gangmenu then return end
 
 	for _,v in ipairs(gangmenu) do

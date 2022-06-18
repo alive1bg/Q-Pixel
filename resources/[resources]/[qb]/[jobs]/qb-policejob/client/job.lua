@@ -419,7 +419,7 @@ RegisterNetEvent('police:client:EvidenceStashDrawer', function(data)
     if not takeLoc then return end
 
     if #(pos - takeLoc) <= 1.0 then
-        --[[local drawer = exports['qb-input']:ShowInput({
+        local drawer = exports['qb-input']:ShowInput({
             header = Lang:t('info.evidence_stash', {value = currentEvidence}),
             submitText = "open",
             inputs = {
@@ -429,13 +429,6 @@ RegisterNetEvent('police:client:EvidenceStashDrawer', function(data)
                     name = 'slot',
                     text = Lang:t('info.slot')
                 }
-            }
-        })]]
-        local drawer = exports['qb-ui']:OpenInputMenu({
-            {
-                label = Lang:t('info.evidence_stash', {value = currentEvidence}), Lang:t('info.slot'),
-                name = 'slot',
-                icon = 'pencil-alt',
             }
         })
         if drawer then

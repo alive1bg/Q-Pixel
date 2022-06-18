@@ -101,13 +101,9 @@ local function openHouseAnim()
     ClearPedTasks(PlayerPedId())
 end
 
---[[RegisterNetEvent('apartments:client:Logout', function()
-    TriggerServerEvent('qb-houses:server:LogoutLocation', source)
-    --ExecuteCommand('logout')
-end)]]
-
-RegisterNetEvent('apartments:client:Logout', function()
-    TriggerServerEvent('qb-houses:server:LogoutLocation')
+RegisterNetEvent('apartments:client:Logout', function(source)
+    --TriggerServerEvent('qb-houses:server:LogoutLocation', source)
+    ExecuteCommand('logout')
 end)
 
 local function EnterApartment(house, apartmentId, new)

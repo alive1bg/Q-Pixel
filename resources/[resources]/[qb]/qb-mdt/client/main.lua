@@ -712,7 +712,7 @@ RegisterNUICallback("callDetach", function(data, cb)
 end)
 
 RegisterNUICallback("removeCallBlip", function(data, cb)
-    TriggerEvent('qb-dispatch:client:removeCallBlip', data.callid)
+    TriggerEvent('ps-dispatch:client:removeCallBlip', data.callid)
     cb(true)
 end)
 

@@ -33,16 +33,16 @@ function ResetModals(type)
 
 var lang = [];
 lang["personal"] = "Personal Account";
-lang["boss"] = "Buisness Account";
-lang["gang"] = "Organization Account";
+lang["business"] = "Buisness Account";
+lang["organization"] = "Organization Account";
 lang["deposit"] = "Deposit";
 lang["withdraw"] = "Withdrawal";
 lang["transfer"] = "Transfer";
 
 var relang = [];
 relang["Personal Account"] = "personal";
-relang["Buisness Account"] = "boss";
-relang["Organization Account"] = "gang";
+relang["Buisness Account"] = "business";
+relang["Organization Account"] = "organization";
 
 function AddAccount(account_name, account_type, bal, ply_Name)
 {
@@ -194,7 +194,7 @@ function OpenATM(data, transactions, name)
         for (var i = 0; i < tbl.length; i++)
         {
             let tTbl = tbl[i];
-            AddAccount((tTbl.type === "boss" && tTbl.name || tTbl.type === "gang" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name);
+            AddAccount((tTbl.type === "business" && tTbl.name || tTbl.type === "organization" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name);
         }
     }
 
@@ -345,7 +345,7 @@ Listeners["refresh_accounts"] = function() {
 
        let data = ValidAccounts[key];
 
-        if (data && data === "boss" || data === "gang")
+        if (data && data === "business" || data === "organization")
         {
             ValidAccounts[key] = null;
             $("#" + key).remove();
@@ -371,7 +371,7 @@ Listeners["refresh_balances"] = function(data) {
     {
         let tTbl = tbl[i];
 
-        let account_name = (tTbl.type === "boss" && tTbl.name || tTbl.type === "gang" && tTbl.name || "Personal Account");
+        let account_name = (tTbl.type === "business" && tTbl.name || tTbl.type === "organization" && tTbl.name || "Personal Account");
         let temp_name = account_name.replace(/"|'/g,'');
         let temp_Name = account_name.replace(/\s+/g, '');
 

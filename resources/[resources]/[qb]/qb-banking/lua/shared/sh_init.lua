@@ -11,6 +11,7 @@ function format_int(n)
         n = n:sub(1, i) .. "," .. n:sub(i + 1)
     end
 
+    -- Make sure the amount is padded with zeroes
     if n[#n - 1] == "." then
         n = n .. "0"
     end
@@ -19,6 +20,22 @@ function format_int(n)
 end
 
 function PlayerIdentifier(type, id)
+    --[[
+    local identifiers = {}
+    local numIdentifiers = GetNumPlayerIdentifiers(id)
+
+    for a = 0, numIdentifiers do
+        table.insert(identifiers, GetPlayerIdentifier(id, a))
+    end
+
+    for b = 1, #identifiers do
+        if string.find(identifiers[b], type, 1) then
+            return identifiers[b]
+        end
+    end
+    return false
+    ]]--
+
     local identifiers = GetPlayerIdentifiers(id)
     for k,v in pairs(identifiers) do
         if (string.find(v, type)) then

@@ -839,31 +839,6 @@ RegisterNetEvent('inventory:server:SaveInventory', function(type, id)
 	end
 end)
 
--- RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
--- 	local src = source
--- 	local Player = QBCore.Functions.GetPlayer(src)
--- 	local itemData = Player.Functions.GetItemBySlot(slot)
--- 	if itemData then
--- 		local itemInfo = QBCore.Shared.Items[itemData.name]
--- 		if itemData.type == "weapon" then
--- 			if itemData.info.quality then
--- 				if itemData.info.quality > 0 then
--- 					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
--- 				else
--- 					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, false)
--- 				end
--- 			else
--- 				TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
--- 			end
--- 			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
--- 		elseif itemData.useable then
--- 			TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
--- 			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
--- 		end
--- 	end
--- end)
-
-
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)

@@ -308,11 +308,13 @@ QBCore.Commands.Add("kill", Lang:t('info.kill'), {{name = "id", help = Lang:t('i
 		local Player = QBCore.Functions.GetPlayer(tonumber(args[1]))
 		if Player then
 			TriggerClientEvent('hospital:client:KillPlayer', Player.PlayerData.source)
+			TriggerEvent("hospital:server:SetDeathStatus", true)
 		else
 			TriggerClientEvent('QBCore:Notify', src, Lang:t('error.not_online'), "error")
 		end
 	else
 		TriggerClientEvent('hospital:client:KillPlayer', src)
+		TriggerEvent("hospital:server:SetDeathStatus", true)
 	end
 end, "admin")
 

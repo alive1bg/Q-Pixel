@@ -874,9 +874,9 @@ RegisterNetEvent('qb-admin:client:SaveCar', function()
         if CoreName.Shared.Vehicles[vehname] ~= nil and next(CoreName.Shared.Vehicles[vehname]) ~= nil then
             TriggerServerEvent('qb-admin:server:SaveCar', props, CoreName.Shared.Vehicles[vehname], GetHashKey(veh), plate)
         else
-            CoreName.Functions.Notify("Fuck u bastard", 'error')
+            CoreName.Functions.Notify("You cant store this vehicle in your garage..", 'error')
         end
     else
-        CoreName.Functions.Notify("No vehicle", 'error')
+        CoreName.Functions.Notify("You are not in a vehicle..", 'error')
     end
 end)

@@ -38,7 +38,7 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
         AddTransaction(targetPly.PlayerData.source, "personal", amount, "transfer", Player.PlayerData.charinfo.firstname, "Received $" .. format_int(amount) .. " from " ..Player.PlayerData.charinfo.firstname)
     end
 
-    if (account == "boss") then
+    if (account == "business") then
         local job = Player.PlayerData.job
 
         if (not SimpleBanking.Config["business_ranks"][string.lower(job.grade.name)] and not SimpleBanking.Config["business_ranks_overrides"][string.lower(job.name)]) then
@@ -64,7 +64,7 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
         end
     end
 
-    if (account == "gang") then
+    if (account == "organization") then
         local gang = Player.PlayerData.gang
 
         if (not SimpleBanking.Config["gang_ranks"][string.lower(gang.grade.name)] and not SimpleBanking.Config["gang_ranks_overrides"][string.lower(gang.name)]) then

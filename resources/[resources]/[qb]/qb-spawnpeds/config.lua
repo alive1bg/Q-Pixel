@@ -23,21 +23,21 @@ Config.PedList = {
 	},
 	-- South Side
 	{
-		model = `mp_m_waremech_01`,
+		model = `s_m_y_construct_01`,
 		coords = vector4(45.54233, -1748.56, 29.586, 48.71),
 		gender = 'male',
 		scenario = 'WORLD_HUMAN_CLIPBOARD'
 	},
 	-- LS Freeway
 	{
-		model = `mp_m_waremech_01`,
+		model = `s_m_y_construct_01`,
 		coords = vector4(2748.02, 3473.83, 55.67, 226.21),
 		gender = 'male',
 		scenario = 'WORLD_HUMAN_CLIPBOARD'
 	},
 	-- Paleto
 	{
-		model = `mp_m_waremech_01`,
+		model = `s_m_y_construct_01`,
 		coords = vector4(-421.83, 6136.09, 31.87, 205.39),
 		gender = 'male',
 		scenario = 'WORLD_HUMAN_CLIPBOARD'
@@ -258,56 +258,49 @@ Config.PedList = {
 	
 	--------- BANK PEDS
 	{
-		model = `ig_bankman`,
-		coords = vector4(241.44, 227.19, 106.29, 170.43),
-		gender = 'male', 
-		animDict = 'anim@heists@prison_heiststation@cop_reactions',
-		animName = 'cop_b_idle'
-	},
-	{
-		model = `ig_bankman`,
+		model = 'a_f_y_business_01',
 		coords = vector4(313.84, -280.58, 54.16, 338.31), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(149.46, -1042.09, 29.37, 335.43), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(-351.23, -51.28, 49.04, 341.73), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(-1211.9, -331.9, 37.78, 20.07), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(-2961.14, 483.09, 15.7, 83.84), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(1174.8, 2708.2, 38.09, 178.52), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
 		animName = 'cop_b_idle'
 	},
 	{
-		model = `ig_bankman`, 
+		model = 'a_f_y_business_01', 
 		coords = vector4(-112.22, 6471.01, 31.63, 134.18), 
 		gender = 'male', 
 		animDict = 'anim@heists@prison_heiststation@cop_reactions',
@@ -334,5 +327,28 @@ Config.PedList = {
 		model = `S_M_M_StrVend_01`, -- Pets Shop
 		coords = vector4(561.18, 2741.51, 42.87, 199.08), 		
 		gender = 'male'
+	},
+	-- Tuner Test Drive Return
+	{
+		model = `mp_m_waremech_01`,
+		coords = vector4(124.62515, -3025.975, 7.0408897, 4.7318964),
+		gender = 'male',
+		scenario = 'WORLD_HUMAN_CLIPBOARD'
+	},
+	-- Pacific Bank
+	-- Finance and Paycheck
+	-- Left 2
+	{
+		model = 'ig_bankman', 
+		coords = vector4(259.55703, 227.19912, 105.95213, 170.69914),
+		gender = 'male', 
+		scenario = 'PROP_HUMAN_SEAT_COMPUTER'
+	},
+	-- Left 3
+	{
+		model = 'a_f_y_business_01',
+		coords = vector4(255.28853, 215.7876, 105.84213, 326.11083),
+		gender = 'female', 
+		scenario = 'PROP_HUMAN_SEAT_COMPUTER'
 	},
 }

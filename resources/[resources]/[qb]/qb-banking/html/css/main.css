@@ -23,7 +23,6 @@ html{
 .hidden{
     display: none !important;
 }
-
 .header-title {
     color:white;
 
@@ -100,15 +99,8 @@ p {
     display: flex;
 }
 
-#Player_Accounts{
-    height: 800px;
-    overflow-y: scroll;
-    box-sizing: content-box;
-}
-
 #Transaction_Row{
     height: 800px;
-    margin-left: 2%;
     overflow-y: scroll;
     box-sizing: content-box;
     background-color: #212832;

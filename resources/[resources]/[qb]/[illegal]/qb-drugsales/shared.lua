@@ -50,10 +50,12 @@ Config.ZoneDrugs = { -- \ Names should be same as zone names
 Config.BlacklistPeds = { -- \ Ped models that should be blacklisted
     "mp_m_shopkeep_01",
     "s_m_y_ammucity_01",
-    `mp_m_weapexp_01`,
-    `ig_bankman`,
-    `S_F_Y_Casino_01`,
-    `cs_lifeinvad_01`,
-    `mp_m_waremech_01`,
-    `ig_hunter`,
+    "mp_m_weapexp_01",
+    "ig_bankman",
+    "S_F_Y_Casino_01",
+    "cs_lifeinvad_01",
+    "mp_m_waremech_01",
+    "ig_hunter",
+    "s_m_y_construct_01",
+    "a_f_y_business_01",
 }

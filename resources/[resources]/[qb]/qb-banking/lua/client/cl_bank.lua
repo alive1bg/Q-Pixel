@@ -90,7 +90,21 @@ exports['qb-target']:AddTargetModel(ATMS,  {
     distance = 1.5
 })
 
-exports['qb-target']:AddBoxZone("Bank1", vector3(149.07, -1041.16, 29.54), 1.5, 4.5, {
+CreateThread(function()
+    exports['qb-target']:AddTargetModel(`a_f_y_business_01`, {
+        options = {
+            {
+                type = "client",
+            	event = "qb-banking:client:bank:openUI",
+				icon = "fas fa-piggy-bank",
+				label = "Sign In",
+            }
+        },
+        distance = 2.5
+    })
+end)
+
+--[[exports['qb-target']:AddBoxZone("Bank1", vector3(149.07, -1041.16, 29.54), 1.5, 4.5, {
 	name = "Bank1",
 	heading = 160,
 	debugPoly = false,
@@ -232,4 +246,4 @@ exports['qb-target']:AddBoxZone("BigBank", vector3(242.41, 225.03, 106.29), 1.5,
 			},
 		},
 		distance = 2.5
-})
+})]]

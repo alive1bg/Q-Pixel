@@ -212,7 +212,7 @@ RegisterNetEvent("qb-realestate:client:HouseOptions", function(data)
 end)
 
 RegisterNetEvent('qb-realestate:client:changetier', function(data)
-    --[[local dialog = exports['qb-input']:ShowInput({
+    local dialog = exports['qb-input']:ShowInput({
         header = 'Tier change',
         submitText = "Change tier",
         inputs = {
@@ -222,13 +222,6 @@ RegisterNetEvent('qb-realestate:client:changetier', function(data)
                 name = 'tier',
                 text = 'Max. ' ..Config.MaxTier
             }
-        }
-    })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
-        {
-            label = 'Tier change | Max. ' ..Config.MaxTier,
-            name = 'tier',
-            icon = 'pencil-alt',
         }
     })
     if dialog then
@@ -247,7 +240,7 @@ RegisterNetEvent('qb-realestate:client:changetier', function(data)
 end)
 
 RegisterNetEvent('qb-realestate:client:changeprice', function(data)
-    --[[local dialog = exports['qb-input']:ShowInput({
+    local dialog = exports['qb-input']:ShowInput({
         header = 'Price change',
         submitText = "Change price",
         inputs = {
@@ -257,13 +250,6 @@ RegisterNetEvent('qb-realestate:client:changeprice', function(data)
                 name = 'price',
                 text = 'Price'
             }
-        }
-    })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
-        {
-            label = 'Price change',
-            name = 'price',
-            icon = 'pencil-alt',
         }
     })
     if dialog then

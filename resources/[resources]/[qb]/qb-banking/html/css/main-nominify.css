@@ -96,11 +96,6 @@ p {
     margin-top: 13%;
 }
 
-#Player_Accounts{
-    overflow-y: scroll;
-}
-
-
 #Transaction_Row{
     height: 900px;
     overflow-y: scroll;

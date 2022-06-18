@@ -29,7 +29,7 @@ function AddMoney(account, amount)
 		{
 			['job_name'] = account,
 			['amount'] = Accounts[account],
-			['type'] = 'boss'
+			['type'] = 'business'
 		})
 end
 
@@ -45,13 +45,13 @@ function RemoveMoney(account, amount)
 			isRemoved = true
 		end
 
-		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "boss"', { Accounts[account], account })
+		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "business"', { Accounts[account], account })
 	end
 	return isRemoved
 end
 
 MySQL.ready(function ()
-	local bossmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "boss"', {})
+	local bossmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "business"', {})
 	if not bossmenu then return end
 
 	for _,v in ipairs(bossmenu) do

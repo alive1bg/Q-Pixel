@@ -4,55 +4,39 @@ Config.MaxHeight = 5.0
 Config.MaxLength = 5.0
 Config.DamageNeeded = 100.0
 Config.IdleCamera = true
-Config.EnableProne = false
+Config.EnableProne = true
 Config.JointEffectTime = 60
 Config.RemoveWeaponDrops = true
 Config.RemoveWeaponDropsTimer = 25
-Config.DefaultPrice = 50 -- carwash
+Config.DefaultPrice = 20 -- carwash
 Config.DirtLevel = 0.1 --carwash dirt level
-Config.RagdollChance = 0.3 -- Decimal Value (Currently 20%)
+Config.RagdollChance = 1
 
 ConsumeablesEat = {
-    ["slushy"] = math.random(5, 10),
-    ["sandwich"] = math.random(15, 24),
-    ["tosti"] = math.random(15, 24),
-    ["twerks_candy"] = math.random(20, 23),
-    ["snikkel_candy"] = math.random(20, 23),
-    --uwu start
-    ["uwupancake"] = math.random(25, 34),                           
-    ["uwubudhabowl"] = math.random(50, 60),
-    ["uwusushi"] = math.random(45, 50),
-    ["uwucupcake"] = math.random(40, 45),
-    ["uwuvanillasandy"] = math.random(50, 65),
-    ["uwuchocsandy"] = math.random(50, 65),
-    --uwu end
+    ["sandwich"] = math.random(35, 54),
+    ["tosti"] = math.random(40, 50),
+    ["twerks_candy"] = math.random(35, 54),
+    ["snikkel_candy"] = math.random(40, 50),
 }
 
 ConsumeablesDrink = {
-    ["water_bottle"] = math.random(35, 50),
-    ["slushy"] = math.random(35, 55),
-    ["kurkakola"] = math.random(25, 45),
-    ["coffee"] = math.random(40, 60),
-    --uwu start
-    ["uwububbleteablueberry"] = math.random(55, 60),
-    ["uwububbletearose"] = math.random(55, 60),
-    ["uwububbleteamint"] = math.random(55, 60),
-    ["uwumisosoup"] = math.random(80, 90),
-    --uwu end
+    ["water_bottle"] = math.random(35, 54),
+    ["kurkakola"] = math.random(35, 54),
+    ["coffee"] = math.random(40, 50),
 }
 
 ConsumeablesAlcohol = {
-    ["whiskey"] = math.random(30, 40),
-    ["beer"] = math.random(20, 30),
-    ["vodka"] = math.random(30, 40),
+    ["whiskey"] = math.random(20, 30),
+    ["beer"] = math.random(30, 40),
+    ["vodka"] = math.random(20, 40),
 }
 
 Config.BlacklistedScenarios = {
     ['TYPES'] = {
         "WORLD_VEHICLE_MILITARY_PLANES_SMALL",
         "WORLD_VEHICLE_MILITARY_PLANES_BIG",
-        "WORLD_VEHICLE_POLICE_NEXT_TO_CAR",
         "WORLD_VEHICLE_AMBULANCE",
+        "WORLD_VEHICLE_POLICE_NEXT_TO_CAR",
         "WORLD_VEHICLE_POLICE_CAR",
         "WORLD_VEHICLE_POLICE_BIKE",
     },
@@ -60,65 +44,64 @@ Config.BlacklistedScenarios = {
         2017590552,
         2141866469,
         1409640232,
-        --`ng_planes`,
     }
 }
 
 Config.BlacklistedVehs = {
-    [`SHAMAL`] = true,
-    [`LUXOR`] = true,
-    [`LUXOR2`] = true,
-    [`JET`] = true,
-    [`LAZER`] = true,
-    [`BUZZARD`] = true,
-    [`BUZZARD2`] = true,
-    [`ANNIHILATOR`] = true,
-    [`SAVAGE`] = true,
-    [`TITAN`] = true,
-    [`RHINO`] = true,
-    [`FIRETRUK`] = true,
-    [`MULE`] = true,
-    [`MAVERICK`] = true,
-    [`BLIMP`] = false,
-    [`AIRTUG`] = true,
-    [`CAMPER`] = true,
-    [`HYDRA`] = true,
-    [`OPPRESSOR`] = true,
-    [`technical3`] = true,
-    [`insurgent3`] = true,
-    [`apc`] = true,
-    [`tampa3`] = true,
-    [`trailersmall2`] = true,
-    [`halftrack`] = true,
-    [`hunter`] = true,
-    [`vigilante`] = false,
-    [`akula`] = true,
-    [`barrage`] = true,
-    [`khanjali`] = true,
-    [`caracara`] = true,
-    [`blimp3`] = false,
-    [`menacer`] = true,
-    [`oppressor2`] = true,
-    [`scramjet`] = true,
-    [`strikeforce`] = true,
-    [`cerberus`] = true,
-    [`cerberus2`] = true,
-    [`cerberus3`] = true,
-    [`scarab`] = true,
-    [`scarab2`] = true,
-    [`scarab3`] = true,
-    [`rrocket`] = true,
-    [`ruiner2`] = true,
-    [`deluxo`] = false,
+    ['SHAMAL'] = true,
+    ['LUXOR'] = true,
+    ['LUXOR2'] = true,
+    ['JET'] = true,
+    ['LAZER'] = true,
+    ['BUZZARD'] = true,
+    ['BUZZARD2'] = true,
+    ['ANNIHILATOR'] = true,
+    ['SAVAGE'] = true,
+    ['TITAN'] = true,
+    ['RHINO'] = true,
+    ['FIRETRUK'] = true,
+    ['MULE'] = true,
+    ['MAVERICK'] = true,
+    ['BLIMP'] = true,
+    ['AIRTUG'] = true,
+    ['CAMPER'] = true,
+    ['HYDRA'] = true,
+    ['OPPRESSOR'] = true,
+    ['technical3'] = true,
+    ['insurgent3'] = true,
+    ['apc'] = true,
+    ['tampa3'] = true,
+    ['trailersmall2'] = true,
+    ['halftrack'] = true,
+    ['hunter'] = true,
+    ['vigilante'] = true,
+    ['akula'] = true,
+    ['barrage'] = true,
+    ['khanjali'] = true,
+    ['caracara'] = true,
+    ['blimp3'] = true,
+    ['menacer'] = true,
+    ['oppressor2'] = true,
+    ['scramjet'] = true,
+    ['strikeforce'] = true,
+    ['cerberus'] = true,
+    ['cerberus2'] = true,
+    ['cerberus3'] = true,
+    ['scarab'] = true,
+    ['scarab2'] = true,
+    ['scarab3'] = true,
+    ['rrocket'] = true,
+    ['ruiner2'] = true,
+    ['deluxo'] = true,
 }
 
 Config.BlacklistedPeds = {
-    [`s_m_y_ranger_01`] = true,
-    [`s_m_y_sheriff_01`] = true,
-    [`s_m_y_cop_01`] = true,
-    [`s_f_y_sheriff_01`] = true,
-    [`s_f_y_cop_01`] = true,
-    [`s_m_y_hwaycop_01`] = true,
+    ['s_m_y_ranger_01'] = true,
+    ['s_m_y_sheriff_01'] = true,
+    ['s_m_y_cop_01'] = true,
+    ['s_f_y_sheriff_01'] = true,
+    ['s_f_y_cop_01'] = true,
+    ['s_m_y_hwaycop_01'] = true,
 }
 
 Config.Teleports = {
@@ -153,47 +136,48 @@ Config.Teleports = {
 
 Config.CarWash = { -- carwash
     [1] = {
-        ["label"] = "Car Wash",
+        ["label"] = "Hands Free Carwash",
         ["coords"] = vector3(25.29, -1391.96, 29.33),
     },
     [2] = {
-        ["label"] = "Car Wash",
+        ["label"] = "Hands Free Carwash",
         ["coords"] = vector3(174.18, -1736.66, 29.35),
     },
     [3] = {
-        ["label"] = "Car Wash",
+        ["label"] = "Hands Free Carwash",
         ["coords"] = vector3(-74.56, 6427.87, 31.44),
     },
     [5] = {
-        ["label"] = "Car Wash",
+        ["label"] = "Hands Free Carwash",
         ["coords"] = vector3(1363.22, 3592.7, 34.92),
     },
     [6] = {
-        ["label"] = "Car Wash",
+        ["label"] = "Hands Free Carwash",
         ["coords"] = vector3(-699.62, -932.7, 19.01),
     }
 }
 
 ------------PURSUIT MODE----------------------------
 Config.DefaultKey = 'N'
+
 Config.SlowdownOnSwitch = true
 Config.SlowdownPercentage = 0.2 -- 0.2 => 20%
+
 Config.PlaySoundOnSwitch = true
+
 Config.PlayServerSyncedSound = true -- server synced sounds can be heard by other players, disable if you cannot hear the sounds at higher speeds or mess with the distance settings below
 Config.MaxSoundDistance = 3.0 -- Server Synced only, and no volume falloff
 Config.MaxSoundDistanceAtMediumSpeeds = 5.0 -- Do not touch if you don't know what you're doing!
 Config.MaxSoundDistanceAtHighSpeeds = 10.0 -- Do not touch if you don't know what you're doing!
+
 Config.SoundFile = 'beep-sound-1' -- file name without the .ogg (located in /resources/[standalone]/interact-sound/client/html/sounds/)
 Config.SoundVolume = 0.05
+
 Config.SwitchNotification = "Changed mode to %s" -- %s will be replaced with the vehicle mode, e.g. S+
+
 Config.AuthorizedJobs = { -- empty => everyone can use it
     "police",
     "ambulance",
-    "bcso",
-    "parkranger",
-    "sast",
-    "pbso",
-    "sdso",
 }
 
 Config.VehicleModes = { -- If you define a new mode, you will have to add a new Vehicle Modification and a new mode for EVERY vehicle defined in Config.VehiclesConfig!
@@ -210,6 +194,7 @@ Config.VehicleModifications = {
         ["Engine"] = -1,
         ["Brakes"] = -1,
         ["Transmission"] = -1,
+        ["Suspension"] = 0,
         ["XenonHeadlightsColor"] = 0,
     },
     ["A+"] = {
@@ -218,7 +203,7 @@ Config.VehicleModifications = {
         ["Engine"] = 2,
         ["Brakes"] = 1,
         ["Transmission"] = 2,
-        ["Suspension"] = 2,
+        ["Suspension"] = 1,
         ["XenonHeadlightsColor"] = 0,
     },
     ["S"] = {
@@ -227,7 +212,7 @@ Config.VehicleModifications = {
         ["Engine"] = 3,
         ["Brakes"] = 1,
         ["Transmission"] = 2,
-        ["Suspension"] = 3,
+        ["Suspension"] = 2,
         ["XenonHeadlightsColor"] = 0,
     },
     ["S+"] = {
@@ -236,7 +221,7 @@ Config.VehicleModifications = {
         ["Engine"] = 4,
         ["Brakes"] = 2,
         ["Transmission"] = 3,
-        ["Suspension"] = 4,
+        ["Suspension"] = 3,
         ["XenonHeadlightsColor"] = 1,
     }
 }
@@ -368,4 +353,3 @@ Config.GeneralVehicleConfig = {
         ["fInitialDriveForce"] = 0.85
     }
 }
-

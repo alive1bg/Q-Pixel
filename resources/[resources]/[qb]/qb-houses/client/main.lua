@@ -1132,7 +1132,7 @@ RegisterNetEvent('qb-houses:client:OpenStash', function()
     end
 end)
 
-RegisterNetEvent('qb-houses:client:ChangeCharacter', function()
+RegisterNetEvent('qb-houses:client:ChangeCharacter', function(source)
     local stashLoc = vector3(logoutLocation.x, logoutLocation.y, logoutLocation.z)
     if CheckDistance(stashLoc, 1.5) then
         DoScreenFadeOut(250)
@@ -1145,8 +1145,7 @@ RegisterNetEvent('qb-houses:client:ChangeCharacter', function()
             SetEntityHeading(PlayerPedId(), Config.Houses[CurrentHouse].coords.enter.h)
             InOwnedHouse = false
             IsInside = false
-            --ExecuteCommand('logout')
-            TriggerServerEvent('qb-houses:server:LogoutLocation')
+            TriggerServerEvent('qb-houses:server:LogoutLocation', source)
         end)
     end
 end)
@@ -1362,7 +1361,9 @@ CreateThread(function()
                             nearLocation = true
                             exports['qb-ui']:showInteraction("[E] Logout")
                             if IsControlJustPressed(0, 38) then
-                                TriggerEvent("qb-houses:client:ChangeCharacter")
+                                ExecuteCommand('logout')
+                                --TriggerServerEvent('qb-houses:server:LogoutLocation', source)
+                                --TriggerEvent("qb-houses:client:ChangeCharacter", source)
                             end
                         elseif #(pos - vector3(logoutLocation.x, logoutLocation.y, logoutLocation.z)) < 2 then
                             exports['qb-ui']:hideInteraction()
