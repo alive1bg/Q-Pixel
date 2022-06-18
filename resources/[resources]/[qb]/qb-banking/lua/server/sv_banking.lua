@@ -22,14 +22,14 @@ QBCore.Functions.CreateCallback("qb-banking:server:GetBankData", function(source
     
     if (job.name and job.grade.name) then
         if(SimpleBanking.Config["business_ranks"][string.lower(job.grade.name)] or SimpleBanking.Config["business_ranks_overrides"][string.lower(job.name)] and SimpleBanking.Config["business_ranks_overrides"][string.lower(job.name)][string.lower(job.grade.name)]) then
-            local result =  MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {job.name})
+            local result =  MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {job.name})
             local data = result[1]
 
             if data ~= nil then
                 tbl[#tbl + 1] = {
                     type = "business",
                     name = job.label,
-                    amount = format_int(data.money) or 0
+                    amount = format_int(data.amount) or 0
                 }
             end
         end
@@ -40,14 +40,14 @@ QBCore.Functions.CreateCallback("qb-banking:server:GetBankData", function(source
     if (gang.name and gang.grade.name) then
         if(SimpleBanking.Config["gang_ranks"][string.lower(gang.grade.name)] or SimpleBanking.Config["gang_ranks_overrides"][string.lower(gang.name)] and SimpleBanking.Config["gang_ranks_overrides"][string.lower(gang.name)][string.lower(gang.grade.name)]) then
 
-            local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {gang.name})
+            local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
             local data = result[1]
 
             if data ~= nil then
                 tbl[#tbl + 1] = {
                     type = "organization",
                     name = gang.label,
-                    amount = format_int(data.money) or 0
+                    amount = format_int(data.amount) or 0
                 }
             end
         end

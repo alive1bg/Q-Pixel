@@ -35,6 +35,7 @@ AddEventHandler('mrp-paychecks:Collect', function()
             local paycheck = result[1].collectamount
             xPlayer.Functions.AddMoney("bank", paycheck, "Collected Paycheck")
             exports.oxmysql:execute("UPDATE paychecks SET collectamount = 0 WHERE citizenid = '"..cid.."'")
+            exports['qb-banking']:AddTransaction(source, "personal", paycheck, "deposit", "N/A", note ~= "" and note or "Collected Personal Paycheck")
             TriggerClientEvent('QBCore:Notify', source, 'You received your paycheck of $'..paycheck..'!')
             TriggerEvent("qb-log:server:CreateLog", "paychecks", "Paychecks", "white", " | "..cid.." collected "..paycheck.." from their paycheck")
         else

@@ -25,9 +25,9 @@ function AddMoney(account, amount)
 	end
 
 	Accounts[account] = Accounts[account] + amount
-	MySQL.insert('INSERT INTO management_funds (job_name, amount, type) VALUES (:job_name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
+	MySQL.insert('INSERT INTO management_funds (name, amount, type) VALUES (:name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
 		{
-			['job_name'] = account,
+			['name'] = account,
 			['amount'] = Accounts[account],
 			['type'] = 'business'
 		})
@@ -45,17 +45,17 @@ function RemoveMoney(account, amount)
 			isRemoved = true
 		end
 
-		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "business"', { Accounts[account], account })
+		MySQL.update('UPDATE management_funds SET amount = ? WHERE name = ? and type = "business"', { Accounts[account], account })
 	end
 	return isRemoved
 end
 
 MySQL.ready(function ()
-	local bossmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "business"', {})
+	local bossmenu = MySQL.query.await('SELECT name,amount FROM management_funds WHERE type = "business"', {})
 	if not bossmenu then return end
 
 	for _,v in ipairs(bossmenu) do
-		Accounts[v.job_name] = v.amount
+		Accounts[v.name] = v.amount
 	end
 end)
 
@@ -64,12 +64,13 @@ RegisterNetEvent("qb-bossmenu:server:withdrawMoney", function(amount)
 	local Player = QBCore.Functions.GetPlayer(src)
 
 	if not Player.PlayerData.job.isboss then ExploitBan(src, 'withdrawMoney Exploiting') return end
-
+	local joblabel = Player.PlayerData.job.label
 	local job = Player.PlayerData.job.name
 	if RemoveMoney(job, amount) then
 		Player.Functions.AddMoney("cash", amount, 'Boss menu withdraw')
 		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Withdraw Money', "blue", Player.PlayerData.name.. "Withdrawal $" .. amount .. ' (' .. job .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have withdrawn: $" ..amount, "success")
+		exports['qb-banking']:AddTransaction(src, "business", -amount, "deposit", joblabel, (note ~= "" and note or "Withdraw from ".. joblabel .."'s account from Business Computer."))
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money in the account!", "error")
 	end
@@ -84,10 +85,12 @@ RegisterNetEvent("qb-bossmenu:server:depositMoney", function(amount)
 	if not Player.PlayerData.job.isboss then ExploitBan(src, 'depositMoney Exploiting') return end
 
 	if Player.Functions.RemoveMoney("cash", amount) then
+		local joblabel = Player.PlayerData.job.label
 		local job = Player.PlayerData.job.name
 		AddMoney(job, amount)
 		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Deposit Money', "blue", Player.PlayerData.name.. "Deposit $" .. amount .. ' (' .. job .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have deposited: $" ..amount, "success")
+		exports['qb-banking']:AddTransaction(src, "business", amount, "deposit", joblabel, note ~= "" and note or "Deposited cash into ".. joblabel .."'s business account from Business Computer.")
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money to add!", "error")
 	end

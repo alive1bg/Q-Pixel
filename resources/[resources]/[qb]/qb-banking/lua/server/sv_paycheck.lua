@@ -12,7 +12,7 @@ AddEventHandler('qb-banking:server:sendPaycheck', function(pAmount, pSource)
     local result = MySQL.Sync.fetchAll("SELECT paycheck FROM players WHERE citizenid = ?", {citizenid})
     local data = result[1]
     if data ~= nil then
-        TriggerClientEvent("QBCore:Notify",src,"Paycheck of €"..total, 'primary')
+        TriggerClientEvent("QBCore:Notify",src,"Paycheck of $"..total, 'primary')
         local setter = MySQL.Sync.fetchAll("UPDATE players SET paycheck = paycheck + @amount WHERE citizenid = @citizenid",{ ['citizenid'] = citizenid, ['amount'] = total})
     end
 
@@ -35,8 +35,8 @@ AddEventHandler('qb-banking:server:Paycheck:pickup', function()
         if (paycheck > 0) then
             player.Functions.AddMoney('bank', paycheck)
             local setter = MySQL.Sync.fetchAll("UPDATE players SET paycheck = ? WHERE citizenid = ?", {0, cid})
-            AddTransaction(src, "personal", paycheck, "deposit", "N/A", (note ~= "" and note or "Plaća od €"..format_int(paycheck)))
-            TriggerClientEvent("QBCore:Notify",src,"Plača od €"..paycheck.." je uplačena na tvoj račun.", "primary")
+            AddTransaction(src, "personal", paycheck, "deposit", "N/A", (note ~= "" and note or "Plaća od $"..format_int(paycheck)))
+            TriggerClientEvent("QBCore:Notify",src,"Plača od $"..paycheck.." je uplačena na tvoj račun.", "primary")
         else
             TriggerClientEvent('QBCore:Notify', src, 'Nema Plače', 'error')
         end

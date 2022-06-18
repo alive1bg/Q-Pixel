@@ -1,17 +1,17 @@
 -- Use this if you are upgrading an existing DB/Server (this will copy your current bossmenu and gangmenu data to QB-Management jobs/gangs)
 CREATE TABLE IF NOT EXISTS `management_funds` (
 `id` INT(11) NOT NULL AUTO_INCREMENT,
-`job_name` VARCHAR(50) NOT NULL,
+`name` VARCHAR(50) NOT NULL,
 `amount`  INT(100) NOT NULL,
 `type` ENUM('boss','gang') NOT NULL DEFAULT 'boss',
 PRIMARY KEY (`id`),
-UNIQUE KEY `job_name` (`job_name`),
+UNIQUE KEY `name` (`name`),
 KEY `type` (`type`)
 );
 
 -- First we do boss menu (THIS WILL PULL YOUR CURRENT bossmenu DATA AND ADD IT TO THE NEWLY CREATED TABLE)
-INSERT INTO `management_funds` (`job_name`, `amount`, `type`)
-SELECT job_name, amount, 'boss' FROM bossmenu;
+INSERT INTO `management_funds` (`name`, `amount`, `type`)
+SELECT name, amount, 'boss' FROM bossmenu;
 
 
 -- [[ You can remove all of this if you want, this is just to confirm everything moved over correctly ]]--
@@ -35,8 +35,8 @@ DELIMITER ;
 
 
 -- Lastly we do the gang menu (THIS WILL PULL YOUR CURRENT gangmenu DATA AND ADD IT TO THE NEWLY CREATED TABLE)
-INSERT INTO `management_funds` (`job_name`, `amount`, `type`)
-SELECT job_name, amount, 'gang' FROM gangmenu;
+INSERT INTO `management_funds` (`name`, `amount`, `type`)
+SELECT name, amount, 'gang' FROM gangmenu;
 
 
 -- [[ You can remove all of this if you want, this is just to confirm everything moved over correctly ]]--

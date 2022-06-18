@@ -1039,7 +1039,7 @@ AddEventHandler('tuner:personalstash', function(players)
 end)
 
 -- 3rd eye target tuner boss menu
-exports['qb-target']:AddBoxZone("TunerBossMenu", vector3(125.4, -3014.79, 7.04), 0.35, 0.35, {
+--[[exports['qb-target']:AddBoxZone("TunerBossMenu", vector3(125.4, -3014.79, 7.04), 0.35, 0.35, {
     name = "TunerBossMenu",
     heading = 0,
     debugPoly = false,
@@ -1056,7 +1056,7 @@ exports['qb-target']:AddBoxZone("TunerBossMenu", vector3(125.4, -3014.79, 7.04),
         },
     },
     distance = 1.5
-})
+})]]
 
 exports['qb-target']:AddBoxZone("TunerDuty", vector3(126.04, -3007.26, 7.04), 0.4, 0.45, {
     name = "TunerDuty",

@@ -771,20 +771,6 @@ CreateThread(function()
 end)
 
 CreateThread(function()
-    exports['qb-target']:AddTargetModel(`ig_bankman`, {
-        options = {
-            {
-                type = "client",
-                event = "qb-vehicleshop:client:getVehicles",
-                icon = 'fas fa-car',
-                label = 'Finance Information',
-            }
-        },
-        distance = 2.5
-    })
-end)
-
-CreateThread(function()
     exports['qb-target']:AddTargetModel(`mp_m_waremech_01`, {
         options = {
             {

@@ -52,7 +52,7 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {job.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {job.name})
         local data = result[1]
         if data then
             local society = data.name
@@ -78,7 +78,7 @@ AddEventHandler('qb-banking:server:Transfer', function(target, account, amount, 
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {gang.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
         local data = result[1]
         if data then
             local society = data.name

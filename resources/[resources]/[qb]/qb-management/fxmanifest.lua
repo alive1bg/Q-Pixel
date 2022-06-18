@@ -22,4 +22,8 @@ server_exports {
     'GetGangAccount',
 }
 
+shared_scripts {
+    'shared/sh_*.lua',
+}
+
 lua54 'yes'

@@ -25,7 +25,7 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
         Player.Functions.AddMoney('cash', withdraw)
         Player.Functions.RemoveMoney('bank', withdraw)
 
-        AddTransaction(src, "personal", -amount, "withdraw", "N/A", (note ~= "" and note or "Isplačeno €"..format_int(amount).."."))
+        AddTransaction(src, "personal", -amount, "withdraw", "N/A", (note ~= "" and note or "Withdraw $"..format_int(amount).."."))
         RefreshTransactions(src)
     end
 
@@ -44,18 +44,18 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name = ?', {job.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name = ?', {job.name})
         local data = result[1]
 
         if data then
-            local sM = tonumber(data.money)
+            local sM = tonumber(data.amount)
             if sM >= amount then
                 TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.name)
 
-                AddTransaction(src, "business", -amount, "deposit", job.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. job.label .."'s account."))
+                AddTransaction(src, "business", -amount, "deposit", job.label, (note ~= "" and note or "Withdrew $"..format_int(amount).." from ".. job.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)
             else
-                TriggerClientEvent("qb-banking:client:Notify", src, "error", "Not enough money current balance: €"..sM) 
+                TriggerClientEvent("qb-banking:client:Notify", src, "error", "Not enough money current balance: $"..sM) 
             end
         end
     end
@@ -75,18 +75,18 @@ AddEventHandler('qb-banking:server:Withdraw', function(account, amount, note, fS
             return
         end
 
-        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE job_name= ?', {gang.name})
+        local result = MySQL.Sync.fetchAll('SELECT * FROM management_funds WHERE name= ?', {gang.name})
         local data = result[1]
 
         if data then
-            local sM = tonumber(data.money)
+            local sM = tonumber(data.amount)
             if sM >= amount then
                 TriggerEvent('qb-banking:society:server:WithdrawMoney',src, amount, data.name)
 
-                AddTransaction(src, "organization", -amount, "deposit", gang.label, (note ~= "" and note or "Withdrew €"..format_int(amount).." from ".. gang.label .."'s account."))
+                AddTransaction(src, "organization", -amount, "deposit", gang.label, (note ~= "" and note or "Withdrew $"..format_int(amount).." from ".. gang.label .."'s account."))
                 Player.Functions.AddMoney('cash', amount)
             else
-                TriggerClientEvent("qb-banking:client:Notify", src, "error", "Not enough money current balance: €"..sM) 
+                TriggerClientEvent("qb-banking:client:Notify", src, "error", "Not enough money current balance: $"..sM) 
             end
         end
     end

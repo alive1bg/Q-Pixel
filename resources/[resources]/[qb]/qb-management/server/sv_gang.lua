@@ -11,9 +11,9 @@ function AddGangMoney(account, amount)
 	end
 
 	GangAccounts[account] = GangAccounts[account] + amount
-	MySQL.insert('INSERT INTO management_funds (job_name, amount, type) VALUES (:job_name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
+	MySQL.insert('INSERT INTO management_funds (name, amount, type) VALUES (:name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
 		{
-			['job_name'] = account,
+			['name'] = account,
 			['amount'] = GangAccounts[account],
 			['type'] = 'organization'
 		})
@@ -31,17 +31,17 @@ function RemoveGangMoney(account, amount)
 			isRemoved = true
 		end
 
-		MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "organization"', { GangAccounts[account], account })
+		MySQL.update('UPDATE management_funds SET amount = ? WHERE name = ? and type = "organization"', { GangAccounts[account], account })
 	end
 	return isRemoved
 end
 
 MySQL.ready(function ()
-	local gangmenu = MySQL.query.await('SELECT job_name,amount FROM management_funds WHERE type = "organization"', {})
+	local gangmenu = MySQL.query.await('SELECT name,amount FROM management_funds WHERE type = "organization"', {})
 	if not gangmenu then return end
 
 	for _,v in ipairs(gangmenu) do
-		GangAccounts[v.job_name] = v.amount
+		GangAccounts[v.name] = v.amount
 	end
 end)
 
@@ -51,11 +51,13 @@ RegisterNetEvent("qb-gangmenu:server:withdrawMoney", function(amount)
 
 	if not Player.PlayerData.gang.isboss then ExploitBan(src, 'withdrawMoney Exploiting') return end
 
+	local ganglabel = Player.PlayerData.gang.label
 	local gang = Player.PlayerData.gang.name
 	if RemoveGangMoney(gang, amount) then
 		Player.Functions.AddMoney("cash", amount, 'Gang menu withdraw')
 		TriggerEvent('qb-log:server:CreateLog', 'gangmenu', 'Withdraw Money', 'yellow', Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. ' successfully withdrew $' .. amount .. ' (' .. gang .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have withdrawn: $" ..amount, "success")
+		AddTransaction(src, "organization", -amount, "deposit", ganglabel, note ~= "" and note or "Withdraw from ".. ganglabel .."'s account from Organization Computer.")
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money in the account!", "error")
 	end
@@ -70,10 +72,12 @@ RegisterNetEvent("qb-gangmenu:server:depositMoney", function(amount)
 	if not Player.PlayerData.gang.isboss then ExploitBan(src, 'depositMoney Exploiting') return end
 
 	if Player.Functions.RemoveMoney("cash", amount) then
+		local ganglabel = Player.PlayerData.gang.label
 		local gang = Player.PlayerData.gang.name
 		AddGangMoney(gang, amount)
 		TriggerEvent('qb-log:server:CreateLog', 'gangmenu', 'Deposit Money', 'yellow', Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname .. ' successfully deposited $' .. amount .. ' (' .. gang .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have deposited: $" ..amount, "success")
+		exports['qb-banking']:AddTransaction(src, "organization", amount, "deposit", ganglabel, note ~= "" and note or "Deposited cash into ".. ganglabel .."'s account.")
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money to add!", "error")
 	end
