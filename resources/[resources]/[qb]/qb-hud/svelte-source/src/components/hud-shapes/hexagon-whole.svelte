@@ -36,7 +36,7 @@
     try {
       pathLength = line.getTotalLength();
     }catch(err) {
-      console.log("Error: QB-Hud Hexagon-Whole-Icon should not be mounting when hiding icons")
+      console.log("Error: qb-Hud: Hexagon-Whole-Icon should not be mounting when hiding icons")
     }
   });
 

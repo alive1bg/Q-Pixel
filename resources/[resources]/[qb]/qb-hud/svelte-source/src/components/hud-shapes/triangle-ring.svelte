@@ -44,7 +44,7 @@
     try {
       pathLength = triangle.getTotalLength();
     }catch(err) {
-      console.log("Error: QB-Hud Triangle-Ring-Icon should not be mounting when hiding icons")
+      console.log("Error: qb-Hud: Triangle-Ring-Icon should not be mounting when hiding icons")
     }
   });
 

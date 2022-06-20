@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local PlayerData = QBCore.Functions.GetPlayerData()
 local config = Config
 local UIConfig = UIConfig
-local speedMultiplier = Config.UseMPH and 2.23694 or 3.6
+local speedMultiplier = config.UseMPH and 2.23694 or 3.6
 local seatbeltOn = false
 local cruiseOn = false
 local showAltitude = false
@@ -31,15 +31,15 @@ local CinematicHeight = 0.2
 local w = 0
 local radioTalking = false
 local Menu = {
-    isOutMapChecked = false, -- isOutMapChecked
+    isOutMapChecked = true, -- isOutMapChecked
     isOutCompassChecked = true, -- isOutCompassChecked
     isCompassFollowChecked = true, -- isCompassFollowChecked
     isOpenMenuSoundsChecked = true, -- isOpenMenuSoundsChecked
     isResetSoundsChecked = true, -- isResetSoundsChecked
     isListSoundsChecked = true, -- isListSoundsChecked
-    isMapNotifChecked = false, -- isMapNotifChecked
+    isMapNotifChecked = true, -- isMapNotifChecked
     isLowFuelChecked = true, -- isLowFuelChecked
-    isCinematicNotifChecked = false, -- isCinematicNotifChecked
+    isCinematicNotifChecked = true, -- isCinematicNotifChecked
     isMapEnabledChecked = false, -- isMapEnabledChecked
     isToggleMapBordersChecked = true, -- isToggleMapBordersChecked
     isDynamicEngineChecked = true, -- isDynamicEngineChecked
@@ -50,7 +50,7 @@ local Menu = {
     isPointerShowChecked = true, -- isPointerShowChecked
     isDegreesShowChecked = true, -- isDegreesShowChecked
     isCineamticModeChecked = false, -- isCineamticModeChecked
-    isToggleMapShapeChecked = 'circle', -- isToggleMapShapeChecked
+    isToggleMapShapeChecked = 'square', -- isToggleMapShapeChecked
 }
 
 DisplayRadar(false)
@@ -88,7 +88,7 @@ local function hasHarness()
 end
 
 local function loadSettings()
-    --QBCore.Functions.Notify(Lang:t("notify.hud_settings_loaded"), "success")
+    QBCore.Functions.Notify(Lang:t("notify.hud_settings_loaded"), "success")
     Wait(1000)
     TriggerEvent("hud:client:LoadMap")
 end
@@ -163,7 +163,7 @@ AddEventHandler("pma-voice:radioActive", function(isRadioTalking)
 end)
 
 -- Callbacks & Events
-RegisterCommand('hud', function()
+RegisterCommand('menu', function()
     Wait(50)
     if showMenu then return end
     TriggerEvent("hud:client:playOpenMenuSounds")
@@ -347,6 +347,11 @@ end)
 RegisterNUICallback('showMapNotif', function(data, cb)
     cb({})
     Wait(50)
+    if data.checked then
+        Menu.isMapNotifChecked = true
+    else
+        Menu.isMapNotifChecked = false
+    end
     TriggerEvent("hud:client:playHudChecklistSound")
 end)
 
@@ -407,6 +412,9 @@ RegisterNetEvent("hud:client:LoadMap", function()
         if not HasStreamedTextureDictLoaded("squaremap") then
             Wait(150)
         end
+        if Menu.isMapNotifChecked then
+            QBCore.Functions.Notify(Lang:t("notify.load_square_map"))
+        end
         SetMinimapClipType(0)
         AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "squaremap", "radarmasksm")
         AddReplaceTexture("platform:/textures/graphics", "radarmask1g", "squaremap", "radarmasksm")
@@ -433,10 +441,16 @@ RegisterNetEvent("hud:client:LoadMap", function()
             showSquareB = true
         end
         Wait(1200)
+        if Menu.isMapNotifChecked then
+            QBCore.Functions.Notify(Lang:t("notify.loaded_square_map"))
+        end
     elseif Menu.isToggleMapShapeChecked == "circle" then
         RequestStreamedTextureDict("circlemap", false)
         if not HasStreamedTextureDictLoaded("circlemap") then
             Wait(150)
+        end
+        if Menu.isMapNotifChecked then
+            QBCore.Functions.Notify(Lang:t("notify.load_circle_map"))
         end
         SetMinimapClipType(1)
         AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "circlemap", "radarmasksm")
@@ -464,6 +478,9 @@ RegisterNetEvent("hud:client:LoadMap", function()
             showCircleB = true
         end
         Wait(1200)
+        if Menu.isMapNotifChecked then
+            QBCore.Functions.Notify(Lang:t("notify.loaded_circle_map"))
+        end
     end
 end)
 
@@ -685,7 +702,7 @@ RegisterNetEvent('hud:client:BuffEffect', function(data)
             display = data.display,
         })
     else
-        print("QB-Hud error: data invalid from client event call: hud:client:BuffEffect")
+        print("qb-Hud error: data invalid from client event call: hud:client:BuffEffect")
     end
 end)
 
@@ -706,7 +723,7 @@ RegisterNetEvent('hud:client:EnhancementEffect', function(data)
             enhancementName = data.enhancementName,
         })
     else
-        print("QB-Hud error: data invalid from client event call: hud:client:EnhancementEffect")
+        print("qb-Hud error: data invalid from client event call: hud:client:EnhancementEffect")
     end
 end)
 

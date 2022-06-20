@@ -88,7 +88,7 @@ CreateThread(function()
             elseif Config.CasinoEmployeePrompt == 'peek' then
                 text = '<b>Diamond Casino Exchange</b>'
                 exports['textUi']:DrawTextUi('show', text)
-                exports['qb-target']:AddTargetModel(`U_F_M_CasinoCash_01`, {
+                exports['qb-target']:AddTargetModel('U_F_M_CasinoCash_01', {
                     options = {
                         { 
                             event = "doj:casinoMainMenu",
@@ -191,24 +191,142 @@ exports['qb-target']:AddBoxZone("casinogeneralsafestorage", vector3(989.39, 30.1
             },
         },
     distance = 2.5
-    })
+})
 
-    exports['qb-target']:AddBoxZone("casinogeneralsafestorage2", vector3(991.49, 32.71, 71.47), 0.5, 0.5, {       
-        name="casinogeneralsafestorage2",
-        heading=-53,
-        debugPoly=false,
-        minZ=71.17,
-        maxZ=71.57
-        }, {
-            options = {
-                {
-                    type = "client",
-                    event = "casino:client:safestash",
-                    icon = "fa fa-circle",
-                    label = "Storage",
-                    job = "casino"
-                },
+exports['qb-target']:AddBoxZone("casinogeneralsafestorage2", vector3(991.49, 32.71, 71.47), 0.5, 0.5, {       
+    name="casinogeneralsafestorage2",
+    heading=-53,
+    debugPoly=false,
+    minZ=71.17,
+    maxZ=71.57
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "casino:client:safestash",
+                icon = "fa fa-circle",
+                label = "Storage",
+                job = "casino"
             },
-        distance = 2.5
-        })
+        },
+    distance = 2.5
+})
 
+function showDiamondsOnScreenBaby()
+    Citizen.CreateThread(function()
+      local propNames = {"vw_vwint01_video_overlay", "gbz_casino_video_overlay"}
+      for _, propName in pairs(propNames) do
+        Citizen.CreateThread(function()
+          local model = GetHashKey(propName)
+          local timeout = 21085 -- 5000 / 255
+          local casinoScreenStr = propName == "vw_vwint01_video_overlay" and "CasinoScreen_01" or "CasinoScreen_02"
+          local handle = CreateNamedRenderTargetForModel(casinoScreenStr, model)
+          --print(model, propName, casinoScreenStr, handle)
+          RegisterScriptWithAudio(0)
+          SetTvChannel(-1)
+          SetTvVolume(0)
+          SetScriptGfxDrawOrder(4)
+          SetTvChannelPlaylist(2, "CASINO_DIA_PL", 0)
+          SetTvChannel(2)
+          EnableMovieSubtitles(1)
+  
+          function doAlpha()
+            Citizen.SetTimeout(timeout, function()
+              SetTvChannelPlaylist(2, "CASINO_DIA_PL", 0)
+              SetTvChannel(2)
+              if inCasino then
+                doAlpha()
+              end
+            end)
+          end
+          doAlpha()
+  
+          Citizen.CreateThread(function()
+            while inCasino do
+              SetTextRenderId(handle)
+              DrawTvChannel(0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, 255)
+              SetTextRenderId(GetDefaultScriptRendertargetRenderId())
+              Citizen.Wait(0)
+            end
+            SetTvChannel(-1)
+            ReleaseNamedRendertarget(GetHashKey(casinoScreenStr))
+            SetTextRenderId(GetDefaultScriptRendertargetRenderId())
+          end)
+        end)
+      end
+    end)
+  end
+  
+  function showDiamondsOnInsideTrackScreenBaby()
+    Citizen.CreateThread(function()
+      local model = GetHashKey("vw_vwint01_betting_screen")
+      local timeout = 21085 -- 5000 / 255
+  
+      local handle = CreateNamedRenderTargetForModel("CasinoScreen_02", model)
+  
+      RegisterScriptWithAudio(0)
+      SetTvChannel(-1)
+      SetTvVolume(0)
+      SetScriptGfxDrawOrder(4)
+      SetTvChannelPlaylist(2, "CASINO_DIA_PL", 0)
+      SetTvChannel(2)
+      EnableMovieSubtitles(1)
+  
+      function doAlpha()
+        Citizen.SetTimeout(timeout, function()
+          SetTvChannelPlaylist(2, "CASINO_DIA_PL", 0)
+          SetTvChannel(2)
+          if inCasino then
+            doAlpha()
+          end
+        end)
+      end
+      doAlpha()
+  
+      Citizen.CreateThread(function()
+        while inCasino do
+          SetTextRenderId(handle)
+          DrawTvChannel(0.5, 0.5, 1.0, 1.0, 0.0, 255, 255, 255, 255)
+          SetTextRenderId(GetDefaultScriptRendertargetRenderId())
+          Citizen.Wait(0)
+        end
+        SetTvChannel(-1)
+        ReleaseNamedRendertarget(GetHashKey("CasinoScreen_02"))
+        SetTextRenderId(GetDefaultScriptRendertargetRenderId())
+      end)
+    end)
+  end
+  
+  function playSomeBackgroundAudioBaby()
+    CreateThread(function()
+      local function audioBanks()
+        while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_GENERAL", false, -1) do
+          Wait(0)
+        end
+        while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_01", false, -1) do
+          Wait(0)
+        end
+        while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_02", false, -1) do
+          Wait(0)
+        end
+        while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_03", false, -1) do
+          Wait(0)
+        end
+        --while not RequestScriptAudioBank("DLC_VINEWOOD/CASINO_INTERIOR_STEMS", false, -1) do
+        --  print('load 5')
+        --  Wait(0)
+        --end
+      end
+      audioBanks()
+      if IsStreamPlaying() then
+        StopStream()
+      end
+      if IsAudioSceneActive("DLC_VW_Casino_General") then
+        StopAudioScene("DLC_VW_Casino_General")
+      end
+      ReleaseScriptAudioBank("DLC_VINEWOOD/CASINO_GENERAL")
+      ReleaseScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_01")
+      ReleaseScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_02")
+      ReleaseScriptAudioBank("DLC_VINEWOOD/CASINO_SLOT_MACHINES_03")
+    end)
+  end

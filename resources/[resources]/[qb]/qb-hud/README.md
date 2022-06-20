@@ -1,4 +1,4 @@
-![Project Sloth GitHub Project qb-hud Banner](https://user-images.githubusercontent.com/91661118/170896135-fead50a0-2a4b-432d-8469-038acfb4f2f3.png)
+![Project Sloth GitHub Project qb-HUD Banner](https://user-images.githubusercontent.com/91661118/170896135-fead50a0-2a4b-432d-8469-038acfb4f2f3.png)
 
 ### qb-hud
 Ultra customizable hud featuring a unique and robust settings menu. Change eveything about your experience!
@@ -6,16 +6,23 @@ Ultra customizable hud featuring a unique and robust settings menu. Change eveyt
 ![Project Sloth Buttons 2](https://user-images.githubusercontent.com/91661118/170895968-c4224105-5c87-4947-af94-8e8bd792f566.png)
 
 ### Optional:
-* [QB-Buffs](https://github.com/Project-Sloth/QB-Buffs)
+* [qb-buffs](https://github.com/Project-Sloth/qb-buffs)
+
+### ⚠️Important:
+- **If the minimap is pulsating or flickering, make sure if you are using custom maps that you ensure qb-hud BEFORE map resource.**
+- **Do not rename this resource from qb-hud or you will encounter issues.**
+- Locale is now supported. Make sure that your qb-core is update. You can update it [here](https://github.com/qbcore-framework/qb-core).
+- **This script is fully open source, it has no obfuscation.** Svelte compiled the js when it gets build and original source code is here [svelte-source](https://github.com/Project-Sloth/qb-hud/tree/main/svelte-source).
 
 <br>
 <br>
 
-![Project Sloth GitHub Project qb-hud Install Banner](https://user-images.githubusercontent.com/91661118/170896809-5c15da71-5dd7-4f46-85c5-892701b1eea8.png)
+![Project Sloth GitHub Project qb-HUD Install Banner](https://user-images.githubusercontent.com/91661118/170896809-5c15da71-5dd7-4f46-85c5-892701b1eea8.png)
 
 
 ### Start installing now
 We will now provide you with a step-by-step guide for the installation process. Shouldn't take too long and it shouldn't be too confusing either! 
+
 
 ### Step 1:
 Go ahead and start by dragging and dropping qb-hud into your designated resources folder.
@@ -27,20 +34,20 @@ If you are still lost, Slothy has created a few GIF's to help guide you through 
 <br>
 <br>
 
-### ⚠️Important:
-If you don't want everyone on the server to be able to access the customizability options within the menu; make sure to change **Config.AdminOnly** to **true** instead of **false**. 
+### Admin Only Setting:
+If you don't want your community to be able to access the customizability options within the menu; make sure to change **Config.AdminOnly** to **true** instead of **false**. Keep in mind as well, while **true**, the changes you save will override for everyone on the server.
 
-This configuration setting is found in **qb-hud/config.lua** as shown in the GIF below
+This configuration setting is found in **qb-hud/config.lua** as shown in the GIF below.
 
 ![chrome_ZwsidhP73y](https://user-images.githubusercontent.com/91661118/171066080-6bc11bb8-7cde-460b-8d73-bbc329644c83.gif)
 
 <br>
 <br>
 
-![Project Sloth GitHub Project qb-hud Features Banner](https://user-images.githubusercontent.com/91661118/170896822-4c6fcf43-94a3-4afd-b651-1eb76244fd8d.png)
+![Project Sloth GitHub Project qb-HUD Features Banner](https://user-images.githubusercontent.com/91661118/170896822-4c6fcf43-94a3-4afd-b651-1eb76244fd8d.png)
 
 
-#### Some features to mention within this QB-Hud
+#### Some features to mention within this qb-hud:
 * Custom icon shapes
 * Alter icon size, position and color
 * Customize settings for individual icons
@@ -48,7 +55,7 @@ This configuration setting is found in **qb-hud/config.lua** as shown in the GIF
 <br>
 <br>
 
-![Project Sloth GitHub Project qb-hud Showcase Banner](https://user-images.githubusercontent.com/91661118/170896830-39245350-47c3-4b42-93d0-ac0ca35c3711.png)
+![Project Sloth GitHub Project qb-HUD Showcase Banner](https://user-images.githubusercontent.com/91661118/170896830-39245350-47c3-4b42-93d0-ac0ca35c3711.png)
 
 
 ### Time to show you what it looks like!
@@ -72,6 +79,8 @@ https://user-images.githubusercontent.com/89323760/170896590-0a9af313-19c3-4981-
 #### Icon layout and spacing:
 https://user-images.githubusercontent.com/89323760/170898540-5e3abd16-38bb-45d6-840e-5a2619c2076b.mp4
 
+# DMCA Protection Certificate
+![image](https://user-images.githubusercontent.com/82112471/172012054-2ae213da-3a42-41d7-a5b8-9a3208809e93.png)
 
 ### Credits:
 Inspiration and some code snippets from [Svelte & Lua Boilerplate](https://github.com/project-error/svelte-lua-boilerplate) by [Project Error](https://github.com/project-error)

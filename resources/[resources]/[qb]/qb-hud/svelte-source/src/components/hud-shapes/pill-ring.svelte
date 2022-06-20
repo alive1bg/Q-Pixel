@@ -44,7 +44,7 @@
     try {
       pathLength = pillRing.getTotalLength();
     }catch(err) {
-      console.log("Error: QB-Hud Pill-Ring-Icon should not be mounting when hiding icons")
+      console.log("Error: qb-Hud: Pill-Ring-Icon should not be mounting when hiding icons")
     }
   });
 

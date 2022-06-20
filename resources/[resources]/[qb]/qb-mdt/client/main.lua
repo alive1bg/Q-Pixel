@@ -712,7 +712,7 @@ RegisterNUICallback("callDetach", function(data, cb)
 end)
 
 RegisterNUICallback("removeCallBlip", function(data, cb)
-    TriggerEvent('ps-dispatch:client:removeCallBlip', data.callid)
+    TriggerEvent('qb-dispatch:client:removeCallBlip', data.callid)
     cb(true)
 end)
 
@@ -887,4 +887,16 @@ end)
 
 RegisterNetEvent('mdt:client:statusImpound', function(data, plate)
     SendNUIMessage({ type = "statusImpound", data = data, plate = plate })
+end)
+
+RegisterNetEvent('mdt:client:getBlackoutState', function(blackoutState)
+    SendNUIMessage({
+        type = "getBlackoutState",
+        data = blackoutState
+    })
+end)
+
+RegisterNUICallback("getBlackoutState", function(data, cb)
+    TriggerServerEvent('mdt:server:getBlackoutState')
+    cb(true)
 end)

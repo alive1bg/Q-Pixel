@@ -172,7 +172,7 @@ RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
     local vehiclePropsjson = json.encode(vehicleProps)
     if car then
         car = false 
-        TriggerClientEvent('QBCore:Notify', source, 'You won a car!', 'success')
+        TriggerClientEvent('QBCore:Notify', source, 'You won a fucking nice car!', 'success')
         TriggerClientEvent('qb-luckywheel:client:winCarEmail', source)
         exports.oxmysql:insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, garage, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
             xPlayer.PlayerData.license,
@@ -181,7 +181,7 @@ RegisterNetEvent('qb-luckywheel:server:carRedeem', function(vehicleProps)
             `Config.Vehicle`,
             vehiclePropsjson,
             vehicleProps.plate,
-            'motelgarage',
+            'casino',
             1
         })
     else

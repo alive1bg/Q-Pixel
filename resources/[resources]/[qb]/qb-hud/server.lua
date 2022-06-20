@@ -64,7 +64,7 @@ end)
 RegisterNetEvent('hud:server:saveUIData', function(data)
     local src = source
 	-- Check Permissions
-    if not QBCore.Functions.HasPermission(src, 'god') and not IsPlayerAceAllowed(src, 'command') then
+    if not QBCore.Functions.HasPermission(src, 'admin') and not IsPlayerAceAllowed(src, 'command') then
 		return
 	end
 
@@ -200,7 +200,7 @@ end)
 
 QBCore.Functions.CreateCallback('hud:server:getRank', function(source, cb)
     local src = source
-    if QBCore.Functions.HasPermission(src, 'god') or IsPlayerAceAllowed(src, 'command') then
+    if QBCore.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
         cb(true)
     else
         cb(false)

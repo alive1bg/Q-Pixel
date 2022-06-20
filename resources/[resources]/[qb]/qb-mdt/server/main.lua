@@ -25,6 +25,10 @@ AddEventHandler("onResourceStart", function(resourceName)
     end
 end)
 
+RegisterNetEvent('mdt:server:getBlackoutState', function()
+    TriggerClientEvent('mdt:client:getBlackoutState', -1, exports["qb-weathersync"]:getBlackoutState())
+end)
+
 if Config.UseWolfknightRadar == true then
 	RegisterNetEvent("wk:onPlateScanned")
 	AddEventHandler("wk:onPlateScanned", function(cam, plate, index)
@@ -98,7 +102,7 @@ RegisterNetEvent('mdt:server:openMDT', function()
 	local JobType = GetJobType(PlayerData.job.name)
 	local bulletin = GetBulletins(JobType)
 
-	local calls = exports['ps-dispatch']:GetDispatchCalls()
+	local calls = exports['qb-dispatch']:GetDispatchCalls()
 
 	--TriggerClientEvent('mdt:client:dashboardbulletin', src, bulletin)
 	TriggerClientEvent('mdt:client:open', src, bulletin, activeUnits, calls, PlayerData.citizenid)
@@ -1029,7 +1033,7 @@ RegisterNetEvent('mdt:server:setWaypoint', function(callid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['ps-dispatch']:GetDispatchCalls()
+			local calls = exports['qb-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:setWaypoint', src, calls[callid])
 		end
 	end
@@ -1080,7 +1084,7 @@ RegisterNetEvent('mdt:server:attachedUnits', function(callid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['ps-dispatch']:GetDispatchCalls()
+			local calls = exports['qb-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:attachedUnits', src, calls[callid]['units'], callid)
 		end
 	end
@@ -1113,7 +1117,7 @@ RegisterNetEvent('mdt:server:setDispatchWaypoint', function(callid, cid)
 	local JobType = GetJobType(Player.PlayerData.job.name)
 	if JobType == 'police' or JobType == 'ambulance' then
 		if callid then
-			local calls = exports['ps-dispatch']:GetDispatchCalls()
+			local calls = exports['qb-dispatch']:GetDispatchCalls()
 			TriggerClientEvent('mdt:client:setWaypoint', src, calls[callid])
 		end
 	end
@@ -1189,7 +1193,7 @@ RegisterNetEvent('mdt:server:getCallResponses', function(callid)
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	if IsPolice(Player.PlayerData.job.name) then
-		local calls = exports['ps-dispatch']:GetDispatchCalls()
+		local calls = exports['qb-dispatch']:GetDispatchCalls()
 		TriggerClientEvent('mdt:client:getCallResponses', src, calls[callid]['responses'], callid)
 	end
 end)

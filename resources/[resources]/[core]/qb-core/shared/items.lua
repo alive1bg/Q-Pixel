@@ -1682,4 +1682,67 @@ QBShared.Items = {
 	["meatbird"] 		 			 	 = {["name"] = "meatbird",       	    		["label"] = "Bird Feather",	 				["weight"] = 100, 		["type"] = "item", 		["image"] = "birdfeather.png", 			["unique"] = false, 	["useable"] = false, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Bird Feather"},
 	["meatcoyote"] 		 			 	 = {["name"] = "meatcoyote",       	    		["label"] = "Coyote Pelt",	 				["weight"] = 100, 		["type"] = "item", 		["image"] = "coyotepelt.png", 			["unique"] = false, 	["useable"] = false, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Coyote Pelt"},
 	["huntingbait"] 		 			 = {["name"] = "huntingbait",       	    	["label"] = "Hunting Bait",	 				["weight"] = 150, 		["type"] = "item", 		["image"] = "huntingbait.png", 			["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,   ["combinable"] = nil,   ["description"] = "Hunting Bait"},
+
+	-- Vangelico Heist
+	['paintingg'] = {['name'] = 'paintingg', ['label'] = 'Painting G', ['weight'] = 120, ['type'] = 'item', ['image'] = 'paintingg.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Painting G'},
+	['paintingf'] = {['name'] = 'paintingf', ['label'] = 'Painting F', ['weight'] = 120, ['type'] = 'item', ['image'] = 'paintingf.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Painting F'},
+	['paintingh'] = {['name'] = 'paintingh', ['label'] = 'Painting H', ['weight'] = 120, ['type'] = 'item', ['image'] = 'paintingh.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Painting H'},
+	['paintingj'] = {['name'] = 'paintingj', ['label'] = 'Painting J', ['weight'] = 120, ['type'] = 'item', ['image'] = 'paintingj.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Painting J'},
+
+	['vanDiamond'] = {['name'] = 'vanDiamond', ['label'] = 'Van Diamond', ['weight'] = 120, ['type'] = 'item', ['image'] = 'vandiamond.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Van Diamond'},
+	['vanPanther'] = {['name'] = 'vanPanther', ['label'] = 'Van Panther', ['weight'] = 120, ['type'] = 'item', ['image'] = 'vanpanther.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Van Panther'},
+	['vanNecklace'] = {['name'] = 'vanNecklace', ['label'] = 'Van Necklace', ['weight'] = 120, ['type'] = 'item', ['image'] = 'vannecklace.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Van Necklace'},
+	['vanBottle'] = {['name'] = 'vanBottle', ['label'] = 'Van Bottle', ['weight'] = 120, ['type'] = 'item', ['image'] = 'vanbottle.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Van Bottle'},
+
+	-- Casino Heist
+	['key1'] = {['name'] = 'key1', ['label'] = 'Key 1', ['weight'] = 1, ['type'] = 'item', ['image'] = 'key1.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Key 1'},
+	['key2'] = {['name'] = 'key2', ['label'] = 'Key 2', ['weight'] = 1, ['type'] = 'item', ['image'] = 'key2.png', ['unique'] = false, ['useable'] = false, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Key 2'},
+
+	-- Humane Labs
+	['wetsuit'] = {['name'] = 'wetsuit', ['label'] = 'Wet Suit', ['weight'] = 100, ['type'] = 'item', ['image'] = 'wetsuit.png', ['unique'] = false, ['useable'] = true, ['shouldClose'] = true, ['combinable'] = nil, ['description'] = 'Wet suit'},
+
+	-- Bottle Message
+	["bottlemessage"] = {
+		["name"] = "bottlemessage",
+		["label"] = "Old Bottle",
+		["weight"] = 2000,
+		["type"] = "item",
+		["image"] = "bottlemessage.png",
+		["unique"] = false,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Looks like something is inside!"
+	},
+	["message"] = {
+		["name"] = "message",
+		["label"] = "Scrumpled Paper",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "message.png",
+		["unique"] = false,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "It's a map with an X.."
+	},
+
+	-- qb-scrapyard
+	['chop-brakes'] 			 	 = {['name'] = 'chop-brakes', 			  		['label'] = 'Brakes', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-brakes.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-bumper'] 			 	 = {['name'] = 'chop-bumper', 			  		['label'] = 'Bumper', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-bumper.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-door'] 			     	 = {['name'] = 'chop-door', 			  		['label'] = 'Door', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-door.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-trunk'] 			    	 = {['name'] = 'chop-trunk', 			  		['label'] = 'Trunk', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-trunk.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-tyre'] 			    	 = {['name'] = 'chop-tyre', 			  		['label'] = 'Tyre', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-tyre.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-exhaust'] 		   	 	 = {['name'] = 'chop-exhaust', 			  		['label'] = 'Exhaust', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-exhaust.png', 		['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-headlight'] 			 	 = {['name'] = 'chop-headlight', 			  	['label'] = 'Headlight', 			   	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-headlight.png', 		['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-hood'] 			    	 = {['name'] = 'chop-hood', 			  		['label'] = 'Hood', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-hood.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-internals'] 			 	 = {['name'] = 'chop-internals', 			  	['label'] = 'Internals', 			   	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-internals.png', 		['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-mirror'] 			 	 = {['name'] = 'chop-mirror', 			  		['label'] = 'Mirror', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-mirror.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-suspension'] 		 	 = {['name'] = 'chop-suspension', 			  	['label'] = 'Suspension', 			   	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-suspension.png', 		['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-rim'] 			     	 = {['name'] = 'chop-rim', 			     		['label'] = 'Rim', 			        	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-rim.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-seat'] 			    	 = {['name'] = 'chop-seat', 			  		['label'] = 'Seat', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-seat.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-engine'] 			 	 = {['name'] = 'chop-engine', 			  		['label'] = 'Engine', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-engine.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-transmission'] 	    	 = {['name'] = 'chop-transmission', 	 		['label'] = 'Transmission', 	    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-transmission.png', 	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-turbo'] 			     	 = {['name'] = 'chop-turbo', 		 	  		['label'] = 'Turbo', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-turbo.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+	['chop-nos'] 			     	 = {['name'] = 'chop-nos', 			     		['label'] = 'NOS', 		    	    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-nos.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
 }

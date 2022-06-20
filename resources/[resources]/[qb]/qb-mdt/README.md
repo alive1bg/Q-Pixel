@@ -7,7 +7,7 @@ For all support questions, ask in our Discord support chat. Do not create issues
 ## Dependencies
 
 - [QBCore](https://github.com/qbcore-framework/qb-core)
-- [PS-Dispatch](https://github.com/Project-Sloth/ps-dispatch)
+- [qb-dispatch](https://github.com/Project-Sloth/qb-dispatch)
 - [Ox MySQL](https://github.com/overextended/oxmysql)
 
 ## FAQ

@@ -87,7 +87,7 @@ const store = () => {
         } else if (data.display != null && data.display != undefined && !data.display) {
           state = delete state[name] && state;
         } else {
-          console.error("QB-Buffs error: Buff State Message malformed!");
+          console.error("qb-Buffs error: Buff State Message malformed!");
         }
 
         return state;
@@ -97,13 +97,13 @@ const store = () => {
     receiveEnhancementStatusMessage(data: enhancementStatusMessage) {
       const name = data.enhancementName;
       if (!name) {
-        console.error("QB-Buffs error: Enchancement Message name malformed:", data.enhancementName);
+        console.error("qb-Buffs error: Enchancement Message name malformed:", data.enhancementName);
         return;
       }
       const playerIconName: iconNamesKind = name.replace('super-','') as iconNamesKind;
 
       if (!iconNames.includes(playerIconName)) {
-        console.error("QB-Buffs error: Enhancement Message name not valid:", data.enhancementName);
+        console.error("qb-Buffs error: Enhancement Message name not valid:", data.enhancementName);
         return;
       }
 
@@ -112,14 +112,14 @@ const store = () => {
           state[playerIconName] = { iconColor: data.iconColor };
         } else if (data.display === false) {
           if (!state[playerIconName]) {
-            console.error("QB-Buffs error: Enchancement name not found:", data.enhancementName);
+            console.error("qb-Buffs error: Enchancement name not found:", data.enhancementName);
             return state;
           }
 
           state = delete state[playerIconName] && state;
 
         } else {
-          console.error("QB-Buffs error: Enhancement Message malformed:", data);
+          console.error("qb-Buffs error: Enhancement Message malformed:", data);
         }
 
         return state;

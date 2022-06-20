@@ -4,8 +4,8 @@ local baseTime = Config.BaseTime
 local timeOffset = Config.TimeOffset
 local timer = 0
 local freezeTime = Config.FreezeTime
--- local blackout = Config.Blackout
--- local blackoutVehicle = Config.BlackoutVehicle
+local blackout = Config.Blackout
+local blackoutVehicle = Config.BlackoutVehicle
 local disable = Config.Disabled
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -33,14 +33,10 @@ RegisterNetEvent('qb-weathersync:client:DisableSync', function()
 	end)
 end)
 
-RegisterNetEvent('qb-weathersync:client:SyncWeather', function(NewWeather)
+RegisterNetEvent('qb-weathersync:client:SyncWeather', function(NewWeather, newblackout)
     CurrentWeather = NewWeather
+    blackout = newblackout
 end)
-
--- RegisterNetEvent('qb-weathersync:client:SyncWeather', function(NewWeather, newblackout)
---     CurrentWeather = NewWeather
---     blackout = newblackout
--- end)
 
 RegisterNetEvent('qb-weathersync:client:RequestCommands', function(isAllowed)
     if isAllowed then
@@ -76,8 +72,8 @@ CreateThread(function()
                 Wait(15000)
             end
             Wait(100) -- Wait 0 seconds to prevent crashing.
-            -- SetArtificialLightsState(blackout)
-            -- SetArtificialLightsStateAffectsVehicles(blackoutVehicle)
+            SetArtificialLightsState(blackout)
+            SetArtificialLightsStateAffectsVehicles(blackoutVehicle)
             ClearOverrideWeather()
             ClearWeatherTypePersist()
             SetWeatherTypePersist(lastWeather)
@@ -91,7 +87,7 @@ CreateThread(function()
                 SetForcePedFootstepsTracks(false)
             end
             if lastWeather == 'RAIN' then
-                SetRainLevel(0.4)
+                SetRainLevel(0.3)
             elseif lastWeather == 'THUNDER' then
                 SetRainLevel(0.5)
             else
@@ -103,9 +99,8 @@ CreateThread(function()
     end
 end)
 
-local hunting_h = 0 -- <------------- ADD THIS
 CreateThread(function()
-    local hour = 0
+    local hour
     local minute = 0
     local second = 0        --Add seconds for shadow smoothness
     while true do
@@ -118,6 +113,7 @@ CreateThread(function()
             end
             if freezeTime then
                 timeOffset = timeOffset + baseTime - newBaseTime
+                second = 0
             end
             baseTime = newBaseTime
             hour = math.floor(((baseTime+timeOffset)/60)%24)
@@ -125,16 +121,9 @@ CreateThread(function()
                 minute = math.floor((baseTime+timeOffset)%60)
                 second = 0
             end
-            hunting_h = hour -- <------------- ADD THIS
             NetworkOverrideClockTime(hour, minute, second)          --Send hour included seconds to network clock time
         else
             Wait(1000)
         end
     end
 end)
-
-function getHour() -- <------------- ADD THIS
-    return hunting_h -- <------------- ADD THIS
-end -- <------------- ADD THIS
-
-exports('getHour', getHour) -- <------------- ADD THIS

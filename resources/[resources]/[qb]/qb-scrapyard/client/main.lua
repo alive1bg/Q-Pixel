@@ -25,6 +25,8 @@ CreateThread(function()
         Wait(10000)
     end
 end)
+			
+
 
 CreateThread(function()
 	while true do
@@ -68,6 +70,14 @@ CreateThread(function()
 					end
 				end
 			end
+			if #(pos - vector3(Config.Locations[closestScrapyard]["exchange"].x, Config.Locations[closestScrapyard]["exchange"].y, Config.Locations[closestScrapyard]["exchange"].z)) < 1.5 then
+				if not IsPedInAnyVehicle(PlayerPedId()) then
+					DrawText3Ds(Config.Locations[closestScrapyard]["exchange"].x, Config.Locations[closestScrapyard]["exchange"].y, Config.Locations[closestScrapyard]["exchange"].z, "~g~E~w~ - Break Parts Down")
+					if IsControlJustReleased(0, 38) then
+						TriggerEvent("qb-scrapyard:client:exchangeItemsMenu")
+					end
+				end
+			end
 		end
 	end
 end)
@@ -91,14 +101,14 @@ function CreateListEmail()
 		SetTimeout(math.random(15000, 20000), function()
 			emailSend = false
 			TriggerServerEvent('qb-phone:server:sendNewMail', {
-				sender = "Turner’s Auto Wrecking",
+				sender = "Madryx Auto Yard",
 				subject = "Vehicle List",
-				message = "You Can Only Demolish A Number Of Vehicles.<br />You Can Keep Everything You Demolish For Yourself As Long As You Dont Bother Me.<br /><br /><strong>Vehicle List:</strong><br />".. vehicleList,
+				message = "You Can Only Demolish A Number Of Vehicles.<br />You Can Keep Everything You Demolish For Yourself or Trade It In Over At the Warehouse Desk As Long As You Dont Bother Me.<br /><br /><strong>Vehicle List:</strong><br />".. vehicleList,
 				button = {}
 			})
 		end)
 	else
-		QBCore.Functions.Notify("You Are Not Allowed To Demolish Vehicles Now", "error")
+		QBCore.Functions.Notify("You Are Not Allowed To Strip Vehicles Now", "error")
 	end
 end
 
@@ -106,7 +116,7 @@ function ScrapVehicle(vehicle)
 	isBusy = true
 	local scrapTime = math.random(28000, 37000)
 	ScrapVehicleAnim(scrapTime)
-	QBCore.Functions.Progressbar("scrap_vehicle", "Demolish Vehicle", scrapTime, false, true, {
+	QBCore.Functions.Progressbar("scrap_vehicle", "Stripping Vehicle", scrapTime, false, true, {
 		disableMovement = true,
 		disableCarMovement = true,
 		disableMouse = false,
@@ -165,6 +175,260 @@ function SetClosestScrapyard()
 	end
 	closestScrapyard = current
 end
+
+RegisterNetEvent("qb-scrapyard:client:exchangeItemsMenu", function()
+    local menu = {
+        {
+            header = "Madryx Auto Yard",
+            txt = "Exchange parts down to make materials",
+			isMenuHeader = true
+        },
+        {
+            header = "Exchange Door",
+            txt = "Exchange a door for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-door",
+                    item = "metalscrap",
+                    amountremove = 1,
+                    amount = math.random(5,10)   --change the values in here to fit your server economy
+                },
+                isServer = false
+            }
+        },
+        {
+            header = "Exchange Trunk",
+            txt = "Exchange a trunk for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-trunk",
+                    item = "aluminum",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+        {
+            header = "Exchange Hood",
+            txt = "Exchange a hood for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-hood",
+                    item = "metalscrap",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+        {
+            header = "Exchange tyre",
+            txt = "Exchange a Tyre for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-tyre",
+                    item = "rubber",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Brakes",
+            txt = "Exchange Brakes for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-brakes",
+                    item = "metalscrap",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Bumper",
+            txt = "Exchange a Bumper for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-bumper",
+                    item = "plastic",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Engine",
+            txt = "Exchange an Engine for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-engine",
+                    item = "steel",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Exhaust",
+            txt = "Exchange a Exhaust for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-exhaust",
+                    item = "copper",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Headlight",
+            txt = "Exchange a Headlight for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-headlight",
+                    item = "plastic",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Mirror",
+            txt = "Exchange Mirror for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-mirror",
+                    item = "glass",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Rim",
+            txt = "Exchange a Rim for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-rim",
+                    item = "steel",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Seat",
+            txt = "Exchange a Seat for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-seat",
+                    item = "plastic",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Suspension",
+            txt = "Exchange a Suspension for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-suspension",
+                    item = "iron",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Transmission",
+            txt = "Exchange a Transmission for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-transmission",
+                    item = "iron",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Turbo",
+            txt = "Exchange a Turbo for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-turbo",
+                    item = "steel",
+                    amountremove = 1,
+                    amount = math.random(5,10)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange Internals",
+            txt = "Exchange Internals for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-internals",
+                    item = "copper",
+                    amountremove = 1,
+                    amount = math.random(10,20)
+                },
+                isServer = false
+            }
+        },
+		{
+            header = "Exchange NOS",
+            txt = "Exchange a NOS for materials",
+            params = {
+                event = "qb-scrapyard:client:exchangeItems",
+                args = {
+                    itemremove = "chop-nos",
+                    item = "iron",
+                    amountremove = 1,
+                    amount = math.random(10,20)
+                },
+                isServer = false
+            }
+        },
+    }
+
+    exports['qb-menu']:openMenu(menu)
+end)
+
+RegisterNetEvent("qb-scrapyard:client:exchangeItems", function(data)
+    TriggerServerEvent("qb-scrapyard:server:ExchangeItems", data.itemremove, data.item, data.amountremove, data.amount)
+end)
 
 function ScrapVehicleAnim(time)
     time = (time / 1000)

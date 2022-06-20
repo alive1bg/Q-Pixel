@@ -28,18 +28,18 @@ RegisterNetEvent('qb-scrapyard:server:ScrapVehicle', function(listKey)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Config.CurrentVehicles[listKey] ~= nil then
-        for i = 1, math.random(2, 4), 1 do
+        for i = 1, math.random(3, 6), 1 do
             local item = Config.Items[math.random(1, #Config.Items)]
-            Player.Functions.AddItem(item, math.random(25, 45))
+            Player.Functions.AddItem(item, math.random(1, 2))
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], 'add')
             Wait(500)
         end
         local Luck = math.random(1, 8)
         local Odd = math.random(1, 8)
         if Luck == Odd then
-            local random = math.random(10, 20)
-            Player.Functions.AddItem("rubber", random)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rubber"], 'add')
+            local random = math.random(2, 5)
+            Player.Functions.AddItem("chop-nos", random)
+            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["chop-nos"], 'add')
 
         end
         Config.CurrentVehicles[listKey] = nil
@@ -69,3 +69,15 @@ function IsInList(name)
     end
     return retval
 end
+
+RegisterNetEvent("qb-scrapyard:server:ExchangeItems", function(itemremove, item, amountremove, amount)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player.Functions.GetItemByName(itemremove) then
+        Player.Functions.RemoveItem(itemremove, amountremove)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[itemremove], "remove", amountremove)
+        Player.Functions.AddItem(item, amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add", amount)
+    else
+        TriggerClientEvent("QBCore:Notify", source, "You do not have enough of that item.", "error")
+    end
+end)

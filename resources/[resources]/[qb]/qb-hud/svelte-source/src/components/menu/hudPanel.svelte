@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from '../atoms/button.svelte'
   import Checkbox from '../atoms/checkbox.svelte'
-  import PSLogo from '../atoms/ps-logo.svelte'
+  import PSLogo from '../atoms/qb-logo.svelte'
   import Switch from '../atoms/switch.svelte'
   import MenuStore from '../../stores/menuStore';
   import { fetchNui } from '../../utils/eventHandler';
