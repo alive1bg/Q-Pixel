@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for nextgenrp
-CREATE DATABASE IF NOT EXISTS `nextgenrp` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `nextgenrp`;
+-- Dumping database structure for arp3_0
+CREATE DATABASE IF NOT EXISTS `arp3_0` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `arp3_0`;
 
--- Dumping structure for table nextgenrp.apartments
+-- Dumping structure for table arp3_0.apartments
 CREATE TABLE IF NOT EXISTS `apartments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS `apartments` (
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.bans
+-- Dumping structure for table arp3_0.bans
 CREATE TABLE IF NOT EXISTS `bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -51,21 +51,29 @@ CREATE TABLE IF NOT EXISTS `bans` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.bongs
-CREATE TABLE IF NOT EXISTS `bongs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `citizenid` varchar(50) NOT NULL,
-  `tolerance` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `high` tinyint(11) NOT NULL,
-  `time` int(64) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `UNIQUE KEY` (`citizenid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+-- Dumping structure for table arp3_0.boosting
+CREATE TABLE IF NOT EXISTS `boosting` (
+  `#` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(255) NOT NULL,
+  `BNE` text NOT NULL DEFAULT '0',
+  `background` varchar(255) DEFAULT NULL,
+  `vin` int(11) DEFAULT NULL,
+  PRIMARY KEY (`#`),
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.cameras
+-- Dumping structure for table arp3_0.boost_queue
+CREATE TABLE IF NOT EXISTS `boost_queue` (
+  `identifier` varchar(60) NOT NULL,
+  `pSrc` int(11) DEFAULT NULL,
+  PRIMARY KEY (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.cameras
 CREATE TABLE IF NOT EXISTS `cameras` (
   `cid` varchar(50) DEFAULT NULL,
   `cameradata` longtext DEFAULT NULL,
@@ -74,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `cameras` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.crypto
+-- Dumping structure for table arp3_0.crypto
 CREATE TABLE IF NOT EXISTS `crypto` (
   `crypto` varchar(50) NOT NULL DEFAULT 'qbit',
   `worth` int(11) NOT NULL DEFAULT 0,
@@ -84,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `crypto` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.crypto_transactions
+-- Dumping structure for table arp3_0.crypto_transactions
 CREATE TABLE IF NOT EXISTS `crypto_transactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -93,11 +101,11 @@ CREATE TABLE IF NOT EXISTS `crypto_transactions` (
   `date` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.dealers
+-- Dumping structure for table arp3_0.dealers
 CREATE TABLE IF NOT EXISTS `dealers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
@@ -109,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `dealers` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.dpkeybinds
+-- Dumping structure for table arp3_0.dpkeybinds
 CREATE TABLE IF NOT EXISTS `dpkeybinds` (
   `id` varchar(50) DEFAULT NULL,
   `keybind1` varchar(50) DEFAULT 'num4',
@@ -128,18 +136,55 @@ CREATE TABLE IF NOT EXISTS `dpkeybinds` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.gloveboxitems
+-- Dumping structure for table arp3_0.ethicalpixel_admin
+CREATE TABLE IF NOT EXISTS `ethicalpixel_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` varchar(50) DEFAULT NULL,
+  `favorite` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`favorite`)),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.ethicalpixel_admin_banned
+CREATE TABLE IF NOT EXISTS `ethicalpixel_admin_banned` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `steam` varchar(50) DEFAULT NULL,
+  `reason` varchar(50) DEFAULT NULL,
+  `length` varchar(50) DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL,
+  `discord` varchar(50) DEFAULT NULL,
+  `license` varchar(50) DEFAULT NULL,
+  `DisplayName` varchar(50) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.ethicalpixel_admin_log
+CREATE TABLE IF NOT EXISTS `ethicalpixel_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Identifier` varchar(50) DEFAULT NULL,
+  `log` longtext DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `date` varchar(50) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.gloveboxitems
 CREATE TABLE IF NOT EXISTS `gloveboxitems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(255) NOT NULL DEFAULT '[]',
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`plate`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.houselocations
+-- Dumping structure for table arp3_0.houselocations
 CREATE TABLE IF NOT EXISTS `houselocations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -152,11 +197,11 @@ CREATE TABLE IF NOT EXISTS `houselocations` (
   `mailbox` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.house_plants
+-- Dumping structure for table arp3_0.house_plants
 CREATE TABLE IF NOT EXISTS `house_plants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `building` varchar(50) DEFAULT NULL,
@@ -175,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `house_plants` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.lapraces
+-- Dumping structure for table arp3_0.lapraces
 CREATE TABLE IF NOT EXISTS `lapraces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -190,21 +235,20 @@ CREATE TABLE IF NOT EXISTS `lapraces` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.management_funds
+-- Dumping structure for table arp3_0.management_funds
 CREATE TABLE IF NOT EXISTS `management_funds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `job_name` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `amount` int(100) NOT NULL,
-  `type` enum('boss','gang') NOT NULL DEFAULT 'boss',
-  `owner` varchar(255) DEFAULT NULL,
+  `type` enum('business','organization') NOT NULL DEFAULT 'business',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `job_name` (`job_name`),
+  UNIQUE KEY `job_name` (`name`) USING BTREE,
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_bolos
+-- Dumping structure for table arp3_0.mdt_bolos
 CREATE TABLE IF NOT EXISTS `mdt_bolos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` varchar(50) DEFAULT NULL,
@@ -223,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `mdt_bolos` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_bulletin
+-- Dumping structure for table arp3_0.mdt_bulletin
 CREATE TABLE IF NOT EXISTS `mdt_bulletin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
@@ -236,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `mdt_bulletin` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_convictions
+-- Dumping structure for table arp3_0.mdt_convictions
 CREATE TABLE IF NOT EXISTS `mdt_convictions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` varchar(50) DEFAULT NULL,
@@ -256,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `mdt_convictions` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_data
+-- Dumping structure for table arp3_0.mdt_data
 CREATE TABLE IF NOT EXISTS `mdt_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` varchar(20) NOT NULL,
@@ -272,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `mdt_data` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_impound
+-- Dumping structure for table arp3_0.mdt_impound
 CREATE TABLE IF NOT EXISTS `mdt_impound` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehicleid` int(11) NOT NULL,
@@ -284,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `mdt_impound` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_incidents
+-- Dumping structure for table arp3_0.mdt_incidents
 CREATE TABLE IF NOT EXISTS `mdt_incidents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` varchar(50) NOT NULL DEFAULT '',
@@ -301,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `mdt_incidents` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_logs
+-- Dumping structure for table arp3_0.mdt_logs
 CREATE TABLE IF NOT EXISTS `mdt_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
@@ -312,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `mdt_logs` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_reports
+-- Dumping structure for table arp3_0.mdt_reports
 CREATE TABLE IF NOT EXISTS `mdt_reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` varchar(50) DEFAULT NULL,
@@ -330,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `mdt_reports` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.mdt_vehicleinfo
+-- Dumping structure for table arp3_0.mdt_vehicleinfo
 CREATE TABLE IF NOT EXISTS `mdt_vehicleinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(50) DEFAULT NULL,
@@ -343,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `mdt_vehicleinfo` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.occasion_vehicles
+-- Dumping structure for table arp3_0.occasion_vehicles
 CREATE TABLE IF NOT EXISTS `occasion_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `seller` varchar(50) DEFAULT NULL,
@@ -359,29 +403,29 @@ CREATE TABLE IF NOT EXISTS `occasion_vehicles` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.oilrig_blender
+-- Dumping structure for table arp3_0.oilrig_blender
 CREATE TABLE IF NOT EXISTS `oilrig_blender` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
   `metadata` text NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.oilrig_cdu
+-- Dumping structure for table arp3_0.oilrig_cdu
 CREATE TABLE IF NOT EXISTS `oilrig_cdu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
   `metadata` text NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.oilrig_position
+-- Dumping structure for table arp3_0.oilrig_position
 CREATE TABLE IF NOT EXISTS `oilrig_position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -392,11 +436,11 @@ CREATE TABLE IF NOT EXISTS `oilrig_position` (
   `state` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.oilrig_storage
+-- Dumping structure for table arp3_0.oilrig_storage
 CREATE TABLE IF NOT EXISTS `oilrig_storage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -404,11 +448,11 @@ CREATE TABLE IF NOT EXISTS `oilrig_storage` (
   `metadata` text NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.paychecks
+-- Dumping structure for table arp3_0.paychecks
 CREATE TABLE IF NOT EXISTS `paychecks` (
   `citizenid` varchar(250) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
   `collectamount` int(255) DEFAULT NULL
@@ -416,7 +460,7 @@ CREATE TABLE IF NOT EXISTS `paychecks` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.permissions
+-- Dumping structure for table arp3_0.permissions
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -428,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_chatrooms
+-- Dumping structure for table arp3_0.phone_chatrooms
 CREATE TABLE IF NOT EXISTS `phone_chatrooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `room_code` varchar(10) NOT NULL,
@@ -447,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `phone_chatrooms` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_chatroom_messages
+-- Dumping structure for table arp3_0.phone_chatroom_messages
 CREATE TABLE IF NOT EXISTS `phone_chatroom_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `room_id` int(10) unsigned DEFAULT NULL,
@@ -461,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `phone_chatroom_messages` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_debt
+-- Dumping structure for table arp3_0.phone_debt
 CREATE TABLE IF NOT EXISTS `phone_debt` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -475,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `phone_debt` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_gallery
+-- Dumping structure for table arp3_0.phone_gallery
 CREATE TABLE IF NOT EXISTS `phone_gallery` (
   `citizenid` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -484,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `phone_gallery` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_invoices
+-- Dumping structure for table arp3_0.phone_invoices
 CREATE TABLE IF NOT EXISTS `phone_invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -498,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `phone_invoices` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_messages
+-- Dumping structure for table arp3_0.phone_messages
 CREATE TABLE IF NOT EXISTS `phone_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -511,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `phone_messages` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_note
+-- Dumping structure for table arp3_0.phone_note
 CREATE TABLE IF NOT EXISTS `phone_note` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -524,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `phone_note` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.phone_tweets
+-- Dumping structure for table arp3_0.phone_tweets
 CREATE TABLE IF NOT EXISTS `phone_tweets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -541,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `phone_tweets` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.players
+-- Dumping structure for table arp3_0.players
 CREATE TABLE IF NOT EXISTS `players` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) NOT NULL,
@@ -563,11 +607,11 @@ CREATE TABLE IF NOT EXISTS `players` (
   KEY `id` (`id`),
   KEY `last_updated` (`last_updated`),
   KEY `license` (`license`)
-) ENGINE=InnoDB AUTO_INCREMENT=594 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_boats
+-- Dumping structure for table arp3_0.player_boats
 CREATE TABLE IF NOT EXISTS `player_boats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -582,7 +626,7 @@ CREATE TABLE IF NOT EXISTS `player_boats` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_contacts
+-- Dumping structure for table arp3_0.player_contacts
 CREATE TABLE IF NOT EXISTS `player_contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -595,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `player_contacts` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_houses
+-- Dumping structure for table arp3_0.player_houses
 CREATE TABLE IF NOT EXISTS `player_houses` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `house` varchar(50) NOT NULL,
@@ -610,11 +654,11 @@ CREATE TABLE IF NOT EXISTS `player_houses` (
   KEY `house` (`house`),
   KEY `citizenid` (`citizenid`),
   KEY `identifier` (`identifier`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_mails
+-- Dumping structure for table arp3_0.player_mails
 CREATE TABLE IF NOT EXISTS `player_mails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -627,24 +671,11 @@ CREATE TABLE IF NOT EXISTS `player_mails` (
   `button` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_pets
-CREATE TABLE IF NOT EXISTS `player_pets` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `citizenid` varchar(50) DEFAULT NULL,
-  `model` text DEFAULT NULL,
-  `name` text DEFAULT NULL,
-  `price` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
-
--- Dumping structure for table nextgenrp.player_vehicles
+-- Dumping structure for table arp3_0.player_vehicles
 CREATE TABLE IF NOT EXISTS `player_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `license` varchar(50) DEFAULT NULL,
@@ -675,11 +706,11 @@ CREATE TABLE IF NOT EXISTS `player_vehicles` (
   KEY `plate` (`plate`),
   KEY `citizenid` (`citizenid`),
   KEY `license` (`license`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.player_warns
+-- Dumping structure for table arp3_0.player_warns
 CREATE TABLE IF NOT EXISTS `player_warns` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `senderIdentifier` varchar(50) DEFAULT NULL,
@@ -691,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `player_warns` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.scenes
+-- Dumping structure for table arp3_0.scenes
 CREATE TABLE IF NOT EXISTS `scenes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creator` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -705,11 +736,11 @@ CREATE TABLE IF NOT EXISTS `scenes` (
   `date_creation` datetime DEFAULT NULL,
   `date_deletion` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.shared_vehicles
+-- Dumping structure for table arp3_0.shared_vehicles
 CREATE TABLE IF NOT EXISTS `shared_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(50) NOT NULL,
@@ -723,9 +754,6 @@ CREATE TABLE IF NOT EXISTS `shared_vehicles` (
   `faction` varchar(50) DEFAULT NULL,
   `garage` varchar(50) DEFAULT NULL,
   `mods` longtext DEFAULT NULL,
-  `noslevel` int(10) DEFAULT 0,
-  `hasnitro` tinyint(4) DEFAULT 0,
-  `wheelfit` longtext DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `plate` (`plate`),
   KEY `category` (`category`),
@@ -735,18 +763,18 @@ CREATE TABLE IF NOT EXISTS `shared_vehicles` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.stashitems
+-- Dumping structure for table arp3_0.stashitems
 CREATE TABLE IF NOT EXISTS `stashitems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stash` varchar(255) NOT NULL DEFAULT '[]',
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`stash`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.transaction_history
+-- Dumping structure for table arp3_0.transaction_history
 CREATE TABLE IF NOT EXISTS `transaction_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` text NOT NULL,
@@ -762,7 +790,7 @@ CREATE TABLE IF NOT EXISTS `transaction_history` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.trunkitems
+-- Dumping structure for table arp3_0.trunkitems
 CREATE TABLE IF NOT EXISTS `trunkitems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(255) NOT NULL DEFAULT '[]',
@@ -773,7 +801,7 @@ CREATE TABLE IF NOT EXISTS `trunkitems` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_current
+-- Dumping structure for table arp3_0.users_current
 CREATE TABLE IF NOT EXISTS `users_current` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -784,11 +812,11 @@ CREATE TABLE IF NOT EXISTS `users_current` (
   `drawtextures` longtext NOT NULL,
   `proptextures` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_face
+-- Dumping structure for table arp3_0.users_face
 CREATE TABLE IF NOT EXISTS `users_face` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -798,11 +826,11 @@ CREATE TABLE IF NOT EXISTS `users_face` (
   `headOverlay` longtext NOT NULL,
   `headStructure` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_hospital_patients
+-- Dumping structure for table arp3_0.users_hospital_patients
 CREATE TABLE IF NOT EXISTS `users_hospital_patients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
@@ -810,11 +838,11 @@ CREATE TABLE IF NOT EXISTS `users_hospital_patients` (
   `level` int(11) NOT NULL DEFAULT 0,
   `time` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_housing
+-- Dumping structure for table arp3_0.users_housing
 CREATE TABLE IF NOT EXISTS `users_housing` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
@@ -826,7 +854,7 @@ CREATE TABLE IF NOT EXISTS `users_housing` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_housing_keys
+-- Dumping structure for table arp3_0.users_housing_keys
 CREATE TABLE IF NOT EXISTS `users_housing_keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
@@ -837,17 +865,17 @@ CREATE TABLE IF NOT EXISTS `users_housing_keys` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_motel
+-- Dumping structure for table arp3_0.users_motel
 CREATE TABLE IF NOT EXISTS `users_motel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
   `building_type` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_outfits
+-- Dumping structure for table arp3_0.users_outfits
 CREATE TABLE IF NOT EXISTS `users_outfits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
@@ -865,32 +893,18 @@ CREATE TABLE IF NOT EXISTS `users_outfits` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.users_tattoos
+-- Dumping structure for table arp3_0.users_tattoos
 CREATE TABLE IF NOT EXISTS `users_tattoos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citizenid` varchar(50) DEFAULT NULL,
   `cid` int(11) NOT NULL DEFAULT 0,
   `tattoos` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table nextgenrp.vaults
-CREATE TABLE IF NOT EXISTS `vaults` (
-  `citizenid` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `storagename` varchar(255) NOT NULL,
-  `storage_size` int(11) DEFAULT 400000,
-  `holders` text DEFAULT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `storage_location` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
-
--- Dumping structure for table nextgenrp.warns
+-- Dumping structure for table arp3_0.warns
 CREATE TABLE IF NOT EXISTS `warns` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -900,25 +914,6 @@ CREATE TABLE IF NOT EXISTS `warns` (
   `warnedtime` bigint(20) NOT NULL DEFAULT unix_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
-
--- Dumping structure for table nextgenrp.weed_plants
-CREATE TABLE IF NOT EXISTS `weed_plants` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stage` varchar(50) COLLATE utf8mb4_bin DEFAULT 'stage-a',
-  `sort` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
-  `gender` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
-  `food` int(11) DEFAULT 100,
-  `health` int(11) DEFAULT 100,
-  `progress` int(11) DEFAULT 0,
-  `coords` text COLLATE utf8mb4_bin DEFAULT NULL,
-  `isDead` int(11) DEFAULT 0,
-  `isFinished` int(11) DEFAULT 0,
-  `finished_time` bigint(20) DEFAULT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AVG_ROW_LENGTH=273;
 
 -- Data exporting was unselected.
 
