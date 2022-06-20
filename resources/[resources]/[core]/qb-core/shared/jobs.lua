@@ -318,34 +318,6 @@ QBShared.Jobs = {
 			},
 		},
 	},
-    ['catcafe'] = {
-		label = 'uWu Cafe',
-		defaultDuty = true,
-		offDutyPay = false,
-		grades = {
-			['0'] = {
-				name = 'Recruit',
-				payment = 65
-			},
-			['1'] = {
-				name = 'Crew Member',
-				payment = 75
-			},
-			['2'] = {
-				name = 'Shift Manager',
-				payment = 95
-			},
-			['3'] = {
-				name = 'Manager',
-				payment = 110
-			},
-			['4'] = {
-				name = 'Owner',
-				isboss = true,
-				payment = 120
-			},
-		},
-	},
 	['police'] = { -- start of police departments
 		label = 'Los Santos Police Department',
 		defaultDuty = true,

@@ -37,10 +37,10 @@ local Menu = {
     isOpenMenuSoundsChecked = true, -- isOpenMenuSoundsChecked
     isResetSoundsChecked = true, -- isResetSoundsChecked
     isListSoundsChecked = true, -- isListSoundsChecked
-    isMapNotifChecked = true, -- isMapNotifChecked
+    isMapNotifChecked = false, -- isMapNotifChecked
     isLowFuelChecked = true, -- isLowFuelChecked
     isCinematicNotifChecked = true, -- isCinematicNotifChecked
-    isMapEnabledChecked = false, -- isMapEnabledChecked
+    isMapEnabledChecked = true, -- isMapEnabledChecked
     isToggleMapBordersChecked = true, -- isToggleMapBordersChecked
     isDynamicEngineChecked = true, -- isDynamicEngineChecked
     isDynamicNitroChecked = true, -- isDynamicNitroChecked
@@ -50,7 +50,7 @@ local Menu = {
     isPointerShowChecked = true, -- isPointerShowChecked
     isDegreesShowChecked = true, -- isDegreesShowChecked
     isCineamticModeChecked = false, -- isCineamticModeChecked
-    isToggleMapShapeChecked = 'square', -- isToggleMapShapeChecked
+    isToggleMapShapeChecked = 'circle', -- isToggleMapShapeChecked
 }
 
 DisplayRadar(false)

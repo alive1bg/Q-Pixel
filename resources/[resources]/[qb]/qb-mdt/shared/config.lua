@@ -1,14 +1,14 @@
 Config = Config or {}
 
 Config.RosterLink = {
-    ['police'] = '',
+    ['police'] = 'https://docs.google.com/spreadsheets/d/1Wo3cc64T7Dj9Smz0ExOZx96451KYKweJ/edit#gid=1313411342',
     ['ambulance'] = '',
-    ['bcso'] = '',
+    ['bcso'] = 'https://docs.google.com/spreadsheets/d/1Wo3cc64T7Dj9Smz0ExOZx96451KYKweJ/edit#gid=1313411342',
     ['doj'] = '',
 }
 
 
-Config.UseWolfknightRadar = false
+Config.UseWolfknightRadar = true
 --[[
 Adds support for Wraith ARS 2X by WolfKnight98 (wk_wars2x)
 https://github.com/WolfKnight98/wk_wars2x
@@ -18,7 +18,7 @@ This will only check plates of vehicles that have been occupied by a player
 
 Config.OnlyShowOnDuty = true
 
-Config.Fuel = "lj-fuel" -- "LegacyFuel", "lj-fuel"
+Config.Fuel = "qb-fuel" -- "LegacyFuel", "lj-fuel"
 
 Config.PenalCodeTitles = {
     [1] = 'OFFENSES AGAINST PERSONS',
@@ -255,6 +255,7 @@ Config.AmbulanceJobs = {
 
 Config.DojJobs = {
     ['lawyer'] = true,
+    ['judge'] = true,
 }
 
 -- Leave my hacky code alone ya goblins
@@ -643,6 +644,6 @@ end
 -- this is a hack, because the qb-menu in qb-policejob populates an impound location and passed it through to the event.
 -- if this impound locations are changed in qb-policejob, they must also be changed here.
 Config.ImpoundLocations = { 
-    [1] = vector4(436.68, -1007.42, 27.32, 180.0),
+    [1] = vector4(476.48, -1022.25, 28.06, 277.7),
     [2] = vector4(-436.14, 5982.63, 31.34, 136.0),
 }

@@ -158,7 +158,7 @@ Config.Shops = {
                 chosenVehicle = 'm3e46',
             },
             [2] = {
-                coords = vector4(148.28, -3042.55, 6.05, 28.07),
+                coords = vector4(147.54553, -3045.051, 6.05, 38.512878),
                 defaultVehicle = 'na1',
                 chosenVehicle = 'na1',
             },

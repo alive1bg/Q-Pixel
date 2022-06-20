@@ -3359,14 +3359,21 @@ RegisterNetEvent('craft:nitroustation', function()
     exports['qb-menu']:openMenu({
         {
             header = "Nitrous Station",
-            txt = "Nitrous Oxide for fast vehicles",
+            txt = "",
             isMenuHeader = true,
         },
         {
             header = "Refilling Nitrous",
-            txt = " Refilling Empty Nitrous Bottle ",
+            txt = "Refilling Empty Nitrous Bottle",
             params = {
                 event = "craft:fillnitrous",
+            }
+        },
+        {
+            header = "Crafting Nitrous",
+            txt = "5x Metalscrap | 5x Iron",
+            params = {
+                event = "craft:nitrous",
             }
         },
         {
@@ -3991,5 +3998,62 @@ RegisterNetEvent('craft:vehstatus', function()
                 event = "qb-menu:client:closeMenu",
             }
         },
+    })
+end)
+
+------ TARGET SYSTEM---------
+CreateThread(function()
+    --- Parts Station
+    exports["qb-target"]:AddBoxZone("tunerparts", vector3(136.7, -3051.41, 7.04), 1, 1, {
+        name = "tunerparts",
+        heading = 0,
+        debugPoly = true,
+        minZ = 3.44,
+        maxZ = 7.44,
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "craft:mechanicparts", 
+                icon = "fas fa-wrench",
+                label = "Tuner Parts",
+                job = "tuner",
+                canInteract = function()
+                if not onDuty then
+                    return false
+                else
+                    return true
+                end
+            end,
+            },
+        },
+        distance = 2.5
+    })
+
+    -- Nitrous Station
+    exports["qb-target"]:AddBoxZone("nitrousstation", vector3(137.51, -3051.36, 7.04), 0.6, 0.65, {
+        name = "nitrousstation",
+        heading = 0,
+        debugPoly = true,
+        minZ = 6.04,
+        maxZ = 7.19
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "craft:nitroustation", 
+                icon = "fas fa-wine-bottle",
+                label = "Nitrous Station",
+                job = "tuner",
+                canInteract = function()
+                if not onDuty then
+                    return false
+                else
+                    return true
+                end
+            end,
+            },
+        },
+        distance = 2.5
     })
 end)
