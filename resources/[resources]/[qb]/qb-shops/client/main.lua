@@ -56,7 +56,7 @@ end)
 local peds = {
     "mp_m_shopkeep_01",
     `s_m_y_construct_01`,
-    `mp_m_weapexp_01`,
+    `s_m_y_ammucity_01`,
     `S_M_M_StrVend_01`
 }
 

@@ -1,5 +1,5 @@
 -- --============================================================== Exports
-exports[Config.targetExport]:AddTargetModel(`s_m_y_ammucity_01`, {
+exports[Config.targetExport]:AddTargetModel(`mp_m_weapexp_01`, {
     options = {
         {
             event = "doj:client:BoatMenu",
