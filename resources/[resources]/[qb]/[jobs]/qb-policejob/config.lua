@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 Config = {}
 
 --gsr config start
@@ -321,7 +323,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_PI_FLSH", label = "Flashlight"},
                 }
@@ -335,7 +337,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
             },
             type = "weapon",
             slot = 12,
@@ -400,7 +402,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_AR_FLSH", label = "Flashlight"},
                 }
@@ -414,7 +416,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_AR_FLSH", label = "Flashlight"},
                     {component = "COMPONENT_AT_SCOPE_MEDIUM", label = "Scope"},
@@ -430,7 +432,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_SG_FLSH", label = "Flashlight"},
                 }
@@ -462,7 +464,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_AR_FLSH", label = "Flashlight"},
                 }
@@ -476,7 +478,7 @@ Config.Items = {
             price = 12,
             amount = 1,
             info = {
-                serie = "PD-" .. tostring(Config.RandomInt(2) .. Config.RandomStr(3) .. Config.RandomInt(1) .. Config.RandomStr(2) .. Config.RandomInt(3)),
+                serie = "PD-" .. tostring(QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomStr(3) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3)),
                 attachments = {
                     {component = "COMPONENT_AT_SCOPE_LARGE", label = "Scope"},
                 }
@@ -493,7 +495,7 @@ Config.Items = {
             type = "item",
             slot = 26,
             authorizedJobGrades = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
-        }
+        },
     }
 }
 
