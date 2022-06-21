@@ -53,7 +53,8 @@ function Pet:spawnPet(source, model, item)
 
     local limit = Pet:isMaxLimitPedReached(source)
     if limit == true then
-        TriggerClientEvent('QBCore:Notify', source, string.format(Lang:t('error.reached_max_allowed_pet'), maxLimit), 'error', 2500)
+        TriggerClientEvent('QBCore:Notify', source, string.format(Lang:t('error.reached_max_allowed_pet'), maxLimit),
+            'error', 2500)
         return
     end
 
@@ -174,6 +175,15 @@ end)
 --          Items
 -- ============================
 local core_items = Config.core_items
+
+local function remove_item(src, Player, name, amount)
+    local res = Player.Functions.RemoveItem(name, amount)
+    if res then
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[name], "remove")
+    end
+    return res
+end
+
 -- food
 QBCore.Functions.CreateUseableItem(core_items.food.item_name, function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
@@ -184,7 +194,7 @@ end)
 RegisterNetEvent('keep-companion:server:increaseFood', function(item)
     local Player = QBCore.Functions.GetPlayer(source)
     if Player == nil or item == nil then return end
-    if Player.Functions.RemoveItem('petfood', 1) ~= true then
+    if not remove_item(source, Player, Config.core_items.food.item_name, 1) then
         TriggerClientEvent('QBCore:Notify', source, 'Failed to remove from your inventory', 'error', 2500)
         return
     end
@@ -209,7 +219,7 @@ RegisterNetEvent('keep-companion:server:rename_name_tag', function(name)
     local Player = QBCore.Functions.GetPlayer(source)
     if Player == nil then return end
 
-    if Player.Functions.RemoveItem("petnametag", 1) ~= true then
+    if not remove_item(source, Player, Config.core_items.nametag.item_name, 1) then
         TriggerClientEvent('QBCore:Notify', source, Lang:t('error.failed_to_remove_item_from_inventory'), 'error', 2500)
         return
     end
@@ -247,10 +257,15 @@ end)
 
 local function save_info_waterbottle(Player, item, amount)
     if Player.PlayerData.items[item.slot] then
-        if type(Player.PlayerData.items[item.slot].info) ~= 'table' then
-            Player.PlayerData.items[item.slot].info = {}
-        end
         Player.PlayerData.items[item.slot].info.liter = amount
+    end
+    Player.Functions.SetInventory(Player.PlayerData.items, true)
+end
+
+local function initialize_info_waterbottle(Player, item)
+    if Player.PlayerData.items[item.slot] then
+        Player.PlayerData.items[item.slot].info = {}
+        Player.PlayerData.items[item.slot].info.liter = 0
     end
     Player.Functions.SetInventory(Player.PlayerData.items, true)
 end
@@ -262,35 +277,47 @@ local function fillwater_bottle(source, item)
     local water_bottle_refill_value = Config.core_items.waterbottle.settings.water_bottle_refill_value
     local amount = 0
 
-    if type(item.info) == "table" then
-        if item.info.liter > max_c then
-            TriggerClientEvent('QBCore:Notify', source, 'could not do that already reached max capacity', 'error', 2500)
-            return
-        elseif item.info.liter == max_c then
-            amount = max_c
+    if type(item.info) ~= "table" or (type(item.info) == "table" and item.info.liter == nil) then
+        initialize_info_waterbottle(Player, item)
+        TriggerClientEvent('QBCore:Notify', source, 'Washing water bottle!', 'primary', 2500)
+        return
+    end
 
-            TriggerClientEvent('QBCore:Notify', source, 'filling already filled bottle has no effect on capacity', 'error', 2500)
-        else
-            amount = item.info.liter + water_bottle_refill_value
-            if amount >= max_c then
-                amount = max_c
-            end
-        end
-        TriggerClientEvent('QBCore:Notify', source, 'Filled bottle', 'success', 2500)
+    if item.info.liter == nil then
+        -- backup initialization
+        initialize_info_waterbottle(Player, item)
+        TriggerClientEvent('QBCore:Notify', source, 'Washing water bottle!', 'primary', 2500)
+        return
+    end
+
+    if item.info.liter > max_c then
+        TriggerClientEvent('QBCore:Notify', source, 'could not do that already reached max capacity', 'error', 2500)
+        return
+    elseif item.info.liter == max_c then
+        amount = max_c
+        TriggerClientEvent('QBCore:Notify', source, 'filling already filled bottle has no effect on capacity',
+            'error', 2500)
     else
-        TriggerClientEvent('QBCore:Notify', source, 'Washing new water bottle!', 'primary', 2500)
+        amount = item.info.liter + water_bottle_refill_value
+        if amount >= max_c then
+            amount = max_c
+        end
+    end
+    if type(amount) ~= "number" then
+        TriggerClientEvent('QBCore:Notify', source, 'Failed to get amount', 'error', 2500)
+        return
     end
     save_info_waterbottle(Player, item, amount)
+    TriggerClientEvent('QBCore:Notify', source, 'Filled bottle', 'success', 2500)
 end
 
 QBCore.Functions.CreateUseableItem(core_items.waterbottle.item_name, function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     local water_bottle_refill_value = Config.core_items.waterbottle.settings.water_bottle_refill_value
     if Player == nil then return end
-    if Player.Functions.RemoveItem('water_bottle', water_bottle_refill_value) ~= true then
+    if not remove_item(source, Player, 'water_bottle', water_bottle_refill_value) then
         local msg = Lang:t('error.not_enough_water_bottles')
         msg = string.format(msg, water_bottle_refill_value)
-        TriggerClientEvent('QBCore:Notify', source, Lang:t('error.failed_to_remove_item_from_inventory'), 'error', 2500)
         TriggerClientEvent('QBCore:Notify', source, msg, 'error', 2500)
         return
     end
@@ -307,15 +334,19 @@ QBCore.Functions.CreateCallback('keep-companion:server:decrease_thirst', functio
 
     if pet_water_bottle.info == nil then
         TriggerClientEvent('QBCore:Notify', source, 'You should wash water bottle first!', 'error', 2500)
+        print('issue with nill info: https://github.com/swkeep/keep-companion/issues/25')
         return
     end
 
     if pet_water_bottle.info.liter == nil then
         TriggerClientEvent('QBCore:Notify', source, 'You should wash water bottle first!', 'error', 2500)
+        print('maybe use your water bottle when there is some water_bottle s in your inventory')
+        print('developer: issue with nill info -> liter: https://github.com/swkeep/keep-companion/issues/25')
         return
     end
 
-    pet_water_bottle.info.liter = pet_water_bottle.info.liter - Config.core_items.waterbottle.settings.water_bottle_refill_value
+    pet_water_bottle.info.liter = pet_water_bottle.info.liter -
+        Config.core_items.waterbottle.settings.water_bottle_refill_value
     if pet_water_bottle.info.liter < 0 then
         TriggerClientEvent('QBCore:Notify', source, Lang:t('error.not_enough_water_in_your_bottle'), 'error', 2500)
         return
@@ -362,7 +393,7 @@ RegisterNetEvent('keep-companion:server:revivePet', function(item, process_type)
         return
     end
 
-    if not Player.Functions.RemoveItem("firstaidforpet", 1) then
+    if not remove_item(source, Player, Config.core_items.firstaid.item_name, 1) then
         TriggerClientEvent('QBCore:Notify', src, 'Failed to remove from your inventory', 'error', 2500)
         return
     end
@@ -408,7 +439,8 @@ for key, value in pairs(Config.pets) do
         if type(item.info) ~= "table" or (type(item.info) == "table" and item.info.hash == nil) then
             -- init companion
             initItem(source, item)
-            TriggerClientEvent('QBCore:Notify', source, Lang:t('success.pet_initialization_was_successful'), 'success', 2500)
+            TriggerClientEvent('QBCore:Notify', source, Lang:t('success.pet_initialization_was_successful'), 'success',
+                2500)
             return
         end
 
@@ -424,6 +456,64 @@ for key, value in pairs(Config.pets) do
     end)
 end
 
+local function search_inventory(cid)
+    local Player = QBCore.Functions.GetPlayer(cid)
+    if not Player then return false end
+    local count = 0
+    for k, illegal_item in pairs(Config.k9.illegal_items) do
+        local item = Player.Functions.GetItemByName(illegal_item)
+        if item then
+            count = count + 1
+            if count > 0 then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+QBCore.Functions.CreateCallback('keep-companion:server:search_inventory', function(source, cb, cid)
+    local res = search_inventory(cid)
+    if not res then
+        TriggerClientEvent('QBCore:Notify', source, 'K9 could not find anything!', 'error', 2500)
+        cb(res)
+        return
+    end
+    -- TriggerClientEvent('QBCore:Notify', source, 'K9 found something', 'success', 2500)
+    cb(res)
+end)
+
+local function search_vehicle(Type, plate)
+    local items_list = nil
+    if Type == 1 then
+        items_list = MySQL.Sync.fetchAll('SELECT * FROM gloveboxitems WHERE plate = ?', { plate })
+    elseif Type == 2 then
+        items_list = MySQL.Sync.fetchAll('SELECT * FROM trunkitems WHERE plate = ?', { plate })
+    end
+    if items_list and items_list[1] and items_list[1].items then
+        local items = json.decode(items_list[1].items)
+        local illegal_items = Config.k9.illegal_items
+        for key, item in pairs(items) do
+            for k, i_name in pairs(illegal_items) do
+                if item.name == i_name then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+QBCore.Functions.CreateCallback('keep-companion:server:search_vehicle', function(source, cb, data)
+    local res = search_vehicle(data.key, data.plate)
+    if not res then
+        TriggerClientEvent('QBCore:Notify', source, 'K9 could not find anything!', 'error', 2500)
+        cb(res)
+        return
+    end
+    TriggerClientEvent('QBCore:Notify', source, 'K9 found something', 'success', 2500)
+    cb(res)
+end)
 -- ================================================
 --          Item - Updating Information
 -- ================================================
@@ -552,7 +642,7 @@ end, 'admin')
 QBCore.Commands.Add('addItem', 'add item to player inventory (Admin Only)', {}, false, function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     Player.Functions.AddItem(item[1], 1)
-    TriggerClientEvent("inventory:client:ItemBox", source, QBCore.Shared.Items[item[1]], "add")
+    TriggerClientEvent("inventory:client:ItemBox", source, QBCore.Shared.Items[ item[1] ], "add")
 end, 'admin')
 
 QBCore.Commands.Add('renamePet', 'rename pet', { { "name", "new pet name" } }, false, function(source, args)

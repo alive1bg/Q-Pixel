@@ -1671,6 +1671,42 @@ QBShared.Items = {
 		["combinable"] = nil,
 		["description"] = "Pet Grooming Kit"
 	},
+	["keepcompanioncoyote"]     = {
+		["name"] = "keepcompanioncoyote",
+		["label"] = "Coyote",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Coyote.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Coyote is your royal companion!"
+	},
+	["keepcompanionrabbit"]     = {
+		["name"] = "keepcompanionrabbit",
+		["label"] = "Rabbit",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Rabbit_01.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Rabbit is your royal companion!"
+	},
+	["keepcompanionhen"]        = {
+		["name"] = "keepcompanionhen",
+		["label"] = "Hen",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Hen.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Hen is your royal companion!"
+	},
 
 	-- HUNTING
 	["meatdeer"] 		 			 	 = {["name"] = "meatdeer",       	    		["label"] = "Deer Horns",	 				["weight"] = 100, 		["type"] = "item", 		["image"] = "deerhorns.png", 			["unique"] = false, 	["useable"] = false, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Deer Horns"},

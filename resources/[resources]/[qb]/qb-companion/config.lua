@@ -99,6 +99,24 @@ Config.pets = {
         model = 'A_C_Husky',
         maxHealth = 350,
         distinct = 'yes dog'
+    },
+    [11] = {
+        name = 'keepcompanionhen',
+        model = 'A_C_Hen',
+        maxHealth = 350,
+        distinct = 'no hen'
+    },
+    [12] = {
+        name = 'keepcompanionrabbit',
+        model = 'A_C_Rabbit_01',
+        maxHealth = 350,
+        distinct = 'no rabbit'
+    },
+    [13] = {
+        name = 'keepcompanioncoyote',
+        model = 'A_C_Coyote',
+        maxHealth = 350,
+        distinct = 'no cat'
     }
 }
 
@@ -152,5 +170,23 @@ Config.core_items = {
             thirst_reduction_per_drinking = 25, --(additive)
             thirst_value_increase_per_tick = 0.1,
         }
+    }
+}
+
+
+-- K9 Settings
+
+local illegal_items = {
+    'weed_brick',
+    'coke_small_brick',
+    'coke_brick'
+}
+
+Config.k9 = {
+    illegal_items = illegal_items,
+    indicator = true,
+    models = {
+        'A_C_Rottweiler',
+        'A_C_shepherd'
     }
 }

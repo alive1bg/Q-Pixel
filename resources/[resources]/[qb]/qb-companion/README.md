@@ -173,6 +173,44 @@
         ["combinable"] = nil,
         ["description"] = "Shepherd is your royal companion!"
     },
+    -- new pets
+    ["keepcompanioncoyote"]     = {
+		["name"] = "keepcompanioncoyote",
+		["label"] = "Coyote",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Coyote.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Coyote is your royal companion!"
+	},
+	["keepcompanionrabbit"]     = {
+		["name"] = "keepcompanionrabbit",
+		["label"] = "Rabbit",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Rabbit_01.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Rabbit is your royal companion!"
+	},
+	["keepcompanionhen"]        = {
+		["name"] = "keepcompanionhen",
+		["label"] = "Hen",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "A_C_Hen.png",
+		["unique"] = true,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Hen is your royal companion!"
+	},
+    ---
     ["petfood"] = {
         ["name"] = "petfood",
         ["label"] = "pet food",
@@ -383,6 +421,30 @@
             type = 'item',
             slot = 16
         },
+        [17] = {
+            name = 'keepcompanionrabbit',
+            price = 15000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 17
+        },
+        [18] = {
+            name = 'keepcompanionhen',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 18
+        },
+        [19] = {
+            name = 'keepcompanioncoyote',
+            price = 50000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 19
+        },
     }
 
 ```
@@ -421,7 +483,10 @@ else if (
     itemData.name == "keepcompanionpug" ||
     itemData.name == "keepcompanionretriever" ||
     itemData.name == "keepcompanionshepherd" ||
-    itemData.name == "keepcompanionwesty"
+    itemData.name == "keepcompanionwesty" ||
+    itemData.name == "keepcompanioncoyote" ||
+    itemData.name == "keepcompanionrabbit" ||
+    itemData.name == "keepcompanionhen"
 ) {
     let gender = itemData.info.gender;
     gender ? (gender = "male") : (gender = "female");

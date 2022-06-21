@@ -544,52 +544,76 @@ Config.Products = {
             slot = 10
         },
         [11] = {
-            name = 'petfood',
-            price = 500,
-            amount = 1000,
+            name = 'keepcompanionrabbit',
+            price = 15000,
+            amount = 50,
             info = {},
             type = 'item',
             slot = 11
         },
         [12] = {
-            name = 'collarpet',
-            price = 50000,
+            name = 'keepcompanionhen',
+            price = 5000,
             amount = 50,
             info = {},
             type = 'item',
             slot = 12
         },
         [13] = {
-            name = 'firstaidforpet',
-            price = 5000,
+            name = 'keepcompanioncoyote',
+            price = 50000,
             amount = 50,
             info = {},
             type = 'item',
             slot = 13
         },
         [14] = {
-            name = 'petnametag',
-            price = 5000,
-            amount = 50,
+            name = 'petfood',
+            price = 500,
+            amount = 1000,
             info = {},
             type = 'item',
             slot = 14
         },
         [15] = {
-            name = 'petwaterbottleportable',
-            price = 5000,
+            name = 'collarpet',
+            price = 50000,
             amount = 50,
             info = {},
             type = 'item',
             slot = 15
         },
         [16] = {
-            name = 'petgroomingkit',
+            name = 'firstaidforpet',
             price = 5000,
             amount = 50,
             info = {},
             type = 'item',
             slot = 16
+        },
+        [17] = {
+            name = 'petnametag',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 17
+        },
+        [18] = {
+            name = 'petwaterbottleportable',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 18
+        },
+        [19] = {
+            name = 'petgroomingkit',
+            price = 5000,
+            amount = 50,
+            info = {},
+            type = 'item',
+            slot = 19
         },
     },
     ["huntingshop"] = {
