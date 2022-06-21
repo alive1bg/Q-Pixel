@@ -117,7 +117,7 @@ setupContext = function()
         exports['qb-target']:AddBoxZone("EnableDuty", settings[k]['duty'].coords, settings[k]['duty'].length, settings[k]['duty'].width, {
             name="EnableDuty",
             heading=settings[k]['duty'].heading,
-            debugPoly=false,
+            debugPoly = false,
             minZ = settings[k]['duty'].minZ,
             maxZ = settings[k]['duty'].maxZ,
             }, {
@@ -136,7 +136,7 @@ setupContext = function()
         exports['qb-target']:AddBoxZone("StashVU", settings[k]['stash'].coords, settings[k]['stash'].length, settings[k]['stash'].width, {
             name="StashVU",
             heading=settings[k]['stash'].heading,
-            debugPoly=false,
+            debugPoly = false,
             minZ = settings[k]['stash'].minZ,
             maxZ = settings[k]['stash'].maxZ,
             }, {

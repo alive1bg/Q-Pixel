@@ -28,7 +28,7 @@ CreateThread(function()
     exports['qb-target']:AddBoxZone("treasurechest", vector3(3061.89, 2219.2, 3.12), 1, 1.0, {
         name="trchest",
         heading=340,
-        --debugPoly=true,
+        --debugPoly = false,
         minZ=-1.08,
         maxZ=2.92,
         }, {

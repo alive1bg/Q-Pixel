@@ -103,7 +103,7 @@ Citizen.CreateThread(function()
             heading=Garages[k].heading,
             minZ = Garages[k].minZ,
             maxZ = Garages[k].maxZ,
-            debugPoly=false
+            debugPoly = false
         }) 
     end
     for k, v in pairs(GangGarages) do
@@ -112,7 +112,7 @@ Citizen.CreateThread(function()
             heading=GangGarages[k].heading,
             minZ = GangGarages[k].minZ,
             maxZ = GangGarages[k].maxZ,
-            debugPoly=false
+            debugPoly = false
         }) 
     end
     for k, v in pairs(JobGarages) do
@@ -121,7 +121,7 @@ Citizen.CreateThread(function()
             heading=JobGarages[k].heading,
             minZ = JobGarages[k].minZ,
             maxZ = JobGarages[k].maxZ,
-            debugPoly=false
+            debugPoly = false
         }) 
     end
     for k, v in pairs(Depots) do
@@ -130,7 +130,7 @@ Citizen.CreateThread(function()
             heading=Depots[k].heading,
             minZ = Depots[k].minZ,
             maxZ = Depots[k].maxZ,
-            debugPoly=false
+            debugPoly = false
         }) 
     end
 end)

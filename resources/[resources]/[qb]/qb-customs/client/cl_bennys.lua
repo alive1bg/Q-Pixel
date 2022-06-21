@@ -31,7 +31,7 @@ local bennyLocation
 
 --Blips
 
---[[CreateThread(function() -- COMMENTED OUT FOR QB-BENNYS
+CreateThread(function()
     for k, v in pairs(bennyGarages) do
         if v.blip then
         local blip = AddBlipForCoord(v.coords.x,v.coords.y,v.coords.z)
@@ -43,7 +43,7 @@ local bennyLocation
         EndTextCommandSetBlipName(blip)
         end
     end
-end)]]--
+end)
 
 --#[Local Functions]#--
 local function isNear(pos1, pos2, distMustBe)
@@ -84,12 +84,10 @@ end
 function RepairVehicle()
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
-    local getFuel = GetVehicleFuelLevel(plyVeh)
 
     SetVehicleFixed(plyVeh)
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
-    SetVehicleFuelLevel(plyVeh, getFuel)
     TriggerEvent('veh.randomDegredation',10,plyVeh,3)
 end
 
@@ -702,41 +700,6 @@ RegisterNetEvent('event:control:bennys', function(useID)
     end
 end)
 
-RegisterNetEvent('event:control:bennys1', function()
-    if IsPedInAnyVehicle(PlayerPedId(), false) then
-        enterLocation1()
-    end
-end)
-
-function enterLocation1()
-    local plyPed = PlayerPedId()
-    local plyVeh = GetVehiclePedIsIn(plyPed, false)
-    local isMotorcycle = false
-
-    SetVehicleModKit(plyVeh, 0)
-    FreezeEntityPosition(plyVeh, true)
-    SetEntityCollision(plyVeh, false, true)
-
-    if GetVehicleClass(plyVeh) == 8 then --Motorcycle
-        isMotorcycle = true
-    else
-        isMotorcycle = false
-    end
-
-    InitiateMenus(isMotorcycle, GetVehicleBodyHealth(plyVeh))
-
-    SetTimeout(100, function()
-        if GetVehicleBodyHealth(plyVeh) < 1000.0 then
-            DisplayMenu(true, "repairMenu")
-        else
-            DisplayMenu(true, "mainMenu")
-        end
-
-        DisplayMenuContainer(true)
-        PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-    end)
-end
-
 function enterLocation(locationsPos)
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
@@ -769,6 +732,39 @@ function enterLocation(locationsPos)
 
     isPlyInBennys = true
 end
+
+function enterLocation1()
+    local plyPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local isMotorcycle = false
+
+    SetVehicleModKit(plyVeh, 0)
+    FreezeEntityPosition(plyVeh, true)
+    SetEntityCollision(plyVeh, false, true)
+
+    if GetVehicleClass(plyVeh) == 8 then --Motorcycle
+        isMotorcycle = true
+    else
+        isMotorcycle = false
+    end
+
+    InitiateMenus(isMotorcycle, GetVehicleBodyHealth(plyVeh))
+
+    SetTimeout(100, function()
+        if GetVehicleBodyHealth(plyVeh) < 1000.0 then
+            DisplayMenu(true, "repairMenu")
+        else
+            DisplayMenu(true, "mainMenu")
+        end
+
+        DisplayMenuContainer(true)
+        PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
+    end)
+    TriggerEvent('close:admin')
+
+    isPlyInBennys = true
+end
+
 
 function disableControls()
     DisableControlAction(1, 38, true) --Key: E
@@ -803,22 +799,21 @@ function disableControls()
     end
 end
 
-
+-- #MarkedForMarker
+--#[Citizen Threads]#--
 CreateThread(function()
     while true do
+        wait = 5
         local plyPed = PlayerPedId()
-
         if IsPedInAnyVehicle(plyPed, false) then
             local plyPos = GetEntityCoords(plyPed)
             for k, v in pairs(bennyGarages) do
-
-                nearDefault = isNear(plyPos, vector3(v.coords.x,v.coords.y,v.coords.z), 2)
-
+                nearDefault = isNear(plyPos, vector3(v.coords.x,v.coords.y,v.coords.z), 5)
                 if nearDefault then
                     bennyLocation = vector3(v.coords.x, v.coords.y, v.coords.z)
                     if nearDefault then
                         if not isPlyInBennys then
-                            if IsControlJustReleased(1, 38) then
+                            if IsControlJustReleased() then
                                 if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then
                                     if (v.useJob and isAuthorized((QBCore.Functions.GetPlayerData().job.name), k)) or not v.useJob then
                                         TriggerEvent('event:control:bennys', k)
@@ -833,10 +828,12 @@ CreateThread(function()
                     end
                 end
             end
+        else
+            wait = 2000 
         end
-        Wait(1)
+        Wait(wait)
     end
-end)
+end) 
 
 --#[Event Handlers]#--
 RegisterNetEvent("qb-customs:purchaseSuccessful", function()
@@ -851,7 +848,6 @@ RegisterNetEvent("qb-customs:purchaseFailed", function()
     QBCore.Functions.Notify("Not enough money", "error")
 end)
 
-
 --helper function
 
 function isAuthorized(job, location)
@@ -863,8 +859,82 @@ function isAuthorized(job, location)
     return false
 end
 
+
+--Pd Bennys
+
+RegisterNetEvent('enter:Bennys', function()
+    TriggerEvent('event:control:pdbennys', 1)
+end)
+
+RegisterNetEvent('event:control:pdbennys', function(useID)
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+        exports['qb-ui']:hideInteraction()
+        bennyHeading = 87.33
+        if useID == 1 and not isPlyInBennys then -- Bennys
+            enterLocation(bennyLocation)
+        end
+    end
+end)
+
+RegisterNetEvent('qb-customs:pdmenu', function()
+    exports['qb-menu']:openMenu({
+        {
+            header = "Vehicle Station",
+            txt = "",
+            icon = "fas fa-car",
+            isMenuHeader = true,
+        },
+        {
+            header = "Vehicle Repair",
+            txt = "Repair your Police Vehicle",
+            icon = "fas fa-wrench",
+            params = {
+                event = "qb-customs:client:repair",
+            }
+        },
+        {
+            header = "Bennys",
+            txt = "Tuning your Police Vehicle",
+            icon = "fas fa-car-burst",
+            params = {
+                event = "enter:Bennys",
+            }
+        },
+        {
+            header = "Close Menu",
+            txt = "",
+            icon = "fas fa-x",
+            params = {
+                event = exports['qb-menu']:closeMenu(),
+            }
+        },
+    })
+end)
+
+--gabz tunershop
+
+RegisterNetEvent('enter:tunershop', function()
+    TriggerEvent('event:control:tunershop', 1)
+end)
+
+RegisterNetEvent('event:control:tunershop', function(useID)
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+        exports['qb-ui']:hideInteraction()
+        bennyHeading = 179.51814
+        if useID == 1 and not isPlyInBennys then -- Bennys
+            enterLocation(bennyLocation)
+        end
+    end
+end)
+
+RegisterNetEvent('event:control:admin', function()
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+        enterLocation1()
+    end
+end)
+
 -------------------------------------------------- benny repair point event + function
-function BennyRepair()
+function BennyEngineRepair()
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
     local getFuel = GetVehicleFuelLevel(plyVeh)
@@ -872,10 +942,26 @@ function BennyRepair()
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
-    SetVehicleFixed(plyVeh)
+    SetVehicleEngineHealth(plyVeh, 1000.0)
     SetVehicleEngineOn(plyVeh, true, true, true)
-    QBCore.Functions.Notify("Repaired Vehicle!", "success")
+    QBCore.Functions.Notify("Engine Repaired!", "success")
+    TriggerServerEvent('qb-customs:paybiatch')
     TriggerEvent('veh.randomDegredation',10,plyVeh,3)
+end
+
+function BennyBodyRepair()
+    local plyPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local getFuel = GetVehicleFuelLevel(plyVeh)
+
+	SetVehicleDirtLevel(plyVeh, 0.0)
+    SetVehicleFuelLevel(plyVeh, getFuel)
+    SetVehicleFixed(plyVeh)
+    SetVehicleDeformationFixed(plyVeh)
+    WashDecalsFromVehicle(plyVeh)
+    SetVehicleBodyHealth(plyVeh, 1000.0)
+    SetVehicleEngineOn(plyVeh, true, true, true)
+    QBCore.Functions.Notify("Body Repaired!", "success")
     TriggerServerEvent('qb-customs:paybiatch')
 end
 
@@ -887,51 +973,41 @@ local function playSoundEffect(soundEffect, volume)
     })
 end
 
-CreateThread(function()
-    while true do
-        local plyPed = PlayerPedId()
-        local plyVeh = GetVehiclePedIsIn(plyPed, false)
-
-        if IsPedInAnyVehicle(plyPed, false) then
-            local plyPos = GetEntityCoords(plyPed)
- 
-            nearDefault = isNear(plyPos, vector3(-33.08, -1053.95, 27.79), 5)
-
-            if nearDefault then
-                if not isPlyInBennys then
-                    if IsControlJustReleased(1, 38) then
-                        playSoundEffect("wrench", 0.4)
-                        SetVehicleEngineOn(plyVeh, false, false, true)
-				        if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then
-                            QBCore.Functions.Progressbar("open_locker_drill", "Fixing engine ..", math.random(10000, 14000), false, true, {
-                                disableMovement = true,
-                                disableCarMovement = true,
-                                disableMouse = false,
-                                disableCombat = true,
-                            }, {}, {}, {}, function() -- Done
-                                QBCore.Functions.Progressbar("open_locker_drill", "Finishing off ..", math.random(5000, 7000), false, true, {
-                                    disableMovement = true,
-                                    disableCarMovement = true,
-                                    disableMouse = false,
-                                    disableCombat = true,
-                                }, {}, {}, {}, function() -- Done
-                                end)
-                                Wait(5000)
-					            BennyRepair()
-                        end, function() -- Cancel
-                            QBCore.Functions.Notify("Canceled..", "error")
-                        end)
-				        end
-                    end
-                else
-                    disableControls()
-                end
-            end
-        else
-            Wait(2000)
+RegisterNetEvent('qb-customs:client:repair', function()
+    local plyPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    
+    if IsPedInAnyVehicle(plyPed, false) then
+        exports['qb-ui']:hideInteraction()
+        playSoundEffect("wrench", 0.4)
+        SetVehicleEngineOn(plyVeh, false, false, true)
+        if GetPedInVehicleSeat(GetVehiclePedIsIn(PlayerPedId()), -1) == PlayerPedId() then
+            QBCore.Functions.Progressbar("open_locker_drill", "Engine Repairing...", math.random(10000, 14000), false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+            }, {}, {}, {}, function() -- Done
+                BennyEngineRepair()
+                QBCore.Functions.Progressbar("open_locker_drill", "Body Repairing...", math.random(5000, 7000), false, true, {
+                    disableMovement = true,
+                    disableCarMovement = true,
+                    disableMouse = false,
+                    disableCombat = true,
+                }, {}, {}, {}, function() -- Done
+                    Wait(100)
+                    BennyBodyRepair()
+                end, function() -- Cancel
+                    QBCore.Functions.Notify("Canceled..", "error")
+                end)
+            end, function() -- Cancel
+                QBCore.Functions.Notify("Canceled..", "error")
+            end)
         end
-        Wait(1)
+    else
+        Wait(2000)
     end
+    Wait(1)
 end)
 
 ----------------------------------------------- end benny repair point event + function

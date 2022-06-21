@@ -723,7 +723,7 @@ end)
 -- BurgerShot
 exports['qb-target']:AddCircleZone("burgerspickup", vector3(141.39, -1466.75, 29.35), 1.0,{
     name="burgerspickup",
-    debugPoly=false,
+    debugPoly = false,
     useZ=true,
     }, {
         options = {
@@ -738,7 +738,7 @@ exports['qb-target']:AddCircleZone("burgerspickup", vector3(141.39, -1466.75, 29
     })
 exports['qb-target']:AddCircleZone("burgerspickup2", vector3(139.44, -1468.94, 29.35), 1.0,{
     name="burgerspickup2",
-    debugPoly=false,
+    debugPoly = false,
     useZ=true,
     }, {
         options = {
@@ -753,7 +753,7 @@ exports['qb-target']:AddCircleZone("burgerspickup2", vector3(139.44, -1468.94, 2
     })
 exports['qb-target']:AddCircleZone("burgershotshelf", vector3(144.26, -1466.04, 29.35), 0.8, {
     name="burgershotshelf",
-    debugPoly=false,
+    debugPoly = false,
     useZ=true,
     }, {
         options = {
@@ -768,7 +768,7 @@ exports['qb-target']:AddCircleZone("burgershotshelf", vector3(144.26, -1466.04, 
     })
 exports['qb-target']:AddCircleZone("burgershotdrinks", vector3(141.11, -1469.68, 29.35), 1.0, {
         name="burgershotdrinks",
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
         }, {
             options = {
@@ -783,7 +783,7 @@ exports['qb-target']:AddCircleZone("burgershotdrinks", vector3(141.11, -1469.68,
         })
 exports['qb-target']:AddCircleZone("burgershotfood", vector3(147.42, -1469.17, 29.35), 1.0, {
         name="burgershotfood",
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
         }, {
             options = {
@@ -798,7 +798,7 @@ exports['qb-target']:AddCircleZone("burgershotfood", vector3(147.42, -1469.17, 2
         })
 exports['qb-target']:AddCircleZone("burgershotstorage", vector3(137.70, -1471.15, 29.35), 1.0, {
         name="burgershotstorage",
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
         }, {
             options = {
@@ -813,7 +813,7 @@ exports['qb-target']:AddCircleZone("burgershotstorage", vector3(137.70, -1471.15
         })
         exports['qb-target']:AddCircleZone("burgershotmisc", vector3(139.32, -1472.20, 29.35), 1.0, {
             name="burgershotmisc",
-            debugPoly=false,
+            debugPoly = false,
             useZ=true,
             }, {
                 options = {
@@ -828,7 +828,7 @@ exports['qb-target']:AddCircleZone("burgershotstorage", vector3(137.70, -1471.15
             })
 exports['qb-target']:AddCircleZone("burgershotfries", vector3(146.00, -1470.80, 29.35), 1.5, {
         name="burgershotfries",
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
         }, {
             options = {
@@ -843,7 +843,7 @@ exports['qb-target']:AddCircleZone("burgershotfries", vector3(146.00, -1470.80, 
         })
         exports['qb-target']:AddCircleZone("burgershotpatty", vector3(144.61, -1472.52, 29.35), 1.0, {
             name="burgershotpatty",
-            debugPoly=false,
+            debugPoly = false,
             useZ=true,
             }, {
                 options = {
@@ -859,7 +859,7 @@ exports['qb-target']:AddCircleZone("burgershotfries", vector3(146.00, -1470.80, 
 
 exports['qb-target']:AddCircleZone("burgermisc", vector3(145.31, -1466.93, 29.35), 1.5, {
         name="burgermisc",
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
         }, {
             options = {
@@ -880,7 +880,7 @@ exports['qb-target']:AddCircleZone("burgermisc", vector3(145.31, -1466.93, 29.35
 
 exports['qb-target']:AddCircleZone("burgerboss", vector3(142.82, -1463.58, 29.35), 1.5, {
     name="burgerboss",
-    debugPoly=false,
+    debugPoly = false,
     useZ=true,
     }, {
         options = {

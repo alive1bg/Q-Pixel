@@ -349,7 +349,7 @@ function Init()
             heading=340,
             minZ = Config.FinanceZone.z - 1,
             maxZ = Config.FinanceZone.z + 1,
-            debugPoly = true,
+            debugPoly = false,
         })
 
         financeZone:onPlayerInOut(function(isPointInside)

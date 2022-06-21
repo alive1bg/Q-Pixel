@@ -117,6 +117,22 @@ local function playSoundEffect(soundEffect, volume)
     })
 end
 
+local function playSoundEffect(soundEffect, volume)
+    SendNUIMessage({
+        playSoundEffect = true,
+        soundEffect = soundEffect,
+        volume = volume
+    })
+end
+
+RegisterNetEvent('qb-customs:client:playSoundEffect', function(soundEffect, volume)
+    SendNUIMessage({
+        playSoundEffect = true,
+        soundEffect = soundEffect,
+        volume = volume
+    })
+end)
+
 local function isMenuActive(menu)
     local menuActive = false
 
@@ -238,11 +254,13 @@ function InitiateMenus(isMotorcycle, vehicleHealth)
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
     --#[Repair Menu]#--
     if vehicleHealth < 1000.0 then
-        local repairCost = math.ceil(1000 - vehicleHealth)
-
+        -- local repairCost = math.ceil(1000 - vehicleHealth)
         TriggerServerEvent("qb-customs:updateRepairCost", repairCost)
+         
         createMenu("repairMenu", "Welcome to Benny's Original Motorworks", "Repair Vehicle")
-        populateMenu("repairMenu", -1, "Repair", "$" .. repairCost)
+        -- populateMenu("repairMenu", -1, "Repair", "$" .. repairCost)
+        populateMenu("repairMenu", -1, "Please Repait Your Car...", "Vehicle is damaged" )
+        
         finishPopulatingMenu("repairMenu")
     end
 
@@ -539,7 +557,7 @@ function InitiateMenus(isMotorcycle, vehicleHealth)
     createMenu("XenonsMenu", "Xenon Customisation", "Choose a Category")
 
     populateMenu("XenonsMenu", 0, "Headlights", "none")
-    populateMenu("XenonsMenu", 1, "Xenon Colours", "none")
+    ---- populateMenu("XenonsMenu", 1, "Xenon Colours", "none")
 
     finishPopulatingMenu("XenonsMenu")
 
@@ -600,7 +618,7 @@ function MenuManager(state)
                     else
                         updateMenuStatus("Not Enough Money!")
                     end
-                elseif currentCategory == 11 or currentCategory == 12 or currentCategory== 13 or currentCategory == 15 or currentCategory == 16 then --Performance Upgrades
+                elseif currentCategory == 11 or currentCategory == 12 or currentCategory== 13 or currentCategory == 15 or currentCategory == 16 then --Performance Upgrades 
                     if AttemptPurchase("performance", currentMenuItemID) then
                         ApplyMod(currentCategory, currentMenuItemID)
                         playSoundEffect("wrench", 0.4)
@@ -686,22 +704,23 @@ function MenuManager(state)
                     updateMenuStatus("Not Enough Money")
                 end
             else
-                if currentMenu == "repairMenu" then
-                    if AttemptPurchase("repair") then
-                        currentMenu = "mainMenu"
+                -- if currentMenu == "repairMenu" then
+                --     if AttemptPurchase("repair") then
+                --         currentMenu = "mainMenu"
 
-                        RepairVehicle()
+                --         RepairVehicle()
 
-                        toggleMenu(false, "repairMenu")
-                        toggleMenu(true, currentMenu)
-                        updateMenuHeading(currentMenu)
-                        updateMenuSubheading(currentMenu)
-                        playSoundEffect("wrench", 0.4)
-                        updateMenuStatus("")
-                    else
-                        updateMenuStatus("Not Enough Money")
-                    end
-                elseif currentMenu == "mainMenu" then
+                --         toggleMenu(false, "repairMenu")
+                --         toggleMenu(true, currentMenu)
+                --         updateMenuHeading(currentMenu)
+                --         updateMenuSubheading(currentMenu)
+                --         playSoundEffect("wrench", 0.4)
+                --         updateMenuStatus("")
+                --     else
+                --         updateMenuStatus("Not Enough Money")
+                --     end
+                -- else
+                if currentMenu == "mainMenu" then
                     currentMenu = currentMenuItem:gsub("%s+", "") .. "Menu"
                     currentCategory = currentMenuItemID
 

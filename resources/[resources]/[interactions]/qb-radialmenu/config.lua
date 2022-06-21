@@ -7,13 +7,38 @@ local isMedic = false
 local isRealestate = false
 local isDead = false
 local myJob = "Unemployed"
-local isHandcuffed = false
-local hasOxygenTankOn = false
-local bennyscivpoly = false
 local onDuty = false
 local inGarage = false
 local inDepots = false
-local inHouses = false
+local inBennys = false
+local inBennys2 = false
+local inTuner = false
+local inTunerShop = false
+local inSandyRepair = false
+local inPaletoRepair = false
+local inPdMech = false
+local PlayerJob = {}
+
+AddEventHandler('onResourceStart', function(resource)
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
+    PlayerJob = job
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty')
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    onDuty = duty
+end)
 
 rootMenuConfig =  {
     {
@@ -66,7 +91,6 @@ rootMenuConfig =  {
          enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and not isPolice and not isMedic)
-            --return isDead and not isPolice and not isMedic
         end,
     },
     {
@@ -77,7 +101,6 @@ rootMenuConfig =  {
          enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and isPolice)
-            --return isDead and isPolice and onDuty
         end,
     },
     {
@@ -88,7 +111,6 @@ rootMenuConfig =  {
          enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return not isDead and isPolice and onDuty
         end,
     },
     {
@@ -99,7 +121,6 @@ rootMenuConfig =  {
          enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and isMedic)
-            --return isDead and isMedic and onDuty
         end,
     },
     {    
@@ -109,7 +130,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"vehicle:riflerack", "police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
     },
@@ -120,7 +140,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
-            --return (isPolice and onDuty and not isDead and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
         subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar"}
     },
@@ -131,7 +150,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"police:spawnpion", "police:spawnhek", "police:spawnschotten", "police:spawntent", "police:spawnverlichting", "police:del" }
     },
@@ -143,7 +161,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return isPolice and onDuty and not isDead
         end,
         subMenus = {"joinradio1", "joinradio2", "joinradio3", "joinradio4", "joinradio5", "joinradio6", "joinradio7" }
     },
@@ -154,7 +171,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isMedic and onDuty)
-            --return isMedic and onDuty and not isDead
         end,
         subMenus = {"medic:status", "medic:revive", "medic:treat"}
     },
@@ -166,7 +182,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isRealestate)
-            --return isRealestate and not isDead
         end,
     },
     {
@@ -176,7 +191,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and exports['qb-houses']:isInHouse())
-            --return not isDead and exports['qb-houses']:isInHouse()
         end,
         subMenus = {"house:setstash", "house:setoutfit", "house:setlogout", "house:givekeys", "house:decorate"}
     },
@@ -187,7 +201,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and not exports['qb-houses']:isInHouse())
-            --return not isDead and not exports['qb-houses']:isInHouse()
         end,
         subMenus = {"house:doorlock", "house:givekeys", "house:enter"}
     },
@@ -198,7 +211,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCloseVeh() and isMedic and onDuty and not IsPedInAnyVehicle(PlayerPedId(), false))
-            --return  (not isDead and isCloseVeh() and isMedic and not IsPedInAnyVehicle(PlayerPedId(), false))
         end,
         subMenus ={"medic:stretcherspawn", "medic:stretcherremove"}
     },
@@ -209,7 +221,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isTow)
-            --return isTow and onDuty and not isDead
         end,
         subMenus = {"tow:togglenpc", "tow:vehicle"}
     },
@@ -220,7 +231,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isTaxi)
-            --return isTaxi and onDuty and not isDead
         end,
         subMenus = {"taxi:npc", "taxi-meter", "taxi:startmeter"}
     },
@@ -232,10 +242,9 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
-            --return (not isDead and not isPolice and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
     },
-    {    
+    {
         id = "Emotes",
         displayName = "Emotes",
         icon = "#general-emotes",
@@ -246,6 +255,46 @@ rootMenuConfig =  {
         end
     },
     {
+        id = "Bennys",
+        displayName = "Bennys",
+        icon = "#bennys",
+        functionName = "qb-customs:client:repair",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and inBennys or inBennys2 or inPaletoRepair or inSandyRepair and IsPedInAnyVehicle(PlayerPedId(), true))
+        end
+    },
+    {
+        id = "TunerRepair",
+        displayName = "Repair Station",
+        icon = "#bennys",
+        functionName = "qb-customs:client:repair",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and inTuner and isTuner and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
+        end
+    },
+    {
+        id = "TunerCustoms",
+        displayName = "6STR Customs",
+        icon = "#car-tilt",
+        functionName = "enter:tunershop",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and inTunerShop and isTuner and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
+        end
+    },
+    {
+        id = "PDMECH",
+        displayName = "Bennys",
+        icon = "#bennys",
+        functionName = "qb-customs:pdmenu",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and inPdMech and isPolice and onDuty and IsPedInAnyVehicle(PlayerPedId(), false))
+        end
+    },
+    {
         id = "GiveCarKeys",
         displayName = "Give Car Keys",
         icon = "#car-key",
@@ -253,7 +302,6 @@ rootMenuConfig =  {
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))
-            --return (not isDead and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))
         end
     },
     {
@@ -340,7 +388,6 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return not isDead and isPolice and onDuty
         end
     },
     ['vehicle:flip'] = {
@@ -775,7 +822,6 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
-            --return not isDead
         end
     },
     -- HOSPITAL
@@ -963,6 +1009,16 @@ AddEventHandler("isRealestateOff", function()
     isRealestate = false
 end)
 
+RegisterNetEvent("isTuner") -- these are all up to you and your job system, if person become Judge, script will see him as Judge too.
+AddEventHandler("isTuner", function()
+    isTuner = true
+end)
+
+RegisterNetEvent("isTunerOff") -- opposite of the above
+AddEventHandler("isTunerOff", function()
+    isTuner = false
+end)
+
 RegisterNetEvent("QBCore:Client:OnJobUpdate") -- dont edit this unless you don't use qb-core
 AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
     myJob = jobInfo.name
@@ -971,9 +1027,11 @@ AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
     if isPolice and myJob ~= "police" then isPolice = false end
     if isTow and myJob ~= "tow" then isTow = false end
     if isTaxi and myJob ~= "taxi" then isTaxi = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
     if myJob == "police" then isPolice = true end
     if myJob == "tow" then isTow = true end
     if myJob == "taxi" then isTaxi = true end
+    if myJob == "tuner" then isTuner = true end
     if myJob == "ambulance" then isMedic = true end
     if myJob == "realestate" then isRealestate = true end
 end)
@@ -984,9 +1042,11 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
     if isMedic and myJob ~= "ambulance" then isMedic = false end
     if isRealestate and myJob ~= "realestate" then isRealestate = false end
     if isPolice and myJob ~= "police" then isPolice = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
     if myJob == "police" then isPolice = true onDuty = duty end
     if myJob == "ambulance" then isMedic = true onDuty = duty end
     if myJob == "realestate" then isRealestate = true onDuty = duty end
+    if myJob == "tuner" then isTuner = true onDuty = duty end
 end)
 
 RegisterNetEvent('pd:deathcheck1') -- YOU SHOULD ADD THIS IN YOUR ambulancejob system, basically let the function trigger here when the ped playing anim and add this to
@@ -1052,13 +1112,70 @@ CreateThread(function()
             minZ = Depots[k].minZ,
             maxZ = Depots[k].maxZ,
             debugPoly = false
-        }) 
+        })
     end
+end)
+CreateThread(function()
+    exports["qb-polyzone"]:AddBoxZone("Bennys", vector3(-39.1, -1053.51, 28.4), 6.8, 4.8, {
+        name="Bennys",
+        heading = 339,
+        debugPoly = false,
+        minZ = 27.4,
+        maxZ = 31.2
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("Bennys2", vector3(-221.75, -1329.9, 30.89), 4.2, 7.4, {
+        name="Bennys2",
+        heading=0,
+        debugPoly = false,
+        minZ = 29.89,
+        maxZ = 32.49
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("TunerRepair", vector3(125.07, -3041.25, 7.08), 3.2, 6.4, {
+        name="TunerRepair",
+        heading=0,
+        debugPoly = false,
+        minZ = 6.08,
+        maxZ = 8.88
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("TunerShop", vector3(144.94, -3030.44, 7.04), 6.2, 3.6, {
+        name="TunerShop",
+        heading=0,
+        debugPoly = false,
+        minZ = 6.04,
+        maxZ = 8.04
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("pdmech", vector3(452.02, -975.89, 25.7), 4.4, 12.8, {
+        name="pdmech",
+        heading=0,
+        debugPoly = false,
+        minZ = 24.7,
+        maxZ = 27.5
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("SandyRepair", vector3(1182.56, 2640.36, 37.76), 7.8, 4.0, {
+        name="SandyRepair",
+        heading=0,
+        debugPoly = false,
+        minZ = 36.76,
+        maxZ = 39.36
+    })
+
+    exports["qb-polyzone"]:AddBoxZone("PaletoRepair", vector3(111.42, 6627.03, 31.79), 8.4, 4.6, {
+        name="PaletoRepair",
+        heading=43,
+        debugPoly = false,
+        minZ = 30.79,
+        maxZ = 33.39
+    })
 end)
 
 RegisterNetEvent('qb-polyzone:enter')
 AddEventHandler('qb-polyzone:enter', function(name)
-    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+    local InVehicle = IsPedInAnyVehicle(PlayerPedId())
     if name == "garages" then
         inGarage = true
         exports['qb-ui']:showInteraction('Parking')
@@ -1071,6 +1188,45 @@ AddEventHandler('qb-polyzone:enter', function(name)
     elseif name == "depots" then
         inDepots = true
         exports['qb-ui']:showInteraction('Depot')
+    elseif name == "Bennys" then
+        if InVehicle then
+            inBennys = true
+            exports['qb-ui']:showInteraction("Bennys")
+        end
+    elseif name == "Bennys2" then
+        if InVehicle then
+            inBennys2 = true
+            exports['qb-ui']:showInteraction("Bennys")
+        end
+    elseif name == "TunerRepair" then
+        if InVehicle then
+            inTuner = true
+            if PlayerJob.name == "tuner" and onDuty then
+                exports['qb-ui']:showInteraction("Repair Station")
+            end
+        end
+    elseif name == "TunerShop" then
+        if InVehicle then
+            inTunerShop = true
+            if PlayerJob.name == "tuner" and onDuty then
+                exports['qb-ui']:showInteraction("6STR Customs")
+            end
+        end
+    elseif name == "pdmech" then
+        if InVehicle then
+            inPdMech = true
+            exports['qb-ui']:showInteraction("Vehicle Station")
+        end
+    elseif name == "SandyRepair" then
+        if InVehicle then
+            inSandyRepair = true
+            exports['qb-ui']:showInteraction("Bennys")
+        end
+    elseif name == "PaletoRepair" then
+        if InVehicle then
+            inPaletoRepair = true
+            exports['qb-ui']:showInteraction("Bennys")
+        end
     end
 end)
 
@@ -1087,6 +1243,31 @@ AddEventHandler('qb-polyzone:exit', function(name)
         exports['qb-ui']:hideInteraction()
     elseif name == "depots" then
         inDepots = false
+        exports['qb-ui']:hideInteraction()
+    elseif name == "Bennys" then
+        inBennys = false
+        exports['qb-ui']:hideInteraction()
+    elseif name == "Bennys2" then
+        inBennys2 = false
+        exports['qb-ui']:hideInteraction()
+    elseif name == "TunerRepair" then
+        inTuner = false
+        if PlayerJob.name == "tuner" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end
+    elseif name == "TunerShop" then
+        inTunerShop = false
+        if PlayerJob.name == "tuner" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end
+    elseif name == "pdmech" then
+        inPdMech = false
+        exports['qb-ui']:hideInteraction()
+    elseif name == "SandyRepair" then
+        inSandyRepair = false
+        exports['qb-ui']:hideInteraction()
+    elseif name == "PaletoRepair" then
+        inPaletoRepair = false
         exports['qb-ui']:hideInteraction()
     end
 end)

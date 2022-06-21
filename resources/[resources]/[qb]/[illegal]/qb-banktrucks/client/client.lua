@@ -41,7 +41,7 @@ function EnterHouse()
     exports['qb-target']:AddBoxZone('lester-computer', vector3(1276.24, -1710.27, 54.77), 1.2, 1, {
         name='lester-computer',
         heading=28,
-        debugPoly=false,
+        debugPoly = false,
         minZ=54.47,
         maxZ=55.27,
         }, {

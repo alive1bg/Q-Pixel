@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local showMenu = false
+local Config = {}
 
 -- Keybind Lookup table
 local keybindControls = {
