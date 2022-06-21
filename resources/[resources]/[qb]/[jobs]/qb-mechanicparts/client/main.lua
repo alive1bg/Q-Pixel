@@ -4007,7 +4007,7 @@ CreateThread(function()
     exports["qb-target"]:AddBoxZone("tunerparts", vector3(136.7, -3051.41, 7.04), 1, 1, {
         name = "tunerparts",
         heading = 0,
-        debugPoly = false,
+        debugPoly = true,
         minZ = 3.44,
         maxZ = 7.44,
     }, {
@@ -4034,7 +4034,7 @@ CreateThread(function()
     exports["qb-target"]:AddBoxZone("nitrousstation", vector3(137.51, -3051.36, 7.04), 0.6, 0.65, {
         name = "nitrousstation",
         heading = 0,
-        debugPoly = false,
+        debugPoly = true,
         minZ = 6.04,
         maxZ = 7.19
     }, {
