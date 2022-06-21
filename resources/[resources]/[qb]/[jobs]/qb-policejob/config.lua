@@ -485,6 +485,15 @@ Config.Items = {
             slot = 25,
             authorizedJobGrades = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
         },
+        [26] = {
+            name = "policespikes",
+            price = 500,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 26,
+            authorizedJobGrades = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
+        }
     }
 }
 
