@@ -75,17 +75,13 @@ Config.Plates = {
         coords = vector4(125.05, -3034.99, 6.54, 269.28),
         AttachedVehicle = nil,
     },
-    [2] = {
-        coords = vector4(125.04, -3041.28, 6.54, 269.12),
-        AttachedVehicle = nil,
-    },
 }
 
 Config.Locations = {
     ["exit"] = vector3(139.99, -3023.5, 7.04),
     ["stash"] = vector3(128.69, -3013.65, 7.04),
-    ["duty"] = vector3(126.17, -3007.91, 7.04), 
-    ["vehicle"] = vector4(141.54, -2998.38, 7.12, 27.19), 
+    ["duty"] = vector3(126.17, -3007.91, 7.04),
+    ["vehicle"] = vector4(141.54, -2998.38, 7.12, 27.19),
 }
 
 Config.Vehicles = {

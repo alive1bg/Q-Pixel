@@ -1,26 +1,26 @@
 Citizen.CreateThread(function()
 	if Config.MLO == "gabz" then
 		for k, v in pairs(Config.GabzPoles) do
-			exports['qb-target']:AddBoxZone("UniDance"..k, v.location, v.width, v.height, { name="UniDance"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniDance"..k, v.location, v.width, v.height, { name="UniDance"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:Dance", icon = "fas fa-chair", label = "Dance", job = "vanilla", loc = v.location, head = v.heading, pole = v.pole }, },
 				  distance = v.distance
 			})
 		end
 		for k, v in pairs(Config.GabzDance) do
-			exports['qb-target']:AddBoxZone("UniPvtDance"..k, v.location, v.width, v.height, { name="UniPvtDance"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniPvtDance"..k, v.location, v.width, v.height, { name="UniPvtDance"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:PvtDance", icon = "fas fa-chair", label = "Dance", job = "vanilla", loc = v.location, head = v.heading }, },
 				  distance = v.distance
 			})
 		end	
 	elseif Config.MLO == "van" then
 		for k, v in pairs(Config.VanPoles) do
-			exports['qb-target']:AddBoxZone("UniDance"..k, v.location, v.width, v.height, { name="UniDance"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniDance"..k, v.location, v.width, v.height, { name="UniDance"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:Dance", icon = "fas fa-chair", label = "Dance", job = "vanilla", loc = v.location, head = v.heading, pole = v.pole }, },
 				  distance = v.distance
 			})
 		end		
 		for k, v in pairs(Config.VanDance) do
-			exports['qb-target']:AddBoxZone("UniPvtDance"..k, v.location, v.width, v.height, { name="UniPvtDance"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniPvtDance"..k, v.location, v.width, v.height, { name="UniPvtDance"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:PvtDance", icon = "fas fa-chair", label = "Dance", job = "vanilla", loc = v.location, head = v.heading }, },
 				  distance = v.distance
 			})

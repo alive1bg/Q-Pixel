@@ -13,7 +13,7 @@ CreateThread(function()
     local insideTrackZone = CircleZone:Create(vector3(998.66, 69.09, 70.0), 2.5, {
         name="insideTrack",
         heading=328.0,
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
     })
     insideTrackZone:onPlayerInOut(function(isPointInside)
@@ -26,7 +26,7 @@ CreateThread(function()
                 exports['qb-target']:AddCircleZone("Betting", vector3(998.66, 69.09, 70.0), 1.0, {
                     name="Betting",
                     heading=160,
-                    debugPoly=false,
+                    debugPoly = false,
                     useZ=true,
                 }, {
                     options = {

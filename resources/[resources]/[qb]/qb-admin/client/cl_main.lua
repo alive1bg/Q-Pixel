@@ -211,7 +211,7 @@ end)
 RegisterNetEvent('qb-admin:client:SetTimeWeather')
 AddEventHandler('qb-admin:client:SetTimeWeather', function(weather, time)
     if time ~= nil then
-        TimeEvent(time)
+        TimeEvent(hour, minute)
     end
     if weather ~= nil then
         WeatherEvent(weather)
@@ -419,9 +419,6 @@ AddEventHandler('qb-admin:client:KickPlayer', function(target, reason)
     TriggerServerEvent('qb-admin:server:DropPlayer', target, reason)
 end)
 
-
-
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -455,6 +452,9 @@ RegisterNUICallback("close" , function(data, cb)
     SetNuiFocus(false ,false)
 end)
 
+RegisterNetEvent('close:admin', function()
+    SetNuiFocus(false ,false)
+end)
 
 RegisterNUICallback("getOnlinePlayers" , function(data, cb)
     CoreName.Functions.TriggerCallback('qb-admin:GetOnlinePlayers', function(result)

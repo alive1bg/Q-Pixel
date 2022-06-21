@@ -5,7 +5,7 @@ local sitting = false
 
 CreateThread(function()
 	for k, v in pairs(Config.Chairs) do
-		exports['qb-target']:AddBoxZone("PizzChair"..k, v.location, v.width, v.depth, { name="PizzChair"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+		exports['qb-target']:AddBoxZone("PizzChair"..k, v.location, v.width, v.depth, { name="PizzChair"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 			{ options = { { event = "qb-pizzathis:Chair", icon = "fas fa-chair", label = "Sit Down", loc = v.location, head = v.heading, seat = v.seat }, },
 			  distance = v.distance+0.4
 		})

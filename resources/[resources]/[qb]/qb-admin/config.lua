@@ -24,7 +24,7 @@ Config['Webhooks'] = {
 
 
 EnterBennys = function()
-    TriggerEvent('event:control:bennys1')
+    TriggerEvent('event:control:admin')
 end
 
 WeatherEvent = function(weather)
@@ -32,7 +32,7 @@ WeatherEvent = function(weather)
 end
 
 TimeEvent = function(time)
-    TriggerEvent("qb-weathersync:server:setTime1", hour)
+    TriggerEvent("qb-weathersync:server:setTime", hour, minute)
     --return print('Currently not working')
 end
 

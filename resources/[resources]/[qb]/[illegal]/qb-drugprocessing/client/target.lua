@@ -259,7 +259,7 @@ CreateThread(function()
     exports['qb-target']:AddBoxZone("thychloride", vector3(-679.77, 5800.7, 17.33), 1, 1, {
 		name="thychloride",
 		heading=340.0,
-		debugPoly=false,
+		debugPoly = false,
 		minZ = 14.33,
 		maxZ = 18.33,
 	},{
@@ -276,7 +276,7 @@ CreateThread(function()
     exports['qb-target']:AddBoxZone("heroinproc", vector3(1413.7, -2041.77, 52.0), 1, 1, {
 		name="heroinproc",
 		heading=352.15,
-		debugPoly=false,
+		debugPoly = false,
 		minZ = 51.00,
 		maxZ = 53.00,
 	},{

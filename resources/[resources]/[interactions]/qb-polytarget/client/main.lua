@@ -34,44 +34,12 @@ CreateThread(function()
         maxZ=39.63
     })
 
-    exports["qb-polyzone"]:AddBoxZone("6strtunershopui", vector3(144.94, -3030.44, 7.04), 6.2, 3.6, {
-        name="6strtunershopui",
-        heading=0,
-        debugPoly = false,
-        minZ=6.04,
-        maxZ=8.04
-    })
-
     exports["qb-polyzone"]:AddBoxZone("pillboxcheckinui", vector3(307.0, -595.09, 43.28), 1.8, 1.8, {
         name="pillboxcheckinui",
         heading=340,
         debugPoly = false,
         minZ=42.28,
         maxZ=44.68
-    })
-
-    exports["qb-polyzone"]:AddBoxZone("bennysrepairui", vector3(-39.1, -1053.51, 28.4), 6.8, 4.8, {
-        name="bennysrepairui",
-        heading=339,
-        debugPoly = false,
-        minZ=27.4,
-        maxZ=31.2
-    })
-
-    exports["qb-polyzone"]:AddBoxZone("bennysrepair2ui", vector3(-32.22, -1066.17, 28.4), 9.6, 5.6, {
-        name="bennysrepair2ui",
-        heading=340,
-        debugPoly = false,
-        minZ=27.4,
-        maxZ=30.4
-    })
-
-    exports["qb-polyzone"]:AddBoxZone("tunerrepairui", vector3(124.68, -3047.27, 7.04), 5.8, 7.8, {
-        name="tunerrepairui",
-        heading=0,
-        debugPoly = false,
-        minZ=6.04,
-        maxZ=8.84
     })
 
     exports["qb-polyzone"]:AddBoxZone("tunerstashui", vector3(128.61, -3013.53, 7.04), 1.4, 2.8, {
@@ -98,13 +66,13 @@ CreateThread(function()
         maxZ=8.04
     })
 
-    exports["qb-polyzone"]:AddBoxZone("hayesrepairui", vector3(-1411.4, -442.37, 35.91), 3.0, 7.0, {
+    --[[exports["qb-polyzone"]:AddBoxZone("hayesrepairui", vector3(-1411.4, -442.37, 35.91), 3.0, 7.0, {
         name="hayesrepairui",
         heading=302,
         debugPoly = false,
         minZ=34.91,
         maxZ=37.11
-    })
+    })]]
 
     exports["qb-polyzone"]:AddBoxZone("hayesstashui", vector3(-1410.19, -448.17, 35.91), 1.4, 1.8, {
         name="hayesstashui",
@@ -138,23 +106,21 @@ CreateThread(function()
         maxZ=8.24
     })
 
-    exports["qb-polyzone"]:AddBoxZone("policerepair", vector3(452.08, -975.89, 25.7), 4.6, 12.4, {
+    --[[exports["qb-polyzone"]:AddBoxZone("policerepair", vector3(452.08, -975.89, 25.7), 4.6, 12.4, {
         name="policerepair",
         heading=0,
         debugPoly = false,
         minZ=24.7,
         maxZ=28.1
-    })
+    })]]
 end)
 
 RegisterNetEvent('qb-polyzone:enter')
 AddEventHandler('qb-polyzone:enter', function(name)
     local InVehicle = IsPedInAnyVehicle(PlayerPedId())
     if name == "votecabin" then
-        --if not InVehicle then
-            inVoteCabin = true
-            exports['qb-ui']:showInteraction('Vote Cabin')
-        --end
+        inVoteCabin = true
+        exports['qb-ui']:showInteraction('Vote Cabin')
     elseif name == "policerepair" then
         if InVehicle then
             if PlayerJob.name == "police" and onDuty then
@@ -230,28 +196,20 @@ RegisterNetEvent('qb-polyzone:exit')
 AddEventHandler('qb-polyzone:exit', function(name)
     local InVehicle = IsPedInAnyVehicle(PlayerPedId())
     if name == "votecabinui" then
-        --if InVehicle then
-            inVoteCabin = false
+        inVoteCabin = false
+        exports['qb-ui']:hideInteraction()
+    --[[elseif name == "policerepair" then
+        if PlayerJob.name == "police" and onDuty then
             exports['qb-ui']:hideInteraction()
-        --end
-    elseif name == "policerepair" then
-        --if InVehicle then
-            if PlayerJob.name == "police" and onDuty then
-                exports['qb-ui']:hideInteraction()
-            end
-        --end
+        end
     elseif name == "6strtunershopui" then
-        --if not InVehicle then
-            if PlayerJob.name == "tuner" and onDuty then
-                exports['qb-ui']:hideInteraction()
-            end
-        --end
+        if PlayerJob.name == "tuner" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end]]
     elseif name == "tunerwheelfitment" then
-        --if InVehicle then
-            if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 and onDuty then
-                exports['qb-ui']:hideInteraction()
-            end
-        --end
+        if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end
     elseif name == "pillboxcheckinui" then
         if doctorCount >= Config.MinimalDoctors then
             exports['qb-ui']:hideInteraction()
@@ -263,11 +221,9 @@ AddEventHandler('qb-polyzone:exit', function(name)
     elseif name == "bennysrepair2ui" then
         exports['qb-ui']:hideInteraction()
     elseif name == "tunerrepairui" then
-        --if not InVehicle then
-            if PlayerJob.name == "tuner" and onDuty then
-                exports['qb-ui']:hideInteraction()
-            end
-        --end
+        if PlayerJob.name == "tuner" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end
     elseif name == "tunerstashui" then
         if PlayerJob.name == "tuner" and onDuty then
             exports['qb-ui']:hideInteraction()
@@ -280,12 +236,10 @@ AddEventHandler('qb-polyzone:exit', function(name)
         if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 then
             exports['qb-ui']:hideInteraction()
         end
-    elseif name == "hayesrepairui" then
-        --if not InVehicle then
-            if PlayerJob.name == "hayesauto" and onDuty then
-                exports['qb-ui']:hideInteraction()
-            end
-        --end
+    --[[elseif name == "hayesrepairui" then
+        if PlayerJob.name == "hayesauto" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end]]
     elseif name == "hayesstashui" then
         if PlayerJob.name == "hayesauto" and onDuty then
             exports['qb-ui']:hideInteraction()

@@ -1,14 +1,14 @@
 CreateThread(function()
 	if Config.MLO == "gabz" then
 		for k, v in pairs(Config.GabzChairs) do
-			exports['qb-target']:AddBoxZone("UniChair"..k, v.location, v.width, v.depth, { name="UniChair"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniChair"..k, v.location, v.width, v.depth, { name="UniChair"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:Chair", icon = "fas fa-chair", label = "Sit Down", loc = v.location, head = v.heading, seat = v.seat }, },
 				  distance = v.distance
 			})
 		end
 	elseif Config.MLO == "van" then
 		for k, v in pairs(Config.VanChairs) do
-			exports['qb-target']:AddBoxZone("UniChair"..k, v.location, v.width, v.depth, { name="UniChair"..k, heading = v.heading, debugPoly=false, minZ = v.minZ, maxZ = v.maxZ, }, 
+			exports['qb-target']:AddBoxZone("UniChair"..k, v.location, v.width, v.depth, { name="UniChair"..k, heading = v.heading, debugPoly = false, minZ = v.minZ, maxZ = v.maxZ, }, 
 				{ options = { { event = "jim-vanillaunicorn:Chair", icon = "fas fa-chair", label = "Sit Down", loc = v.location, head = v.heading, seat = v.seat }, },
 				  distance = v.distance
 			})

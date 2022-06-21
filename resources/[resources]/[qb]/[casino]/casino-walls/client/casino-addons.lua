@@ -78,7 +78,7 @@ CreateThread(function()
     local CasinoShop = CircleZone:Create(vector3(989.35, 31.8, 71.47), 2.0, {
         name="CasinoShop",
         heading=160,
-        debugPoly=false,
+        debugPoly = false,
         useZ=true,
     })
     CasinoShop:onPlayerInOut(function(isPointInside)
@@ -177,7 +177,7 @@ end)
 exports['qb-target']:AddBoxZone("casinogeneralsafestorage", vector3(989.39, 30.18, 71.47), 0.5, 0.5, {       
 	name="casinogeneralsafestorage",
 	heading=-53,
-	debugPoly=false,
+	debugPoly = false,
 	minZ=71.17,
 	maxZ=71.57
     }, {
@@ -196,7 +196,7 @@ exports['qb-target']:AddBoxZone("casinogeneralsafestorage", vector3(989.39, 30.1
 exports['qb-target']:AddBoxZone("casinogeneralsafestorage2", vector3(991.49, 32.71, 71.47), 0.5, 0.5, {       
     name="casinogeneralsafestorage2",
     heading=-53,
-    debugPoly=false,
+    debugPoly = false,
     minZ=71.17,
     maxZ=71.57
     }, {

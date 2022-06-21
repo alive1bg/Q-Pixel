@@ -7,20 +7,20 @@ moneyType = 'bank'
 -- Add locations here
 -- Add jobs specific to the garage.
 bennyGarages = {
-    [1] = {coords = vector4(144.95, -3030.57, 6.44, 179.41), blip = false, useJob = false, job = {"tuner", "mechanic", "police", "hayesauto"}}, -- tuner shop
-    [2] = {coords = vector4(452.18, -976.12, 25.51, 89.02), blip = false, useJob = false, job = {"tuner", "mechanic", "police", "hayesauto"}}, -- MRPD
-    [3] = {coords = vector4(109.89, 6627.07, 31.78, 221.7938), blip = false, useJob = true, job = {"mechanic", "tuner", "police", "hayesauto"}} -- PALETO?
-}
-
---[[ bennyLocations = {
-    vector4(-211.55, -1324.55, 30.90, 319.731)
-} ]]
+    [1] = {coords = vector4(109.89, 6627.07, 31.78, 227.576), useJob = false, blip = true, job = {""}}, -- Paleto Bay 1
+    [2] = {coords = vector4(1182.109, 2639.328, 37.315, 359.716), useJob = false, blip = true, job = {""}}, -- SandyShores 2
+    [3] = {coords = vector4(124.55118, -3041.298, 6.4355678, 271.12182), useJob = true, blip = false, job = {"tuner"}}, -- Tuner Repair 1
+    [4] = {coords = vector4(144.97485, -3030.232, 6.4368472, 179.51814), useJob = true, blip = false, job = {"tuner"}}, -- Tunershop 1
+    [5] = {coords = vector4(-39.20199, -1053.769, 27.791173, 157.56155), useJob = false, blip = true, job = {""}}, -- Hub by Pdm
+    [6] = {coords = vector4(-221.8769, -1329.83, 30.285072, 268.9121), useJob = false, blip = true, job = {""}}, -- Bennys
+    [7] = {coords = vector4(450.31, -976.1, 25.5, 90.25), useJob = true, blip = false, job = {""}}, -- PDBennys
+} 
 
 -- ADJUST PRICING
 
 vehicleCustomisationPrices = {
     cosmetics = {price = 400},
-    respray = {price = 1000},
+    respray = {price = 50},
     performance = {prices = {0, 3250, 5500, 10450, 15250, 20500}},
     turbo = {price = 15000},
     wheels = {price = 400},
@@ -32,7 +32,7 @@ vehicleCustomisationPrices = {
     headlights = {price = 100},
     xenoncolours = {price = 500},
     oldlivery = {price = 500},
-    plateindex = {price = 1000}
+    plateindex = {price = 100}
 }
 
 -- RESPRAY CATEGORIES
@@ -87,8 +87,7 @@ vehicleWheelOptions = {
     {category = "Offroad", id = 4, wheelID = 23},
     {category = "Tuner", id = 5, wheelID = 23},
     {category = "Motorcycle", id = 6, wheelID = 23},
-    {category = "Highend", id = 7, wheelID = 23},
-    {category = "Rally", id = 12, wheelID = 23}
+    {category = "Highend", id = 7, wheelID = 23}
 }
 
 -- TIRE SMOKE
@@ -241,7 +240,7 @@ vehicleNeonOptions = {
 vehicleCustomisation = {
     {category = "Spoiler", id = 0}, 
     {category = "Front Bumper", id = 1},
-    {category = "Rear Bumper", id = 2},
+    {category = "Rear Bumper", id = 2}, 
     {category = "Side Skirt", id = 3},
     {category = "Exhaust", id = 4},
     {category = "Roll Cage", id = 5},
@@ -250,12 +249,12 @@ vehicleCustomisation = {
     {category = "Left Fender", id = 8},
     {category = "Right Fender", id = 9},
     {category = "Roof",id = 10},
-    -- {category = "Engine Upgrade", id = 11},
-    -- {category = "Brake Upgrade", id = 12},
-    -- {category = "Transmission Upgrade", id = 13},
-    -- {category = "Suspension Upgrade", id = 15},
-    -- {category = "Armour Upgrade", id = 16},
-    -- {category = "Turbo Upgrade", id = 18},
+    ---- {category = "Engine Upgrade", id = 11},
+    ---- {category = "Brake Upgrade", id = 12},
+    ---- {category = "Transmission Upgrade", id = 13},
+    ---- {category = "Suspension Upgrade", id = 15},
+    ---- {category = "Armour Upgrade", id = 16},
+    ---- {category = "Turbo Upgrade", id = 18},
     {category = "Vanity Plates",id = 25},
     {category = "Trim A", id = 27},
     {category = "Ornaments", id = 28},

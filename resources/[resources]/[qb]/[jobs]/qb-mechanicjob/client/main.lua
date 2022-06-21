@@ -794,8 +794,6 @@ CreateThread(function()
             if PlayerJob.name == "tuner" then
                 local pos = GetEntityCoords(PlayerPedId())
                 local StashDistance = #(pos - Config.Locations["stash"])
-                local OnDutyDistance = #(pos - Config.Locations["duty"])
-                local VehicleDistance = #(pos - vector3(Config.Locations["vehicle"].x, Config.Locations["vehicle"].y, Config.Locations["vehicle"].z))
 
                 if onDuty then
                     if StashDistance < 20 then
