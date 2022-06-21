@@ -455,7 +455,7 @@ RegisterNetEvent('qb-policejob:ToggleDuty', function()
 end)
 
 -- Toggle Duty
-CreateThread(function()
+--[[ CreateThread(function()
     while true do
         local sleep = 2000
         if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" or PlayerJob.name == "bcso" or PlayerJob.name == "sasp" or PlayerJob.name == "saspr" or PlayerJob.name == "sdso" or PlayerJob.name == "pbso" then
@@ -484,9 +484,9 @@ CreateThread(function()
         end
         Wait(sleep)
     end
-end)
+end) ]]
 
--- Stash 1
+--[[ -- Stash 1
 CreateThread(function()
     Wait(1000)
     local headerDrawn = false
@@ -726,7 +726,7 @@ CreateThread(function()
         end
         Wait(sleep)
     end
-end)
+end) ]]
 
 -- 3rd eye MRPD GABZ SHIT
 
