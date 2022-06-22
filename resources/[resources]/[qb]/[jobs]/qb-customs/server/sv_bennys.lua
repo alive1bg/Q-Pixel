@@ -61,6 +61,7 @@ RegisterNetEvent('qb-customs:updateRepairCost', function(cost)
 end)
 
 RegisterNetEvent("updateVehicle", function(myCar)
+    local src = source
     if IsVehicleOwned(myCar.plate) then
         MySQL.Async.execute('UPDATE player_vehicles SET mods = ? WHERE plate = ?', {json.encode(myCar), myCar.plate})
     end

@@ -31,7 +31,7 @@ local bennyLocation
 
 --Blips
 
-CreateThread(function()
+CreateThread(function() -- COMMENTED OUT FOR QB-BENNYS
     for k, v in pairs(bennyGarages) do
         if v.blip then
         local blip = AddBlipForCoord(v.coords.x,v.coords.y,v.coords.z)
@@ -84,10 +84,12 @@ end
 function RepairVehicle()
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
+    local getFuel = GetVehicleFuelLevel(plyVeh)
 
     SetVehicleFixed(plyVeh)
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
+    SetVehicleFuelLevel(plyVeh, getFuel)
     TriggerEvent('veh.randomDegredation',10,plyVeh,3)
 end
 
@@ -558,10 +560,10 @@ function ApplyColour(paintType, paintCategory, paintID)
     if paintType == 0 then --Primary Colour
         if paintCategory == 1 then --Metallic Paint
             SetVehicleColours(plyVeh, paintID, vehSecondaryColour)
-            -- SetVehicleExtraColours(plyVeh, paintID, vehWheelColour)
+            SetVehicleExtraColours(plyVeh, paintID, vehWheelColour)
             SetVehicleExtraColours(plyVeh, originalPearlescentColour, vehWheelColour)
             originalPrimaryColour = paintID
-            -- originalPearlescentColour = paintID
+            originalPearlescentColour = paintID
         else
             SetVehicleColours(plyVeh, paintID, vehSecondaryColour)
             originalPrimaryColour = paintID
@@ -733,37 +735,6 @@ function enterLocation(locationsPos)
     isPlyInBennys = true
 end
 
-function enterLocation1()
-    local plyPed = PlayerPedId()
-    local plyVeh = GetVehiclePedIsIn(plyPed, false)
-    local isMotorcycle = false
-
-    SetVehicleModKit(plyVeh, 0)
-    FreezeEntityPosition(plyVeh, true)
-    SetEntityCollision(plyVeh, false, true)
-
-    if GetVehicleClass(plyVeh) == 8 then --Motorcycle
-        isMotorcycle = true
-    else
-        isMotorcycle = false
-    end
-
-    InitiateMenus(isMotorcycle, GetVehicleBodyHealth(plyVeh))
-
-    SetTimeout(100, function()
-        if GetVehicleBodyHealth(plyVeh) < 1000.0 then
-            DisplayMenu(true, "repairMenu")
-        else
-            DisplayMenu(true, "mainMenu")
-        end
-
-        DisplayMenuContainer(true)
-        PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
-    end)
-
-    isPlyInBennys = false
-end
-
 
 function disableControls()
     DisableControlAction(1, 38, true) --Key: E
@@ -797,6 +768,7 @@ function disableControls()
         PlaySoundFrontend(-1, "NO", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end
 end
+
 
 -- #MarkedForMarker
 --#[Citizen Threads]#--
@@ -832,7 +804,7 @@ CreateThread(function()
         end
         Wait(wait)
     end
-end) 
+end)
 
 --#[Event Handlers]#--
 RegisterNetEvent("qb-customs:purchaseSuccessful", function()
@@ -847,6 +819,7 @@ RegisterNetEvent("qb-customs:purchaseFailed", function()
     QBCore.Functions.Notify("Not enough money", "error")
 end)
 
+
 --helper function
 
 function isAuthorized(job, location)
@@ -857,7 +830,6 @@ function isAuthorized(job, location)
     end
     return false
 end
-
 
 --Pd Bennys
 
@@ -926,12 +898,6 @@ RegisterNetEvent('event:control:tunershop', function(useID)
     end
 end)
 
-RegisterNetEvent('event:control:admin', function()
-    if IsPedInAnyVehicle(PlayerPedId(), false) then
-        enterLocation1()
-    end
-end)
-
 -------------------------------------------------- benny repair point event + function
 function BennyEngineRepair()
     local plyPed = PlayerPedId()
@@ -942,7 +908,7 @@ function BennyEngineRepair()
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
     SetVehicleEngineHealth(plyVeh, 1000.0)
-    SetVehicleEngineOn(plyVeh, true, true, true)
+    SetVehicleEngineOn(plyVeh, false, false, true)
     QBCore.Functions.Notify("Engine Repaired!", "success")
     TriggerServerEvent('qb-customs:paybiatch')
     TriggerEvent('veh.randomDegredation',10,plyVeh,3)
