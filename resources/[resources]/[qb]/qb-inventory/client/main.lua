@@ -340,7 +340,7 @@ end)
 
 RegisterNetEvent('inventory:client:OpenInventory', function(PlayerAmmo, inventory, other)
     if not IsEntityDead(PlayerPedId()) then
-        Wait(50)
+        Wait(500)
         ToggleHotbar(false)
         if showBlur == true then
             TriggerScreenblurFadeIn(1000)
