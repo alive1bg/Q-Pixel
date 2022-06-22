@@ -19,6 +19,27 @@ local function DrawText3D(x, y, z, text)
     ClearDrawOrigin()
 end
 
+AddEventHandler('onResourceStart', function(resource)
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
+    PlayerJob = job
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty')
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    onDuty = duty
+end)
+
 local function loadAnimDict(dict) -- interactions, job,
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
@@ -454,6 +475,28 @@ RegisterNetEvent('qb-policejob:ToggleDuty', function()
     TriggerServerEvent("InteractSound_SV:PlayOnSource", "noticlick", 0.5)
 end)
 
+RegisterNetEvent('qb-policejob:oNDuty', function()
+    if not onDuty then
+        TriggerServerEvent("police:server:UpdateCurrentCops")
+        TriggerServerEvent("police:server:UpdateBlips")
+        TriggerServerEvent("QBCore:oNDuty")
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "noticlick", 0.5)
+    else
+        QBCore.Functions.Notify('You are already On Duty')
+    end
+end)
+
+RegisterNetEvent('qb-policejob:oFFDuty', function()
+    if onDuty then
+        TriggerServerEvent("police:server:UpdateCurrentCops")
+        TriggerServerEvent("police:server:UpdateBlips")
+        TriggerServerEvent("QBCore:oFFDuty")
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "noticlick", 0.5)
+    else
+        QBCore.Functions.Notify('You are already Off Duty')
+    end
+end)
+
 -- Toggle Duty
 --[[ CreateThread(function()
     while true do
@@ -730,6 +773,41 @@ end) ]]
 
 -- 3rd eye MRPD GABZ SHIT
 
+RegisterNetEvent('qb-policejob:pd:duty', function()
+    exports['qb-menu']:openMenu({
+        {
+            header = "Duty Station",
+            txt = "",
+            icon = "fas fa-clipboard-user",
+            isMenuHeader = true,
+        },
+        {
+            header = "Sign In",
+            txt = "",
+            icon = "fas fa-clipboard-check",
+            params = {
+                event = "qb-policejob:oNDuty",
+            }
+        },
+        {
+            header = "Sign Out",
+            txt = "",
+            icon = "fas fa-clipboard-question",
+            params = {
+                event = "qb-policejob:oFFDuty",
+            }
+        },
+        {
+            header = "Close Menu",
+            txt = "",
+            icon = "fas fa-x",
+            params = {
+                event = exports['qb-menu']:closeMenu(),
+            }
+        },
+    })
+end)
+
 exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -982.0529, 30.67834), 0.45, 0.35, {
     name = "MissionRowDutyClipboard",
     heading = 11.0,
@@ -740,15 +818,15 @@ exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -98
         options = {
             {
                 type = "client",
-                event = "qb-policejob:ToggleDuty",
+                event = "qb-policejob:pd:duty",
                 icon = "fas fa-sign-in-alt",
-                label = "Go On/Off Duty",
+                label = "Duty",
                 job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
             },
             {
                 type = "client",
                 event = "police:client:deskAlert",
-                icon = "fas fa-sign-in-alt",
+                icon = "fas fa-phone-volume",
                 label = "Page Officers",
             },
         },
