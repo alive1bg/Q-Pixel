@@ -362,7 +362,7 @@ exports['qb-target']:AddBoxZone("PrisonJob8", vector3(1761.36, 2518.88, 45.57), 
 exports['qb-target']:AddBoxZone("CleanerSortItems", vector3(1786.84, 2564.97, 45.67), 1.0, 2.8, {
 	name="CleanerSortItems",
 	heading=0,
-	-- debugpoly = false,
+	-- debugPoly = false,
 	minZ=44.67,
 	maxZ=46.87
     }, {
@@ -380,7 +380,7 @@ exports['qb-target']:AddBoxZone("CleanerSortItems", vector3(1786.84, 2564.97, 45
 -- exports['qb-target']:AddBoxZone("CleanerSortItems", vector3(1786.84, 2564.97, 45.67), 1.0, 2.8, {
 	-- name="CleanerSortItems",
 	-- heading=0,
-	-- debugpoly = false,
+	-- debugPoly = false,
 	-- minZ=44.67,
 	-- maxZ=46.87
     -- }, {

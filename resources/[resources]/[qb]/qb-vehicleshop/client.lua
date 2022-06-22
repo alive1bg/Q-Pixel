@@ -352,13 +352,13 @@ function Init()
             debugPoly = false,
         })
 
-        financeZone:onPlayerInOut(function(isPointInside)
+        --[[financeZone:onPlayerInOut(function(isPointInside)
             if isPointInside then
                 exports['qb-menu']:showHeader(financeMenu)
             else
                 exports['qb-menu']:closeMenu()
             end
-        end)
+        end)]]
     end)
     CreateThread(function()
         for k in pairs(Config.Shops) do

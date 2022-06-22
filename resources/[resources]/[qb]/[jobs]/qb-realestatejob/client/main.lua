@@ -120,7 +120,7 @@ end)
 exports['qb-target']:AddBoxZone("PersonalStash", vector3(-715.64, 266.96, 84.1), 2.6, 0.6, {
     name = "PersonalStash",
     heading = 25,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 81.15,
     maxZ = 85.15
     }, {
@@ -139,7 +139,7 @@ exports['qb-target']:AddBoxZone("PersonalStash", vector3(-715.64, 266.96, 84.1),
 exports['qb-target']:AddBoxZone("RealEstateDuty", vector3(-714.81, 267.51, 84.1), 0.4, 0.35, {
     name = "RealEstateDuty",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 83.8,
     maxZ = 85.0
     }, {
@@ -158,7 +158,7 @@ exports['qb-target']:AddBoxZone("RealEstateDuty", vector3(-714.81, 267.51, 84.1)
 exports['qb-target']:AddBoxZone("RealEstateBoss", vector3(-715.41, 261.36, 84.14), 0.3, 0.3, {
     name = "RealEstateBoss",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 84.04,
     maxZ = 84.34
     }, {

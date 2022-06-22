@@ -133,6 +133,8 @@ local function applyVehicleMods(vehicle)
     SetVehicleMod(vehicle, 11, Config["VehicleModifications"][vehicleMode]["Engine"] or GetVehicleMod(vehicle, 18), false) -- Engine
     SetVehicleMod(vehicle, 12, Config["VehicleModifications"][vehicleMode]["Brakes"] or GetVehicleMod(vehicle, 18), false) -- Brakes
     SetVehicleMod(vehicle, 13, Config["VehicleModifications"][vehicleMode]["Transmission"] or GetVehicleMod(vehicle, 18), false) -- Transmission
+    SetVehicleMod(vehicle, 15, Config["VehicleModifications"][vehicleMode]["Suspension"], false) -- Suspension
+    SetVehicleMod(vehicle, 16, Config["VehicleModifications"][vehicleMode]["Armor"], false) -- Armor
     SetVehicleXenonLightsColour(vehicle, Config["VehicleModifications"][vehicleMode]["XenonHeadlightsColor"] or GetVehicleXenonLightsColour(vehicle)) -- Xenon Headlights Color
 
     if Config.SlowdownOnSwitch then

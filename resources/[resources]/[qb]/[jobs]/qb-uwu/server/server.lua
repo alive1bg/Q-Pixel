@@ -252,6 +252,6 @@ AddEventHandler('qb-uwu:Tickets:Sell', function()
 		TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['burger-ticket'], "remove", tickets)
 		TriggerClientEvent('QBCore:Notify', src, "Tickets: "..tickets.." Total: $"..pay, 'success')
 	else 
-		TriggerClientEvent('QBCore:Notify', src, "No tickets to trade", 'error')
+		TriggerClientEvent('QBCore:Notify', src, "You don't have tickets to trade", 'error')
 	end
 end)

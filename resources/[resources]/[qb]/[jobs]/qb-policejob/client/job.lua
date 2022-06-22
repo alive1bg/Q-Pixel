@@ -811,7 +811,7 @@ end)
 exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -982.0529, 30.67834), 0.45, 0.35, {
     name = "MissionRowDutyClipboard",
     heading = 11.0,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 30.77834,
     maxZ = 30.87834,
     }, {
@@ -836,7 +836,7 @@ exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -98
 exports['qb-target']:AddBoxZone("FingerPrint", vector3(473.14, -1006.95, 26.27), 0.35, 0.45, {
     name = "FingerPrint",
     heading = 11.0,
-    debugpoly = false,
+    debugPoly = false,
     minZ=26.17,
     maxZ=26.32
     }, {
@@ -855,7 +855,7 @@ exports['qb-target']:AddBoxZone("FingerPrint", vector3(473.14, -1006.95, 26.27),
 exports['qb-target']:AddBoxZone("PersonalStash", vector3(463.1, -995.34, 30.69), 0.6, 2.4, {
     name = "PersonalStash",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 29.69,
     maxZ = 32.69,
     }, {
@@ -874,7 +874,7 @@ exports['qb-target']:AddBoxZone("PersonalStash", vector3(463.1, -995.34, 30.69),
 exports['qb-target']:AddBoxZone("Armory", vector3(482.54, -994.72, 30.69), 0.6, 1, {
     name = "Armory",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ=29.59,
     maxZ=31.59
     }, {
@@ -893,7 +893,7 @@ exports['qb-target']:AddBoxZone("Armory", vector3(482.54, -994.72, 30.69), 0.6, 
 exports['qb-target']:AddBoxZone("Armory1", vector3(485.4, -994.81, 30.69), 0.6, 1, {
     name = "Armory1",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ = 29.69,
     maxZ = 32.69,
     }, {
@@ -950,7 +950,7 @@ exports['qb-target']:AddBoxZone("Trash1", vector3(442.47, -983.19, 30.69), 0.4, 
 exports['qb-target']:AddBoxZone("bossmrpd", vector3(461.51, -986.33, 30.69), 0.5, 0.5, {
     name = "bossmrpd",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ=30.59,
     maxZ=30.79
     }, {
@@ -969,7 +969,7 @@ exports['qb-target']:AddBoxZone("bossmrpd", vector3(461.51, -986.33, 30.69), 0.5
 exports['qb-target']:AddBoxZone("policeoutfits", vector3(460.2, -999.76, 30.69), 0.55, 1.05, {
     name = "policeoutfits",
     heading = 0,
-    debugpoly = false,
+    debugPoly = false,
     minZ=29.69,
     maxZ=30.69
     }, {

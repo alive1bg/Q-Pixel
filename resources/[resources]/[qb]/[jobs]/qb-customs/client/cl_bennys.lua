@@ -760,9 +760,8 @@ function enterLocation1()
         DisplayMenuContainer(true)
         PlaySoundFrontend(-1, "OK", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
     end)
-    TriggerEvent('close:admin')
 
-    isPlyInBennys = true
+    isPlyInBennys = false
 end
 
 
@@ -1002,7 +1001,7 @@ RegisterNetEvent('qb-customs:client:repair', function()
                 end)
             end, function() -- Cancel
                 QBCore.Functions.Notify("Canceled..", "error")
-            end)
+            end, "fa-solid fa-wrench")
         end
     else
         Wait(2000)

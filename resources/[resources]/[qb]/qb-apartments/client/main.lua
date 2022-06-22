@@ -170,7 +170,7 @@ local function EnterApartment(house, apartmentId, new)
     exports['qb-target']:AddBoxZone("ApartmentStash", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z), 1.2, 1.2, { 
         name = "ApartmentStash", 
         heading=270, 
-        debugpoly = false,
+        debugPoly = false,
         minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z-1,
         maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z+1, 
         }, {
@@ -188,7 +188,7 @@ local function EnterApartment(house, apartmentId, new)
     exports['qb-target']:AddBoxZone("ApartmentClothing", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.clothes.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z), 1.6, 1.6, { 
         name = "ApartmentClothing", 
         heading=270, 
-        debugpoly = false,
+        debugPoly = false,
         minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z-1, 
         maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z+2, 
         }, {
@@ -206,7 +206,7 @@ local function EnterApartment(house, apartmentId, new)
     exports['qb-target']:AddBoxZone("ApartMentLogout", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z), 1.6, 1.6, { 
         name = "ApartMentLogout", 
         heading=270, 
-        debugpoly = false,
+        debugPoly = false,
         minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z-1, 
         maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z+2, 
         }, {
@@ -224,7 +224,7 @@ local function EnterApartment(house, apartmentId, new)
     exports['qb-target']:AddBoxZone("ApartmentExit", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z), 1.6, 1.6, {
         name = "ApartmentExit", 
         heading=270, 
-        debugpoly = false,
+        debugPoly = false,
         minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z-1, 
         maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z+2, 
         }, {
@@ -243,7 +243,7 @@ end
 exports['qb-target']:AddCircleZone("enterappartments", vector3(-269.79, -961.35, 31.52), 0.21, {
     name = "enterappartments",
     useZ=false,
-    debugpoly = false,
+    debugPoly = false,
     }, {
     options = {
         {

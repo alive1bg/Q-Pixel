@@ -55,8 +55,8 @@ RegisterNetEvent('qb-garage:server:updateVehicleStatus', function(fuel, engine, 
     end
 end)
 
-RegisterNetEvent('qb-garages:server:SaveSharedVehicle', function(plate, vehicle, category, hash, faction, garage, mods, noslevel, hasnitro, wheelfit)
-    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods, noslevel, hasnitro, wheelfit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, mods, noslevel, hasnitro, wheelfit})
+RegisterNetEvent('qb-garages:server:SaveSharedVehicle', function(plate, vehicle, category, hash, faction, garage, mods)
+    exports.oxmysql:execute('INSERT INTO shared_vehicles (plate, vehicle, category, hash, fuel, engine, body, faction, garage, mods) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)', {plate, vehicle, category, hash, 100, 1000, 1000, faction, garage, json.encode(mods)})
 end)
 
 RegisterNetEvent('qb-garages:server:SaveVehicleMods', function(plate, vehmods, isShared)
@@ -278,11 +278,6 @@ QBCore.Functions.CreateCallback('qb-garage:server:PayDepotPrice', function(sourc
     end
 end)
 
-QBCore.Commands.Add("addsv", "Add Vehicle into Shared Garage.", {{name="garage", help="Garage Name"}, {name="faction", help="Vehicle Faction (e.g., police)"}, {name="category", help="Vehicle Category Name (e.g., Charger)"}}, true, function(source, args)
+QBCore.Commands.Add("addsv", "Add Vehicle into Shared Garage.", {{name="garage", help="Garage Name"}, {name="faction", help="Vehicle Faction (e.g., police)"}, {name="category", help="Vehicle Category Name (e.g., Interceptors)"}}, true, function(source, args)
     TriggerClientEvent('qb-garages:client:AddSharedVehicle', source, args[1], args[2], args[3])
 end, "admin")
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --
--- Haritha#3955 --

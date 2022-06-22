@@ -13,7 +13,7 @@ end)
 -- exports['qb-target']:AddBoxZone("pawnshopseller", vector3(158.44, -1313.71, 29.36), 1, 1, {
 -- 		name="pawnshopseller",
 -- 		heading=0.0,
--- 		debugpoly = false,
+-- 		debugPoly = false,
 -- 		minZ = 26.36,
 -- 		maxZ = 30.36,
 -- 	  },{

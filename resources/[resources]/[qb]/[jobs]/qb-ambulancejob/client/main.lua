@@ -938,7 +938,7 @@ CreateThread(function()
         exports['qb-target']:AddBoxZone("hospitalCheckin", vector3(307.54, -595.3, 43.28), 0.5, 0.35, {
             name = "hospitalCheckin",
             heading = 337,
-            debugpoly = false,
+            debugPoly = false,
             minZ=43.08,
             maxZ=43.18,
             }, {
@@ -956,7 +956,7 @@ CreateThread(function()
         exports['qb-target']:AddBoxZone("hospitalCheckin", vector3(307.54, -595.3, 43.28), 0.5, 0.35, {
             name = "hospitalCheckin",
             heading = 337,
-            debugpoly = false,
+            debugPoly = false,
             minZ=43.08,
             maxZ=43.18,
             }, {

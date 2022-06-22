@@ -24,6 +24,9 @@ client_scripts {
     'client/cl_bennys.lua'
 }
 
-server_script 'server/sv_bennys.lua'
+server_scripts {
+    'server/sv_bennys.lua',
+    '@oxmysql/lib/MySQL.lua',
+}
 
 lua54 'yes'

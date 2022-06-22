@@ -308,7 +308,7 @@ CreateThread(function()
 exports['qb-target']:AddBoxZone("PrisonCanteenTable1", vector3(1780.78, 2556.42, 45.67), 1.2, 1.2, {
 	name="prisontable 1",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {
@@ -326,7 +326,7 @@ exports['qb-target']:AddBoxZone("PrisonCanteenTable1", vector3(1780.78, 2556.42,
 exports['qb-target']:AddBoxZone("PrisonCanteenTable2", vector3(1789.82, 2556.23, 45.67), 1.2, 1.2, {
 	name="prisontable 2",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {
@@ -344,7 +344,7 @@ exports['qb-target']:AddBoxZone("PrisonCanteenTable2", vector3(1789.82, 2556.23,
 exports['qb-target']:AddBoxZone("PrisonCanteenTable3", vector3(1790.0, 2548.09, 45.67), 1.2, 1.2, {
 	name="prisontable 3",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {
@@ -362,7 +362,7 @@ exports['qb-target']:AddBoxZone("PrisonCanteenTable3", vector3(1790.0, 2548.09, 
 exports['qb-target']:AddBoxZone("PrisonCanteenTable4", vector3(1786.43, 2547.81, 45.67), 4.8, 1.2, {
 	name="prisontable 4",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {
@@ -380,7 +380,7 @@ exports['qb-target']:AddBoxZone("PrisonCanteenTable4", vector3(1786.43, 2547.81,
 exports['qb-target']:AddBoxZone("PrisonCanteenTable5", vector3(1782.23, 2547.65, 45.67), 4.8, 1.2, {
 	name="prisontable 5",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {
@@ -398,7 +398,7 @@ exports['qb-target']:AddBoxZone("PrisonCanteenTable5", vector3(1782.23, 2547.65,
 exports['qb-target']:AddBoxZone("PrisonCanteenTable6", vector3(1777.8, 2547.9, 45.67), 1.2, 1.2, {
 	name="prisontable 6",
 	heading=0,
-	debugpoly = false,
+	debugPoly = false,
 	minZ=45.37,
 	maxZ=45.57
     }, {

@@ -191,29 +191,35 @@ Config.VehicleModifications = {
     ["A"] = {
         ["Turbo"] = false,
         ["XenonHeadlights"] = false,
-        ["Engine"] = -1,
-        ["Brakes"] = -1,
-        ["Transmission"] = -1,
+        ["Engine"] = 0,
+        ["Brakes"] = 0,
+        ["Transmission"] = 0,
         ["Suspension"] = 0,
+        ["Armor"] = 0,
         ["XenonHeadlightsColor"] = 0,
+        --exports['ld-hud']:pursuitMode(true, 1)
     },
     ["A+"] = {
         ["Turbo"] = false,
         ["XenonHeadlights"] = false,
-        ["Engine"] = 2,
-        ["Brakes"] = 1,
-        ["Transmission"] = 2,
+        ["Engine"] = 1,
+        ["Brakes"] = 0,
+        ["Transmission"] = 1,
         ["Suspension"] = 1,
+        ["Armor"] = 1,
         ["XenonHeadlightsColor"] = 0,
+        --exports['ld-hud']:pursuitMode(true, 2)
     },
     ["S"] = {
         ["Turbo"] = true,
-        ["XenonHeadlights"] = false,
-        ["Engine"] = 3,
+        ["XenonHeadlights"] = true,
+        ["Engine"] = 2,
         ["Brakes"] = 1,
         ["Transmission"] = 2,
         ["Suspension"] = 2,
+        ["Armor"] = 2,
         ["XenonHeadlightsColor"] = 0,
+        --exports['ld-hud']:pursuitMode(true, 3)
     },
     ["S+"] = {
         ["Turbo"] = true,
@@ -222,85 +228,117 @@ Config.VehicleModifications = {
         ["Brakes"] = 2,
         ["Transmission"] = 3,
         ["Suspension"] = 3,
-        ["XenonHeadlightsColor"] = 1,
+        ["Armor"] = 3,
+        ["XenonHeadlightsColor"] = 0,
+        --exports['ld-hud']:pursuitMode(true, 4)
     }
 }
 
 -- To add more cars just copy an existing one and adjust the values correspondingly (don't forget to change the model name aswell, e.g. police3) 
 -- You can remove or add any value that is a float, integer or vector3 (for available values check handling.meta) but make sure to do so for every mode / class of that vehicle, otherwise the value won't be reset
 Config.VehiclesConfig = {
-    ["police3"] = {
+    ["npolvic"] = {
         ["A"] = {
-            ["fDriveInertia"] = 1.000000,
-            ["fBrakeForce"] = 1.700000,
-            ["fInitialDriveMaxFlatVel"] = 130.000000,
-            ["fSteeringLock"] = 44.300000,
-            ["fInitialDriveForce"] = 0.270000
-        },
-        ["A+"] = {
-            ["fDriveInertia"] = 1.100000,
-            ["fBrakeForce"] = 2.000000,
-            ["fInitialDriveMaxFlatVel"] = 150.000000,
-            ["fSteeringLock"] = 45.200000,
-            ["fInitialDriveForce"] = 0.32
-        },
-        ["S"] = {
-            ["fDriveInertia"] = 1.2,
-            ["fBrakeForce"] = 3.5,
-            ["fInitialDriveMaxFlatVel"] = 170.0,
-            ["fSteeringLock"] = 43.3,
-            ["fInitialDriveForce"] = 0.37
-        },
-        ["S+"] = {
-            ["fDriveInertia"] = 1.3,
-            ["fBrakeForce"] = 4.5,
-            ["fInitialDriveMaxFlatVel"] = 190.0,
-            ["fSteeringLock"] = 40.3,
-            ["fInitialDriveForce"] = 0.45
-        }
-    },
-    ["pd3"] = {
-        ["A"] = {
-            ["fDriveInertia"] = 1.000000,
-            ["fBrakeForce"] = 1.700000,
-            ["fInitialDriveMaxFlatVel"] = 130.000000,
-            ["fSteeringLock"] = 43.300000,
-            ["fInitialDriveForce"] = 0.270000
-        },
-        ["A+"] = {
-            ["fDriveInertia"] = 1.100000,
-            ["fBrakeForce"] = 2.000000,
-            ["fInitialDriveMaxFlatVel"] = 150.000000,
-            ["fSteeringLock"] = 44.200000,
-            ["fInitialDriveForce"] = 0.32
-        },
-        ["S"] = {
-            ["fDriveInertia"] = 1.2,
-            ["fBrakeForce"] = 3.5,
-            ["fInitialDriveMaxFlatVel"] = 170.0,
-            ["fSteeringLock"] = 45.3,
-            ["fInitialDriveForce"] = 0.37
-        },
-        ["S+"] = {
-            ["fDriveInertia"] = 1.3,
-            ["fBrakeForce"] = 4.5,
-            ["fInitialDriveMaxFlatVel"] = 190.0,
-            ["fSteeringLock"] = 46.3,
-            ["fInitialDriveForce"] = 0.45
-        }
-    },
-    ["lspd18char"] = {
-        ["A"] = {
-            ["fDriveInertia"] = 1.000000,
-            ["fBrakeForce"] = 1.700000,
-            ["fInitialDriveMaxFlatVel"] = 130.000000,
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.7,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
             ["fSteeringLock"] = 50.0,
-            ["fInitialDriveForce"] = 0.270000
+            ["fInitialDriveForce"] = 0.27
         },
         ["A+"] = {
-            ["fDriveInertia"] = 1.100000,
-            ["fBrakeForce"] = 2.000000,
-            ["fInitialDriveMaxFlatVel"] = 150.000000,
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
+            ["fSteeringLock"] =50.0,
+            ["fInitialDriveForce"] = 0.32
+        },
+        ["S"] = {
+            ["fDriveInertia"] = 1.2,
+            ["fBrakeForce"] = 3.5,
+            ["fInitialDriveMaxFlatVel"] = 170.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.47
+        },
+        ["S+"] = {
+            ["fDriveInertia"] = 1.3,
+            ["fBrakeForce"] = 4.5,
+            ["fInitialDriveMaxFlatVel"] = 170.0,
+            ["fSteeringLock"] = 55.0,
+            ["fInitialDriveForce"] = 0.53
+        }
+    },
+    ["npolexp"] = {
+        ["A"] = {
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.7,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
+            ["fSteeringLock"] = 46.0,
+            ["fInitialDriveForce"] = 0.10
+        },
+        ["A+"] = {
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 140.0,
+            ["fSteeringLock"] = 46.0,
+            ["fInitialDriveForce"] = 0.15
+        },
+        ["S"] = {
+            ["fDriveInertia"] = 1.2,
+            ["fBrakeForce"] = 3.5,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
+            ["fSteeringLock"] = 46.0,
+            ["fInitialDriveForce"] = 0.20
+        },
+        ["S+"] = {
+            ["fDriveInertia"] = 1.3,
+            ["fBrakeForce"] = 4.5,
+            ["fInitialDriveMaxFlatVel"] = 160.0,
+            ["fSteeringLock"] = 46.0,
+            ["fInitialDriveForce"] = 0.25
+        }
+    },
+    ["npolchar"] = {
+        ["A"] = {
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.7,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.10
+        },
+        ["A+"] = {
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
+            ["fSteeringLock"] =50.0,
+            ["fInitialDriveForce"] = 0.15
+        },
+        ["S"] = {
+            ["fDriveInertia"] = 1.2,
+            ["fBrakeForce"] = 3.5,
+            ["fInitialDriveMaxFlatVel"] = 160.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.25
+        },
+        ["S+"] = {
+            ["fDriveInertia"] = 1.3,
+            ["fBrakeForce"] = 4.5,
+            ["fInitialDriveMaxFlatVel"] = 170.0,
+            ["fSteeringLock"] = 55.0,
+            ["fInitialDriveForce"] = 0.35
+        }
+    },
+    ["npolstang"] = {
+        ["A"] = {
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.7,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.27
+        },
+        ["A+"] = {
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
             ["fSteeringLock"] =50.0,
             ["fInitialDriveForce"] = 0.32
         },
@@ -314,14 +352,74 @@ Config.VehiclesConfig = {
         ["S+"] = {
             ["fDriveInertia"] = 1.3,
             ["fBrakeForce"] = 4.5,
-            ["fInitialDriveMaxFlatVel"] = 190.0,
-            ["fSteeringLock"] =55.0,
-            ["fInitialDriveForce"] = 0.45
+            ["fInitialDriveMaxFlatVel"] = 180.0,
+            ["fSteeringLock"] = 55.0,
+            ["fInitialDriveForce"] = 0.80
+        }
+    },
+    ["npolchal"] = {
+        ["A"] = {
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.7,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.27
+        },
+        ["A+"] = {
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.32
+        },
+        ["S"] = {
+            ["fDriveInertia"] = 1.2,
+            ["fBrakeForce"] = 3.5,
+            ["fInitialDriveMaxFlatVel"] = 170.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.37
+        },
+        ["S+"] = {
+            ["fDriveInertia"] = 1.3,
+            ["fBrakeForce"] = 4.5,
+            ["fInitialDriveMaxFlatVel"] = 180.0,
+            ["fSteeringLock"] = 55.0,
+            ["fInitialDriveForce"] = 0.72
+        }
+    },
+    ["npolvette"] = {
+        ["A"] = {
+            ["fDriveInertia"] = 1.0,
+            ["fBrakeForce"] = 1.70,
+            ["fInitialDriveMaxFlatVel"] = 130.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.27
+        },
+        ["A+"] = {
+            ["fDriveInertia"] = 1.1,
+            ["fBrakeForce"] = 2.0,
+            ["fInitialDriveMaxFlatVel"] = 150.0,
+            ["fSteeringLock"] =50.0,
+            ["fInitialDriveForce"] = 0.32
+        },
+        ["S"] = {
+            ["fDriveInertia"] = 1.2,
+            ["fBrakeForce"] = 3.5,
+            ["fInitialDriveMaxFlatVel"] = 170.0,
+            ["fSteeringLock"] = 50.0,
+            ["fInitialDriveForce"] = 0.37
+        },
+        ["S+"] = {
+            ["fDriveInertia"] = 1.3,
+            ["fBrakeForce"] = 4.5,
+            ["fInitialDriveMaxFlatVel"] = 180.0,
+            ["fSteeringLock"] = 55.0,
+            ["fInitialDriveForce"] = 0.67
         }
     },
 }
 
-Config.UseGeneralVehicleConfig = true -- change this if you want every EMERGENCY vehicle to be able to change modes (still restricted by Configs.AuthorizedJobs)
+Config.UseGeneralVehicleConfig = false -- change this if you want every EMERGENCY vehicle to be able to change modes (still restricted by Configs.AuthorizedJobs)
 Config.EmergencyVehiclesOnly = true -- change this if you want EVERY vehicle to be able to change modes (still restricted by Configs.AuthorizedJobs)
 Config.GeneralVehicleConfig = {
     ["A"] = {

@@ -53,7 +53,7 @@ function parseCircle(zone)
   printout = printout .. "CircleZone:Create("
   printout = printout .. "vector3(" .. tostring(round(zone.center.x, 2)) .. ", " .. tostring(round(zone.center.y, 2))  .. ", " .. tostring(round(zone.center.z, 2)) .."), "
   printout = printout .. tostring(zone.radius) .. ", "
-  printout = printout .. "{\n  name=\"" .. zone.name .. "\",\n  useZ=" .. tostring(zone.useZ) .. ",\n  --debugpoly = false\n})\n\n"
+  printout = printout .. "{\n  name=\"" .. zone.name .. "\",\n  useZ=" .. tostring(zone.useZ) .. ",\n  --debugPoly = false\n})\n\n"
   return printout
 end
 
@@ -64,7 +64,7 @@ function parseBox(zone)
   printout = printout .. tostring(zone.length) .. ", "
   printout = printout .. tostring(zone.width) .. ", "
   
-  printout = printout .. "{\n  name=\"" .. zone.name .. "\",\n  heading=" .. zone.heading .. ",\n  --debugpoly = false"
+  printout = printout .. "{\n  name=\"" .. zone.name .. "\",\n  heading=" .. zone.heading .. ",\n  --debugPoly = false"
   if zone.minZ then
     printout = printout .. ",\n  minZ=" .. tostring(round(zone.minZ, 2))
   end

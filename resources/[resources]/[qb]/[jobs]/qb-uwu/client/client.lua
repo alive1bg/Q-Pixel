@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 PlayerJob = {}
 local onDuty = false
-local debug = true
+local debug = false
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
@@ -199,11 +199,18 @@ Citizen.CreateThread(function()
 		  distance = 2.5
 	})
 
-	exports['qb-target']:AddBoxZone("uWuBank", vector3(251.75, 222.17, 106.2), 0.6, 2.0, { name="uWuBank", heading = 340.0, debugPoly=debug, minZ = 105.75, maxZ = 107.29, }, 
-		{ options = { { type = "server", event = "qb-uwu:Tickets:Sell", icon = "fas fa-receipt", label = "Cash in Receipts", job = "uwu" }, },
-		  distance = 2.0
-	})
-	
+	exports['qb-target']:AddTargetModel(`ig_bankman`, {
+        options = {
+            {
+                type = 'server',
+                event = 'qb-uwu:Tickets:Sell',
+                icon = 'fas fa-receipt',
+                label = 'Cash in Receipts',
+				job = 'uwu',
+            },
+        },
+        distance = 2.5
+    })
 end)
 
 RegisterNetEvent('qb-uwu:washHands')

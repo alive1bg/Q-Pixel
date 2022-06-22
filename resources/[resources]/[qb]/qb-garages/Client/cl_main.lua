@@ -889,10 +889,12 @@ RegisterNetEvent('qb-garages:client:AddSharedVehicle', function(garage, faction,
         local curVeh = getVehicleInDirection(coordA, coordB)
         local vehhash = GetEntityModel(curVeh)
         local plate = GetVehicleNumberPlateText(curVeh)
-        local model = nil
+        --local model = GetEntityModel(curVeh)
+        local vehname = GetDisplayNameFromVehicleModel(vehhash):lower()
+        local model = QBCore.Shared.Vehicles[vehname].model
         for k, v in pairs(QBCore.Shared.Vehicles) do
             if vehhash == QBCore.Shared.Vehicles[k].hash then
-                model = QBCore.Shared.Vehicles[k].model  
+                model = QBCore.Shared.Vehicles[k].model
                 break
             end
         end
