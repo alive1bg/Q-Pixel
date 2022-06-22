@@ -186,7 +186,7 @@ AddEventHandler("spikestrips:client:usespikes", function(config)
     Animation()
     Citizen.Wait(1700)
     ClearPedTasksImmediately(PlayerPedId())
-    CreateSpikes(3)
+    CreateSpikes(1)
     TriggerServerEvent("qb-spikes-use")
 end)
 
@@ -260,7 +260,6 @@ Citizen.CreateThread(function()
                 end
             end
         end
-
         Citizen.Wait(0)
     end
 end)
@@ -308,6 +307,7 @@ exports['qb-target']:AddTargetModel(spikestrips, {
             event = "RemoveSpikes",
             icon = "fas fa-hand-holding",
             label = "Pick Up",
+            job = 'police'
         },
     },
     distance = 2.0

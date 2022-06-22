@@ -165,6 +165,22 @@ RegisterNetEvent('QBCore:ToggleDuty', function()
     TriggerClientEvent('QBCore:Client:SetDuty', src, Player.PlayerData.job.onduty)
 end)
 
+RegisterNetEvent('QBCore:oNDuty', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.SetJobDuty(true)
+    TriggerClientEvent('QBCore:Notify', src, Lang:t('info.on_duty'))
+    TriggerClientEvent('QBCore:Client:SetDuty', src, Player.PlayerData.job.onduty)
+end)
+
+RegisterNetEvent('QBCore:oFFDuty', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.SetJobDuty(false)
+    TriggerClientEvent('QBCore:Notify', src, Lang:t('info.off_duty'))
+    TriggerClientEvent('QBCore:Client:SetDuty', src, Player.PlayerData.job.onduty)
+end)
+
 -- Items
 
 RegisterNetEvent('QBCore:Server:UseItem', function(item)

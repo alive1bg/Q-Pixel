@@ -1671,42 +1671,6 @@ QBShared.Items = {
 		["combinable"] = nil,
 		["description"] = "Pet Grooming Kit"
 	},
-	["keepcompanioncoyote"]     = {
-		["name"] = "keepcompanioncoyote",
-		["label"] = "Coyote",
-		["weight"] = 500,
-		["type"] = "item",
-		["image"] = "A_C_Coyote.png",
-		["unique"] = true,
-		["useable"] = true,
-		["shouldClose"] = true,
-		["combinable"] = nil,
-		["description"] = "Coyote is your royal companion!"
-	},
-	["keepcompanionrabbit"]     = {
-		["name"] = "keepcompanionrabbit",
-		["label"] = "Rabbit",
-		["weight"] = 500,
-		["type"] = "item",
-		["image"] = "A_C_Rabbit_01.png",
-		["unique"] = true,
-		["useable"] = true,
-		["shouldClose"] = true,
-		["combinable"] = nil,
-		["description"] = "Rabbit is your royal companion!"
-	},
-	["keepcompanionhen"]        = {
-		["name"] = "keepcompanionhen",
-		["label"] = "Hen",
-		["weight"] = 500,
-		["type"] = "item",
-		["image"] = "A_C_Hen.png",
-		["unique"] = true,
-		["useable"] = true,
-		["shouldClose"] = true,
-		["combinable"] = nil,
-		["description"] = "Hen is your royal companion!"
-	},
 
 	-- HUNTING
 	["meatdeer"] 		 			 	 = {["name"] = "meatdeer",       	    		["label"] = "Deer Horns",	 				["weight"] = 100, 		["type"] = "item", 		["image"] = "deerhorns.png", 			["unique"] = false, 	["useable"] = false, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Deer Horns"},
@@ -1781,4 +1745,23 @@ QBShared.Items = {
 	['chop-transmission'] 	    	 = {['name'] = 'chop-transmission', 	 		['label'] = 'Transmission', 	    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-transmission.png', 	['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
 	['chop-turbo'] 			     	 = {['name'] = 'chop-turbo', 		 	  		['label'] = 'Turbo', 			    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-turbo.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
 	['chop-nos'] 			     	 = {['name'] = 'chop-nos', 			     		['label'] = 'NOS', 		    	    	['weight'] = 500, 		['type'] = 'item', 		['image'] = 'chop-nos.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'change this'},
+
+	-- Custom Weapons
+	['weapon_ak47'] 		 = {['name'] = 'weapon_ak47', 	 	  	['label'] = 'AK-47', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'weapon_assaultrifle.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A rapid-fire, magazine-fed automatic rifle designed for infantry use'},
+	['weapon_de'] 			 = {['name'] = 'weapon_de', 		 	  	['label'] = 'Desert Eagle', 			    ['weight'] = 8000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',			['image'] = 'deagle.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A .50 caliber firearm designed to be held with both hands'},
+	['weapon_fnx45'] 		 = {['name'] = 'weapon_fnx45', 	 	  	['label'] = 'FN FNX-45', 			['weight'] = 7000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',			['image'] = 'weapon_combat-pistol.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A combat version small firearm designed to be held in one hand'},
+	['weapon_glock17'] 				 = {['name'] = 'weapon_glock17', 			 	['label'] = 'PD Glock 17', 				['weight'] = 7000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',			['image'] = 'glock-17.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'PD GUN'},
+	['weapon_m4'] 		 = {['name'] = 'weapon_m4', 	 	  	['label'] = 'PD M4A1', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'weapon_carbinerifle.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A lightweight automatic rifle for the Police'},
+	['weapon_m9'] 				 = {['name'] = 'weapon_m9', 			 	['label'] = 'Beretta M9A3', 				['weight'] = 7000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',			['image'] = 'm1911.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A M91'},
+	['weapon_m70'] 		 = {['name'] = 'weapon_m70', 	 	  	['label'] = 'M70', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'm70.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A rapid-fire, magazine-fed automatic rifle designed for infantry use'},
+	['weapon_m1911'] 			 = {['name'] = 'weapon_m1911', 	 	  	['label'] = 'M1911', 			['weight'] = 7000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',			['image'] = 'browning.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A hefty firearm designed to be held in one hand (or attempted)'},
+	['weapon_uzi'] 			 = {['name'] = 'weapon_uzi', 		 	  	['label'] = 'UZI', 				['weight'] = 10000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SMG',				['image'] = 'uzi.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A handheld lightweight machine gun'},
+	['weapon_mac10'] 			 = {['name'] = 'weapon_mac10', 		 	  	['label'] = 'MAC-10', 				['weight'] = 10000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SMG',				['image'] = 'mac-10.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A handheld lightweight machine gun'},
+	['weapon_mossberg'] 		 = {['name'] = 'weapon_mossberg', 	 	['label'] = 'Mossberg 500', 		['weight'] = 10000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SHOTGUN',			['image'] = 'mossberg500.png', ['unique'] = true, 	['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A sawn-off smoothbore gun for firing small shot at short range'},
+	['weapon_remington'] 			 = {['name'] = 'weapon_remington', 	 	  	['label'] = 'Remington 870', 			['weight'] = 8000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SHOTGUN',			['image'] = 'remington.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A pump-action smoothbore gun for firing small shot at short range'},
+	['weapon_scarh'] 		 = {['name'] = 'weapon_scarh', 	 	['label'] = 'PD SCAR-H', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'scar.png', ['unique'] = true, 	['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'An extremely versatile assault rifle for any combat situation'},
+	['weapon_shiv'] 				 = {['name'] = 'weapon_shiv', 			 	  	['label'] = 'Shiv', 					['weight'] = 3000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'shiv.png', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 10.0,     	['description'] = 'An instrument composed of a blade fixed into a handle, used for cutting or as a weapon'},
+	['weapon_ar15'] 		 = {['name'] = 'weapon_ar15', 	 	  	['label'] = 'PD AR-15', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'weapon_mcx.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A lightweight automatic rifle for the Police'},
+	['weapon_mk14'] 		 = {['name'] = 'weapon_mk14', 	 	  	['label'] = 'PD MK14', 			['weight'] = 23000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SNIPER',			['image'] = 'mk14.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A very accurate single-fire rifle'},
+	['weapon_huntingrifle'] 		 = {['name'] = 'weapon_huntingrifle', 	 	  	['label'] = 'Hunting Rifle', 			['weight'] = 23000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SNIPER',			['image'] = 'huntingrifle.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A very accurate Rifle for hunting'},
 }

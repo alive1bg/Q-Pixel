@@ -254,14 +254,11 @@ AddEventHandler("qb-polyzone:enter", function(zone, data)
             while inZone do
                 if IsPedInAnyVehicle(plyPed, false) and not isWheelFitmentInUse then
                     if not isMenuShowing then
-                        if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 then
+                        if PlayerJob.name == 'tuner' and PlayerJob.grade.level == 4 and onDuty then
                             local plyPos = GetEntityCoords(plyPed, false)
                             local coords = cfg_wheelFitmentPos[zone].coords
                             local heading = cfg_wheelFitmentPos[zone].heading
-                            DrawMarker(20, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 148, 0, 211, 255, true, false, 2, true, nil, nil, false)
                             if isNear(plyPos, coords, 2.0) then
-                                Draw3DText(coords.x, coords.y, coords.z, "[Press ~p~E~w~ - Adjust Wheel Fitment]", 255, 255, 255, 255, 4, 0.45, true, true, true, true, 0, 0, 0, 0, 55)
-
                                 if IsControlJustReleased(1, 38) then -- Key: E
                                     local slider_wWidth = {}
                                     local slider_wSize = {}
