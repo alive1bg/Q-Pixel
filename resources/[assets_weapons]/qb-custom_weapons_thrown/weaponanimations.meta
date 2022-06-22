@@ -50,7 +50,7 @@
           <AimingDownTheBarrel value="true" />
           <WeaponSwapData ref="SWAP_DEFAULT" />
         </Item>
-		<Item key="WEAPON_BOOK">
+		    <Item key="WEAPON_BOOK">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -92,7 +92,7 @@
           <AimingDownTheBarrel value="true" />
           <WeaponSwapData ref="SWAP_DEFAULT" />
         </Item>
-		<Item key="WEAPON_SHOE">
+		    <Item key="WEAPON_CASH">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -134,7 +134,7 @@
           <AimingDownTheBarrel value="true" />
           <WeaponSwapData ref="SWAP_DEFAULT" />
         </Item>
-		<Item key="WEAPON_CASH">
+        <Item key="WEAPON_SHOE">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -187,7 +187,7 @@
       <Fallback>Default</Fallback>
       <WeaponAnimations>
         <Item key="WEAPON_BRICK">
-		  <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
+		      <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -234,15 +234,15 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_idle</FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_idle@p_m_zero@projectile@ball@aim_trans@unholster_to_idle</FPSTransitionFromUnholsterHash>
-	      <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
-	  	  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
+          <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
+          <FPSFidgetClipsetHashes>
+          <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
+          <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
+          <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
           </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_BOOKK">
-		  <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
+		    <Item key="WEAPON_BOOK">
+		      <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -289,14 +289,14 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_idle</FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_idle@p_m_zero@projectile@ball@aim_trans@unholster_to_idle</FPSTransitionFromUnholsterHash>
-	      <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
-	  	  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
+	        <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
+	  	    <FPSFidgetClipsetHashes>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
           </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_SHOE">
+		    <Item key="WEAPON_SHOE">
 		  <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
@@ -344,15 +344,15 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_idle</FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_idle@p_m_zero@projectile@ball@aim_trans@unholster_to_idle</FPSTransitionFromUnholsterHash>
-	      <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
-	  	  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
+	        <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
+	  	    <FPSFidgetClipsetHashes>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
           </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_CASH">
-		  <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
+		    <Item key="WEAPON_CASH">
+		      <MovementOverrideClipSetHash>move_m@generic</MovementOverrideClipSetHash>
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -399,11 +399,11 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_idle</FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_idle@p_m_zero@projectile@ball@aim_trans@unholster_to_idle</FPSTransitionFromUnholsterHash>
-	      <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
-	  	  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
-			<Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
+	        <WeaponClipSetHashForClone>weapons@first_person@aim_idle@remote_clone@projectile@shared@core</WeaponClipSetHashForClone>
+	  	    <FPSFidgetClipsetHashes>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@a</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@b</Item>
+			    <Item>weapons@first_person@aim_idle@p_m_zero@projectile@ball@fidgets@c</Item>
           </FPSFidgetClipsetHashes>
         </Item>
       </WeaponAnimations>
@@ -458,13 +458,13 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash></FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@unholster_to_lt</FPSTransitionFromUnholsterHash>
-		  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
-		  </FPSFidgetClipsetHashes>
+          <FPSFidgetClipsetHashes>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
+          </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_BOOK">
+		    <Item key="WEAPON_BOOK">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -511,13 +511,13 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash></FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@unholster_to_lt</FPSTransitionFromUnholsterHash>
-		  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
-		  </FPSFidgetClipsetHashes>
+          <FPSFidgetClipsetHashes>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
+          </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_SHOE">
+		    <Item key="WEAPON_SHOE">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -564,13 +564,13 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash></FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@unholster_to_lt</FPSTransitionFromUnholsterHash>
-		  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
-		  </FPSFidgetClipsetHashes>
+          <FPSFidgetClipsetHashes>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
+          </FPSFidgetClipsetHashes>
         </Item>
-		<Item key="WEAPON_CASH">
+		    <Item key="WEAPON_CASH">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -617,11 +617,11 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash></FPSTransitionFromLTHash>
           <FPSTransitionFromUnholsterHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@unholster_to_lt</FPSTransitionFromUnholsterHash>
-		  <FPSFidgetClipsetHashes>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
-			<Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
-		  </FPSFidgetClipsetHashes>
+          <FPSFidgetClipsetHashes>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@a</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@b</Item>
+          <Item>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@fidgets@C</Item>
+          </FPSFidgetClipsetHashes>
         </Item>
       </WeaponAnimations>
     </Item>	 
@@ -675,7 +675,7 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_rng</FPSTransitionFromLTHash>
         </Item>
-		<Item key="WEAPON_BOOK">
+		    <Item key="WEAPON_BOOK">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -722,7 +722,7 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_rng</FPSTransitionFromLTHash>
         </Item>
-		<Item key="WEAPON_SHOE">
+		    <Item key="WEAPON_SHOE">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />
@@ -769,7 +769,7 @@
           <FPSTransitionFromRNGHash></FPSTransitionFromRNGHash>
           <FPSTransitionFromLTHash>weapons@first_person@aim_lt@p_m_zero@projectile@misc@shared@aim_trans@lt_to_rng</FPSTransitionFromLTHash>
         </Item>
-		<Item key="WEAPON_CASH">
+		    <Item key="WEAPON_CASH">
           <CoverMovementClipSetHash />
           <CoverMovementExtraClipSetHash />
           <CoverAlternateMovementClipSetHash />

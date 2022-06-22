@@ -51,7 +51,11 @@ Config.WhitelistedWeaponArmed = { -- weapons specifically whitelisted to not sho
     `weapon_pipebomb`,
     `weapon_ball`,
     `weapon_smokegrenade`,
-    `weapon_flare`
+    `weapon_flare`,
+    `weapon_shoe`,
+    `weapon_brick`,
+    `weapon_book`,
+    `weapon_cash`
 }
 
 Config.WhitelistedWeaponStress = {

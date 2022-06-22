@@ -18,7 +18,7 @@ QBShared.Items = {
 	-- THROWABLES
 	['weapon_shoe'] 		     					= {['name'] = 'weapon_shoe', 		 	  	['label'] = 'Stolen Shoes', 			['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'shoes.png', 			['unique'] = false, 		['useable'] = false, 	['description'] = 'Smelly shoes, is that toejam?', ['created'] = nil, ['decay'] = 28.0},
 	['weapon_book'] 		 						= {['name'] = 'weapon_book', 	      		['label'] = 'Dr Seuss Book', 			['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'np_book.png', 			['unique'] = true, 		['useable'] = false, 	['description'] = 'The Cat In The Hat by Dr Seuss.', ['created'] = nil, ['decay'] = 28.0},
-	['weapon_brick'] 		 						= {['name'] = 'weapon_brick', 	      		['label'] = 'Pet Rock', 				['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'np_pet-rock.png', 			['unique'] = true, 		['useable'] = false, 	['description'] = 'Rocky :)', ['created'] = nil, ['decay'] = 28.0},
+	['weapon_brick'] 		 						= {['name'] = 'weapon_brick', 	      		['label'] = 'Pet Rock', 				['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'np_brick.png', 			['unique'] = true, 		['useable'] = false, 	['description'] = 'Rocky :)', ['created'] = nil, ['decay'] = 28.0},
 	['weapon_cash'] 		 						= {['name'] = 'weapon_cash', 	      		['label'] = 'Racks', 					['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'np_cash-stack.png', 			['unique'] = true, 		['useable'] = false, 	['description'] = 'Racks on racks', ['created'] = nil, ['decay'] = 28.0},
 
 	-- PISTOLS

@@ -19,6 +19,7 @@ CONTROLS
 	Auxiliary siren:	Down Arrow	(Phone Up)
 ---------------------------------------------------
 ]]
+local QBCore = exports['qb-core']:GetCoreObject()
 
 local count_bcast_timer = 0
 local delay_bcast_timer = 200
@@ -345,7 +346,7 @@ end)
 
 
 ---------------------------------------------------------------------
-CreateThread(function()
+Citizen.CreateThread(function()
 	while true do
 			
 			CleanupSounds()
@@ -630,6 +631,699 @@ CreateThread(function()
 				end
 			end
 			
-		Wait(0)
+		Citizen.Wait(0)
 	end
+end)
+
+------------- VEHICLE EXTRAS
+------ Vehicle Extras ------
+
+function createExtrasMenu()
+    extrasMenu = {
+        {
+            isHeader = true,
+            header = 'Veh Extras Controls',
+			icon = 'fas fa-car-on'
+        },
+        {
+            header = "Activate Extras",
+			txt = "Turn Extra's On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:client:extrasActMenu",
+            }
+        },
+        {
+            header = "Deactivate Extras",
+			txt = "Turn Extra's Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:client:extrasDeactMenu",
+            }
+        },
+		{
+            header = 'Close Menu',
+            txt = 'Close whole menu',
+			icon = 'fas fa-x',
+            params = {
+                isServer = false,
+                event = exports['qb-menu']:closeMenu(),
+            }
+        },
+    }
+    exports['qb-menu']:openMenu(extrasMenu)
+end
+
+function createExtrasDeactMenu()
+    extrasDeactMenu = {
+        {
+            isHeader = true,
+            header = 'Veh Extras Controls',
+			icon = 'fas fa-car-on'
+        },
+        {
+            header = "Extra 1",
+			txt = "Turn Extra 1 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 1
+            }
+        },
+        {
+            header = "Extra 2",
+			txt = "Turn Extra 2 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 3
+            }
+        },
+        {
+            header = "Extra 3",
+			txt = "Turn Extra 3 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 5
+            }
+        },
+        {
+            header = "Extra 4",
+			txt = "Turn Extra 4 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 7
+            }
+        },
+        {
+            header = "Extra 5",
+			txt = "Turn Extra 5 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 9
+            }
+        },
+        {
+            header = "Extra 6",
+			txt = "Turn Extra 6 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 11
+            }
+        },
+        {
+            header = "Extra 7",
+			txt = "Turn Extra 7 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 13
+            }
+        },
+        {
+            header = "Extra 8",
+			txt = "Turn Extra 8 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 15
+            }
+        },
+        {
+            header = "Extra 9",
+			txt = "Turn Extra 9 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 17
+            }
+        },
+        {
+            header = "Extra 10",
+			txt = "Turn Extra 10 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 19
+            }
+        },
+        {
+            header = "Extra 11",
+			txt = "Turn Extra 11 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 21
+            }
+        },
+        {
+            header = "Extra 12",
+			txt = "Turn Extra 12 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 23
+            }
+        },
+		{
+            header = "Extra 13",
+			txt = "Turn Extra 13 Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 25
+            }
+        },
+		{
+            header = "All Extras",
+			txt = "Turn All Extras Off",
+			icon = 'fas fa-power-off',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 27
+            }
+        },
+        {
+            header = 'Back',
+            txt = 'Go Back to Car Control Menu',
+			icon = 'fas fa-arrow-rotate-left',
+            params = {
+                isServer = false,
+                event = 'qb-vehiclemenu:client:extrasMenu',
+            }
+        },
+		{
+            header = 'Close Menu',
+            txt = '',
+			icon = 'fas fa-x',
+            params = {
+                isServer = false,
+                event = exports['qb-menu']:closeMenu(),
+            }
+        },
+    }
+    exports['qb-menu']:openMenu(extrasDeactMenu)
+end
+
+function createExtrasActMenu()
+    extrasActMenu = {
+        {
+            isHeader = true,
+            header = 'Veh Extras Controls',
+			icon = 'fas fa-car-on'
+        },
+        {
+            header = "Extra 1",
+			txt = "Turn Extra 1 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 2
+            }
+        },
+        {
+            header = "Extra 2",
+			txt = "Turn Extra 2 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 4
+            }
+        },
+        {
+            header = "Extra 3",
+			txt = "Turn Extra 3 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 6
+            }
+        },
+        {
+            header = "Extra 4",
+			txt = "Turn Extra 4 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 8
+            }
+        },
+        {
+            header = "Extra 5",
+			txt = "Turn Extra 6 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 10
+            }
+        },
+        {
+            header = "Extra 6",
+			txt = "Turn Extra 6 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 12
+            }
+        },
+        {
+            header = "Extra 7",
+			txt = "Turn Extra 7 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 14
+            }
+        },
+        {
+            header = "Extra 8",
+			txt = "Turn Extra 8 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 16
+            }
+        },
+        {
+            header = "Extra 9",
+			txt = "Turn Extra 9 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 18
+            }
+        },
+        {
+            header = "Extra 10",
+			txt = "Turn Extra 10 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 20
+            }
+        },
+        {
+            header = "Extra 11",
+			txt = "Turn Extra 11 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 22
+            }
+        },
+        {
+            header = "Extra 12",
+			txt = "Turn Extra 12 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 24
+            }
+        },
+		{
+            header = "Extra 13",
+			txt = "Turn Extra 13 On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 26
+            }
+        },
+		{
+            header = "All Extras",
+			txt = "Turn All Extras On",
+			icon = 'fas fa-plug',
+			params = {
+                isServer = false,
+                event = "qb-vehiclemenu:vehicleExtras",
+                args = 28
+            }
+        },
+        {
+            header = 'Back',
+            txt = 'Go Back to Car Control Menu',
+			icon = 'fas fa-arrow-rotate-left',
+            params = {
+                isServer = false,
+                event = 'qb-vehiclemenu:client:extrasMenu',
+            }
+        },
+		{
+            header = 'Close Menu',
+            txt = '',
+			icon = 'fas fa-x',
+            params = {
+                isServer = false,
+                event = exports['qb-menu']:closeMenu(),
+            }
+        },
+    }
+    exports['qb-menu']:openMenu(extrasActMenu)
+end
+
+RegisterNetEvent('qb-vehiclemenu:vehicleExtras', function(args)
+    local playerPed = PlayerPedId()
+    local veh = GetVehiclePedIsIn(playerPed)
+    local plate = GetVehicleNumberPlateText(veh)
+    if veh ~= nil then
+        if veh == true then
+            QBCore.Functions.Notify('Not In A Vehicle..')
+        else
+            SetVehicleAutoRepairDisabled(veh, true)
+            if DoesExtraExist(veh, 1) then
+                local args = tonumber(args)
+                if args == 1 then 
+                    SetVehicleExtra(veh, 1, 1)
+                    QBCore.Functions.Notify('Extra ' .. 1 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 2 then 
+                    SetVehicleExtra(veh, 1, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 1 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 2) then
+                local args = tonumber(args)
+                if args == 3 then 
+                    SetVehicleExtra(veh, 2, 1)
+                    QBCore.Functions.Notify('Extra ' .. 2 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 4 then 
+                    SetVehicleExtra(veh, 2, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 2 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 3) then
+                local args = tonumber(args)
+                if args == 5 then 
+                    SetVehicleExtra(veh, 3, 1)
+                    QBCore.Functions.Notify('Extra ' .. 3 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 6 then 
+                    SetVehicleExtra(veh, 3, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 3 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 4) then
+                local args = tonumber(args)
+                if args == 7 then 
+                    SetVehicleExtra(veh, 4, 1)
+                    QBCore.Functions.Notify('Extra ' .. 4 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 8 then 
+                    SetVehicleExtra(veh, 4, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 4 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 5) then
+                local args = tonumber(args)
+                if args == 9 then 
+                    SetVehicleExtra(veh, 5, 1)
+                    QBCore.Functions.Notify('Extra ' .. 5 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 10 then 
+                    SetVehicleExtra(veh, 5, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 5 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 6) then
+                local args = tonumber(args)
+                if args == 11 then 
+                    SetVehicleExtra(veh, 6, 1)
+                    QBCore.Functions.Notify('Extra ' .. 6 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 12 then 
+                    SetVehicleExtra(veh, 6, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 6 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 7) then
+                local args = tonumber(args)
+                if args == 13 then 
+                    SetVehicleExtra(veh, 7, 1)
+                    QBCore.Functions.Notify('Extra ' .. 7 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 14 then 
+                    SetVehicleExtra(veh, 7, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 7 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 8) then
+                local args = tonumber(args)
+                if args == 15 then 
+                    SetVehicleExtra(veh, 8, 1)
+                    QBCore.Functions.Notify('Extra ' .. 8 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 16 then 
+                    SetVehicleExtra(veh, 8, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 8 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 9) then
+                local args = tonumber(args)
+                if args == 17 then 
+                    SetVehicleExtra(veh, 9, 1)
+                    QBCore.Functions.Notify('Extra ' .. 9 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 18 then 
+                    SetVehicleExtra(veh, 9, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 9 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 10) then
+                local args = tonumber(args)
+                if args == 19 then 
+                    SetVehicleExtra(veh, 10, 1)
+                    QBCore.Functions.Notify('Extra ' .. 10 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 20 then 
+                    SetVehicleExtra(veh, 10, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 10 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 11) then
+                local args = tonumber(args)
+                if args == 21 then 
+                    SetVehicleExtra(veh, 11, 1)
+                    QBCore.Functions.Notify('Extra ' .. 11 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 22 then 
+                    SetVehicleExtra(veh, 11, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 11 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 12) then
+                local args = tonumber(args)
+                if args == 23 then 
+                    SetVehicleExtra(veh, 12, 1)
+                    QBCore.Functions.Notify('Extra ' .. 12 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 24 then 
+                    SetVehicleExtra(veh, 12, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 12 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+            if DoesExtraExist(veh, 13) then
+                local args = tonumber(args)
+                if args == 25 then 
+                    SetVehicleExtra(veh, 13, 1)
+                    QBCore.Functions.Notify('Extra ' .. 13 .. ' Deactivated', 'error', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasDeactMenu')
+                elseif args == 26 then 
+                    SetVehicleExtra(veh, 13, 0)
+                    SetVehicleAutoRepairDisabled(true)
+                    QBCore.Functions.Notify('Extra ' .. 13 .. ' Activated', 'success', 2500)
+                    TriggerEvent('qb-vehiclemenu:client:extrasActMenu')
+                end
+            end
+			if DoesExtraExist(veh) then
+				local args = tonumber(args)
+				if args == 27 then
+					SetVehicleAutoRepairDisabled(true)
+					QBCore.Functions.Notify('All extras are Deactivated', 'error', 2500)
+					TriggerEvent('qb-vehiclemenu:alldisable')
+				elseif args == 28 then 
+					SetVehicleAutoRepairDisabled(true)
+					QBCore.Functions.Notify('All extras are Activated', 'success', 2500)
+					TriggerEvent('qb-vehiclemenu:allenable')
+				end
+			end
+			if not DoesExtraExist(veh) then
+				QBCore.Functions.Notify('This extra is not present on this vehicle ', 'error', 2500)
+			end
+        end
+    end
+end)
+
+RegisterNetEvent('qb-vehiclemenu:alleExtras', function(args)
+    local playerPed = PlayerPedId()
+    local veh = GetVehiclePedIsIn(playerPed)
+    local plate = GetVehicleNumberPlateText(veh)
+	if veh ~= nil then
+        if veh == true then
+            QBCore.Functions.Notify('Not In A Vehicle..')
+        else
+			local args = tonumber(args)
+			if args == 27 then
+				SetVehicleAutoRepairDisabled(true)
+				QBCore.Functions.Notify('All extras are Deactivated', 'error', 2500)
+				TriggerEvent('qb-vehiclemenu:alldisable')
+			elseif args == 28 then 
+				SetVehicleAutoRepairDisabled(true)
+				QBCore.Functions.Notify('All extras are Activated', 'success', 2500)
+				TriggerEvent('qb-vehiclemenu:allenable')
+			end
+		end
+end)
+
+RegisterNetEvent('qb-vehiclemenu:allenable', function()
+	local playerPed = PlayerPedId()
+    local veh = GetVehiclePedIsIn(playerPed)
+	SetVehicleAutoRepairDisabled(true)
+	if DoesExtraExist(veh, 1) then
+    	SetVehicleExtra(veh, 1, 0)
+	end
+	if DoesExtraExist(veh, 2) then
+		SetVehicleExtra(veh, 2, 0)
+	end
+	if DoesExtraExist(veh, 3) then
+		SetVehicleExtra(veh, 3, 0)
+	end
+	if DoesExtraExist(veh, 4) then
+		SetVehicleExtra(veh, 4, 0)
+	end
+	if DoesExtraExist(veh, 5) then
+		SetVehicleExtra(veh, 5, 0)
+	end
+	if DoesExtraExist(veh, 6) then
+		SetVehicleExtra(veh, 6, 0)
+	end
+	if DoesExtraExist(veh, 7) then
+		SetVehicleExtra(veh, 7, 0)
+	end
+	if DoesExtraExist(veh, 8) then
+		SetVehicleExtra(veh, 8, 0)
+	end
+	if DoesExtraExist(veh, 9) then
+		SetVehicleExtra(veh, 9, 0)
+	end
+	if DoesExtraExist(veh, 10) then
+		SetVehicleExtra(veh, 10, 0)
+	end
+	if DoesExtraExist(veh, 11) then
+		SetVehicleExtra(veh, 11, 0)
+	end
+	if DoesExtraExist(veh, 12) then
+		SetVehicleExtra(veh, 12, 0)
+	end
+	if DoesExtraExist(veh, 13) then
+		SetVehicleExtra(veh, 13, 0)
+	end
+	if DoesExtraExist(veh) then
+		QBCore.Functions.Notify('This extra is not present on this vehicle ', 'error', 2500)
+	end
+end)
+
+RegisterNetEvent('qb-vehiclemenu:alldisable', function()
+	local playerPed = PlayerPedId()
+    local veh = GetVehiclePedIsIn(playerPed)
+	SetVehicleAutoRepairDisabled(true)
+    SetVehicleExtra(veh, 1, 1)
+	SetVehicleExtra(veh, 2, 1)
+	SetVehicleExtra(veh, 3, 1)
+	SetVehicleExtra(veh, 4, 1)
+	SetVehicleExtra(veh, 5, 1)
+	SetVehicleExtra(veh, 6, 1)
+	SetVehicleExtra(veh, 7, 1)
+	SetVehicleExtra(veh, 8, 1)
+	SetVehicleExtra(veh, 9, 1)
+	SetVehicleExtra(veh, 10, 1)
+	SetVehicleExtra(veh, 11, 1)
+	SetVehicleExtra(veh, 12, 1)
+	SetVehicleExtra(veh, 13, 1)
+end)
+
+
+-- events
+RegisterNetEvent('qb-vehiclemenu:client:extrasMenu', function()
+	local PlayerPed = PlayerPedId()		
+	if IsPedInAnyVehicle(PlayerPed, false) then
+		local veh = GetVehiclePedIsUsing(PlayerPed)
+		if GetPedInVehicleSeat(veh, -1) == PlayerPed then
+			if GetVehicleClass(veh) == 18 then
+				createExtrasMenu()
+				exports['qb-menu']:openMenu(extrasMenu)
+			else
+				QBCore.Functions.Notify('Thats not emergency vehicle', 'error', 2500)
+			end
+		else
+			QBCore.Functions.Notify('You have to be on driver seat', 'error', 2500)
+		end
+	end
+end)
+
+RegisterNetEvent('qb-vehiclemenu:client:extrasActMenu', function()
+    createExtrasActMenu()
+    exports['qb-menu']:openMenu(extrasActMenu)
+end)
+
+RegisterNetEvent('qb-vehiclemenu:client:extrasDeactMenu', function()
+    createExtrasDeactMenu()
+    exports['qb-menu']:openMenu(extrasDeactMenu)
 end)

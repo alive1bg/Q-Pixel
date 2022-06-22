@@ -141,7 +141,7 @@ rootMenuConfig =  {
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
-        subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar"}
+        subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar", "vehicle:extras"}
     },
     {
         id = "PoliceObjects",
@@ -375,6 +375,11 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and IsPedInAnyVehicle(PlayerPedId(), false))
        end,
+    },
+    ['vehicle:extras'] = {
+        title = 'Toggle Extras',
+        icon = '#vehicle-options-vehicle',
+        functionName = "qb-vehiclemenu:client:extrasMenu"
     },
     ['vehicle:menu'] = {
         title = 'Vehicle Menu',

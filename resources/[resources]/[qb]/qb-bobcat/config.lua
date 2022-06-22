@@ -17,7 +17,6 @@ Config.Explosives = {
     "weapon_bzgas",
     "weapon_molotov",
     "weapon_stickybomb",
-
 }
 
 Config.Rifles = {
