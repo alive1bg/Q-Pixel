@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `apartments` (
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -51,6 +51,20 @@ CREATE TABLE IF NOT EXISTS `bans` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table arp3_0.barnfind
+CREATE TABLE IF NOT EXISTS `barnfind` (
+  `owner` varchar(250) DEFAULT NULL,
+  `model` varchar(250) DEFAULT NULL,
+  `copper` int(11) DEFAULT NULL,
+  `aluminum` int(11) DEFAULT NULL,
+  `steel` int(11) DEFAULT NULL,
+  `plastic` int(11) DEFAULT NULL,
+  `glass` int(11) DEFAULT NULL,
+  `rubber` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table arp3_0.boosting
 CREATE TABLE IF NOT EXISTS `boosting` (
   `#` int(11) NOT NULL AUTO_INCREMENT,
@@ -60,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `boosting` (
   `vin` int(11) DEFAULT NULL,
   PRIMARY KEY (`#`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -136,13 +150,26 @@ CREATE TABLE IF NOT EXISTS `dpkeybinds` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table arp3_0.dream_jobs
+CREATE TABLE IF NOT EXISTS `dream_jobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `experience` int(11) NOT NULL,
+  `pickaxe` int(11) NOT NULL,
+  `job` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `first_time` varchar(255) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table arp3_0.ethicalpixel_admin
 CREATE TABLE IF NOT EXISTS `ethicalpixel_admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` varchar(50) DEFAULT NULL,
   `favorite` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`favorite`)),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -244,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `management_funds` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `job_name` (`name`) USING BTREE,
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -607,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   KEY `id` (`id`),
   KEY `last_updated` (`last_updated`),
   KEY `license` (`license`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -671,7 +698,7 @@ CREATE TABLE IF NOT EXISTS `player_mails` (
   `button` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `citizenid` (`citizenid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -706,7 +733,7 @@ CREATE TABLE IF NOT EXISTS `player_vehicles` (
   KEY `plate` (`plate`),
   KEY `citizenid` (`citizenid`),
   KEY `license` (`license`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -759,7 +786,7 @@ CREATE TABLE IF NOT EXISTS `shared_vehicles` (
   KEY `category` (`category`),
   KEY `garage` (`garage`),
   KEY `state` (`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -770,7 +797,7 @@ CREATE TABLE IF NOT EXISTS `stashitems` (
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`stash`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -786,7 +813,7 @@ CREATE TABLE IF NOT EXISTS `transaction_history` (
   `message` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -812,7 +839,7 @@ CREATE TABLE IF NOT EXISTS `users_current` (
   `drawtextures` longtext NOT NULL,
   `proptextures` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -826,7 +853,7 @@ CREATE TABLE IF NOT EXISTS `users_face` (
   `headOverlay` longtext NOT NULL,
   `headStructure` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -838,7 +865,7 @@ CREATE TABLE IF NOT EXISTS `users_hospital_patients` (
   `level` int(11) NOT NULL DEFAULT 0,
   `time` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -871,7 +898,7 @@ CREATE TABLE IF NOT EXISTS `users_motel` (
   `cid` int(11) NOT NULL,
   `building_type` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 
@@ -900,7 +927,7 @@ CREATE TABLE IF NOT EXISTS `users_tattoos` (
   `cid` int(11) NOT NULL DEFAULT 0,
   `tattoos` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
