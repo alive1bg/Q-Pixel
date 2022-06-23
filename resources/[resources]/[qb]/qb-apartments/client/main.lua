@@ -258,7 +258,7 @@ exports['qb-target']:AddCircleZone("enterappartments", vector3(-269.79, -961.35,
         },
         {
             event = "qb-apartments:choose",
-            icon = "far fa-clipboard",
+            icon = "fas fa-power-off",
             label = "Raid apartment",
             job = 'police'
         },
