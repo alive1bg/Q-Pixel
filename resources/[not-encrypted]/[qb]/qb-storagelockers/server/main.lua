@@ -87,10 +87,10 @@ AddEventHandler('qb-storagelockers:server:createPassword', function(password, lo
 end)
 
 QBCore.Commands.Add("locker", "Create a locker at your current location", {{name = "name", help = "Locker name"}, {name = "price", help = "Locker Price"}, {name = "slots", help = "Slots - suggested 30"}, {name = "capactiy", help = "Capacity - suggested 5,000,000"} }, true, function(source, args)
---    local PlayerData = QBCore.Functions.GetPlayerData()
---    local PlayerJob = PlayerData.job.name
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
     local coords = GetEntityCoords(GetPlayerPed(source))
---    if PlayerData.job.name == 'realestate' then
+    if Player.PlayerData.job.name == 'realestate' then
         name = args[1]
         price = args[2]
         slots = args[3]
@@ -109,5 +109,7 @@ QBCore.Commands.Add("locker", "Create a locker at your current location", {{name
         currentConfig[name] = newlocker
         SaveResourceFile(GetCurrentResourceName(), "lockers.json", json.encode(currentConfig), -1)
         TriggerClientEvent('qb-storagelockers:client:FetchConfig', -1)
---    end
+    else
+        TriggerClientEvent("QBCore:Notify", 'You are not Real Estate Agent!', "error", 5500)
+    end
 end)

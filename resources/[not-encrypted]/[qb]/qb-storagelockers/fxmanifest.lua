@@ -3,10 +3,10 @@
 fx_version 'cerulean'
 game 'gta5'
 
-lua54 'yes'
+description 'shanks-storagelockers'
+version '1.0.0'
+authour 'Sam Shanks'
 
-escrow_ignore {
-}
 
 ui_page 'html/index.html'
 

@@ -97,24 +97,18 @@ end)
 RegisterNetEvent('qb-storagelockers:buystorage')
 AddEventHandler('qb-storagelockers:buystorage', function()
     local dialog = exports['qb-input']:ShowInput({
-        header = "Create Password",
+        header = "Create Passcode",
         submitText = "Submit",
+        info = "Passcode for your storage",
         inputs = {
             {
-                text = "Password", -- text you want to be displayed as a place holder
+                text = "Passcode", -- text you want to be displayed as a place holder
                 name = "password", -- name of the input should be unique otherwise it might override
                 type = "password", -- type of the input
                 isRequired = true -- Optional [accepted values: true | false] but will not submit the form if no value is inputted
             }
         },
     })
-    --[[local dialog = exports['qb-ui']:OpenInputMenu({
-        {
-            label = 'Create Password',
-            name = 'password',
-            icon = 'pencil-alt',
-        }
-    })]]
     if dialog ~= nil then
         QBCore.Functions.TriggerCallback('qb-storagelockers:server:purchaselocker', function(bankmoney)
             if bankmoney >= currentLocker.price then
@@ -128,24 +122,18 @@ end)
 
 RegisterNetEvent('qb-storagelockers:changePassword')
 AddEventHandler('qb-storagelockers:changePassword', function()
-    --[[local dialog = exports['qb-input']:ShowInput({
-        header = "Change Password",
-        submitText = "Submit",
+    local dialog = exports['qb-input']:ShowInput({
+        header = "Change Passcode",
+        submitText = "Change",
+        info = "Change Storage Passcode",
         inputs = {
             {
-                text = "Password", -- text you want to be displayed as a place holder
+                text = "Passcode", -- text you want to be displayed as a place holder
                 name = "password", -- name of the input should be unique otherwise it might override
                 type = "password", -- type of the input
                 isRequired = true -- Optional [accepted values: true | false] but will not submit the form if no value is inputted
             }
         },
-    })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
-        {
-            label = 'Change Password',
-            name = 'password',
-            icon = 'pencil-alt',
-        }
     })
     if dialog ~= nil then
         TriggerServerEvent("qb-storagelockers:server:changePasscode", dialog.password, lockerName, currentLocker)
@@ -154,24 +142,18 @@ end)
 
 RegisterNetEvent('qb-storagelockers:openStorage')
 AddEventHandler('qb-storagelockers:openStorage', function()
-    --[[local dialog = exports['qb-input']:ShowInput({
-        header = "Storage Password",
+    local dialog = exports['qb-input']:ShowInput({
+        header = "Storage Passcode",
         submitText = "Submit",
+        info = "Without passcode u can't open this storage",
         inputs = {
             {
-                text = "Password", -- text you want to be displayed as a place holder
+                text = "Passcode", -- text you want to be displayed as a place holder
                 name = "password", -- name of the input should be unique otherwise it might override
                 type = "password", -- type of the input
                 isRequired = true -- Optional [accepted values: true | false] but will not submit the form if no value is inputted
             }
         },
-    })]]
-    local dialog = exports['qb-ui']:OpenInputMenu({
-        {
-            label = 'Storage Password',
-            name = 'password',
-            icon = 'pencil-alt',
-        }
     })
     if dialog ~= nil then
         QBCore.Functions.TriggerCallback('qb-storagelockers:server:getData', function(password)
@@ -200,6 +182,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
     local storages = {
         {
             header = "Locker "..lockername,
+            icon = 'fas fa-user-lock',
             isMenuHeader = true
         }
     }
@@ -208,6 +191,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
         storages[#storages+1] = {
             header = "Purchase",
             txt = "Purchase Locker for $" .. v.price,
+            icon = 'fas fa-dollar-sign',
             params = {
                 event = "qb-storagelockers:client:purchase",
             }
@@ -217,6 +201,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
         storages[#storages + 1] = {
             header = "Open Locker",
             txt = "",
+            icon = 'fas fa-lock',
             params = {
                 event = "qb-storagelockers:client:openLocker",
             }
@@ -227,6 +212,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
         storages[#storages + 1] = {
             header = "Change Passcode",
             txt = "",
+            icon = 'fas fa-pencil',
             params = {
                 event = "qb-storagelockers:client:changePasscode", 
             }
@@ -236,6 +222,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
         storages[#storages + 1] = {
             header = "Sell Locker",
             txt = "",
+            icon = 'fab fa-paypal',
             params = {
                 event = "qb-storagelockers:client:sellLocker",
                 args = {
@@ -250,6 +237,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
         storages[#storages + 1] = {
             header = "Raid Locker",
             txt = "",
+            icon = 'fas fa-power-off',
             params = {
                 event = "qb-storagelockers:client:raidLocker", 
                 args = {
@@ -263,6 +251,7 @@ AddEventHandler("qb-storagelockers:client:interact", function(k, v)
     storages[#storages+1] = {
         header = "Close Menu",
         txt = "",
+        icon = 'fas fa-xmark',
         params = {
             event = exports['qb-menu']:closeMenu()
         }
@@ -279,7 +268,7 @@ end)
 RegisterNetEvent('qb-storagelockers:client:changePasscode')
 AddEventHandler('qb-storagelockers:client:changePasscode', function()
     TriggerEvent("qb-storagelockers:changePassword")
-    QBCore.Functions.Notify("Please set new password")
+    QBCore.Functions.Notify("Please set new passcode")
 end)
 
 RegisterNetEvent('qb-storagelockers:client:raidLocker')
@@ -315,7 +304,7 @@ RegisterNetEvent('qb-storagelockers:client:purchase') --trigger event after nh-c
 AddEventHandler('qb-storagelockers:client:purchase', function()
     --add the money check here instead
     TriggerEvent("qb-storagelockers:buystorage")
-    QBCore.Functions.Notify("Please set a password")
+    QBCore.Functions.Notify("Please set a passcode")
 end)
 
 RegisterNetEvent('qb-storagelockers:client:openLocker') --trigger event after nh-context open locker button. Opens the password UI for the locker
