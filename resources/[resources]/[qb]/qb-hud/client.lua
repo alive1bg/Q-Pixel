@@ -1078,11 +1078,14 @@ end)
 
 CreateThread(function()
     while true do
-        Wait(1000)
+        Wait(1500)
         if LocalPlayer.state.isLoggedIn then
             local ped = PlayerPedId()
             if IsPedInAnyVehicle(ped, false) then
                 hasHarness()
+                if seatbeltOn ~= true then
+                    TriggerEvent("InteractSound_CL:PlayOnOne","beltalarm",0.6)
+                end
             end
         end
     end
