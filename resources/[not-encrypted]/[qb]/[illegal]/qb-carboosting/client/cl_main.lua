@@ -131,13 +131,7 @@ AddEventHandler('boosting:CreateContract' , function(shit)
         local class = data.type
         if(HasItem('pixellaptop') == true) then
           if Config['General']["UseNotificationsInsteadOfEmails"] then
-              exports['t-notify']:Alert({
-                style  =  'inform',
-                duration  =  12000,
-                title  =  'Boosting Manager',
-                message  =  "You have recieved a "..class.. " Boosting...",
-                sound  =  true
-            })   
+            TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "You have recieved a "..class.. " Boosting...", 'fas fa-laptop-code', '#00ffd5', 5500)
           else
             RevievedOfferEmail(data.owner, data.type)
           end
@@ -270,13 +264,7 @@ RegisterNUICallback('vin', function(data)
     BNEBoosting['functions'].RemoveBNE(Config['Utils']["VIN"]["BNEPrice"])
     TriggerEvent("boosting:StartContract" , data.id , true)
   else
-    exports['t-notify']:Alert({
-      style  =  'success',
-      duration  =  8000,
-      title  =  'Boosting Manager',
-      message  =  'Not Enough BTC.',
-      sound  =  true
-  })
+    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Not Enough BTC...", 'fas fa-laptop-code', '#00ffd5', 5500)
   end
 end)
 
@@ -293,13 +281,7 @@ AddEventHandler("boosting:DisablerUsed" , function()
   if OnTheDropoffWay then
     local Class = Contracts[startedcontractid].type 
     if (Config['Utils']["Contracts"]["DisableTrackingOnDCB"]) and (Class == "D" or Class == "C" or Class == "B") then
-      exports['t-notify']:Alert({
-        style  =  'inform',
-        duration  =  8000,
-        title  =  'Boosting Manager',
-        message  =  'No Tracker.',
-        sound  =  true
-    })
+      TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "No Tracker.", 'fas fa-laptop-code', '#00ffd5', 5500)
     elseif(vinstarted == false) then
       if(DisablerTimes < 1) then
         DisablerUsed = true
@@ -309,26 +291,13 @@ AddEventHandler("boosting:DisablerUsed" , function()
             DisablerTimes = DisablerTimes + 1
             CallingCops = false
             TriggerServerEvent("boosting:removeblip")
-            exports['t-notify']:Alert({
-              style  =  'success',
-              duration  =  8000,
-              title  =  'Boosting Manager',
-              message  =  'Tracker has been removed.',
-              sound  =  true
-          })
+            TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Tracker has been removed.", 'fas fa-laptop-code', '#00ffd5', 5500)
           elseif(DisablerTimes < 1) then
             Config['Utils']["Blips"]["BlipUpdateTime"] = 7000
             DisablerTimes = DisablerTimes + 1
             TriggerServerEvent("boosting:SetBlipTime")
-            exports['t-notify']:Alert({
-              style  =  'success',
-              duration  =  8000,
-              title  =  'Boosting Manager',
-              message  =  'Success.',
-              sound  =  true
-          })
+            QBCore.Functions.Notify('Success', 'success', 5500)
           end
-         
         end
       end
     end
@@ -340,39 +309,21 @@ AddEventHandler("boosting:DisablerUsed" , function()
         Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
         DisablerTimes = DisablerTimes + 1
         TriggerServerEvent("boosting:SetBlipTime")
-        exports['t-notify']:Alert({
-          style  =  'success',
-          duration  =  8000,
-          title  =  'Boosting Manager',
-          message  =  'Success.',
-          sound  =  true
-      })
+        QBCore.Functions.Notify('Success', 'success', 5500)
       end
     else
       if(DisablerTimes == 1) then
         CallingCops = false
         TriggerServerEvent("boosting:removeblip")
         CanUseComputer = true
-            exports['t-notify']:Alert({
-              style  =  'success',
-              duration  =  8000,
-              title  =  'Boosting Manager',
-              message  =  'Tracker Removed, You can now scratch this vehicle.',
-              sound  =  true
-          })
+        TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Tracker Removed, You can now scratch this vehicle.", 'fas fa-laptop-code', '#00ffd5', 5500)
         if not MainThreadStarted then
           MainThread()
         end
       end
     end
   else
-    exports['t-notify']:Alert({
-      style  =  'inform',
-      duration  =  8000,
-      title  =  'Boosting Manager',
-      message  =  'You are not boosting right now.',
-      sound  =  true
-  })
+    QBCore.Functions.Notify('You are not boosting right now', 'error', 5500)
   end
 end
 end)
@@ -414,14 +365,8 @@ AddEventHandler("boosting:DisplayUI" , function()
 	end
     timetosend = realtimehours..":"..realtimeminutes
     SendNUIMessage({show = 'true' , logo = Config['Utils']["Laptop"]["LogoUrl"] , background = URL, time = timetosend, BNE = BNEBoosting['functions'].GetCurrentBNE().bne , defaultback = Config['Utils']["Laptop"]["DefaultBackground"]})
-  else 
-  exports['t-notify']:Alert({
-    style  =  'inform',
-    duration  =  8000,
-    title  =  'Boosting Manager',
-    message  =  'Please wait 3 senconds the nui is loading.',
-    sound  =  true
-})
+  else
+    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Please wait 3 senconds the nui is loading.", 'fas fa-laptop-code', '#00ffd5', 5500)
     Citizen.Wait(3000)
     NuiLoaded = true
   end
@@ -738,12 +683,7 @@ RegisterNetEvent("boosting:ContractDone")
 AddEventHandler("boosting:ContractDone" , function()
   if CompletedTask then
     QBCore.Functions.Notify(Config['Utils']["Notifications"]["DropOffMsg"], "success", 3500)
-    exports['t-notify']:Alert({
-      style = 'inform', 
-      message = 'Leave the car here, You will be paid',
-      duration = 10000
-  })
-    
+    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Leave the car here, You will be paid", 'fas fa-laptop-code', '#00ffd5', 5500)
     TriggerServerEvent("boosting:removeblip")
     Citizen.Wait(math.random(25000,35000))
     TriggerServerEvent('boosting:finished')
@@ -940,23 +880,11 @@ local ScratchAnim = "car_bomb_mechanic"
 local function AddVehicleToGarage()
   local EntityModel = GetEntityModel(Vehicle)
   local DiplayName = GetDisplayNameFromVehicleModel(EntityModel)
-  exports['t-notify']:Alert({
-    style  =  'success',
-    duration  =  8000,
-    title  =  'Boosting Manager',
-    message  =  'Vin scratch complete.',
-    sound  =  true
-})
-  Citizen.Wait(4000) 
-  exports['t-notify']:Alert({
-    style  =  'success',
-    duration  =  8000,
-    title  =  'Boosting Manager',
-    message  =  'Vehicle now belongs to you, Go park it.',
-    sound  =  true
-})
-    local vehicleProps = QBCore.Functions.GetVehicleProperties(Vehicle)	
-    TriggerServerEvent('boosting:AddVehicle', string.lower(DiplayName), Contracts[startedcontractid].plate, vehicleProps)
+  TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Good Job Vin scratch complete.", 'fas fa-laptop-code', '#00ffd5', 5500)
+  Citizen.Wait(4000)
+  TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Vehicle now belongs to you, Go park it.", 'fas fa-laptop-code', '#00ffd5', 5500)
+  local vehicleProps = QBCore.Functions.GetVehicleProperties(Vehicle)	
+  TriggerServerEvent('boosting:AddVehicle', string.lower(DiplayName), Contracts[startedcontractid].plate, vehicleProps)
   vinstarted = false
   CanScratchVehicle = false
   table.remove(Contracts , startedcontractid)
@@ -979,22 +907,10 @@ AddEventHandler("boosting:client:UseComputer" , function()
         TriggerEvent('boosting:client:2ndUseComputer')
       end, function() -- Cancel
         StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-         exports['t-notify']:Alert({
-      style  =  'error',
-      duration  =  4000,
-      title  =  'Boosting Manager',
-      message  =  'Failed.',
-      sound  =  true
-  })
+        QBCore.Functions.Notify("You Failed.", "error", 5500)
     end)
   else
-    exports['t-notify']:Alert({
-      style  =  'error',
-      duration  =  4000,
-      title  =  'Boosting Manager',
-      message  =  'You cannot use this.',
-      sound  =  true
-  })
+    QBCore.Functions.Notify("You cannot use this.", "error", 5500)
   end
 end)
 
@@ -1011,23 +927,11 @@ AddEventHandler("boosting:client:2ndUseComputer" , function()
       flags = 16,
     }, {}, {}, function() -- Done
       CanScratchVehicle = true
-      exports['t-notify']:Alert({
-        style  =  'success',
-        duration  =  12000,
-        title  =  'Boosting Manager',
-        message  =  'Go to the vehicle and scratch the VIN.',
-        sound  =  true
-    })
+      TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Go to the vehicle and scratch the VIN.", 'fas fa-laptop-code', '#00ffd5', 5500)
       CanUseComputer = false
     end, function() -- Cancel
       StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-      exports['t-notify']:Alert({
-        style  =  'error',
-        duration  =  8000,
-        title  =  'Boosting Manager',
-        message  =  'Failed.',
-        sound  =  true
-    })
+      QBCore.Functions.Notify("You Failed.", "error", 5500)
   end)
 end)
 
@@ -1049,13 +953,7 @@ AddEventHandler("boosting:client:ScratchVehicle" , function()
       CallingCops = false
     end, function() -- Cancel
       StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-      exports['t-notify']:Alert({
-        style  =  'error',
-        duration  =  8000,
-        title  =  'Boosting Manager',
-        message  =  'Failed.',
-        sound  =  true
-    })
+      QBCore.Functions.Notify("You Failed.", "error", 5500)
   end)
 end)
 
