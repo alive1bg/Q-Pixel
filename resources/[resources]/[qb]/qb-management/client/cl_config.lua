@@ -25,6 +25,9 @@ Config.BossMenus = {
     ['tuner'] = {
         vector3(125.4, -3014.79, 7.04),
     },
+    ['hayesauto'] = {
+        vector3(-1427.635, -458.2952, 35.909709),
+    },
 }
 
 Config.BossMenuZones = {
@@ -48,6 +51,9 @@ Config.BossMenuZones = {
     },
     ['tuner'] = {
         { coords = vector3(125.4, -3014.79, 7.04), length = 0.35, width = 0.35, heading = 0, minZ = 6.84, maxZ = 7.14 },
+    },
+    ['hayesauto'] = {
+        { coords = vector3(-1427.34, -458.78, 35.91), length = 2.6, width = 2.2, heading = 32, minZ = 34.91, maxZ = 37.51 },
     },
 }
 
