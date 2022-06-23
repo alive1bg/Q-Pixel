@@ -71,6 +71,18 @@ RegisterCommand('mdt', function()
     end
 end, false)
 
+RegisterNetEvent('mdt:OpenMDT', function()
+    local plyPed = PlayerPedId()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    if not PlayerData.metadata["isdead"] and not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["ishandcuffed"] and not IsPauseMenuActive() then
+        if GetJobType(PlayerData.job.name) ~= nil then
+            TriggerServerEvent('mdt:server:openMDT')
+        end
+    else
+        QBCore.Functions.Notify("Can't do that!", "error")
+    end
+end)
+
 Citizen.CreateThread(function()
     TriggerEvent('chat:addSuggestion', '/mdt', 'Open the emergency services MDT', {})
 end)
