@@ -25,7 +25,7 @@ end)
 
 
 function isPD(job)
-    return job == "police"
+    return job == "police" or job == "sasp" or job == "saspr" or job == "bcso" or job == "sdso" or job == "pbso"
 end
 
 function isDR(job)

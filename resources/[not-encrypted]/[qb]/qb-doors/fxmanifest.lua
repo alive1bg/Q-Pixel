@@ -5,12 +5,6 @@ games {
     'rdr3'
 }
 
-lua54 'yes'
-
-escrow_ignore {
-	'server/*.lua'
-}
-
 client_scripts {
 	'client_init.lua',
 	'client/cl_*.lua'

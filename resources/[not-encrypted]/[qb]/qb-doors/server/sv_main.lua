@@ -180,7 +180,7 @@ local AllDoors = {
 	[163] = {id = 163, active = true, model = 1028191914, coords = vector3(1769.170, 2613.576, 46.15020), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_SINGLE_DOOR_UPPER
 	[164] = {id = 164, active = true, model = 1028191914, coords = vector3(1769.167, 2619.262, 46.15020), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_SINGLE_DOOR_UPPER
 	[165] = {id = 165, active = true, model = -1023447729, coords = vector3(735.19820, 132.41220, 80.90654), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOONE"] = true}}}, --POWERSTATION DOOR
---Pillbox Garage Doors	
+	--Pillbox Garage Doors	
 	[166] = {id = 166, active = true, model = -820650556, coords = vector3(336.89230, -565.49120, 31.75273), automatic = {distance = 5.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["DR"] = true}}, keyFob = true}, --garage_door_right
 	[167] = {id = 167, active = true, model = -820650556, coords = vector3(329.74830, -562.89590, 31.75383), automatic = {distance = 5.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["DR"] = true}}, keyFob = true}, --garage_door_left
 	--Import car shop
@@ -191,7 +191,7 @@ local AllDoors = {
 	[171] = {id = 171, active = true, model = 390840000, coords = vector3(124.82060, -1292.484400, 29.43452), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_BASEMENT
 	[172] = {id = 172, active = true, model = 390840000, coords = vector3(130.26640, -1296.22700, 26.44135), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_BASEMENT_OFFICE
 	[173] = {id = 173, active = true, model = 390840000, coords = vector3(134.96960, -1290.40500, 29.42340), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_STORAGE_TO_BATHROOM
---Bahama Mamas
+	--Bahama Mamas
 	[174] = {id = 174, active = true, model = -1747430008, coords = vector3(-1369.03800, -616.02820, 30.46988), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}}, --BAHAMA_MAMAS_BOSSMAN_OFFICE_LEFT
 	[175] = {id = 175, active = true, model = -1747430008, coords = vector3(-1370.71500, -617.11790, 30.46937), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}}, --BAHAMA_MAMAS_BOSSMAN_OFFICE_RIGHT
 	[176] = {id = 176, active = true, model = 401003935, coords = vector3(-1371.19500, -607.16190, 30.86444), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}}, --BAHAMA_MAMAS_BOSSMAN_RESTRICTED_ENTRANCE
@@ -200,34 +200,34 @@ local AllDoors = {
 	[179] = {id = 179, active = true, model = 401003935, coords = vector3(-1393.30500, -624.95420, 30.46850), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}}, --BAHAMA_MAMAS_GARAGE_DOOR_CLUB_ENTRANCE
 	[180] = {id = 180, active = true, model = -822900180, coords = vector3(-1394.17300, -635.75740, 29.61153), automatic = {distance = 5.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}, keyFob = true}, --BAHAMA_MAMAS_GARAGE_SLIDEY
 	[181] = {id = 181, active = true, model = -2003105485, coords = vector3(-1391.63600, -640.34480, 28.87561), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["bahama"] = true}}}, --BAHAMA_MAMAS_GARAGE_DOOR
---Beanmachine
+	--Beanmachine
 	[182] = {id = 182, active = true, model = 736699661, coords = vector3(-629.79980, 228.98980, 82.04890), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["beanmachine"] = true}}}, --BEANMACHINE_KITCHEN_DOOR
---Burgershot	
+	--Burgershot	
 	[183] = {id = 183, active = true, model = 1050821746, coords = vector3(-1199.03300, -885.16990, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 	[184] = {id = 184, active = true, model = -1270304831, coords = vector3(-1196.53900, -883.48520, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 	[185] = {id = 185, active = true, model = 1050821746, coords = vector3(-1184.89200, -883.33770, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 	[186] = {id = 186, active = true, model = -1270304831, coords = vector3(-1183.20700, -885.83120, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 
---ARCarWash
+	--ARCarWash
 	[187] = {id = 187, active = true, model = -868672903, coords = vector3(179.34400, -1721.60900, 29.51156), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["arcar"] = true}}}, 
 	[188] = {id = 188, active = true, model = 668467214, coords = vector3(163.62240, -1716.16700, 29.44219), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["arcar"] = true}}}, --office
 	[189] = {id = 189, active = true, model = 668467214, coords = vector3(166.45060, -1709.60100, 29.48179), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["arcar"] = true}}}, --office
 	[190] = {id = 190, active = true, model = GetHashKey('v_ilev_fb_doorshortl'), coords = vector3(170.8415, -1722.198, 28.84955), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["arcar"] = true}}}, --door next to register
---Noods	
+	--Noods	
 	[191] = {id = 191, active = true, model = GetHashKey('apache_noodle02_door'), coords = vector3(-1198.877, -1162.307, 7.6961), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["noods"] = true}}}, --front door
 	[192] = {id = 192, active = true, model = -1382408715, coords = vector3(-1186.53600, -1152.83600, 7.81937), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["noods"] = true}}}, --office
 
 	--Casino
-	[193] = {id = 193, active = true, model = 21324050, coords = vector3(923.45050, 42.69615, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[194] = {id = 194, active = true, model = 21324050, coords = vector3(924.78530, 44.82212, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[195] = {id = 195, active = true, model = 21324050, coords = vector3(924.93740, 45.08024, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[196] = {id = 196, active = true, model = 21324050, coords = vector3(926.27120, 47.20670, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[197] = {id = 197, active = true, model = 21324050, coords = vector3(926.43820, 47.46822, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[198] = {id = 198, active = true, model = 21324050, coords = vector3(927.77390, 49.59499, 81.53419), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[199] = {id = 199, active = true, model = 901693952, coords = vector3(930.42280, 33.26310, 81.24268), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[200] = {id = 200, active = true, model = 901693952, coords = vector3(930.01350, 29.90940, 81.24268), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
-	[201] = {id = 201, active = true, model = -1957832210, coords = vector3(936.91220, 2.19366, 77.77723), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}, keyFob = true}, --front door
-	[202] = {id = 202, active = true, model = 1266543998, coords = vector3(951.09560, 27.26886, 71.98338), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["XPC94324"] = true}}}, --front door
+	[193] = {id = 193, active = true, model = 401003935, coords = vector3(994.96, 30.81, 71.47), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[194] = {id = 194, active = true, model = 680601509, coords = vector3(1025.59, 33.29, 69.86), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[195] = {id = 195, active = true, model = 680601509, coords = vector3(1026.28, 32.67, 69.87), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[196] = {id = 196, active = true, model = 680601509, coords = vector3(1018.18, 66.8, 69.86), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[197] = {id = 197, active = true, model = 680601509, coords = vector3(1017.9, 65.96, 69.86), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[198] = {id = 198, active = true, model = 401003935, coords = vector3(991.50073, 24.507802, 71.466896), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[199] = {id = 199, active = true, model = 901693952, coords = vector3(930.42280, 33.26310, 81.24268), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[200] = {id = 200, active = true, model = 901693952, coords = vector3(930.01350, 29.90940, 81.24268), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
+	[201] = {id = 201, active = true, model = -1957832210, coords = vector3(936.91220, 2.19366, 77.77723), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}, keyFob = true}, --front door
+	[202] = {id = 202, active = true, model = 1266543998, coords = vector3(951.09560, 27.26886, 71.98338), automatic = false, lock = 2, forceUnlocked = false, access = {job = {""}, cid = {["MXX80150"] = true}}}, --front door
 	--Beanmachine
 	[203] = {id = 203, active = true, model = -952356348, coords = vector3(-632.14860, 228.41510, 86.49095), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["beanmachine"] = true}}}, --office door
 
@@ -259,10 +259,10 @@ local AllDoors = {
 	[226] = {id = 226, active = true, model = -2023754432, coords = vector3(154.9345, -3017.323, 7.190679), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["tuner"] = true}}, keyFob = false}, --Archies Torture Door 2
 
 	--Hayes
-	[227] = {id = 227, active = true, model = 1715394473, coords = vector3(-1421.11800, -440.27210, 34.90352), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayes"] = true}}, keyFob = true}, --Archies Torture Door 2
-	[228] = {id = 228, active = true, model = 1715394473, coords = vector3(-1427.32600, -444.15160, 34.90352), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayes"] = true}}, keyFob = true}, --Archies Torture Door 2
-	[229] = {id = 229, active = true, model = 1715394473, coords = vector3(-1414.86900, -436.36750, 34.90551), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayes"] = true}}, keyFob = true}, --Archies Torture Door 2
-	[230] = {id = 230, active = true, model = -634936098, coords = vector3(-1434.15500, -448.58610, 36.05923), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayes"] = true}}, keyFob = true}, --Archies Torture Door 2
+	[227] = {id = 227, active = true, model = 1715394473, coords = vector3(-1421.11800, -440.27210, 34.90352), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayesauto"] = true}}, keyFob = true}, --Archies Torture Door 2
+	[228] = {id = 228, active = true, model = 1715394473, coords = vector3(-1427.32600, -444.15160, 34.90352), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayesauto"] = true}}, keyFob = true}, --Archies Torture Door 2
+	[229] = {id = 229, active = true, model = 1715394473, coords = vector3(-1414.86900, -436.36750, 34.90551), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayesauto"] = true}}, keyFob = true}, --Archies Torture Door 2
+	[230] = {id = 230, active = true, model = -634936098, coords = vector3(-1434.15500, -448.58610, 36.05923), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["hayesauto"] = true}}, keyFob = true}, --Archies Torture Door 2
 
 	--Real G Records
 	[231] = {id = 231, active = true, model = -1719935594, coords = vector3(-993.44750, -281.38380, 38.36613), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["DYG28908"] = true, ["ASR68282"] = true}}}, --back door
