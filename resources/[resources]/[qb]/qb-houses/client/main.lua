@@ -515,8 +515,7 @@ local function enterOwnedHouse(house)
     entering = true
     Wait(500)
     TriggerServerEvent('qb-houses:server:SetInsideMeta', house, true)
-    --TriggerEvent('qb-weathersync:client:DisableSync')
-    TriggerEvent('qb-weathersync:client:EnableSync')
+    TriggerEvent('qb-weathersync:client:DisableSync')
     TriggerEvent('qb-weed:client:getHousePlants', house)
     entering = false
     setHouseLocations()
@@ -560,8 +559,7 @@ local function enterNonOwnedHouse(house)
     entering = true
     Wait(500)
     TriggerServerEvent('qb-houses:server:SetInsideMeta', house, true)
-    --TriggerEvent('qb-weathersync:client:DisableSync')
-    TriggerEvent('qb-weathersync:client:EnableSync')
+    TriggerEvent('qb-weathersync:client:DisableSync')
     TriggerEvent('qb-weed:client:getHousePlants', house)
     entering = false
     InOwnedHouse = true
@@ -1190,7 +1188,7 @@ end)
 
 -- Threads
 
-CreateThread(function() -- ORIGINAL THREAD BEFORE GARAGE EDIT
+CreateThread(function()
     Wait(1000)
     TriggerServerEvent('qb-houses:server:setHouses')
     SetClosestHouse()
