@@ -1127,3 +1127,15 @@ AddEventHandler("qb-spikes-remove", function(netid)
     Player.Functions.AddItem('policespikes', 1, false, info) -- set to 1 still pulls the config spawned ammount...
     TriggerClientEvent("qb-spikes-delete", -1, netid) 
 end)
+
+RegisterServerEvent("qb-police:server:license", function(playerId, businessname, issuedate, expiredate)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local info = {}
+        info.citizenname = playerId
+        info.businessname = businessname
+        info.datenumber = issuedate
+        info.expiredate = expiredate
+        Player.Functions.AddItem('certificate', 1, nil, info)
+    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['certificate'], 'add', 1)
+end)

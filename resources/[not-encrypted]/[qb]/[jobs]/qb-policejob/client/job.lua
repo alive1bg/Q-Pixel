@@ -1077,3 +1077,47 @@ AddEventHandler('police:trash1', function(players)
         end
     --end
 end)
+
+RegisterCommand('govlicense', function()
+    if QBCore.Functions.GetPlayerData().job.name =='government' and QBCore.Functions.GetPlayerData().job.onduty then
+        local givelicense = exports["qb-input"]:ShowInput({
+            header = "Create License",
+            submitText = "Give License",
+            inputs = {
+                {
+                    text = "Citizen Name",
+                    name = "playerid",
+                    type = "text",
+                    isRequired = true
+                },
+                {
+                    text = "Business Name",
+                    name = "businessname",
+                    type = "text",
+                    isRequired = true
+                },
+                {
+                    text = "Issue Date",
+                    name = "issuedate",
+                    type = "text",
+                    isRequired = true
+                },
+                {
+                    text = "Expire Date",
+                    name = "expiredate",
+                    type = "text",
+                    isRequired = true
+                }
+            }
+        })
+        if givelicense then
+            if not givelicense.playerid or not givelicense.businessname or not givelicense.issuedate or not givelicense.expiredate then
+                return
+            else
+                TriggerServerEvent("qb-police:server:license", givelicense.playerid, givelicense.businessname, givelicense.issuedate, givelicense.expiredate)
+            end
+        end
+    else
+        QBCore.Functions.Notify("You aren't a government offical", 'error')
+    end
+end)
