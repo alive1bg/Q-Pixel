@@ -1,9 +1,9 @@
 Config = Config or {}
 
 Config.RosterLink = {
-    ['police'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml?gid=1313411342&single=true',
-    ['sasp'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml?gid=857640172&single=true',
-    ['bcso'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml?gid=1723354438&single=true',
+    ['police'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml',
+    ['sasp'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml',
+    ['bcso'] = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpGwc0yHwkr288l2CwTBt_ZTBi4jBtahA0nkDpNZbI2g7eYAMYZMT4ZcFvP1lodw/pubhtml',
     ['ambulance'] = '',
     ['doj'] = '',
 }
