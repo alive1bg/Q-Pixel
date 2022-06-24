@@ -19,6 +19,43 @@
 CREATE DATABASE IF NOT EXISTS `arp3_0` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `arp3_0`;
 
+-- Dumping structure for table arp3_0.adminmenu_admin
+CREATE TABLE IF NOT EXISTS `adminmenu_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` varchar(50) DEFAULT NULL,
+  `favorite` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`favorite`)),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.adminmenu_banned
+CREATE TABLE IF NOT EXISTS `adminmenu_banned` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `steam` varchar(50) DEFAULT NULL,
+  `reason` varchar(50) DEFAULT NULL,
+  `length` varchar(50) DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL,
+  `discord` varchar(50) DEFAULT NULL,
+  `license` varchar(50) DEFAULT NULL,
+  `DisplayName` varchar(50) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table arp3_0.adminmenu_log
+CREATE TABLE IF NOT EXISTS `adminmenu_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Identifier` varchar(50) DEFAULT NULL,
+  `log` longtext DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `date` varchar(50) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table arp3_0.apartments
 CREATE TABLE IF NOT EXISTS `apartments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -160,43 +197,6 @@ CREATE TABLE IF NOT EXISTS `dream_jobs` (
   `first_time` varchar(255) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Data exporting was unselected.
-
--- Dumping structure for table arp3_0.ethicalpixel_admin
-CREATE TABLE IF NOT EXISTS `ethicalpixel_admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` varchar(50) DEFAULT NULL,
-  `favorite` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`favorite`)),
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
--- Data exporting was unselected.
-
--- Dumping structure for table arp3_0.ethicalpixel_admin_banned
-CREATE TABLE IF NOT EXISTS `ethicalpixel_admin_banned` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `steam` varchar(50) DEFAULT NULL,
-  `reason` varchar(50) DEFAULT NULL,
-  `length` varchar(50) DEFAULT NULL,
-  `ip` varchar(50) DEFAULT NULL,
-  `discord` varchar(50) DEFAULT NULL,
-  `license` varchar(50) DEFAULT NULL,
-  `DisplayName` varchar(50) DEFAULT NULL,
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
-
--- Data exporting was unselected.
-
--- Dumping structure for table arp3_0.ethicalpixel_admin_log
-CREATE TABLE IF NOT EXISTS `ethicalpixel_admin_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Identifier` varchar(50) DEFAULT NULL,
-  `log` longtext DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `date` varchar(50) DEFAULT NULL,
-  KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -634,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   KEY `id` (`id`),
   KEY `last_updated` (`last_updated`),
   KEY `license` (`license`)
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -797,7 +797,7 @@ CREATE TABLE IF NOT EXISTS `stashitems` (
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`stash`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
