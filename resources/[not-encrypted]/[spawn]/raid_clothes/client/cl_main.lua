@@ -1276,7 +1276,8 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                     action = "qb-ui:raid_clothes:addOutfitPrompt"
                 }
             end
-            exports['qb-ui']:showContextMenu(menuData)
+            exports['qb-menu']:openMenu(menuData)
+            --exports['qb-ui']:showContextMenu(menuData)
         else
             menuData[1] = {
                 title = "Save Current Outfit",
@@ -1284,10 +1285,10 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                 key = 1,
                 action = "qb-ui:raid_clothes:addOutfitPrompt"
             }
-            exports['qb-ui']:showContextMenu(menuData)
+            exports['qb-menu']:openMenu(menuData)
+            --exports['qb-ui']:showContextMenu(menuData)
         end
     else
         QBCore.Functions.Notify("You have to be near clothing shop or in apartment or house")
-        --TriggerEvent("notify", "You have to be near clothing shop or in apartment or house", 2)
     end
 end)
