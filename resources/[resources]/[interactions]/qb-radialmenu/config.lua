@@ -131,7 +131,7 @@ rootMenuConfig =  {
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
         end,
-        subMenus = {"vehicle:riflerack", "police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
+        subMenus = {"police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
     },
     {
         id = "Vehicle",
@@ -369,7 +369,7 @@ rootMenuConfig =  {
 newSubMenus = { -- NOTE basicly, what will be happen after clicking these buttons and icon of them
     ['vehicle:radar'] = {
         title = 'Toggle Radar',
-        icon = '#vehicle-options-vehicle',
+        icon = '#tachometer-alt',
         functionName = "wk:toggleRadar",
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
@@ -378,17 +378,17 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
     },
     ['vehicle:extras'] = {
         title = 'Toggle Extras',
-        icon = '#vehicle-options-vehicle',
+        icon = '#car-mechanic',
         functionName = "qb-vehiclemenu:client:extrasMenu"
     },
     ['vehicle:menu'] = {
         title = 'Vehicle Menu',
-        icon = '#vehicle-options-vehicle',
+        icon = '#car',
         functionName = "veh:options"
     },
     ['vehicle:riflerack'] = {
         title = 'Rifle Back',
-        icon = '#vehicle-options-vehicle',
+        icon = '#raygun',
         functionName = "police:client:riflerack",
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
@@ -397,7 +397,7 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
     },
     ['vehicle:flip'] = {
         title = 'Flip Vehicle',
-        icon = '#vehicle-options-vehicle',
+        icon = '#fas fa-car-burst',
         functionName = "qb:flipvehicle"
     },
     ['vehicle:autodrive'] = {
@@ -677,7 +677,7 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
     ['police:mdt'] = {
         title = "MDT",
         icon = "#mdt",
-        functionName = "mdt:OpenMDT"    
+        functionName = "mdt:OpenMDT"
     },
     ['police:takeoffmask'] = {
         title = "Mask",

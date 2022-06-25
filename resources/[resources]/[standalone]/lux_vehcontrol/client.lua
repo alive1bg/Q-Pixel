@@ -1230,6 +1230,7 @@ RegisterNetEvent('qb-vehiclemenu:alleExtras', function(args)
 				TriggerEvent('qb-vehiclemenu:allenable')
 			end
 		end
+	end
 end)
 
 RegisterNetEvent('qb-vehiclemenu:allenable', function()
