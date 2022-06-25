@@ -5,7 +5,7 @@ var selectedId = 0
 var selectedCat = 0
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'USD',
 });
 var current = {}
 var zone = null
