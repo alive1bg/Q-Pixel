@@ -198,7 +198,7 @@ RegisterNetEvent('qb-drugprocessing:ChangeTemp', function()
 	if not isTempChangeU then
 		QBCore.Functions.TriggerCallback('qb-drugprocessing:validate_items', function(result)
 			if result then
-				exports["memorygame"]:thermiteminigame(6, 3, 5, 10,function() -- success
+				exports["thermite"]:OpenThermiteGame(6, 3, 5, 10,function() -- success
 					QBCore.Functions.Notify(Lang:t("success.temp_up"), 'success')
 					ProcessTempUp()
 				end,function() -- failure
@@ -218,7 +218,7 @@ RegisterNetEvent('qb-drugprocessing:ChangeTemp2', function()
 	if not isTempChangeD then
 		QBCore.Functions.TriggerCallback('qb-drugprocessing:validate_items', function(result)
 			if result then
-				exports["memorygame"]:thermiteminigame(6, 3, 5, 10,function() -- success
+				exports["thermite"]:OpenThermiteGame(6, 3, 5, 10,function() -- success
 					QBCore.Functions.Notify(Lang:t("success.temp_down"), 'success')
 					ProcessTempDown()
 				end,function() -- failure

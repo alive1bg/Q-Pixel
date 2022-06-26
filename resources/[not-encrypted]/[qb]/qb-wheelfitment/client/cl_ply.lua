@@ -73,6 +73,39 @@ function SyncWheelFitment()
     TriggerServerEvent("bu-orospu-zonelari-kaydet", suanki_zone, false)
 end
 
+function SyncWheelFitment1()
+    local plyPed = PlayerPedId()
+    local plyVeh = GetVehiclePedIsIn(plyPed, false)
+
+    if didPlyAdjustFitments then
+        if not DecorExistOn(plyVeh, "qb-wheelfitment_applied") then
+            DecorSetBool(plyVeh, "qb-wheelfitment_applied", true)
+        end
+
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_width", roundNum(GetVehicleWheelWidth(plyVeh), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_size", roundNum(GetVehicleWheelSize(plyVeh), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_fl", roundNum(GetVehicleWheelXOffset(plyVeh, 0), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_fr", roundNum(GetVehicleWheelXOffset(plyVeh, 1), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_rl", roundNum(GetVehicleWheelXOffset(plyVeh, 2), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_rr", roundNum(GetVehicleWheelXOffset(plyVeh, 3), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_flro", roundNum(GetVehicleWheelXOffset(plyVeh, 0), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_frro", roundNum(GetVehicleWheelXOffset(plyVeh, 1), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_rlro", roundNum(GetVehicleWheelXOffset(plyVeh, 2), 2))
+        DecorSetFloat(plyVeh, "qb-wheelfitment_w_rrro", roundNum(GetVehicleWheelXOffset(plyVeh, 3), 2))
+
+        local plate = GetVehicleNumberPlateText(plyVeh)
+        TriggerServerEvent("qb-wheelfitment_sv:saveWheelfitment", plate, currentFitmentsToSet, plyVeh)
+        
+        didPlyAdjustFitments = false
+    end
+
+    currentFitmentsToSet = {width = 0, size = 0, fl = 0, fr = 0, rl = 0, rr = 0, flro = 0, frro = 0, rlro = 0, rrro = 0}
+
+    performVehicleCheck = true
+
+    checkVehicleFitment()
+end
+
 function AdjustWheelFitment(state, wheel, amount)
     if amount == -1 then
         amount = -1.00
@@ -441,6 +474,10 @@ RegisterNetEvent("qb-wheelfitment_cl:forceMenuClose", function()
     TriggerServerEvent("bu-orospu-zonelari-kaydet", suanki_zone, false)
     SyncWheelFitment()
     DisplayMenu(false)
+end)
+
+RegisterNetEvent("qb-wheelfitment_cl:SaveClose", function()
+    SyncWheelFitment1()
 end)
 
 RegisterCommand("leavefitment", function()

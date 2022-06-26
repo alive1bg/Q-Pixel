@@ -282,13 +282,13 @@ Citizen.CreateThread(function()
 
 	exports["qb-polyzone"]:AddBoxZone("mrpd_bollards_01", vector3(411.66, -1027.95, 29.24), 7.8, 23.4, {
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=28.14,
         maxZ=32.14
     })
     exports["qb-polyzone"]:AddBoxZone("mrpd_bollards_02", vector3(411.66, -1020.09, 29.34), 7.8, 23.4, {
         heading=0,
-        debugPoly = true,
+        debugPoly = false,
         minZ=28.14,
         maxZ=32.14
     })

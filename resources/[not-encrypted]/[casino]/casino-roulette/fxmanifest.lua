@@ -2,11 +2,6 @@ version '1.0.2'
 author 'freamee'
 decription 'Aquiver rulett'
 
-lua54 'yes'
-
-escrow_ignore {
- 'config.lua'
-}
 
 client_scripts {
     'config.lua',

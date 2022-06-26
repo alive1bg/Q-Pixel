@@ -107,30 +107,46 @@ local AllDoors = {
 	[101] = {id = 101, active = true, model = 1373390714, coords = vector3(1776.195, 2552.563, 45.74741), automatic = false, lock = 0, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_CAFETERIA_SOMETHING
 	[102] = {id = 102, active = true, model = 1373390714, coords = vector3(1791.595, 2551.462, 45.7532), automatic = false, lock = 0, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_CAFETERIA_SOMETHING
 	[103] = {id = 103, active = true, model = 871712474, coords = vector3(1762.779, 2590.629, 50.67069), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
-	[104] = {id = 104, active = true, model = 871712474, coords = vector3(1762.780, 2593.568, 50.67069), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
-	[105] = {id = 105, active = true, model = 871712474, coords = vector3(1762.774, 2596.512, 50.67069), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
+	--[104] = {id = 104, active = true, model = 871712474, coords = vector3(1762.780, 2593.568, 50.67069), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
+	--[105] = {id = 105, active = true, model = 871712474, coords = vector3(1762.774, 2596.512, 50.67069), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
+
 	--Pacifc Bank
-	[106] = {id = 106, active = true, model = -222270721, coords = vector3(256.3116, 220.6579, 106.4296), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_BANK_DOOR_1
-	[107] = {id = 107, active = true, model = 746855201, coords = vector3(262.1981, 222.5188, 106.4296), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_BANK_DOOR_2
-	[108] = {id = 108, active = true, model = 1956494919, coords = vector3(266.36, 217.56, 110.43), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_UPPER_DOOR_1
-	[109] = {id = 109, active = true, model = -1508355822, coords = vector3(252.0858, 221.028, 101.8877), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_SAFE_DOOR_1
-	[110] = {id = 110, active = true, model = -1508355822, coords = vector3(261.3165, 214.6756, 101.8161), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_SAFE_DOOR_2
-	[111] = {id = 111, active = true, model = 961976194, coords = vector3(255.22830, 223.976, 102.39320), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_VAULT
+	[104] = {id = 104, active = true, model = -2121568016, coords = vector3(267.72, 213.87, 106.28), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
+	[105] = {id = 105, active = true, model = -2121568016, coords = vector3(270.12, 220.82, 106.28), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --BOLINGBROKE_PRISON_
+	[106] = {id = 106, active = true, model = 267980221, coords = vector3(272.42, 206.14, 106.28), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_BANK_DOOR_1
+	-- Front of Vault Doors
+	[107] = {id = 107, active = true, model = 409280169, coords = vector3(272.07043, 220.17076, 97.166244), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_BANK_DOOR_2
+	[108] = {id = 108, active = true, model = 409280169, coords = vector3(269.41, 213.09, 97.17), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_UPPER_DOOR_
+	-- Office in Vault
+	[109] = {id = 109, active = true, model = 409280169, coords = vector3(265.51, 225.37, 97.17), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_SAFE_DOOR_1
+	-- Left Small Vault
+	[110] = {id = 110, active = true, model = 409280169, coords = vector3(244.1, 217.01, 97.17), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_SAFE_DOOR_2
+	-- Right Small Vault
+	[111] = {id = 111, active = true, model = 409280169, coords = vector3(250.03, 233.49, 97.17), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_VAULT
+	-- Vault Door
+	[112] = {id = 112, active = true, model = 961976194, coords = vector3(236.23, 229.35, 97.12), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_VAULT
+	-- After Vault Door 1st door 
+	[113] = {id = 113, active = true, model = 643152522, coords = vector3(229.49, 227.53, 97.18), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_VAULT
+	-- 2nd door
+	[114] = {id = 114, active = true, model = 643152522, coords = vector3(226.08, 228.8, 97.18), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --PACIFIC_VAULT
+
+
+
 	--Fleeca Bank Pink Cage
-	[112] = {id = 112, active = true, model = -1591004109, coords = vector3(314.61, -285.82, 54.49), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PINK_CAGE
+	--[114] = {id = 114, active = true, model = -1591004109, coords = vector3(314.61, -285.82, 54.49), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PINK_CAGE
 	--Fleeca Bank Legion Square
-	[113] = {id = 113, active = true, model = -1591004109, coords = vector3(150.29130, -1047.629, 29.6663), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_LEGION_SQUARE
+	[115] = {id = 115, active = true, model = -1591004109, coords = vector3(150.29130, -1047.629, 29.6663), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_LEGION_SQUARE
 	--Fleeca Bank Hawick Avenue
-	[114] = {id = 114, active = true, model = -1591004109, coords = vector3(-350.41440, -56.79705, 49.33480), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_HAWICK_AVENUE
+	[116] = {id = 116, active = true, model = -1591004109, coords = vector3(-350.41440, -56.79705, 49.33480), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_HAWICK_AVENUE
 	--Fleeca Bank Great Ocean HWY
-	[115] = {id = 115, active = true, model = -1591004109, coords = vector3(-2956.116, 485.42060, 15.99531), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_GREAT_OCEAN_HWY
+	[117] = {id = 117, active = true, model = -1591004109, coords = vector3(-2956.116, 485.42060, 15.99531), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_GREAT_OCEAN_HWY
 	--Paleto Bank
-	[116] = {id = 116, active = true, model = 1622278560, coords = vector3(-104.604, 6473.444, 31.79532), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PALETO_BAY_GATE_1
-	[117] = {id = 117, active = true, model = 1309269072, coords = vector3(-106.5051, 6476.122, 31.91084), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PALETO_BAY_GATE_2
+	[118] = {id = 118, active = true, model = 1622278560, coords = vector3(-104.604, 6473.444, 31.79532), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PALETO_BAY_GATE_1
+	[119] = {id = 119, active = true, model = 1309269072, coords = vector3(-106.5051, 6476.122, 31.91084), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --FLEECA_BANK_PALETO_BAY_GATE_2
 	--Racers Edge
-	[118] = {id = 118, active = true, model = -305065920, coords = vector3(946.23, -984.69, 41.51), automatic = {distance = 5.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}, keyFob = true}, --RACERS_EDGE_SLIDEY_DOOR
-	[119] = {id = 119, active = true, model = 1289778077, coords = vector3(948.7, -964.4, 39.8), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}}, --RACERS_EDGE_STAFF_DOOR_1
-	[120] = {id = 120, active = true, model = -626684119, coords = vector3(955.6, -971.5, 39.9), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}}, --RACERS_EDGE_STAFF_DOOR_2
+	[120] = {id = 120, active = true, model = -305065920, coords = vector3(946.23, -984.69, 41.51), automatic = {distance = 5.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}, keyFob = true}, --RACERS_EDGE_SLIDEY_DOOR
+	--[121] = {id = 119, active = true, model = 1289778077, coords = vector3(948.7, -964.4, 39.8), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}}, --RACERS_EDGE_STAFF_DOOR_1
+	--[122] = {id = 120, active = true, model = -626684119, coords = vector3(955.6, -971.5, 39.9), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["racersedge"] = true}}}, --RACERS_EDGE_STAFF_DOOR_2
 	--Pillbox
 	[121] = {id = 121, active = true, model = -434783486, coords = vector3(302.8, -581.4, 43.4), automatic = false, lock = 0, forceUnlocked = false, access = {job = {["PD"] = true, ["DR"] = true}}}, --PILLBOX_LOBBY_TO_WARD_LEFT
 	[122] = {id = 122, active = true, model = -1700911976, coords = vector3(305.2, -582.3, 43.4), automatic = false, lock = 0, forceUnlocked = false, access = {job = {["PD"] = true, ["DR"] = true}}}, --PILLBOX_LOBBY_TO_WARD_RIGHT
@@ -160,13 +176,13 @@ local AllDoors = {
 	[146] = {id = 146, active = true, model = -434783486, coords = vector3(349.3, -586.3, 43.4), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true, ["DR"] = true}}}, --PILLBOX_WARD_C_LEFT
 	[147] = {id = 147, active = true, model = -1700911976, coords = vector3(348.43330, -588.74500, 43.43391), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true, ["DR"] = true}}}, --PILLBOX_WARD_C_RIGHT
 	--Vanilla Unicorn
-	[148] = {id = 148, active = true, model = -1116041313, coords = vector3(127.95010, -1298.50700, 29.41962), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_PARKING_LOT_TO_MAIN
-	[149] = {id = 149, active = true, model = 390840000, coords = vector3(132.23420, -1288.30300, 29.43497), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_STORAGE
-	[150] = {id = 150, active = true, model = 390840000, coords = vector3(128.07080, -1279.34700, 29.43697), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_DJ_BOOTH
-	[151] = {id = 151, active = true, model = 390840000, coords = vector3(116.22780, -1294.59300, 29.43599), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_PREMIUM_LOUNGE
-	[152] = {id = 152, active = true, model = 390840000, coords = vector3(113.41010, -1296.26000, 29.43599), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_DANCER_ROOMS
-	[153] = {id = 153, active = true, model = 390840000, coords = vector3(99.08307, -1293.68900, 29.44040), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_BOSSMAN_OFFICE
-	[154] = {id = 154, active = true, model = -1116041313, coords = vector3(96.09800, -1284.85000, 29.43878), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vu"] = true}}}, --VANILLA_UNICORN_DOOR_TO_BOSSMAN_OFFICE
+	[148] = {id = 148, active = true, model = -1116041313, coords = vector3(127.95010, -1298.50700, 29.41962), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_PARKING_LOT_TO_MAIN
+	[149] = {id = 149, active = true, model = 390840000, coords = vector3(132.23420, -1288.30300, 29.43497), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_STORAGE
+	[150] = {id = 150, active = true, model = 390840000, coords = vector3(128.07080, -1279.34700, 29.43697), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_DJ_BOOTH
+	[151] = {id = 151, active = true, model = 390840000, coords = vector3(116.22780, -1294.59300, 29.43599), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_PREMIUM_LOUNGE
+	[152] = {id = 152, active = true, model = 390840000, coords = vector3(113.41010, -1296.26000, 29.43599), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_DANCER_ROOMS
+	[153] = {id = 153, active = true, model = 390840000, coords = vector3(99.08307, -1293.68900, 29.44040), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_BOSSMAN_OFFICE
+	[154] = {id = 154, active = true, model = -1116041313, coords = vector3(96.09800, -1284.85000, 29.43878), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["vanilla"] = true}}}, --VANILLA_UNICORN_DOOR_TO_BOSSMAN_OFFICE
 	--More MRPD (Because I read config wrong, gg)
 	[155] = {id = 155, active = true, model = -692649124, coords = vector3(469.774, -1014.407, 26.483), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --MRPD_BACK_DOORS_LEFT
 	[156] = {id = 156, active = true, model = -692649124, coords = vector3(467.368, -1014.407, 26.483), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}}, --MRPD_BACK_DOORS_RIGHT
@@ -272,6 +288,10 @@ local AllDoors = {
 	--PD Bollards
 	[234] = {id = 234, active = true, model = -1635161509, coords = vector3(410.02578735352, -1024.2199707031, 29.220199584961), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
 	[235] = {id = 235, active = true, model = -1868050792, coords = vector3(410.02578735352, -1024.2259521484, 29.220220565796), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
+
+	--Vangelico
+	[236] = {id = 236, active = true, model = 9467943, coords = vector3(-630.71, -238.12, 38.1), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[237] = {id = 237, active = true, model = 1425919976, coords = vector3(-632.18, -236.72, 38.05), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 }
 
 ForcedDoors = {}

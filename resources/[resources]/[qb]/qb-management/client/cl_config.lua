@@ -28,6 +28,12 @@ Config.BossMenus = {
     ['hayesauto'] = {
         vector3(-1427.635, -458.2952, 35.909709),
     },
+    ['vanilla'] = {
+        vector3(95.673805, -1293.922, 29.263528),
+    },
+    ['cardshop'] = {
+        vector3(-162.7, 218.78, 95.12),
+    },
 }
 
 Config.BossMenuZones = {
@@ -50,10 +56,16 @@ Config.BossMenuZones = {
         { coords = vector3(-339.53, -156.44, 44.59), length = 1.15, width = 2.6, heading = 353.0, minZ = 43.59, maxZ = 44.99 },
     },
     ['tuner'] = {
-        { coords = vector3(125.4, -3014.79, 7.04), length = 0.35, width = 0.35, heading = 0, minZ = 6.84, maxZ = 7.14 },
+        { coords = vector3(125.4, -3014.79, 7.04), length = 0.35, width = 0.35, heading = 0.0, minZ = 6.84, maxZ = 7.14 },
     },
     ['hayesauto'] = {
-        { coords = vector3(-1427.34, -458.78, 35.91), length = 2.6, width = 2.2, heading = 32, minZ = 34.91, maxZ = 37.51 },
+        { coords = vector3(-1427.34, -458.78, 35.91), length = 2.6, width = 2.2, heading = 32.0, minZ = 34.91, maxZ = 37.51 },
+    },
+    ['vanilla'] = {
+        { coords = vector3(96.27, -1292.72, 29.26), length = 0.45, width = 0.5, heading = 30.0, minZ = 29.06, maxZ = 29.66 },
+    },
+    ['cardshop'] = {
+        { coords = vector3(-162.7, 218.78, 95.12), length = 0.5, width = 0.5, heading = 189.0, minZ = 95.02, maxZ = 95.22 },
     },
 }
 

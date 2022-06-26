@@ -5,12 +5,6 @@ author 'KevinGirardx'
 
 game 'gta5'
 
-lua54 'yes'
-
-escrow_ignore {
-	'config.lua'
-}
-
 shared_script {
 	'config.lua',
 }
@@ -28,4 +22,11 @@ server_scripts {
 	'server/*.lua'
 }
 
+lua54 'yes'
+
+escrow_ignore { 
+    'client/*.lua',
+    'server/*.lua',
+    'config.lua',
+}
 dependency '/assetpacks'

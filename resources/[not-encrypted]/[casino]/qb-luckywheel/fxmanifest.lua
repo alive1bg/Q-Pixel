@@ -6,12 +6,6 @@ author 'ItsANoBrainer'
 description 'Casino Lucky Wheel'
 version '1.0.3'
 
-lua54 'yes'
-
-escrow_ignore {
- 'config.lua'
-}
-
 client_script 'client/main.lua'
 server_script 'server/main.lua'
 shared_script 'config.lua'

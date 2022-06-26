@@ -7,12 +7,6 @@ QBCore.Commands.Add('cash', 'Check Cash Balance', {}, false, function(source, ar
     TriggerClientEvent('hud:client:ShowAccounts', source, 'cash', cashamount)
 end)
 
-QBCore.Commands.Add('bank', 'Check Bank Balance', {}, false, function(source, args)
-    local Player = QBCore.Functions.GetPlayer(source)
-    local bankamount = Player.PlayerData.money.bank
-    TriggerClientEvent('hud:client:ShowAccounts', source, 'bank', bankamount)
-end)
-
 QBCore.Commands.Add("dev", "Enable/Disable developer Mode", {}, false, function(source, args)
     TriggerClientEvent("qb-admin:client:ToggleDevmode", source)
 end, 'admin')

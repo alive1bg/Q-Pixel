@@ -976,3 +976,11 @@ RegisterNetEvent('qb-customs:client:repair', function()
 end)
 
 ----------------------------------------------- end benny repair point event + function
+
+RegisterNetEvent('qb-customs:client:EnterCustoms', function(override)
+    if not override.coords or not override.heading then override = nil end
+    if not IsPedInAnyVehicle(PlayerPedId(), false) or isPlyInBennys or (not next(CustomsData) and not override) then return end
+    if not override and next(CustomsData) and not CheckRestrictions(CustomsData.location) then return end
+
+    EnterLocation(override)
+end)

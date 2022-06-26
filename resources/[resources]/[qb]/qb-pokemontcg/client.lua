@@ -257,23 +257,23 @@ menu_button:On('select', function(item)
     end)
 end)
 
-
--- BOSS MENU
-exports['qb-target']:AddBoxZone("cardshopbossmenu", vector3(-162.7, 218.78, 95.12), 0.5, 0.5, {
-    name = "cardshopbossmenu",
-    heading = 189.0,
-    debugPoly = false,
-    minZ = 95.02,
-    maxZ = 95.22,
-    }, {
+CreateThread(function()
+    exports['qb-target']:AddBoxZone("CardShop", vector3(-152.31, 229.14, 89.94), 0.8, 0.65, {
+        name = "CardShop",
+        heading = 0,
+        debugPoly = true,
+        minZ=87.94,
+        maxZ=89.94,
+        }, {
         options = {
             {
                 type = "client",
-                event = "qb-management:client:OpenMenu",
-                icon = "fas fa-sign-in-alt",
-                label = "Open Boss Menu",
+                event = 'Cards:client:openMenu',
+                icon = "fas fa-card",
+                label = "Sell Menu",
                 job = "cardshop",
             },
         },
         distance = 2.5
-})
+    })
+end)

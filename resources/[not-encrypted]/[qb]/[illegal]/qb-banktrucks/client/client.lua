@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-
+---
 local CurrentCops = 0
 local InHouse = false
 local NeedAccess1 = false
@@ -8,11 +8,19 @@ local SystemHacked = false
 local GuardSpawned = false
 local BodySearched = false
 local GotTruck = false
-local NearTruck = false
-local KeyPressed = false
 local KeyPressed2 = false
 local GuardsSpawned = false
 local CanLoot = false
+local CanThermite = false
+local alerted = false
+local alerted2 = false
+---
+local truckSpawn = false
+local TruckZone
+local notdelivered = false
+local DropZone
+local GotLocation = false
+
 
 RegisterNetEvent('police:SetCopCount', function(amount)
     CurrentCops = amount
@@ -41,7 +49,7 @@ function EnterHouse()
     exports['qb-target']:AddBoxZone('lester-computer', vector3(1276.24, -1710.27, 54.77), 1.2, 1, {
         name='lester-computer',
         heading=28,
-        debugPoly = false,
+        debugPoly=false,
         minZ=54.47,
         maxZ=55.27,
         }, {
@@ -85,104 +93,134 @@ function EnterHouse()
 end
 
 function Access()
-    if CurrentCops >= Config.PoliceNeeded then
-        QBCore.Functions.TriggerCallback("qb-banktrucks:server:coolc",function(isCooldown)
-            if not isCooldown then
-                TriggerEvent('animations:client:EmoteCommandStart', {"type"})
-                QBCore.Functions.Progressbar("start_job", "Accessing", 6000, false, true, {
-                    disableMovement = true,
-                    disableCarMovement = true,
-                    disableMouse = false,
-                    disableCombat = true,
-                }, {
-                }, {}, {}, function() -- Done
-                    QBCore.Functions.Notify("Security lock to difficult, need brute force!", 'primary')
-                    TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-                    TriggerServerEvent("qb-banktrucks:server:coolout")
-                    NeedAccess1 = true
-                    NeedAccess2 = true
-                end, function() -- Cancel
-                    TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-                    QBCore.Functions.Notify("Cancelled?", 'error')
-                end, "fas fa-laptop-code")
-            else
-                QBCore.Functions.Notify("System seems to be on a cooldown", 'error')
-            end
-        end)
-    else
-        QBCore.Functions.Notify("Cannot do this right now..", "error", 3500)
-    end
-end
-
-RegisterCommand('t', function ()
-    Connect()
-end)
-function Connect()
-    TriggerEvent('animations:client:EmoteCommandStart', {"type"})
-    Wait(2000)
-    QBCore.Functions.TriggerCallback('qb-banktrucks:server:hasItem', function(item)
-        if item then
-            Wait(500)
-            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-            QBCore.Functions.Progressbar("search_body", "Connecting", 5000, false, true, {
+    QBCore.Functions.TriggerCallback("kevin-banktrucks:server:coolc",function(isCooldown)
+        if not isCooldown then
+            TriggerEvent('animations:client:EmoteCommandStart', {"type"})
+            NeedAccess1 = true
+            QBCore.Functions.Progressbar("start_job", "Accessing", 6000, false, true, {
                 disableMovement = true,
                 disableCarMovement = true,
                 disableMouse = false,
                 disableCombat = true,
             }, {
-                animDict = "anim@heists@ornate_bank@hack",
-                anim = "hack_loop",
-                flags = 1,
-            }, {
-                model = "hei_prop_hst_laptop",
-                coords = { x = 0.18, y = 0.053, z = 0.02 },
-                rotation = { x = 190.0, y = 0.0, z = 80.0 },
-            }, {}, function() -- Done
-                exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
-                function() -- Success
-                    DeleteObject(hacklaptop)
-                    ClearPedTasksImmediately(PlayerPedId())
-                    Wait(1000)
-                    QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
-                    SystemHacked = true
-                    NeedAccess2 = false
-                end,
-                function() -- Failure
-                    ClearPedTasksImmediately(PlayerPedId())
-                    QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
-                end)
+            }, {}, {}, function() -- Done
+                QBCore.Functions.Notify("Security lock to difficult, need brute force!", 'primary')
+                TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+                TriggerServerEvent("kevin-banktrucks:server:coolout")
+                NeedAccess1 = true
+                NeedAccess2 = true
             end, function() -- Cancel
+                NeedAccess1 = false
+                TriggerEvent('animations:client:EmoteCommandStart', {"c"})
                 QBCore.Functions.Notify("Cancelled?", 'error')
-                ClearPedTasks(ped)
-            end, "fas fa-code")
-            
+            end, "fas fa-laptop-code")
         else
-            ClearPedTasksImmediately(PlayerPedId())
-            QBCore.Functions.Notify("You do not have the equipment to hack this computer", 'error')
+            QBCore.Functions.Notify("System seems to be on a cooldown", 'error')
         end
     end)
 end
 
-function Browse()
-    exports['qb-menu']:openMenu({
-        {
-            header = "Jobs Available",
-            txt = "Lester left a tab open with his jobs?",
-            icon = "fas fa-money-bill-1",
-            isMenuHeader = true
-        },
-        {
-            header = "Bank Truck",
-            txt = "Send information to your phone",
-            icon = "fas fa-mobile",
-            params = {
-                event = "qb-banktrucks:client:GotAccess",
-            }
-        },
-    })
+function Connect()
+    NeedAccess2 = false
+    TriggerEvent('animations:client:EmoteCommandStart', {"type"})
+    QBCore.Functions.Progressbar("search_body", "Connecting Laptop", 5000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        QBCore.Functions.TriggerCallback('kevin-banktrucks:server:hasItem', function(item)
+            if item then
+                Wait(500)
+                TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+                QBCore.Functions.Progressbar("search_body", "Accessing", 5000, false, true, {
+                    disableMovement = true,
+                    disableCarMovement = true,
+                    disableMouse = false,
+                    disableCombat = true,
+                }, {
+                    animDict = "anim@heists@ornate_bank@hack",
+                    anim = "hack_loop",
+                    flags = 1,
+                }, {
+                    model = "hei_prop_hst_laptop",
+                    coords = { x = 0.18, y = 0.053, z = 0.02 },
+                    rotation = { x = 190.0, y = 0.0, z = 80.0 },
+                }, {}, function() -- Done
+                    exports["thermite"]:OpenThermiteGame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
+                    function() -- Success
+                        TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
+                        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
+                        ClearPedTasksImmediately(PlayerPedId())
+                        Wait(1000)
+                        QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
+                        SystemHacked = true
+                        NeedAccess2 = false
+                    end,
+                    function() -- Failure
+                        ClearPedTasksImmediately(PlayerPedId())
+                        QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
+                    end)
+                end, function() -- Cancel
+                    QBCore.Functions.Notify("Cancelled?", 'error')
+                    ClearPedTasks(ped)
+                end, "fas fa-code")
+            else
+                NeedAccess2 = true
+                ClearPedTasksImmediately(PlayerPedId())
+                QBCore.Functions.Notify("You do not have the equipment to hack this computer", 'error')
+            end
+        end)
+    end, function() -- Cancel
+        NeedAccess2 = true
+        QBCore.Functions.Notify("Cancelled?", 'error')
+        ClearPedTasks(ped)
+    end, "fas fa-code")
 end
 
-RegisterNetEvent('qb-banktrucks:client:GotAccess', function ()
+function Browse()
+    if SystemHacked then
+        local header = {
+            {
+                isMenuHeader = true,
+                icon = "fas fa-bars",
+                header = "Available Bank Trucks",
+                txt = "Lester's Desktop Application",
+            }
+        }
+        for k, v in pairs(Config.JobsList) do
+            if CurrentCops >= v.minCops then
+                header[#header+1] = {
+                    header = v.Header,
+                    txt = "Available",
+                    icon = v.icon,
+                    params = {
+                        event = v.event,
+                    }
+                }
+            else
+                header[#header+1] = {
+                    header = v.Header,
+                    txt = "Not Available",
+                    icon = v.busyicon,
+                    isMenuHeader = true,
+                }
+            end
+        end
+        header[#header+1] = {
+            header = "Close App",
+            icon = "fas fa-xmark",
+            params = {
+                event = "qb-menu:closeMenu",
+            }
+        }
+        exports['qb-menu']:openMenu(header)
+    else
+        QBCore.Functions.Notify("Security system still online..", 'error')
+    end
+end
+
+RegisterNetEvent('kevin-banktrucks:client:GotAccess', function ()
     SystemHacked = false
     Wait(1000)
     TriggerServerEvent('qb-phone:server:sendNewMail', {
@@ -198,67 +236,66 @@ end)
 function SetGps()
     Wait(2000)
     TriggerEvent('qb-phone:client:CustomNotification', 'CURRENT TASK', "Meet up at the location with lesters connect", 'fas fa-location-arrow', '#00ffd5', 5500)
-
     local pedloc = Config.PedLocations[math.random(#Config.PedLocations)]
     if not GuardSpawned then
-        QBCore.Functions.LoadModel(Config.SecurityPed)
-        local guard = CreatePed(0,Config.SecurityPed, pedloc.x, pedloc.y, pedloc.z, 0.0, true, true)
-        SetEntityAsMissionEntity(guard)
-        TaskWanderInArea(guard, pedloc.x, pedloc.y, pedloc.z, 1.0, 2, 0.2)
+        meetlocblip = AddBlipForCoord(pedloc)
+        SetBlipSprite(meetlocblip, 1)
+        SetBlipColour(meetlocblip, 2)
+        SetBlipRoute(meetlocblip, true)
+        SetBlipRouteColour(meetlocblip, 2)
+        SetBlipAsShortRange(meetlocblip, false)
+        SetBlipScale(meetlocblip, 0.75)
 
-        guardblip = AddBlipForEntity(guard)
-        SetBlipSprite(guardblip, 304)
-        SetBlipColour(guardblip, 2)
-        SetBlipRoute(guardblip, true)
-        SetBlipRouteColour(guardblip, 2)
-        SetBlipAsShortRange(guardblip, false)
-        SetBlipScale(guardblip, 0.75)
-        GuardSpawned = true
-
-        local alerted = false
-        local GuardZone = BoxZone:Create(vector3(pedloc.x, pedloc.y, pedloc.z), 20.0, 20.0, {
-            heading = 0,
-            name="guard",
-            debugPoly = false,
-            -- minZ = 53.64,
-            -- maxZ = 56.24
+        local GuardZone = CircleZone:Create(pedloc, 50.0, {
+            name = "guard",
+            debugPoly = false
         })
         GuardZone:onPlayerInOut(function(isPointInside)
             if isPointInside and not alerted then
+                RemoveBlip(meetlocblip)
+                QBCore.Functions.LoadModel(Config.SecurityPed)
+                guard = CreatePed(0,Config.SecurityPed, pedloc.x, pedloc.y, pedloc.z, 0.0, true, true)
+                guardblip = AddBlipForEntity(guard)
+                SetBlipSprite(guardblip, 304)
+                SetBlipColour(guardblip, 2)
+                SetBlipScale(guardblip, 0.75)
+                GuardSpawned = true
+                SetEntityAsMissionEntity(guard)
+                TaskWanderInArea(guard, pedloc.x, pedloc.y, pedloc.z, 1.0, 2, 0.2)
+
                 alerted = true
                 TriggerEvent('qb-phone:client:CustomNotification', 'TASK COMPLETED', "Meet up at the location with Lester's connect", 'fas fa-location-arrow', '#00ffd5', 5500)
-                Wait(1500)
+                Wait(5500)
                 TriggerEvent('qb-phone:client:CustomNotification', 'CURRENT TASK', "Kill the guard", 'fas fa-user', '#00ffd5', 5500)
                 TaskSmartFleePed(guard, PlayerPedId(), 500.0, -1, true, true)
                 QBCore.Functions.Notify("You spooked the guard...Kill him before he alerts the cops", 'primary')
-            end
-        end)
 
-        local alerted2 = false
-        CreateThread( function ()
-            while DoesEntityExist(guard) do
-                if IsPedDeadOrDying(guard) and not alerted2 then
-                    alerted2 = true
-                    TriggerEvent('qb-phone:client:CustomNotification', 'TASK COMPLETED', "Kill the guard", 'fas fa-user', '#00ffd5', 5500)
-                    RemoveBlip(guardblip)
-                    exports['qb-target']:AddTargetEntity(guard, {
-                        options = {
-                            {
-                                icon = 'fas fa-circle',
-                                label = 'Search Body',
-                                canInteract = function()
-                                    if not BodySearched then return true end
-                                    return false
-                                end,
-                                action = function()
-                                    TakePackage()
-                                end,
-                            }
-                        },
-                        distance = 2.0
-                    })
-                end
-                Wait(1000)
+                CreateThread( function ()
+                    while DoesEntityExist(guard) do
+                        if IsPedDeadOrDying(guard) and not alerted2 then
+                            alerted2 = true
+                            TriggerEvent('qb-phone:client:CustomNotification', 'TASK COMPLETED', "Kill the guard", 'fas fa-user', '#00ffd5', 5500)
+                            RemoveBlip(guardblip)
+                            exports['qb-target']:AddTargetEntity(guard, {
+                                options = {
+                                    {
+                                        icon = 'fas fa-circle',
+                                        label = 'Search Body',
+                                        canInteract = function()
+                                            if not BodySearched then return true end
+                                            return false
+                                        end,
+                                        action = function()
+                                            TakePackage()
+                                        end,
+                                    }
+                                },
+                                distance = 2.0
+                            })
+                        end
+                        Wait(1000)
+                    end
+                end)
             end
         end)
     end
@@ -275,14 +312,14 @@ function TakePackage()
     }, {}, {}, function() -- Done
         BodySearched = true
         ClearPedTasksImmediately(PlayerPedId())
-        TriggerServerEvent('qb-banktrucks:server:giveitem')
+        TriggerServerEvent('kevin-banktrucks:server:giveitem')
     end, function() -- Cancel
         ClearPedTasksImmediately(PlayerPedId())
         QBCore.Functions.Notify("Cancelled?", 'error')
     end, "fas fa-magnifying-glass")
 end
 
-RegisterNetEvent('qb-banktrucks:client:gettruck', function ()
+RegisterNetEvent('kevin-banktrucks:client:gettruck', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"tablet2"})
     if BodySearched then
         QBCore.Functions.Progressbar("search_body", "Booting Up", 5000, false, true, {
@@ -331,27 +368,18 @@ function SpawnStuff()
     SetPedSuffersCriticalHits(CoPilot, false)
     TaskVehicleDriveWander(Driver, Truck, 70.0, 262144)
     GotTruck = true
+
     CreateThread( function ()
         while GotTruck do
             if IsVehicleStopped(Truck) then
                 if IsVehicleSeatFree(Truck, -1) and IsVehicleSeatFree(Truck, 0) and IsVehicleSeatFree(Truck, 1) then
-                    local PedPos = GetEntityCoords(PlayerPedId())
-                    local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
-                    local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
-                    if TruckDist <= 2.5 and not NearTruck then
-                        if IsPedDeadOrDying(Driver) and IsPedDeadOrDying(CoPilot) then
-                            QBCore.Functions.TriggerCallback('qb-banktrucks:server:hasItem', function(item)
-                                if item then
-                                    exports['qb-ui']:showInteraction("[E] Connect Computer")
-                                    PressedKey()
-                                else
-                                    ClearPedTasksImmediately(PlayerPedId())
-                                    QBCore.Functions.Notify("You do not have the equipment to access this door", 'error')
-                                end
-                            end) 
+                    if IsPedDeadOrDying(Driver) and IsPedDeadOrDying(CoPilot) then
+                        local PedPos = GetEntityCoords(PlayerPedId())
+                        local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
+                        local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
+                        if TruckDist <= 1.0 then
+                            CanThermite = true
                         end
-                    else
-                        exports['qb-ui']:hideInteraction()
                     end
                 end
             end
@@ -360,53 +388,53 @@ function SpawnStuff()
     end)
 end
 
-function PressedKey()
-    CreateThread(function ()
-        while not KeyPressed do
-            if IsControlJustReleased(0, 38) then
-                GotTruck = false
-                NearTruck = true
-                KeyPressed = true
-                exports['qb-ui']:hideInteraction()
-                FreezeEntityPosition(Truck, true)
-                AccessDoors()
-                TriggerEvent('qb-phone:client:CustomNotification', 'TASK COMPLETED', "Intercept the truck", 'fas fa-truck-moving', '#00ffd5', 5500)
-            end
-            Wait(1)
-        end
-    end)
-end
+RegisterNetEvent('kevin-banktrucks:client:usethermite', function ()
+    if CanThermite then
+        AccessDoors()
+    else
+        QBCore.Functions.Notify("Cannot use this right now", 'error', 3000)
+    end
+end)
 
 function AccessDoors()
+    CanThermite = false
     local ped = PlayerPedId()
     SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
     Wait(1500)
-    QBCore.Functions.Progressbar("search_body", "Connecting", 5000, false, true, {
+    RequestAnimDict('anim@heists@ornate_bank@thermal_charge_heels')
+    while not HasAnimDictLoaded('anim@heists@ornate_bank@thermal_charge_heels') do
+        Wait(50)
+    end
+    local x, y, z = table.unpack(GetEntityCoords(ped))
+    prop = CreateObject(GetHashKey('prop_c4_final_green'), x, y, z + 0.2, true, true, true)
+    AttachEntityToEntity(prop, ped, GetPedBoneIndex(ped, 60309), 0.06, 0.0, 0.06, 90.0,0.0, 0.0, true, true, false, true, 1, true)
+    TaskPlayAnim(ped, 'anim@heists@ornate_bank@thermal_charge_heels', "thermal_charge", 3.0, -8,-1, 63, 0, 0, 0, 0)
+    QBCore.Functions.Progressbar("search_body", "Setting Timer", 5000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,
-    }, {
-        animDict = "anim@heists@ornate_bank@hack",
-        anim = "hack_loop",
-        flags = 1,
-    }, {
-        model = "hei_prop_hst_laptop",
-        coords = { x = 0.18, y = 0.053, z = 0.02 },
-        rotation = { x = 190.0, y = 0.0, z = 80.0 },
-    }, {}, function() -- Done
-        exports['qb-dispatch']:BankTruckRobbery()
-        exports["memorygame"]:thermiteminigame(Config.Blocks2, Config.Attempts2, Config.Show2, Config.Time2,
+    }, {}, {}, {}, function() -- Done
+        exports['ps-dispatch']:BankTruckRobbery()
+        exports["thermite"]:OpenThermiteGame(Config.Blocks2, Config.Attempts2, Config.Show2, Config.Time2,
         function() -- Success
-            TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
-            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
-            SetVehicleUndriveable(Truck, true)
+            TriggerServerEvent("QBCore:Server:RemoveItem", "kthermite", 1)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kthermite"], "remove")
             ClearPedTasks(ped)
+            DetachEntity(prop)
+            AttachEntityToEntity(prop, Truck, GetEntityBoneIndexByName(Truck, 'door_pside_r'), -0.7, 0.0,0.0, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
+            QBCore.Functions.Notify("Wait for the the door to blow", 'primary', 3000)
             Wait(Config.Timer)
+            local transCoords = GetEntityCoords(Truck)
+            SetVehicleDoorBroken(Truck, 2, false)
+            SetVehicleDoorBroken(Truck, 3, false)
+            AddExplosion(transCoords.x, transCoords.y, transCoords.z, 'EXPLOSION_TANKER', 2.0, true, false, 2.0)
+            ApplyForceToEntity(Truck, 0, transCoords.x, transCoords.y, transCoords.z, 0.0, 0.0, 0.0, 1, false,true, true, true, true)
+            SetVehicleUndriveable(Truck, true)
             SpawnGuards()
         end,
         function() -- Failure
-            ClearPedTasksImmediately(PlayerPedId())
+            ClearPedTasksImmediately(ped)
             QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
         end)
     end, function() -- Cancel
@@ -417,23 +445,37 @@ end
 
 function SpawnGuards()
     QBCore.Functions.LoadModel(Config.SecurityPed)
-    for k = -1, 4 do
-        Wait(1) 
-        local Guards = CreatePedInsideVehicle(Truck, 5, Config.SecurityPed, k, 1, 1)
-        TaskLeaveVehicle(Guards, Truck, 0)
-        SetEntityAsMissionEntity(Guards)
-        SetEntityVisible(Guards, true)
-        SetPedRelationshipGroupHash(Guards, `HATES_PLAYER`)
-        SetPedAccuracy(Guards, 80)
-        SetPedArmour(Guards, 200)
-        SetPedMaxHealth(Guards, 500)
-        SetPedCanSwitchWeapon(Guards, true)
-        SetPedDropsWeaponsWhenDead(Guards, false)
-        SetPedFleeAttributes(Guards, 0, false)
-        GiveWeaponToPed(Guards, `WEAPON_SMG`, 250, false, true)
-        SetPedSuffersCriticalHits(Guards, false)
-        GuardsSpawned = true
-    end
+    Wait(10)
+    local Guard1 = CreatePedInsideVehicle(Truck, 5, Config.SecurityPed, 1, 1, 1)
+    local Guard2 = CreatePedInsideVehicle(Truck, 5, Config.SecurityPed, 2, 1, 1)
+    TaskLeaveVehicle(Guard1, Truck, 0)
+    SetEntityAsMissionEntity(Guard1)
+    SetEntityVisible(Guard1, true)
+    SetPedRelationshipGroupHash(Guard1, `HATES_PLAYER`)
+    SetPedAccuracy(Guard1, Config.GuardAccuracy)
+    SetPedArmour(Guard1, Config.GuardArmor)
+    SetPedMaxHealth(Guard1, Config.GuardsHealth)
+    SetPedCanSwitchWeapon(Guard1, true)
+    SetPedDropsWeaponsWhenDead(Guard1, false)
+    SetPedFleeAttributes(Guard1, 0, false)
+    GiveWeaponToPed(Guard1, `WEAPON_SMG`, Config.GuardWeapon, false, true)
+    SetPedSuffersCriticalHits(Guard1, false)
+    SetPedCanRagdoll(Guard1, false)
+
+    TaskLeaveVehicle(Guard2, Truck, 0)
+    SetEntityAsMissionEntity(Guard2)
+    SetEntityVisible(Guard2, true)
+    SetPedRelationshipGroupHash(Guard2, `HATES_PLAYER`)
+    SetPedAccuracy(Guard2, Config.GuardAccuracy)
+    SetPedArmour(Guard2, Config.GuardArmor)
+    SetPedMaxHealth(Guard2, Config.GuardsHealth)
+    SetPedCanSwitchWeapon(Guard2, true)
+    SetPedDropsWeaponsWhenDead(Guard2, false)
+    SetPedFleeAttributes(Guard2, 0, false)
+    GiveWeaponToPed(Guard2, `WEAPON_SMG`, Config.GuardWeapon, false, true)
+    SetPedSuffersCriticalHits(Guard2, false)
+    SetPedCanRagdoll(Guard2, false)
+    GuardsSpawned = true
     SetVehicleDoorOpen(Truck, 3, false, true)
     SetVehicleDoorOpen(Truck, 4, false, true)
     CreateThread( function ()
@@ -442,10 +484,10 @@ function SpawnGuards()
             local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
             local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
             if TruckDist <= 2.5 and not CanLoot then
-                exports['qb-ui']:showInteraction("[E] Grab Loot")
+                exports['qb-core']:DrawText("[E] Grab Loot", "left")
                 PressedKey2()
             else
-                exports['qb-ui']:hideInteraction()
+                exports['qb-core']:HideText()
             end
             Wait(1000)
         end
@@ -458,7 +500,7 @@ function PressedKey2()
             if IsControlJustReleased(0, 38) then
                 CanLoot = true
                 KeyPressed2 = true
-                exports['qb-ui']:hideInteraction()
+                exports["qb-core"]:KeyPressed()
                 Loot()
             end
             Wait(1)
@@ -485,7 +527,9 @@ function Loot()
         coords = { x = -0.004, y = 0.00, z = -0.14 },
         rotation = { x = 235.0, y = -25.0, z = 0.0 },
     }, {}, function() -- Done
-        TriggerServerEvent('qb-banktrucks:server:Payouts')
+        RemoveBlip(TruckBlip)
+        TriggerServerEvent('kevin-banktrucks:server:Payouts')
+        TriggerEvent('kevin-banktrucks:client:Clean')
     end, function() -- Cancel
         QBCore.Functions.Notify("Cancelled", 'error')
     end,"fas fa-boxes-stacked")
@@ -493,11 +537,11 @@ end
 function LoadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
-        Citizen.Wait(10)
+        Wait(10)
     end
 end
 
-RegisterNetEvent('qb-banktrucks:client:Clean', function ()
+RegisterNetEvent('kevin-banktrucks:client:Clean', function ()
     NeedAccess1 = false
     NeedAccess2 = false
     SystemHacked = false
@@ -509,6 +553,8 @@ RegisterNetEvent('qb-banktrucks:client:Clean', function ()
     KeyPressed2 = false
     GuardsSpawned = false
     CanLoot = false
+    alerted2 = false
+    alerted = false
 end)
 
 function SearchAnim()
@@ -521,24 +567,127 @@ function SearchAnim()
     TaskPlayAnim(ped, "anim@gangops@facility@servers@bodysearch@" ,"player_search" ,8.0, -8.0, -1, 49, 0, false, false, false )
 end
 
-function OpenAnim()
-    local ped = PlayerPedId()
-    local pos = GetEntityCoords(ped)
+----------DELIVERY PART STARTS HERE
 
-    local animDict = "anim@heists@ornate_bank@hack"
-    RequestAnimDict(animDict)
-    QBCore.Functions.LoadModel("hei_prop_hst_laptop")
+RegisterNetEvent('kevin-banktrucks:client:StartDelivery', function ()
+    TriggerServerEvent("kevin-banktrucks:server:coolout")
+    TruckPos = Config.DeliverTruckLocations[math.random(#Config.DeliverTruckLocations)]
+    Text()
+    TruckZone = CircleZone:Create(TruckPos, 150.0, {
+		name = "Truck-Zone",
+		debugPoly = false
+	})
+	TruckZone:onPlayerInOut(function(isPointInside)
+		if isPointInside then
+			if not truckSpawn then
+				spawnTruck()
+			end
+		end
+	end)
+end)
 
-    hacklaptop = CreateObject(`hei_prop_hst_laptop`, pos.x, pos.y, pos.z + 0.40, 1, 1, 0)
-    SetEntityHeading(hacklaptop, GetEntityHeading(ped))
-    local LaptopPos = GetEntityCoords(hacklaptop)
-    local HackLoop = NetworkCreateSynchronisedScene(LaptopPos, GetEntityRotation(hacklaptop), 0, false, true, 1065353216, 0, 1.3)
-    NetworkAddPedToSynchronisedScene(ped, HackLoop, animDict, "hack_loop", 3.0, 3.0, 25, 16, 1148846080, 0)
-    NetworkAddEntityToSynchronisedScene(hacklaptop, HackLoop, animDict, "hack_loop_laptop", 4.0, -8.0, 1)
-    HackFinished = NetworkCreateSynchronisedScene(LaptopPos, GetEntityRotation(hacklaptop), 0, false, true, 1065353216, 0, 1.3)
-    NetworkAddPedToSynchronisedScene(ped, HackFinished, animDict, "hack_exit", 3.0, 3.0, 25, 16, 1148846080, 0)
-    NetworkAddEntityToSynchronisedScene(hacklaptop, HackFinished, animDict, "hack_exit_laptop", 4.0, -8.0, 1)
-    NetworkStartSynchronisedScene(HackLoop)
+function Text()
+    SystemHacked = false
+    Wait(1000)
+    TriggerServerEvent('qb-phone:server:sendNewMail', {
+        sender = "Lester's Computer",
+        subject = 'Job Info',
+        message = 'Anonymous: Hey there was a messup on that job and we had to stash the truck. Unfortunately we cannot remember where exactly it all went down so fast but we have a general idea of the area I will send you the gps ping',
+    })
+    Wait(15000)
+    TruckArea = AddBlipForRadius(TruckPos.x, TruckPos.y + 175, TruckPos.z, 450.0)
+    SetBlipColour(TruckArea, 72)
 end
 
+function spawnTruck()
+    QBCore.Functions.LoadModel("stockade")
+    Truck = CreateVehicle("stockade", TruckPos.x, TruckPos.y, TruckPos.z, TruckPos.w, true, true)
+    SetEntityAsMissionEntity(Truck)
+    truckSpawn = true
+end
 
+CreateThread( function ()
+    while true do
+        if truckSpawn then
+            if IsPedInVehicle(PlayerPedId(), Truck) and not GotMsg then
+                exports['ps-dispatch']:BankTruckRobbery()
+                TruckZone:destroy()
+                RemoveBlip(TruckArea)
+                SetDrop()
+            end
+        end
+        Wait(1000)
+    end
+end)
+
+RegisterNetEvent('banktrucks:policegps', function (x,y,z)
+    local Player = QBCore.Functions.GetPlayerData()
+    if Player.job.name == 'police' then
+        RemoveBlip(TruckGps)
+        TruckPos = GetEntityCoords(Truck)
+        TruckGps =  AddBlipForCoord(x,y,z)
+        SetBlipSprite(TruckGps, 161)
+        SetBlipAsShortRange(TruckGps, true)
+        SetBlipColour(TruckGps, 1)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString('Bank Truck Gps')
+        EndTextCommandSetBlipName(TruckGps)
+    end
+end)
+
+function SetDrop()
+    TriggerEvent('qb-phone:client:CustomNotification', 'NOTIFICATION', 'Drive until you get a drop location', 'fas fa-bars', '#00ffd5', 5500)
+    CreateThread(function ()
+        while DoesEntityExist(Truck) do
+            if not GotLocation then
+                TriggerServerEvent('banktrucks:policegps',TruckPos)
+            end
+            Wait(3000)
+        end
+    end)
+    Wait(Config.GpsTimer)
+    GotLocation = true
+    RemoveBlip(TruckGps)
+    truckSpawn = false
+    local droploc = Config.RandomDropLocation[math.random(#Config.RandomDropLocation)]
+    DropBlip = AddBlipForCoord(droploc)
+    SetBlipSprite(DropBlip, 440)
+    SetBlipColour(DropBlip, 64)
+    SetBlipScale(DropBlip, 0.70)
+    TriggerEvent('qb-phone:client:CustomNotification', 'NOTIFICATION', 'Deliver vehicle to drop point', 'fas fa-location-arrow', '#00ffd5', 5500)
+    GotMsg = true
+
+    DropZone = CircleZone:Create(droploc, 10.0, {
+		name = "Drop-Zone",
+		debugPoly = false
+	})
+	DropZone:onPlayerInOut(function(isPointInside)
+		if isPointInside then
+            Finish()
+		end
+	end)
+end
+
+function Finish()
+    CreateThread( function ()
+        while not notdelivered do
+            if IsVehicleStopped(Truck) then
+                if IsPedInVehicle(PlayerPedId(), Truck) then
+                    FreezeEntityPosition(Truck, true)
+                    RemoveBlip(DropBlip)
+                    TriggerServerEvent('kevin-banktrucks:server:DeliveryPayouts')
+                    DropZone:destroy()
+                    notdelivered = true
+                    QBCore.Functions.DeleteVehicle(Truck)
+                    truckSpawn = false
+                    notdelivered = false
+                    SystemHacked = false
+                    NeedAccess1 = false
+                    NeedAccess2 = false
+                    GotLocation = false
+                end
+            end
+            Wait(1000)
+        end
+    end)
+end

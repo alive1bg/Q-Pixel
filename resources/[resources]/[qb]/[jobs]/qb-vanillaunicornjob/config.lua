@@ -10,7 +10,7 @@ Config.Locations = { ["main"] = { label = "Vanilla Unicorn", coords = vector3(11
 
 Config.ClockOutDist = 35 --25 Seems about fair, just outside the boundaries of the building
 
-Config.MLO = "van" --Set to "van" for the default interior
+Config.MLO = "gabz" --Set to "van" for the default interior
 				   --Set to "gabz" for Gabz VU interior
 
 Config.DrinkItems = {

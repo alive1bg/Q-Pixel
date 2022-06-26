@@ -163,7 +163,7 @@ AddEventHandler("pma-voice:radioActive", function(isRadioTalking)
 end)
 
 -- Callbacks & Events
-RegisterCommand('menu', function()
+RegisterCommand('hud', function()
     Wait(50)
     if showMenu then return end
     TriggerEvent("hud:client:playOpenMenuSounds")

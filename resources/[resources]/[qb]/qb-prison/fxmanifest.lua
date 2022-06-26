@@ -28,4 +28,3 @@ client_scripts {
 server_script 'server/main.lua'
 
 lua54 'yes'
-dependency '/assetpacks'

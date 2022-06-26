@@ -734,7 +734,7 @@ end
 
 function hideUi()
 	exports['textUi']:HideTextUi('hide')
-	exports['casinoUi']:HideCasinoUi('hide') 
+	exports['qb-casinoui']:Hideqb-casinoui('hide') 
 end
 
 function changeBetAmount(amount)
@@ -917,7 +917,7 @@ function casinoNuiUpdateGame(rulettIndex, ido, statusz)
         retval = result
         if selectedRulett == rulettIndex then
             if not statusz then
-                exports['casinoUi']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>"..ido.." Seconds Left</p>Current Bet: "..currentBetAmount.." chips</p>Availble chips: "..retval)
+                exports['qb-casinoui']:Drawqb-casinoui('show', "Diamond Casino Blackjack</p>"..ido.." Seconds Left</p>Current Bet: "..currentBetAmount.." chips</p>Availble chips: "..retval)
                 if Config.allowCustomBet then
                     exports['textUi']:DrawTextUi('show', "Adjust Bet: <strong>↑/↓</strong></p>LEFT CLICK: Bet number</p>SPACEBAR: Custom Amount</p>E: Change camera</p>ESC: Exit")
                 else

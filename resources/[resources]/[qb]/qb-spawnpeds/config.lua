@@ -301,10 +301,9 @@ Config.PedList = {
 	},
 	{
 		model = 'a_f_y_business_01', 
-		coords = vector4(-112.22, 6471.01, 31.63, 134.18), 
+		coords = vector4(-107.1917, 6473.6588, 31.039972, 225.00003),
 		gender = 'male', 
-		animDict = 'anim@heists@prison_heiststation@cop_reactions',
-		animName = 'cop_b_idle'
+		scenario = 'PROP_HUMAN_SEAT_COMPUTER'
 	},
 	{
 		model = `cs_lifeinvad_01`, -- Arcade
@@ -344,5 +343,11 @@ Config.PedList = {
 		coords = vector4(255.28853, 215.7876, 105.84213, 326.11083),
 		gender = 'female', 
 		scenario = 'PROP_HUMAN_SEAT_COMPUTER'
+	},
+	-- CARD SHOP
+	{
+		model = 'u_m_y_rsranger_01',
+		coords = vector4(-152.2783, 229.18035, 89.081504, 93.520172),
+		gender = 'male', 
 	},
 }

@@ -151,6 +151,7 @@ Config.Shops = {
         ['Location'] = vector3(140.61065, -3035.94, 6.4677233),
         ['ReturnLocation'] = vector4(124.73069, -3022.994, 6.4294185, 269.32009),
         ['VehicleSpawn'] = vector4(124.73069, -3022.994, 6.4294185, 269.32009),
+        ['TestDriveSpawn'] = vector4(124.73069, -3022.994, 6.4294185, 269.32009),
         ['ShowroomVehicles'] = {
             [1] = {
                 coords = vector4(151.24, -3043.06, 6.05, 32.22),

@@ -11,19 +11,19 @@ QBCore.Functions.CreateUseableItem("boosterbox", function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot, item.info) then
         TriggerClientEvent("Cards:Client:OpenCards", source, item.name)
-			local xPlayer = QBCore.Functions.GetPlayer(source)
-				xPlayer.Functions.AddItem('boosterpack',4)
-           Wait(4000)
+		local xPlayer = QBCore.Functions.GetPlayer(source)
+		xPlayer.Functions.AddItem('boosterpack', 4)
+        Wait(4000)
         TriggerClientEvent('QBCore:Notify', source, 'You got 4 booster packs!')
-            Wait(1000)
+        Wait(1000)
     end
 end)
 
 QBCore.Functions.CreateCallback("Cards:server:Menu",function(source,cb)
     local player = QBCore.Functions.GetPlayer(source)
     local item = "...."
-        if player ~= nil then
-            if player.Functions.GetItemByName(item) then
+    if player ~= nil then
+        if player.Functions.GetItemByName(item) then
             cb(item,item.amount)
         end
     end
@@ -31,9 +31,9 @@ end)
 
 QBCore.Functions.CreateUseableItem("boosterpack", function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)  
-        TriggerClientEvent("Cards:Client:OpenPack", source)  
-        Wait(4000)
-        TriggerClientEvent('QBCore:Notify', source, 'You got 4 cards!')
+    TriggerClientEvent("Cards:Client:OpenPack", source)  
+    Wait(4000)
+    TriggerClientEvent('QBCore:Notify', source, 'You got 4 cards!')
 end)
 
 RegisterServerEvent('Cards:Server:RemoveItem')
@@ -47,7 +47,6 @@ AddEventHandler('Cards:Server:RemoveItem', function()
     else
         Player.Functions.RemoveItem('boosterpack',1)
     end
-  
 end)
 
 CreateThread(function()
@@ -60,29 +59,21 @@ AddEventHandler('Cards:Server:rewarditem', function()
     local Player = QBCore.Functions.GetPlayer(source)
     local pack = Player.Functions.GetItemByName("boosterpack")
     local card = ''
-
     local randomChance = math.random(1, 1000)
-   -- print(randomChance) -- if you wanna see the random chance
     if randomChance <= 5 then 
         card = rainbowCards[math.random(1,#rainbowCards)]         
 	elseif randomChance >= 6 and randomChance <= 19 then
         card = vmaxCards[math.random(1, #vmaxCards)]
-
 	elseif randomChance >= 20 and randomChance <= 50 then
         card = vCards[math.random(1, #vCards)]
-
 	elseif randomChance >= 51 and randomChance <= 100 then
         card = ultraCards[math.random(1, #ultraCards)]
-
     elseif randomChance >= 101 and randomChance <= 399 then
         card = rareCards[math.random(1, #rareCards)]
     else 
         card = basicCards[math.random(1, #basicCards)]
 	end
-
     Wait(10)
-    --print(card)
-
     if card ~= '' then        
         TriggerClientEvent('Cards:Client:CardChoosed', src, card)
     else
@@ -99,35 +90,35 @@ AddEventHandler('Cards:Server:GetPokemon', function(pokemon)
         TriggerClientEvent("inventory:client:ItemBox", QBCore.Shared.Items[pokemon], "add")
         TriggerClientEvent('QBCore:Notify', source, "You got "..pokemonName.. "")
         Player.Functions.AddItem(pokemon, 1)
-    end  
+    end
 end)
 
 RegisterServerEvent("Cards:server:badges")
 AddEventHandler("Cards:server:badges", function(type)
-        local total = 0
-        local canBadge = true
-        local Player = QBCore.Functions.GetPlayer(source)
-            for k, v in pairs(Config.Badge[type].cards) do 
-                if Player.Functions.GetItemByName(k) ~= nil then 
-                    if Player.Functions.GetItemByName(k).amount < v then 
-                       canBadge = false
-                      TriggerClientEvent('QBCore:Notify', source, 'Come back when you have all the items for the '..Config.Badge[type].label, 'error', 5000) 
-                    end
-                else 
-                    canBadge = false
-                    TriggerClientEvent('QBCore:Notify', source, 'Come back when you have all the items for the '..Config.Badge[type].label, 'error', 5000)
-                    break                          
-                end
+    local total = 0
+    local canBadge = true
+    local Player = QBCore.Functions.GetPlayer(source)
+    for k, v in pairs(Config.Badge[type].cards) do 
+        if Player.Functions.GetItemByName(k) ~= nil then 
+            if Player.Functions.GetItemByName(k).amount < v then 
+                canBadge = false
+                TriggerClientEvent('QBCore:Notify', source, 'Come back when you have all the items for the '..Config.Badge[type].label, 'error', 5000) 
             end
-                if canBadge then 
-                    TriggerClientEvent('QBCore:Notify', source, 'You got a '..Config.Badge[type].label..'!', 'success', 10000)
-                    for k, v in pairs(Config.Badge[type].cards) do
-                    Player.Functions.RemoveItem(k, v)
+        else 
+            canBadge = false
+            TriggerClientEvent('QBCore:Notify', source, 'Come back when you have all the items for the '..Config.Badge[type].label, 'error', 5000)
+            break                          
+        end
+    end
+    if canBadge then 
+        TriggerClientEvent('QBCore:Notify', source, 'You got a '..Config.Badge[type].label..'!', 'success', 10000)
+        for k, v in pairs(Config.Badge[type].cards) do
+        Player.Functions.RemoveItem(k, v)
 
-                    end 
-                   Wait(2000)
-                    Player.Functions.AddItem(type, 1)
-                end 
+        end 
+        Wait(2000)
+        Player.Functions.AddItem(type, 1)
+    end
 end)
 
 QBCore.Functions.CreateUseableItem("pokebox", function(source, item)
@@ -147,7 +138,6 @@ end
 RegisterServerEvent("Cards:sellItem")
 AddEventHandler("Cards:sellItem", function(itemName, amount, price)
 	local xPlayer = QBCore.Functions.GetPlayer(source)
-    
     if xPlayer.Functions.RemoveItem(itemName, amount) then
         xPlayer.Functions.AddMoney('cash', price, 'Card-sell')
         TriggerClientEvent("QBCore:Notify", source, "You sold " .. amount .. " " .. itemName .. " for $" .. price, "success", 5000)

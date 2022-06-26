@@ -709,8 +709,10 @@ end)
 --====================================================================================
 
 RegisterNetEvent('dispatch:clNotify', function(sNotificationData, sNotificationId)
-    sNotificationData.playerJob = PlayerData.job.name
-    SendNUIMessage({ type = "call", data = sNotificationData })
+    if LocalPlayer.state.isLoggedIn then
+        sNotificationData.playerJob = PlayerData.job.name
+        SendNUIMessage({ type = "call", data = sNotificationData })
+    end
 end)
 
 RegisterNUICallback("setWaypoint", function(data, cb)

@@ -264,6 +264,7 @@ fr_skins = {
     "ig_sherry",
     "ig_roseedwards",
     "ig_old_lady_cop",
+    "dreahj",
 }
 
 frm_skins = {
@@ -271,7 +272,9 @@ frm_skins = {
     'player_one',
     'player_two',
     'player_zero',
+    'mp_m_niko_01',
     "ig_vanya",
+    "ghostface",
     "bobby_brown",
     "ig_shevy",
     "ig_tony",
@@ -319,7 +322,7 @@ frm_skins = {
     "ig_nino",
     "ig_cesar",
     "ig_cornwood",
-    "ig_bogg",  
+    "ig_bogg",
     "ig_avonB",
     "ig_eddieD",
     "dragon",
@@ -352,10 +355,14 @@ frm_skins = {
     "ig_hatcarl",
     "silverhand",
     "ig_pedro",
-    "csb_miguelmadrazo", -- For krnk
+    "csb_miguelmadrazo",
     "ig_rabies",
     "ig_fingle",
+    'ig_dw_kid',
+    'ig_dw',
     "codprice",
+    "jason",
+    "igor",
     "ig_tommyt",
     'ig_paige',
     'ig_abigail',
@@ -721,6 +728,8 @@ frm_skins = {
     'ig_trafficwarden_m',
     'g_m_m_chiboss_01_m',
     "ig_squid",
+    "brian_o",
+    "ig_francis",
 }
 
 function GetCustomSkins()

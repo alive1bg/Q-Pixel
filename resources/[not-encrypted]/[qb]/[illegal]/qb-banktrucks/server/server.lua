@@ -2,7 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 local CoolDown = false
 
-RegisterServerEvent('qb-banktrucks:server:coolout', function()
+RegisterServerEvent('kevin-banktrucks:server:coolout', function()
     CoolDown = true
     local timer = Config.CoolDown
     while timer > 0 do
@@ -14,7 +14,7 @@ RegisterServerEvent('qb-banktrucks:server:coolout', function()
     end
 end)
 
-QBCore.Functions.CreateCallback("qb-banktrucks:server:coolc",function(source, cb)
+QBCore.Functions.CreateCallback("kevin-banktrucks:server:coolc",function(source, cb)
     if CoolDown then
         cb(true)
     else
@@ -22,7 +22,7 @@ QBCore.Functions.CreateCallback("qb-banktrucks:server:coolc",function(source, cb
     end
 end)
 
-QBCore.Functions.CreateCallback('qb-banktrucks:server:hasItem', function(source, cb)
+QBCore.Functions.CreateCallback('kevin-banktrucks:server:hasItem', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 	local hasItem = Player.Functions.GetItemByName("hacking-laptop")
@@ -33,22 +33,14 @@ QBCore.Functions.CreateCallback('qb-banktrucks:server:hasItem', function(source,
     end
 end)
 
-RegisterNetEvent('qb-banktrucks:server:giveitem', function ()
+RegisterNetEvent('kevin-banktrucks:server:giveitem', function ()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     Player.Functions.AddItem("gps-device", 1)
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["gps-device"], "add")
 end)
 
-QBCore.Functions.CreateUseableItem("gps-device", function(source, item)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("qb-banktrucks:client:gettruck", src, item.name)
-    end
-end)
-
-RegisterServerEvent('qb-banktrucks:server:Payouts', function()
+RegisterServerEvent('kevin-banktrucks:server:Payouts', function()
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
 	local rewardamt = math.random(Config.MinReward,Config.MaxReward)
@@ -64,6 +56,41 @@ RegisterServerEvent('qb-banktrucks:server:Payouts', function()
 		Player.Functions.AddItem(Config.RareItem, rareamt)
 		TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.RareItem], "add", rareamt)
 	end
-    TriggerClientEvent('qb-banktrucks:client:Clean',src)
 	Wait(2500)
+end)
+
+RegisterServerEvent('kevin-banktrucks:server:DeliveryPayouts', function()
+	local src = source
+	local Player = QBCore.Functions.GetPlayer(src)
+	local rewardamt = math.random(Config.DeliveryMinReward,Config.DeliveryMaxReward)
+	local info = {
+		worth = math.random(Config.DeliveryMinPayout, Config.DeliveryMaxPayout)
+	}
+    local rareamt = Config.DeliveryRareItemAmt
+	Player.Functions.AddItem(Config.DeliveryReward, rewardamt, false, info)
+	TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.DeliveryReward], "add",rewardamt)
+
+	local chance = math.random(1, 100)
+	if chance >= 95 then
+		Player.Functions.AddItem(Config.DeliveryRareItem, rareamt)
+		TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.DeliveryRareItem], "add", rareamt)
+	end
+	Wait(2500)
+end)
+
+QBCore.Functions.CreateUseableItem("gps-device", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("kevin-banktrucks:client:gettruck", src, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("kthermite", function(source, item)
+    local src = source
+    TriggerClientEvent("kevin-banktrucks:client:usethermite", src, item.name)
+end)
+
+RegisterNetEvent('banktrucks:policegps', function (TruckPos)
+    TriggerClientEvent('banktrucks:policegps', -1, TruckPos)
 end)

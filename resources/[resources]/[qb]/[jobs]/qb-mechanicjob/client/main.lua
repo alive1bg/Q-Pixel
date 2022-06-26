@@ -42,21 +42,6 @@ local function loadAnimDict(dict)
     end
 end
 
-local function DrawText3Ds(x, y, z, text)
-	SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(true)
-    AddTextComponentString(text)
-    SetDrawOrigin(x,y,z, 0)
-    DrawText(0.0, 0.0)
-    local factor = (string.len(text)) / 370
-    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
-    ClearDrawOrigin()
-end
-
 local function SetClosestPlate()
     local pos = GetEntityCoords(PlayerPedId(), true)
     local current = nil
@@ -528,7 +513,7 @@ local function RepairPart(part)
                     StashItems[indx].amount = countitem
                 end
                 TriggerEvent('qb-vehicletuning:client:RepaireeePart', part)
-                TriggerServerEvent('qb-inventory:server:SaveStashItems', "mechanicstash", StashItems)
+                TriggerServerEvent('qb-inventory:server:SaveStashItems', "tunerstash", StashItems)
                 SetTimeout(250, function()
                     PartsMenu()
                 end)
@@ -538,7 +523,7 @@ local function RepairPart(part)
         else
             QBCore.Functions.Notify('There Are Not Enough Materials In The Safe', 'error')
         end
-    end, "mechanicstash")
+    end, "tunerstash")
 end
 
 
@@ -798,10 +783,10 @@ CreateThread(function()
                 if onDuty then
                     if StashDistance < 20 then
                         inRange = true
-                        if StashDistance < 2 then
+                        if StashDistance < 3 then
                             if IsControlJustReleased(0, 38) then
-                                TriggerEvent("inventory:client:SetCurrentStash", "tunertash")
-                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "tunerstash", {
+                                TriggerEvent("inventory:client:SetCurrentStash", "tunerjobstash")
+                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "tunerjobstash", {
                                     maxweight = 4000000,
                                     slots = 500,
                                 })
@@ -1037,25 +1022,6 @@ AddEventHandler('tuner:personalstash', function(players)
 end)
 
 -- 3rd eye target tuner boss menu
---[[exports['qb-target']:AddBoxZone("TunerBossMenu", vector3(125.4, -3014.79, 7.04), 0.35, 0.35, {
-    name = "TunerBossMenu",
-    heading = 0,
-    debugPoly = false,
-    minZ=6.84,
-    maxZ=7.14
-    }, {
-    options = {
-        {
-            type = "client",
-            event = "qb-management:client:OpenMenu",
-            icon = "fas fa-sign-in-alt",
-            label = "Open Boss Menu",
-            job = {["tuner"] = 4},
-        },
-    },
-    distance = 1.5
-})]]
-
 exports['qb-target']:AddBoxZone("TunerDuty", vector3(126.04, -3007.26, 7.04), 0.4, 0.45, {
     name = "TunerDuty",
     heading = 90.0,

@@ -4,14 +4,6 @@ game 'gta5'
 description 'QB-Core'
 version '1.0.0'
 
-lua54 'yes'
-
-escrow_ignore {
-	'shared/*.lua',
-	'locale/*.lua',
-	'config.lua'
-}
-
 shared_scripts {
 	'shared/locale.lua',
 	'locale/en.lua', -- replace with desired language

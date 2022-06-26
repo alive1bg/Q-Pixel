@@ -4,11 +4,6 @@ game 'gta5'
 description 'QB-Nitro'
 version '1.0.0'
 
-lua54 'yes'
-
-escrow_ignore {
-}
-
 client_script 'client/main.lua'
 
 server_scripts {
