@@ -144,20 +144,20 @@ CreateThread(function() -- STOP IDLE CAMERA THAT PLAYS AFTER 30 SECS
     end
 end)
 
---[[CreateThread(function() -- TRAIN SPAWNS / SPAWN TRAINS
+CreateThread(function() -- TRAIN SPAWNS / SPAWN TRAINS
 	SwitchTrainTrack(0, true)
 	SwitchTrainTrack(3, true)
 	N_0x21973bbf8d17edfa(0, 120000)
 	SetRandomTrains(true)
-  end)]]--
+end)
 
-  CreateThread(function() -- ONLY 2 CAMERA VIEWS
+CreateThread(function() -- ONLY 2 CAMERA VIEWS
     local setpov = false
     while true do
         DisableControlAction(0, 0, true) -- Controlkey "V"
         local PlayerPed = PlayerPedId()
         local VehicleCurrentCamViewMode = GetFollowVehicleCamViewMode(PlayerPed) -- src https://runtime.fivem.net/doc/natives/?_0xAC253D7842768F48
-            if IsPedInAnyVehicle(PlayerPed) then -- When in Vehicle
+        if IsPedInAnyVehicle(PlayerPed) then -- When in Vehicle
             if not setpov and IsDisabledControlJustPressed(0, 0) then
                 setpov = true
                 SetFollowVehicleCamViewMode(4) -- First Person View
@@ -196,18 +196,17 @@ CreateThread(function() -- ANTI JUMP SPAM -- SEE CONFIG TO ADJUST %
 end)
 
 -- stop controller aim exploit START
-CreateThread(function()
+--[[CreateThread(function()
     while true do
-      Wait(0)
-          if IsPedArmed(PlayerPedId(), 2) and IsPedArmed(PlayerPedId(), 4) then
-            SetPlayerLockon(PlayerId(), false)
-          end
+        Wait(0)
+        if IsPedArmed(PlayerPedId(), 2) and IsPedArmed(PlayerPedId(), 4) then
+        SetPlayerLockon(PlayerId(), false)
+        end
     end
-end)
+end)]]
 -- controller aim exploit start END
 
 -- PICKUP BIKES START
-
 RegisterNetEvent('pickup:bike')
 AddEventHandler('pickup:bike', function()
     local playerPed = PlayerPedId()
@@ -236,7 +235,6 @@ AddEventHandler('pickup:bike', function()
     end, false)
 
         RegisterKeyMapping('dropbike', 'Drop Bike', 'keyboard', 'g')
-
                 CreateThread(function()
                 while true do
                 Wait(0)
@@ -267,7 +265,6 @@ local taserCartsLeft = maxTaserCarts
 
 RegisterNetEvent("FillTaser")
 AddEventHandler("FillTaser",function(source, args, rawCommand)
-    
     QBCore.Functions.Progressbar("load_tazer", "Reloading Tazer..", 2000, false, true, {
         disableMovement = false,
         disableCarMovement = false,
@@ -278,12 +275,9 @@ AddEventHandler("FillTaser",function(source, args, rawCommand)
         anim = "reload_aim",
         flags = 48,
     }, {}, {}, function() -- Done
-    
-        
         taserCartsLeft = maxTaserCarts
         TriggerServerEvent("QBCore:Server:RemoveItem", "taserammo", 1)
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["taserammo"], "remove")
-        
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["taserammo"], "remove")  
     end)
 end) 
 
@@ -293,14 +287,12 @@ CreateThread(function()
     while true do
         Wait(0)
         local ped = PlayerPedId()
-
         if GetSelectedPedWeapon(ped) == taserModel then
             if IsPedShooting(ped) then
                 DisplayAmmoThisFrame(true)
                 taserCartsLeft = taserCartsLeft - 1
             end
         end
-
         if taserCartsLeft <= 0 then
             if GetSelectedPedWeapon(ped) == taserModel then
                 SetPlayerCanDoDriveBy(ped, false)
@@ -310,7 +302,6 @@ CreateThread(function()
                 end
             end
         end
-
         if longerTazeTime then
             SetPedMinGroundTimeForStungun(ped, longerTazeSecTime * 1000)
         end

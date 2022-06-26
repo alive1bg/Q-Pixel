@@ -12,6 +12,7 @@ RegisterCommand('hu', function()
 	end
     handsup = not handsup
     if exports['qb-policejob']:IsHandcuffed() then return end
+	if isPedReloading(ped) then return end
     if handsup then
         TaskPlayAnim(ped, animDict, anim, 8.0, 8.0, -1, 50, 0, false, false, false)
         if IsPedInAnyVehicle(ped, false) then
@@ -56,7 +57,7 @@ CreateThread(function()
 		Wait(5)
 		local playerPed = PlayerPedId()
 		if IsControlJustPressed(0, 38) and IsInputDisabled(2) then
-			Citizen.Wait(100)
+			Wait(100)
 			if not IsPedInAnyVehicle(playerPed) then 
 				RequestAnimDict("random@arrests@busted")
 				while not HasAnimDictLoaded("random@arrests@busted") do 
@@ -80,7 +81,7 @@ CreateThread(function()
 		Wait(5)
 		local playerPed = PlayerPedId()
 		if IsControlJustPressed(0, 73) and IsInputDisabled(2) then
-			Citizen.Wait(100)
+			Wait(100)
 			if not IsPedInAnyVehicle(playerPed) then 
 				RequestAnimDict('missminuteman_1ig_2')
 				while not HasAnimDictLoaded('missminuteman_1ig_2') do

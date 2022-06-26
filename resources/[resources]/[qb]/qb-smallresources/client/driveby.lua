@@ -29,21 +29,17 @@ end)
 CreateThread(function()
     while true do
         Wait(1)
-
         if IsPedShooting(PlayerPedId()) and shot == false and GetFollowPedCamViewMode() ~= 4 then
             check2 = true
             shot = true
             SetFollowVehicleCamViewMode(4)
         end
-
         if IsPedShooting(PlayerPedId()) and shot == true and GetFollowPedCamViewMode() == 4 then
             count = 0
         end
-
         if not IsPedShooting(PlayerPedId()) and shot == true then
             count = count + 1
         end
-
         if not IsPedShooting(PlayerPedId()) and shot == true then
             if not IsPedShooting(PlayerPedId()) and shot == true and count > 20 then
                 if check2 == true then
