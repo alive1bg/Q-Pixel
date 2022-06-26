@@ -132,11 +132,11 @@ local function startTestDriveTimer(testDriveTime)
         while inTestDrive do
             if GetGameTimer() < gameTimer + tonumber(1000 * testDriveTime) then
                 local secondsLeft = GetGameTimer() - gameTimer
-                exports['casinoUi']:DrawCasinoUi('show', Lang:t('general.testdrive_timer') .. math.ceil(testDriveTime - secondsLeft / 1000))
+                exports['qb-casinoui']:DrawCasinoUi('show', Lang:t('general.testdrive_timer') .. math.ceil(testDriveTime - secondsLeft / 1000))
             end
             Wait(0)
         end
-        exports['casinoUi']:HideCasinoUi('hide') 
+        exports['qb-casinoui']:HideCasinoUi('hide')
     end)
 end
 

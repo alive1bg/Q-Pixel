@@ -342,7 +342,7 @@ RegisterNetEvent("doj:client:startingBets", function(args)
             sittingAtBlackjackTable = false
             drawTimerBar = false
             drawCurrentHand = false
-            exports['qb-casinoui']:Hideqb-casinoui('hide') 
+            exports['qb-casinoui']:HideCasinoUi('hide') 
             waitingForBetState = false
             TriggerServerEvent("Blackjack:leaveBlackjackTable")
             closestDealerPed, closestDealerPedDistance = getClosestDealer()
@@ -482,9 +482,9 @@ CreateThread(function()
     while true do
         if drawTimerBar then
             -- QBCore.Functions.TriggerCallback('BLACKJACK:server:blackChipsAmount', function(result)
-            --     exports['qb-casinoui']:Drawqb-casinoui('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount).."</p>Availble chips: "..tostring(result))   
+            --     exports['qb-casinoui']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount).."</p>Availble chips: "..tostring(result))   
 	        -- end) 
-            exports['qb-casinoui']:Drawqb-casinoui('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount))  
+            exports['qb-casinoui']:DrawCasinoUi('show', "Diamond Casino Blackjack</p>Game Starting in: "..tostring(timeLeft).."s</p>Current Bet: "..tostring(currentBetAmount))  
         end
         if drawCurrentHand then
             exports['textUi']:DrawTextUi('show', "Your hand: "..tostring(currentHand).."</p>Dealers Hand: "..tostring(dealersHand))  
@@ -539,7 +539,7 @@ RegisterNetEvent("Blackjack:beginCardGiveOut")
 AddEventHandler("Blackjack:beginCardGiveOut",function(gameId,cardData,chairId,cardIndex,gotCurrentHand,tableId)
     if closeToCasino then
         blackjackGameInProgress = true
-        exports['qb-casinoui']:Hideqb-casinoui('hide') 
+        exports['qb-casinoui']:HideCasinoUi('hide') 
         blackjackAnimsToLoad = {
             "anim_casino_b@amb@casino@games@blackjack@dealer",
             "anim_casino_b@amb@casino@games@shared@dealer@",

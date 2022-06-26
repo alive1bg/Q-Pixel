@@ -138,6 +138,7 @@ Config.Shops = {
             ['mitsubishi'] = 'Mitsubishi',
             ['nissan'] = 'Nissan',
             ['peuogeot'] = 'Peugeot',
+            ['pontiac'] = 'Pontiac',
             ['porsche'] = 'Porsche',
             ['landrover'] = 'Land Rover',
             ['renault'] = 'Renault',
