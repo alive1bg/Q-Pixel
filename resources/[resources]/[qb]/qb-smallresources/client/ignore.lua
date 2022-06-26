@@ -196,14 +196,14 @@ CreateThread(function() -- ANTI JUMP SPAM -- SEE CONFIG TO ADJUST %
 end)
 
 -- stop controller aim exploit START
---[[CreateThread(function()
+CreateThread(function()
     while true do
         Wait(0)
         if IsPedArmed(PlayerPedId(), 2) and IsPedArmed(PlayerPedId(), 4) then
         SetPlayerLockon(PlayerId(), false)
         end
     end
-end)]]
+end)
 -- controller aim exploit start END
 
 -- PICKUP BIKES START
@@ -307,3 +307,22 @@ CreateThread(function()
         end
     end
 end)
+
+---- Prevent players from losing clothes after being puched or taken damage
+
+CreateThread(function ()
+    SetPedCanLosePropsOnDamage(PlayerPedId(), false, 0)
+end)
+
+local lastped = nil
+
+CreateThread(function ()
+    while true do
+        if PlayerPedId() ~= lastped then
+            lastped = PlayerPedId()
+            SetPedCanLosePropsOnDamage(PlayerPedId(), false, 0)
+        end
+        Wait(100)
+    end
+end
+)
