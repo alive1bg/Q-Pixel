@@ -1,8 +1,10 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'qb-cameras'
-version '1.0.0'
+lua54 'yes'
+
+escrow_ignore {
+}
 
 shared_script { 
 --	'@qb-core/import.lua'

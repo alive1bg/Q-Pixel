@@ -2,7 +2,10 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'EOTIX SCRIPT I DA DUMVASH I DA NE SI OSTAWASH BALUK'
+lua54 'yes'
+
+escrow_ignore {
+}
 
 server_script 'server.lua'
 client_script 'client.lua'

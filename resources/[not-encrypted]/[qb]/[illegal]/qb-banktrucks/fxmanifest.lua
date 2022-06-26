@@ -1,7 +1,10 @@
 
 fx_version 'cerulean'
 
-author 'KevinGirardx'
+lua54 'yes'
+
+escrow_ignore {
+}
 
 game 'gta5'
 

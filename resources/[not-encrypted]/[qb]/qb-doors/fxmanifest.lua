@@ -1,5 +1,10 @@
 fx_version 'cerulean'
 
+lua54 'yes'
+
+escrow_ignore {
+}
+
 games {
     'gta5',
     'rdr3'

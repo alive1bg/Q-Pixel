@@ -1,9 +1,10 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'Nopixel inspired qb-garages'
-version 'v2.1'
-author 'Haritha#3955'
+lua54 'yes'
+
+escrow_ignore {
+}
 
 server_script {
     'Server/sv_main.lua',

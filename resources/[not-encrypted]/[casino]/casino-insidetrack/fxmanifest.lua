@@ -2,7 +2,11 @@ fx_version 'cerulean'
 
 game 'gta5'
 
-description 'Rexhack Gaming : Inside-Track'
+lua54 'yes'
+
+escrow_ignore {
+
+}
 
 version '1.0.1'
 
