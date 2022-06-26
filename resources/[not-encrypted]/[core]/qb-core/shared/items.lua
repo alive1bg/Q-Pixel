@@ -1102,6 +1102,7 @@ QBShared.Items = {
 	-- BANK TRUCK ROBBERY
 	["hacking-laptop"] 			     		 = {["name"] = "hacking-laptop",				    		["label"] = "Hacking Laptop",			   			["weight"] = 1500,    	["type"] = "item",		["image"] = "hacking-laptop.png",         			["unique"] = true,		["useable"] = true,	    ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "",								["created"] = nil, 		["decay"] = 28.0 },
 	["gps-device"] 			     		 = {["name"] = "gps-device",				    		["label"] = "Gps Device",			   			["weight"] = 1500,    	["type"] = "item",		["image"] = "gps-device.png",         			["unique"] = true,		["useable"] = true,	    ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "",								["created"] = nil, 		["decay"] = 28.0 },
+	["kthermite"] 			 		 = {["name"] = "kthermite",						["label"] = "Thermite",					["weight"] = 500,    	["type"] = "item",		["image"] = "thermite.png",         		["unique"] = true,		["useable"] = true,	    ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "",				["created"] = nil, 		["decay"] = 1.0 },
 
 	-- Random Fun NP Items
 	['wingsuit_open']		  = {['name'] = "wingsuit_open",					['label'] = "Wingsuit Open",			['weight'] = 2500,		['type'] = 'item', 		['image'] = 'np_wingsuit.png',						['unique'] = true,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "Falling, with style!", ['created'] = nil, ['decay'] = 28.0},

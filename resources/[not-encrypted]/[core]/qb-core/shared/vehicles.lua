@@ -596,6 +596,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----BUICK
+	['rrgnx'] = {
+		['name'] = 'GN X RR',
+		['brand'] = 'Buick',
+		['model'] = 'rrgnx',
+		['price'] = 30000,
+		['category'] = 'buick',
+		['hash'] = 'rrgnx',
+		['shop'] = 'tuner',
+	},
 	['bgnx'] = {
 		['name'] = 'GN X',
 		['brand'] = 'Buick',
@@ -634,6 +643,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----CHEVROLET
+	['rrbelair'] = {
+		['name'] = 'BelAir Custom',
+		['brand'] = 'Chevrolet',
+		['model'] = 'rrbelair',
+		['price'] = 1986000,
+		['category'] = 'chevrolet',
+		['hash'] = 'rrbelair',
+		['shop'] = 'tuner',
+	},
 	['c7'] = {
 		['name'] = 'Corvette C7',
 		['brand'] = 'Chevrolet',
@@ -689,6 +707,24 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----DODGE
+	['rr68demoncharger'] = {
+		['name'] = '69 Demon Charger',
+		['brand'] = 'Dodge',
+		['model'] = 'rr68demoncharger',
+		['price'] = 1300000,
+		['category'] = 'dodge',
+		['hash'] = 'rr68demoncharger',
+		['shop'] = 'tuner',
+	},
+	['rrhelldart'] = {
+		['name'] = 'Hell Dart',
+		['brand'] = 'Dodge',
+		['model'] = 'rrhelldart',
+		['price'] = 1300000,
+		['category'] = 'dodge',
+		['hash'] = 'rrhelldart',
+		['shop'] = 'tuner',
+	},
 	['69charger'] = {
 		['name'] = 'Charger RT/70 1969',
 		['brand'] = 'Dodge',
@@ -842,6 +878,15 @@ QBShared.Vehicles = {
 		['price'] = 1187000,
 		['category'] = 'ford',
 		['hash'] = 'hoonitruck',
+		['shop'] = 'tuner',
+	},
+	['rrtermivert'] = {
+		['name'] = 'Mustang Wide Convertible',
+		['brand'] = 'FORD',
+		['model'] = 'rrtermivert',
+		['price'] = 1187000,
+		['category'] = 'ford',
+		['hash'] = 'rrtermivert',
 		['shop'] = 'tuner',
 	},
 	['rr70bosswide'] = {
@@ -1452,6 +1497,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----MERCEDES
+	['rrmaybach'] = {
+		['name'] = 'Maybach',
+		['brand'] = 'Mercedes Benz',
+		['model'] = 'rrmaybach',
+		['price'] = 1700000,
+		['category'] = 'mercedes',
+		['hash'] = 'rrmaybach',
+		['shop'] = 'tuner',
+	},
 	['22g63'] = {
 		['name'] = 'AMG G63 G-Wagen',
 		['brand'] = 'Mercedes Benz',
@@ -1616,6 +1670,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----NISSAN
+	['nissanr33tbk'] = {
+		['name'] = 'R33 GTR',
+		['brand'] = 'Nissan',
+		['model'] = 'nissanr33tbk',
+		['price'] = 260000,
+		['category'] = 'nissan',
+		['hash'] = 'nissanr33tbk',
+		['shop'] = 'tuner',
+	},
 	['zlay_gtrkuhl'] = {
 		['name'] = 'GTR Kuhl',
 		['brand'] = 'Nissan',
@@ -1859,6 +1922,16 @@ QBShared.Vehicles = {
 		['price'] = 77000,
 		['category'] = 'peugeot',
 		['hash'] = '205',
+		['shop'] = 'tuner',
+	},
+	----PONTIAC
+	['rr69gto'] = {
+		['name'] = '69 GTO',
+		['brand'] = 'Pontiac',
+		['model'] = 'rr69gto',
+		['price'] = 2795000,
+		['category'] = 'pontiac',
+		['hash'] = 'rr69gto',
 		['shop'] = 'tuner',
 	},
 	----PORSCHE

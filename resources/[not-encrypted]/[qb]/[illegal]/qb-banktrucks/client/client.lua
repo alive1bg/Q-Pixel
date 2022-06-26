@@ -147,7 +147,7 @@ function Connect()
                     coords = { x = 0.18, y = 0.053, z = 0.02 },
                     rotation = { x = 190.0, y = 0.0, z = 80.0 },
                 }, {}, function() -- Done
-                    exports["thermite"]:OpenThermiteGame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
+                    exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
                     function() -- Success
                         TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
                         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
@@ -415,8 +415,8 @@ function AccessDoors()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        exports['ps-dispatch']:BankTruckRobbery()
-        exports["thermite"]:OpenThermiteGame(Config.Blocks2, Config.Attempts2, Config.Show2, Config.Time2,
+        Dispatch()
+        exports["memorygame"]:thermiteminigame(Config.Blocks2, Config.Attempts2, Config.Show2, Config.Time2,
         function() -- Success
             TriggerServerEvent("QBCore:Server:RemoveItem", "kthermite", 1)
             TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["kthermite"], "remove")
@@ -610,7 +610,7 @@ CreateThread( function ()
     while true do
         if truckSpawn then
             if IsPedInVehicle(PlayerPedId(), Truck) and not GotMsg then
-                exports['ps-dispatch']:BankTruckRobbery()
+                Dispatch()
                 TruckZone:destroy()
                 RemoveBlip(TruckArea)
                 SetDrop()
@@ -690,4 +690,31 @@ function Finish()
             Wait(1000)
         end
     end)
+end
+
+
+----- ALERTS PORTION
+function Dispatch()
+    if Config.Dispatch == 'ps-dispatch' then
+        exports['ps-dispatch']:BankTruckRobbery()
+    elseif Config.Dispatch == 'cd-dispatch' then
+        local data = exports['cd_dispatch']:GetPlayerInfo()
+        TriggerServerEvent('cd_dispatch:AddNotification', {
+            job_table = {'police'},
+            coords = data.coords,
+            title = '10-90 - Fleeca Truck Robbery',
+            message = 'A '..data.sex..' robbing a bank truck at '..data.street,
+            flash = 0,
+            unique_id = tostring(math.random(0000000,9999999)),
+            blip = {
+                sprite = 67,
+                scale = 1.5,
+                colour = 2,
+                flashes = false,
+                text = '911 - Fleeca Truck Robbery',
+                time = (5*60*1000),
+                sound = 1,
+            }
+        })
+    end
 end

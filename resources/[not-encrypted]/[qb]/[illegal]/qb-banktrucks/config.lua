@@ -1,5 +1,7 @@
 Config = Config or {}
 
+Config.Dispatch = 'ps-dispatch'  -- ps-dispatch / cd-dispatch  (type of dispatch you use)
+
 ---Thermite Minigame for lester Computer
 Config.Blocks = "6" -- Number of correct blocks the player needs to click
 Config.Attempts = "3" -- Number of incorrect blocks after which the game will fail

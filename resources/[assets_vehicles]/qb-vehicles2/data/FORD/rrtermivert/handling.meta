@@ -2,16 +2,6 @@
 
 <CHandlingDataMgr>
   <HandlingData>
-
-
-
-
-
-
-
-
-
-
     <Item type="CHandlingData">
       <handlingName>rrtermivert</handlingName>
       <fMass value="1650.000000" />
@@ -21,15 +11,15 @@
       <vecInertiaMultiplier x="1.000000" y="1.200000" z="1.400000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="5" />
-      <fInitialDriveForce value="0.560000" />
+      <fInitialDriveForce value="0.360000" />
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="2.100000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="240.000000" />
+      <fInitialDriveMaxFlatVel value="180.000000" />
       <fBrakeForce value="1.100000" />
       <fBrakeBiasFront value="0.525000" />
       <fHandBrakeForce value="1.000000" />
-      <fSteeringLock value="38.000000" />
+      <fSteeringLock value="43.000000" />
       <fTractionCurveMax value="3.000000" />
       <fTractionCurveMin value="2.50000" />
       <fTractionCurveLateral value="22.500000" />
