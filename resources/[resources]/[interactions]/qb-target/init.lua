@@ -172,7 +172,7 @@ Config.TargetBones = {
                 label = "Flip Vehicle",
             },
         },
-        distance = 3.0
+        distance = 2.5
     },
 }
 

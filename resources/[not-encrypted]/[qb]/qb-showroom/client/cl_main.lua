@@ -35,8 +35,8 @@ RegisterNUICallback("showroomPurchaseCurrentVehicle", function(data, cb)
 end);
 
 RegisterNetEvent('qb-showroom:client:buyShowroomVehicle', function(vehicle, plate)
-    coords = vector4(-23.83789, -1094.691, 26.88134, 339.00994)
-    local coords = vector4(-23.83789, -1094.691, 26.88134, 339.00994)
+    coords = vector4(-26.43222, -1082.095, 26.450332, 70.779533)
+    local coords = vector4(-26.43222, -1082.095, 26.450332, 70.779533)
     QBCore.Functions.SpawnVehicle(vehicle, function(veh)
       SetEntityHeading(veh, coords.w)
       SetVehicleNumberPlateText(veh, plate)

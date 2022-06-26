@@ -1,5 +1,6 @@
 fx_version 'adamant'
 games { 'gta5' }
+
 client_scripts {
 	"@PolyZone/client.lua",
 	"@PolyZone/BoxZone.lua",
@@ -11,11 +12,13 @@ client_scripts {
 	"utils.lua",
 	"client/stretcher.lua",
 	"client/clothing.lua",
+	"client/trunk.lua",
 	"emotes_triggers.lua"
 }
 
 server_scripts {
-	"server/stretcher.lua"
+	"server/stretcher.lua",
+	"server/trunk.lua",
 }
 
 shared_script "@qb-garages/config.lua"
