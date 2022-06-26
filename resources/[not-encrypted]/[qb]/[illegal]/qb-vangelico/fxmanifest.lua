@@ -7,10 +7,6 @@ version '1.5.0'
 
 lua54 'yes'
 
-escrow_ignore {
-	'config.lua'
-}
-
 shared_scripts {
     -- If your not using the latest version of QBCore, make sure you comment these two lines out | '@qb-core/shared/locale.lua', | 'locales/en.lua',
     '@qb-core/shared/locale.lua',

@@ -43,7 +43,7 @@ let validate = (ev) => {
             $('.message').html('Finger print recognize complete');
             $('.groups').addClass('hidden');
             $('.splash').removeClass('hidden');
-            $.post('http://tc-slider/callback', JSON.stringify({'success': true}));
+            $.post('http://slider/callback', JSON.stringify({'success': true}));
             setTimeout(function () {
                 $(".minigame").css("display", "none");
                 location.reload()
@@ -58,7 +58,7 @@ let validate = (ev) => {
         $('.message').html('Finger print recognize failed');
         $('.groups').addClass('hidden');
         $('.splash').removeClass('hidden');
-        $.post('http://tc-slider/callback', JSON.stringify({'success': false}));
+        $.post('http://slider/callback', JSON.stringify({'success': false}));
         setTimeout(function () {
             $(".minigame").css("display", "none");
             location.reload()

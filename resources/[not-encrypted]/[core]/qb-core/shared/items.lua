@@ -1071,6 +1071,7 @@ QBShared.Items = {
 	-- PAC BANK VAULT LOWER
 	['lvaultusb']			  = {['name'] = "lvaultusb",					['label'] = "Lower Vault USB",			['weight'] = 500,		['type'] = 'item', 		['image'] = 'lvaultusb.png',				['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "Lower Vault USB Hacking Device", ['created'] = nil, ['decay'] = 28.0},
 	['lvaultusbcodes']		  = {['name'] = "lvaultusbcodes",				['label'] = "Codes",					['weight'] = 500,		['type'] = 'item', 		['image'] = 'lvaultusbcodes.png',			['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "Vault Codes", ['created'] = nil, ['decay'] = 28.0},
+	-- Vangelico Jewellery Robbery
 	['goldlaptop']			  = {['name'] = "goldlaptop",					['label'] = "Gold Laptop",				['weight'] = 500,		['type'] = 'item', 		['image'] = 'np_laptop_prac.png',			['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "A gold laptop used in PAC lower vault.", ['created'] = nil, ['decay'] = 28.0},
 
 	-- FLEECA
@@ -1081,9 +1082,6 @@ QBShared.Items = {
 
 	-- BOBCAT 
 	["bobcatsecuritycard"] 	  = {["name"] = "bobcatsecuritycard", 			["label"] = "Bobcat Security Card", 	["weight"] = 1000, 		["type"] = "item", 		["image"] = "gruppe62.png", 			["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "Provides access to the Bobcat Security building.", ['created'] = nil, ['decay'] = 28.0},
-
-	-- Vangelico Jewellery Robbery
-	["usb_green"] 		 	    = {["name"] = "usb_green", 					["label"] = "Green USB", 				["weight"] = 5000, 	    ["type"] = "item", 		["image"] = "np_heist_usb_green.png", 			["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "What is this USB used for?", ['created'] = nil, ['decay'] = 28.0},
 
 	-- VAR HEIST
 	["var_helmet"] 			 		= {["name"] = "var_helmet", 					["label"] = "VAR Headset", 				["weight"] = 1000, 		["type"] = "item", 		["image"] = "np_var_headset.png", 			["unique"] = true, 		["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "VAR Helmet", ['created'] = nil, ['decay'] = 28.0},

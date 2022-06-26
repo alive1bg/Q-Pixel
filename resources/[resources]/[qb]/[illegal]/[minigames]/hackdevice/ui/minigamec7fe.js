@@ -135,7 +135,7 @@ function check(){
         streak++;
         if(streak == target){
             $('.text').html('HACK COMPLETE')
-            $.post('http://tc-hackdevice/callback', JSON.stringify({'success': true}));
+            $.post('http://hackdevice/callback', JSON.stringify({'success': true}));
             setTimeout(function () {
                 $('.minigame').css('display','none')
                 setTimeout(function(){
@@ -151,7 +151,7 @@ function check(){
         drawPosition('green', false);
         setTimeout(function(){
             $('.text').html('HACK FAILED')
-            $.post('http://tc-hackdevice/callback', JSON.stringify({'success': false}));
+            $.post('http://hackdevice/callback', JSON.stringify({'success': false}));
             setTimeout(function () {
                 $('.minigame').css('display','none')
                 setTimeout(function(){

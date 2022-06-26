@@ -6,11 +6,11 @@ Config.Version = "new"
 
 ------ / Set to false if you haven't updated your QBCore to the latest
 
-Config.Locales = true 
+Config.Locales = true
  
 ------ / Door System | If you use qb-doorlock then use 'qb' | If you use nui_doorlock then use 'nui'
 
-Config.DoorLock = 'qb'
+Config.DoorLock = 'np'
 
 ------ / This will be the ID of the Door that you are using only use this section if you are using qb-doorlock
 
@@ -33,8 +33,8 @@ Config.VangelicoRepeat = 2
 
 ------ / Destroy The Security System / Thermite Minigame
 
-Config.CorrectBlocks = 16
-Config.IncorrectBlocks = 3 
+Config.CorrectBlocks = 1
+Config.IncorrectBlocks = 1 
 Config.TimeToShow = 6 
 Config.TimeToLose = 20
 

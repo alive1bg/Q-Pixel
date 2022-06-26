@@ -24,9 +24,10 @@ RegisterNetEvent('thermite:UseThermite', function()
                                     TriggerServerEvent('qb-jewellery:BeginCooldown')
 
                                     -- Door Dependency (NUI or QB)
-                                    if Config.DoorLock == "nui" then
+                                    if Config.DoorLock == "np" then
                                         -- Successfully Complete Thermite Game (Open Door)
-                                        TriggerServerEvent('nui_doorlock:server:updateState', "vangelicodoor", false, false, false, true)
+                                        TriggerServerEvent("doors:change-lock-state", 236)
+                                        TriggerServerEvent("doors:change-lock-state", 237)
                                     else if Config.DoorLock == "qb" then
                                         -- Successfully Complete Thermite Game (Open Door)
                                         TriggerServerEvent('qb-doorlock:server:updateState', Config.QBDoorID, false)
@@ -153,7 +154,7 @@ RegisterNetEvent('hackinglaptop:UseHackinglaptop', function()
                     })
                     SecurityAnimation()
                     Wait(2000)
-                    exports['hacking']:OpenHackingGame(Config.VangelicoTime, Config.VangelicoBlocks, Config.VangelicoRepeat, 
+                    exports["hacking"]:OpenHackingGame(Config.VangelicoTime, Config.VangelicoBlocks, Config.VangelicoRepeat, 
                     function(Success)
                         if Success then
                             SecuritySuccess()
@@ -162,7 +163,7 @@ RegisterNetEvent('hackinglaptop:UseHackinglaptop', function()
                             SecurityFailed()
                             SecurityFailedAnim()
                         end
-                    end)                        
+                    end)
                 else
                     if Config.Locales == true then
                     QBCore.Functions.Notify(Lang:t("error.wrong_equipment"), "error", 3500)
@@ -487,9 +488,10 @@ RegisterNetEvent('nc-vangelico:client:rebootsystem', function()
         QBCore.Functions.Notify("The System Will Reboot In 30 Seconds!", "error", 3500)
     end
 
-    if Config.DoorLock == "nui" then
+    if Config.DoorLock == "np" then
         Wait(30000)
-        TriggerServerEvent('nui_doorlock:server:updateState', "vangelicodoor", true, false, false, true)
+        TriggerServerEvent("doors:change-lock-state", 236)
+        TriggerServerEvent("doors:change-lock-state", 237)
 
         if Config.Locales == true then
             QBCore.Functions.Notify(Lang:t("success.door_locked"), "success", 3500)

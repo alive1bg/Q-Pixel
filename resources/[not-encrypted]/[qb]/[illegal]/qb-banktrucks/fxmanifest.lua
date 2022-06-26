@@ -29,4 +29,3 @@ escrow_ignore {
     'server/*.lua',
     'config.lua',
 }
-dependency '/assetpacks'

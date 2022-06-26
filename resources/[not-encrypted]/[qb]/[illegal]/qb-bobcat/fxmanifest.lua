@@ -1,12 +1,6 @@
 fx_version 'cerulean'
 game 'gta5'
 
-lua54 'yes'
-
-escrow_ignore {
-	'config.lua'
-}
-
 author 'Gutso'
 description 'Gutso Bobcat Heist'
 version '2.0'

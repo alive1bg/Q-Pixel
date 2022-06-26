@@ -93,7 +93,7 @@ function EnterHouse()
 end
 
 function Access()
-    QBCore.Functions.TriggerCallback("kevin-banktrucks:server:coolc",function(isCooldown)
+    QBCore.Functions.TriggerCallback("qb-banktrucks:server:coolc",function(isCooldown)
         if not isCooldown then
             TriggerEvent('animations:client:EmoteCommandStart', {"type"})
             NeedAccess1 = true
@@ -106,7 +106,7 @@ function Access()
             }, {}, {}, function() -- Done
                 QBCore.Functions.Notify("Security lock to difficult, need brute force!", 'primary')
                 TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-                TriggerServerEvent("kevin-banktrucks:server:coolout")
+                TriggerServerEvent("qb-banktrucks:server:coolout")
                 NeedAccess1 = true
                 NeedAccess2 = true
             end, function() -- Cancel
@@ -129,7 +129,7 @@ function Connect()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function()
-        QBCore.Functions.TriggerCallback('kevin-banktrucks:server:hasItem', function(item)
+        QBCore.Functions.TriggerCallback('qb-banktrucks:server:hasItem', function(item)
             if item then
                 Wait(500)
                 TriggerEvent('animations:client:EmoteCommandStart', {"c"})
@@ -147,19 +147,20 @@ function Connect()
                     coords = { x = 0.18, y = 0.053, z = 0.02 },
                     rotation = { x = 190.0, y = 0.0, z = 80.0 },
                 }, {}, function() -- Done
-                    exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
-                    function() -- Success
-                        TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
-                        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
-                        ClearPedTasksImmediately(PlayerPedId())
-                        Wait(1000)
-                        QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
-                        SystemHacked = true
-                        NeedAccess2 = false
-                    end,
-                    function() -- Failure
-                        ClearPedTasksImmediately(PlayerPedId())
-                        QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
+                    --exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
+                    exports["hacking"]:OpenHackingGame(function(success)
+                        if success then
+                            TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
+                            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
+                            ClearPedTasksImmediately(PlayerPedId())
+                            Wait(1000)
+                            QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
+                            SystemHacked = true
+                            NeedAccess2 = false
+                        else
+                            ClearPedTasksImmediately(PlayerPedId())
+                            QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
+                        end
                     end)
                 end, function() -- Cancel
                     QBCore.Functions.Notify("Cancelled?", 'error')
@@ -220,7 +221,7 @@ function Browse()
     end
 end
 
-RegisterNetEvent('kevin-banktrucks:client:GotAccess', function ()
+RegisterNetEvent('qb-banktrucks:client:GotAccess', function ()
     SystemHacked = false
     Wait(1000)
     TriggerServerEvent('qb-phone:server:sendNewMail', {
@@ -312,14 +313,14 @@ function TakePackage()
     }, {}, {}, function() -- Done
         BodySearched = true
         ClearPedTasksImmediately(PlayerPedId())
-        TriggerServerEvent('kevin-banktrucks:server:giveitem')
+        TriggerServerEvent('qb-banktrucks:server:giveitem')
     end, function() -- Cancel
         ClearPedTasksImmediately(PlayerPedId())
         QBCore.Functions.Notify("Cancelled?", 'error')
     end, "fas fa-magnifying-glass")
 end
 
-RegisterNetEvent('kevin-banktrucks:client:gettruck', function ()
+RegisterNetEvent('qb-banktrucks:client:gettruck', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"tablet2"})
     if BodySearched then
         QBCore.Functions.Progressbar("search_body", "Booting Up", 5000, false, true, {
@@ -388,7 +389,7 @@ function SpawnStuff()
     end)
 end
 
-RegisterNetEvent('kevin-banktrucks:client:usethermite', function ()
+RegisterNetEvent('qb-banktrucks:client:usethermite', function ()
     if CanThermite then
         AccessDoors()
     else
@@ -484,10 +485,10 @@ function SpawnGuards()
             local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
             local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
             if TruckDist <= 2.5 and not CanLoot then
-                exports['qb-core']:DrawText("[E] Grab Loot", "left")
+                exports['qb-ui']:showInteraction('[E] Grab Loot')
                 PressedKey2()
             else
-                exports['qb-core']:HideText()
+                exports['qb-ui']:hideInteraction()
             end
             Wait(1000)
         end
@@ -500,7 +501,7 @@ function PressedKey2()
             if IsControlJustReleased(0, 38) then
                 CanLoot = true
                 KeyPressed2 = true
-                exports["qb-core"]:KeyPressed()
+                exports['qb-ui']:hideInteraction()
                 Loot()
             end
             Wait(1)
@@ -528,8 +529,8 @@ function Loot()
         rotation = { x = 235.0, y = -25.0, z = 0.0 },
     }, {}, function() -- Done
         RemoveBlip(TruckBlip)
-        TriggerServerEvent('kevin-banktrucks:server:Payouts')
-        TriggerEvent('kevin-banktrucks:client:Clean')
+        TriggerServerEvent('qb-banktrucks:server:Payouts')
+        TriggerEvent('qb-banktrucks:client:Clean')
     end, function() -- Cancel
         QBCore.Functions.Notify("Cancelled", 'error')
     end,"fas fa-boxes-stacked")
@@ -541,7 +542,7 @@ function LoadAnimDict(dict)
     end
 end
 
-RegisterNetEvent('kevin-banktrucks:client:Clean', function ()
+RegisterNetEvent('qb-banktrucks:client:Clean', function ()
     NeedAccess1 = false
     NeedAccess2 = false
     SystemHacked = false
@@ -569,8 +570,8 @@ end
 
 ----------DELIVERY PART STARTS HERE
 
-RegisterNetEvent('kevin-banktrucks:client:StartDelivery', function ()
-    TriggerServerEvent("kevin-banktrucks:server:coolout")
+RegisterNetEvent('qb-banktrucks:client:StartDelivery', function ()
+    TriggerServerEvent("qb-banktrucks:server:coolout")
     TruckPos = Config.DeliverTruckLocations[math.random(#Config.DeliverTruckLocations)]
     Text()
     TruckZone = CircleZone:Create(TruckPos, 150.0, {
@@ -675,7 +676,7 @@ function Finish()
                 if IsPedInVehicle(PlayerPedId(), Truck) then
                     FreezeEntityPosition(Truck, true)
                     RemoveBlip(DropBlip)
-                    TriggerServerEvent('kevin-banktrucks:server:DeliveryPayouts')
+                    TriggerServerEvent('qb-banktrucks:server:DeliveryPayouts')
                     DropZone:destroy()
                     notdelivered = true
                     QBCore.Functions.DeleteVehicle(Truck)
