@@ -8,6 +8,7 @@ shared_scripts {
 	'shared/locale.lua',
 	'locale/en.lua', -- replace with desired language
 	'config.lua',
+	'import.lua',
 	'shared/main.lua',
 	'shared/items.lua',
 	'shared/jobs.lua',
@@ -17,6 +18,7 @@ shared_scripts {
 }
 
 client_scripts {
+	'client/ped.lua',
 	'client/main.lua',
 	'client/functions.lua',
 	'client/loops.lua',
