@@ -893,7 +893,90 @@ CreateThread(function() -- Not event sure what this is even for
     end
 end)
 
+function getVehicleHandling(pVehicleIdentifier, pHandling)
+	if pVehicleIdentifier and pHandling then
+	  if ModdedVehicles[pVehicleIdentifier] ~= nil and ModdedVehicles[pVehicleIdentifier][pHandling] ~= nil then
+		return true, ModdedVehicles[pVehicleIdentifier][pHandling]
+	  else
+		return false, GetVehicleHandlingFloat(pVehicleIdentifier, 'CHandlingData', pHandling)
+	  end
+	end
+end
+
 CreateThread(function() -- Not event sure what this is even for
+   while true do
+       Wait(1)
+       if (IsPedInAnyVehicle(PlayerPedId(), false)) then
+            local myVeh = GetVehiclePedIsIn(PlayerPedId(),false)
+            local vehicleIdentifier = myVeh
+            if ModdedVehicles[vehicleIdentifier] == nil and not IsThisModelABicycle(GetEntityModel(veh)) then
+                SetVehiclePetrolTankHealth(myVeh, 4000.0)
+                SetVehicleHandlingFloat(myVeh, 'CHandlingData', 'fWeaponDamageMult', 5.500000)
+        
+                local isModified, fSteeringLock = getVehicleHandling(myVeh, 'fSteeringLock')
+                print(isModified)
+                print(fSteeringLock)
+                print(getVehicleHandling(myVeh, 'fBrakeForce'))
+                if not isModified then
+                    print(GetVehicleMod(myVeh, 15))
+                    if GetVehicleMod(myVeh, 15) == 0 then
+                        fSteeringLock = math.ceil((fSteeringLock * 0.75)) + 0.1
+                        print(fSteeringLock)
+                    elseif GetVehicleMod(myVeh, 15) == 1 then
+                        fSteeringLock = math.ceil((fSteeringLock * 0.77)) + 0.1
+                        print(fSteeringLock)
+                    elseif GetVehicleMod(myVeh, 15) == 2 then
+                        fSteeringLock = math.ceil((fSteeringLock * 0.79)) + 0.1
+                        print(fSteeringLock)
+                    elseif GetVehicleMod(myVeh, 15) == 3 then
+                        fSteeringLock = math.ceil((fSteeringLock * 0.81)) + 0.1
+                        print(fSteeringLock)
+                    end
+
+                  
+                end 
+        
+                if not ModdedVehicles[vehicleIdentifier] then ModdedVehicles[vehicleIdentifier] = {} end 
+                ModdedVehicles[vehicleIdentifier]['fSteeringLock'] = fSteeringLock
+                SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fSteeringLock', fSteeringLock)
+        
+                if IsThisModelABike(GetEntityModel(vehicleIdentifier)) then
+                    setVehicleHandling(vehicleIdentifier, 'fTractionCurveMin', 0.6)
+                    setVehicleHandling(vehicleIdentifier, 'fTractionCurveMax', 0.6)
+                    setVehicleHandling(vehicleIdentifier, 'fInitialDriveForce', 2.2)
+                    setVehicleHandling(vehicleIdentifier, 'fBrakeForce', 1.4)
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fSuspensionReboundDamp', 5.000000) 
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fSuspensionCompDamp', 5.000000)
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fSuspensionForce', 22.000000)
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fCollisionDamageMult', 1.150000)
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fEngineDamageMult', 0.120000)
+                else
+                    --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fTractionCurveMin', 1.0)
+                    --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fBrakeForce', 0.1)
+
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fEngineDamageMult', 0.250000)
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fCollisionDamageMult', 1.000000)
+                    -- test lower deformation for weird driving on cop / some race cars after minor crashes
+                    SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fDeformationDamageMult', 0.400000)
+                end
+        
+                ModdedVehicles[vehicleIdentifier].fInitialDriveMaxFlatVel = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fInitialDriveMaxFlatVel')
+                ModdedVehicles[vehicleIdentifier].fTractionLossMult = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fTractionLossMult')
+                ModdedVehicles[vehicleIdentifier].fLowSpeedTractionLossMult = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fLowSpeedTractionLossMult')
+                ModdedVehicles[vehicleIdentifier].fDriveBiasFront = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fDriveBiasFront')
+                ModdedVehicles[vehicleIdentifier].fDriveInertia = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fDriveInertia')
+
+               
+            else
+                Wait(2000)
+            end
+        else
+            Wait(2000)
+        end
+    end
+end)
+
+--[[ CreateThread(function() -- Not event sure what this is even for
    while true do
        Wait(1)
        if (IsPedInAnyVehicle(PlayerPedId(), false)) then
@@ -969,7 +1052,7 @@ CreateThread(function() -- Not event sure what this is even for
             Wait(2000)
         end
     end
-end)
+end) ]]
 
 
 CreateThread(function()

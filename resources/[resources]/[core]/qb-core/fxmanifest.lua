@@ -18,7 +18,6 @@ shared_scripts {
 }
 
 client_scripts {
-	'client/ped.lua',
 	'client/main.lua',
 	'client/functions.lua',
 	'client/loops.lua',
