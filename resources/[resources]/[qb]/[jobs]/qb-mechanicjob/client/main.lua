@@ -863,7 +863,7 @@ CreateThread(function()
 end)
 
 
-CreateThread(function() -- Not event sure what this is even for
+--[[ CreateThread(function() -- Not event sure what this is even for
     while true do
         Wait(1)
         if (IsPedInAnyVehicle(PlayerPedId(), false)) then
@@ -891,7 +891,7 @@ CreateThread(function() -- Not event sure what this is even for
             Wait(2000)
         end
     end
-end)
+end) ]]
 
 function getVehicleHandling(pVehicleIdentifier, pHandling)
 	if pVehicleIdentifier and pHandling then
