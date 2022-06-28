@@ -915,28 +915,28 @@ CreateThread(function() -- Not event sure what this is even for
         
                 local isModified, fSteeringLock = getVehicleHandling(myVeh, 'fSteeringLock')
                 --print(isModified)
-                --print(fSteeringLock)
+                print(fSteeringLock)
                 if not isModified then
                     print("Setting up handling data")
                     --print("below is lock")
                     --print(GetVehicleMod(myVeh, 15))
                     --print("above is lock")
                     if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.75)) + 0.1
-                        --print(fSteeringLock)
-                        print("angle set")
+                        fSteeringLock = math.ceil((fSteeringLock * 0.45)) + 0.1
+                        print(fSteeringLock)
+                        print("angle set 1")
                     elseif GetVehicleMod(myVeh, 15) == 1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.77)) + 0.1
-                        --print(fSteeringLock)
-                        print("angle set")
+                        fSteeringLock = math.ceil((fSteeringLock * 0.47)) + 0.1
+                        print(fSteeringLock)
+                        print("angle set 2")
                     elseif GetVehicleMod(myVeh, 15) == 2 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.79)) + 0.1
-                        --print(fSteeringLock)
-                        print("angle set")
+                        fSteeringLock = math.ceil((fSteeringLock * 0.49)) + 0.1
+                        print(fSteeringLock)
+                        print("angle set 3")
                     elseif GetVehicleMod(myVeh, 15) == 3 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.81)) + 0.1
-                        --print(fSteeringLock)
-                        print("angle set")
+                        fSteeringLock = math.ceil((fSteeringLock * 0.51)) + 0.1
+                        print(fSteeringLock)
+                        print("angle set 4")
                     end
 
                   
