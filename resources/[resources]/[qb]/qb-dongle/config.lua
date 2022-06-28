@@ -114,7 +114,7 @@ Config.Shop = {
         type = "crypto",
         icon = "fas fa-mobile-screen",
     },
-    [12] = {
+    [13] = {
         item = "kthermite",
         price = 1,
         type = "crypto",
