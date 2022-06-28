@@ -165,7 +165,7 @@ local function EnterApartment(house, apartmentId, new)
         end
     end, apartmentId)
 
-    Wait(1400)
+    Citizen.Wait(1400)
 
     exports['qb-target']:AddBoxZone("ApartmentStash", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z), 1.2, 1.2, { 
         name = "ApartmentStash", 

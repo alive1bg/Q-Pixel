@@ -83,7 +83,7 @@ QBCore.Functions.CreateCallback('boosting:addBne', function(source, cb , amount)
         local sql = SQL('SELECT * FROM boosting WHERE citizenid=@citizenid', {['@citizenid'] = cid})
         if sql[1].BNE ~= nil then
             local pBNE = sql[1].BNE
-            local sql = SQL('UPDATE boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBne + amount})
+            local sql = SQL('UPDATE boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBNE + amount})
         else
             cb(0)
         end
