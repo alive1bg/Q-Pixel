@@ -126,6 +126,7 @@ local Translations = {
         heavy_alcohol = 'Smells very much like alcohol',
         agitated = 'Agitated - Signs of Meth Use',
         serial_not_visible = 'Serial number not visible...',
+        tobacco_smell = 'Smells like tobacco',
     },
     menu = {
         garage_title = 'Police Vehicles',

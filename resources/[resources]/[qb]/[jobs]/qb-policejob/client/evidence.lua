@@ -21,7 +21,8 @@ local StatusList = {
     ['confused'] = 'Confused',
     ['alcohol'] = 'Smells like alcohol',
     ['heavyalcohol'] = 'Smells very much like alcohol',
-    ["agitated"] = 'Agitated'
+    ["agitated"] = 'Agitated',
+    ['tobaccosmell'] = 'Smells like tobacco',
 }
 
 local WhitelistedWeapons = {
