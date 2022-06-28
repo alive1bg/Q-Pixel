@@ -321,9 +321,9 @@ QBCore.Commands.Add("plateinfo", Lang:t("commands.plateinfo"), {{name = "plate",
                 if Plates[args[1]:upper()].isflagged then
                     TriggerClientEvent('qb-policejob:flaggedvehicle:sound', source)
                     TriggerClientEvent('chat:addMessage', source,  {
-                        template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Рег.номер:</strong> {1} <br><strong>Собственик:</strong> {2} <br><strong>Причина:</strong> {3}</div></div>',
+                        template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Plate:</strong> {1} <br><strong>Name:</strong> {2} <br><strong>Причина:</strong> {3}</div></div>',
                         args = {
-                            "Маркиран автомобил",
+                            "Marked Vehicle",
                             args[1]:upper(),
                             Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname,
                             Plates[args[1]:upper()].reason,
@@ -333,9 +333,9 @@ QBCore.Commands.Add("plateinfo", Lang:t("commands.plateinfo"), {{name = "plate",
                 else
                     TriggerClientEvent('qb-policejob:flaggedvehicle:sound', source)
                     TriggerClientEvent('chat:addMessage', source,  {
-                        template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Рег.номер:</strong> {1} <br><strong>Собственик:</strong> {2} <br><strong>Причина:</strong> {3}</div></div>',
+                        template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Plate:</strong> {1} <br><strong>Name:</strong> {2} <br><strong>Причина:</strong> {3}</div></div>',
                         args = {
-                            "Маркиран автомобил",
+                            "Marked Vehicle",
                             args[1]:upper(),
                             Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname,
                             Plates[args[1]:upper()].reason,
@@ -345,9 +345,9 @@ QBCore.Commands.Add("plateinfo", Lang:t("commands.plateinfo"), {{name = "plate",
             else
                 TriggerClientEvent('qb-policejob:flaggedvehicle:sound', source)
                 TriggerClientEvent('chat:addMessage', source,  {
-                    template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Рег.номер:</strong> {1} <br><strong>Собственик:</strong> {2}</div></div>',
+                    template = '<div class="fadeInLeft animated"><div class="chat-message emergency"><div class="chat-message-body"><strong>{0}</strong><br><br> <strong>Plate:</strong> {1} <br><strong>Name:</strong> {2}</div></div>',
                     args = {
-                        "Не маркиран автомобил",
+                        "UnMarked Vehicle",
                         args[1]:upper(),
                         Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname,
                     }
