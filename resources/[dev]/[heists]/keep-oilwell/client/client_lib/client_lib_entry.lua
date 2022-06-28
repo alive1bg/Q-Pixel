@@ -1,7 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-PlayerJob = {}
-OnDuty = false
 local function Draw2DText(content, font, colour, scale, x, y)
      SetTextFont(font)
      SetTextScale(scale, scale)
@@ -112,10 +110,13 @@ function replaceString(o)
 end
 
 function createOwnerQbTarget(entity)
-     exports['qb-target']:AddEntityZone("oil-rig-" .. entity, entity, {
+     local coord = GetEntityCoords(entity)
+     exports['qb-target']:AddBoxZone("oil-rig-" .. entity, coord, 3, 5, {
           name = "oil-rig-" .. entity,
           heading = GetEntityHeading(entity),
-          debugPoly = true,
+          debugPoly = false,
+          minZ = coord.z,
+          maxZ = coord.z + 3,
      }, {
           options = {
                {
@@ -143,9 +144,9 @@ function createOwnerQbTarget(entity)
                },
                {
                     type = "client",
-                    event = "",
+                    event = "keep-oilrig:client:show_oilwell_stash",
                     icon = "fa-solid fa-gears",
-                    label = "Manage Parts",
+                    label = "Manange Parts",
                     canInteract = function(entity)
                          local oilrig = OilRigs:getByEntityHandle(entity)
                          if oilrig ~= nil and oilrig.isOwner == true then
@@ -154,6 +155,9 @@ function createOwnerQbTarget(entity)
                               return false
                          end
                     end,
+                    -- action = function(entity)
+                    --      TriggerEvent('keep-oilrig:client:show_oilwell_stash', entity)
+                    -- end
                },
           },
           distance = 2.5
@@ -169,13 +173,13 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("storage" .. entity, entity, {
                     name = "storage" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
                               type = "client",
                               event = "keep-oilrig:storage_menu:ShowStorage",
-                              icon = "fas fa-box-open",
+                              icon = "fa-solid fa-arrows-spin",
                               label = "View Storage",
                               canInteract = function(entity)
                                    print(OnDuty)
@@ -189,7 +193,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("distillation" .. entity, entity, {
                     name = "distillation" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -208,7 +212,7 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("blender" .. entity, entity, {
                     name = "blender" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
@@ -227,14 +231,33 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
                exports['qb-target']:AddEntityZone("barrel_withdraw" .. entity, entity, {
                     name = "barrel_withdraw" .. entity,
                     heading = GetEntityHeading(entity),
-                    debugPoly = true,
+                    debugPoly = false,
                }, {
                     options = {
                          {
                               type = "client",
                               event = "keep-oilrig:client_lib:withdraw_from_queue",
-                              icon = "fas fa-file-import",
+                              icon = "fa-solid fa-boxes-packing",
                               label = "Send to invnetory",
+                              canInteract = function(entity)
+                                   return true
+                              end,
+                         },
+                    },
+                    distance = 2.5
+               })
+          elseif key == 'crude_oil_transport' then
+               exports['qb-target']:AddEntityZone("crude_oil_transport" .. entity, entity, {
+                    name = "crude_oil_transport" .. entity,
+                    heading = GetEntityHeading(entity),
+                    debugPoly = false,
+               }, {
+                    options = {
+                         {
+                              type = "client",
+                              event = "keep-oilwell:menu:show_transport_menu",
+                              icon = "fa-solid fa-boxes-packing",
+                              label = "Fill transport well",
                               canInteract = function(entity)
                                    return true
                               end,
@@ -249,15 +272,14 @@ function addQbTargetToCoreEntities(entity, Type, PlayerJob)
           exports['qb-target']:AddEntityZone("toggle_job" .. entity, entity, {
                name = "toggle_job" .. entity,
                heading = GetEntityHeading(entity),
-               debugPoly = true,
+               debugPoly = false,
           }, {
                options = {
                     {
                          type = "client",
                          event = "keep-oilrig:client:goOnDuty",
-                         icon = "fas fa-sign-in-alt",
+                         icon = "fa-solid fa-boxes-packing",
                          label = "Toggle Duty",
-                         job = "oilwell",
                          canInteract = function(entity)
                               return true
                          end,

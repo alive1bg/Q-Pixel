@@ -21,21 +21,18 @@ local function showblender(data)
                icon = 'fa-solid fa-blender'
           }, {
                header = 'Heavy Naphtha',
-               isMenuHeader = true,
                icon = 'fa-solid fa-circle',
                txt = heavy_naphtha .. " Gallons",
                disabled = true
           },
           {
                header = 'Light Naphtha',
-               isMenuHeader = true,
                icon = 'fa-solid fa-circle',
                txt = light_naphtha .. " Gallons",
                disabled = true
           },
           {
                header = 'Other Gases',
-               isMenuHeader = true,
                icon = 'fa-solid fa-circle',
                txt = other_gases .. " Gallons",
                disabled = true
@@ -55,8 +52,8 @@ local function showblender(data)
                }
           },
           {
-               header = 'Close',
-               icon = 'fas fa-x',
+               header = 'leave',
+               icon = 'fa-solid fa-angle-left',
                params = {
                     event = "qb-menu:closeMenu"
                }

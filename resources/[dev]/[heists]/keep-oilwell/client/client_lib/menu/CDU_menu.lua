@@ -8,7 +8,7 @@ local function showCDU(data)
      if data.metadata.state == true then
           state = 'Active'
      else
-          state = 'Inactive'
+          state = 'inactive'
      end
      local header = "Crude oil distillation unit (" .. state .. ')'
      -- header
@@ -23,13 +23,11 @@ local function showCDU(data)
                header = 'Temperature',
                icon = 'fa-solid fa-temperature-high',
                txt = "" .. CDU_Temperature .. " °C",
-               isMenuHeader = true,
           },
           {
                header = 'Curde Oil inside CDU',
                icon = 'fa-solid fa-oil-can',
                txt = CDU_Gal .. " Gallons",
-               isMenuHeader = true,
           },
           {
                header = 'Pump Curde Oil to CDU',
@@ -53,8 +51,8 @@ local function showCDU(data)
                }
           },
           {
-               header = 'Close',
-               icon = 'fas fa-x',
+               header = 'leave',
+               icon = 'fa-solid fa-angle-left',
                params = {
                     event = "qb-menu:closeMenu"
                }

@@ -108,16 +108,35 @@ QBCore.Functions.CreateCallback('keep-oilrig:server:withdraw_from_queue', functi
           cb(false)
           return
      end
+
+     local barrel_max_size = Oilwell_config.Settings.capacity.oilbarell.size
      for key, barrel in pairs(storage.metadata.queue) do
-          player.Functions.RemoveMoney('bank', Config.Settings.capacity.oilbarell.price, 'oil barell')
-          player.Functions.AddItem('oilbarell', 1, 1, {
-               type = barrel.type,
-               gal = barrel.gal,
-               avg_gas_octane = barrel.avg_gas_octane
-          })
+          player.Functions.RemoveMoney('bank', Oilwell_config.Settings.capacity.oilbarell.price, 'oil barell')
+
+          local divide = math.floor(barrel.gal / barrel_max_size)
+          local remainder = barrel.gal % barrel_max_size
+
+          for i = 1, divide + 1, 1 do
+               if i ~= (divide + 1) then
+                    player.Functions.AddItem('oilbarell', 1, 1, {
+                         type = barrel.type,
+                         gal = barrel_max_size,
+                         avg_gas_octane = barrel.avg_gas_octane
+                    })
+               else
+                    if remainder ~= 0 then
+                         player.Functions.AddItem('oilbarell', 1, 1, {
+                              type = barrel.type,
+                              gal = remainder,
+                              avg_gas_octane = barrel.avg_gas_octane
+                         })
+                    end
+               end
+          end
+
           TriggerClientEvent('QBCore:Notify', source, "Request compeleted!", 'success')
           cb(storage)
-          storage.metadata.queue[key] = nil
+          -- storage.metadata.queue[key] = nil
           return
      end
 end)
@@ -159,7 +178,8 @@ QBCore.Functions.CreateCallback('keep-oilrig:server:WithdrawLoadInTruck', functi
                return
           end
 
-          local RemoveMoney = player.Functions.RemoveMoney('bank', Config.Settings.capacity.truck.price, 'oil barell truck')
+          local RemoveMoney = player.Functions.RemoveMoney('bank', Oilwell_config.Settings.capacity.truck.price,
+               'oil barell truck')
           if RemoveMoney ~= true then
                TriggerClientEvent('QBCore:Notify', source, "you don't have enough money in your bank!", 'error')
                cb(false)
@@ -193,7 +213,7 @@ local function SetCarItemsInfo(ouritems)
 end
 
 function split_oilbarrel_size(size, data)
-     local barrel_max_size = Config.Settings.capacity.oilbarell.size
+     local barrel_max_size = Oilwell_config.Settings.capacity.oilbarell.size
 
      local divide = math.floor(size / barrel_max_size)
      local remainder = size % barrel_max_size
@@ -230,18 +250,23 @@ end
 
 RegisterNetEvent('keep-oilrig:server:updateSpeed', function(inputData, id)
      local player = QBCore.Functions.GetPlayer(source)
-     if player ~= nil then
-          -- validate speed for 0 - 100
-          local oilrig = GlobalScirptData:read(id)
-          if player.PlayerData.citizenid == oilrig.citizenid then
-               local speed = tonumber(inputData.speed)
-               oilrig.metadata.speed = speed
-               -- sync speed on other clients
-               TriggerClientEvent('keep-oilrig:client:syncSpeed', -1, id, speed)
-          else
-               TriggerClientEvent('QBCore:Notify', source, "You are not owner of oil pump!")
-          end
+     if player == nil then return end
+     -- validate speed for 0 - 100
+     local oilrig = GlobalScirptData:read(id)
+     if player.PlayerData.citizenid ~= oilrig.citizenid then
+          TriggerClientEvent('QBCore:Notify', source, "You are not owner of oil pump!")
+          return
      end
+
+     local speed = tonumber(inputData.speed)
+     if not (0 <= speed and speed <= 100) then
+          TriggerClientEvent('QBCore:Notify', source, 'speed must be between 0 to 100', "error")
+          return
+     end
+
+     oilrig.metadata.speed = speed
+     -- sync speed on other clients
+     TriggerClientEvent('keep-oilrig:client:syncSpeed', -1, id, speed)
 end)
 
 QBCore.Functions.CreateCallback('keep-oilrig:server:get_CDU_Data', function(source, cb)
@@ -353,6 +378,123 @@ QBCore.Functions.CreateCallback('keep-oilrig:server:recipe_blender', function(so
      cb(blender)
 end)
 
+local current_transport_stock = 0
+local TRANSPORT = Oilwell_config.Transport
+
+local function change_item_info(Player, slot, info)
+     if Player.PlayerData.items[slot] then
+          Player.PlayerData.items[slot].info = info
+     end
+     Player.Functions.SetInventory(Player.PlayerData.items, true)
+end
+
+QBCore.Functions.CreateCallback('keep-oilrig:server:oil_transport:fillTransportWell', function(source, cb, amount)
+     amount = tonumber(amount) -- just in case
+     local player = QBCore.Functions.GetPlayer(source)
+     local oil_barrel = player.Functions.GetItemByName('oilbarell')
+     local msg_string = ""
+
+     if not oil_barrel then
+          TriggerClientEvent('QBCore:Notify', source, 'You do not have a oil barrel!', 'error')
+          return
+     end
+
+     local current_info = oil_barrel.info
+     local do_we_need_more_stock = current_transport_stock + amount
+
+     if not current_info.type then
+          TriggerClientEvent('QBCore:Notify', source, 'Failed to get oil type', 'error')
+          return
+     end
+
+     if not current_info.type == 'crudeOil' then
+          TriggerClientEvent('QBCore:Notify', source, 'We are experts in crude oil transportation!', 'error')
+          return
+     end
+
+     if TRANSPORT.max_stock <= current_transport_stock then
+          -- when we reached max stock
+          TriggerClientEvent('QBCore:Notify', source, 'Currently we can not accept more offers pls come back later!',
+               'primary')
+          current_transport_stock = TRANSPORT.max_stock
+          return
+     end
+
+     if do_we_need_more_stock > TRANSPORT.max_stock then
+          -- when buying results in more oil than what we need
+          local max_amount = math.floor(TRANSPORT.max_stock - current_transport_stock)
+          msg_string = "We can only accept maximum amount of %d gallons"
+          msg_string = string.format(msg_string, max_amount)
+          TriggerClientEvent('QBCore:Notify', source, '', 'error')
+          return
+     end
+
+     if current_info.gal < amount then
+          -- when they don't have what they want to sell
+          msg_string = 'You asked to sell:  %d but only have: %d'
+          msg_string = string.format(msg_string, amount, current_info.gal)
+          TriggerClientEvent('QBCore:Notify', source, msg_string, 'error')
+          cb(false)
+          return
+     end
+
+     if current_info.gal > amount then
+          -- asking less than what they have
+          current_info.gal = math.floor(current_info.gal - amount)
+          -- this function can be called just once after conditions but this should prevent switching slots
+          change_item_info(player, oil_barrel.slot, oil_barrel.info)
+
+          player.Functions.AddMoney("bank", TRANSPORT.price * amount, 'crude_oil_transport')
+
+          msg_string = 'You sold: %d gal for: %.2f$'
+          msg_string = string.format(msg_string, amount, TRANSPORT.price * amount)
+          TriggerClientEvent('QBCore:Notify', source, msg_string, 'success')
+     elseif current_info.gal == amount and amount ~= 0 then
+          -- asking for all they have
+          current_info.gal = 0
+          -- this function can be called just once after conditions but this should prevent switching slots
+          change_item_info(player, oil_barrel.slot, oil_barrel.info)
+
+          player.Functions.AddMoney("bank", TRANSPORT.price * amount, 'crude_oil_transport')
+          msg_string = 'You sold: %d gal for: %.2f$'
+          msg_string = string.format(msg_string, amount, TRANSPORT.price * amount)
+          TriggerClientEvent('QBCore:Notify', source, msg_string, 'success')
+     else
+          -- invalid
+          -- or they ask for much more than they have
+          TriggerClientEvent('QBCore:Notify', source, 'You either do not have a oil barell or its empty!', 'error')
+          cb(false)
+          return
+     end
+
+     local gender = Oilwell_config.Locale.info.mr
+     if player.PlayerData.charinfo.gender == 1 then
+          gender = Oilwell_config.Locale.info.mrs
+     end
+     local charinfo = player.PlayerData.charinfo
+
+     TriggerClientEvent('keep-oilrig:client:local_mail_sender', source, {
+          gender = gender,
+          charinfo = charinfo,
+          transport_price = TRANSPORT.price,
+          amount = amount
+     })
+     current_transport_stock = current_transport_stock + amount
+     cb(true)
+end)
+
+RegisterServerEvent('keep-oilrig:server:oil_transport:fillTransportWell:give_money')
+AddEventHandler('keep-oilrig:server:oil_transport:fillTransportWell:give_money', function(cid, amount)
+     local player = QBCore.Functions.GetPlayer(cid)
+     player.Functions.AddMoney("bank", TRANSPORT.price * amount, 'crude_oil_transport')
+end)
+
+RegisterNetEvent('keep-oilrig:server:oil_transport:checkPrice', function()
+     local msg_string = "Our Current Stock is: %d/%d Price Per Gal: %.2f$"
+     msg_string = string.format(msg_string, math.floor(current_transport_stock), TRANSPORT.max_stock, TRANSPORT.price)
+     TriggerClientEvent('QBCore:Notify', source, msg_string)
+end)
+
 -- =======================================
 --          Send Data / to Client
 -- =======================================
@@ -453,6 +595,77 @@ QBCore.Functions.CreateCallback('keep-oilrig:server:regiserOilrig', function(sou
           TriggerClientEvent('QBCore:Notify', source, "Could not find player by it cid!")
           cb(false)
      end
+end)
+
+function GetOilPumpItems(oilrig_hash)
+     local items = {}
+     local stash = 'oilPump_' .. oilrig_hash
+     local result = MySQL.Sync.fetchAll("SELECT items FROM stashitems WHERE stash=?", { stash })
+     local res = result[1]
+     if res == nil then return false end
+     if res.items == nil then return false end
+     res.items = json.decode(res.items)
+     if res.items == nil then return false end
+
+     for k, item in pairs(res.items) do
+          local itemInfo = QBCore.Shared.Items[item.name:lower()]
+          items[item.slot] = {
+               name = itemInfo["name"],
+               amount = tonumber(item.amount),
+               info = item.info ~= nil and item.info or "",
+               label = itemInfo["label"],
+               description = itemInfo["description"] ~= nil and itemInfo["description"] or "",
+               weight = itemInfo["weight"],
+               type = itemInfo["type"],
+               unique = itemInfo["unique"],
+               useable = itemInfo["useable"],
+               image = itemInfo["image"],
+               slot = item.slot,
+          }
+     end
+     return items
+end
+
+local function isOneOfItems(item)
+     local s = {
+          ['oilfilter'] = 'polish',
+          ['reliefvalvestring'] = 'polish',
+          ['skewgear'] = 'clutch',
+          ['timingchain'] = 'belt',
+          ['driveshaft'] = 'clutch'
+     }
+
+     for _, part in pairs(s) do
+          if item.name == _ then
+               return item, part
+          end
+     end
+     return nil
+end
+
+QBCore.Functions.CreateCallback('keep-oilwell:server:fix_oil_well', function(source, cb, oilrig_hash)
+     local Player = QBCore.Functions.GetPlayer(source)
+     local items = GetOilPumpItems(oilrig_hash)
+     local stash = 'oilPump_' .. oilrig_hash
+     local oil_well = GlobalScirptData:getByHash(oilrig_hash)
+
+     for item, data in pairs(items) do
+          local _item, part = isOneOfItems(data)
+          if _item then
+               local increase = oil_well.metadata.part_info[part] + 10 * _item.amount
+               if increase >= 0 and increase <= 100 then
+                    oil_well.metadata.part_info[part] = increase
+               elseif increase >= 100 then
+                    oil_well.metadata.part_info[part] = 100
+               else
+                    oil_well.metadata.part_info[part] = 0
+               end
+          end
+     end
+
+     TriggerClientEvent('QBCore:Notify', source, "Items used to fix oilwell.", 'primary')
+     MySQL.Sync.fetchAll("UPDATE stashitems SET items = '[]' WHERE stash = ?", { stash })
+     cb(true)
 end)
 
 -- ===========================
