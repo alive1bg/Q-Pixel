@@ -914,23 +914,29 @@ CreateThread(function() -- Not event sure what this is even for
                 SetVehicleHandlingFloat(myVeh, 'CHandlingData', 'fWeaponDamageMult', 5.500000)
         
                 local isModified, fSteeringLock = getVehicleHandling(myVeh, 'fSteeringLock')
-                print(isModified)
-                print(fSteeringLock)
-                print(getVehicleHandling(myVeh, 'fBrakeForce'))
+                --print(isModified)
+                --print(fSteeringLock)
                 if not isModified then
-                    print(GetVehicleMod(myVeh, 15))
-                    if GetVehicleMod(myVeh, 15) == 0 then
+                    print("Setting up handling data")
+                    --print("below is lock")
+                    --print(GetVehicleMod(myVeh, 15))
+                    --print("above is lock")
+                    if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
                         fSteeringLock = math.ceil((fSteeringLock * 0.75)) + 0.1
-                        print(fSteeringLock)
+                        --print(fSteeringLock)
+                        print("angle set")
                     elseif GetVehicleMod(myVeh, 15) == 1 then
                         fSteeringLock = math.ceil((fSteeringLock * 0.77)) + 0.1
-                        print(fSteeringLock)
+                        --print(fSteeringLock)
+                        print("angle set")
                     elseif GetVehicleMod(myVeh, 15) == 2 then
                         fSteeringLock = math.ceil((fSteeringLock * 0.79)) + 0.1
-                        print(fSteeringLock)
+                        --print(fSteeringLock)
+                        print("angle set")
                     elseif GetVehicleMod(myVeh, 15) == 3 then
                         fSteeringLock = math.ceil((fSteeringLock * 0.81)) + 0.1
-                        print(fSteeringLock)
+                        --print(fSteeringLock)
+                        print("angle set")
                     end
 
                   
@@ -953,7 +959,7 @@ CreateThread(function() -- Not event sure what this is even for
                 else
                     --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fTractionCurveMin', 1.0)
                     --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fBrakeForce', 0.1)
-
+                    print("handling data set")
                     SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fEngineDamageMult', 0.250000)
                     SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fCollisionDamageMult', 1.000000)
                     -- test lower deformation for weird driving on cop / some race cars after minor crashes
