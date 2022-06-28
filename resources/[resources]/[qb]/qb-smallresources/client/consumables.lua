@@ -626,6 +626,8 @@ CreateThread(function()
     end
 end)
 
+-- CIGARETTES
+
 local cigpackHp = 20
 local cigpackData = {}
 

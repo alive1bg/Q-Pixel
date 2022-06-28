@@ -197,7 +197,6 @@ Config.VehicleModifications = {
         ["Suspension"] = -1,
         ["Armor"] = -1,
         ["XenonHeadlightsColor"] = 0,
-        --exports['ld-hud']:pursuitMode(true, 1)
     },
     ["A+"] = {
         ["Turbo"] = false,
@@ -208,7 +207,6 @@ Config.VehicleModifications = {
         ["Suspension"] = 1,
         ["Armor"] = 1,
         ["XenonHeadlightsColor"] = 0,
-        --exports['ld-hud']:pursuitMode(true, 2)
     },
     ["S"] = {
         ["Turbo"] = true,
@@ -219,7 +217,6 @@ Config.VehicleModifications = {
         ["Suspension"] = 2,
         ["Armor"] = 2,
         ["XenonHeadlightsColor"] = 0,
-        --exports['ld-hud']:pursuitMode(true, 3)
     },
     ["S+"] = {
         ["Turbo"] = true,
@@ -230,7 +227,6 @@ Config.VehicleModifications = {
         ["Suspension"] = 3,
         ["Armor"] = 3,
         ["XenonHeadlightsColor"] = 0,
-        --exports['ld-hud']:pursuitMode(true, 4)
     }
 }
 
