@@ -91,12 +91,12 @@ Config.bulkmin = "5"
 Config.bulkmax = "14"
 
 Config.PedList = { -- APPARENTLY You can call config locations IN the config, learn't that one today
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['Recycle'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['Trade'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, --Trade
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank1'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank2'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank3'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank4'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank5'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
-	{ model = `S_M_Y_Construct_01`, coords = Config.Locations['BottleBank6'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['Recycle'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['Trade'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, --Trade
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank1'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank2'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank3'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank4'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank5'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
+	{ model = `S_M_Y_Construct_02`, coords = Config.Locations['BottleBank6'].location, gender = "male", scenario = "WORLD_HUMAN_CLIPBOARD", }, -- Outside Mine
 }
