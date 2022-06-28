@@ -17,7 +17,7 @@ client_scripts {
 
 shared_scripts {
 	"shared/*.lua",
-	--'@rp_core/import.lua'
+	'config.lua',
 }
 
 server_scripts {
