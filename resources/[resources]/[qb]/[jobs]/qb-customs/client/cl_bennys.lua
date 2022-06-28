@@ -904,6 +904,7 @@ function BennyEngineRepair()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
     local getFuel = GetVehicleFuelLevel(plyVeh)
 
+	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
     SetVehicleEngineHealth(plyVeh, 1000.0)
@@ -975,11 +976,3 @@ RegisterNetEvent('qb-customs:client:repair', function()
 end)
 
 ----------------------------------------------- end benny repair point event + function
-
-RegisterNetEvent('qb-customs:client:EnterCustoms', function(override)
-    if not override.coords or not override.heading then override = nil end
-    if not IsPedInAnyVehicle(PlayerPedId(), false) or isPlyInBennys or (not next(CustomsData) and not override) then return end
-    if not override and next(CustomsData) and not CheckRestrictions(CustomsData.location) then return end
-
-    EnterLocation(override)
-end)

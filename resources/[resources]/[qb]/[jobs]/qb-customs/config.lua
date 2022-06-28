@@ -14,6 +14,7 @@ bennyGarages = {
     [5] = {coords = vector4(-39.20199, -1053.769, 27.791173, 157.56155), useJob = false, blip = true, job = {""}}, -- Hub by Pdm
     [6] = {coords = vector4(-221.8769, -1329.83, 30.285072, 268.9121), useJob = false, blip = true, job = {""}}, -- Bennys
     [7] = {coords = vector4(450.31, -976.1, 25.5, 90.25), useJob = true, blip = false, job = {"police"}}, -- PDBennys
+    [8] = {coords = vector4(832.28961, -805.5268, 25.72084, 89.64141), useJob = true, blip = false, job = {"ottos"}}, -- Ottos repair
 } 
 
 --[[ bennyLocations = {

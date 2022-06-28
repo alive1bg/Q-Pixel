@@ -124,7 +124,7 @@ rootMenuConfig =  {
             return (pData.metadata["isdead"] and pData.metadata["inlaststand"] and isMedic)
         end,
     },
-    {    
+    {
         id = "Police",
         displayName = "Police",
         icon = "#badge-sheriff",
@@ -132,7 +132,7 @@ rootMenuConfig =  {
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty)
         end,
-        subMenus = {"police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask", "police:mdt" }
+        subMenus = {"police:mdt", "police:escort", "police:checkvin", "general:cuff", "police:seizecash", "police:checkvehicle", "police:takedriverlicense", "police:statuscheck", "police:searchplayer", "police:jail", "police:takeoffmask"}
     },
     {
         id = "Vehicle",
@@ -753,6 +753,11 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
         icon = "#campground",
         functionName = "police:client:spawnTent" 
     },
+    ['police:revive'] = {
+        title = "Revive",
+        icon = "#hospital-revivep",
+        functionName = "hospital:client:RevivePlayerPolice"
+    },
     ['police:spawnverlichting'] = {
         title = "Light",
         icon = "#expressions-speculative",
@@ -1177,6 +1182,14 @@ CreateThread(function()
         minZ = 30.79,
         maxZ = 33.39
     })
+
+    exports["qb-polyzone"]:AddBoxZone("Ottos", vector3(832.39, -805.53, 26.33), 4.2, 6.2, {
+        name="Ottos",
+        heading=0,
+        debugPoly = false,
+        minZ=25.33,
+        maxZ=27.93
+    })
 end)
 
 RegisterNetEvent('qb-polyzone:enter')
@@ -1233,6 +1246,13 @@ AddEventHandler('qb-polyzone:enter', function(name)
             inPaletoRepair = true
             exports['qb-ui']:showInteraction("Bennys")
         end
+    elseif name == "Ottos" then
+        if InVehicle then
+            inTunerShop = true
+            if PlayerJob.name == "ottos" and onDuty then
+                exports['qb-ui']:showInteraction("Repair Station")
+            end
+        end
     end
 end)
 
@@ -1275,6 +1295,11 @@ AddEventHandler('qb-polyzone:exit', function(name)
     elseif name == "PaletoRepair" then
         inPaletoRepair = false
         exports['qb-ui']:hideInteraction()
+    elseif name == "Ottos" then
+        inTunerShop = false
+        if PlayerJob.name == "ottos" and onDuty then
+            exports['qb-ui']:hideInteraction()
+        end
     end
 end)
 
