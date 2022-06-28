@@ -1,3 +1,6 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
+
 local blackout = false
 RegisterNetEvent('jd:explotiontype')
 AddEventHandler('jd:explotiontype', function()
@@ -49,6 +52,31 @@ AddEventHandler('restore:blackout', function(blackout)
     SetArtificialLightsState(false)
 end)
 
+RegisterNetEvent('restore:blackoutPD')
+AddEventHandler('restore:blackoutPD', function(blackout)
+    exports["memorygame"]:thermiteminigame(10, 3, 3, 10,
+    function() -- success
+        QBCore.Functions.Progressbar('washing_hands', 'Restoring Power', 45000, false, false, {
+            disableMovement = true, --
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = "mp_arresting", 
+            anim = "a_uncuff", 
+            flags = 8,
+        }, {}, {}, function()
+            TriggerEvent('QBCore:Notify', "You've restored the power!", 'success')
+        end, function() -- Cancel
+            TriggerServerEvent('jd:server:elektrikkes', false)
+            SetArtificialLightsStateAffectsVehicles(false) 
+            SetArtificialLightsState(false)
+        end)
+    end,
+    function() -- failure
+        TriggerEvent('QBCore:Notify', "Failed", 'error')
+    end)   
+end)
 
 exports['qb-target']:AddCircleZone("restorepower", vector3(713.19, 164.7, 80.75), 0.51, {
     name = "restorepower",
@@ -60,7 +88,7 @@ exports['qb-target']:AddCircleZone("restorepower", vector3(713.19, 164.7, 80.75)
         options = {
             {
                 type = "client",
-                event = "restore:blackout",
+                event = "restore:blackoutPD",
                 icon = "fas fa-circle",
                 label = "Restore Power",
                 job = "police",
