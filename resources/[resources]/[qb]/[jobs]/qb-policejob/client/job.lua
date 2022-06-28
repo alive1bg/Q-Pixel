@@ -437,32 +437,32 @@ RegisterNetEvent('police:client:EvidenceStashDrawer', function(data)
     local pos = GetEntityCoords(PlayerPedId())
     local takeLoc = Config.Locations["evidence"][currentEvidence]
 
-    if not takeLoc then return end
+    --if not takeLoc then return end
 
-    if #(pos - takeLoc) <= 1.0 then
+    --if #(pos - takeLoc) <= 1.0 then
         local drawer = exports['qb-input']:ShowInput({
-            header = Lang:t('info.evidence_stash', {value = currentEvidence}),
+            header = "Evidence Stash | MRPD",
             submitText = "open",
             inputs = {
                 {
                     type = 'number',
                     isRequired = true,
                     name = 'slot',
-                    text = Lang:t('info.slot')
+                    text = "MDW Report Number"
                 }
             }
         })
         if drawer then
             if not drawer.slot then return end
-            TriggerServerEvent("inventory:server:OpenInventory", "stash", Lang:t('info.current_evidence', {value = currentEvidence, value2 = drawer.slot}), {
+            TriggerServerEvent("inventory:server:OpenInventory", "stash", Lang:t('info.current_evidence', {value = "Evidence Locker", value2 = drawer.slot}), {
                 maxweight = 4000000,
                 slots = 500,
             })
-            TriggerEvent("inventory:client:SetCurrentStash", Lang:t('info.current_evidence', {value = currentEvidence, value2 = drawer.slot}))
+            TriggerEvent("inventory:client:SetCurrentStash", Lang:t('info.current_evidence', {value = "Evidence Locker", value2 = drawer.slot}))
         end
-    else
-        exports['qb-menu']:closeMenu()
-    end
+    --else
+    --    exports['qb-menu']:closeMenu()
+    --end
 end)
 
 -- Threads
@@ -529,8 +529,8 @@ end)
     end
 end) ]]
 
---[[ -- Stash 1
-CreateThread(function()
+-- Stash 1
+--[[ CreateThread(function()
     Wait(1000)
     local headerDrawn = false
 
@@ -568,8 +568,8 @@ CreateThread(function()
         end
         Wait(sleep)
     end
-end)
-
+end) ]]
+--[[
 -- Personal Stash
 CreateThread(function()
     Wait(1000)
@@ -979,6 +979,25 @@ exports['qb-target']:AddBoxZone("policeoutfits", vector3(460.2, -999.76, 30.69),
                 event = "raid_clothes:outfits",
                 icon = "fas fa-tshirt",
                 label = "Change Outfit",
+                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
+            },
+        },
+        distance = 2.5
+})
+
+exports['qb-target']:AddBoxZone("policeevidence", vector3(473.77130, -994.46810, 26.62234), 0.55, 1.05, {
+    name = "policeevidence",
+    heading = 0,
+    debugPoly = false,
+    minZ=25.00,
+    maxZ=28.00
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "police:client:EvidenceStashDrawer",
+                icon = "far fa-folder-open",
+                label = "Evidence Locker",
                 job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
             },
         },

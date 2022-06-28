@@ -60,7 +60,7 @@ Config.Locations = {
     ["evidence"] = {
         [1] = vector3(480.83, -991.82, 30.69), -- mrpd laboratory
         [2] = vector3(475.38, -1005.11, 26.27), -- mrpd processing
-        [3] = vector3(473.14, -994.98, 26.27), -- evidence room
+        [3] = vector3(472.86737, -994.4609, 26.273309), -- evidence room
     },
     ["stations"] = {
         [1] = {label = "Mission Row PD", coords = vector4(428.23, -984.28, 29.76, 3.5)},
