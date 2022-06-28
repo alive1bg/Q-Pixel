@@ -1,10 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-lua54 'yes'
-
-escrow_ignore {
-}
+description 'QB-HouseRobbery'
+version '1.0.0'
 
 shared_scripts {
  'config.lua',

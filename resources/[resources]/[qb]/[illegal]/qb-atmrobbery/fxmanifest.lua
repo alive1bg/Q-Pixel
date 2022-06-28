@@ -1,10 +1,9 @@
 fx_version 'cerulean'
 game 'gta5'
 
-lua54 'yes'
+description 'amir_expert#1911 - ATM Robbery'
 
-escrow_ignore {
-}
+version '1.0.3'
 
 client_script 'client/client.lua'
 server_script 'server/server.lua'

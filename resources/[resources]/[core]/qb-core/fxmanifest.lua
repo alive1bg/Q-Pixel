@@ -53,9 +53,3 @@ dependencies {
 --server_export 'isPed'
 
 lua54 'yes'
-
-escrow_ignore {
-'config.lua',
-'shared/*.lua',
-'locale/*.lua',
-}

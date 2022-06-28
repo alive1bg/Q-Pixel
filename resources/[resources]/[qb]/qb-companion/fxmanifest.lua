@@ -1,10 +1,7 @@
 fx_version 'cerulean'
 games { 'gta5' }
 
-lua54 'yes'
-
-escrow_ignore {
-}
+author "Swkeep#7049"
 
 shared_scripts {
      '@qb-core/shared/locale.lua',
