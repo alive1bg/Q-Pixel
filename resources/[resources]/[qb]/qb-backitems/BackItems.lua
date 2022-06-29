@@ -723,4 +723,122 @@ BackItems = {
         y_rotation = -90.0,
         z_rotation = 0.00,
     },
+
+    --CUSTOM WEAPONS
+    ["weapon_ak47"] = {
+        model="w_ar_ak47",
+        back_bone = 24818,
+        x = -0.0,
+        y = -0.17,
+        z = 0.08,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+    },
+
+    ["weapon_m70"] = {
+        model="w_ar_m70",
+        back_bone = 24818,
+        x = -0.0,
+        y = -0.17,
+        z = 0.08,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+    },
+        
+    ["weapon_remington"] = {
+        model="w_sg_remington",
+        back_bone = 24818,
+        x = -0.0,
+        y = -0.17,
+        z = 0.08,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+    },
+    
+    ["weapon_huntingrifle"] = {
+        model="w_sr_huntingrifle",
+        back_bone = 24818,
+        x = 0.0,
+        y = -0.17,
+        z = -0.12,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+        
+    },
+        
+    ["weapon_uzi"] = {
+        model="w_sb_uzi",
+        back_bone = 24818,
+        x = 0.12,
+        y = -0.17,
+        z = -0.0,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 0.0,
+        
+    },
+        
+    ["weapon_mk14"] = {
+        model="w_sr_mk14",
+        back_bone = 24818,
+        x = 0.0,
+        y = -0.17,
+        z = -0.12,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+        
+    },
+        
+    ["weapon_mossberg"] = {
+        model="w_sg_mossberg",
+        back_bone = 24818,
+        x = 0.12,
+        y = -0.17,
+        z = -0.0,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 0.0,
+        
+    },
+        
+    ["weapon_m4"] = {
+        model="w_ar_m4",
+        back_bone = 24818,
+        x = -0.0,
+        y = -0.17,
+        z = 0.08,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+        
+    },
+        
+    ["weapon_scarh"] = {
+        model="w_ar_scarh",
+        back_bone = 24818,
+        x = 0.12,
+        y = -0.17,
+        z = -0.0,
+        x_rotation = 0.0,
+        y_rotation = 180.0,
+        z_rotation = 0.0,
+        
+    },
+        
+    ["weapon_mac10"] = {
+        model="w_sb_mac10",
+        back_bone = 24818,
+        x = 0.0,
+        y = -0.17,
+        z = -0.12,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+        
+    },
 }
