@@ -113,7 +113,7 @@ CreateThread(function()
         sleep = 1000
         if IsPedInAnyVehicle(PlayerPedId()) then
             sleep = 10
-            if seatbeltOn or harnessOn then
+            if harnessOn then
                 DisableControlAction(0, 75, true)
                 DisableControlAction(27, 75, true)
             end
