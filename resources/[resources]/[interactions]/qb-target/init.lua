@@ -125,14 +125,14 @@ Config.TargetBones = {
             },
             {
                 type = "client",
-                event = "dcrp-policejob:copimpound",
+                event = "qb-policejob:copimpound",  
                 icon = "fas fa-car",
                 label = "Impound Vehicle",
                 job = 'police'
             },
             {
                 type = "client",
-                event = "dcrp-policejob:towimpound",
+                event = "qb-policejob:towimpound",
                 icon = "fas fa-car",
                 label = "Impound",
                 job = 'tow'
