@@ -129,17 +129,35 @@ $(function () {
         }
     };
 
+    $('#save-bank').on('click', function() {
+        CloseMenuBank(true)
+    })
     $('#save').on('click', function() {
-        CloseMenu(true)
+        CloseMenuCash(true)
     })
     $('#discard').on('click', function() {
         CloseMenu(false)
     })
 
     function CloseMenu(save) {
-        $.post('https://raid_clothes/escape', JSON.stringify({save:save}));
-    }
-
+        $.post('https://raid_clothes/escape', JSON.stringify({
+			save:save,
+			fadeStyle: $('#fadeStyle').find('.input-number').eq(0).val()
+		})); 
+    } 
+    function CloseMenuBank(save) {
+        $.post('https://raid_clothes/escape-bank', JSON.stringify({
+			save:save,
+			fadeStyle: $('#fadeStyle').find('.input-number').eq(0).val()
+		}));
+    } 
+    function CloseMenuCash(save) {
+        $.post('https://raid_clothes/escape-cash', JSON.stringify({
+			save:save,
+			fadeStyle: $('#fadeStyle').find('.input-number').eq(0).val()
+		}));
+    } 
+    
     $(document).on('contextmenu', function() {
         $.post('https://raid_clothes/togglecursor', JSON.stringify({}));
     })

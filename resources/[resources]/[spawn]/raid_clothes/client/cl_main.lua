@@ -735,21 +735,35 @@ RegisterNetEvent("clothing:close", function()
 end)
 
 RegisterNUICallback('escape', function(data, cb)
-    local shouldSave = data['save'] or false
-    if shouldSave and currentPrice > 0 then
-        QBCore.Functions.TriggerCallback("clothing:purchase", function(result) 
-            if not result then
-                QBCore.Functions.Notify("You don't have enough money!")
-                --TriggerEvent("notify", "Yeteri kadar paran yok!", 2)
-                shouldSave = false
-            end
-        end, currentPrice)
-    end
-    if not startingMenu then
-        TriggerServerEvent("Police:getMeta")
-    end
-    Save(shouldSave,true)
+	local newFadeStyle = data["fadeStyle"] or 255
+    Save(data['save'], true, newFadeStyle)
+    EnableGUI(false, false)
+    menu = nil
+    startingMenu = false
     cb('ok')
+    TriggerEvent("backitems:displayItems", true)
+end)
+
+
+RegisterNUICallback('escape-bank', function(data, cb)
+	local newFadeStyle = data["fadeStyle"] or 255
+    Save(data['save'], true, newFadeStyle)
+    EnableGUI(false, false)
+    menu = nil
+    startingMenu = false
+    cb('ok')
+    TriggerServerEvent("clothing:payment", 'bank', 120)
+    TriggerEvent("backitems:displayItems", true)
+end)
+
+RegisterNUICallback('escape-cash', function(data, cb)
+	local newFadeStyle = data["fadeStyle"] or 255
+    Save(data['save'], true, newFadeStyle)
+    EnableGUI(false, false)
+    menu = nil
+    startingMenu = false
+    cb('ok')
+    TriggerServerEvent("clothing:payment", 'cash', 100)
     TriggerEvent("backitems:displayItems", true)
 end)
 

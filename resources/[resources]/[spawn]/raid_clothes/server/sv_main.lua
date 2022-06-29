@@ -383,3 +383,12 @@ RegisterServerEvent("clothing:checkIfNew", function()
         TriggerClientEvent("raid_clothes:inService",src,isService)
     end)
 end)
+
+RegisterServerEvent("clothing:payment")
+AddEventHandler("clothing:payment", function(pType,price)
+    print(pType)
+    print(price)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.RemoveMoney(pType, price, 'Clothing Payment')
+end)
