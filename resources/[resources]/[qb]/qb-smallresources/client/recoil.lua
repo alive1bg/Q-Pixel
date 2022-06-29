@@ -105,12 +105,14 @@ local recoils = {
 	[-1238556825] = 0.3,		--['weapon_rayminigun']
 
 	---- CUSTOM WEAPONS ---------
+	-- CUSTOM WEAPONS
 	[GetHashKey("weapon_ak47")] = 0.5,
 	[GetHashKey("weapon_de")] = 0.5,
 	[GetHashKey("weapon_fnx45")] = 0.3,
 	[GetHashKey("weapon_glock17")] = 0.3,
 	[GetHashKey("weapon_m4")] = 0.3,
 	[GetHashKey("weapon_mk14")] = 0.4,
+	[GetHashKey("weapon_m110")] = 0.4,
 	[GetHashKey("weapon_huntingrifle")] = 0.4,
 	[GetHashKey("weapon_ar15")] = 0.4,
 	[GetHashKey("weapon_m9")] = 0.4,
@@ -118,6 +120,7 @@ local recoils = {
 	[GetHashKey("weapon_m1911")] = 0.4,
 	[GetHashKey("weapon_mac10")] = 0.7,
 	[GetHashKey("weapon_uzi")] = 0.7,
+	[GetHashKey("weapon_mp9")] = 0.7,
 	[GetHashKey("weapon_mossberg")] = 0.7,
 	[GetHashKey("weapon_remington")] = 0.7,
 	[GetHashKey("weapon_scarh")] = 0.5,

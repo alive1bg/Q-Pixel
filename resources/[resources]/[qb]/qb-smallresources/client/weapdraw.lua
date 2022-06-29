@@ -1,5 +1,6 @@
 local weapons = {
 	--Custom Weapon
+	--Custom Weapon
 	'WEAPON_AK47',
 	'WEAPON_M9',
 	'WEAPON_FNX45',
@@ -13,10 +14,14 @@ local weapons = {
 	'WEAPON_M1911',
 	'WEAPON_MAC10',
 	'WEAPON_UZI',
+	'WEAPON_MP9',
+	'WEAPON_M110',
 	'WEAPON_MOSSBERG',
 	'WEAPON_REMINGTON',
 	'WEAPON_SCARH',
 	'WEAPON_SHIV',
+	'WEAPON_KATANA',
+	'WEAPON_SLEDGEHAMMER',
 	------------------
 	'WEAPON_BATS',
     'WEAPON_KATANAS',
