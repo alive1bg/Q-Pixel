@@ -74,6 +74,15 @@ AddEventHandler('qb-garages:server:modifystate', function(vehicleProps)
     exports.oxmysql:execute('UPDATE player_vehicles SET mods = ? WHERE plate = ?', {json.encode(vehicleProps), plate})
 end)
 
+RegisterServerEvent('qb-police:server:returntoimpound')
+AddEventHandler('qb-police:server:returntoimpound', function(data)
+    local src = source
+	local plate = data.plate
+    local state = 1
+    TriggerClientEvent('QBCore:Notify', src, "Vehicle has been released at the impound", 'success')
+    exports.oxmysql:execute('UPDATE player_vehicles SET state = ?, depotprice = ? WHERE plate = ?', {state, 0, plate})
+end)
+
 RegisterNetEvent('qb-garages:server:UpdateParkingLog', function(plate)
     local pData = QBCore.Functions.GetPlayer(source)
     local ctime = os.date('%H:%M %p')
@@ -229,6 +238,17 @@ QBCore.Functions.CreateCallback('qb-garages:server:GetDepotVehicles', function(s
             cb(result)
         else
             cb(nil)
+        end
+    end)
+end)
+
+QBCore.Functions.CreateCallback('qb-garages:server:GetDepotVehiclesPD', function(source, cb)
+    local state = 2
+    exports.oxmysql:execute('SELECT * FROM player_vehicles WHERE state = ?', {state}, function(result)
+        if result[1] ~= nil then
+            cb(result)
+        else
+            cb(result)
         end
     end)
 end)

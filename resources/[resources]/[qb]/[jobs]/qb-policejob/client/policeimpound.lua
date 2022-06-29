@@ -239,3 +239,48 @@ RegisterNetEvent("qb-policejob:towimpound", function(source, args, raw)
         },
     })
 end)
+
+
+RegisterNetEvent('qb-garages:client:VehicleListPD', function()
+    QBCore.Functions.TriggerCallback('qb-garages:server:GetDepotVehiclesPD', function(vehcheck) 
+        local NoVeh = false
+        local menu = {{
+            header = "< Go Back",
+            params = {
+                event = "Garages:OpenDepot",
+            }
+        }}
+        for i = 1, #vehcheck do
+            if vehcheck[i].state == 2 then
+                table.insert(menu, {
+                    header = QBCore.Shared.Vehicles[vehcheck[i].vehicle].name,
+                    txt = "Plate: "..vehcheck[i].plate.." | Fine: "..vehcheck[i].depotprice.."$",
+                    params = {
+                        event = "qb-police:client:returntoimpound",
+                        args = {
+                            plate = vehcheck[i].plate,
+                            vehicle = vehcheck[i].vehicle,
+                            engine = vehcheck[i].engine,
+                            body = vehcheck[i].body,
+                            fuel = vehcheck[i].fuel,
+                            fine = vehcheck[i].depotprice,
+                            garage = vehcheck[i].garage
+                        }
+                    }
+                })
+                NoVeh = true
+            end
+            if NoVeh then
+                exports['qb-menu']:openMenu(menu)
+            end
+        end
+        if not NoVeh then
+            TriggerEvent('QBCore:Notify', "There are no seized vehicles", "error", 3000)
+        end
+    end)
+end)
+
+RegisterNetEvent("qb-police:client:returntoimpound")
+AddEventHandler('qb-police:client:returntoimpound', function(data)
+    TriggerServerEvent("qb-police:server:returntoimpound", data)
+end)

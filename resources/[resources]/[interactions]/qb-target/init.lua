@@ -53,6 +53,31 @@ Config.CircleZones = {
 }
 
 Config.BoxZones = {
+
+
+      ["pdseized"] = {
+        name = "PD Seized",
+        coords = vector3(444.59, -985.03, 30.69), 
+        length = 1.0,
+        width = 1.4,
+        heading = 2,
+        debugPoly = false,
+        minZ=27.69,
+        maxZ=31.69,
+        options = {
+            {
+                type = "client",
+                event = "qb-garages:client:VehicleListPD", 
+                icon = "fas fa-wrench",
+                label = "Seized Vehicle List",
+                job = "police",
+            },
+        },
+        distance = 2.5
+    },
+
+
+
     -- qb-mechanicparts
     ["mechaniccraft2"] = {
         name = "Mechanic Toolbox2",
