@@ -9,6 +9,22 @@ local effectTimer = 0
 
 -- Exports
 
+AddEventHandler('onResourceStart', function(resource)
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
+    PlayerJob = job
+end)
+
 local function GetVehicleStatusList(plate)
     local retval = nil
     if VehicleStatus[plate] ~= nil then
@@ -917,29 +933,33 @@ CreateThread(function() -- Not event sure what this is even for
                 --print(isModified)
                 print(fSteeringLock)
                 if not isModified then
-                    print("Setting up handling data")
-                    --print("below is lock")
-                    --print(GetVehicleMod(myVeh, 15))
-                    --print("above is lock")
-                    if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.48)) + 0.1
-                        print(fSteeringLock)
-                        print("angle set 1")
-                    elseif GetVehicleMod(myVeh, 15) == 1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.49)) + 0.1
-                        print(fSteeringLock)
-                        print("angle set 2")
-                    elseif GetVehicleMod(myVeh, 15) == 2 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.50)) + 0.1
-                        print(fSteeringLock)
-                        print("angle set 3")
-                    elseif GetVehicleMod(myVeh, 15) == 3 then
+                    if PlayerJob.name == 'police' then
                         fSteeringLock = math.ceil((fSteeringLock * 0.51)) + 0.1
-                        print(fSteeringLock)
-                        print("angle set 4")
+                            print(fSteeringLock)
+                            print("angle set POLICE")
+                    else
+                        print("Setting up handling data")
+                        --print("below is lock")
+                        --print(GetVehicleMod(myVeh, 15))
+                        --print("above is lock")
+                        if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
+                            fSteeringLock = math.ceil((fSteeringLock * 0.48)) + 0.1
+                            print(fSteeringLock)
+                            print("angle set 1")
+                        elseif GetVehicleMod(myVeh, 15) == 1 then
+                            fSteeringLock = math.ceil((fSteeringLock * 0.49)) + 0.1
+                            print(fSteeringLock)
+                            print("angle set 2")
+                        elseif GetVehicleMod(myVeh, 15) == 2 then
+                            fSteeringLock = math.ceil((fSteeringLock * 0.50)) + 0.1
+                            print(fSteeringLock)
+                            print("angle set 3")
+                        elseif GetVehicleMod(myVeh, 15) == 3 then
+                            fSteeringLock = math.ceil((fSteeringLock * 0.51)) + 0.1
+                            print(fSteeringLock)
+                            print("angle set 4")
+                        end
                     end
-
-                  
                 end 
         
                 if not ModdedVehicles[vehicleIdentifier] then ModdedVehicles[vehicleIdentifier] = {} end 
