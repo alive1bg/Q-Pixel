@@ -922,15 +922,15 @@ CreateThread(function() -- Not event sure what this is even for
                     --print(GetVehicleMod(myVeh, 15))
                     --print("above is lock")
                     if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.45)) + 0.1
+                        fSteeringLock = math.ceil((fSteeringLock * 0.48)) + 0.1
                         print(fSteeringLock)
                         print("angle set 1")
                     elseif GetVehicleMod(myVeh, 15) == 1 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.47)) + 0.1
+                        fSteeringLock = math.ceil((fSteeringLock * 0.49)) + 0.1
                         print(fSteeringLock)
                         print("angle set 2")
                     elseif GetVehicleMod(myVeh, 15) == 2 then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.49)) + 0.1
+                        fSteeringLock = math.ceil((fSteeringLock * 0.50)) + 0.1
                         print(fSteeringLock)
                         print("angle set 3")
                     elseif GetVehicleMod(myVeh, 15) == 3 then
