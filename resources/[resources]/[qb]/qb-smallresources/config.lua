@@ -11,6 +11,7 @@ Config.RemoveWeaponDropsTimer = 25
 Config.DefaultPrice = 20 -- carwash
 Config.DirtLevel = 0.1 --carwash dirt level
 Config.RagdollChance = 1
+Config.densityMultipliers = {}
 
 ConsumeablesEat = {
     ["sandwich"] = math.random(35, 54),
@@ -433,3 +434,11 @@ Config.GeneralVehicleConfig = {
         ["fInitialDriveForce"] = 0.85
     }
 }
+
+
+Config.populationDensity = 0.8
+
+Config.antiGhostDebug = false
+Config.antiGhostYeetVehicles = true
+Config.antiGhostScaleX = 10.0
+Config.antiGhostScaleY = 5.0

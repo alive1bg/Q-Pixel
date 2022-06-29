@@ -26,3 +26,14 @@ AddEventHandler('qb-rental:removepapers', function(plate, model, money)
 end)
 
 
+QBCore.Functions.CreateCallback('qb-rental:checkmoney', function(source, cb, data)
+    local src = source
+    local price = data
+    local Player = QBCore.Functions.GetPlayer(source)
+    local moneyPlayer = tonumber(Player.PlayerData.money.bank)
+    if moneyPlayer > price then
+       cb(true)
+    else
+        cb(false)
+    end
+end)

@@ -4,9 +4,9 @@ RegisterNetEvent('tackle:server:TacklePlayer', function(playerId)
     TriggerClientEvent("tackle:client:GetTackled", playerId)
 end)
 
-QBCore.Commands.Add("flipvehicle", "Flip nearest vehicle", {}, false, function(source, args)
+--[[ QBCore.Commands.Add("flipvehicle", "Flip nearest vehicle", {}, false, function(source, args)
 	TriggerClientEvent("qb:flipvehicle", source)
-end)
+end) ]]
 
 QBCore.Functions.CreateCallback('nos:GetNosLoadedVehs', function(source, cb)
     cb(VehicleNitrous)
@@ -97,4 +97,11 @@ QBCore.Functions.CreateCallback('smallresources:server:GetCurrentPlayers', funct
         TotalPlayers = TotalPlayers + 1
     end
     cb(TotalPlayers)
+end)
+
+RegisterNetEvent('np:peds:rogue')
+AddEventHandler('np:peds:rogue', function(toDelete)
+  if toDelete == nil then return end
+
+  TriggerClientEvent("np:peds:rogue:delete",-1, toDelete)
 end)

@@ -1,0 +1,9 @@
+--Name: impound | 2022-06-29T14:50:29Z
+BoxZone:Create(vector3(444.59, -985.03, 30.69), 1.0, 1.4, {
+  name="impound",
+  heading=2,
+  --debugPoly = false,
+  minZ=27.69,
+  maxZ=31.69
+})
+

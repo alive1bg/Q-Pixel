@@ -216,19 +216,30 @@ AddEventHandler('qb-rental:spawncar', function(data)
     local money =data.money
     local model = data.model
     local player = PlayerPedId()
-    QBCore.Functions.SpawnVehicle(model, function(vehicle)
-        SetEntityHeading(vehicle, 340.0)
-        TaskWarpPedIntoVehicle(player, vehicle, -1)
-        TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicle))
-        SetVehicleEngineOn(vehicle, true, true)
-        SpawnVehicle = true
-    end, vector4(111.4223, -1081.24, 29.192,340.0), true)
-    Wait(1000)
-    local vehicle = GetVehiclePedIsIn(player, false)
-    local vehicleLabel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
-    vehicleLabel = GetLabelText(vehicleLabel)
-    local plate = GetVehicleNumberPlateText(vehicle)
-    TriggerServerEvent('qb-rental:rentalpapers', plate, vehicleLabel, money)
+
+    QBCore.Functions.TriggerCallback('qb-rental:checkmoney', function(result)
+        if result then
+            QBCore.Functions.SpawnVehicle(model, function(vehicle)
+                SetEntityHeading(vehicle, 340.0)
+                TaskWarpPedIntoVehicle(player, vehicle, -1)
+                TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(vehicle))
+                SetVehicleEngineOn(vehicle, true, true)
+                SpawnVehicle = true
+            end, vector4(111.4223, -1081.24, 29.192,340.0), true)
+        
+            Wait(1000)
+
+            local vehicle = GetVehiclePedIsIn(player, false)
+            local vehicleLabel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+            vehicleLabel = GetLabelText(vehicleLabel)
+            local plate = GetVehicleNumberPlateText(vehicle)
+            TriggerServerEvent('qb-rental:rentalpapers', plate, vehicleLabel, money)
+        else
+            QBCore.Functions.Notify('You do not have enough money!')
+        end
+    end, money)
+
+    
 end)
 
 RegisterNetEvent('qb-rental:return')

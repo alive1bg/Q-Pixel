@@ -17,7 +17,7 @@ RegisterNetEvent('police:client:Impound', function(fullImpound, price)
                 disableCombat = false,
             }, {}, {}, {}, function() -- Done
                 local plate = QBCore.Functions.GetPlate(vehicle)
-                TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)
+                TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel) 
                 QBCore.Functions.DeleteVehicle(vehicle)
             end, function() -- Cancel
                 QBCore.Functions.Notify("Canceled..", "error")
@@ -26,18 +26,58 @@ RegisterNetEvent('police:client:Impound', function(fullImpound, price)
     end
 end)
 
-RegisterNetEvent("police:Impound")
-AddEventHandler('police:Impound', function(data)
-    TriggerEvent('police:client:Impound', false, data.price)
+RegisterNetEvent("police:ImpoundWhich")
+AddEventHandler('police:ImpoundWhich', function(data)
+    exports['qb-menu']:openMenu({
+        {
+            header = "Police Impound",
+            isMenuHeader = true
+        },
+        {
+            header = "Impound Vehicle",
+            txt = "Car will be sent to the impound",
+            params = {
+                event = "police:FullImpound",
+				args = {
+					price = data.price,
+                    seize = false,
+				}
+            }
+        },
+        {
+            header = "Seize Vehicle",
+            txt = "Car will be held by the PD",
+            params = {
+                event = "police:FullImpound",
+				args = {
+					price = data.price,
+                    seize = true,
+				}
+            }
+        },
+        {
+            header = "Close",
+            txt = "Close Menu",
+            params = {
+                event = "qb-menu:client:closeMenu"
+            },
+        },
+    })
+
 end)
 
 RegisterNetEvent("police:FullImpound")
 AddEventHandler('police:FullImpound', function(data)
-    TriggerEvent('police:client:Impound', true, data.price)
+    print(data.seize)
+    TriggerEvent('police:client:Impound', data.seize, data.price)
 end)
 
 RegisterNetEvent("qb-policejob:copimpound", function(source, raw)
     exports['qb-menu']:openMenu({
+        {
+            header = "Impound Options",
+            isMenuHeader = true
+        },
         {
             header = "Request Impound",
             txt = "Request Tow Worker to impound this vehicle",
@@ -72,7 +112,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Evidence Of a Crime",
             txt = "Vehicle has been used in or is evidence of a crime.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
                 args = {
 					price = '750',
 				}
@@ -82,7 +122,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Reckless Evading",
             txt = "Driven carelessly with gross disregard for human life.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '1300',
 				}
@@ -92,7 +132,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Street Racing",
             txt = "Vehicle was uised in a speed contest on a public road/highway.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '800',
 				}
@@ -102,7 +142,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Vehicle Repossession",
             txt = "Vehicle with an outstanding loan that was not paid off and is to be seized.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '2000',
 				}
@@ -112,7 +152,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Robbery or Kidnapping",
             txt = "Vehicle was used in the commission of any robbery or kidnapping related offense.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '4000',
 				}
@@ -122,7 +162,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Inoperable on a scene",
             txt = "Vehicle found on a scene in an inoperable state.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '500',
 				}
@@ -132,7 +172,7 @@ RegisterNetEvent("qb-policejob:policeimpound", function(source, args, raw)
             header = "Violent Felony",
             txt = "Used in the commission of violent crime either in a drive by shooting or for transporting to and from the scene of a violent crime.",
             params = {
-                event = "police:FullImpound",
+                event = "police:ImpoundWhich",
 				args = {
 					price = '3500',
 				}
@@ -165,14 +205,22 @@ RegisterNetEvent("qb-policejob:towimpound", function(source, args, raw)
             header = "Vehicle Scuff",
             txt = "Vehicle in an unrecoverable state.",
             params = {
-                event = "qb-tow:client:markVehicleNew",
+                event = "police:FullImpound",
+                args = {
+					price = '0',
+                    seize = false,
+				}
             }
         },
         {
             header = "Parking Violation",
             txt = "Vehicle parked in an restricted or unauthorzied place.",
             params = {
-                event = "qb-tow:client:markVehicleNew",
+                event = "police:FullImpound",
+                args = {
+					price = '500',
+                    seize = false,
+				}
             }
         },
         {
@@ -190,4 +238,49 @@ RegisterNetEvent("qb-policejob:towimpound", function(source, args, raw)
             },
         },
     })
+end)
+
+
+RegisterNetEvent('qb-garages:client:VehicleListPD', function()
+    QBCore.Functions.TriggerCallback('qb-garages:server:GetDepotVehiclesPD', function(vehcheck) 
+        local NoVeh = false
+        local menu = {{
+            header = "< Go Back",
+            params = {
+                event = "Garages:OpenDepot",
+            }
+        }}
+        for i = 1, #vehcheck do
+            if vehcheck[i].state == 2 then
+                table.insert(menu, {
+                    header = QBCore.Shared.Vehicles[vehcheck[i].vehicle].name,
+                    txt = "Plate: "..vehcheck[i].plate.." | Fine: "..vehcheck[i].depotprice.."$",
+                    params = {
+                        event = "qb-police:client:returntoimpound",
+                        args = {
+                            plate = vehcheck[i].plate,
+                            vehicle = vehcheck[i].vehicle,
+                            engine = vehcheck[i].engine,
+                            body = vehcheck[i].body,
+                            fuel = vehcheck[i].fuel,
+                            fine = vehcheck[i].depotprice,
+                            garage = vehcheck[i].garage
+                        }
+                    }
+                })
+                NoVeh = true
+            end
+            if NoVeh then
+                exports['qb-menu']:openMenu(menu)
+            end
+        end
+        if not NoVeh then
+            TriggerEvent('QBCore:Notify', "There are no seized vehicles", "error", 3000)
+        end
+    end)
+end)
+
+RegisterNetEvent("qb-police:client:returntoimpound")
+AddEventHandler('qb-police:client:returntoimpound', function(data)
+    TriggerServerEvent("qb-police:server:returntoimpound", data)
 end)
