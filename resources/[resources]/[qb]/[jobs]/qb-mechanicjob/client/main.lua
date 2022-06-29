@@ -939,9 +939,6 @@ CreateThread(function() -- Not event sure what this is even for
                             print("angle set POLICE")
                     else
                         print("Setting up handling data")
-                        --print("below is lock")
-                        --print(GetVehicleMod(myVeh, 15))
-                        --print("above is lock")
                         if GetVehicleMod(myVeh, 15) == 0 or  GetVehicleMod(myVeh, 15) == -1 then
                             fSteeringLock = math.ceil((fSteeringLock * 0.48)) + 0.1
                             print(fSteeringLock)

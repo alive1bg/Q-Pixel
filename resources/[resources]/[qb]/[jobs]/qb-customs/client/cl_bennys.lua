@@ -45,6 +45,14 @@ CreateThread(function() -- COMMENTED OUT FOR QB-BENNYS
     end
 end)
 
+RegisterNetEvent('qb-customs:client:EnterCustoms', function(override)
+    if not override.coords or not override.heading then override = nil end
+    if not IsPedInAnyVehicle(PlayerPedId(), false) or isPlyInBennys or (not next(CustomsData) and not override) then return end
+    if not override and next(CustomsData) and not CheckRestrictions(CustomsData.location) then return end
+
+    EnterLocation(override)
+end)
+
 --#[Local Functions]#--
 local function isNear(pos1, pos2, distMustBe)
     local diff = pos2 - pos1
