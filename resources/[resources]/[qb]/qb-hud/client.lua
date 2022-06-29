@@ -1076,7 +1076,7 @@ end)
 
 -- Harness Check
 
-CreateThread(function()
+--[[ CreateThread(function()
     while true do
         Wait(1500)
         if LocalPlayer.state.isLoggedIn then
@@ -1090,7 +1090,7 @@ CreateThread(function()
             end
         end
     end
-end)
+end) ]]
 
 -- Stress Gain
 
