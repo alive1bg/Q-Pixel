@@ -809,3 +809,28 @@ QBCore.Functions.CreateCallback('qb-phone:server:MeosGetPlayerHouses', function(
         cb(nil)
     end
 end)
+
+
+QBCore.Commands.Add("deletehouse", "Delete House (Real Estate Only)", {}, false, function(source)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player.PlayerData.job.name == "realestate" then
+        TriggerClientEvent("qb-houses:client:DeleteHouse", src)
+    else
+        TriggerClientEvent('QBCore:Notify', src, "You can't do this", "error")
+    end 
+end)
+RegisterNetEvent("qb-houses:server:DeleteHouse", function(house)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player.PlayerData.job.name == "realestate" then
+        if not isHouseOwned(house) then
+            MySQL.Async.execute('DELETE FROM `houselocations` WHERE name = ?', {house})  
+            Config.Houses[house] = nil
+            TriggerClientEvent('qb-houses:client:removeMenuForAgent', src, house)
+            TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Config.Houses)    
+        else
+            TriggerClientEvent('QBCore:Notify', src, "House is Owned")
+        end
+    end
+end)

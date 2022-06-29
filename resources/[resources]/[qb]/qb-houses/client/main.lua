@@ -1411,3 +1411,22 @@ exports('isInHouse', function()
     end
     return false
 end)
+
+RegisterNetEvent("qb-houses:client:DeleteHouse", function()
+    if QBCore.Functions.GetPlayerData().job.name == 'realestate' then
+        if ClosestHouse ~= nil then
+            TriggerServerEvent("qb-houses:server:DeleteHouse", ClosestHouse)
+        else
+            QBCore.Functions.Notify('No House Nearby', 'error')
+        end
+    else
+        QBCore.Functions.Notify('Real Estate Only', 'error')
+    end
+end)
+RegisterNetEvent("qb-houses:client:removeMenuForAgent", function(house) -- This was to make sure the entry menu went away because the default QB-Houses uses that instead of targeting
+    if ClosestHouse ~= nil then
+        if ClosestHouse == house then
+            ClosestHouse = nil    
+        end
+    end
+end)
