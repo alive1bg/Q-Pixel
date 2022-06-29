@@ -200,3 +200,11 @@ end)
 AddEventHandler('baseevents:vehicleChangedSeat', function (currentVehicle, currentSeat)
   IsDriver = currentSeat == -1
 end)
+
+
+function tableContains(tbl, value)
+    for k, v in pairs(tbl) do
+      if v == value then return true end
+    end
+    return false
+  end

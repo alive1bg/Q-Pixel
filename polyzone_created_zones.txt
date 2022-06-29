@@ -7,3 +7,12 @@ BoxZone:Create(vector3(444.59, -985.03, 30.69), 1.0, 1.4, {
   maxZ=31.69
 })
 
+--Name: ff | 2022-06-29T21:51:42Z
+BoxZone:Create(vector3(-661.73, -873.7, 24.51), 11.8, 14.6, {
+  name="ff",
+  heading=90,
+  --debugPoly = false,
+  minZ=23.31,
+  maxZ=25.71
+})
+
