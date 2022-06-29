@@ -18,7 +18,7 @@ body {
     display: block;
     position: absolute;
     top: 80vh;
-    left: 45%;
+    left: 42%;
     width: auto;
     opacity: 0;
 }
@@ -27,8 +27,8 @@ body {
     display: block;
     position: absolute;
     margin: 50px auto;
-    width: 6.5vh;
-    height: 6.5vh;
+    width: 6.0vh;
+    height: 6.0vh;
 }
 
 .label {
