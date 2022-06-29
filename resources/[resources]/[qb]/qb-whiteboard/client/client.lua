@@ -85,7 +85,7 @@ AddEventHandler("qb-polyzone:exit", function(zone)
   end
 end)
 
---[[RegisterNetEvent("police:changewhiteboardcli")
+--[[ RegisterNetEvent("police:changewhiteboardcli")
 AddEventHandler("police:changewhiteboardcli", function(pUrl, pRoom)
   if pRoom == "mrpd_classroom" and inClassRoom and dui then
     currentBoardUrl = pUrl
@@ -94,12 +94,37 @@ AddEventHandler("police:changewhiteboardcli", function(pUrl, pRoom)
     currentMeetingRoomBoardUrl = pUrl
     exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
   end
-end)]]
+end) ]]
+
+CreateThread(function()
+  local duiObj = CreateDui(defaultDuiUrl, 1064, 661)
+  _G.duiObj = duiObj
+  local dui = GetDuiHandle(duiObj)
+  local txd = CreateRuntimeTxd('duiTxd')
+  local tx = CreateRuntimeTextureFromDuiHandle(txd, 'duiTex', dui)
+end)
+
+RegisterNetEvent("police:client:SetBoardPhoto")
+AddEventHandler("police:client:SetBoardPhoto", function(pUrl)
+  currentBoardUrl = pUrl
+  if inClassRoom then
+    SetDuiUrl(_G.duiObj, currentBoardUrl)
+    TriggerEvent("police:changewhiteboardclipp", currentBoardUrl)
+  end
+end)
+
+RegisterNetEvent("police:changewhiteboardclipp")
+AddEventHandler("police:changewhiteboardclipp", function(pUrl)
+    currentMeetingRoomBoardUrl = pUrl
+    exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
+    --TriggerServerEvent("police:server:SetBoardPhoto", currentMeetingRoomBoardUrl)
+end)
 
 RegisterNetEvent("police:changewhiteboardcli")
 AddEventHandler("police:changewhiteboardcli", function(pUrl)
     currentMeetingRoomBoardUrl = pUrl
     exports["np-lib"]:changeDuiUrl(dui.id, currentMeetingRoomBoardUrl)
+    TriggerServerEvent("police:server:SetBoardPhoto", currentMeetingRoomBoardUrl)
 end)
 
 QBCore.Functions.TriggerCallback("qb-ui:policechangeurl", function(data, cb)

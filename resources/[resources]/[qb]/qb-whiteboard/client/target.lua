@@ -34,18 +34,19 @@ exports['qb-target']:AddBoxZone("mrpd_meetingroom_screen", vector3(439.24, -985.
         },
     },
     distance = 1.5
-})
+}) 
 
 RegisterNetEvent("qb-whiteboard:changewhiteboardcli")
 AddEventHandler("qb-whiteboard:changewhiteboardcli", function()
-    local dialog = exports['qb-ui']:OpenInputMenu({
+    --[[ local dialog = exports['qb-ui']:OpenInputMenu({
         {
             label = "Whiteboard URL",
             name = 'URL',
             icon = 'pencil-alt',
         }
-    })
-    --[[local dialog = exports['qb-input']:ShowInput({
+    }) ]]
+
+    local dialog = exports['qb-input']:ShowInput({
         header = "Whiteboard URL",
         submitText = "Confirm",
         inputs = {
@@ -56,7 +57,7 @@ AddEventHandler("qb-whiteboard:changewhiteboardcli", function()
                 isRequired = true -- Optional [accepted values: true | false] but will submit the form if no value is inputted
             }
         },
-    })]]
+    })
 
     if dialog ~= nil then
         for k,v in pairs(dialog) do
