@@ -27,7 +27,7 @@
 }
 
 .phone-app-footer {
-    position: absolute;
+    position: relative;
     height: 5vh;
     width: 100%;
     bottom: -2vh;
@@ -37,8 +37,9 @@
 .phone-app-footer-button {
     position: relative;
     height: 100%;
-    width: 50%;
+    width: 33%;
     text-align: center;
+    top: 1100%;
     float: left;
     /* font-family: 'Roboto', sans-serif !important; */
     color: white;
@@ -52,7 +53,7 @@
 .phone-contacts {
     display: block;
     position: absolute;
-    height: 79%;
+    height: 99%;
     width: 100%;
     top: 4vh;
 }
