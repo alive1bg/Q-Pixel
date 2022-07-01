@@ -621,6 +621,7 @@ Config.Weapons = {
     [`WEAPON_M70`] = Config.WeaponClasses['HIGH_CALIBER'],
     [`WEAPON_SCARH`] = Config.WeaponClasses['HIGH_CALIBER'],
     [`WEAPON_MK14`] = Config.WeaponClasses['HIGH_CALIBER'],
+    [`WEAPON_HK416`] = Config.WeaponClasses['HIGH_CALIBER'],
     [`WEAPON_M110`] = Config.WeaponClasses['HIGH_CALIBER'],
     [`WEAPON_HUNTINGRIFLE`] = Config.WeaponClasses['HIGH_CALIBER'],
     --[[ MEDIUM CALIBER ]]

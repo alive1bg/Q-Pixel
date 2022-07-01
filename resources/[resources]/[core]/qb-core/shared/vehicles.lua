@@ -1669,7 +1669,16 @@ QBShared.Vehicles = {
 		['hash'] = 'mlec',
 		['shop'] = 'tuner',
 	},
-	----NISSAN
+	----NISSAN 
+	['razerhycade34'] = {
+		['name'] = 'R34 Hycade',
+		['brand'] = 'Nissan',
+		['model'] = 'razerhycade34',
+		['price'] = 260000,
+		['category'] = 'nissan',
+		['hash'] = 'razerhycade34k',
+		['shop'] = 'tuner',
+	},
 	['nissanr33tbk'] = {
 		['name'] = 'R33 GTR',
 		['brand'] = 'Nissan',
@@ -2175,7 +2184,7 @@ QBShared.Vehicles = {
 	},
 	----TOYOTA
 	['zupra2'] = {
-		['name'] = 'Supra Custom',
+		['name'] = 'Supra Wide Custom',
 		['brand'] = 'Toyota',
 		['model'] = 'zupra2',
 		['price'] = 175000,

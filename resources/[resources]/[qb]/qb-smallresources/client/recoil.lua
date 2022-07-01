@@ -112,6 +112,7 @@ local recoils = {
 	[GetHashKey("weapon_glock17")] = 0.3,
 	[GetHashKey("weapon_m4")] = 0.3,
 	[GetHashKey("weapon_mk14")] = 0.4,
+	[GetHashKey("weapon_hk416")] = 0.3,
 	[GetHashKey("weapon_m110")] = 0.4,
 	[GetHashKey("weapon_huntingrifle")] = 0.4,
 	[GetHashKey("weapon_ar15")] = 0.4,

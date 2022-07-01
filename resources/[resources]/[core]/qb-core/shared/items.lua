@@ -101,6 +101,7 @@ QBShared.Items = {
 	['weapon_sledgehammer'] 				 = {['name'] = 'weapon_sledgehammer', 	 		  	['label'] = 'Sledge Hammer', 					['weight'] = 13000, 	['type'] = 'weapon', 	['ammotype'] = nil,						['image'] = 'sledgehammer.png', 							['unique'] = true, 		['useable'] = false,["created"] = nil,	['description'] = 'A Sledge Hammer to destroy peoples heads'},
 	['weapon_mp9'] 			 = {['name'] = 'weapon_mp9', 		 	  	['label'] = 'MP9', 				['weight'] = 10000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SMG',				['image'] = '???', 		['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A handheld lightweight machine gun'},
 	['weapon_m110'] 		 = {['name'] = 'weapon_m110', 	 	  	['label'] = 'M110', 			['weight'] = 23000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_SNIPER',			['image'] = '???', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A very accurate single-fire rifle'},
+	['weapon_hk416'] 		 = {['name'] = 'weapon_hk416', 	 	  	['label'] = 'HK-416', 			['weight'] = 13000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_RIFLE',			['image'] = 'weapon_carbinerifle.png', 	['unique'] = true, 		['useable'] = false,["created"] = nil,["decay"] = 30.0,     	['description'] = 'A lightweight automatic rifle'},
 
 	-- EXPLOSIVES
 	-- bzgas = M67 Grenade
@@ -1800,4 +1801,49 @@ QBShared.Items = {
 	['cardiaquecigs'] 				 	= {['name'] = 'cardiaquecigs', 			['label'] = 'Cardiaque Cigarettes', ['weight'] = 250, 		["degrade"] = 1.0,		['type'] = 'item', 		['image'] = 'cardiaquecigs.png', 			['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pack of Cigarettes, Made in USA', ['created'] = nil, ['decay'] = 28.0},
 	['yukoncigs'] 				 		= {['name'] = 'yukoncigs', 				['label'] = 'Yukon Cigarettes', 	['weight'] = 250, 		["degrade"] = 1.0,		['type'] = 'item', 		['image'] = 'yukoncigs.png', 				['unique'] = true, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pack of Menthol Cigarettes, Made in USA', ['created'] = nil, ['decay'] = 28.0},
 	["cigarette"] 						= {["name"] = "cigarette",  	     	["label"] = "Cigarette",	 		["weight"] = 250, 		["type"] = "item", 		["image"] = "cigarette.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = "Smokeable Tobacco", ['created'] = nil, ['decay'] = 28.0},
+
+	-- GUNRACK
+	["policegunrack"] = {
+		["name"] = "policegunrack",
+		["label"] = "Police Gun Rack",
+		["weight"] = 15000,
+		["type"] = "item",
+		["image"] = "policegunrack.png",
+		["unique"] = false,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "Gun rack for police vehicles",
+		['created'] = nil, 
+		['decay'] = 28.0
+   },
+   -- optional if you want to open rack by keys
+   ["gunrackkey"] = {
+		["name"] = "gunrackkey",
+		["label"] = "Police Gun Key",
+		["weight"] = 500,
+		["type"] = "item",
+		["image"] = "gunrackkey.png",
+		["unique"] = false,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "A key to open gun rack", 
+		['created'] = nil, 
+		['decay'] = 28.0
+   },
+   ["keycuttingmachine"] = {
+		["name"] = "keycuttingmachine",
+		["label"] = "Key Cutting Machine",
+		["weight"] = 40000,
+		["type"] = "item",
+		["image"] = "keycuttingmachine.png",
+		["unique"] = false,
+		["useable"] = true,
+		["shouldClose"] = true,
+		["combinable"] = nil,
+		["description"] = "A Machine to Cut Keys", 
+		['created'] = nil, 
+		['decay'] = 28.0
+   },
 }

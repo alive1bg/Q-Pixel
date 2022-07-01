@@ -817,6 +817,17 @@ BackItems = {
         z_rotation = 180.0,
         
     },
+
+    ["weapon_hk416"] = {
+        model="w_ar_hk416",
+        back_bone = 24818,
+        x = -0.0,
+        y = -0.17,
+        z = 0.08,
+        x_rotation = 0.0,
+        y_rotation = -180.0,
+        z_rotation = 180.0,
+    },
         
     ["weapon_scarh"] = {
         model="w_ar_scarh",

@@ -171,6 +171,7 @@ Config.DurabilityMultiplier = {
      ['weapon_glock17'] 		        = 0.15,
      ['weapon_m4'] 			= 0.15,
      ['weapon_mk14'] 			= 0.15,
+     ['weapon_hk416'] 			= 0.15,
      ['weapon_m110'] 			= 0.15,
      ['weapon_huntingrifle'] 	        = 0.20,
      ['weapon_ar15'] 			= 0.15,
@@ -333,6 +334,26 @@ WeaponAttachments = {
             component = 'COMPONENT_M110_CLIP_02',
             item = 'marksmanrifle_extendedclip',
             type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP',
+            item = 'rifle_suppressor',
+        },
+    },
+    ['WEAPON_HK416'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_HK416_CLIP_01',
+            item = 'carbinerifle_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_HK416_CLIP_02',
+            item = 'carbinerifle_extendedclip',
+            type = 'clip',
+        },
+        ['flashlight'] = {
+            component = 'COMPONENT_AT_AR_FLSH',
+            item = 'rifle_flashlight',
         },
         ['suppressor'] = {
             component = 'COMPONENT_AT_AR_SUPP',

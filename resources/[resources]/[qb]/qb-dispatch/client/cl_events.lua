@@ -50,6 +50,7 @@ local WeaponTable = {
     [GetHashKey("weapon_fnx45")] = "CLASS 1: FN .45",
     [GetHashKey("weapon_glock17")] = "CLASS 1: Glock 17",
     [GetHashKey("weapon_m4")] = "CLASS 3: M4",
+    [GetHashKey("weapon_hk416")] = "CLASS 3: HK-416",
     [GetHashKey("weapon_mk14")] = "CLASS 4: MK 14",
     [GetHashKey("weapon_mk14")] = "CLASS 4: M110",
     [GetHashKey("weapon_huntingrifle")] = "CLASS 3: Hunting Rifle",

@@ -215,4 +215,5 @@ QBShared.Weapons = {
 	[`weapon_huntingrifle`] 		 = {['name'] = 'weapon_huntingrifle', 	 	['label'] = 'Hunting Rifle', 				['ammotype'] = 'AMMO_SNIPER',	['damagereason'] = 'Ended / Sniped / Shot down / Floored'},
 	[`weapon_mp9`] 			 = {['name'] = 'weapon_mp9', 		['label'] = 'MP9', 			['ammotype'] = 'AMMO_SMG',		['damagereason'] = 'Riddled / Drilled / Finished / Submachine Gunned'},
 	[`weapon_m110`] 		 = {['name'] = 'weapon_m110', 	 	['label'] = 'M110', 				['ammotype'] = 'AMMO_SNIPER',	['damagereason'] = 'Ended / Sniped / Shot down / Floored'},
+	[`weapon_hk416`] 		 = {['name'] = 'weapon_hk416', 	 	['label'] = 'HK-416', 				['ammotype'] = 'AMMO_RIFLE',	['damagereason'] = 'Ended / Rifled / Shot down / Floored'},
 }

@@ -254,6 +254,9 @@ Config.WhitelistedWeapons = {
     [GetHashKey('weapon_m4')] = {
         ['timeOut'] = 12000
     },
+    [GetHashKey(`weapon_hk416`)] = {
+        ["timeOut"] = 10000
+    },
     [GetHashKey('weapon_assaultrifle')] = {
         ['timeOut'] = 12000
     },
