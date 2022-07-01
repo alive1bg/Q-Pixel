@@ -2,7 +2,7 @@
 	<head>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 		<link href="css/main.css" rel="stylesheet">
 		<style>
 			#depositUI, #withdrawUI, #transferUI, #general, #topbar, #waiting
@@ -10,43 +10,117 @@
 		</style>
 	</head>
 	<body>
-		<div id='bankui' class='container'>
-			<div class="container-fluid text-white">
-				<div class="row">
-					<div class="col-4 mt-2">
-						<h4 class="game-header">Accounts</h4>
-					</div>
-					<div class="col mt-2">
-						<!-- Header -->
-						<div class="row game-header">
-							<div class="col">
-								<h4 class="header-title">Transaction History</h4>
-							</div>
-							<div class="col d-flex justify-content-end">
-								<img class="media-object h-50" src="img/bank.png" alt="...">
-								<h4 class="header-title">&nbsp;Los Santos Bank</h4>
+		<div>
+			<div id='bankui' class='container disableSelection'>
+				<div class="container-fluid text-white">
+					<div class="row">
+						<div class="col-4" style="position:relative;top: 1vh;">
+							<h4 class="game-header">Accounts</h4>
+						</div>
+						<div class="col mt-2">
+							<!-- Header -->
+							<div class="row game-header">
+								<div class="col-4" style="position:relative; left: -6vh;top: .2vh;">
+									<h4 >Transaction History</h4>
+								</div>
+								<div class="col d-flex justify-content-end" style='position: relative;right: -5vh;'>
+									<img class="media-object h-50" src="img/bank.png">
+									<div class="col-4" style="position:relative;top: .8vh;">
+										<h4 class="header-title">&nbsp;Chafe Bank</h4>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div>
-					<div class="row g-2">
-						<div class="col-4 scroll_panel" id="Player_Accounts">
-						</div>
-						<div class="col scroll_panel">
-							<div class="row">
-								<div id="Transaction_Row" class="col">
+					<div>
+						<div class="row g-2">
+							<div class="col-4 scroll_panel" id="Player_Accounts">
+							</div>
+							<div class="col scroll_panel">
+								<div class="row">
+									<div id="Transaction_Row">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<label class="cash">543656</label>
 			</div>
+		</div>
+
+		<div class="full-white"></div>
+
+		<div>
+			<div class="deposit-container disableSelection">
+				<div style="position: absolute; left: 18.8vh; top: 8.8vh;" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+				<div class="items-view">
+					<div>
+        	    		<p class="deposit-title">Amount</p>
+        	    		<input type="number" id="deposit-amount" required>
+						<i id="deposit-icon" class="fas">$</i>
+
+						<p class="deposit-title2">Comment</p>
+        	    		<input id="deposit-comment" required>
+						<i id="deposit-icon2" class="fas">//</i>
+					</div>
+					<div class='d-flex justify-content-between' style="position:relative;top: 19vh;width: 23vh;left: 6.1vh;">
+						<button class="deposit-decline">CANCEL</button>
+        	    		<button class="deposit-submit">DEPOSIT</button>
+					</div>
+				</div>
+        	</div>
+
+			<div class="withdraw-container disableSelection">
+				<div style="position: absolute; left: 18.8vh; top: 8.8vh;" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+				<div class="items-view">
+					<div>
+        	    		<p class="withdraw-title">Amount</p>
+        	    		<input type="number" id="withdraw-amount" required>
+						<i id="withdraw-icon" class="fas">$</i>
+
+						<p class="withdraw-title2">Comment</p>
+        	    		<input id="withdraw-comment" required>
+						<i id="withdraw-icon2" class="fas">//</i>
+					</div>
+					<div class='d-flex justify-content-between' style="position:relative;top: 19vh;width: 23vh;left: 6.1vh;">
+						<button class="withdraw-decline">CANCEL</button>
+        	    		<button class="withdraw-submit">WITHDRAW</button>
+					</div>
+				</div>
+        	</div>
+
+			<div class="transfer-container disableSelection">
+				<div style="position: absolute; left: 18.8vh; top: 8.8vh;" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+				<div class="items-view">
+					<div>
+        	    		<p class="transfer-title">Amount</p>
+        	    		<input type="number" id="transfer-amount" required>
+						<i id="transfer-icon" class="fas">$</i>
+
+						<p class="transfer-title2">Comment</p>
+        	    		<input id="transfer-comment" required>
+						<i id="transfer-icon2" class="fas">//</i>
+
+						<p class="transfer-title3">State ID</p>
+        	    		<input type="number" id="transfer-id" required>
+						<i id="transfer-icon3" class="fas">#</i>
+
+						<p class="transfer-title4">..or Account ID</p>
+        	    		<input id="transfer-citizenid" required>
+						<i id="transfer-icon4" class="fas">#</i>
+					</div>
+					<div class='d-flex justify-content-between' style="position:relative;top: 29vh;width: 23vh;left: 6.1vh;">
+						<button class="transfer-decline">CANCEL</button>
+        	    		<button class="transfer-submit">TRANSFER</button>
+					</div>
+				</div>
+        	</div>
 		</div>
 
 		<!-- Modals -->
 		<!-- Deposit Modal -->
-		<div class="modal fade" id="DepositModal" role="dialog" data-backdrop="true" data-keyboard="true">
+		<!-- <div class="modal fade" id="DepositModal" role="dialog" data-backdrop="true" data-keyboard="true">
 			<div class="modal-dialog  modal-dialog-centered">
 				<div class="modal-content dark-modal">
 					<div class="modal-header">
@@ -71,9 +145,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Withdrawal modal-->
-		<div class="modal fade" id="WithdrawModal" role="dialog" data-backdrop="true" data-keyboard="true">
+		<!-- <div class="modal fade" id="WithdrawModal" role="dialog" data-backdrop="true" data-keyboard="true">
 			<div class="modal-dialog  modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -99,9 +173,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Transfer Modal -->
-		<div class="modal fade" id="TransferModal" role="dialog" data-backdrop="true" data-keyboard="true">
+		<!-- <div class="modal fade" id="TransferModal" role="dialog" data-backdrop="true" data-keyboard="true">
 			<div class="modal-dialog  modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -129,7 +203,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- End Modals -->
 		<!-- Notifications -->
 		<div class="modal fade" id="notificationModal" data-backdrop="true">

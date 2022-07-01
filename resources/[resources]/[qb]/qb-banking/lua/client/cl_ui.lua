@@ -29,6 +29,8 @@ end)
 
 function ToggleUI()
     local charinfo = QBCore.Functions.GetPlayerData().charinfo
+    local citizenid = QBCore.Functions.GetPlayerData().citizenid
+    local cash = QBCore.Functions.GetPlayerData().money.cash
     bMenuOpen = not bMenuOpen
 
     if (not bMenuOpen) then
@@ -39,7 +41,7 @@ function ToggleUI()
 
 
             SetNuiFocus(true, true)
-            SendNUIMessage({type = 'OpenUI', accounts = PlayerBanks, transactions = json.encode(transactions), name = charinfo.firstname.. " ".. charinfo.lastname})
+            SendNUIMessage({type = 'OpenUI', accounts = PlayerBanks, transactions = json.encode(transactions), name = charinfo.firstname.. " ".. charinfo.lastname, citizenid = citizenid, cash = cash})
         end)
     end
 end
@@ -58,7 +60,7 @@ RegisterNUICallback("DepositCash", function(data, cb)
         return
     end
 
-    TriggerServerEvent("qb-banking:server:Deposit", data.account, data.amount, (data.note ~= nil and data.note or ""))
+    TriggerServerEvent("qb-banking:server:Deposit", data.account, data.amount, (data.note ~= nil and data.note or ""), data.uuid)
 end)
 
 RegisterNUICallback("WithdrawCash", function(data, cb)
@@ -70,11 +72,11 @@ RegisterNUICallback("WithdrawCash", function(data, cb)
         return
     end
 
-    TriggerServerEvent("qb-banking:server:Withdraw", data.account, data.amount, (data.note ~= nil and data.note or ""))
+    TriggerServerEvent("qb-banking:server:Withdraw", data.account, data.amount, (data.note ~= nil and data.note or ""), data.uuid)
 end)
 
 RegisterNUICallback("TransferCash", function(data, cb)
-    if (not data or not data.account or not data.amount or not data.target) then
+    if (not data or not data.account or not data.amount or not data.target or not data.citizenid) then
         return
     end
 
@@ -82,11 +84,7 @@ RegisterNUICallback("TransferCash", function(data, cb)
         return
     end
 
-    if(tonumber(data.target) <= 0) then
-        return
-    end
-
-    TriggerServerEvent("qb-banking:server:Transfer", data.target, data.account, data.amount, (data.note ~= nil and data.note or ""))
+    TriggerServerEvent("qb-banking:server:Transfer", data.citizenid, data.target, data.account, data.amount, (data.note ~= nil and data.note or ""), data.uuid)
 end)
 
 
@@ -103,7 +101,7 @@ RegisterNetEvent("qb-banking:client:UpdateTransactions")
 AddEventHandler("qb-banking:client:UpdateTransactions", function(transactions)
     if (bMenuOpen) then
 
-        SendNUIMessage({type = 'update_transactions', transactions = json.encode(transactions)})
+        SendNUIMessage({type = 'update_transactions', transactions = json.encode(transactions), cash = QBCore.Functions.GetPlayerData().money.cash})
 
         QBCore.Functions.TriggerCallback("qb-banking:server:GetBankData", function(data, transactions)
             local PlayerBanks = json.encode(data)

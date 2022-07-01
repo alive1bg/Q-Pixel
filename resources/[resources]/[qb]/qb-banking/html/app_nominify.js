@@ -167,7 +167,7 @@ function AddTransaction(trans_id, account, amount, time, note, why, receiver, pl
                         <b class='" + ColStr + "'> " + str + "</b>\
                     </div>\
                     <div class='col-5'>\
-                        " + (receiver === "N/A" && plName || receiver) + "\
+                        " + (receiver === "Personal Account" && plName || receiver) + "\
                     </div>\
                         <div class='col d-flex justify-content-end'>\
                             <div>\
