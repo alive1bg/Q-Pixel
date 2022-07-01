@@ -142,7 +142,7 @@ rootMenuConfig =  {
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isPolice and onDuty and IsPedInAnyVehicle(PlayerPedId(), true))
         end,
-        subMenus = {"vehicle:menu", "vehicle:riflerack", "vehicle:radar", "vehicle:extras"}
+        subMenus = {"vehicle:menu", "vehicle:radar", "vehicle:extras"}
     },
     {
         id = "PoliceObjects",
