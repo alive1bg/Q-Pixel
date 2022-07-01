@@ -50,7 +50,7 @@ function SpawnPeds()
             SetPedComponentVariation(model, 9, data["vest"].item, data["vest"].texture, 0)
             SetPedComponentVariation(model, 11, data["torso2"].item, 0, 2)
             SetPedComponentVariation(model, 11, data["torso2"].item, data["torso2"].texture, 0)
-            SetPedComponentVariation(model, 6, data["shoes"].item, 0, 2)
+            SetPedComponentVariation(model, 6, data["shoes"].item, 22, 2)
             SetPedComponentVariation(model, 6, data["shoes"].item, data["shoes"].texture, 0)
             SetPedComponentVariation(model, 1, data["mask"].item, 0, 2)
             SetPedComponentVariation(model, 1, data["mask"].item, data["mask"].texture, 0)
@@ -179,12 +179,12 @@ CreateThread(function()
 
         if inZone and not alreadyEnteredZone then
             alreadyEnteredZone = true
-            exports['np-ui']:showInteraction(text)
+            exports['qb-ui']:showInteraction(text)
         end
 
         if not inZone and alreadyEnteredZone then
             alreadyEnteredZone = false
-            exports['np-ui']:hideInteraction()
+            exports['qb-ui']:hideInteraction()
         end
     end
 end)
@@ -195,7 +195,7 @@ CreateThread(function()
     while not HasModelLoaded(model) do
         Wait(10)
     end
-    local veh = CreateVehicle(model, 1056.88, -387.13, 67.4, true, false)
+    local veh = CreateVehicle(model, 1056.88, -387.13, 66.4, true, false)
     SetModelAsNoLongerNeeded(model)
     SetEntityAsMissionEntity(veh, true, true)
     SetVehicleOnGroundProperly(veh)
