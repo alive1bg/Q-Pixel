@@ -23,7 +23,6 @@ RegisterNetEvent('onResourceStart', function(resource)
                     exports.oxmysql:execute('UPDATE shared_vehicles SET state = ? WHERE plate = ?', {'Stored', result[i].plate})
                     stored = i
                 end
-                print('^2 ['..GetCurrentResourceName()..'] Stored '..stored..' shared vehicles.^7')
             end
         end)
     end

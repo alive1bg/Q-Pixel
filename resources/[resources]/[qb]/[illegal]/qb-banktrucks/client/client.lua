@@ -147,20 +147,19 @@ function Connect()
                     coords = { x = 0.18, y = 0.053, z = 0.02 },
                     rotation = { x = 190.0, y = 0.0, z = 80.0 },
                 }, {}, function() -- Done
-                    --exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
-                    exports["hacking"]:OpenHackingGame(function(success)
-                        if success then
-                            TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
-                            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
-                            ClearPedTasksImmediately(PlayerPedId())
-                            Wait(1000)
-                            QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
-                            SystemHacked = true
-                            NeedAccess2 = false
-                        else
-                            ClearPedTasksImmediately(PlayerPedId())
-                            QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
-                        end
+                    exports["memorygame"]:thermiteminigame(Config.Blocks, Config.Attempts, Config.Show, Config.Time,
+                    function() -- Success
+                        TriggerServerEvent("QBCore:Server:RemoveItem", "hacking-laptop", 1)
+                        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["hacking-laptop"], "remove")
+                        ClearPedTasksImmediately(PlayerPedId())
+                        Wait(1000)
+                        QBCore.Functions.Notify("Security bypassed, you can now browse the computer", 'success')
+                        SystemHacked = true
+                        NeedAccess2 = false
+                    end,
+                    function() -- Failure
+                        ClearPedTasksImmediately(PlayerPedId())
+                        QBCore.Functions.Notify("Failed to brute force.. Alarms triggered", 'error')
                     end)
                 end, function() -- Cancel
                     QBCore.Functions.Notify("Cancelled?", 'error')
@@ -348,45 +347,61 @@ end)
 
 function SpawnStuff()
     local Truckloc = Config.Locations[math.random(#Config.Locations)]
-    QBCore.Functions.LoadModel("stockade")
-    Truck = CreateVehicle("stockade", Truckloc.x, Truckloc.y, Truckloc.z, 52.0, true, true)
-    SetEntityAsMissionEntity(Truck)
+    zoneblip = AddBlipForCoord(Truckloc)
+    SetBlipSprite(zoneblip, 67)
+    SetBlipScale(zoneblip, 0.75)
+    SetBlipColour(zoneblip, 2)
+    SetBlipRoute(zoneblip, true)
+    SetBlipRouteColour(zoneblip, 2)
+    TruckZone = CircleZone:Create(Truckloc, 300.0, {
+		name = "Truck-Zone",
+		debugPoly = false
+	})
+	TruckZone:onPlayerInOut(function(isPointInside)
+		if isPointInside then
+            RemoveBlip(zoneblip)
+            TruckZone:destroy()
+            QBCore.Functions.LoadModel("stockade")
+            Truck = CreateVehicle("stockade", Truckloc.x, Truckloc.y, Truckloc.z, 52.0, true, true)
+            SetEntityAsMissionEntity(Truck)
 
-    TruckBlip = AddBlipForEntity(Truck)
-    SetBlipSprite(TruckBlip, 67)
-    SetBlipColour(TruckBlip, 2)
-    SetBlipFlashes(TruckBlip, true)
-    SetBlipRoute(TruckBlip, true)
-    SetBlipRouteColour(TruckBlip, 2)
+            TruckBlip = AddBlipForEntity(Truck)
+            SetBlipSprite(TruckBlip, 67)
+            SetBlipScale(TruckBlip, 0.75)
+            SetBlipColour(TruckBlip, 2)
+            SetBlipFlashes(TruckBlip, true)
 
-    QBCore.Functions.LoadModel(Config.SecurityPed)
-    Driver = CreatePed(26, Config.SecurityPed, Truckloc.x, Truckloc.y, Truckloc.z, 268.9422, true, false)
-    CoPilot = CreatePed(26, Config.SecurityPed, Truckloc.x, Truckloc.y, Truckloc.z, 268.9422, true, false)
-    SetPedIntoVehicle(Driver, Truck, -1)
-    SetPedIntoVehicle(CoPilot, Truck, 0)
-    SetPedRelationshipGroupHash(CoPilot, `HATES_PLAYER`)
-    GiveWeaponToPed(CoPilot, `WEAPON_SMG`, 250, false, true)
-    SetPedSuffersCriticalHits(CoPilot, false)
-    TaskVehicleDriveWander(Driver, Truck, 70.0, 262144)
-    GotTruck = true
 
-    CreateThread( function ()
-        while GotTruck do
-            if IsVehicleStopped(Truck) then
-                if IsVehicleSeatFree(Truck, -1) and IsVehicleSeatFree(Truck, 0) and IsVehicleSeatFree(Truck, 1) then
-                    if IsPedDeadOrDying(Driver) and IsPedDeadOrDying(CoPilot) then
-                        local PedPos = GetEntityCoords(PlayerPedId())
-                        local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
-                        local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
-                        if TruckDist <= 1.0 then
-                            CanThermite = true
+            QBCore.Functions.LoadModel(Config.SecurityPed)
+            Driver = CreatePed(26, Config.SecurityPed, Truckloc.x, Truckloc.y, Truckloc.z, 268.9422, true, false)
+            CoPilot = CreatePed(26, Config.SecurityPed, Truckloc.x, Truckloc.y, Truckloc.z, 268.9422, true, false)
+            SetPedIntoVehicle(Driver, Truck, -1)
+            SetPedIntoVehicle(CoPilot, Truck, 0)
+            SetPedRelationshipGroupHash(CoPilot, `HATES_PLAYER`)
+            GiveWeaponToPed(CoPilot, `WEAPON_SMG`, 250, false, true)
+            SetPedSuffersCriticalHits(CoPilot, false)
+            TaskVehicleDriveWander(Driver, Truck, 70.0, 262144)
+            GotTruck = true
+
+            CreateThread( function ()
+                while GotTruck do
+                    if IsVehicleStopped(Truck) then
+                        if IsVehicleSeatFree(Truck, -1) and IsVehicleSeatFree(Truck, 0) and IsVehicleSeatFree(Truck, 1) then
+                            if IsPedDeadOrDying(Driver) and IsPedDeadOrDying(CoPilot) then
+                                local PedPos = GetEntityCoords(PlayerPedId())
+                                local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
+                                local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
+                                if TruckDist <= 1.0 then
+                                    CanThermite = true
+                                end
+                            end
                         end
                     end
+                    Wait(1000)
                 end
-            end
-            Wait(1000)
+            end)
         end
-    end)
+	end)
 end
 
 RegisterNetEvent('qb-banktrucks:client:usethermite', function ()
@@ -485,10 +500,10 @@ function SpawnGuards()
             local TruckPos = GetOffsetFromEntityInWorldCoords(Truck, 0.0, -3.5, 0.5)
             local TruckDist = GetDistanceBetweenCoords(PedPos.x, PedPos.y, PedPos.z, TruckPos.x, TruckPos.y, TruckPos.z, true)
             if TruckDist <= 2.5 and not CanLoot then
-                exports['qb-ui']:showInteraction('[E] Grab Loot')
+                exports['qb-core']:DrawText("[E] Grab Loot", "left")
                 PressedKey2()
             else
-                exports['qb-ui']:hideInteraction()
+                exports['qb-core']:HideText()
             end
             Wait(1000)
         end
@@ -501,7 +516,7 @@ function PressedKey2()
             if IsControlJustReleased(0, 38) then
                 CanLoot = true
                 KeyPressed2 = true
-                exports['qb-ui']:hideInteraction()
+                exports["qb-core"]:KeyPressed()
                 Loot()
             end
             Wait(1)

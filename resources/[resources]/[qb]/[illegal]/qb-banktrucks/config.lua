@@ -3,16 +3,17 @@ Config = Config or {}
 Config.Dispatch = 'qb-dispatch'  -- ps-dispatch / cd-dispatch  (type of dispatch you use)
 
 ---Thermite Minigame for lester Computer
-Config.Blocks = "4" -- Number of correct blocks the player needs to click
-Config.Attempts = "2" -- Number of incorrect blocks after which the game will fail
-Config.Time = "15" -- Maximum time after timetoshow expires for player to select the right blocks
+Config.Blocks = "6" -- Number of correct blocks the player needs to click
+Config.Attempts = "3" -- Number of incorrect blocks after which the game will fail
+Config.Show = "5" -- Time in secs for which the right blocks will be shown
+Config.Time = "45" -- Maximum time after timetoshow expires for player to select the right blocks
 ---
 
 ---Thermite Minigame for bank truck
 Config.Blocks2 = "8" -- Number of correct blocks the player needs to click
-Config.Attempts2 = "2" -- Number of incorrect blocks after which the game will fail
+Config.Attempts2 = "4" -- Number of incorrect blocks after which the game will fail
 Config.Show2 = "6" -- Time in secs for which the right blocks will be shown
-Config.Time2 = "20" -- Maximum time after timetoshow expires for player to select the right blocks
+Config.Time2 = "40" -- Maximum time after timetoshow expires for player to select the right blocks
 ---
 
 Config.CoolDown = 600 * 1000 --- Cooldown until can start next job default is 10 minutes you can use this link too get a better understanding of the time to change if you like http://convertwizard.com/600000-milliseconds-to-minutes
@@ -28,7 +29,7 @@ Config.MinPayout = 500 -- Minimum Payout of the item
 Config.MaxPayout = 750 -- Maximum Payout of the item
 Config.Reward = "markedbills" -- Reward you get when finished looting the truck
 Config.RareItem = "boosting-laptop" -- Change to whatever item you want the rare item to get is
-Config.RareItemAmt = "1" -- Amount of the rare item you want to be given
+Config.RareItemAmt = "3" -- Amount of the rare item you want to be given
 -- End of Convoy Rewards
 
 -- Delivery Rewards (Default same as convoy rewards, can change if you want one paying out more or differently than the other)
@@ -38,7 +39,7 @@ Config.DeliveryMinPayout = 500 -- Minimum Payout of the item
 Config.DeliveryMaxPayout = 750 -- Maximum Payout of the item
 Config.DeliveryReward = "markedbills" -- Reward you get when finished looting the truck
 Config.DeliveryRareItem = "boosting-laptop" -- Change to whatever item you want the rare item to get is
-Config.DeliveryRareItemAmt = "1" -- Amount of the rare item you want to be given
+Config.DeliveryRareItemAmt = "3" -- Amount of the rare item you want to be given
 -- End of Delivery Rewards
 
 Config.PedLocations = {
