@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CPedVariationInfo>
+ <bHasTexVariations value="false" />
+ <bHasDrawblVariations value="false" />
+ <bHasLowLODs value="false" />
+ <bIsSuperLOD value="false" />
+ <availComp>0 1 2 3 4 255 5 6 7 8 255 9</availComp>
+ <aComponentData3 itemType="CPVComponentData">
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="17" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="1" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="1" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="11" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="17" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="1" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="17" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="1" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="1" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+  <Item>
+   <numAvailTex value="1" />
+   <aDrawblData3 itemType="CPVDrawblData">
+    <Item>
+     <propMask value="1" />
+     <numAlternatives value="0" />
+     <aTexData itemType="CPVTextureData">
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+      <Item>
+       <texId value="0" />
+       <distribution value="255" />
+      </Item>
+     </aTexData>
+     <clothData>
+      <ownsCloth value="false" />
+     </clothData>
+    </Item>
+   </aDrawblData3>
+  </Item>
+ </aComponentData3>
+ <aSelectionSets itemType="CPedSelectionSet" />
+ <compInfos itemType="CComponentInfo">
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="0" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="1" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="2" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>cloth_upper_jacket_suit</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="3" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>cloth_lower_pants_suit</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="4" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>shoe_dress_shoes</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="6" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="7" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="8" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="9" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+  <Item>
+   <hash_2FD08CEF>none</hash_2FD08CEF>
+   <hash_FC507D28>none</hash_FC507D28>
+   <hash_07AE529D>0 0 0 0 0</hash_07AE529D>
+   <flags value="0" />
+   <inclusions>0</inclusions>
+   <exclusions>0</exclusions>
+   <hash_6032815C>PV_COMP_HEAD</hash_6032815C>
+   <hash_7E103C8B value="0" />
+   <hash_D12F579D value="11" />
+   <hash_FA1F27BF value="0" />
+  </Item>
+ </compInfos>
+ <propInfo>
+  <numAvailProps value="1" />
+  <aPropMetaData itemType="CPedPropMetaData">
+   <Item>
+    <audioId>none</audioId>
+    <expressionMods>0 0 0 0 0</expressionMods>
+    <texData itemType="CPedPropTexData">
+     <Item>
+      <inclusions>0</inclusions>
+      <exclusions>0</exclusions>
+      <texId value="0" />
+      <inclusionId value="0" />
+      <exclusionId value="0" />
+      <distribution value="255" />
+     </Item>
+    </texData>
+    <renderFlags />
+    <propFlags value="0" />
+    <flags value="0" />
+    <anchorId value="0" />
+    <propId value="0" />
+    <hash_AC887A91 value="0" />
+   </Item>
+  </aPropMetaData>
+  <aAnchors itemType="CAnchorProps">
+   <Item>
+    <props>1</props>
+    <anchor>ANCHOR_HEAD</anchor>
+   </Item>
+  </aAnchors>
+ </propInfo>
+ <dlcName />
+</CPedVariationInfo>
