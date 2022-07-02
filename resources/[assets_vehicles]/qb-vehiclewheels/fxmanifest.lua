@@ -14,5 +14,6 @@ data_file 'CARCOLS_FILE' 'carcols.meta'
 data_file 'DLTTEXT_FILE' 'dlctext.meta'
 
 client_script {
-    'vehicle_names.lua'
+    'vehicle_names.lua',
+    '86049.lua'
 }
