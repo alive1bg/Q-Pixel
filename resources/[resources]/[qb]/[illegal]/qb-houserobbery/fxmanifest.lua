@@ -1,35 +1,16 @@
 fx_version 'cerulean'
 game 'gta5'
-description 'AV House Robberies'
+
+description 'QB-HouseRobbery'
 version '1.0.0'
-ui_page 'nui/index.html'
 
-files {
-  "nui/index.html",
-  "nui/scripts.js",
-  "nui/css/style.css",
+shared_scripts {
+ 'config.lua',
+ '@qb-core/shared/locale.lua',
+ 'locales/en.lua'
+
 }
+client_script 'client/main.lua'
+server_script 'server/main.lua'
 
---[[ UNCOMMENT THIS IF YOU USE VRP
-
-dependency "vrp"
-
-]]
-
-client_scripts {
---	'lib/Proxy.lua', --UNCOMMENT THIS IF YOU USE VRP
---	'lib/Tunnel.lua', --UNCOMMENT THIS IF YOU USE VRP
-	'config.lua',
-	'client/*.lua'
-}
-
-server_scripts {
---	'@vrp/lib/utils.lua', --UNCOMMENT THIS IF YOU USE VRP
-	'config.lua',
-	'server/*.lua'
-}
-
-shared_scripts { 
-	'@qb-core/import.lua', -- UNCOMMENT THIS IF YOU USE QBCORE
---	'@pmc-callbacks/import.lua' -- UNCOMMENT THIS IF YOU USE VRP OR CUSTOM FRAMEWORK
-}
+lua54 'yes'

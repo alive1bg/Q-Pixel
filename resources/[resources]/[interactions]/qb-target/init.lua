@@ -55,26 +55,6 @@ Config.CircleZones = {
 Config.BoxZones = {
 
 
-  ["housedoor"] = {
-    name = "House Robbery",
-    coords = vector3(1511.15, 6325.64, 24.61), 
-    length = 1.4,
-    width = 1.0,
-    heading = 325,
-    debugPoly = false,
-    minZ=21.81,
-    maxZ=35.81,
-    options = {
-        {
-            type = "client",
-            event = "av_houserobbery:targetdoor", 
-            icon = "fas fa-question",
-            label = "Knock On The Door",
-        },
-    },
-    distance = 2.5
-},
-
       ["pdseized"] = {
         name = "PD Seized",
         coords = vector3(444.59, -985.03, 30.69), 
