@@ -320,6 +320,21 @@ Config.TargetModels = {
         },
         distance = 2.5,
     },
+
+    ["signs"] = {
+        models = {
+	    1532794617,
+        },
+        options = {
+            {
+                type = "client",
+                event = "signs:client:hello",
+                icon = "fas fa-clipboard",
+                label = "Change Sign",
+            },
+        },
+        distance = 3.0
+    },
 }
 
 Config.GlobalPedOptions = {
