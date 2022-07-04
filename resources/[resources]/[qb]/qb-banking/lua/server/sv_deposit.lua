@@ -25,7 +25,7 @@ AddEventHandler('qb-banking:server:Deposit', function(account, amount, note, fSt
         Wait(500)
         Player.Functions.AddMoney('bank', amt)
         RefreshTransactions(src)
-        AddTransaction(src, "personal", amount, "deposit", "Into Personal Account", (note ~= "" and note or "Deposited $"..format_int(amount).." cash."))
+        AddTransaction(src, "personal", amount, "deposit", "N/A", (note ~= "" and note or "Deposited $"..format_int(amount).." cash."))
         return
     end
 

@@ -1,44 +1,31 @@
-@font-face {
-    font-family: 'CiutadellaRoundedW01';
-    src: url("../Ciutadella_Rounded_W01_Medium.ttf") format("truetype");
-}
-
-
 body{
 	background: none !important;
     overflow: hidden !important;
-    font-family: 'CiutadellaRoundedW01';
 }
 
 html{
     overflow: hidden !important;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 #bankui {
     opacity: 0;
     transition: 0.5s ease-in-out opacity;
-    margin-top: 5.7%;
+    margin-top: 3%;
     background-color: #212832;
-}
-
-.disableSelection{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    outline: 0;
 }
 
 .hidden{
     display: none !important;
 }
 .header-title {
-    position: relative;
     color:white;
-    top: -.5vh;
+
 }
 
 .img-spacer {
@@ -54,13 +41,11 @@ html{
 .addition {
     color: #92f075;
     text-shadow: 2px 2px rgba(0, 0, 0, 0.05);
-    font-size: 2vh;
 }
 
 .expense {
     color: #f2a367;
     text-shadow:  2px 2px rgba(0, 0, 0, 0.05);
-    font-size: 2vh;
 }
 
 p {
@@ -79,36 +64,19 @@ p {
 .deposit{
     background: #92f075;
     color: #000 !important;
-    height: 2.5vh;
-    font-size: 1vh;
-    letter-spacing: .1vh;
-    border-radius: .5vh;
-    margin-left: -1vh;
-    border: none;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.137)
+    border: 0;
 }
 
 .withdraw{
     background: #f2a367;
     color: #000 !important;
-    height: 2.5vh;
-    font-size: 1vh;
-    letter-spacing: .1vh;
-    border-radius: .5vh;
-    border: none;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.137)
+    border: 0;
 }
 
 .transfer{
     background: #dfe0db;
     color: #000 !important;
-    height: 2.5vh;
-    font-size: 1vh;
-    letter-spacing: .1vh;
-    border-radius: .5vh;
-    margin-right: -1vh;
-    border: none;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.137)
+    border: 0;
 }
 
 .deposit:hover{
@@ -126,39 +94,16 @@ p {
     color: #000 !important;
 }
 
-.cash {
-    position: absolute;
-    color: white;
-    font-size: 1.5vh;
-    bottom: 10.5vh;
-    left: 29vh;
-}
-
 .container{
-    height: 80vh;
-    width: 122.4vh;
+    margin-top: 13%;
+    display: flex;
 }
 
 #Transaction_Row{
-    position: absolute;
-    height: 72vh;
-    width: 85.6vh;
-    left: 62vh;
-    top: 14.8vh;
-    overflow-y: auto;
-    box-sizing: content-box !important;
-    background-color: transparent;
-}
-
-#Player_Accounts {
-    position: absolute;
-    height: 72vh;
-    width: 33vh;
-    left: 28.6vh;
-    top: 14.1vh;
-    overflow-y: auto;
-    box-sizing: content-box !important;
-    background-color: transparent;
+    height: 800px;
+    overflow-y: scroll;
+    box-sizing: content-box;
+    background-color: #212832;
 }
 
 .dark-modal, .modal-body, .modal-header, .modal-footer{
@@ -172,725 +117,34 @@ p {
     right: 0;
 }
 
-.title-card-1 {
-    position: relative;
-    top: -1vh;
-    font-size: 1.3vh;
-    left: -1vh;
-}
-
-.title-card-2 {
-    position: relative;
-    top: -2vh;
-    font-size: 1.3vh;
-    left: -1vh;
-}
-
-.title-card-3 {
-    position: relative;
-    top: -3vh;
-    font-size: 1.3vh;
-    left: -1vh;
-}
-
-.title-card-4 {
-    position: relative;
-    top: -3.7vh;
-    font-size: 1.3vh;
-    right: -1vh;
-}
-
-.title-card-5 {
-    position: relative;
-    top: -2.4vh;
-    font-size: 2vh;
-    right: -1vh;
-}
-
-
-
 
 /* width */
 ::-webkit-scrollbar {
-    width: 0;
-    color: transparent;
-    background-color: transparent;
+    width: 10px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #212529;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #769ec5;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #212529;
 }
 
 .bgdark1 {
     background-color: #30475c!important;
-    height: 16vh;
 }
 
 .bgdark2 {
     background-color: #1e3956!important;
     border: rgba(255, 255, 255, 0.5);
     border-width: 1px;
-    height: 12.5vh;
-    border-radius: .3vh;
-    width: 32vh;
     border-style: solid;
-    margin-bottom: -1.4vh;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.items-view {
-    display: none;
-}
-
-.full-white {
-    position: absolute;
-    display: none;
-    height: 80vh;
-    width: 122.4vh;
-    top: 10.1vh;
-    left: 27.7vh;
-    background-color: rgba(255, 255, 255, 0.308);
-}
-
-/* Deposit */
-
-.deposit-container {
-    position: absolute;
-    display: none;
-
-    top: 37.4vh;
-    left: 66.3vh;
-
-    padding-left: 5vh;
-    padding-right: 5vh;
-
-    width: 45vh;
-    height: 25vh;
-    border-radius: .3vh;
-
-    background-color: #30475c;
-}
-
-.deposit-title {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 7.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#deposit-amount {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 9vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#deposit-amount:focus {
-    opacity: 1;
-}
-
-#deposit-icon {
-    position: absolute;
-    top: 9.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.deposit-title2 {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 13.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#deposit-comment {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 15vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#deposit-comment:focus {
-    opacity: 1;
-}
-
-#deposit-icon2 {
-    position: absolute;
-    top: 15.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.deposit-submit {
-    border: none;
-    height: 2.5vh;
-    background-color: #92f075;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.deposit-submit:hover {
-    background-color: #82d669;
-}
-
-.deposit-decline {
-    border: none;
-    height: 2.5vh;
-    background-color: #f2a367;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.deposit-decline:hover {
-    background-color: #d9935d;
-}
-
-/* Withdrawl */
-
-.withdraw-container {
-    position: absolute;
-    display: none;
-
-    top: 37.4vh;
-    left: 66.3vh;
-
-    padding-left: 5vh;
-    padding-right: 5vh;
-
-    width: 45vh;
-    height: 25vh;
-    border-radius: .3vh;
-
-    background-color: #30475c;
-}
-
-.withdraw-title {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 7.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#withdraw-amount {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 9vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#withdraw-amount:focus {
-    opacity: 1;
-}
-
-#withdraw-icon {
-    position: absolute;
-    top: 9.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.withdraw-title2 {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 13.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#withdraw-comment {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 15vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#withdraw-comment:focus {
-    opacity: 1;
-}
-
-#withdraw-icon2 {
-    position: absolute;
-    top: 15.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.withdraw-submit {
-    border: none;
-    height: 2.5vh;
-    background-color: #92f075;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.withdraw-submit:hover {
-    background-color: #82d669;
-}
-
-.withdraw-decline {
-    border: none;
-    height: 2.5vh;
-    background-color: #f2a367;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.withdraw-decline:hover {
-    background-color: #d9935d;
-}
-
-/* Transfer */
-
-.transfer-container {
-    position: absolute;
-    display: none;
-
-    top: 32.5vh;
-    left: 66.3vh;
-
-    padding-left: 5vh;
-    padding-right: 5vh;
-
-    width: 45vh;
-    height: 35vh;
-    border-radius: .3vh;
-
-    background-color: #30475c;
-}
-
-.transfer-title {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 5.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#transfer-amount {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 7vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#transfer-amount:focus {
-    opacity: 1;
-}
-
-#transfer-icon {
-    position: absolute;
-    top: 7.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.transfer-title2 {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 11.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#transfer-comment {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 13vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#transfer-comment:focus {
-    opacity: 1;
-}
-
-#transfer-icon2 {
-    position: absolute;
-    top: 13.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.transfer-title3 {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 17.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#transfer-id {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 19vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#transfer-id:focus {
-    opacity: 1;
-}
-
-#transfer-icon3 {
-    position: absolute;
-    top: 19.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.transfer-title4 {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 23.5vh;
-
-    color: white;
-    font-size: 1.2vh;
-    opacity: .5;
-}
-
-#transfer-citizenid {
-    position: absolute;
-
-    left: 11.15vh;
-    top: 25vh;
-
-    width: 23vh;
-
-    background-color: rgba(197, 39, 39, 0);
-    border-bottom: 0.2vh solid white;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    outline: none;
-    color: white;
-    text-indent: 1.5vh;
-    text-align: left;
-    opacity: .5;
-}
-
-#transfer-citizenid:focus {
-    opacity: 1;
-}
-
-#transfer-icon4 {
-    position: absolute;
-    top: 25.6vh;
-    left: 11.15vh;
-    color: white;
-    font-size: 1.3vh;
-    opacity: .5;
-}
-
-.transfer-submit {
-    border: none;
-    height: 2.5vh;
-    background-color: #92f075;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.transfer-submit:hover {
-    background-color: #82d669;
-}
-
-.transfer-decline {
-    border: none;
-    height: 2.5vh;
-    background-color: #f2a367;
-    border-radius: 0.3vh;
-    transition: all .15s ease-in-out;
-
-    font-size: 1vh;
-    letter-spacing: .1vh;
-}
-
-.transfer-decline:hover {
-    background-color: #d9935d;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.lds-spinner {
-    color: official;
-    display: none;
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
-  .lds-spinner div {
-    transform-origin: 40px 40px;
-    animation: lds-spinner 1.2s linear infinite;
-  }
-  .lds-spinner div:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 3px;
-    left: 37px;
-    width: 6px;
-    height: 18px;
-    border-radius: 20%;
-    background: #fff;
-  }
-  .lds-spinner div:nth-child(1) {
-    transform: rotate(0deg);
-    animation-delay: -1.1s;
-  }
-  .lds-spinner div:nth-child(2) {
-    transform: rotate(30deg);
-    animation-delay: -1s;
-  }
-  .lds-spinner div:nth-child(3) {
-    transform: rotate(60deg);
-    animation-delay: -0.9s;
-  }
-  .lds-spinner div:nth-child(4) {
-    transform: rotate(90deg);
-    animation-delay: -0.8s;
-  }
-  .lds-spinner div:nth-child(5) {
-    transform: rotate(120deg);
-    animation-delay: -0.7s;
-  }
-  .lds-spinner div:nth-child(6) {
-    transform: rotate(150deg);
-    animation-delay: -0.6s;
-  }
-  .lds-spinner div:nth-child(7) {
-    transform: rotate(180deg);
-    animation-delay: -0.5s;
-  }
-  .lds-spinner div:nth-child(8) {
-    transform: rotate(210deg);
-    animation-delay: -0.4s;
-  }
-  .lds-spinner div:nth-child(9) {
-    transform: rotate(240deg);
-    animation-delay: -0.3s;
-  }
-  .lds-spinner div:nth-child(10) {
-    transform: rotate(270deg);
-    animation-delay: -0.2s;
-  }
-  .lds-spinner div:nth-child(11) {
-    transform: rotate(300deg);
-    animation-delay: -0.1s;
-  }
-  .lds-spinner div:nth-child(12) {
-    transform: rotate(330deg);
-    animation-delay: 0s;
-  }
-  @keyframes lds-spinner {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }

@@ -15,32 +15,21 @@ function ResetModals(type)
 {
     
     // Amounts
-    $("#deposit-amount").val("");
-    $("#withdraw-amount").val("");
-    $("#transfer-amount").val("");
-
+    $("#depositAmount").val(0);
+    $("#withdrawAmount").val(0);
+    $("#transferAmount").val(0);
     // Notes
-    $("#deposit-comment").val("");
-    $("#withdraw-comment").val("");
-    $("#transfer-comment").val("");
-
-    // Ids
-    $("#transfer-id").val("");
-    $("#transfer-citizenid").val("");
+    $("#depositNote").val("");
+    $("#withdrawNote").val("");
+    $("#transferNote").val("");
+    // Transfer ID
+    $("#transferID").val(1);
 
     curAccount = type;
 
     //if (sSteamID && sSteamID !== "undefined")
        // GlobalSteamID = sSteamID;
 }
-
-var lang2 = [];
-lang2["personal"] = "Default";
-lang2["business"] = "Buisness Account";
-lang2["organization"] = "Organization Account";
-lang2["deposit"] = "Deposit";
-lang2["withdraw"] = "Withdrawal";
-lang2["transfer"] = "Transfer";
 
 var lang = [];
 lang["personal"] = "Personal Account";
@@ -55,7 +44,7 @@ relang["Personal Account"] = "personal";
 relang["Buisness Account"] = "business";
 relang["Organization Account"] = "organization";
 
-function AddAccount(account_name, account_type, bal, ply_Name, ply_Citizenid)
+function AddAccount(account_name, account_type, bal, ply_Name)
 {
     if (playerName == null || playerName === "")
         playerName = ply_Name;
@@ -69,32 +58,33 @@ function AddAccount(account_name, account_type, bal, ply_Name, ply_Citizenid)
         return UpdateAccount(temp_Name, bal);
 
     $("#Player_Accounts").append("<div id='"+temp_Name+"'\
-        <div class='bgdark2'>\
+        <div class='card bgdark2'>\
             <div class='account'>\
-                <p class='title-card-1'>" + account_name +" / "+ply_Citizenid+ "</p>\
-                <p class='title-card-2'>" + account_type + "</p>\
+                <h5 class='card-title note'>" + account_name + (relang[account_type] === "personal" && " </i>" || "") + "</h5>\
+                <p class='card-subtitle note'>" + account_type + "</p>\
 \
                 <div class='row'>\
                     <div class='col'>\
-                        <p class='title-card-3'>" + ply_Name + "</p>\
+                        <p class='card-subtitle mb-2'>" + ply_Name + "</p>\
                     </div>\
 \
                     <div class='col mb-2'>\
 \
                         <div class='d-flex justify-content-end'>\
-                            <h5 id='" + temp_Name + "_Balance' class='title-card-5'>$" + bal.toLocaleString() + ".00</h5>\
+                            <h5 id='" + temp_Name + "_Balance' class='odometer'>$" + bal.toLocaleString() + "</h5>\
                         </div>\
                         <div class='d-flex justify-content-end mt-1 mb-1'>\
-                            <p class='title-card-4'>Available Balance</p>\
+                            <p class='card-subtitle'>Available Balance</p>\
                             \
                         </div>\
                     </div>\
                 </div>\
 \
-                <div class='d-flex justify-content-between' style='position: relative;bottom: 5vh'>\
-                    <button type='button' class='text-muted deposit' id='DepositModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>DEPOSIT</button>\
-                    <button type='button' class='text-muted withdraw' id='WithdrawModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>WITHDRAW</button>\
-                    <button type='button' class='text-muted transfer' id='TransferModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>TRANSFER</button>\
+                <hr>\
+                <div class='d-flex justify-content-between'>\
+                    <button type='button' class='btn btn-light mb-2 text-muted deposit' data-toggle='modal' data-target='#DepositModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>DEPOSIT</button>\
+                    <button type='button' class='btn btn-light mb-2 text-muted withdraw' data-toggle='modal' data-target='#WithdrawModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>WITHDRAW</button>\
+                    <button type='button' class='btn btn-light mb-2 text-muted transfer' data-toggle='modal' data-target='#TransferModal' onClick='ResetModals(\"" + transferAcc + "\", \"" + "\")'>TRANSFER</button>\
                 </div>\
             </div>\
     </div><br/></div>");
@@ -137,12 +127,13 @@ function timeSince(date) {
 function addNote(note)
 {
     return "<div>\
-            <h6 class='note' style='position: relative;opacity: .2;font-size: .9vh;top: 1vh;'>Message</h6>\
-            <p class='note' style='position: relative;opacity: .2;font-size: 1.3vh;top: 1vh;'>" + htmlEncode(note) + "</p>\
-            <hr style='border: 1px dashed black;border-radius: 5vh;width: 100%;' />\
+        <hr>\
+            <h6 class='note'>Message</h6>\
+            <p class='note'>" + htmlEncode(note) + "</p>\
+        </hr>\
     </div>"
 }
-function AddTransaction(trans_id, account, amount, time, note, why, receiver, plName, citizenid)
+function AddTransaction(trans_id, account, amount, time, note, why, receiver, plName)
 {
 
     let curTime = new Date();
@@ -158,7 +149,7 @@ function AddTransaction(trans_id, account, amount, time, note, why, receiver, pl
 
     let ColStr = (amount.toString().charAt(0) === "-" && "expense" || "addition");
 
-    let str = (amount.toString().charAt(0) === "-" && "-$" + parseInt(amount.toString().substring(1, amount.length)).toLocaleString() || "$" + amount.toLocaleString())
+    let str = (amount.toString().charAt(0) === "-" && "-$" + parseInt(amount.toString().substring(1, amount.length)).toLocaleString() || "+$" + amount.toLocaleString())
     $("#Transaction_Row").prepend("\
         <div class='card bgdark1 mb-2'>\
             <div class='card-body'>\
@@ -166,20 +157,20 @@ function AddTransaction(trans_id, account, amount, time, note, why, receiver, pl
                 <!-- Header -->\
                 <div class='row game-header'>\
                     <div class='col'>\
-                        <p class='header-title'> " + lang[account] + " / "+citizenid+" ["+why.toUpperCase()+"]</p>\
+                        <p class='header-title'> " + lang[account] + "</p>\
                     </div>\
                     <div class='col d-flex justify-content-end'>\
-                        <p class='header-title'>"+trans_id+"</p>\
+                        <p class='header-title'><span class='badge bg-primary'>Bank Transfer</span> <> <span class='badge bg-secondary'>" + lang[why] + "</span></p>\
                     </div>\
-                    <hr style='position: relative;top: -1vh;border: 1.5px solid white;border-radius: 5px;width: 98%;margin: auto;opacity: .7;'/>\
-                    <div class='col'>\
-                        <h5 class='" + ColStr + "'> " + str + ".00</h5>\
+                    <hr/>\
+                    <div class='col-2'>\
+                        <b class='" + ColStr + "'> " + str + "</b>\
                     </div>\
-                    <div class='col-5' style='font-weight: 500;'>\
-                        " + (receiver === "Personal Account" && plName || receiver) + "\
+                    <div class='col-5'>\
+                        " + (receiver === "N/A" && plName || receiver) + "\
                     </div>\
                         <div class='col d-flex justify-content-end'>\
-                            <div style='font-weight: 500;'>\
+                            <div>\
                                 <p class='note' id='"+trans_id+"_time'>" + TimeSince + " ago</p>\
                                 <p class='note'> " + plName + "</p>\
                             </div>\
@@ -195,7 +186,7 @@ function AddTransaction(trans_id, account, amount, time, note, why, receiver, pl
 }
 
 
-function OpenATM(data, transactions, name, citizenid, cash)
+function OpenATM(data, transactions, name)
 {
     if (data && data !== null)
     {
@@ -203,8 +194,7 @@ function OpenATM(data, transactions, name, citizenid, cash)
         for (var i = 0; i < tbl.length; i++)
         {
             let tTbl = tbl[i];
-            console.log(tTbl.type);
-            AddAccount((tTbl.type === "business" && tTbl.name || tTbl.type === "organization" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name, citizenid);
+            AddAccount((tTbl.type === "business" && tTbl.name || tTbl.type === "organization" && tTbl.name || "Personal Account"), (lang[tTbl.type] && lang[tTbl.type] || tTbl.type), tTbl.amount, name);
         }
     }
 
@@ -216,148 +206,70 @@ function OpenATM(data, transactions, name, citizenid, cash)
         {
             let tTbl = transactions[i];
 
-            AddTransaction(tTbl.trans_id, tTbl.account, tTbl.amount, tTbl.date, tTbl.message, tTbl.trans_type, tTbl.receiver || "Unknown", name, tTbl.citizenid);
+            AddTransaction(tTbl.trans_id, tTbl.account, tTbl.amount, tTbl.date, tTbl.message, tTbl.trans_type, tTbl.receiver || "Unknown", name);
         }
     }
 
-    $('.cash').text("Cash: $"+cash.toLocaleString()+".00")
     $('#bankui').fadeTo(10, 1.0)
 }
 
-function uuid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+function confirmDeposit()
+{
+    let amount = $("#depositAmount").val();
+
+    if(!amount || amount <= 0)
+        return;
+    
+    let note = $("#depositNote").val();
+    $("#DepositModal").modal().hide();
+    $('.modal-backdrop').remove()
+
+    $.post("https://" + folder_name + "/DepositCash", JSON.stringify({
+        account: curAccount,
+        amount: amount,
+        note: note,
+    }));
 }
 
-// DEPOSIT
-$(document).on('click', '#DepositModal', function(e){
-    e.preventDefault();
-    $('.deposit-container').css({'display':'block'});
-    $('.items-view').css({'display':'block'});
-    $('.full-white').css({'display':'block'});
-});
-
-$(document).on('click', '.deposit-decline', function(e){
-    e.preventDefault();
-    $('.deposit-container').css({'display':'none'});
-    $('.items-view').css({'display':'none'});
-    $('.full-white').css({'display':'none'});
-});
-
-$(document).on('click', '.deposit-submit', function(e){
-    let amount = $("#deposit-amount").val();
+function confirmWithdraw()
+{
+    let amount = $("#withdrawAmount").val();
 
     if(!amount || amount <= 0)
         return;
     
-    let note = $("#deposit-comment").val();
+    let note = $("#withdrawNote").val();
+    $(".modal").hide();
+    $('.modal-backdrop').remove() // removes the grey overlay.
 
-    $('.items-view').css({'display':'none'});
-    $('.lds-spinner').css({'display':'inline-block'});
+    $.post("https://" + folder_name + "/WithdrawCash", JSON.stringify({
+        account: curAccount,
+        amount: amount,
+        note: note,
+    })); 
+}
 
-    setTimeout( () => {
-        $.post("https://" + folder_name + "/DepositCash", JSON.stringify({
-            account: curAccount,
-            amount: amount,
-            note: note,
-            uuid: uuid(),
-        }));
-
-        setTimeout( () => {
-            $('.lds-spinner').css({'display':'none'});
-            $('.deposit-decline').click()
-        },500)
-    }, 500)
-});
-
-// WITHDRAW
-$(document).on('click', '#WithdrawModal', function(e){
-    e.preventDefault();
-    $('.withdraw-container').css({'display':'block'});
-    $('.items-view').css({'display':'block'});
-    $('.full-white').css({'display':'block'});
-});
-
-$(document).on('click', '.withdraw-decline', function(e){
-    e.preventDefault();
-    $('.withdraw-container').css({'display':'none'});
-    $('.items-view').css({'display':'none'});
-    $('.full-white').css({'display':'none'});
-});
-
-$(document).on('click', '.withdraw-submit', function(e){
-    let amount = $("#withdraw-amount").val();
-
-    if(!amount || amount <= 0)
-        return;
-    
-    let note = $("#withdraw-comment").val(); 
-
-    $('.items-view').css({'display':'none'});
-    $('.lds-spinner').css({'display':'inline-block'});
-
-    setTimeout( () => {
-        $.post("https://" + folder_name + "/WithdrawCash", JSON.stringify({
-            account: curAccount,
-            amount: amount,
-            note: note,
-            uuid: uuid(),
-        })); 
-
-        setTimeout( () => {
-            $('.lds-spinner').css({'display':'none'});
-            $('.withdraw-decline').click()
-        },500)
-    }, 500)
-});
-
-// TRANSFER
-$(document).on('click', '#TransferModal', function(e){
-    e.preventDefault();
-    $('.transfer-container').css({'display':'block'});
-    $('.items-view').css({'display':'block'});
-    $('.full-white').css({'display':'block'});
-});
-
-$(document).on('click', '.transfer-decline', function(e){
-    e.preventDefault();
-    $('.transfer-container').css({'display':'none'});
-    $('.items-view').css({'display':'none'});
-    $('.full-white').css({'display':'none'});
-});
-
-$(document).on('click', '.transfer-submit', function(e){
+function confirmTransfer()
+{
     //if (!curAccount)
         //curAccount = "personal";
 
-    let amount = $("#transfer-amount").val();
-    let tTarget = $("#transfer-id").val();
-    let tTargetCitizen = $("#transfer-citizenid").val();
+    let amount = $("#transferAmount").val();
+    let tTarget = $("#transferID").val();
     if(!amount || amount <= 0)
         return;
     
-    let note = $("#transfer-comment").val();
+    let note = $("#transferNote").val();
+    $("#TransferModal").modal().hide();
+    $('.modal-backdrop').remove() // removes the grey overlay.
 
-    $('.items-view').css({'display':'none'});
-    $('.lds-spinner').css({'display':'inline-block'});
-
-    setTimeout( () => {
-        $.post("https://" + folder_name + "/TransferCash", JSON.stringify({
-            citizenid: tTargetCitizen,
-            account: curAccount,
-            amount: amount,
-            target: tTarget,
-            note: note,
-            uuid: uuid(),
-        }));
-        setTimeout( () => {
-            $('.lds-spinner').css({'display':'none'});
-            $('.transfer-decline').click()
-        },500)
-    },500)
-});
+    $.post("https://" + folder_name + "/TransferCash", JSON.stringify({
+        account: curAccount,
+        amount: amount,
+        target: tTarget,
+        note: note,
+    }));
+}
 
 function confirmRemove(identifier, name)
 {
@@ -397,7 +309,7 @@ Listeners["notification"] = function(data)
 Listeners["OpenUI"] = function(data)
 {
     let name = data.name;
-    OpenATM(data.accounts, data.transactions, name, data.citizenid, data.cash);
+    OpenATM(data.accounts, data.transactions, name);
 }
 
 Listeners["edit_account"] = function(data)
@@ -449,10 +361,8 @@ Listeners["update_transactions"] = function(data)
     for (var i = 0; i < transactions.length; i++)
     {
         let tTbl = transactions[i];
-        AddTransaction(tTbl.trans_id, tTbl.account, tTbl.amount, tTbl.date, tTbl.message, tTbl.trans_type, tTbl.receiver || "Unknown", playerName, tTbl.citizenid);
+        AddTransaction(tTbl.trans_id, tTbl.account, tTbl.amount, tTbl.date, tTbl.message, tTbl.trans_type, tTbl.receiver || "Unknown", playerName);
     }
-
-    $('.cash').text("Cash: $"+data.cash.toLocaleString()+".00")
 }
 
 Listeners["refresh_balances"] = function(data) {
@@ -492,22 +402,24 @@ $(function()
 
     document.onkeyup = function(data){
         if (data.which == 27){
-            if ($(".deposit-container").is(':visible')) {
-                $('.deposit-container').css({'display':'none'});
-                $('.items-view').css({'display':'none'});
-                $('.full-white').css({'display':'none'});
-            } else if ($(".transfer-container").is(':visible')) {
-                $('.transfer-container').css({'display':'none'});
-                $('.items-view').css({'display':'none'});
-                $('.full-white').css({'display':'none'});
-            } else if ($(".withdraw-container").is(':visible')) {
-                $('.withdraw-container').css({'display':'none'});
-                $('.items-view').css({'display':'none'});
-                $('.full-white').css({'display':'none'});
-            } else
-                $("#bankui").fadeTo(10, 0, () => $.post("https://" + folder_name + "/CloseATM", JSON.stringify({})));
+            if ($("#editAccountModal").is(':visible'))
+                $("#editAccountModal").modal('toggle');
 
-            $('#bankui').focus();
+            if ($("#notificationModal").is(':visible'))
+                $("#notificationModal").modal('toggle');
+                
+            if ($("#DepositModal").is(':visible'))
+                $("#DepositModal").modal().hide();
+
+            if ($("#WithdrawModal").is(':visible'))
+                $("#WithdrawModal").modal().hide();
+
+            if ($("#TransferModal").is(':visible'))
+                $("#TransferModal").modal().hide();
+
+            $('.modal-backdrop').remove()
+
+            $("#bankui").fadeTo(10, 0, () => $.post("https://" + folder_name + "/CloseATM", JSON.stringify({})));
         }
     }
 
