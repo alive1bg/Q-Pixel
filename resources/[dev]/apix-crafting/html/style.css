@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    outline: 0;
+    font-weight: normal;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.8);
+    user-select: none;
+    overflow: hidden;
+}
+
+:root {
+    --main-label-color: 38, 41, 60;
+}
+
+.MainBody{
+    display: none;
+    position: absolute;
+    transform: translate(-100%, -50%);
+    top: 50%;
+    left: 98%;
+    width: 38%;
+    height: 65%;
+    max-width: 70%;
+    max-height: 65%;
+    color: #ffffff;
+    background: rgb(35 34 56 / 80%);
+    border-radius: 0.2vh;
+    overflow-y: auto;
+    font-family: sans-serif;
+}
+
+.BodyItemForCraft {
+    display: inline-block;
+    width: 45%;
+    height: 22%;
+    max-width: 45%;
+    max-height: 22%;
+    margin-left: 2%;
+    margin-top: 0.5%;
+    background: rgb(102 102 113 / 30%);
+    transition: 0.4s;
+}
+
+.BodyItemForCraft:hover{
+    background: rgb(48 48 56 / 30%);
+}
+
+.item-selected{
+    background: #4b526c4d;
+}
+
+.item-selected:hover{
+    background: #4b526c23;
+}
+
+.MainBody::-webkit-scrollbar {
+    width: .5vh;
+}
+
+.MainBody::-webkit-scrollbar-thumb {
+    background-color: #4b526c;
+}
+
+.Body_mainImage{
+    display: inline-block;
+    width: 35%;
+    height: 80%;
+    margin-top: 4.5%;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    padding-left: 2%;
+    background: rgba(var(--main-label-color), 0.2);
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.image_body{
+    height: 80%;
+    max-height: 80%;
+}
+
+.ItemNamesForCraft{
+    display: inline-block;
+    width: 54%;
+    height: 90%;
+    border-radius: 0.2vh;
+    overflow-y: auto;
+}
+
+.ItemNamesForCraft::-webkit-scrollbar {
+    width: .5vh;
+}
+
+.ItemNamesForCraft::-webkit-scrollbar-thumb {
+    background-color: rgb(51, 54, 77);
+}
+
+.ItemsUI{
+    display: inline-block;
+    font-size: 70%;
+    font-weight: bold;
+
+}
+
+#ItemsUI{
+    width: 20%;
+}
+
+.TextBoxUi{
+    display: inline-block;
+    transform: translate(0, -60%);
+}
+
+.slide-in {
+    animation: slide-in 0.35s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.35s forwards;
+}
+
+.slide-inA {
+    animation: slide-inA 0.35s forwards;
+}
+
+.slide-outA {
+    animation: slide-outA 0.35s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.0;
+    }
+}
+
+@keyframes slide-inA {
+    0% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes slide-outA {
+    0% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.0;
+    }
+}
+
+.MainBodyTextUI{
+    padding-left: 3%;
+    padding-top: 3%;
+    font-weight: bold;
+}
+
+.CraftStart{
+    display: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 8%;
+    background-color: rgb(35 34 56 / 80%);
+    font-family: sans-serif;
+}
+
+.BodyCraftingStart{
+    display: none;
+    text-align: center;
+    background-color: #646475;
+    padding: 10%;
+    margin: 5%;
+    transition: 0.3s;
+}
+
+.BodyCraftingStart:hover{
+    background-color: #4b526cad;
+}
+
+.CloseCrafting{
+    text-align: center;
+    background-color: #646475;
+    padding: 10%;
+    margin: 5%;
+    transition: 0.3s;
+}
+
+.CloseCrafting:hover{
+    background-color: #4b526cad;
+}
+
+
+.BodyCraftingInput{
+    margin: 5%;
+    background: #646475 !important;
+    border: none;
+    outline: none;
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    width: 90%;
+    text-align: center;
+    font-size: 95%;
+    padding: 10%;
+    color: rgb(255, 255, 255);
+}
+
+input[class="BodyCraftingInput"]::-webkit-input-placeholder {
+    color: rgb(223, 223, 223);
+    text-align: center;
+  }
+
+
+input[class="BodyCraftingInput"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+.XPShow{
+    width: 91.5%;
+    height: 2%;
+    margin-top: 0.5%;
+    margin-left: 2.1%;
+    background-color: rgba(24, 26, 30, 0.6);
+    font-size: 70%;
+    font-family: 'Mukta', monospace;
+    color: black;
+}
+
+.pro {
+     background: linear-gradient(to right, #0fffd5, #0b9a82 500px);
+     height: 100%;
+     transition: width 0.5s;
+}
+
+.TextXPUI{
+    padding-left: 10px;
+    color: black;
+}
