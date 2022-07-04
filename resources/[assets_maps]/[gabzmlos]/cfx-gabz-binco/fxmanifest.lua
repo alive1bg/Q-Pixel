@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 author 'Gabz'
 description 'Binco'
-version '8.0.0'
+version '8.0.1'
 lua54 'yes'
 this_is_a_map 'yes'
 
