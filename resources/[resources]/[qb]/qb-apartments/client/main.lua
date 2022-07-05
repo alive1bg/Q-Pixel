@@ -106,6 +106,80 @@ RegisterNetEvent('apartments:client:Logout', function(source)
     ExecuteCommand('logout')
 end)
 
+local function ApartmentTargets()
+    exports['qb-target']:AddBoxZone("ApartmentStash", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z), 1.2, 1.2, { 
+        name = "ApartmentStash", 
+        heading=270, 
+        debugPoly = false,
+        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z-1,
+        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z+1, 
+        }, {
+        options = { 
+            { 
+                type = "client", 
+                event = "apartments:client:OpenStash", 
+                icon = 'fas fa-box', 
+                label = 'Open Stash', 
+            }
+        },
+        distance = 1.5,
+    })
+    
+    exports['qb-target']:AddBoxZone("ApartmentClothing", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.clothes.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z), 1.6, 1.6, { 
+        name = "ApartmentClothing", 
+        heading=270, 
+        debugPoly = false,
+        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z-1, 
+        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z+2, 
+        }, {
+        options = { 
+            { 
+                type = "client", 
+                event = "raid_clothes:outfits", 
+                icon = 'fas fa-tshirt', 
+                label = 'Change Outfit', 
+            }
+        },
+        distance = 1.5,
+    })
+    
+    exports['qb-target']:AddBoxZone("ApartmentLogout", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z), 1.6, 1.6, { 
+        name = "ApartmentLogout", 
+        heading=270, 
+        debugPoly = false,
+        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z-1, 
+        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z+2, 
+        }, {
+        options = { 
+            { 
+                type = "client", 
+                event = "apartments:client:Logout", 
+                icon = 'fas fa-sign-out-alt', 
+                label = 'Log Out', 
+            }
+        },
+        distance = 1.5,
+    })
+    
+    exports['qb-target']:AddBoxZone("ApartmentExit", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z), 1.6, 1.6, {
+        name = "ApartmentExit", 
+        heading=270, 
+        debugPoly = false,
+        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z-1, 
+        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z+2, 
+        }, {
+        options = { 
+            { 
+                type = "client", 
+                event = "apartments:client:LeaveApartment", 
+                icon = 'fas fa-house-user', 
+                label = 'Leave Apartment', 
+            }
+        },
+        distance = 1.5,
+    })
+end
+
 local function EnterApartment(house, apartmentId, new)
     TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.1)
     openHouseAnim()
@@ -165,83 +239,12 @@ local function EnterApartment(house, apartmentId, new)
         end
     end, apartmentId)
 
-    Citizen.Wait(1400)
-
-    exports['qb-target']:AddBoxZone("ApartmentStash", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.stash.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.stash.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z), 1.2, 1.2, { 
-        name = "ApartmentStash", 
-        heading=270, 
-        debugPoly = false,
-        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z-1,
-        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.stash.z+1, 
-        }, {
-        options = { 
-            { 
-                type = "client", 
-                event = "apartments:client:OpenStash", 
-                icon = 'fas fa-box', 
-                label = 'Open Stash', 
-            }
-        },
-        distance = 1.5,
-    })
-    
-    exports['qb-target']:AddBoxZone("ApartmentClothing", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.clothes.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.clothes.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z), 1.6, 1.6, { 
-        name = "ApartmentClothing", 
-        heading=270, 
-        debugPoly = false,
-        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z-1, 
-        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.clothes.z+2, 
-        }, {
-        options = { 
-            { 
-                type = "client", 
-                event = "raid_clothes:outfits", 
-                icon = 'fas fa-tshirt', 
-                label = 'Change Outfit', 
-            }
-        },
-        distance = 1.5,
-    })
-    
-    exports['qb-target']:AddBoxZone("ApartMentLogout", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.logout.x, Apartments.Locations[ClosestHouse].coords.enter.y + POIOffsets.logout.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z), 1.6, 1.6, { 
-        name = "ApartMentLogout", 
-        heading=270, 
-        debugPoly = false,
-        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z-1, 
-        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.logout.z+2, 
-        }, {
-        options = { 
-            { 
-                type = "client", 
-                event = "apartments:client:Logout", 
-                icon = 'fas fa-sign-out-alt', 
-                label = 'Log Out', 
-            }
-        },
-        distance = 1.5,
-    })
-    
-    exports['qb-target']:AddBoxZone("ApartmentExit", vector3(Apartments.Locations[ClosestHouse].coords.enter.x - POIOffsets.exit.x, Apartments.Locations[ClosestHouse].coords.enter.y - POIOffsets.exit.y, Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z), 1.6, 1.6, {
-        name = "ApartmentExit", 
-        heading=270, 
-        debugPoly = false,
-        minZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z-1, 
-        maxZ = Apartments.Locations[ClosestHouse].coords.enter.z - CurrentOffset + POIOffsets.exit.z+2, 
-        }, {
-        options = { 
-            { 
-                type = "client", 
-                event = "apartments:client:LeaveApartment", 
-                icon = 'fas fa-house-user', 
-                label = 'Leave Apartment', 
-            }
-        },
-        distance = 1.5,
-    })
+    Wait(1400)
+    ApartmentTargets()
 end
 
-exports['qb-target']:AddCircleZone("enterappartments", vector3(-269.79, -961.35, 31.52), 0.21, {
-    name = "enterappartments",
+exports['qb-target']:AddCircleZone("EnterAppartments", vector3(-269.79, -961.35, 31.52), 0.21, {
+    name = "EnterAppartments",
     useZ=false,
     debugPoly = false,
     }, {
@@ -286,6 +289,10 @@ local function LeaveApartment(house)
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_close", 0.1)
         TriggerServerEvent("QBCore:Server:SetMetaData", "currentapartment", nil)
     end)
+    exports['qb-target']:RemoveZone("ApartmentStash")
+    exports['qb-target']:RemoveZone("ApartmentClothing")
+    exports['qb-target']:RemoveZone("ApartmentExit")
+    exports['qb-target']:RemoveZone("ApartmentLogout")
 end
 
 local function SetClosestApartment()
@@ -306,21 +313,6 @@ local function SetClosestApartment()
             IsOwned = result
         end, ClosestHouse)
     end
-end
-
-local function DrawText3D(x, y, z, text)
-    SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(true)
-    AddTextComponentString(text)
-    SetDrawOrigin(x,y,z, 0)
-    DrawText(0.0, 0.0)
-    local factor = (string.len(text)) / 370
-    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
-    ClearDrawOrigin()
 end
 
 -- Events
