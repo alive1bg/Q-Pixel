@@ -25,3 +25,12 @@ BoxZone:Create(vector3(-577.31, -1106.52, 22.18), 15.0, 17.2, {
   maxZ=23.18
 })
 
+--Name: tow | 2022-07-05T17:00:02Z
+BoxZone:Create(vector3(-135.7, -1174.31, 23.77), 11.0, 20.4, {
+  name="tow",
+  heading=270,
+  --debugPoly = false,
+  minZ=22.17,
+  maxZ=26.17
+})
+
