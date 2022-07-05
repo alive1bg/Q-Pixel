@@ -933,7 +933,7 @@ CreateThread(function() -- Not event sure what this is even for
                 --print(isModified)
                 print(fSteeringLock)
                 if not isModified then
-                    if PlayerJob.name == 'police' then
+                    if PlayerJob.name == 'police' or GetVehiclePedIsIn(PlayerPedId(), 'flatbed') then
                         fSteeringLock = math.ceil((fSteeringLock * 0.58)) + 0.1
                             print(fSteeringLock)
                             print("angle set POLICE")
