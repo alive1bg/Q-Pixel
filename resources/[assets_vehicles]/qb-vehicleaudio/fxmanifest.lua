@@ -14,6 +14,12 @@ files {
   'sfx/**/*.awc',
 }
 
+data_file 'AUDIO_GAMEDATA' 'audioconfig/demonengine_game.dat'
+data_file 'AUDIO_SOUNDDATA' 'audioconfig/demonengine_sounds.dat'
+data_file 'AUDIO_WAVEPACK' 'sfx/dlc_demonengine'
+data_file 'AUDIO_GAMEDATA' 'audioconfig/demonv8_game.dat'
+data_file 'AUDIO_SOUNDDATA' 'audioconfig/demonv8_sounds.dat'
+data_file 'AUDIO_WAVEPACK' 'sfx/dlc_demonv8'
 data_file 'AUDIO_GAMEDATA' 'audioconfig/taaud40v8_game.dat'
 data_file 'AUDIO_SOUNDDATA' 'audioconfig/taaud40v8_sounds.dat'
 data_file 'AUDIO_WAVEPACK' 'sfx/dlc_taaud40v8'
