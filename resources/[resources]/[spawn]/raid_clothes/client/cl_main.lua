@@ -1208,7 +1208,7 @@ end)
 RegisterUICallback("qb-ui:raid_clothes:addOutfitPrompt", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     Wait(1) --wait to fix ui bug?
-    exports['qb-ui']:openApplication('textbox', {
+    exports['np-ui']:openApplication('textbox', {
         callbackUrl = 'qb-ui:raid_clothes:addOutfit',
         key = data.key,
         items = {
@@ -1222,25 +1222,43 @@ RegisterUICallback("qb-ui:raid_clothes:addOutfitPrompt", function(data, cb)
     })
 end)
 
+function dump(o)
+	if type(o) == 'table' then
+	   local s = '{ '
+	   for k,v in pairs(o) do 
+		  if type(k) ~= 'number' then k = '"'..k..'"' end
+		  s = s .. '['..k..'] = ' .. dump(v) .. ','
+	   end
+	   return s .. '} '
+	else
+	   return tostring(o)
+	end
+ end
+
 RegisterUICallback("qb-ui:raid_clothes:addOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = '' } })
-    exports['qb-ui']:closeApplication('textbox')
-    local outfitSlot = data.key
-    local outfitName = data.values.outfitname
+    exports['np-ui']:closeApplication('textbox')
+
+    local outfitSlot = data[2].value
+    local outfitName = data[1].value
     if outfitName == nil then outfitName = "" end
 
-    TriggerServerEvent("raid_clothes:set_outfit", outfitSlot, outfitName, GetCurrentPed())
+    TriggerServerEvent("raid_clothes:set_outfit", outfitSlot, outfitName, GetCurrentPed()) 
 end)
-
+ 
 RegisterUICallback("qb-ui:raid_clothes:changeOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     TriggerServerEvent("raid_clothes:get_outfit", data.key)
     TriggerEvent("backitems:displayItems", true)
+    Citizen.Wait(100)
+    TriggerEvent("raid_clothes:outfits")
 end)
 
 RegisterUICallback("qb-ui:raid_clothes:deleteOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     TriggerServerEvent('raid_clothes:remove_outfit', data.key)
+    Citizen.Wait(100)
+    TriggerEvent("raid_clothes:outfits")
 end)
 
 RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
@@ -1250,6 +1268,15 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
         for i = 1, #skincheck do
             local slot = tonumber(skincheck[i].slot)
             takenSlots[slot] = true
+
+
+            menuData[1] = {
+                title = "<center><strong>Your Outfits</strong></center>",
+                description = '',
+                key = 1,
+                action = ""
+            }
+
             menuData[#menuData + 1] = {
                 title = slot .. " | " .. skincheck[i].name,
                 description = '',
@@ -1260,6 +1287,7 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                 }
             }
         end
+
         if #menuData > 0 then
             if #menuData < 20 then
                 --Find first empty slot
@@ -1276,7 +1304,8 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                     action = "qb-ui:raid_clothes:addOutfitPrompt"
                 }
             end
-            exports['qb-menu']:openMenu(menuData)
+            --exports["xz-menu"]:openMenu(menuData)
+            exports['np-ui']:showContextMenu(menuData)
             --exports['qb-ui']:showContextMenu(menuData)
         else
             menuData[1] = {
@@ -1285,7 +1314,8 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
                 key = 1,
                 action = "qb-ui:raid_clothes:addOutfitPrompt"
             }
-            exports['qb-menu']:openMenu(menuData)
+            --exports["xz-menu"]:openMenu(menuData)
+            exports['np-ui']:showContextMenu(menuData)
             --exports['qb-ui']:showContextMenu(menuData)
         end
     else

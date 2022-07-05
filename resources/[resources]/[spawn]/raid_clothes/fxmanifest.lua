@@ -34,5 +34,6 @@ exports {
 	'ExportRecords',
   "GetCustomSkins",
   "GetTatCategs",
-  "CreateHashList"
+  "CreateHashList",
+  "GetCurrentPed"
 }
