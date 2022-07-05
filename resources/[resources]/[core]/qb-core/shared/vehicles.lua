@@ -642,6 +642,16 @@ QBShared.Vehicles = {
 		['hash'] = 'fleet78',
 		['shop'] = 'tuner',
 	},
+	----CHRYSLER
+	['300chellcat'] = {
+		['name'] = '300C Hellcat',
+		['brand'] = 'Chrysler',
+		['model'] = '300chellcat',
+		['price'] = 1986000,
+		['category'] = 'chevrolet',
+		['hash'] = '300chellcat',
+		['shop'] = 'tuner',
+	},
 	----CHEVROLET
 	['rrbelair'] = {
 		['name'] = 'BelAir Custom',
@@ -707,6 +717,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----DODGE
+	['HellephantDurango'] = {
+		['name'] = 'Durango Hellcat',
+		['brand'] = 'Dodge',
+		['model'] = 'HellephantDurango',
+		['price'] = 1300000,
+		['category'] = 'dodge',
+		['hash'] = 'HellephantDurango',
+		['shop'] = 'tuner',
+	},
 	['rr68demoncharger'] = {
 		['name'] = '69 Demon Charger',
 		['brand'] = 'Dodge',
@@ -1312,6 +1331,15 @@ QBShared.Vehicles = {
 		['shop'] = 'tuner',
 	},
 	----LEXUS
+	['is300'] = {
+		['name'] = 'IS300',
+		['brand'] = 'Lexus',
+		['model'] = 'is300',
+		['price'] = 117000,
+		['category'] = 'lexus',
+		['hash'] = 'is300',
+		['shop'] = 'tuner',
+	},
 	['lfa'] = {
 		['name'] = 'LFA',
 		['brand'] = 'Lexus',
