@@ -199,7 +199,7 @@ RegisterNetEvent('fishing:server:SellillegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "dolphin-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['dolphin'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "Dolphin Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellillegalFish", source)
+			TriggerClientEvent("qb-client:SellillegalFish", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have any Dolphin to sell", 'error')
 		end
@@ -211,7 +211,7 @@ RegisterNetEvent('fishing:server:SellillegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "sharktiger-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['sharktiger'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "Tiger Shark Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellillegalFish", source)
+			TriggerClientEvent("qb-client:SellillegalFish", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have any Tiger Shark to sell", 'error')
 		end
@@ -223,7 +223,7 @@ RegisterNetEvent('fishing:server:SellillegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "sharkhammer-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['sharkhammer'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "Hammerhead Shark Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellillegalFish", source)
+			TriggerClientEvent("qb-client:SellillegalFish", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have any Hammerhead Shark to sell", 'error')
 		end
@@ -235,7 +235,7 @@ RegisterNetEvent('fishing:server:SellillegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "killerwhale-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['killerwhale'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "Killer Whale Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellillegalFish", source)
+			TriggerClientEvent("qb-client:SellillegalFish", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have any Killer Whale to sell", "error")
 		end
@@ -254,7 +254,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "mackerel-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['mackerel'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Mackerel Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellLegalFish", source)
+			TriggerClientEvent("qb-client:SellLegalFish", source)
 		else
 		    TriggerClientEvent('QBCore:Notify', src, "You dont have any Mackerels to sell", "error")
 		end
@@ -266,7 +266,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "codfish-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['codfish'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Cod Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellLegalFish", source)
+			TriggerClientEvent("qb-client:SellLegalFish", source)
 		else
 		    TriggerClientEvent('QBCore:Notify', src, "You dont have any Cods to sell", "error")
 		end
@@ -278,7 +278,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "bass-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['bass'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Bass Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellLegalFish", source)
+			TriggerClientEvent("qb-client:SellLegalFish", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have any Bass to sell", "error")
 		end
@@ -290,7 +290,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "flounder-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['flounder'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Flounder Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellLegalFish", source)
+			TriggerClientEvent("qb-client:SellLegalFish", source)
 		else
 		    TriggerClientEvent('QBCore:Notify', src, "You dont have any Flounders to sell", "error")
 		end
@@ -302,7 +302,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 			Player.Functions.AddMoney('bank', payment , "stingray-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['stingray1'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Stingray Sold for $"..payment, "success")
-			TriggerClientEvent("doj:client:SellLegalFish", source)
+			TriggerClientEvent("qb-client:SellLegalFish", source)
 		else
 		    TriggerClientEvent('QBCore:Notify', src, "You dont have any Stingray to sell", "error")
 		end
@@ -320,7 +320,7 @@ RegisterNetEvent('fishing:server:BuyFishingGear', function(args)
 			Player.Functions.RemoveMoney('bank', Config.fishingBaitPrice, "fishbait")
 			Player.Functions.AddItem('fishbait', 1, nil)
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['fishbait'], "add", 1)
-			TriggerClientEvent("doj:client:buyFishingGear", source)
+			TriggerClientEvent("qb-client:buyFishingGear", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have enough money..", "error")
 		end
@@ -329,7 +329,7 @@ RegisterNetEvent('fishing:server:BuyFishingGear', function(args)
 			Player.Functions.RemoveMoney('bank', Config.fishingRodPrice, "fishingrod")
 			Player.Functions.AddItem('fishingrod', 1, nil)
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['fishingrod'], "add", 1)
-			TriggerClientEvent("doj:client:buyFishingGear", source)
+			TriggerClientEvent("qb-client:buyFishingGear", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have enough money..", "error")
 		end
@@ -338,7 +338,7 @@ RegisterNetEvent('fishing:server:BuyFishingGear', function(args)
 			Player.Functions.RemoveMoney('bank', Config.BoatAnchorPrice, "anchor")
 			Player.Functions.AddItem('anchor', 1, nil)
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['anchor'], "add", 1)
-			TriggerClientEvent("doj:client:buyFishingGear", source)
+			TriggerClientEvent("qb-client:buyFishingGear", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have enough money..", "error")
 		end
@@ -351,7 +351,7 @@ RegisterNetEvent('fishing:server:BuyFishingGear', function(args)
 			}
 			Player.Functions.AddItem('fishicebox', 1, nil, info)
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['fishicebox'], "add", 1)
-			TriggerClientEvent("doj:client:buyFishingGear", source)
+			TriggerClientEvent("qb-client:buyFishingGear", source)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "You dont have enough money..", "error")
 		end
