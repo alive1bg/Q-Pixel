@@ -648,7 +648,7 @@ QBShared.Vehicles = {
 		['brand'] = 'Chrysler',
 		['model'] = '300chellcat',
 		['price'] = 1986000,
-		['category'] = 'chevrolet',
+		['category'] = 'chrysler',
 		['hash'] = '300chellcat',
 		['shop'] = 'tuner',
 	},

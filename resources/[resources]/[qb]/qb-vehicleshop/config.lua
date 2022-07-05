@@ -121,6 +121,7 @@ Config.Shops = {
             ['buick'] = 'Buick',
             ['cadillac'] = 'Cadillac',
             ['chevrolet'] = 'Chevrolet',
+            ['chrysler'] = 'Chrysler',
             ['dodge'] = 'Dodge',
             ['ferrari'] = 'Ferrari',
             ['ford'] = 'Ford',
