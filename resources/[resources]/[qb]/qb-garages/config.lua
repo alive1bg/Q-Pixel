@@ -866,4 +866,43 @@ JobGarages = {
         maxZ=62.35,
         showBlip = true
     },
+    --Tow
+    ["towpound"] = {
+        label = "Impound Garage",
+        job = "tow", -- job which have access
+        isHelipad = false,
+        Blip = vector3(-135.7, -1174.31, 23.77),
+        polyzone = vector3(-135.7, -1174.31, 23.77),
+        polyzone1 = 11.0, 
+        polyzone2 = 20.4,
+        heading = 270,
+        minZ = 22.17, 
+        maxZ = 26.17,
+        showBlip = true,
+        spawns = {
+            [1] = { ['x'] = -136.13, ['y'] = -1182.414, ['z'] = 23.858259, ['h'] = 91.584922 },
+            [2] = { ['x'] = -136.1818, ['y'] = -1178.619, ['z'] = 23.859046, ['h'] = 91.328765 },
+            [3] = { ['x'] = -136.1592, ['y'] = -1175.029, ['z'] = 23.859703, ['h'] = 89.89257 },
+            [4] = { ['x'] = -136.0429, ['y'] = -1169.895, ['z'] = 23.858291, ['h'] = 90.088554 },
+            [5] = { ['x'] = -135.9885, ['y'] = -1166.422, ['z'] = 23.858621, ['h'] = 89.271842 },
+        },
+    },
+
+    --Hayesautos
+    ["hayesautos"] = {
+        label = "HayesAutos Garage",
+        job = "hayesauto", -- job which have access
+        isHelipad = false,
+        Blip = vector3(-1406.95, -458.48, 34.48),
+        polyzone = vector3(-1406.95, -458.48, 34.48),
+        polyzone1 = 9.2, 
+        polyzone2 = 7.6,
+        heading = 305,
+        minZ = 33.08, 
+        maxZ = 37.08,
+        showBlip = true,
+        spawns = {
+            { ['x'] = -1404.541, ['y'] = -457.476, ['z'] = 34.573432, ['h'] = 121.7573 },
+        },
+    },
 }
