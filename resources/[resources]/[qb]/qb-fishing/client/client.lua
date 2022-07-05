@@ -244,7 +244,7 @@ RegisterNetEvent('fishing:fishstart', function()
 	end
 end, false)
 
-RegisterNetEvent('doj:client:ReturnBoat', function(args)
+RegisterNetEvent('qb-client:ReturnBoat', function(args)
 	local ped = PlayerPedId()
 	local args = tonumber(args)
 	if IsPedInAnyVehicle(ped) then
@@ -282,7 +282,7 @@ RegisterNetEvent('doj:client:ReturnBoat', function(args)
 	end
 end)
 
-RegisterNetEvent('doj:client:rentaBoat', function(args)
+RegisterNetEvent('qb-client:rentaBoat', function(args)
 	local args = tonumber(args)
 	local chance = math.random(1, 20)
 
@@ -341,7 +341,7 @@ RegisterNetEvent('doj:client:rentaBoat', function(args)
 	end)
 end)
 
-RegisterNetEvent('doj:client:BoatMenu', function(data)
+RegisterNetEvent('qb-client:BoatMenu', function(data)
 	local ped = PlayerPedId()
     local inVehicle = IsPedInAnyVehicle(ped)
 	if data.location == 1 then 

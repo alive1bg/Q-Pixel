@@ -11,7 +11,7 @@ function BoatMenuLaPuerta()
             header = "Boat: "..Config.RentalBoat,
             txt = "Price: $"..Config.BoatPrice,
             params = {
-                event = "doj:client:rentaBoat",
+                event = "qb-client:rentaBoat",
 				args = 1
             }
         },
@@ -35,7 +35,7 @@ function BoatMenuPaletoCove()
             header = "Boat: "..Config.RentalBoat,
             txt = "Price: $"..Config.BoatPrice,
             params = {
-                event = "doj:client:rentaBoat",
+                event = "qb-client:rentaBoat",
 				args = 2
             }
         },
@@ -59,7 +59,7 @@ function BoatMenuElGordo()
             header = "Boat: "..Config.RentalBoat,
             txt = "Price: $"..Config.BoatPrice,
             params = {
-                event = "doj:client:rentaBoat",
+                event = "qb-client:rentaBoat",
 				args = 3
             }
         },
@@ -84,7 +84,7 @@ function BoatMenuActDam()
             header = "Boat: "..Config.RentalBoat,
             txt = "Price: $"..Config.BoatPrice,
             params = {
-                event = "doj:client:rentaBoat",
+                event = "qb-client:rentaBoat",
 				args = 4
             }
         },
@@ -108,7 +108,7 @@ function BoatMenuAlamoSea()
             header = "Boat: "..Config.RentalBoat,
             txt = "Price: $"..Config.BoatPrice,
             params = {
-                event = "doj:client:rentaBoat",
+                event = "qb-client:rentaBoat",
 				args = 5
             }
         },
@@ -133,7 +133,7 @@ function ReturnBoatLaPuerta()
             header = "Return Boat",
             txt = "return and get $"..math.floor(Config.BoatPrice/2),
             params = {
-                event = "doj:client:ReturnBoat",
+                event = "qb-client:ReturnBoat",
 				args = 1
             }
         },
@@ -157,7 +157,7 @@ function ReturnBoatPaletoCove()
             header = "Return Boat",
             txt = "return and get $"..math.floor(Config.BoatPrice/2),
             params = {
-                event = "doj:client:ReturnBoat",
+                event = "qb-client:ReturnBoat",
 				args = 2
             }
         },
@@ -181,7 +181,7 @@ function ReturnBoatElGordo()
             header = "Return Boat",
             txt = "return and get $"..math.floor(Config.BoatPrice/2),
             params = {
-                event = "doj:client:ReturnBoat",
+                event = "qb-client:ReturnBoat",
 				args = 3
             }
         },
@@ -205,7 +205,7 @@ function ReturnBoatActDam()
             header = "Return Boat",
             txt = "return and get $"..math.floor(Config.BoatPrice/2),
             params = {
-                event = "doj:client:ReturnBoat",
+                event = "qb-client:ReturnBoat",
 				args = 4
             }
         },
@@ -229,7 +229,7 @@ function ReturnBoatAlamoSea()
             header = "Return Boat",
             txt = "return and get $"..math.floor(Config.BoatPrice/2),
             params = {
-                event = "doj:client:ReturnBoat",
+                event = "qb-client:ReturnBoat",
 				args = 5
             }
         },
@@ -245,8 +245,8 @@ end
 
 --============================================================== Sell/Gear Menus
 
-RegisterNetEvent('doj:client:SellLegalFish')
-AddEventHandler('doj:client:SellLegalFish', function()
+RegisterNetEvent('qb-client:SellLegalFish')
+AddEventHandler('qb-client:SellLegalFish', function()
     exports['qb-menu']:openMenu({
 		{
             header = "Pearl's Seafood Restaurant",
@@ -307,8 +307,8 @@ AddEventHandler('doj:client:SellLegalFish', function()
     })
 end)
 
-RegisterNetEvent('doj:client:buyFishingGear')
-AddEventHandler('doj:client:buyFishingGear', function() 
+RegisterNetEvent('qb-client:buyFishingGear')
+AddEventHandler('qb-client:buyFishingGear', function() 
     exports['qb-menu']:openMenu({
 		{
             header = "Purchase Fishing Gear",
@@ -360,8 +360,8 @@ AddEventHandler('doj:client:buyFishingGear', function()
     })
 end)
 
-RegisterNetEvent('doj:client:SellillegalFish')
-AddEventHandler('doj:client:SellillegalFish', function() 
+RegisterNetEvent('qb-client:SellillegalFish')
+AddEventHandler('qb-client:SellillegalFish', function() 
 	QBCore.Functions.TriggerCallback('QBCore:HasItem', function(HasItem)
 		if HasItem then
 			local charinfo = QBCore.Functions.GetPlayerData().charinfo
