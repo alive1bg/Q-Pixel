@@ -1,5 +1,5 @@
 local ApartmentObjects = {}
-QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['qb-core']:GetCoreObject()
 
 -- Functions
 
@@ -82,8 +82,9 @@ RegisterNetEvent('apartments:server:CreateApartment', function(type, label, bool
                 label,
                 Player.PlayerData.citizenid
             })
-            TriggerClientEvent('notify', src, 'Yeni apartmanın verildi.')
+            TriggerClientEvent('QBCore:Notify', src, 'You have new apartment.')
             TriggerClientEvent("apartments:client:SpawnInApartment", src, apartmentId, type)
+            TriggerClientEvent("apartments:client:SetHomeBlip", src, type)
         end
     end)
 end)
@@ -92,7 +93,24 @@ RegisterNetEvent('apartments:server:UpdateApartment', function(type, label)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     MySQL.query('UPDATE apartments SET type = ?, label = ? WHERE citizenid = ?', { type, label, Player.PlayerData.citizenid })
-    TriggerClientEvent('notify', src, 'Başarılı bir şekilde tier arttırıldı.')
+    TriggerClientEvent('QBCore:Notify', src, "Your apartment is upgraded")
+    TriggerClientEvent("apartments:client:SetHomeBlip", src, type)
+end)
+
+RegisterNetEvent('apartments:server:RingDoor', function(apartmentId, apartment)
+    local src = source
+    if ApartmentObjects[apartment].apartments[apartmentId] ~= nil and next(ApartmentObjects[apartment].apartments[apartmentId].players) ~= nil then
+        for k, v in pairs(ApartmentObjects[apartment].apartments[apartmentId].players) do
+            TriggerClientEvent('apartments:client:RingDoor', k, src)
+        end
+    end
+end)
+
+RegisterNetEvent('apartments:server:OpenDoor', function(target, apartmentId, apartment)
+    local OtherPlayer = QBCore.Functions.GetPlayer(target)
+    if OtherPlayer ~= nil then
+        TriggerClientEvent('apartments:client:SpawnInApartment', OtherPlayer.PlayerData.source, apartmentId, apartment)
+    end
 end)
 
 RegisterNetEvent('apartments:server:AddObject', function(apartmentId, apartment, offset)

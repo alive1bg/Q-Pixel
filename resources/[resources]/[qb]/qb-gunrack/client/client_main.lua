@@ -185,14 +185,12 @@ AddEventHandler('onResourceStart', function(resourceName)
           PlayerJob = PlayerData.job
           if IsJobAllowed(PlayerJob.name) then
                onDuty = PlayerData.job.onduty
-               Menu:create()
           end
      end)
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
      if (GetCurrentResourceName() ~= resourceName) then return end
-     Menu:destroy()
 end)
 
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
@@ -200,7 +198,6 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
           PlayerJob = PlayerData.job
           if IsJobAllowed(PlayerJob.name) then
                onDuty = PlayerData.job.onduty
-               Menu:create()
           end
      end)
 end)
@@ -209,9 +206,6 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
      PlayerJob = JobInfo
      if IsJobAllowed(PlayerJob.name) then
           onDuty = PlayerJob.onduty
-          Menu:create()
-     else
-          Menu:destroy()
      end
 end)
 
