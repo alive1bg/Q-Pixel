@@ -66,7 +66,6 @@ CreateThread(function()
 					TriggerEvent('fishing:SkillBar')
 				else
 					QBCore.Functions.Notify('The Fish Escaped!', 'error')
-					exports['textUi']:DrawTextUi('hide')
 					loseBait()
 				end
 			end
@@ -76,7 +75,6 @@ end)
 
 CreateThread(function()
 	while true do
-
 		local wait = math.random(Config.FishingWaitTime.minTime , Config.FishingWaitTime.maxTime)
 		Wait(wait)
 		if fishing then
@@ -152,18 +150,16 @@ end)
 
 
 RegisterNetEvent('fishing:SkillBar', function(message)
-	exports['textUi']:DrawTextUi('hide')
-	--if Config.Skillbar == "qb-lock" then
+	exports['qb-ui']:hideInteraction()
 	local success = exports['qb-lock']:StartLockPickCircle(3,40)
 	if success then
-		QBCore.Functions.Notify('The Fish Got Away!', 'error')
-		loseBait()
-		ClearPedTasks(playerPed)
-	else
 		catchAnimation()
 		QBCore.Functions.Notify('Bingo!', 'success')
+	else
+		QBCore.Functions.Notify('The Fish Got Away!', 'error')
+		endFishing()
+		ClearPedTasks(playerPed)
 	end
-	--end
 end) 
 
 RegisterNetEvent('fishing:client:spawnFish', function(args)
@@ -491,10 +487,8 @@ loseBaitAnimation = function()
 	end
 	TaskPlayAnim(ped, animDict, animName, 1.0, -1.0, 1.0, 0, 0, 0, 48, 0)
 	RemoveAnimDict(animDict)
-	exports['qb-ui']:showInteraction("Fish took your bait!")
+	QBCore.Functions.Notify("Fish took your bait!", "error")
 	Wait(2000)
-	exports['qb-ui']:hideInteraction()
-	--exports['textUi']:DrawTextUi('hide')
 	fishAnimation()
 end
 
@@ -542,7 +536,6 @@ fishAnimation = function()
 			fishingRodEntity()
 			fishing = true
 			Wait(3700)
-			exports['textUi']:DrawTextUi('hide') 
 		else
 		  endFishing()
 		  QBCore.Functions.Notify("You dont have any fishing bait", "error")
@@ -566,7 +559,8 @@ endFishing = function()
 		ClearPedTasks(ped)
 		fishing = false
 		rodHandle = 0
-		exports['textUi']:DrawTextUi('hide')
+		DeleteEntity(rodHandle)
+		exports['qb-ui']:hideInteraction()
     end
 end
 
