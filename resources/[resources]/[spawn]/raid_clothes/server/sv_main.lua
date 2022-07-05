@@ -347,7 +347,7 @@ RegisterServerEvent("raid_clothes:list_outfits", function()
     local src = source
     local xPlayer = QBCore.Functions.GetPlayer(src)
     local cid = xPlayer.PlayerData.cid
-    local citizenid = xPlayer.PlayerData.citizenid
+    local citizenid = xPlayer.PlayerData.citizenid 
     local slot = slot
     local name = name
 
@@ -357,6 +357,23 @@ RegisterServerEvent("raid_clothes:list_outfits", function()
         ['@citizenid'] = citizenid
     }, function(skincheck)
     	TriggerClientEvent("raid_clothes:ListOutfits",src, skincheck)
+	end)
+end)
+
+RegisterServerEvent("raid_clothes:list_outfits_boss", function()
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+    local cid = xPlayer.PlayerData.cid
+    local citizenid = xPlayer.PlayerData.citizenid 
+    local slot = slot
+    local name = name
+
+    if not citizenid then return end
+
+    MySQL.Async.fetchAll("SELECT slot, name FROM users_outfits WHERE citizenid = @citizenid", {
+        ['@citizenid'] = citizenid
+    }, function(skincheck)
+    	TriggerClientEvent("raid_clothes:ListOutfits_boss",src, skincheck)
 	end)
 end)
 

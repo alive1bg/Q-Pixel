@@ -1019,6 +1019,21 @@ RegisterNetEvent('raid_clothes:outfits', function(pAction, pId, pName)
     end
 end)
 
+RegisterNetEvent('raid_clothes:outfits_boss', function(pAction, pId, pName)
+    if pAction == 1 then
+        TriggerServerEvent("raid_clothes:set_outfit",pId, pName, GetCurrentPed())
+    elseif pAction == 2 then
+        TriggerServerEvent("raid_clothes:remove_outfit",pId)
+    elseif pAction == 3 then 
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.6)
+        TriggerServerEvent("raid_clothes:get_outfit", pId)
+        TriggerEvent("backitems:displayItems", true)
+        TriggerEvent("backitems:start")
+    else
+        TriggerServerEvent("raid_clothes:list_outfits_boss")
+    end
+end)
+
 function SetCustomNuiFocus(hasKeyboard, hasMouse)
   HasNuiFocus = hasKeyboard or hasMouse
   SetNuiFocus(hasKeyboard, hasMouse)
@@ -1321,4 +1336,66 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
     else
         QBCore.Functions.Notify("You have to be near clothing shop or in apartment or house")
     end
+end)
+
+RegisterNetEvent('raid_clothes:ListOutfits_boss', function(skincheck)
+    --if inzone or exports['qb-apartments']:isInApt() then
+        local menuData = {}
+        local takenSlots = {}
+        for i = 1, #skincheck do
+            local slot = tonumber(skincheck[i].slot)
+            takenSlots[slot] = true
+
+
+            menuData[1] = {
+                title = "<center><strong>Your Outfits</strong></center>",
+                description = '',
+                key = 1,
+                action = ""
+            }
+
+            menuData[#menuData + 1] = {
+                title = slot .. " | " .. skincheck[i].name,
+                description = '',
+                key = slot,
+                children = {
+                    { title = "Change Outfit", action = "qb-ui:raid_clothes:changeOutfit", key = slot},
+                    { title = "Delete Outfit", action = "qb-ui:raid_clothes:deleteOutfit", key = slot},
+                }
+            }
+        end
+
+        if #menuData > 0 then
+            if #menuData < 20 then
+                --Find first empty slot
+                local emptySlot = -1
+                for i=1,20 do
+                    if emptySlot == -1 and takenSlots[i] == nil then
+                        emptySlot = i
+                    end
+                end
+                menuData[#menuData + 1] = {
+                    title = "Save Current Outfit",
+                    description = '',
+                    key = emptySlot,
+                    action = "qb-ui:raid_clothes:addOutfitPrompt"
+                }
+            end
+            --exports["xz-menu"]:openMenu(menuData)
+            exports['np-ui']:showContextMenu(menuData)
+            --exports['qb-ui']:showContextMenu(menuData)
+        else
+            menuData[1] = {
+                title = "Save Current Outfit",
+                description = '',
+                key = 1,
+                action = "qb-ui:raid_clothes:addOutfitPrompt"
+            }
+            --exports["xz-menu"]:openMenu(menuData)
+            exports['np-ui']:showContextMenu(menuData)
+            --exports['qb-ui']:showContextMenu(menuData)
+        end
+    --else
+    --    QBCore.Functions.Notify("You have to be near clothing shop or in apartment or house")
+    --end
 end)

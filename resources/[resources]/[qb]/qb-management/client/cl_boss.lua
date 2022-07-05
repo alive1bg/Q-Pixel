@@ -73,7 +73,7 @@ RegisterNetEvent('qb-bossmenu:client:OpenMenu', function()
             txt = "See Saved Outfits",
             icon = "fa-solid fa-shirt",
             params = {
-                event = "qb-bossmenu:client:Wardrobe",
+                event = "raid_clothes:outfits_boss", 
             }
         },
         {

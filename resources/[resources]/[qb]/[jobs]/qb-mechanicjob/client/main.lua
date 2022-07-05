@@ -1157,7 +1157,7 @@ exports['qb-target']:AddBoxZone("TunerOutfits", vector3(154.45, -3011.35, 7.04),
     options = {
         {
             type = "client",
-            event = "raid_clothes:outfits",
+            event = "raid_clothes:outfits", 
             icon = "fas fa-tshirt",
             label = "Change Outfit",
             job = "tuner",
