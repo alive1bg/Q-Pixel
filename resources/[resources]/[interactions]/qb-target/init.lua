@@ -1,3 +1,4 @@
+
 function Load(name)
 	local resourceName = GetCurrentResourceName()
 	local chunk = LoadResourceFile(resourceName, ('data/%s.lua'):format(name))
@@ -74,6 +75,27 @@ Config.BoxZones = {
             },
         },
         distance = 2.5
+    },
+
+    ["dispatchcarcam"] = {
+        name = "PD Cameras",
+        coords = vector3(442.31, -999.67, 34.97), 
+        length = 1.0,
+        width = 3.4,
+        heading = 359,
+        debugPoly = false,
+        minZ=34.77,
+        maxZ=35.37,
+        options = {
+            {
+                type = "client",
+                event = "rp_interact:client:PoliceDashCams", 
+                icon = "fas fa-circle",
+                label = "View Dash Cams",
+                job = "police",
+            },
+        },
+        distance = 1.5
     },
 
 

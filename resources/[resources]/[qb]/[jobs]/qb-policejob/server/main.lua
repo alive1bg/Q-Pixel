@@ -1139,3 +1139,8 @@ RegisterServerEvent("qb-police:server:license", function(playerId, businessname,
         Player.Functions.AddItem('certificate', 1, nil, info)
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['certificate'], 'add', 1)
 end)
+
+
+QBCore.Functions.CreateUseableItem('pd_dashcam', function(source, item)
+	TriggerClientEvent('rp_vehicles:client:GoPro:attach', source, item, 'pd')
+end)

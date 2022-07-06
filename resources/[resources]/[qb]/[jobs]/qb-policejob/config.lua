@@ -460,9 +460,20 @@ Config.Items = {
             type = "item",
             slot = 23,
             authorizedJobGrades = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+        },
+        [24] = {
+            name = "pd_dashcam",
+            price = 1000,
+            amount = 15,
+            info = {},
+            type = "item",
+            slot = 24,
+            authorizedJobGrades = {1, 2, 3, 4, 5, 6, 7, 8, 9}
         }
     }
 }
+
+
 
 Config.VehicleSettings = {
     ["car1"] = { --- Model name

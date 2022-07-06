@@ -29,8 +29,8 @@ local function GenerateStreamID()
     return defaultID
 end
 
-RegisterNetEvent('np_vehicles:server:GoPro:CreateStream')
-AddEventHandler('np_vehicles:server:GoPro:CreateStream', function(veh, dashType)
+RegisterNetEvent('rp_vehicles:server:GoPro:CreateStream')
+AddEventHandler('rp_vehicles:server:GoPro:CreateStream', function(veh, dashType)
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
     local cid = Ply.PlayerData.citizenid
@@ -39,7 +39,7 @@ AddEventHandler('np_vehicles:server:GoPro:CreateStream', function(veh, dashType)
 	local streamTitle = ""
 
 	if dashType == 'pd' then
-		streamTitle = Ply.PlayerData.charinfo.fullname .. ' #'..Ply.PlayerData.metadata.callsign
+		streamTitle = Ply.PlayerData.job.grade.name .. ' - '.. Ply.PlayerData.charinfo.lastname .. ' #'..Ply.PlayerData.metadata.callsign
 	end
     GoProStreams[networkVehicleEntity] = {
         vehicleEntity = networkVehicleEntity, --NetToVeh()
@@ -50,42 +50,57 @@ AddEventHandler('np_vehicles:server:GoPro:CreateStream', function(veh, dashType)
 		streamType = dashType
     }
 	Entity(networkVehicleEntity).state:set('dashcam', true, true)
-    --TriggerClientEvent('QBCore:Notify', src, "Your stream pin is: #"..GoProStreams[networkVehicleEntity].streamPin)
 end)
 
-RegisterNetEvent('np_vehicles:server:GoPro:JoinStream', function(data)
+function dump(o)
+	if type(o) == 'table' then
+	   local s = '{ '
+	   for k,v in pairs(o) do
+		  if type(k) ~= 'number' then k = '"'..k..'"' end
+		  s = s .. '['..k..'] = ' .. dump(v) .. ','
+	   end
+	   return s .. '} '
+	else
+	   return tostring(o)
+	end
+ end
+
+RegisterNetEvent('rp_vehicles:server:GoPro:JoinStream', function(data)
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
 
-    if not GoProStreams[data.vehicleEntity] then return end
-	local vehData = GoProStreams[data.vehicleEntity]
+    if not GoProStreams[data.vehicleEntity] then 
+        return 
+    end
 
-	local StillExists = DoesEntityExist(vehData.vehicleEntity)
+        local vehData = GoProStreams[data.vehicleEntity]
 
-	if not StillExists then
-		GoProStreams[data.vehicleEntity] = nil
-		TriggerClientEvent('QBCore:Notify', src, "Vehicle no longer exists", 'error')
-		return
-	end
+        local StillExists = DoesEntityExist(vehData.vehicleEntity)
 
-	local vehCoords = GetEntityCoords(vehData.vehicleEntity)
-    TriggerClientEvent('np_vehicles:client:GoPro:AttachCam', src, NetworkGetNetworkIdFromEntity(vehData.vehicleEntity), vehCoords)
+        if not StillExists then
+            GoProStreams[vehData.vehicleEntity] = nil
+            TriggerClientEvent('QBCore:Notify', src, "Vehicle no longer exists", 'error')
+            return
+        end
+
+        local vehCoords = GetEntityCoords(vehData.vehicleEntity)
+        TriggerClientEvent('rp_vehicles:client:GoPro:AttachCam', src, NetworkGetNetworkIdFromEntity(vehData.vehicleEntity), vehCoords)
 end)
 
-RegisterNetEvent('np_vehicles:server:GoPro:LeaveStream', function()
+RegisterNetEvent('rp_vehicles:server:GoPro:LeaveStream', function()
     local src = source
     local Ply = QBCore.Functions.GetPlayer(src)
 
     if myStreams[Ply.PlayerData.citizenid] ~= nil then
-        TriggerClientEvent('np_vehicles:server:GoPro:DetachCam', src)
+        TriggerClientEvent('rp_vehicles:server:GoPro:DetachCam', src)
     end
 end)
 
 QBCore.Functions.CreateUseableItem('pd_dashcam', function(source, item)
-	TriggerClientEvent('np_vehicles:client:GoPro:attach', source, item, 'pd')
+	TriggerClientEvent('rp_vehicles:client:GoPro:attach', source, item, 'pd')
 end)
 
-QBCore.Functions.CreateCallback('np_vehicles:server:GoPro:GetDashCams', function(source, cb, camType)
+QBCore.Functions.CreateCallback('rp_vehicles:server:GoPro:GetDashCams', function(source, cb, camType)
 	local retval = {}
 
 	for k,v in pairs(GoProStreams) do

@@ -16,7 +16,7 @@ client_scripts {
 	'client/interactions.lua',
 	'client/job.lua',
 	'client/heli.lua',
-	--'client/anpr.lua',
+	'client/gopros.lua',
 	'client/evidence.lua',
 	'client/objects.lua',
 	'client/policeimpound.lua',
@@ -27,6 +27,7 @@ client_scripts {
 server_scripts {
 	'@oxmysql/lib/MySQL.lua',
 	'server/main.lua',
+	'server/gopros.lua',
 	'server/gsr.lua'
 }
 

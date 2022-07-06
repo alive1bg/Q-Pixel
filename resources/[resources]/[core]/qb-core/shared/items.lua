@@ -1068,7 +1068,10 @@ QBShared.Items = {
 	['cctv'] 		 				 = {['name'] = 'cctv', 						['label'] = 'CCTV Camera', 				['weight'] = 5000, 	    ['type'] = 'item', 		['image'] = 'nmcctv.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Single Heading CCTV Camera (Manually Placeable)', ['created'] = nil, ['decay'] = 28.0},
 	['360cctv'] 		 			 = {['name'] = '360cctv', 					['label'] = '360D CCTV Cam', 			['weight'] = 10000, 	    ['type'] = 'item', 		['image'] = 'mcctv.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = '360 Degree Revolvable CCTV Camera (Manually Placeable)', ['created'] = nil, ['decay'] = 28.0},
 	['camviewer'] 		 			 = {['name'] = 'camviewer', 				['label'] = 'CamViewer', 			    ['weight'] = 7000, 	    ['type'] = 'item', 		['image'] = 'camviewer.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Remote Camera Viewer and Controller', ['created'] = nil, ['decay'] = 28.0},
+	['pd_dashcam'] 		 			 = {['name'] = 'pd_dashcam', 			    ['label'] = 'Dash Camera [PD]', 	    ['weight'] = 3000, 	    ['type'] = 'item', 		['image'] = 'dashcam.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Dash Cam, used for attaching to vehicles (MARKED FOR SEIZURE)', ['created'] = nil, ['decay'] = 28.0},
 
+
+	
 	-- portable chair
 	["chair62"] 					= {["name"] = "chair62",  	    			["label"] = "Green Camping Chair",		["weight"] = 100, 		["type"] = "item", 		["image"] = "np_props_lawnchair2.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = "" , ['created'] = nil, ['decay'] = 28.0},
 	["chair63"] 					= {["name"] = "chair63",  	    			["label"] = "Blue Camping Chair",		["weight"] = 100, 		["type"] = "item", 		["image"] = "np_props_lawnchair.png", 		["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = "" , ['created'] = nil, ['decay'] = 28.0},
