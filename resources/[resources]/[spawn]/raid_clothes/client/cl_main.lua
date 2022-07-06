@@ -1282,7 +1282,7 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
         local takenSlots = {}
         for i = 1, #skincheck do
             local slot = tonumber(skincheck[i].slot)
-            takenSlots[slot] = true
+            takenSlots[slot] = true 
 
 
             menuData[1] = {
@@ -1399,3 +1399,20 @@ RegisterNetEvent('raid_clothes:ListOutfits_boss', function(skincheck)
     --    QBCore.Functions.Notify("You have to be near clothing shop or in apartment or house")
     --end
 end)
+
+function IsNearShopMenu()
+    local dstchecked = 1000
+    local plyPos = GetEntityCoords(GetPlayerPed(PlayerId()), false)
+	for i = 1, #clothingShops do
+		shop = clothingShops[i]
+		local comparedst = Vdist(plyPos.x, plyPos.y, plyPos.z,shop[1], shop[2], shop[3])
+		if comparedst < dstchecked then
+			dstchecked = comparedst
+		end
+
+		if comparedst < 5.0 then
+			DrawMarker(27,shop[1], shop[2], shop[3], 0, 0, 0, 0, 0, 0, 1.001, 1.0001, 1.7001, 0, 55, 240, 20, 0, 0, 0, 0)
+		end
+	end
+	return dstchecked
+end

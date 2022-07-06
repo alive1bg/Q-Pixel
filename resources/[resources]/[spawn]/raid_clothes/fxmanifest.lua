@@ -35,5 +35,6 @@ exports {
   "GetCustomSkins",
   "GetTatCategs",
   "CreateHashList",
-  "GetCurrentPed"
+  "GetCurrentPed",
+  "IsNearShopMenu"
 }

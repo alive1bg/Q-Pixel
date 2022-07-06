@@ -95,6 +95,17 @@ rootMenuConfig =  {
         end,
     },
     {
+        id = "clothingNear",
+        displayName = "Outfits",
+        icon = "#house-setoutift",
+        functionName = "raid_clothes:outfits",
+        enableMenu = function()
+            local Data = QBCore.Functions.GetPlayerData()
+            local clothing = exports["raid_clothes"]:IsNearShopMenu() 
+            return (not Data.metadata["isdead"] and not Data.metadata["inlaststand"] and clothing <= 5.0)
+        end
+    },
+    {
         id = "copDead",
          displayName = "11-A",
          icon = "#police-dead",
