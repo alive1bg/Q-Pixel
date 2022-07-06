@@ -3785,6 +3785,7 @@ RegisterNetEvent('craft:vehmenu', function()
         {
             id = 1,
             header = "Vehicle: " .. plate,
+            icon = "fas fa-car",
             txt = "",
             isMenuHeader = true
         },
@@ -3792,6 +3793,7 @@ RegisterNetEvent('craft:vehmenu', function()
             id = 2,
             header = "Vehicle Status",
             txt = "View vehicle health and status",
+            icon = "fas fa-signal",
             params = {
                 event = "craft:vehstatus",
             }
@@ -3800,6 +3802,7 @@ RegisterNetEvent('craft:vehmenu', function()
             id = 3,
             header = "Vehicle Modifications",
             txt = "View vehicles modifications and upgrades",
+            icon = "fab fa-searchengin",
             params = {
                 event = "craft:vehmods",
             }
@@ -3808,7 +3811,7 @@ RegisterNetEvent('craft:vehmenu', function()
             id = 4,
             header = "Close Menu",
             txt = "",
-            icon = "redusb",
+            icon = "fas fa-x",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
@@ -3892,36 +3895,42 @@ RegisterNetEvent('craft:vehmods', function()
         {
             id = 1,
             header = "Vehicle: " .. plate,
+            icon = "fas fa-car",
             txt = "",
             isMenuHeader = true
         },
         {
             id = 2,
             header = "Engine: ".. engine,
+            icon = "fas fa-car-battery",
             txt = "",
             isMenuHeader = true
         },
         {
             id = 3,
             header = "Transmission: ".. transmission,
+            icon = "fas fa-truck-monster",
             txt = "",
             isMenuHeader = true
         },
         {
             id = 4,
             header = "Suspension: ".. suspension,
+            icon = "fas fa-power-off",
             txt = "",
             isMenuHeader = true
         },
         {
             id = 5,
             header = "Brakes: ".. brakes,
+            icon = "fas fa-ban",
             txt = "",
             isMenuHeader = true
         },
         {
             id = 6,
             header = "Turbo: ".. turbo,
+            icon = "fas fa-poop",
             txt = "",
             isMenuHeader = true
         },
@@ -3938,7 +3947,7 @@ RegisterNetEvent('craft:vehmods', function()
             id = 8,
             header = "Close Menu",
             txt = "Back to main menu",
-            icon = "redusb",
+            icon = "fas fa-x",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
@@ -3962,26 +3971,41 @@ RegisterNetEvent('craft:vehstatus', function()
     exports['qb-menu']:openMenu({
         {
             id = 1,
-            header = "Engine Health",
-            txt = "Status: " .. math.ceil(engineHealth / 10) .. "% / 100.0%",
+            header = "Vehicle: " .. plate,
+            icon = "fas fa-car",
+            txt = "",
+            isMenuHeader = true
         },
         {
             id = 2,
-            header = "Body Condition",
-            txt = "Status: " .. math.ceil(bodyHealth / 10) .. "% / 100.0%",
+            header = "Engine Health",
+            isMenuHeader = true,
+            icon = "fas fa-car-battery",
+            txt = "Status: " .. math.ceil(engineHealth / 10) .. "% / 100.0%",
         },
         {
             id = 3,
+            header = "Body Condition",
+            isMenuHeader = true,
+            icon = "fas fa-car-burst",
+            txt = "Status: " .. math.ceil(bodyHealth / 10) .. "% / 100.0%",
+        },
+        {
+            id = 4,
             header = "Fuel Level",
+            isMenuHeader = true,
+            icon = "fas fa-gas-pump",
             txt = "Status: " .. math.ceil(fuelHealth) .. ".0% / 100.0%",
         },
         {
-            id = 4,
+            id = 5,
             header = "Engine Temperature",
+            isMenuHeader = true,
+            icon = "fas fa-temperature-low",
             txt = "Status: " .. math.ceil(vehTemp) .. "° C",
         },
         {
-            id = 4,
+            id = 6,
             header = "Back",
             txt = "Back to main menu",
             icon = "fa-solid fa-rotate-left",
@@ -3990,10 +4014,10 @@ RegisterNetEvent('craft:vehstatus', function()
             }
         },
         {
-            id = 6,
+            id = 7,
             header = "Close Menu",
             txt = "Back to main menu",
-            icon = "redusb",
+            icon = "fas fa-x",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
