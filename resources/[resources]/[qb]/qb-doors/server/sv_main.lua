@@ -292,6 +292,10 @@ local AllDoors = {
 	--Vangelico
 	[236] = {id = 236, active = true, model = 9467943, coords = vector3(-630.71, -238.12, 38.1), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	[237] = {id = 237, active = true, model = 1425919976, coords = vector3(-632.18, -236.72, 38.05), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+
+	--pdsalesgarage
+	[238] = {id = 238, active = true, model = -190780785, coords = vector3(459.54000, -1014.646, 29.153), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
+	[239] = {id = 239, active = true, model = -190780785, coords = vector3(459.53980, -1019.699, 29.134), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
 }
 
 ForcedDoors = {}

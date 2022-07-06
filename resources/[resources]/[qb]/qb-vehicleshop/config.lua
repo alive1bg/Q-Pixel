@@ -280,7 +280,7 @@ Config.Shops = {
         },
     },
     ['police'] = {
-        ['Type'] = 'police', -- no player interaction is required to purchase a vehicle
+        ['Type'] = 'free-use', -- no player interaction is required to purchase a vehicle
         ['Zone'] = {
             ['Shape'] = {--polygon that surrounds the shop
             vector2(430.71487426758, -978.34411621094),
@@ -294,21 +294,26 @@ Config.Shops = {
         },
         ['Job'] = 'police', -- Name of job or none
         ['ShopLabel'] = 'Police Vehicle Shop', -- Blip name
-        ['showBlip'] = false, -- true or false
+        ['showBlip'] = true, -- true or false
         ['blipSprite'] = 56, -- Blip sprite
         ['blipColor'] = 21, -- Blip color
         ['Categories'] = {-- Categories available to browse
             ['standard'] = 'Police',
-            ['interceptors'] = 'Interceptors',
+            ['interceptor'] = 'Interceptors',
             ['polbike'] = 'Police Bikes',
         },
         ['TestDriveTimeLimit'] = 1.5, -- Time in minutes until the vehicle gets deleted
-        ['Location'] = vector3(435.00958, -975.9316, 25.509723), -- Blip Location
-        ['ReturnLocation'] = vector3(429.28225, -976.963, 25.509597), -- Location to return vehicle, only enables if the vehicleshop has a job owned
-        ['VehicleSpawn'] = vector4(429.28225, -976.963, 25.509597, 181.3663), -- Spawn location when vehicle is bought
+        ['Location'] = vector3(455.3695, -1024.233, 28.264682), -- Blip Location
+        ['ReturnLocation'] = vector3(455.3695, -1024.233, 28.264682), -- Location to return vehicle, only enables if the vehicleshop has a job owned
+        ['VehicleSpawn'] = vector4(455.3695, -1024.233, 28.264682, 54.743831), -- Spawn location when vehicle is bought
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(434.86022, -975.9877, 24.97999, 135.22297), -- where the vehicle will spawn on display
+                coords = vector4(463.12777, -1019.371, 27.902521, 92.010543), -- where the vehicle will spawn on display
+                defaultVehicle = 'npolvic', -- Default display vehicle
+                chosenVehicle = 'npolvic' -- Same as default but is dynamically changed when swapping vehicles
+            },
+            [2] = {
+                coords = vector4(463.23217, -1014.885, 27.356174, 91.169265), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolchal', -- Default display vehicle
                 chosenVehicle = 'npolchal' -- Same as default but is dynamically changed when swapping vehicles
             },

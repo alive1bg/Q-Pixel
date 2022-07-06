@@ -373,7 +373,7 @@ function Init()
                 SetModelAsNoLongerNeeded(model)
                 SetEntityAsMissionEntity(veh, true, true)
                 SetVehicleOnGroundProperly(veh)
-                SetVehicleModKit(veh, 0)
+                SetVehicleModKit(veh, 0) 
                 SetVehicleMod(veh, 48, math.random(0, 9), false)
                 SetVehicleLivery(veh, math.random(0, 9))
                 for i = 1, 9, 1 do
@@ -591,7 +591,7 @@ RegisterNetEvent('qb-vehicleshop:client:openCustomFinance', function(data)
     end
 end)
 
-RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
+RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data) 
     local shopName = data.ClosestShop
     if Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].chosenVehicle ~= data.toVehicle then
         local closestVehicle, closestDistance = QBCore.Functions.GetClosestVehicle(vector3(Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.x, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.y, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.z))
@@ -612,6 +612,12 @@ RegisterNetEvent('qb-vehicleshop:client:swapVehicle', function(data)
         end
         SetModelAsNoLongerNeeded(model)
         SetVehicleOnGroundProperly(veh)
+        SetVehicleModKit(veh, 0) 
+        SetVehicleMod(veh, 48, math.random(0, 9), false)
+        SetVehicleLivery(veh, math.random(0, 9))
+        for i = 1, 9, 1 do
+            SetVehicleExtra(veh, i, 0)
+        end
         SetEntityInvincible(veh, true)
         SetEntityHeading(veh, Config.Shops[shopName]["ShowroomVehicles"][data.ClosestVehicle].coords.w)
         SetVehicleDoorsLocked(veh, 3)
