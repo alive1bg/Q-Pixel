@@ -16,6 +16,7 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     local gameTime = GetGameTimer()
     TriggerServerEvent('qb-vehicleshop:server:addPlayer', citizenid, gameTime)
     TriggerServerEvent('qb-vehicleshop:server:checkFinance')
+    TriggerServerEvent('qb-vehicleshop:server:checkRepo')
     if not Initialized then Init() end
 end)
 
@@ -372,6 +373,12 @@ function Init()
                 SetModelAsNoLongerNeeded(model)
                 SetEntityAsMissionEntity(veh, true, true)
                 SetVehicleOnGroundProperly(veh)
+                SetVehicleModKit(veh, 0)
+                SetVehicleMod(veh, 48, math.random(0, 9), false)
+                SetVehicleLivery(veh, math.random(0, 9))
+                for i = 1, 9, 1 do
+                    SetVehicleExtra(veh, i, 0)
+                end
                 SetEntityInvincible(veh, true)
                 SetVehicleDirtLevel(veh, 0.0)
                 SetVehicleDoorsLocked(veh, 3)

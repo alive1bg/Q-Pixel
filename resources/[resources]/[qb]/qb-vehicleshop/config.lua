@@ -298,7 +298,9 @@ Config.Shops = {
         ['blipSprite'] = 56, -- Blip sprite
         ['blipColor'] = 21, -- Blip color
         ['Categories'] = {-- Categories available to browse
-            ['police'] = 'Police'
+            ['standard'] = 'Police',
+            ['interceptors'] = 'Interceptors',
+            ['polbike'] = 'Polixe Bikes',
         },
         ['TestDriveTimeLimit'] = 1.5, -- Time in minutes until the vehicle gets deleted
         ['Location'] = vector3(435.00958, -975.9316, 25.509723), -- Blip Location
@@ -306,7 +308,7 @@ Config.Shops = {
         ['VehicleSpawn'] = vector4(429.28225, -976.963, 25.509597, 181.3663), -- Spawn location when vehicle is bought
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(435.00958, -975.9316, 25.509723, 269.88796), -- where the vehicle will spawn on display
+                coords = vector4(434.86022, -975.9877, 24.97999, 135.22297), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolchal', -- Default display vehicle
                 chosenVehicle = 'npolchal' -- Same as default but is dynamically changed when swapping vehicles
             },
