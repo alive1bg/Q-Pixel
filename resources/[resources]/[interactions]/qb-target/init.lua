@@ -263,6 +263,26 @@ Config.TargetModels = {
         },
         distance = 3.0
     }, 
+
+    ["yoga"] = {
+        models = {
+            `prop_yoga_mat_01`,
+            `prop_yoga_mat_02`,
+            `prop_yoga_mat_03`,
+            `p_yoga_mat_01_s`
+        },
+        options = {
+            {
+                type = "client",
+                event = "yoga:start",
+                icon = "fas fa-yin-yang",
+                label = "Do yoga"
+            },
+        },
+        distance = 2.0
+    }, 
+
+
     ["trashsearch"] = {
         models = {
 	    -1096777189,
