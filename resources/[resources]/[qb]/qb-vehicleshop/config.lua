@@ -280,7 +280,7 @@ Config.Shops = {
         },
     },
     ['police'] = {
-        ['Type'] = 'free-use', -- no player interaction is required to purchase a vehicle
+        ['Type'] = 'police', -- no player interaction is required to purchase a vehicle
         ['Zone'] = {
             ['Shape'] = {--polygon that surrounds the shop
             vector2(430.71487426758, -978.34411621094),
@@ -293,14 +293,14 @@ Config.Shops = {
             ['size'] = 2.75, -- size of the vehicles zones 
         },
         ['Job'] = 'police', -- Name of job or none
-        ['ShopLabel'] = 'Police Shop', -- Blip name
-        ['showBlip'] = true, -- true or false
+        ['ShopLabel'] = 'Police Vehicle Shop', -- Blip name
+        ['showBlip'] = false, -- true or false
         ['blipSprite'] = 56, -- Blip sprite
         ['blipColor'] = 21, -- Blip color
         ['Categories'] = {-- Categories available to browse
             ['standard'] = 'Police',
             ['interceptors'] = 'Interceptors',
-            ['polbike'] = 'Polixe Bikes',
+            ['polbike'] = 'Police Bikes',
         },
         ['TestDriveTimeLimit'] = 1.5, -- Time in minutes until the vehicle gets deleted
         ['Location'] = vector3(435.00958, -975.9316, 25.509723), -- Blip Location

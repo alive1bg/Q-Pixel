@@ -1704,7 +1704,7 @@ QBShared.Vehicles = {
 		['model'] = 'razerhycade34',
 		['price'] = 260000,
 		['category'] = 'nissan',
-		['hash'] = 'razerhycade34k',
+		['hash'] = 1369146075,
 		['shop'] = 'tuner',
 	},
 	['nissanr33tbk'] = {
@@ -1713,7 +1713,7 @@ QBShared.Vehicles = {
 		['model'] = 'nissanr33tbk',
 		['price'] = 260000,
 		['category'] = 'nissan',
-		['hash'] = 'nissanr33tbk',
+		['hash'] = -1484026753,
 		['shop'] = 'tuner',
 	},
 	['zlay_gtrkuhl'] = {
@@ -1722,7 +1722,7 @@ QBShared.Vehicles = {
 		['model'] = 'zlay_gtrkuhl',
 		['price'] = 260000,
 		['category'] = 'nissan',
-		['hash'] = 'zlay_gtrkuhl',
+		['hash'] = -978869455,
 		['shop'] = 'tuner',
 	},
 	['zlay420sx'] = {
