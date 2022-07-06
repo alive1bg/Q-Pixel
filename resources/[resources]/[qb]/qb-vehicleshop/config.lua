@@ -279,4 +279,38 @@ Config.Shops = {
             },
         },
     },
+    ['police'] = {
+        ['Type'] = 'free-use', -- no player interaction is required to purchase a vehicle
+        ['Zone'] = {
+            ['Shape'] = {--polygon that surrounds the shop
+            vector2(430.71487426758, -978.34411621094),
+            vector2(430.74841308594, -973.61950683594),
+            vector2(440.41931152344, -973.62719726562),
+            vector2(440.40130615234, -978.3017578125)
+            },
+            ['minZ'] = 25.69, -- min height of the shop zone
+            ['maxZ'] = 25.69, -- max height of the shop zone
+            ['size'] = 2.75, -- size of the vehicles zones 
+        },
+        ['Job'] = 'police', -- Name of job or none
+        ['ShopLabel'] = 'Police Shop', -- Blip name
+        ['showBlip'] = true, -- true or false
+        ['blipSprite'] = 56, -- Blip sprite
+        ['blipColor'] = 21, -- Blip color
+        ['Categories'] = {-- Categories available to browse
+            ['police'] = 'Police',
+        },
+        ['TestDriveTimeLimit'] = 1.5, -- Time in minutes until the vehicle gets deleted
+        ['Location'] = vector3(435.00958, -975.9316, 25.509723), -- Blip Location
+        ['ReturnLocation'] = vector3(429.28225, -976.963, 25.509597), -- Location to return vehicle, only enables if the vehicleshop has a job owned
+        ['VehicleSpawn'] = vector4(429.28225, -976.963, 25.509597, 181.3663), -- Spawn location when vehicle is bought
+        ['ShowroomVehicles'] = {
+            [1] = {
+                coords = vector4(435.00958, -975.9316, 25.509723, 269.88796), -- where the vehicle will spawn on display
+                defaultVehicle = 'npolvic', -- Default display vehicle
+                chosenVehicle = 'npolvic' -- Same as default but is dynamically changed when swapping vehicles
+            },
+        },
+    },
 }
+
