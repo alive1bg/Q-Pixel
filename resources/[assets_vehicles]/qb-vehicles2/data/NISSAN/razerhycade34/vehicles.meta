@@ -8,14 +8,14 @@
       <txdName>razerhycade34</txdName>
       <handlingId>razerhycade34</handlingId>
       <gameName>razerhycade34</gameName>
-      <vehicleMakeName>nissan</vehicleMakeName>
+      <vehicleMakeName>Nissan</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
-      <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>elegy</audioNameHash>
+      <ptfxAssetName>weap_xs_vehicle_weapons</ptfxAssetName>
+      <audioNameHash>elegyx</audioNameHash>
       <layout>LAYOUT_LOW_RHD</layout>
       <coverBoundOffsets>BLISTA_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>

@@ -3,7 +3,8 @@ function AddTextEntry(key, value)
 end
 
 Citizen.CreateThread(function()
-	--Generic Liveries
+	AddTextEntry("MCLAREN", "McLaren")
+	AddTextEntry("mclarenf1wb", "F1 Khyzel Saleem")
 	AddTextEntry("LIV_AP", "AP")
 	AddTextEntry("LIV_FLAME", "Flame")
 	AddTextEntry("LIV_JESSE", "Jesse")
