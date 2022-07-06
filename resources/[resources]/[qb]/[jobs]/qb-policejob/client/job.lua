@@ -47,6 +47,10 @@ local function loadAnimDict(dict) -- interactions, job,
     end
 end
 
+RegisterNetEvent('police:client:judgeGavel', function()
+    TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 10, "gavel_hits", 0.7)
+   end)
+
 local function GetClosestPlayer() -- interactions, job, tracker
     local closestPlayers = QBCore.Functions.GetPlayersFromCoords()
     local closestDistance = -1
@@ -808,6 +812,25 @@ RegisterNetEvent('qb-policejob:pd:duty', function()
     })
 end)
 
+exports['qb-target']:AddBoxZone("court-gavel", vector3(-576.19, -209.92, 38.77), 1.55, 0.3, {
+    name = "court-gavel",
+    heading = 210,
+    debugPoly = false,
+    minZ = 38.52,
+    maxZ = 38.72,
+    }, {
+    options = {
+        {
+            type = "client",
+            event = "police:client:judgeGavel",
+            icon = "fa-solid fa-gavel",
+            label = "Use Gavel",
+            job = 'judge',
+        },
+    },
+    distance = 2.0
+})
+
 exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -982.0529, 30.67834), 0.45, 0.35, {
     name = "MissionRowDutyClipboard",
     heading = 11.0,
@@ -815,22 +838,22 @@ exports['qb-target']:AddBoxZone("MissionRowDutyClipboard", vector3(441.7989, -98
     minZ = 30.77834,
     maxZ = 30.87834,
     }, {
-        options = {
-            {
-                type = "client",
-                event = "qb-policejob:pd:duty",
-                icon = "fas fa-sign-in-alt",
-                label = "Duty",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
-            {
-                type = "client",
-                event = "police:client:deskAlert",
-                icon = "fas fa-phone-volume",
-                label = "Page Officers",
-            },
+    options = {
+        {
+            type = "client",
+            event = "qb-policejob:pd:duty",
+            icon = "fas fa-sign-in-alt",
+            label = "Duty",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+        {
+            type = "client",
+            event = "police:client:deskAlert",
+            icon = "fas fa-phone-volume",
+            label = "Page Officers",
+        },
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("FingerPrint", vector3(473.14, -1006.95, 26.27), 0.35, 0.45, {
@@ -840,16 +863,16 @@ exports['qb-target']:AddBoxZone("FingerPrint", vector3(473.14, -1006.95, 26.27),
     minZ=26.17,
     maxZ=26.32
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:fingerprint",
-                icon = "fas fa-fingerprint",
-                label = "Scan Fingerprint",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:fingerprint",
+            icon = "fas fa-fingerprint",
+            label = "Scan Fingerprint",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 1.5
+    },
+    distance = 1.5
 })
 
 exports['qb-target']:AddBoxZone("PersonalStash", vector3(463.1, -995.34, 30.69), 0.6, 2.4, {
@@ -859,16 +882,16 @@ exports['qb-target']:AddBoxZone("PersonalStash", vector3(463.1, -995.34, 30.69),
     minZ = 29.69,
     maxZ = 32.69,
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:stash",
-                icon = "fas fa-archive",
-                label = "Personal Stash",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:stash",
+            icon = "fas fa-archive",
+            label = "Personal Stash",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("Armory", vector3(482.54, -994.72, 30.69), 0.6, 1, {
@@ -878,16 +901,16 @@ exports['qb-target']:AddBoxZone("Armory", vector3(482.54, -994.72, 30.69), 0.6, 
     minZ=29.59,
     maxZ=31.59
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:armory",
-                icon = "fas fa-user-shield",
-                label = "Armory",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:armory",
+            icon = "fas fa-user-shield",
+            label = "Armory",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("Armory1", vector3(485.4, -994.81, 30.69), 0.6, 1, {
@@ -897,16 +920,16 @@ exports['qb-target']:AddBoxZone("Armory1", vector3(485.4, -994.81, 30.69), 0.6, 
     minZ = 29.69,
     maxZ = 32.69,
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:armory",
-                icon = "fas fa-user-shield",
-                label = "Armory",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:armory",
+            icon = "fas fa-user-shield",
+            label = "Armory",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("Trash", vector3(471.9, -1002.49, 30.69), 0.5, 0.5, {
@@ -916,16 +939,16 @@ exports['qb-target']:AddBoxZone("Trash", vector3(471.9, -1002.49, 30.69), 0.5, 0
     minZ=29.69,
     maxZ=30.49
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:trash",
-                icon = "far fa-trash-alt",
-                label = "Trash Bin",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:trash",
+            icon = "far fa-trash-alt",
+            label = "Trash Bin",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 1.5
+    },
+    distance = 1.5
 })
 
 exports['qb-target']:AddBoxZone("Trash1", vector3(442.47, -983.19, 30.69), 0.4, 0.45, {
@@ -935,16 +958,16 @@ exports['qb-target']:AddBoxZone("Trash1", vector3(442.47, -983.19, 30.69), 0.4, 
     minZ=29.69,
     maxZ=30.29
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:trash1",
-                icon = "far fa-trash-alt",
-                label = "Trash Bin",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:trash1",
+            icon = "far fa-trash-alt",
+            label = "Trash Bin",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 1.5
+    },
+    distance = 1.5
 })
 
 exports['qb-target']:AddBoxZone("bossmrpd", vector3(461.51, -986.33, 30.69), 0.5, 0.5, {
@@ -954,16 +977,16 @@ exports['qb-target']:AddBoxZone("bossmrpd", vector3(461.51, -986.33, 30.69), 0.5
     minZ=30.59,
     maxZ=30.79
     }, {
-        options = {
-            {
-                type = "client",
-                event = "qb-management:client:OpenMenu",
-                icon = "fas fa-circle",
-                label = "Boss Menu",
-                job = {["police"] = 9, ["sasp"] = 9, ["saspr"] = 9, ["sdso"] = 9, ["pbso"] = 9, ["bcso"] = 9},
-            },
+    options = {
+        {
+            type = "client",
+            event = "qb-management:client:OpenMenu",
+            icon = "fas fa-circle",
+            label = "Boss Menu",
+            job = {["police"] = 9, ["sasp"] = 9, ["saspr"] = 9, ["sdso"] = 9, ["pbso"] = 9, ["bcso"] = 9},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("policeoutfits", vector3(460.2, -999.76, 30.69), 0.55, 1.05, {
@@ -973,16 +996,16 @@ exports['qb-target']:AddBoxZone("policeoutfits", vector3(460.2, -999.76, 30.69),
     minZ=29.69,
     maxZ=30.69
     }, {
-        options = {
-            {
-                type = "client",
-                event = "raid_clothes:outfits",
-                icon = "fas fa-tshirt",
-                label = "Change Outfit",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "raid_clothes:outfits",
+            icon = "fas fa-tshirt",
+            label = "Change Outfit",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 exports['qb-target']:AddBoxZone("policeevidence", vector3(473.77130, -994.46810, 26.62234), 0.55, 1.05, {
@@ -992,16 +1015,16 @@ exports['qb-target']:AddBoxZone("policeevidence", vector3(473.77130, -994.46810,
     minZ=25.00,
     maxZ=28.00
     }, {
-        options = {
-            {
-                type = "client",
-                event = "police:client:EvidenceStashDrawer",
-                icon = "far fa-folder-open",
-                label = "Evidence Locker",
-                job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
-            },
+    options = {
+        {
+            type = "client",
+            event = "police:client:EvidenceStashDrawer",
+            icon = "far fa-folder-open",
+            label = "Evidence Locker",
+            job = {["police"] = 0, ["sasp"] = 0, ["saspr"] = 0, ["sdso"] = 0, ["pbso"] = 0, ["bcso"] = 0},
         },
-        distance = 2.5
+    },
+    distance = 2.5
 })
 
 RegisterNetEvent("police:armory")
