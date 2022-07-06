@@ -3946,7 +3946,7 @@ RegisterNetEvent('craft:vehmods', function()
         {
             id = 8,
             header = "Close Menu",
-            txt = "Back to main menu",
+            txt = "",
             icon = "fas fa-x",
             params = {
                 event = "qb-menu:client:closeMenu",
@@ -4016,7 +4016,7 @@ RegisterNetEvent('craft:vehstatus', function()
         {
             id = 7,
             header = "Close Menu",
-            txt = "Back to main menu",
+            txt = "",
             icon = "fas fa-x",
             params = {
                 event = "qb-menu:client:closeMenu",
