@@ -4,6 +4,7 @@ $('#barber_shop').fadeOut(0);
 var currentMenu = null;
 var hairColors = null;
 var makeupColors = null;
+var eyecolor = null;
 let headBlend = {};
 
 var isService = false;
@@ -71,6 +72,7 @@ $(function () {
         if (event.data.type == "colors") {
             hairColors = createPalette(event.data.hairColors);
             makeupColors = createPalette(event.data.makeupColors);
+            eyecolor = createPalette(event.data.eyecolor);
             AddPalettes();
             SetHairColor(event.data.hairColor);
         }
@@ -573,6 +575,9 @@ $(function () {
             if ($(this).hasClass('makeupcol')) {
                 $(this).append($(makeupColors))
             }
+            if ($(this).hasClass('eyecolor')) {
+                $(this).append($(eyecolor))
+            }
         });
         $('.color_palette').on('click', function() {
             var palettes = $(this).parents('.panel').find('.color_palette_container')
@@ -584,6 +589,11 @@ $(function () {
                 $.post('https://raid_clothes/savehaircolor', JSON.stringify({
                     firstColour: palettes.eq(0).find('.active').attr('value'),
                     secondColour: palettes.eq(1).find('.active').attr('value')
+                }));
+            }
+            else if ($(this).parents('.panel').hasClass('eyecolor')) {
+                $.post('https://raid_clothes/saveeyecolor', JSON.stringify({
+                    firstColour: palettes.eq(0).find('.active').attr('value')
                 }));
             }
             else {

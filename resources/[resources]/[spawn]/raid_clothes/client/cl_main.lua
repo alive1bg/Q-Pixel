@@ -32,7 +32,7 @@ local startingMenu = false
 
 local drawable_names = {"face", "masks", "hair", "torsos", "legs", "bags", "shoes", "neck", "undershirts", "vest", "decals", "jackets"}
 local prop_names = {"hats", "glasses", "earrings", "mouth", "lhand", "rhand", "watches", "braclets"}
-local head_overlays = {"Blemishes","FacialHair","Eyebrows","Ageing","Makeup","Blush","Complexion","SunDamage","Lipstick","MolesFreckles","ChestHair","BodyBlemishes","AddBodyBlemishes"}
+local head_overlays = {"Blemishes","FacialHair","Eyebrows","Ageing","Makeup","Blush","Complexion","SunDamage","Lipstick","MolesFreckles","ChestHair","BodyBlemishes","AddBodyBlemishes","eyecolor"}
 local face_features = {"Nose_Width","Nose_Peak_Hight","Nose_Peak_Lenght","Nose_Bone_High","Nose_Peak_Lowering","Nose_Bone_Twist","EyeBrown_High","EyeBrown_Forward","Cheeks_Bone_High","Cheeks_Bone_Width","Cheeks_Width","Eyes_Openning","Lips_Thickness","Jaw_Bone_Width","Jaw_Bone_Back_Lenght","Chimp_Bone_Lowering","Chimp_Bone_Lenght","Chimp_Bone_Width","Chimp_Hole","Neck_Thikness"}
 local tatCategory = GetTatCategs()
 local tattooHashList = CreateHashList()
@@ -74,6 +74,49 @@ function RefreshUI()
         local outR, outG, outB= GetPedMakeupRgbColor(i)
         makeupColors[i] = {outR, outG, outB}
     end
+
+    eyecolors = {}
+    eyecolors[1] = {82, 94, 55}
+    eyecolors[2] = {38, 52, 25}
+    eyecolors[3] = {131, 183, 213}
+    eyecolors[4] = {62, 102, 163}
+    eyecolors[5] = {141, 104, 51}
+    eyecolors[6] = {82, 55, 17}
+    eyecolors[7] = {208, 132, 24}
+    eyecolors[8] = {190, 190, 190}
+    eyecolors[9] = {190, 190, 200}
+    eyecolors[10] = {215, 66, 245}
+    eyecolors[11] = {245, 236, 66}
+    eyecolors[12] = {161, 97, 207}
+    eyecolors[13] = {0, 0, 0}
+    eyecolors[14] = {82, 78, 78}
+    eyecolors[15] = {219, 125, 57}
+    eyecolors[16] = {211, 214, 0}
+    eyecolors[17] = {209, 209, 209}
+    eyecolors[18] = {255, 54, 54}
+    eyecolors[19] = {255, 133, 89}
+    eyecolors[20] = {219, 219, 219}
+    eyecolors[21] = {255, 125, 125}
+    eyecolors[22] = {125, 168, 89}
+    eyecolors[23] = {204, 179, 90}
+    eyecolors[24] = {90, 118, 204}
+    eyecolors[25] = {145, 136, 106}
+    eyecolors[26] = {194, 150, 2}
+    eyecolors[27] = {33, 33, 33}
+    eyecolors[28] = {255, 33, 33}
+    eyecolors[29] = {247, 82, 82}
+    eyecolors[30] = {86, 240, 222}
+    eyecolors[31] = {230, 255, 252}
+    eyecolors[32] = {225, 247, 245}
+    eyecolors[33] = {81, 110, 83}
+
+    SendNUIMessage({
+        type="colors",
+        hairColors=hairColors,
+        makeupColors=makeupColors,
+        hairColor=GetPedHair(),
+        eyecolor = eyecolors
+    })
 
     SendNUIMessage({
         type="colors",
@@ -331,6 +374,7 @@ function GetCurrentPed()
     return {
         model = GetEntityModel(PlayerPedId()),
         hairColor = GetPedHair(),
+        eyecolor = GetPedEyeColor(player),
         headBlend = GetPedHeadBlendData(),
         headOverlay = GetHeadOverlayData(),
         headStructure = GetHeadStructure(),
@@ -499,15 +543,21 @@ end
 function GetHeadOverlayData()
     local headData = {}
     for i = 1, #head_overlays do
-        local retval, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(player, i-1)
-        if retval then
+        if head_overlays[i] == "eyecolor" then
             headData[i] = {}
-            headData[i].name = head_overlays[i]
-            headData[i].overlayValue = overlayValue
-            headData[i].colourType = colourType
-            headData[i].firstColour = firstColour
-            headData[i].secondColour = secondColour
-            headData[i].overlayOpacity = overlayOpacity
+            headData[i].name = "eyecolor"
+            headData[i].val = GetPedEyeColor(player)
+        else
+            local retval, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(player, i-1)
+            if retval then
+                headData[i] = {}
+                headData[i].name = head_overlays[i]
+                headData[i].overlayValue = overlayValue
+                headData[i].colourType = colourType
+                headData[i].firstColour = firstColour
+                headData[i].secondColour = secondColour
+                headData[i].overlayOpacity = overlayOpacity
+            end
         end
     end
     return headData
@@ -516,7 +566,11 @@ end
 function SetHeadOverlayData(data)
     if json.encode(data) ~= "[]" then
         for i = 1, #head_overlays do
-            SetPedHeadOverlay(player,  i-1, tonumber(data[i].overlayValue),  tonumber(data[i].overlayOpacity))
+            if data[i].name == "eyecolor" then
+                SetPedEyeColor(player, tonumber(data[i].val))
+            else
+                SetPedHeadOverlay(player,  i-1, tonumber(data[i].overlayValue),  tonumber(data[i].overlayOpacity))
+            end
             -- SetPedHeadOverlayColor(player, i-1, data[i].colourType, data[i].firstColour, data[i].secondColour)
         end
 
@@ -538,7 +592,9 @@ end
 function GetHeadOverlayTotals()
     local totals = {}
     for i = 1, #head_overlays do
-        totals[head_overlays[i]] = GetNumHeadOverlayValues(i-1)
+        if head_overlays[i] ~= "eyecolor" then
+            totals[head_overlays[i]] = GetNumHeadOverlayValues(i-1)
+        end
     end
     return totals
 end
@@ -573,6 +629,8 @@ function SetHeadStructure(data)
 end
 
 
+
+
 RegisterNUICallback('saveheadblend', function(data, cb)
     SetPedHeadBlendData(player,
     tonumber(data.shapeFirst),
@@ -589,6 +647,10 @@ end)
 
 RegisterNUICallback('savehaircolor', function(data, cb)
     SetPedHairColor(player, tonumber(data['firstColour']), tonumber(data['secondColour']))
+end)
+
+RegisterNUICallback('saveeyecolor', function(data, cb)
+    SetPedEyeColor(player,  tonumber(data['firstColour']))
 end)
 
 RegisterNUICallback('savefacefeatures', function(data, cb)
