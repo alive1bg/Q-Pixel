@@ -1082,9 +1082,8 @@ function setTattoosAndFacial(pTattoos, pFadeStyle)
     end
 
     
-
+    currentTats = {}
     if pTattoos then
-        currentTats = {}
         for k, v in pairs(pTattoos) do
             for categ in pairs(tattooHashList) do
                 if k == categ then
