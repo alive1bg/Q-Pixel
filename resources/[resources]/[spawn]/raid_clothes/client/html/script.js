@@ -81,7 +81,8 @@ $(function () {
             let textureTotal = event.data.textureTotal;
             let headoverlayTotal = event.data.headoverlayTotal;
             let skinTotal = event.data.skinTotal;
-            UpdateTotals(drawTotal, propDrawTotal, textureTotal, headoverlayTotal, skinTotal);
+            let fadeTotal = event.data.fadeTotal;
+            UpdateTotals(drawTotal, propDrawTotal, textureTotal, headoverlayTotal, skinTotal, fadeTotal);
         }
         if (event.data.type == "clothing_shopdata") {
             let drawables = event.data.drawables;
@@ -89,7 +90,8 @@ $(function () {
             let drawtextures = event.data.drawtextures;
             let proptextures = event.data.proptextures;
             let skin = event.data.skin;
-            UpdateInputs(drawables, props, drawtextures, proptextures, skin);
+            let currentFade = event.data.currentFade;
+            UpdateInputs(drawables, props, drawtextures, proptextures, skin, currentFade);
         }
 
         if (event.data.type == "barber_shop") {
@@ -137,7 +139,10 @@ $(function () {
     })
 
     function CloseMenu(save) {
-        $.post('https://raid_clothes/escape', JSON.stringify({save:save}));
+        $.post('https://raid_clothes/escape', JSON.stringify({
+          save: save,
+          fadeStyle: $('#fadeStyle').find('.input-number').eq(0).val()
+        }));
     }
 
     $(document).on('contextmenu', function() {
@@ -155,7 +160,7 @@ $(function () {
         t.fadeIn(100);
     })
 
-    function UpdateTotals(drawTotal, propDrawTotal, textureTotal, headoverlayTotal, skinTotal) {
+    function UpdateTotals(drawTotal, propDrawTotal, textureTotal, headoverlayTotal, skinTotal, fadeTotal) {
         for (var i = 0; i < Object.keys(drawTotal).length; i++) {
             if (drawTotal[i][0] == "hair") {
                 $('.hair').each(function() {
@@ -177,12 +182,14 @@ $(function () {
             $("#" + key).find('.total-number').eq(0).text(headoverlayTotal[key]);
         }
 
+        $("#fadeStyle").find('.total-number').eq(0).text(fadeTotal);
+
         let skinConts = $('#skins').find('.total-number');
         skinConts.eq(0).text(skinTotal[0]+1);
         skinConts.eq(1).text(skinTotal[1]+1);
     }
 
-    function UpdateInputs(drawables, props, drawtextures, proptextures, skin) {
+    function UpdateInputs(drawables, props, drawtextures, proptextures, skin, currentFade) {
         for (var i = 0; i < Object.keys(drawables).length; i++) {
             if (drawables[i][0] == "hair") {
                 $('.hair').each(function() {
@@ -202,6 +209,8 @@ $(function () {
         for (var i = 0; i < Object.keys(proptextures).length; i++) {
             $("#" + proptextures[i][0]).find('.input-number').eq(1).val(proptextures[i][1]);
         }
+
+        $('.fadeStyle').find('.input-number').eq(0).val(currentFade);
 
         if (skin['name'] == "skin_male") {
             $('#skin_male').val(skin['value'])

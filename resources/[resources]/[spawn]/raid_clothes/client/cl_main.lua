@@ -1,6 +1,7 @@
 QBCore = exports['qb-core']:GetCoreObject()
 priceWithTax = nil
 currentsteamid = nil
+local currentFadeStyle = 255
 PlayerData = {}
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -86,7 +87,8 @@ function RefreshUI()
         propDrawTotal = GetPropDrawablesTotal(),
         textureTotal = GetTextureTotals(),
         headoverlayTotal = GetHeadOverlayTotals(),
-        skinTotal = GetSkinTotal()
+        skinTotal = GetSkinTotal(),
+        fadeTotal = GetFadeTotal()
     })
     SendNUIMessage({
         type = "barber_shop",
@@ -101,6 +103,7 @@ function RefreshUI()
         drawtextures = GetDrawTextures(),
         proptextures = GetPropTextures(),
         skin = GetSkin(),
+        currentFade = currentFadeStyle,
         oldPed = oldPed,
     })
     SendNUIMessage({
@@ -319,6 +322,7 @@ function LoadPed(data)
     SetPedHeadBlend(data.headBlend)
     SetHeadStructure(data.headStructure)
     SetHeadOverlayData(data.headOverlay)
+    setTattoosAndFacial(nil, data.fadeStyle)
     return
 end
 
@@ -334,6 +338,7 @@ function GetCurrentPed()
         props = GetProps(),
         drawtextures = GetDrawTextures(),
         proptextures = GetPropTextures(),
+        fadeStyle = currentFadeStyle,
     }
 end
 
@@ -595,9 +600,13 @@ RegisterNUICallback('savefacefeatures', function(data, cb)
 end)
 
 RegisterNUICallback('saveheadoverlay', function(data, cb)
-    local index = has_value(head_overlays, data["name"])
-    SetPedHeadOverlay(player,  index, tonumber(data["value"]), tonumber(data["opacity"]) / 100)
-    cb('ok')
+    if data["name"] == "fadeStyle" then
+        setTattoosAndFacial(nil, tonumber(data["value"]))
+      else
+        local index = has_value(head_overlays, data["name"])
+        SetPedHeadOverlay(player,  index, tonumber(data["value"]), tonumber(data["opacity"]) / 100)
+      end
+      cb('ok')
 end)
 
 RegisterNUICallback('saveheadoverlaycolor', function(data, cb)
@@ -736,6 +745,7 @@ end)
 
 RegisterNUICallback('escape', function(data, cb)
     local shouldSave = data['save'] or false
+    local newFadeStyle = data["fadeStyle"] or 255
     if shouldSave and currentPrice > 0 then
         QBCore.Functions.TriggerCallback("clothing:purchase", function(result) 
             if not result then
@@ -748,7 +758,7 @@ RegisterNUICallback('escape', function(data, cb)
     if not startingMenu then
         TriggerServerEvent("Police:getMeta")
     end
-    Save(shouldSave,true)
+    Save(shouldSave,true, newFadeStyle)
     cb('ok')
     TriggerEvent("backitems:displayItems", true)
 end)
@@ -817,7 +827,7 @@ function SetTats(data)
 end
 
 RegisterNUICallback('settats', function(data, cb)
-    SetTats(data["tats"])
+    setTattoosAndFacial(data["tats"], currentFadeStyle)
     cb('ok')
 end)
 
@@ -842,8 +852,9 @@ function OpenMenu(name, pPriceText, pPrice)
     end
 end
 
-function Save(save, close)
+function Save(save, close, newFadeStyle)
     if save then
+        currentFadeStyle = newFadeStyle 
         data = GetCurrentPed()
         if (GetCurrentPed().model == GetHashKey("mp_f_freemode_01") or GetCurrentPed().model == GetHashKey("mp_m_freemode_01")) and startingMenu then
             -- nothing 
@@ -943,7 +954,7 @@ RegisterNetEvent("raid_clothes:setclothes", function(data,alreadyExist)
     SetClothing(data.drawables, data.props, data.drawtextures, data.proptextures)
     Wait(500)
 	TriggerEvent("facewear:update")
-    TriggerServerEvent("raid_clothes:get_character_face")
+    TriggerServerEvent("raid_clothes:get_character_face", nil, data.fadeStyle) 
     TriggerServerEvent("raid_clothes:retrieve_tats")
     TriggerEvent("backitems:displayItems", true)
 end)
@@ -969,7 +980,8 @@ end)
 
 RegisterNetEvent("raid_clothes:settattoos", function(playerTattoosList)
     currentTats = playerTattoosList
-    SetTats(GetTats())
+    --SetTats(GetTats())
+    setTattoosAndFacial(nil, currentFadeStyle)
 end)
 
 RegisterNetEvent("raid_clothes:setpedfeatures", function(data)
@@ -996,6 +1008,7 @@ RegisterNetEvent("raid_clothes:setpedfeatures", function(data)
     SetHeadStructure(data.headStructure)
     SetPedHairColor(player, tonumber(haircolor[1]), tonumber(haircolor[2]))
     SetHeadOverlayData(data.headOverlay)
+    currentFadeStyle = data.fadeStyle
 end)
 
 function DisplayHelpText(str)
@@ -1033,6 +1046,62 @@ RegisterNetEvent('raid_clothes:outfits_boss', function(pAction, pId, pName)
         TriggerServerEvent("raid_clothes:list_outfits_boss")
     end
 end)
+
+function GetFadeTotal()
+    local data = getFacialDecorationsData()
+    return #data
+end
+
+function isFreemodeModel(pModelHash)
+    return pModelHash == `mp_f_freemode_01` or pModelHash == `mp_m_freemode_01`
+  end
+
+function getFacialDecorationsData()
+    local playerPed = PlayerPedId()
+    local playerModel = GetEntityModel(playerPed)
+    if isFreemodeModel(playerModel) then
+      return FADE_CONFIGURATIONS[playerModel == `mp_m_freemode_01` and "male" or "female"]
+    else
+      return {}
+    end
+end
+
+function setTattoosAndFacial(pTattoos, pFadeStyle)
+    local fadeStyle = tonumber(pFadeStyle) or 255
+    local playerPed = PlayerPedId()
+    local playerModel = GetEntityModel(playerPed)
+
+    ClearPedFacialDecorations(playerPed)
+
+    if fadeStyle and fadeStyle > 0 and fadeStyle ~= 255 and isFreemodeModel(playerModel) then
+        local facialDecoration = FADE_CONFIGURATIONS[playerModel == `mp_m_freemode_01` and "male" or "female"][fadeStyle]
+        if facialDecoration then
+            Wait(1)
+            SetPedFacialDecoration(playerPed, facialDecoration[1], facialDecoration[2])
+        end
+    end
+
+    
+
+    if pTattoos then
+        currentTats = {}
+        for k, v in pairs(pTattoos) do
+            for categ in pairs(tattooHashList) do
+                if k == categ then
+                    local tattoo = tattooHashList[categ][tonumber(v)]
+                    if tattoo ~= nil then
+                        currentTats[#currentTats + 1] = {tattoo[2], tattoo[1]}
+                    end
+                end
+            end
+        end
+    end
+
+    for i = 1, #currentTats do
+        ApplyPedOverlay(playerPed, currentTats[i][1], currentTats[i][2])
+    end
+end
+
 
 function SetCustomNuiFocus(hasKeyboard, hasMouse)
   HasNuiFocus = hasKeyboard or hasMouse

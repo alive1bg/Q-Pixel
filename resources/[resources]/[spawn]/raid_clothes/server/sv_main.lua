@@ -136,7 +136,7 @@ RegisterServerEvent("raid_clothes:get_character_face", function(pSrc)
 
     local query = "SELECT cc.model, cf.hairColor, cf.headBlend, cf.headOverlay, cf.headStructure FROM users_face cf INNER JOIN users_current cc on cc.citizenid = cf.citizenid WHERE cf.citizenid = @citizenid"
     MySQL.Async.fetchAll(query, {
-        -- ['@cid'] = citizenid,
+        -- ['@cid'] = citizenid, 
         ['@citizenid'] = citizenid
     }, function(result)
         if (result ~= nil and result[1] ~= nil) then
@@ -145,6 +145,7 @@ RegisterServerEvent("raid_clothes:get_character_face", function(pSrc)
                 headBlend = json.decode(result[1].headBlend),
                 headOverlay = json.decode(result[1].headOverlay),
                 headStructure = json.decode(result[1].headStructure),
+                fadeStyle = json.decode(result[1].fadeStyle),
             }
             local model = tonumber(result[1].model)
             if model == 1885233650 or model == -1667301416 then
