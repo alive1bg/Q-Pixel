@@ -195,7 +195,7 @@ CreateThread(function()
     while not HasModelLoaded(model) do
         Wait(10)
     end
-    local veh = CreateVehicle(model, 1056.88, -387.13, 66.4, true, false)
+    local veh = CreateVehicle(model, 1056.88, -387.13, 66.8, true, false)
     SetModelAsNoLongerNeeded(model)
     SetEntityAsMissionEntity(veh, true, true)
     SetVehicleOnGroundProperly(veh)
