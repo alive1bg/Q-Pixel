@@ -15,7 +15,7 @@ Spawn.motel = {
 }
 
 Spawn.housingCoords = nil
-Spawn.isNew = false
+--Spawn.isNew = false
 
 Spawn.tempHousing = {}
 Spawn.defaultApartmentSpawn = {}
@@ -38,9 +38,7 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
 			Spawn.overwriteSpawn(spawnData.overwrites)
 		elseif spawnData.overwrites == "new" then
-			Spawn.isNew = true 
-			Spawn.selectedSpawn(' Apartments 1')
-			TriggerEvent("backitems:start")
+			Spawn.overwriteSpawn(spawnData.overwrites)
 		end
 		return
 	end
