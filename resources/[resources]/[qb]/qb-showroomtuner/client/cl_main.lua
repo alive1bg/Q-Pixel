@@ -6,7 +6,7 @@ RegisterNUICallback("showroomPurchaseCurrentVehicle", function(data, cb)
     print(success, vehicle)
     if success then
         DoScreenFadeOut(0)
-        Wait(400)
+        Wait(50)
         DoScreenFadeIn(1000)
         SetNuiFocus(false, false)
         ClearFocus()
