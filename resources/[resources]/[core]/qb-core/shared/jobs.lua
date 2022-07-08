@@ -867,62 +867,73 @@ QBShared.Jobs = {
         },
 	},
 -- CUSTOM ADDED JOBS
-['tuner'] = {
-    label = '6STR Tuner Shop',
-    defaultDuty = true,
-    offDutyPay = false,
-    grades = {
-        ['0'] = {
-            name = 'Recruit',
-            payment = 50
-        },
-        ['1'] = {
-            name = 'Mechanic',
-            payment = 75
-        },
-        ['2'] = {
-            name = 'Vehicle Sales',
-            payment = 100
-        },
-        ['3'] = {
-            name = 'Manager',
-            isboss = true,
-            payment = 125
-        },
-        ['4'] = {
-            name = 'CEO',
-            isboss = true,
-            payment = 150
-        },
-    },
-},
-['hayesauto'] = {
-    label = 'Hayes Auto',
-    defaultDuty = true,
-    offDutyPay = false,
-    grades = {
-        ['0'] = {
-            name = 'Apprentice',
-            payment = 50
-        },
-        ['1'] = {
-            name = 'Mechanic',
-            payment = 75
-        },
-        ['2'] = {
-            name = 'Assistant Manager',
-            payment = 100
-        },
-        ['3'] = {
-            name = 'Boss',
-            isboss = true,
-            payment = 125
-        },
-        ['4'] = {
-            name = 'CEO',
-            isboss = true,
-            payment = 135
+    ['tuner'] = {
+        label = '6STR Tuner Shop',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Recruit',
+                payment = 50
+            },
+            ['1'] = {
+                name = 'Mechanic',
+                payment = 75
+            },
+            ['2'] = {
+                name = 'Vehicle Sales',
+                payment = 100
+            },
+            ['3'] = {
+                name = 'Manager',
+                isboss = true,
+                payment = 125
+            },
+            ['4'] = {
+                name = 'CEO',
+                isboss = true,
+                payment = 150
+            },
         },
     },
-},
+    ['hayesauto'] = {
+        label = 'Hayes Auto',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Apprentice',
+                payment = 50
+            },
+            ['1'] = {
+                name = 'Mechanic',
+                payment = 75
+            },
+            ['2'] = {
+                name = 'Assistant Manager',
+                payment = 100
+            },
+            ['3'] = {
+                name = 'Boss',
+                isboss = true,
+                payment = 125
+            },
+            ['4'] = {
+                name = 'CEO',
+                isboss = true,
+                payment = 135
+            },
+        },
+    },
+    ['delivery'] = {
+		label = 'Dodo Deliveries', --- change if you like
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+            ['0'] = {
+                name = 'Delivery Driver',
+                payment = 50
+            },
+        },
+	},
 }

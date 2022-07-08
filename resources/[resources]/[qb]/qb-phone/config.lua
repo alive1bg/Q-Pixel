@@ -396,4 +396,9 @@ Config.JobCenter = {
         label = "Trash Collector",
         Coords = {-313.85, -1522.82},
     },
+    [6] = {
+        job = "delivery",
+        label = "Dodo Deliveries",
+        Coords = {-442.9967, -2820.352},
+    },    
 }

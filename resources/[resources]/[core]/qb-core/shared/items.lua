@@ -1087,6 +1087,9 @@ QBShared.Items = {
 	-- JL-BOOSTING JustLazzy
 	['hacking_device']			  = {['name'] = "hacking_device",				['label'] = "Hacking device",			['weight'] = 500,		['type'] = 'item', 		['image'] = 'disabler.png',			['unique'] = true,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "A multi purpose hacking device", ['created'] = nil, ['decay'] = 28.0},
 	
+	-- DeliveryBoxBruv
+	["delivery-box"] 			    = {["name"] = "delivery-box",				["label"] = "Delivery Package",			["weight"] = 10000,    	["type"] = "item",		["image"] = "deliverybox.png",     ["unique"] = true,		["useable"] = false,	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "Package",		["created"] = nil, 	["decay"] = 28.0 },
+
 	-- HEIST SHIT
 
 	-- PAC BANK VAULT UPPER
