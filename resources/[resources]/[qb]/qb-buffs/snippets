@@ -156,7 +156,7 @@ end)
 qb-core/server/events.lua - Replace the event with this new event--------------------------------------------------------
 RegisterNetEvent('QBCore:UpdatePlayer', function(hungerRate, thirstRate)
     print('Updating Player', hungerRate, thirstRate)
-    local src = source
+    local src = source 
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
     local newHunger = Player.PlayerData.metadata['hunger'] - hungerRate

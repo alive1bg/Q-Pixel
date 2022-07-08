@@ -119,23 +119,39 @@ end)
 
 -- Player
 
-RegisterNetEvent('QBCore:UpdatePlayer', function()
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    if Player then
-        local newHunger = Player.PlayerData.metadata['hunger'] - QBCore.Config.Player.HungerRate
-        local newThirst = Player.PlayerData.metadata['thirst'] - QBCore.Config.Player.ThirstRate
-        if newHunger <= 0 then
-            newHunger = 0
+
+CreateThread(function()
+    while true do
+        local sleep = 0
+        if LocalPlayer.state.isLoggedIn then
+            sleep = (1000 * 60) * QBCore.Config.UpdateInterval
+            local hungerRate = 0
+            local thirstRate = 0
+            if exports["qb-buffs"]:HasBuff("super-hunger") then hungerRate = QBCore.Config.Player.HungerRate/2 else hungerRate = QBCore.Config.Player.HungerRate end
+            if exports["qb-buffs"]:HasBuff("super-thirst") then thirstRate = QBCore.Config.Player.ThirstRate/2 else thirstRate = QBCore.Config.Player.ThirstRate end
+            TriggerServerEvent('QBCore:UpdatePlayer', hungerRate, thirstRate)
         end
-        if newThirst <= 0 then
-            newThirst = 0
-        end
-        Player.Functions.SetMetaData('thirst', newThirst)
-        Player.Functions.SetMetaData('hunger', newHunger)
-        TriggerClientEvent('hud:client:UpdateNeeds', src, newHunger, newThirst)
-        Player.Functions.Save()
+        Wait(sleep)
     end
+end)
+
+RegisterNetEvent('QBCore:UpdatePlayer', function(hungerRate, thirstRate)
+    print('Updating Player', hungerRate, thirstRate)
+    local src = source 
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    local newHunger = Player.PlayerData.metadata['hunger'] - hungerRate
+    local newThirst = Player.PlayerData.metadata['thirst'] - thirstRate
+    if newHunger <= 0 then
+        newHunger = 0
+    end
+    if newThirst <= 0 then
+        newThirst = 0
+    end
+    Player.Functions.SetMetaData('thirst', newThirst)
+    Player.Functions.SetMetaData('hunger', newHunger)
+    TriggerClientEvent('hud:client:UpdateNeeds', src, newHunger, newThirst)
+    Player.Functions.Save()
 end)
 
 RegisterNetEvent('QBCore:Server:SetMetaData', function(meta, data)
