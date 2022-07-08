@@ -37,8 +37,6 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	if spawnData.overwrites ~= nil then
 		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
 			Spawn.overwriteSpawn(spawnData.overwrites)
-		elseif spawnData.overwrites == "new" then
-			Spawn.overwriteSpawn(spawnData.overwrites)
 		end
 		return
 	end
