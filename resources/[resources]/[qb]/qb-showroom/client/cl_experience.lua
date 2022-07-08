@@ -23,6 +23,8 @@ function CreateShowroomVehicle(showroom, vehicleName)
   end
   SetModelAsNoLongerNeeded(vehicleName)
 
+  Citizen.Wait(250)
+
   if showroom == 'pdm' then
     CalculateCamPos(vehicleName, 15.5)
     return CreateVehicle(vehicleName, -37.26872,-1054.309,-43.37314, 32.1, false, false)
