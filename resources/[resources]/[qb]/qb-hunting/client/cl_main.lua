@@ -50,30 +50,24 @@ AddEventHandler('qb-hunting:client:slaughterAnimal', function(entity)
     local animal = getAnimalMatch(model)
 
     if (model and animal) then
-        CoreName.Functions.TriggerCallback("QBCore:HasItem", function(hasitem)
-            if hasitem then
-                ClearPedTasks(PlayerPedId())
-                ToggleSlaughterAnimation(true, entity)
-                CoreName.Functions.Progressbar("harv_anim", "Slaughtering Animal", Config.SlaughteringSpeed, false,
-                    false, {
-                        disableMovement = true,
-                        disableCarMovement = true,
-                        disableMouse = true,
-                        disableCombat = true
-                    }, {}, {}, {}, function()
-                    ToggleSlaughterAnimation(false, 0)
-                    if AnimalLootMultiplier:read(entity) ~= nil and AnimalLootMultiplier:read(entity) ~= false then
-                        TriggerServerEvent('qb-hunting:server:AddItem', animal, entity, AnimalLootMultiplier:read(entity))
-                    else
-                        -- defalut values for multipiler
-                        TriggerServerEvent('qb-hunting:server:AddItem', animal, entity, 'defalut')
-                    end
-                    Citizen.Wait(100)
-                end)
+        ClearPedTasks(PlayerPedId())
+        ToggleSlaughterAnimation(true, entity)
+        CoreName.Functions.Progressbar("harv_anim", "Slaughtering Animal", Config.SlaughteringSpeed, false,
+            false, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = true,
+                disableCombat = true
+            }, {}, {}, {}, function()
+            ToggleSlaughterAnimation(false, 0)
+            if AnimalLootMultiplier:read(entity) ~= nil and AnimalLootMultiplier:read(entity) ~= false then
+                TriggerServerEvent('qb-hunting:server:AddItem', animal, entity, AnimalLootMultiplier:read(entity))
             else
-                CoreName.Functions.Notify("You dont have knife.")
+                -- defalut values for multipiler
+                TriggerServerEvent('qb-hunting:server:AddItem', animal, entity, 'defalut')
             end
-        end, "weapon_knife")
+            Citizen.Wait(100)
+        end)
     end
 end)
 
