@@ -1,20 +1,18 @@
-QBCore = nil
+local QBCore = exports['qb-core']:GetCoreObject()
 
 
-local coreLoaded = false
-
-Citizen.CreateThread(function()
-    while QBCore == nil do
-        TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-        Citizen.Wait(200)
-    end
-    coreLoaded = true
-    PlayerData = QBCore.Functions.GetPlayerData()
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    PlayerJob = QBCore.Functions.GetPlayerData().job
 end)
 
-RegisterNetEvent('QBCore:Client:OnJobUpdate')
-AddEventHandler('QBCore:Client:OnJobUpdate', function(job)
-	PlayerData.job = job
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function()
+    PlayerJob = QBCore.Functions.GetPlayerData().job
+end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+        PlayerJob = QBCore.Functions.GetPlayerData().job
+    end
 end)
 
 local vehicleModes = {}
@@ -45,7 +43,7 @@ RegisterCommand("pursuit", function(source, args)
             break
         end
     end
-    --if  PlayerData.job.name == 'police' then 
+    if  PlayerJob.name == 'police' then 
         if not vehiclePresetName then return end
         if currentLevel == 3 then currentLevel = 1 end
         currentLevel = currentLevel + 1
@@ -76,10 +74,9 @@ RegisterCommand("pursuit", function(source, args)
             QBCore.Functions.Notify("Pursuit Mod: " ..modLevel.name)
             print(modLevel.name)
         end
-    --else
-    --    QBCore.Functions.Notify("U are not a Police.", "error")
-    --end
-
+    else
+        QBCore.Functions.Notify("U are not a Police.", "error")
+    end
 end)
 
 
