@@ -1,19 +1,19 @@
-RLCore = nil
+QBCore = nil
 
 
 local coreLoaded = false
 
 Citizen.CreateThread(function()
-    while RLCore == nil do
-        TriggerEvent('RLCore:GetObject', function(obj) RLCore = obj end)
+    while QBCore == nil do
+        TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
         Citizen.Wait(200)
     end
     coreLoaded = true
-    PlayerData = RLCore.Functions.GetPlayerData()
+    PlayerData = QBCore.Functions.GetPlayerData()
 end)
 
-RegisterNetEvent('RLCore:Client:OnJobUpdate')
-AddEventHandler('RLCore:Client:OnJobUpdate', function(job)
+RegisterNetEvent('QBCore:Client:OnJobUpdate')
+AddEventHandler('QBCore:Client:OnJobUpdate', function(job)
 	PlayerData.job = job
 end)
 
@@ -73,11 +73,11 @@ RegisterCommand("pursuit", function(source, args)
         print('After',GetVehicleHandlingFloat(vehicle, 'CHandlingData', modLevel.handling[i].field))
     end
     if source then 
-        RLCore.Functions.Notify("Pursuit Mod: " ..modLevel.name)
+        QBCore.Functions.Notify("Pursuit Mod: " ..modLevel.name)
         print(modLevel.name)
     end
 else
-    RLCore.Functions.Notify("U are not a Police.", "error")
+    QBCore.Functions.Notify("U are not a Police.", "error")
 end
 
 end)
