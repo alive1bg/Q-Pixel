@@ -442,7 +442,8 @@ AddEventHandler("boosting:DisablerUsed" , function()
     elseif(vinstarted == false) then
       if(DisablerTimes < 4) then
         DisablerUsed = true
-        local minigame = exports['hackingminigame']:Open()   
+        --here
+        local minigame = exports['hacking']:OpenHackingGame()   
         if(minigame == true and DisablerTimes < 4) then
           if(DisablerTimes == 3) then
             DisablerTimes = DisablerTimes + 1
@@ -475,7 +476,7 @@ AddEventHandler("boosting:DisablerUsed" , function()
   else if vinstarted == true then
     if(DisablerTimes < 6) then
       DisablerUsed = true
-      local minigame = exports['hackingminigame']:Open()   
+      local minigame = exports['hacking']:OpenHackingGame()   
       if(minigame == true) then
         Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
         DisablerTimes = DisablerTimes + 1
