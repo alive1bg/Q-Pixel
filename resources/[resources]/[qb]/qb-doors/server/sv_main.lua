@@ -286,8 +286,8 @@ local AllDoors = {
 	[233] = {id = 233, active = true, model = 662746527, coords = vector3(-1016.50600, -267.10980, 39.27121), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["NOACCESS"] = true}, cid = {["DYG28908"] = true, ["ASR68282"] = true}}}, --front door
 
 	--PD Bollards
-	[234] = {id = 234, active = true, model = -1635161509, coords = vector3(410.02578735352, -1024.2199707031, 29.220199584961), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
-	[235] = {id = 235, active = true, model = -1868050792, coords = vector3(410.02578735352, -1024.2259521484, 29.220220565796), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
+	[234] = {id = 234, active = true, model = -1635161509, coords = vector3(410.02578735352, -1024.2199707031, 29.220199584961), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
+	[235] = {id = 235, active = true, model = -1868050792, coords = vector3(410.02578735352, -1024.2259521484, 29.220220565796), automatic = {distance = 10.0, rate = 2.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
 
 	--Vangelico
 	[236] = {id = 236, active = true, model = 9467943, coords = vector3(-630.71, -238.12, 38.1), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
