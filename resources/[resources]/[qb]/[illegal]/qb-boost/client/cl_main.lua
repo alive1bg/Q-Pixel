@@ -1,8 +1,29 @@
+----------------------------------------------------------------------------------------------------------------------------
+local CoreName = exports['qb-core']:GetCoreObject()
+local ESX = nil
 
-
-local QBCore = exports['qb-core']:GetCoreObject()
-
-
+if Config['General']["Core"] == "QBCORE" then
+    if Config['CoreSettings']["QBCORE"]["Version"] == "new" then
+        CoreName = Config['CoreSettings']["QBCORE"]["Export"]
+    else
+        Citizen.CreateThread(function()
+            while true do
+                Citizen.Wait(10)
+                if CoreName == nil then
+                    TriggerEvent(Config['CoreSettings']["QBCORE"]["Trigger"], function(obj) CoreName = obj end)
+                    Citizen.Wait(200)
+                end
+            end
+        end)
+    end
+elseif Config['General']["Core"] == "ESX" then
+    Citizen.CreateThread(function()
+        while ESX == nil do
+            TriggerEvent(Config['CoreSettings']["ESX"]["Trigger"], function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
+    end)
+end
 ----------------------------------------------------------------------------------------------------------------------------
 
 local authorized = false
@@ -111,7 +132,8 @@ AddEventHandler('boosting:CreateContract' , function(shit)
   else
     shit = true
   end
-    QBCore.Functions.TriggerCallback('boosting:GetExpireTime', function(result)
+  if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.TriggerCallback('boosting:GetExpireTime', function(result)
       if result then
         local data = {
           vehicle = dick,
@@ -131,7 +153,7 @@ AddEventHandler('boosting:CreateContract' , function(shit)
         local class = data.type
         if(HasItem('pixellaptop') == true) then
           if Config['General']["UseNotificationsInsteadOfEmails"] then
-            TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "You have recieved a "..class.. " Boosting...", 'fas fa-laptop-code', '#00ffd5', 5500)
+            CoreName.Functions.Notify("You have recieved a "..class.. " Boosting...", "success", 3500)   
           else
             RevievedOfferEmail(data.owner, data.type)
           end
@@ -139,6 +161,65 @@ AddEventHandler('boosting:CreateContract' , function(shit)
         table.insert(Contracts , data)
       end
     end)
+  elseif Config['General']["Core"] == "ESX" then
+    ESX.TriggerServerCallback('boosting:GetExpireTime', function(result)
+      if result then
+        local data = {
+          vehicle = dick,
+          price = Config.Vehicles[num].price,
+          owner = owner,
+          price = VehiclePrice,
+          type = response.c,
+          expires = '6 Hours',
+          time = result,
+          id = #Contracts+1,
+          coords = coord,
+          plate = 'ddd',
+          started = false,
+          vin = shit
+  
+      }
+      local class = data.type
+      if(HasItem('pixellaptop') == true) then
+        if Config['General']["UseNotificationsInsteadOfEmails"] then
+          ShowNotification("You have recieved a "..class.. " Boosting...", "success")
+        else
+          RevievedOfferEmail(data.owner, data.type)
+        end
+        table.insert(Contracts , data)
+        end
+      end
+    end)
+  elseif Config['General']["Core"] == "NPBASE" then
+    local ExpireTime = RPC.execute("boosting:GetExpireTime")
+
+    if ExpireTime then
+      local data = {
+        vehicle = dick,
+        price = Config.Vehicles[num].price,
+        owner = owner,
+        price = VehiclePrice,
+        type = response.c,
+        expires = '6 Hours',
+        time = result,
+        id = #Contracts+1,
+        coords = coord,
+        plate = 'ddd',
+        started = false,
+        vin = shit
+  
+    }
+    if(HasItem('pixellaptop') == true) then
+      if Config['General']["UseNotificationsInsteadOfEmails"] then
+        local class = data.type
+        TriggerEvent("DoLongHudText","You have recieved a "..class.. " Boosting...")
+      else
+        RevievedOfferEmailNPBASE(data.owner, data.type)
+      end
+      table.insert(Contracts , data)
+      end
+    end
+  end
   DeleteVehicle(response.vehicleshit)
 end)
 
@@ -160,8 +241,13 @@ AddEventHandler("boosting:StartContract" , function(id , vin)
           end
           startedcontractid = v.id
         if not Config['General']["UseNotificationsInsteadOfEmails"] then
-          CreateListEmail()
-        
+          if Config['General']["Core"] == "QBCORE" then
+              CreateListEmail()
+          elseif Config['General']["Core"] == "ESX" then
+              CreateListEmail()
+          elseif Config['General']["Core"] == "NPBASE" then
+              CreateListEmailNPBASE()
+          end
         end
       end
   end
@@ -189,29 +275,55 @@ AddEventHandler("boosting:DeleteAllContracts" , function()
 end)
 
 RegisterNUICallback("transfercontract", function(data)
-  QBCore.Functions.TriggerCallback('boosting:getusercontracts', function(usercontracts)
-    count = 0
-    for x, y in ipairs(usercontracts) do
-    count = count + 1
+ if Config['General']["Core"] == "QBCORE" then
+  CoreName.Functions.TriggerCallback('boosting:getusercontracts', function(usercontracts)
+  count = 0
+  for x, y in ipairs(usercontracts) do
+  count = count + 1
+  end
+  for k,v in ipairs(Contracts) do
+    if v.id == data.contract.id then
+	  local newid = count + 1
+      local contract = {
+        vehicle = GetDisplayNameFromVehicleModel(v.vehicle),
+        price = v.price,
+        owner = v.owner,
+        type = v.type,
+        expires = '6 Hours',
+        id = newid,
+        started = v.started,
+        vin = v.vin
+      }
+    TriggerServerEvent("boosting:transfercontract", contract, data.target)
+	table.remove(Contracts, v.id)
     end
-    for k,v in ipairs(Contracts) do
-      if v.id == data.contract.id then
-      local newid = count + 1
-        local contract = {
-          vehicle = GetDisplayNameFromVehicleModel(v.vehicle),
-          price = v.price,
-          owner = v.owner,
-          type = v.type,
-          expires = '6 Hours',
-          id = newid,
-          started = v.started,
-          vin = v.vin
-        }
-      TriggerServerEvent("boosting:transfercontract", contract, data.target)
-    table.remove(Contracts, v.id)
-      end
-     end
-    end, data.target)
+   end
+  end, data.target)
+ elseif Config['General']["Core"] == "ESX" then
+  ESX.TriggerServerCallback('boosting:getusercontracts', function(usercontracts)
+  count = 0
+  for x, y in ipairs(usercontracts) do
+  count = count + 1
+  end
+  for k,v in ipairs(Contracts) do
+    if v.id == data.contract.id then
+	  local newid = count + 1
+      local contract = {
+        vehicle = GetDisplayNameFromVehicleModel(v.vehicle),
+        price = v.price,
+        owner = v.owner,
+        type = v.type,
+        expires = '6 Hours',
+        id = newid,
+        started = v.started,
+        vin = v.vin
+      }
+    TriggerServerEvent("boosting:transfercontract", contract, data.target)
+	table.remove(Contracts, v.id)
+    end
+   end
+  end, data.target)
+ end
 end)
 
 RegisterNUICallback("joinBoostQueue", function()
@@ -224,27 +336,60 @@ RegisterNUICallback('leaveBoostQueue', function()
 end)
 
 RegisterNUICallback('dick', function(data)
-  if Config['General']["MinPolice"] == 0 then
-    TriggerEvent("boosting:StartContract" , data.id)
-    Contracts[data.id].started = true
-    SetNuiFocus(false ,false)
-  else
-    QBCore.Functions.TriggerCallback('boosting:server:GetActivity', function(result)
-  if(tonumber(BNEBoosting['functions'].GetCurrentBNE().bne) >= tonumber(data.price)) then
+  if Config['General']["Core"] == "QBCORE" then
+    if Config['General']["MinPolice"] == 0 then
+      TriggerEvent("boosting:StartContract" , data.id)
+      Contracts[data.id].started = true
+      SetNuiFocus(false ,false)
+    else
+      CoreName.Functions.TriggerCallback('boosting:server:GetActivity', function(result)
+	  if(tonumber(BNEBoosting['functions'].GetCurrentBNE().bne) >= tonumber(data.price)) then
+        if result >= Config['General']["MinPolice"] then
+          TriggerEvent("boosting:StartContract" , data.id)
+          Contracts[data.id].started = true
+          SetNuiFocus(false ,false)
+        else
+          TriggerEvent("DoLongHudText","Not enough police",2)
+          SetNuiFocus(false ,false)
+        end
+    else
+     ShowNotification("Not enough BNE",'error')
+     SetNuiFocus(false ,false)
+	end
+    end)  
+   end
+  elseif Config['General']["Core"] == "ESX" then
+    ESX.TriggerServerCallback('boosting:server:GetActivity', function(result)
+	if(tonumber(BNEBoosting['functions'].GetCurrentBNE().bne) >= tonumber(data.price)) then
       if result >= Config['General']["MinPolice"] then
+        BNEBoosting['functions'].RemoveBNE(tonumber(data.price))	  
         TriggerEvent("boosting:StartContract" , data.id)
         Contracts[data.id].started = true
         SetNuiFocus(false ,false)
       else
-        TriggerEvent("DoLongHudText","Not enough police",2)
+        ShowNotification("Not enough police",'error')
         SetNuiFocus(false ,false)
       end
-  else
-   ShowNotification("Not enough BNE",'error')
-   SetNuiFocus(false ,false)
-end
-  end)  
- end
+	else
+     ShowNotification("Not enough BNE",'error')
+     SetNuiFocus(false ,false)
+	end
+   end)  
+  elseif Config['General']["Core"] == "NPBASE" then
+   if(tonumber(BNEBoosting['functions'].GetCurrentBNE().bne) >= tonumber(data.price)) then
+    if exports[Config['CoreSettings']["NPBASE"]["HandlerScriptName"]]:isPed("countpolice") >= Config['General']["MinPolice"] then
+      TriggerEvent("boosting:StartContract" , data.id)
+      Contracts[data.id].started = true
+      SetNuiFocus(false ,false)
+    else
+      TriggerEvent("DoLongHudText","Not enough police",2)
+      SetNuiFocus(false ,false)
+    end
+    else
+     ShowNotification("Not enough BNE",'error')
+     SetNuiFocus(false ,false)
+	end
+  end
 end)
 
 
@@ -264,7 +409,13 @@ RegisterNUICallback('vin', function(data)
     BNEBoosting['functions'].RemoveBNE(Config['Utils']["VIN"]["BNEPrice"])
     TriggerEvent("boosting:StartContract" , data.id , true)
   else
-    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Not Enough BTC...", 'fas fa-laptop-code', '#00ffd5', 5500)
+    if Config['General']["Core"] == "QBCORE" then
+      CoreName.Functions.Notify(Config['Utils']["Notifications"]["NotEnoughBNE"], "error", 3500)    
+    elseif Config['General']["Core"] == "ESX" then
+        ShowNotification(Config['Utils']["Notifications"]["NotEnoughBNE"],'error')
+    elseif Config['General']["Core"] == "NPBASE" then
+        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NotEnoughBNE"],2)
+    end
   end
 end)
 
@@ -281,49 +432,87 @@ AddEventHandler("boosting:DisablerUsed" , function()
   if OnTheDropoffWay then
     local Class = Contracts[startedcontractid].type 
     if (Config['Utils']["Contracts"]["DisableTrackingOnDCB"]) and (Class == "D" or Class == "C" or Class == "B") then
-      TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "No Tracker.", 'fas fa-laptop-code', '#00ffd5', 5500)
+      if Config['General']["Core"] == "QBCORE" then
+        CoreName.Functions.Notify(Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"], "error", 3500)    
+      elseif Config['General']["Core"] == "ESX" then
+          ShowNotification(Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"],'error')
+      elseif Config['General']["Core"] == "NPBASE" then
+          TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NoTrackerOnThisVehicle"],2)
+      end
     elseif(vinstarted == false) then
-      if(DisablerTimes < 1) then
+      if(DisablerTimes < 4) then
         DisablerUsed = true
         local minigame = exports['hackingminigame']:Open()   
-        if(minigame == true and DisablerTimes < 1) then
-          if(DisablerTimes == 1) then
+        if(minigame == true and DisablerTimes < 4) then
+          if(DisablerTimes == 3) then
             DisablerTimes = DisablerTimes + 1
             CallingCops = false
             TriggerServerEvent("boosting:removeblip")
-            TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Tracker has been removed.", 'fas fa-laptop-code', '#00ffd5', 5500)
-          elseif(DisablerTimes < 1) then
+            if Config['General']["Core"] == "QBCORE" then
+              CoreName.Functions.Notify(Config['Utils']["Notifications"]["TrackerRemoved"], "success", 3500)    
+            elseif Config['General']["Core"] == "ESX" then
+                ShowNotification(Config['Utils']["Notifications"]["TrackerRemoved"],'success')
+            elseif Config['General']["Core"] == "NPBASE" then
+                TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["TrackerRemoved"])
+            end
+          elseif(DisablerTimes < 3) then
             Config['Utils']["Blips"]["BlipUpdateTime"] = 7000
             DisablerTimes = DisablerTimes + 1
             TriggerServerEvent("boosting:SetBlipTime")
-            QBCore.Functions.Notify('Success', 'success', 5500)
+            if Config['General']["Core"] == "QBCORE" then
+              CoreName.Functions.Notify(Config['Utils']["Notifications"]["SuccessHack"], "success", 3500)    
+            elseif Config['General']["Core"] == "ESX" then
+                ShowNotification(Config['Utils']["Notifications"]["SuccessHack"],'success')
+            elseif Config['General']["Core"] == "NPBASE" then
+                TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
+            end
           end
+       
+         
         end
       end
     end
   else if vinstarted == true then
-    if(DisablerTimes < 1) then
+    if(DisablerTimes < 6) then
       DisablerUsed = true
       local minigame = exports['hackingminigame']:Open()   
       if(minigame == true) then
         Config['Utils']["Blips"]["BlipUpdateTime"] = Config['Utils']["Blips"]["BlipUpdateTime"] + 5000
         DisablerTimes = DisablerTimes + 1
         TriggerServerEvent("boosting:SetBlipTime")
-        QBCore.Functions.Notify('Success', 'success', 5500)
+        if Config['General']["Core"] == "QBCORE" then
+          CoreName.Functions.Notify(Config['Utils']["Notifications"]["SuccessHack"], "success", 3500)    
+        elseif Config['General']["Core"] == "ESX" then
+            ShowNotification(Config['Utils']["Notifications"]["SuccessHack"],'success')
+        elseif Config['General']["Core"] == "NPBASE" then
+            TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["SuccessHack"])
+        end
       end
     else
-      if(DisablerTimes == 1) then
+      if(DisablerTimes == 6) then
         CallingCops = false
         TriggerServerEvent("boosting:removeblip")
         CanUseComputer = true
-        TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Tracker Removed, You can now scratch this vehicle.", 'fas fa-laptop-code', '#00ffd5', 5500)
+        if Config['General']["Core"] == "QBCORE" then
+          CoreName.Functions.Notify(Config['Utils']["Notifications"]["TrackerRemovedVINMission"]["VINMission"], "success", 3500)    
+        elseif Config['General']["Core"] == "ESX" then
+            ShowNotification(Config['Utils']["Notifications"]["TrackerRemovedVINMission"]["VINMission"],'success')
+        elseif Config['General']["Core"] == "NPBASE" then
+            TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["TrackerRemovedVINMission"]["VINMission"])
+        end
         if not MainThreadStarted then
           MainThread()
         end
       end
     end
   else
-    QBCore.Functions.Notify('You are not boosting right now', 'error', 5500)
+   if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.Notify(Config['Utils']["Notifications"]["NoMissionDetected"], "error", 3500)    
+    elseif Config['General']["Core"] == "ESX" then
+        ShowNotification(Config['Utils']["Notifications"]["NoMissionDetected"],'error')
+    elseif Config['General']["Core"] == "NPBASE" then
+        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["NoMissionDetected"],2)
+    end
   end
 end
 end)
@@ -366,7 +555,13 @@ AddEventHandler("boosting:DisplayUI" , function()
     timetosend = realtimehours..":"..realtimeminutes
     SendNUIMessage({show = 'true' , logo = Config['Utils']["Laptop"]["LogoUrl"] , background = URL, time = timetosend, BNE = BNEBoosting['functions'].GetCurrentBNE().bne , defaultback = Config['Utils']["Laptop"]["DefaultBackground"]})
   else
-    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Please wait 3 senconds the nui is loading.", 'fas fa-laptop-code', '#00ffd5', 5500)
+    if Config['General']["Core"] == "QBCORE" then
+      CoreName.Functions.Notify(Config['Utils']["Notifications"]["UiStillLoadingMsg"], "error", 3500)    
+    elseif Config['General']["Core"] == "ESX" then
+        ShowNotification(Config['Utils']["Notifications"]["UiStillLoadingMsg"],'error')
+    elseif Config['General']["Core"] == "NPBASE" then
+        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["UiStillLoadingMsg"],2)
+    end
     Citizen.Wait(3000)
     NuiLoaded = true
   end
@@ -682,8 +877,13 @@ end)
 RegisterNetEvent("boosting:ContractDone")
 AddEventHandler("boosting:ContractDone" , function()
   if CompletedTask then
-    QBCore.Functions.Notify(Config['Utils']["Notifications"]["DropOffMsg"], "success", 3500)
-    TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Leave the car here, You will be paid", 'fas fa-laptop-code', '#00ffd5', 5500)
+    if Config['General']["Core"] == "QBCORE" then
+      CoreName.Functions.Notify(Config['Utils']["Notifications"]["DropOffMsg"], "success", 3500)    
+    elseif Config['General']["Core"] == "ESX" then
+        ShowNotification(Config['Utils']["Notifications"]["DropOffMsg"],'success')
+    elseif Config['General']["Core"] == "NPBASE" then
+        TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["DropOffMsg"])
+    end
     TriggerServerEvent("boosting:removeblip")
     Citizen.Wait(math.random(25000,35000))
     TriggerServerEvent('boosting:finished')
@@ -706,11 +906,23 @@ end)
 
 function HasItem(item)
   local hasitem = false
-  QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
-    hasitem = result
-end, item)
-Citizen.Wait(500)
-return hasitem
+  if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.TriggerCallback(Config['CoreSettings']['QBCORE']["HasItem"], function(result)
+        hasitem = result
+    end, item)
+    Citizen.Wait(500)
+    return hasitem
+  elseif Config['General']["Core"] == "ESX" then
+    ESX.TriggerServerCallback('boosting:canPickUp', function(result)
+      hasitem = result
+    end , item)
+    Citizen.Wait(500)
+    return hasitem
+  elseif Config['General']["Core"] == "NPBASE" then
+    hasitem = exports[Config['CoreSettings']['NPBASE']["HasItem"]]:hasEnoughOfItem(item, 1, false, true)
+    Citizen.Wait(500)
+    return hasitem
+  end
 end
 
 ---------------- Cop Blip Thingy ------------------
@@ -797,8 +1009,8 @@ end
 function RevievedOfferEmail(owner, class)
   TriggerServerEvent(Config['General']["EmailEvent"], {
     sender = owner,
-    subject = "Boost Offer",
-    message = "You have recieved a "..class.. " Boosting offer, Grab the car and lose the cops... <br />",
+    subject = "Contract Offer",
+    message = "You have recieved a "..class.. " Boosting... <br />",
     button = {}
   })
 end
@@ -880,21 +1092,81 @@ local ScratchAnim = "car_bomb_mechanic"
 local function AddVehicleToGarage()
   local EntityModel = GetEntityModel(Vehicle)
   local DiplayName = GetDisplayNameFromVehicleModel(EntityModel)
-  TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Good Job Vin scratch complete.", 'fas fa-laptop-code', '#00ffd5', 5500)
-  Citizen.Wait(4000)
-  TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Vehicle now belongs to you, Go park it.", 'fas fa-laptop-code', '#00ffd5', 5500)
-  local vehicleProps = QBCore.Functions.GetVehicleProperties(Vehicle)	
-  TriggerServerEvent('boosting:AddVehicle', string.lower(DiplayName), Contracts[startedcontractid].plate, vehicleProps)
+  if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.Notify("Vin scratch complete!", "success", 3500)   
+    local vehicleProps = CoreName.Functions.GetVehicleProperties(Vehicle)	
+    TriggerServerEvent('boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate, vehicleProps)
+  elseif Config['General']["Core"] == "ESX" then
+      ShowNotification("Vin scratch complete!",'success')
+      local vehicleProps = ESX.Game.GetVehicleProperties(Vehicle)
+      TriggerServerEvent('boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate,vehicleProps)
+  elseif Config['General']["Core"] == "NPBASE" then
+      TriggerEvent("DoLongHudText","Vin scratch complete!")
+      TriggerServerEvent('boosting:AddVehicle',string.lower(DiplayName) ,Contracts[startedcontractid].plate)
+  end
   vinstarted = false
   CanScratchVehicle = false
   table.remove(Contracts , startedcontractid)
+  
 end
-
 
 RegisterNetEvent("boosting:client:UseComputer")
 AddEventHandler("boosting:client:UseComputer" , function()
-  if CanUseComputer then
-    QBCore.Functions.Progressbar("boosting_scratch", "Penetrating the network...", 5000, false, true, {
+  if Config['General']["Core"] == "QBCORE" then
+    if CanUseComputer then
+      CoreName.Functions.Progressbar("boosting_scratch", "Connection to network...", 5000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+        }, {
+          animDict = ScratchAnimDict,
+          anim = ScratchAnim,
+          flags = 16,
+        }, {}, {}, function() -- Done
+          TriggerEvent('boosting:client:2ndUseComputer')
+        end, function() -- Cancel
+          StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
+          CoreName.Functions.Notify("Failed!", "error", 3500)
+      end)
+    else
+      CoreName.Functions.Notify("Can't use this now!", "error", 3500)
+    end
+  elseif Config['General']["Core"] == "ESX" then
+    if CanUseComputer then
+      LoadDict(ScratchAnimDict)
+      FreezeEntityPosition(PlayerPedId(),true)
+      TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
+      local finished = exports[Config['CoreSettings']["ESX"]["ProgressBarScriptName"]]:taskBar(5000, 'Connection to network...')
+      if (finished == 100) then
+        CanScratchVehicle = true
+        ShowNotification(Config['Utils']["Notifications"]["FinishComputer"],'success')
+        CanUseComputer = false
+        FreezeEntityPosition(PlayerPedId(),false)
+        ClearPedTasks(PlayerPedId())
+      end
+    else
+      ShowNotification("Can't use this now",'error')
+    end
+  elseif Config['General']["Core"] == "NPBASE" then
+    if CanUseComputer then
+      LoadDict(ScratchAnimDict)
+      FreezeEntityPosition(PlayerPedId(),true)
+      TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
+      local finished = exports[Config['CoreSettings']["NPBASE"]["ProgressBarScriptName"]]:taskBar(5000, 'Connection to network...')
+      if (finished == 100) then
+        TriggerEvent('boosting:client:2ndUseComputer')
+      end
+    else
+      TriggerEvent("DoLongHudText","Can't use this now!",2)
+    end
+  end
+end)
+
+RegisterNetEvent("boosting:client:2ndUseComputer")
+AddEventHandler("boosting:client:2ndUseComputer" , function()
+  if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.Progressbar("boosting_scratch", "Wiping online paperwork...", 5000, false, true, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -904,57 +1176,75 @@ AddEventHandler("boosting:client:UseComputer" , function()
         anim = ScratchAnim,
         flags = 16,
       }, {}, {}, function() -- Done
-        TriggerEvent('boosting:client:2ndUseComputer')
+        CanScratchVehicle = true
+        CoreName.Functions.Notify(Config['Utils']["Notifications"]["FinishComputer"], "success" , 3500)
+        CanUseComputer = false
       end, function() -- Cancel
         StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-        QBCore.Functions.Notify("You Failed.", "error", 5500)
+        CoreName.Functions.Notify("Failed!", "error", 3500)
     end)
-  else
-    QBCore.Functions.Notify("You cannot use this.", "error", 5500)
-  end
-end)
-
-RegisterNetEvent("boosting:client:2ndUseComputer")
-AddEventHandler("boosting:client:2ndUseComputer" , function()
-  QBCore.Functions.Progressbar("boosting_scratch", "Wiping online paperwork...", 5000, false, true, {
-    disableMovement = true,
-    disableCarMovement = true,
-    disableMouse = false,
-    disableCombat = true,
-    }, {
-      animDict = ScratchAnimDict,
-      anim = ScratchAnim,
-      flags = 16,
-    }, {}, {}, function() -- Done
+  elseif Config['General']["Core"] == "NPBASE" then
+    LoadDict(ScratchAnimDict)
+    FreezeEntityPosition(PlayerPedId(),true)
+    TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
+    local finished = exports[Config['CoreSettings']["NPBASE"]["ProgressBarScriptName"]]:taskBar(5000, 'Wiping online paperwork...')
+    if (finished == 100) then
       CanScratchVehicle = true
-      TriggerEvent('qb-phone:client:CustomNotification', 'Boosting Manager', "Go to the vehicle and scratch the VIN.", 'fas fa-laptop-code', '#00ffd5', 5500)
+      TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["FinishComputer"])
       CanUseComputer = false
-    end, function() -- Cancel
-      StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-      QBCore.Functions.Notify("You Failed.", "error", 5500)
-  end)
+      FreezeEntityPosition(PlayerPedId(),false)
+      ClearPedTasks(PlayerPedId())
+    end   
+  end
 end)
 
 RegisterNetEvent("boosting:client:ScratchVehicle")
 AddEventHandler("boosting:client:ScratchVehicle" , function()
-  QBCore.Functions.Progressbar("boosting_scratch", "Scratching Vin", 10000, false, true, {
-    disableMovement = true,
-    disableCarMovement = true,
-    disableMouse = false,
-    disableCombat = true,
-    }, {
-      animDict = ScratchAnimDict,
-      anim = ScratchAnim,
-      flags = 16,
-    }, {}, {}, function() -- Done
-      StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
+  if Config['General']["Core"] == "QBCORE" then
+    CoreName.Functions.Progressbar("boosting_scratch", "Scratching Vin", 10000, false, true, {
+      disableMovement = true,
+      disableCarMovement = true,
+      disableMouse = false,
+      disableCombat = true,
+      }, {
+        animDict = ScratchAnimDict,
+        anim = ScratchAnim,
+        flags = 16,
+      }, {}, {}, function() -- Done
+        StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
+        AddVehicleToGarage()
+        CoreName.Functions.Notify(Config['Utils']["Notifications"]["VehicleAdded"], "success", 3500)
+        DeleteBlip()
+        CallingCops = false
+      end, function() -- Cancel
+        StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
+        CoreName.Functions.Notify("Failed!", "error", 3500)
+    end)
+  elseif Config['General']["Core"] == "ESX" then
+    LoadDict(ScratchAnimDict)
+    FreezeEntityPosition(PlayerPedId(),true)
+    TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
+    local finished = exports[Config['CoreSettings']["ESX"]["ProgressBarScriptName"]]:taskBar(10000, 'Scratching Vin')
+    if (finished == 100) then
       AddVehicleToGarage()
-      DeleteBlip()
+      ShowNotification(Config['Utils']["Notifications"]["VehicleAdded"],'success')
       CallingCops = false
-    end, function() -- Cancel
-      StopAnimTask(PlayerPedId(), ScratchAnimDict, "exit", 1.0)
-      QBCore.Functions.Notify("You Failed.", "error", 5500)
-  end)
+      DeleteBlip()
+      FreezeEntityPosition(PlayerPedId(),false)
+    end
+  elseif Config['General']["Core"] == "NPBASE" then
+    LoadDict(ScratchAnimDict)
+    FreezeEntityPosition(PlayerPedId(),true)
+    TaskPlayAnim(PlayerPedId(), ScratchAnimDict, ScratchAnim, 3.0, -8, -1, 63, 0, 0, 0, 0 )
+    local finished = exports[Config['CoreSettings']["NPBASE"]["ProgressBarScriptName"]]:taskBar(10000, 'Scratching Vin')
+    if (finished == 100) then
+      AddVehicleToGarage()
+      TriggerEvent("DoLongHudText",Config['Utils']["Notifications"]["VehicleAdded"])
+      CallingCops = false
+      DeleteBlip()
+    end 
+  end
+  NotifySent = false
 end)
 
 Citizen.CreateThread(function()
@@ -1000,7 +1290,14 @@ function MainThread()
         DrawMarker(2, Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 200, 200, 222, false, false, false, true, false, false, false)
         MainThreadStarted = true
         if (#(pos - vector3(Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z)) < 1.5) then
-          QBCore.Functions.DrawText3D(Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z, "~g~E~w~ - Use Computer")
+          if Config['General']["Core"] == "QBCORE" then
+            CoreName.Functions.DrawText3D(Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z, "~g~E~w~ - Use Computer")
+          elseif Config['General']["Core"] == "ESX" then
+            local coordsoftext = vector3(Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z)
+            ESX.Game.Utils.DrawText3D(coordsoftext, "~g~E~w~ - Use Computer")
+          elseif Config['General']["Core"] == "NPBASE" then
+            DrawText3D2(Config['Utils']["VIN"]["VinLocations"].x, Config['Utils']["VIN"]["VinLocations"].y, Config['Utils']["VIN"]["VinLocations"].z, "~g~E~w~ - Use Computer")
+          end
           if IsControlJustReleased(0, Keys["E"]) then
             TriggerEvent('boosting:client:UseComputer')
             return

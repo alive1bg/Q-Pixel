@@ -54,7 +54,7 @@ input[type=number] {
     height: 85vh;
     width: 150vh;
     border: 4px solid #212428;
-    background-image: url("ui/images/npbackground.png");
+    background-image: url("images/npbackground.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;

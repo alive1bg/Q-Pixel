@@ -2,7 +2,7 @@ Config = {}
 
 Config['General'] = {
     ["License"] = "lol", --- your license here
-    ["Core"] = "QBCore", -- This can be ESX , QBCORE , NPBASE
+    ["Core"] = "QBCORE", -- This can be ESX , QBCORE , NPBASE
     ["SQLWrapper"] = "oxmysql", -- This can be `| oxmysql or ghmattimysql or mysql-async
     ["EmailEvent"] = "qb-phone:server:sendNewMail",
     ["PoliceJobName"] = "police", -- police job name
@@ -15,6 +15,25 @@ Config['General'] = {
 
 
 
+Config['CoreSettings'] = {
+    ["ESX"] = {
+        ["Trigger"] = "esx:getSharedObject",
+        ["ProgressBarScriptName"] = "unwind-taskbar", -- progress bar script name link in esx_readme.md
+    },
+    ["QBCORE"] = {
+        ["Version"] = "old", -- new = using export | old = using events
+        ["Export"] = exports['qb-core']:GetCoreObject(), -- uncomment this if using new qbcore version
+        ["Trigger"] = "QBCore:GetObject",
+        ["HasItem"] = "QBCore:HasItem", -- Imporant [ Your trigger for checking has item, default is CORENAME:HasItem ] 
+
+    }, 
+    ["NPBASE"] = {
+        ["Name"] = "unwind-fw", -- this will be used in server side to call player module
+        ["ProgressBarScriptName"] = "unwind-taskbar", -- progress bar script name link in np_readme.md
+        ["HasItem"] = "unwind-inventory", -- Imporant [ Your normal export for checking has item, default is yourservername:inventory ] 
+        ["HandlerScriptName"] = "unwind_handler",
+    }
+}
 
 
 Config['Utils'] = {
@@ -25,23 +44,23 @@ Config['Utils'] = {
         ["RewardAccount"] = "cash", -- this can be only ywo values (no need to config if you are using an item as a reward)
     },
     ["Contracts"] = {
-        ["TimeBetweenContracts"] = 300000, -- Time in (ms) between contract creations
-        ["ContractChance"] = 50, -- This is the luck percentage of getting a contract
+        ["TimeBetweenContracts"] = math.random(1800000,2700000), -- Time in (ms) between contract creations
+        ["ContractChance"] = 60, -- This is the luck percentage of getting a contract
     },
     ["VIN"] = {
-        ["BNEPrice"] = 500, -- Price (BNE) for start a vin scratch
+        ["BNEPrice"] = 350, -- Price (BNE) for start a vin scratch
         ["AmountBneAfterDropOff"] = 50, 
         ["VinLocations"] = {x = 472.08, y = -1310.73, z = 29.22}, -- laptop coords
         ["ForceVin"] = true, -- this will force vin contract optiion on any created contract turn to false to use days instead
-        ["VinDays"] = 7, -- amount of days between vin contracts , (irl days) 
+        ["VinDays"] = 5, -- amount of days between vin contracts , (irl days) 
     },
     ["ClassPrices"] = {
-        ['X'] = "75",
-        ['A'] = "60",
-        ['B'] = "42",
-        ['C'] = "30",
-        ['D'] = "17",
-        ['M'] = "12",
+        ['X'] = "55",
+        ['A'] = "40",
+        ['B'] = "30",
+        ['C'] = "20",
+        ['D'] = "15",
+        ['M'] = "10",
     },
     ["Blips"] = {
         ["BlipUpdateTime"] = 3000, -- Time in (ms) of the police blip update 1000 = 1 second
@@ -67,7 +86,7 @@ Config['Utils'] = {
     },
     ["Laptop"] = {
         ["LogoUrl"] = "images/winlogo.png", 
-        ["DefaultBackground"] = "images/npbackground.png",
+        ["DefaultBackground"] = "images/background.png",
         ["CopNotifyLength"] = 5000, -- Time in (ms) of the police Notify length
     },
 }
@@ -77,7 +96,28 @@ Config['Utils'] = {
 
 
 -------------- SERVER FUNCTIONS --------------
-
+AddVehicle = function(data)
+    if Config['General']["Core"] == "QBCORE" then
+        SQL('INSERT INTO player_vehicles (steam, citizenid, vehicle, hash, mods, plate, state) VALUES (?, ?, ?, ?, ?, ?, ?)',{data.steam, data.cid, data.vehicle, data.hash, data.vehicleMods, data.vehicleplate, data.vehiclestate})
+    elseif Config['General']["Core"] == "ESX" then
+        SQL('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (?, ?, ?)',{data.steam, data.vehicleplate, data.vehicle})
+    elseif Config['General']["Core"] == "NPBASE" then
+        local v = {
+            ["owner"] = data.steam,
+            ["cid"] = data.cid,
+            ['name'] = data.vehicle,
+            ["model"] = data.vehicle,
+            ["vehicle_state"] = "Out",
+            ["fuel"] = 100,
+            ["engine_damage"] = 1000,
+            ["body_damage"] = 1000,
+            ["current_garage"] = "T",
+            ["license_plate"] = data.vehicleplate
+        }
+        local k = [[INSERT INTO characters_cars (owner, cid, name, model, vehicle_state, fuel, engine_damage, body_damage, current_garage, license_plate) VALUES(@owner, @cid, @name, @model, @vehicle_state, @fuel, @engine_damage, @body_damage, @current_garage, @license_plate);]]
+        SQL(k, v)
+    end
+end
 
 AddBNE = function(cid, pBne, amount)
     SQL('UPDATE boosting SET BNE=@bne WHERE citizenid=@citizenid', {['@citizenid'] = cid , ['@bne'] = pBne + amount})
@@ -148,10 +188,69 @@ Config.BoostingDropOff = {
 	[2] =  { ['x'] = -1286.9621582031,['y'] = -274.47973632813,['z'] = 38.724918365479},
 	[3] =  { ['x'] = -1330.8432617188,['y'] = -1034.8623046875,['z'] = 7.518029212951},
 }
+
 -----     VEHICLE SPAWN LOCATIONS        -------
 Config.VehicleCoords = {
-    [1] = {x = 487.95, y = -1314.39, z = 29.25, h = 281.08},
-    
+    [1] = {x = -1132.395, y = -1070.607, z = 1.64372, h = 120.00},
+    --[[ [2] = {x = -935.1176, y = -1080.552, z = 1.683342, h = 120.1060},
+    [3] = {x = -1074.953,y = -1160.545,z = 1.661577, h = 119.0},
+    [4] = {x = -1023.625,y = -890.4014,z = 5.202, h = 216.0399},
+    [5] = {x = -1609.647,y = -382.792,z = 42.70383, h = 52.535},
+    [6] = {x = -1527.88,y = -309.8757,z = 47.88678, h= 323.43},
+    [7] = {x = -1658.969,y = -205.1732,z = 54.8448,h = 71.138},
+    [8] = {x = 97.57888,y = -1946.472,z = 20.27978,h = 215.933},
+    [9] = {x = -61.59007,y = -1844.621,z = 26.1685,h = 138.9848},
+    [10] = {x = 28.51439,y = -1734.881,z = 28.5415,h = 231.968},
+    [11] = {x = 437.5428,y = -1925.465,z = 24.004,h = 28.82286},
+    [12] = {x = 406.5316,y = -1920.471,z = 24.51589,h = 224.6432},
+    [13] = {x = 438.4482,y = -1838.672,z = 27.47369,h = 42.8129   },
+    [14] = {x = 187.353,y = -1542.984,z = 28.72487,h = 39.00627},
+    [15] = {x = 1153.467,y = -330.2682,z = 68.60548,h = 7.20},
+    [16] = {x = 1144.622,y = -465.7694,z = 66.20689,h = 76.612770},
+    [17] = {x = 1295.844,y = -567.6,z = 70.77858,h = 166.552},
+    [18] = {x = 1319.566,y = -575.9492,z = 72.58221,h = 155.9249},
+    [19] = {x = 1379.466,y = -596.0999,z = 73.89736,h = 230.594},
+    [20] = {x = 1256.648,y = -624.0594,z = 68.93141,h = 117.415},
+    [21] = {x = 1368.127,y = -748.2613,z = 66.62316,h = 231.535},
+    [22] = {x = 981.7167,y = -709.7389,z = 57.18427,h = 128.729},
+    [23] = {x = 958.206,y = -662.7545,z = 57.57119,h = 116.9299},
+    [24] = {x = -2012.404,y = 484.0458,z = 106.5597,h = 78.13},
+    [25] = {x = -2001.294,y = 454.7647,z = 102.0194,h = 108.1178},
+    [26] = {x = -1994.725,y = 377.4933,z = 94.04324,h = 89.64067},
+    [27] = {x = -1967.549,y = 262.1507,z = 86.23506,h = 109.1846},
+    [28] = {x = -989.6796,y = 418.4977,z = 74.731,h = 20.262},
+    [29] = {x = -979.6517,y = 518.119,z = 81.03075,h = 328.386},
+    [30] = {x = -1040.915,y = 496.5622,z = 82.52803,h = 54.439},
+    [31] = {x = -1094.621,y = 439.2605,z = 74.84596,h = 84.936},
+    [32] = {x = -1236.895,y = 487.9722,z = 92.82943,h = 330.6634},
+    [33] = {x = -1209.098,y = 557.9588,z = 99.04235,h = 3.2526},
+    [34] = {x = -1155.296,y = 565.4297,z = 101.3919,h = 7.4106},
+    [35] = {x = -1105.378,y = 551.5797,z = 102.1759,h = 211.7110},
+    [36] = {x = 1708.02,y = 3775.486,z = 34.08183,h = 35.04580},
+    [37] = {x = 2113.365,y = 4770.113,z = 40.72895,h = 297.5323},
+    [38] = {x = 2865.448,y = 1512.715,z = 24.12726,h = 252.3262},
+    [39] = {x = 1413.973,y = 1119.024,z = 114.3981,h = 305.99868},
+    [40] = {x = -78.39651,y = 497.4749,z = 143.9646,h = 160.2948},
+    [41] = {x = -248.9841,y = 492.9105,z = 125.0711,h = 208.5761},
+    [42] = {x = 14.09792,y = 548.8402,z = 175.7571,h = 241.4019775},
+    [43] = {x = 51.48445,y = 562.2509,z = 179.8492,h = 203.159},
+    [44] = {x = -319.3912,y = 478.9731,z = 111.7186,h = 298.7645},
+    [45] = {x = -202.0035,y = 410.2064,z = 110.0086,h = 195.6136},
+    [46] = {x = -187.1009, y = 379.9514, z = 108.0138, h = 176.9462},
+    [47] = {x = 213.5159, y = 389.3123, z = 106.4154, h = 348.890255},
+    [48] = {x = 323.7256, y = 343.3308, z = 104.761, h = 345.49426},
+    [49] = {x = 701.1197, y = 254.4424, z = 92.85217, h = 240.62884},
+    [50] = {x = 656.4758, y = 184.8482, z = 94.53828, h = 248.9376},
+    [51] = {x = 615.5524, y = 161.4801, z = 96.91451, h = 69.2577},
+    [52] = {x = 899.2693, y = -41.99047, z = 78.32366, h = 28.13086},
+    [53] = {x = 873.3314, y = 9.008331, z = 78.32432, h = 329.343},
+    [54] = {x = 941.2477, y = -248.0161, z = 68.15629, h = 328.122},
+    [55] = {x = 842.7501, y = -191.9954, z = 72.1975, h = 329.2124},
+    [56] = {x = 534.3583, y = -26.7027, z = 70.18916, h = 30.70978},
+    [57] = {x = 302.5077, y = -176.5727, z = 56.95071, h = 249.3339},
+    [58] = {x = 85.26346, y = -214.7179, z = 54.05132, h = 160.2142},
+    [59] = {x = 78.38569, y = -198.4182, z = 55.79539, h = 70.1377},
+    [60] = {x = -30.09893, y = -89.37914, z = 56.8136, h = 340.32879}, ]]
 }
 
 
@@ -354,6 +453,7 @@ end
 
 ShowNotification = function(msg, type)
     exports['mythic_notify']:SendAlert(type, msg)
+    TriggerClientEvent('QBCore:Notify', src, msg, 'success')
 	--exports['co_notify']:SendNotify('boosting', type, msg)
 end
 

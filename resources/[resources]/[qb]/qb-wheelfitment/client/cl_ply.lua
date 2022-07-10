@@ -427,7 +427,8 @@ end)
 -- #[Event Handlers]#--
 RegisterNetEvent("qb-wheelfitment_cl:applySavedWheelFitment", function(wheelFitments, plyVeh)
     performVehicleCheck = false
-
+    json.encode(print(wheelFitments))
+    json.encode(print(plyVeh))
     SetVehicleWheelWidth(plyVeh, wheelFitments.width)
     SetVehicleWheelSize(plyVeh, wheelFitments.size)
     SetVehicleWheelXOffset(plyVeh, 0, wheelFitments.fl)
