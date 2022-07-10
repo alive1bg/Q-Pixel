@@ -81,5 +81,5 @@ end)
 
 
 Citizen.CreateThread(function()
-    RegisterKeyMapping("pursuit", "Pursuit", "keyboard", "")
+    RegisterKeyMapping("pursuit", "Pursuit", "keyboard", "N")
 end)
