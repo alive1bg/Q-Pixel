@@ -38,8 +38,6 @@ RegisterNetEvent('qb-nitro:client:ApplyNitrous', function()
                         disableMouse = false,
                         disableCombat = true,
                     }, {}, {}, {}, function() -- Done
-                        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['nitrous'], "remove")
-                        TriggerServerEvent("QBCore:Server:RemoveItem", 'nitrous', 1)
                         local CurrentVehicle = GetVehiclePedIsIn(PlayerPedId())
                         local Plate = trim(GetVehicleNumberPlateText(CurrentVehicle))
                         TriggerServerEvent('qb-nitro:server:LoadNitrous', Plate)
@@ -364,8 +362,6 @@ end)
 
 RegisterNetEvent('qb-nitro:client:UnloadNitrous', function(Plate)
     VehicleNitrous[Plate] = nil
-    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['emptynitrous'], "add")
-    TriggerServerEvent("QBCore:Server:AddItem", 'emptynitrous', 1)
     local CurrentVehicle = GetVehiclePedIsIn(PlayerPedId())
     local CPlate = trim(GetVehicleNumberPlateText(CurrentVehicle))
     if CPlate == Plate then

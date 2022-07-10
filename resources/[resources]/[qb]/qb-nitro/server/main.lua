@@ -3,6 +3,8 @@ local VehicleNitrous = {}
 
 QBCore.Functions.CreateUseableItem("nitrous", function(source, item)
     TriggerClientEvent('qb-nitro:client:ApplyNitrous', source)
+	TriggerEvent("QBCore:Server:RemoveItem", 'nitrous', 1)
+    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['nitrous'], "remove")
 end)
 
 RegisterNetEvent('qb-nitro:server:LoadNitrous', function(Plate)
@@ -22,6 +24,8 @@ end)
 RegisterNetEvent('qb-nitro:server:UnloadNitrous', function(Plate)
     VehicleNitrous[Plate] = nil
     TriggerClientEvent('qb-nitro:client:UnloadNitrous', -1, Plate)
+	TriggerEvent("QBCore:Server:AddItem", 'emptynitrous', 1)
+	TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['emptynitrous'], "add")
     TriggerEvent('qb-nitro:database:UnloadNitro', Plate)
 end)
 
