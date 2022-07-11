@@ -104,7 +104,7 @@ RegisterCommand("pursuit", function(source, args)
             print(modLevel.name)
         end
     else
-        QBCore.Functions.Notify("U are not a Police.", "error")
+        QBCore.Functions.Notify("You are not a Police Officer.", "error")
     end
 end)
 

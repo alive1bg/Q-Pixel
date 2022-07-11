@@ -8,7 +8,7 @@
                 { "model": "npolchal", "preset": "generic" },
                 { "model": "npolvette", "preset": "generic" },
                 { "model": "npolmm", "preset": "motorbike" },
-                { "model": "npolvic", "preset": "cruiser" }
+                { "model": "npolvic", "preset": "generic" }
             ],
             "presets": [
                 {
