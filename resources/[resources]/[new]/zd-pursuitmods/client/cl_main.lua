@@ -65,10 +65,11 @@ RegisterCommand("pursuit", function(source, args)
         print(currentLevel)
 
         if currentLevel == 3 then 
-            currentLevel = 1 
+            currentLevel = 0 
         end
-        
+
         currentLevel = currentLevel + 1
+
         local modLevel = vehiclePresetMods[currentLevel]
         SetVehicleXenonLightsColour(vehicle, modLevel.appearance.colors.xenon)
         ToggleVehicleMod(vehicle, modLevel.mods.Turbo)
