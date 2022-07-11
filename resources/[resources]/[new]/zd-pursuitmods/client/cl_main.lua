@@ -25,6 +25,19 @@ end)
 
 local currentLevel = 1 
 
+function dump(o)
+	if type(o) == 'table' then
+	   local s = '{ '
+	   for k,v in pairs(o) do
+		  if type(k) ~= 'number' then k = '"'..k..'"' end
+		  s = s .. '['..k..'] = ' .. dump(v) .. ','
+	   end
+	   return s .. '} '
+	else
+	   return tostring(o)
+	end
+ end
+
 RegisterCommand("pursuit", function(source, args)
     local ped = PlayerPedId()
     local vehicle = GetVehiclePedIsIn(ped, false)
@@ -37,7 +50,7 @@ RegisterCommand("pursuit", function(source, args)
             for x, y in pairs(vehicleModes["client"]["global"]["presets"]) do
                 if y.id == vehiclePresetName then
                     vehiclePresetMods = y.modes
-                    json.encode(print(y.modes))
+                    print("a:", dump(y.modes))
                     break
                 end
             end
