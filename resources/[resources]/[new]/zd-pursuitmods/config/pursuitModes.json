@@ -33,6 +33,24 @@
                             ]
                         },
                         {
+                            "name": "A",
+                            "appearance": {
+                                "colors": {
+                                    "xenon": 0
+                                }
+                            },
+                            "mods": {
+                                "Turbo": false,
+                                "Engine": -1,
+                                "Brakes": -1,
+                                "Transmission": -1,
+                                "XenonHeadlights": 1
+                            },
+                            "handling": [
+                                { "field": "fInitialDriveForce", "multiplier": 0.9 }
+                            ]
+                        },
+                        {
                             "name": "S+",
                             "appearance": {
                                 "colors": {
