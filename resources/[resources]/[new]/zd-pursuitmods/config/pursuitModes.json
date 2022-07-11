@@ -40,7 +40,7 @@
                                 }
                             },
                             "mods": {
-                                "Turbo": 1,
+                                "Turbo": true,
                                 "Engine": 2,
                                 "Brakes": 1,
                                 "Transmission": 2,
@@ -76,7 +76,7 @@
                                 }
                             },
                             "mods": {
-                                "Turbo": 1,
+                                "Turbo": true,
                                 "Engine": 4,
                                 "Brakes": 2,
                                 "Transmission": 3,
@@ -107,7 +107,7 @@
                                         }
                                     },
                                     "mods": {
-                                        "Turbo": 1,
+                                        "Turbo": true,
                                         "Engine": 5,
                                         "Brakes": 5,
                                         "Transmission": 5,
@@ -128,7 +128,7 @@
                                         }
                                     },
                                     "mods": {
-                                        "Turbo": 1,
+                                        "Turbo": true,
                                         "Engine": 5,
                                         "Brakes": 5,
                                         "Transmission": 5,
@@ -149,7 +149,7 @@
                                         }
                                     },
                                     "mods": {
-                                        "Turbo": 1,
+                                        "Turbo": true,
                                         "Engine": 5,
                                         "Brakes": 5,
                                         "Transmission": 5,
@@ -192,7 +192,7 @@
                                         }
                                     },
                                     "mods": {
-                                        "Turbo": 1,
+                                        "Turbo": true,
                                         "Engine": 2,
                                         "Brakes": 1,
                                         "Transmission": 2
