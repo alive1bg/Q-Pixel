@@ -37,6 +37,7 @@ RegisterCommand("pursuit", function(source, args)
             for x, y in pairs(vehicleModes["client"]["global"]["presets"]) do
                 if y.id == vehiclePresetName then
                     vehiclePresetMods = y.modes
+                    json.encode(print(y.modes))
                     break
                 end
             end
