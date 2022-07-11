@@ -58,8 +58,14 @@ RegisterCommand("pursuit", function(source, args)
         end
     end
     if  PlayerJob.name == 'police' then 
-        if not vehiclePresetName then return end
-        if currentLevel == 3 then currentLevel = 1 end
+        if not vehiclePresetName then 
+            return 
+        end
+
+        --[[ if currentLevel == 3 then 
+            currentLevel = 1 
+        end ]]
+
         currentLevel = currentLevel + 1
         local modLevel = vehiclePresetMods[currentLevel]
         SetVehicleXenonLightsColour(vehicle, modLevel.appearance.colors.xenon)
