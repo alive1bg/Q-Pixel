@@ -1362,21 +1362,6 @@ function swap($fromSlot, $toSlot, $fromInv, $toInv, $toAmount) {
             return;
         }
 
-        if (newData.name == fromData.name) {
-            if (newData.info.quality !== fromData.info.quality  ) {
-                InventoryError($fromInv, $fromSlot);
-                $.post(
-                    "https://qb-inventory/Notify",
-                    JSON.stringify({
-                        message: "You can not stack items which are not the same quality.",
-                        type: "error",
-                    })
-                );
-                return;
-            
-            }
-        }
-
         if (
             $toAmount == 0 &&
             $fromInv.attr("data-inventory").split("-")[0] == "itemshop" &&
