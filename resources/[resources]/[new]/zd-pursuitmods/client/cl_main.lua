@@ -62,10 +62,15 @@ RegisterCommand("pursuit", function(source, args)
             return 
         end
 
-        print(currentLevel)
-        print("a:", dump(vehiclePresetName))
+        if vehiclePresetName == "generic" and currentLevel == 4 then 
+            currentLevel = 0 
+        end
 
-        if currentLevel == 4 then 
+        if vehiclePresetName == "motorbike" and currentLevel == 3 then 
+            currentLevel = 0 
+        end
+
+        if vehiclePresetName == "cruiser" and currentLevel == 2 then 
             currentLevel = 0 
         end
 
