@@ -50,7 +50,7 @@ RegisterCommand("pursuit", function(source, args)
             for x, y in pairs(vehicleModes["client"]["global"]["presets"]) do
                 if y.id == vehiclePresetName then
                     vehiclePresetMods = y.modes
-                    print("a:", dump(y.modes))
+                    
                     break
                 end
             end
@@ -63,8 +63,9 @@ RegisterCommand("pursuit", function(source, args)
         end
 
         print(currentLevel)
+        print("a:", dump(vehiclePresetName))
 
-        if currentLevel == 3 then 
+        if currentLevel == 4 then 
             currentLevel = 0 
         end
 
