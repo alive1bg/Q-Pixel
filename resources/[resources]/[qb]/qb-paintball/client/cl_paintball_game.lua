@@ -83,7 +83,7 @@ RegisterNetEvent('qb-paintball:getVendor', function()
             }
         })
     end
-    TriggerEvent('nh-context:sendMenu', dataMenu)
+    exports['np-ui']:showContextMenu(dataMenu)
 end)
 
 RegisterNetEvent("qb-paintball:joinWest")
