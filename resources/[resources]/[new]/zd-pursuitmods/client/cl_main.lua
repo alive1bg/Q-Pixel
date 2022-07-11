@@ -79,6 +79,8 @@ RegisterCommand("pursuit", function(source, args)
         local modLevel = vehiclePresetMods[currentLevel]
         SetVehicleXenonLightsColour(vehicle, modLevel.appearance.colors.xenon)
         ToggleVehicleMod(vehicle, modLevel.mods.Turbo)
+        ToggleVehicleMod(vehicle, 18, modLevel.mods.Turbo)
+        
         SetVehicleMod(vehicle, 11, modLevel.mods.Engine, false)
         SetVehicleMod(vehicle, 12, modLevel.mods.Brakes, false)
         SetVehicleMod(vehicle, 13, modLevel.mods.Transmission, false)
