@@ -544,10 +544,11 @@ local playertables = {
     { table = 'users_tattoos' },
 }
 
-function QBCore.Player.DeleteCharacter(source, citizenid)
+function QBCore.Player.DeleteCharacter(source, citizenid) 
     local src = source
     local license = QBCore.Functions.GetIdentifier(src, 'license')
-    local result = MySQL.Sync.fetchScalar('SELECT license FROM players where citizenid = ?', { citizenid })
+    local cid = citizenid
+    local result = MySQL.Sync.fetchScalar('SELECT license FROM players where citizenid = ?', { cid })
     if license == result then
         local query = "DELETE FROM %s WHERE citizenid = ?"
 		local tableCount = #playertables
