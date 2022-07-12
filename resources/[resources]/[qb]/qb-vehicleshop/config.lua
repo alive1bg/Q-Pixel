@@ -280,16 +280,16 @@ Config.Shops = {
         },
     },
     ['police'] = {
-        ['Type'] = 'free-use', -- no player interaction is required to purchase a vehicle
+        ['Type'] = 'managed', -- no player interaction is required to purchase a vehicle
         ['Zone'] = {
             ['Shape'] = {--polygon that surrounds the shop
-            vector2(430.71487426758, -978.34411621094),
-            vector2(430.74841308594, -973.61950683594),
-            vector2(440.41931152344, -973.62719726562),
-            vector2(440.40130615234, -978.3017578125)
+            vector2(451.72113037109, -1027.4052734375),
+            vector2(466.52694702148, -1026.2106933594),
+            vector2(466.84201049805, -1011.0835571289),
+            vector2(451.4697265625, -1013.9250488281)
             },
-            ['minZ'] = 25.69, -- min height of the shop zone
-            ['maxZ'] = 25.69, -- max height of the shop zone
+            ['minZ'] = 28.1, -- min height of the shop zone
+            ['maxZ'] = 29.8, -- max height of the shop zone
             ['size'] = 2.75, -- size of the vehicles zones 
         },
         ['Job'] = 'police', -- Name of job or none
