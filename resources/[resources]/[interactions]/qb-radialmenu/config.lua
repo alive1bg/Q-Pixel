@@ -310,7 +310,7 @@ rootMenuConfig =  {
         id = "GiveCarKeys",
         displayName = "Give Car Keys",
         icon = "#car-key",
-        functionName = "vehiclekeys:client:GiveClosestKeys",
+        functionName = "vehiclekeys:client:GiveKeys",
         enableMenu = function()
             local pData = QBCore.Functions.GetPlayerData()
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCloseVeh() or IsPedInAnyVehicle(PlayerPedId(), true))

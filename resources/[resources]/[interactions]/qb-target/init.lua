@@ -218,6 +218,12 @@ Config.TargetBones = {
                 icon = "fas fa-car",
                 label = "Flip Vehicle",
             },
+            {
+                type = "client",
+                event = "vehiclekeys:client:GiveKeys",
+                icon = "fas fa-key", 
+                label = "Give Keys",
+            },
         },
         distance = 2.5
     },
