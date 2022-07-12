@@ -38,7 +38,7 @@ RegisterNetEvent('qb-apartments:choose')
 AddEventHandler('qb-apartments:choose',function()
     local PlayerData = QBCore.Functions.GetPlayerData()
     local dialog = exports['qb-input']:ShowInput({
-        header = "Enter the CID of the persons apartment",
+        header = "APARTMENT RAID - Use the Persons CID not STATE ID ex: SFW01927",
         submitText = "Enter",
         inputs = {
             {
@@ -53,12 +53,12 @@ AddEventHandler('qb-apartments:choose',function()
     if dialog then
         QBCore.Functions.TriggerCallback('apartments:PoliceApartment', function(result)
             if result then
-                if PlayerData.job.grade.level > 2 and PlayerData.job.onduty then
+                if PlayerData.job.grade.level > 2 then
                     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result2)
                         if result2 then
                             DoRamAnimation(true)
-                            --if exports['qb-buffs']:HasBuff("luck") then
-                                --[[ local seconds = math.random(7,10)
+                            if exports['qb-buffs']:HasBuff("luck") then
+                                local seconds = math.random(7,10)
                                 local circles = math.random(3,6)
                                 local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
                                 if success then
@@ -67,9 +67,9 @@ AddEventHandler('qb-apartments:choose',function()
                                     DoRamAnimation(false)
                                 else
                                     DoRamAnimation(false)
-                                    QBCore.Functions.Notify("Du hast versagt!", "error" , 5000)
-                                end ]]
-                            --else
+                                    QBCore.Functions.Notify("You exhausted yourself!", "error" , 5000)
+                                end
+                            else
                                 local seconds = math.random(5,8)
                                 local circles = math.random(6,9)
                                 local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
@@ -79,15 +79,15 @@ AddEventHandler('qb-apartments:choose',function()
                                     DoRamAnimation(false)
                                 else
                                     DoRamAnimation(false)
-                                    QBCore.Functions.Notify("Du hast versagt!", "error" , 5000)
+                                    QBCore.Functions.Notify("You exhausted yourself!", "error" , 5000)
                                 end
-                            --end
+                            end
                         else
-                            QBCore.Functions.Notify("Dir fehlt etwas..", "error" , 5000)
+                            QBCore.Functions.Notify("You expect to ram the door with your shoulder? Go get a ram!", "error" , 5000)
                         end
                     end, 'police_stormram')
                 else
-                    QBCore.Functions.Notify("Du bist nicht hoch genug oder nicht im Dienst!", "error")
+                    QBCore.Functions.Notify("Your superior wont like this, Get a higher rank!.. Are you on duty?", "error")
                 end
             end
         end, dialog.citizenid)
