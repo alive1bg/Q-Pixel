@@ -45,22 +45,22 @@ Config.Shops = {
         ['TestDriveSpawn'] = vector4(802.38647, -820.7225, 26.180999, 266.13333), -- Spawn location for test drive
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(797.95074, -806.8751, 24.663558, 234.14276), -- where the vehicle will spawn on display
+                coords = vector4(797.95074, -806.8751, 25.2, 234.14276), -- where the vehicle will spawn on display
                 defaultVehicle = 'baller', -- Default display vehicle
                 chosenVehicle = 'baller', -- Same as default but is dynamically changed when swapping vehicles
             },
             [2] = {
-                coords = vector4(798.09246, -810.5512, 24.600973, 237.48246),
+                coords = vector4(798.09246, -810.5512, 25.2, 237.48246),
                 defaultVehicle = 'schafter2',
                 chosenVehicle = 'schafter2'
             },
             [3] = {
-                coords = vector4(798.27111, -813.7525, 24.578573, 238.25881),
+                coords = vector4(798.27111, -813.7525, 25.2, 238.25881),
                 defaultVehicle = 'comet2',
                 chosenVehicle = 'comet2'
             },
             [4] = {
-                coords = vector4(797.99426, -816.7172, 24.575042, 239.4253),
+                coords = vector4(797.99426, -816.7172, 25.2, 239.4253),
                 defaultVehicle = 'sultanrs',
                 chosenVehicle = 'sultanrs'
             }
@@ -284,12 +284,12 @@ Config.Shops = {
         ['VehicleSpawn'] = vector4(455.3695, -1024.233, 28.264682, 54.743831), -- Spawn location when vehicle is bought
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(463.12777, -1019.371, 26.902521, 92.010543), -- where the vehicle will spawn on display
+                coords = vector4(463.12777, -1019.371, 27.0, 92.010543), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolvic', -- Default display vehicle
                 chosenVehicle = 'npolvic' -- Same as default but is dynamically changed when swapping vehicles
             },
             [2] = {
-                coords = vector4(463.23217, -1014.885, 26.356174, 91.169265), -- where the vehicle will spawn on display
+                coords = vector4(463.23217, -1014.885, 27.0, 91.169265), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolchal', -- Default display vehicle
                 chosenVehicle = 'npolchal' -- Same as default but is dynamically changed when swapping vehicles
             },
