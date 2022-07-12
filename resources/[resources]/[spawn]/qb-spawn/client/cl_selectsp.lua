@@ -15,7 +15,7 @@ Spawn.motel = {
 }
 
 Spawn.housingCoords = nil
---Spawn.isNew = false
+Spawn.isNew = false
 
 Spawn.tempHousing = {}
 Spawn.defaultApartmentSpawn = {}
@@ -28,6 +28,7 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 
 	Login.SetTestCam()
 	DoScreenFadeIn(1)
+	
 	TriggerEvent('qb-weathersync:client:DisableSync')
 
 	if spawnData.hospital.illness == "dead" or spawnData.hospital.illness == "icu" then
@@ -37,6 +38,10 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	if spawnData.overwrites ~= nil then
 		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
 			Spawn.overwriteSpawn(spawnData.overwrites)
+		elseif spawnData.overwrites == "new" then
+			Spawn.isNew = true 
+			Spawn.selectedSpawn(' Apartments 1')
+			TriggerEvent("backitems:start")
 		end
 		return
 	end
@@ -77,7 +82,7 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	local infoTable = {}
 	for i=1,#currentSpawns do
 		local spawn = currentSpawns[i]
-		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}
+		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}	
 	end
 
 
@@ -168,7 +173,6 @@ function Spawn.selectedSpawn(spawnInfo)
 	Login.DeleteCamera()
 	SetNuiFocus(false,false)
 	TriggerEvent("inSpawn",false)
-	TriggerEvent('qb-weathersync:client:EnableSync')
 	local apartment = Spawn.obtainApartmentType(spawnInfo)
 	if apartment then
 		DoScreenFadeOut(2)
@@ -187,7 +191,7 @@ function Spawn.selectedSpawn(spawnInfo)
 			Wait(200)
 			
 			DoScreenFadeIn(2500)
-			TriggerEvent("qb-spawn:characterSpawned")
+			TriggerEvent("cn-spawn:characterSpawned")
 		else 
 
 			local pos = Spawn.obtainHousingPos(spawnInfo)
@@ -204,7 +208,6 @@ function Spawn.selectedSpawn(spawnInfo)
 				DoScreenFadeIn(2500)	
 				Login.characterSpawned()
 				TriggerEvent("housing:playerSpawned",spawnInfo)
-				
 			end
 		end
  	end
@@ -215,7 +218,7 @@ end
 
 function Spawn.overwriteSpawn(overwrite)
 	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison 
-	TriggerEvent('qb-weathersync:client:EnableSync')
+
 	if overwrite == "maxsec" then
 		pos = vector4(1690.75,2593.14,45.61,178.75)
 	elseif overwrite == "rehab" then
