@@ -102,7 +102,7 @@ RegisterCommand("pursuit", function(source, args)
             print('After',GetVehicleHandlingFloat(vehicle, 'CHandlingData', modLevel.handling[i].field))
         end
         if source then 
-            QBCore.Functions.Notify("Pursuit Mod: " ..modLevel.name)
+            QBCore.Functions.Notify("Pursuit Mode: " ..modLevel.name)
             print(modLevel.name)
         end
     else
