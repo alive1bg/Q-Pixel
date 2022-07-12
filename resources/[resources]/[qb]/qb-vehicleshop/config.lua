@@ -8,25 +8,21 @@ Config.PaymentInterval = 24 -- time in hours between payment being due
 Config.MinimumDown = 10 -- minimum percentage allowed down
 Config.MaximumPayments = 24 -- maximum payments allowed
 Config.Shops = {
-    --[[['pdm'] = {
-        ['Type'] = 'free-use', -- no player interaction is required to purchase a car
+    ['cardealer'] = {
+        ['Type'] = 'managed', -- no player interaction is required to purchase a car
         ['Zone'] = {
             ['Shape'] = {--polygon that surrounds the shop
-                vector2(-56.727394104004, -1086.2325439453),
-                vector2(-60.612808227539, -1096.7795410156),
-                vector2(-58.26834487915, -1100.572265625),
-                vector2(-35.927803039551, -1109.0034179688),
-                vector2(-34.427627563477, -1108.5111083984),
-                vector2(-32.02657699585, -1101.5877685547),
-                vector2(-33.342102050781, -1101.0377197266),
-                vector2(-31.292987823486, -1095.3717041016)
+                vector2(811.53509521484, -803.42724609375),
+                vector2(791.18218994141, -803.62445068359),
+                vector2(791.05706787109, -833.19201660156),
+                vector2(811.46490478516, -833.70062255859)
             },
-            ['minZ'] = 25.0, -- min height of the shop zone
-            ['maxZ'] = 28.0, -- max height of the shop zone
+            ['minZ'] = 26.10, -- min height of the shop zone
+            ['maxZ'] = 26.26, -- max height of the shop zone
             ['size'] = 2.75 -- size of the vehicles zones
         },
-        ['Job'] = 'none', -- Name of job or none
-        ['ShopLabel'] = 'Premium Deluxe Motorsport', -- Blip name
+        ['Job'] = 'cardealer', -- Name of job or none
+        ['ShopLabel'] = 'Otto AutoParts And Sales', -- Blip name
         ['showBlip'] = true, -- true or false
         ['blipSprite'] = 326, -- Blip sprite
         ['blipColor'] = 3, -- Blip color
@@ -43,53 +39,33 @@ Config.Shops = {
             ['cycles'] = 'Bicycles'
         },
         ['TestDriveTimeLimit'] = 0.5, -- Time in minutes until the vehicle gets deleted
-        ['Location'] = vector3(-45.67, -1098.34, 26.42), -- Blip Location
-        ['ReturnLocation'] = vector3(-44.74, -1082.58, 26.68), -- Location to return vehicle, only enables if the vehicleshop has a job owned
-        ['VehicleSpawn'] = vector4(-56.79, -1109.85, 26.43, 71.5), -- Spawn location when vehicle is bought
-        ['TestDriveSpawn'] = vector4(-56.79, -1109.85, 26.43, 71.5), -- Spawn location for test drive
+        ['Location'] = vector3(801.00994, -822.8892, 26.181016), -- Blip Location
+        ['ReturnLocation'] = vector3(803.93225, -820.6266, 26.181016), -- Location to return vehicle, only enables if the vehicleshop has a job owned
+        ['VehicleSpawn'] = vector4(802.38647, -820.7225, 26.180999, 266.13333), -- Spawn location when vehicle is bought
+        ['TestDriveSpawn'] = vector4(802.38647, -820.7225, 26.180999, 266.13333), -- Spawn location for test drive
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(-45.65, -1093.66, 25.44, 69.5), -- where the vehicle will spawn on display
-                defaultVehicle = 'adder', -- Default display vehicle
-                chosenVehicle = 'adder', -- Same as default but is dynamically changed when swapping vehicles
+                coords = vector4(797.95074, -806.8751, 24.663558, 234.14276), -- where the vehicle will spawn on display
+                defaultVehicle = 'baller', -- Default display vehicle
+                chosenVehicle = 'baller', -- Same as default but is dynamically changed when swapping vehicles
             },
             [2] = {
-                coords = vector4(-48.27, -1101.86, 25.44, 294.5),
+                coords = vector4(798.09246, -810.5512, 24.600973, 237.48246),
                 defaultVehicle = 'schafter2',
                 chosenVehicle = 'schafter2'
             },
             [3] = {
-                coords = vector4(-39.6, -1096.01, 25.44, 66.5),
+                coords = vector4(798.27111, -813.7525, 24.578573, 238.25881),
                 defaultVehicle = 'comet2',
                 chosenVehicle = 'comet2'
             },
             [4] = {
-                coords = vector4(-51.21, -1096.77, 25.44, 254.5),
-                defaultVehicle = 'vigero',
-                chosenVehicle = 'vigero'
-            },
-            [5] = {
-                coords = vector4(-40.18, -1104.13, 25.44, 338.5),
-                defaultVehicle = 't20',
-                chosenVehicle = 't20'
-            },
-            [6] = {
-                coords = vector4(-43.31, -1099.02, 25.44, 52.5),
-                defaultVehicle = 'bati',
-                chosenVehicle = 'bati'
-            },
-            [7] = {
-                coords = vector4(-50.66, -1093.05, 25.44, 222.5),
-                defaultVehicle = 'bati',
-                chosenVehicle = 'bati'
-            },
-            [8] = {
-                coords = vector4(-44.28, -1102.47, 25.44, 298.5),
-                defaultVehicle = 'bati',
-                chosenVehicle = 'bati'
+                coords = vector4(797.99426, -816.7172, 24.575042, 239.4253),
+                defaultVehicle = 'sultanrs',
+                chosenVehicle = 'sultanrs'
             }
         },
-    },]]
+    },
     ['tuner'] = {
         ['Type'] = 'managed', -- meaning a real player has to sell the car
         ['Zone'] = {
@@ -308,12 +284,12 @@ Config.Shops = {
         ['VehicleSpawn'] = vector4(455.3695, -1024.233, 28.264682, 54.743831), -- Spawn location when vehicle is bought
         ['ShowroomVehicles'] = {
             [1] = {
-                coords = vector4(463.12777, -1019.371, 27.902521, 92.010543), -- where the vehicle will spawn on display
+                coords = vector4(463.12777, -1019.371, 26.902521, 92.010543), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolvic', -- Default display vehicle
                 chosenVehicle = 'npolvic' -- Same as default but is dynamically changed when swapping vehicles
             },
             [2] = {
-                coords = vector4(463.23217, -1014.885, 27.356174, 91.169265), -- where the vehicle will spawn on display
+                coords = vector4(463.23217, -1014.885, 26.356174, 91.169265), -- where the vehicle will spawn on display
                 defaultVehicle = 'npolchal', -- Default display vehicle
                 chosenVehicle = 'npolchal' -- Same as default but is dynamically changed when swapping vehicles
             },

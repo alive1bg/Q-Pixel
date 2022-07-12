@@ -192,10 +192,13 @@ end)
 
 
 CreateThread(function()
-  exports['qb-target']:AddCircleZone("showroom", vector3(-38.98, -1100.29, 27.42), 0.48, {
+  exports['qb-target']:AddBoxZone("showroom", vector3(805.06, -825.51, 26.34), 0.8, 1.6, {
     name = "showroom",
-    useZ=true,
+    heading = 269,
     debugPoly = false,
+    minZ=22.34,
+    maxZ=26.34,
+    debugPoly = false, 
     }, {
       options = {
           {
@@ -207,7 +210,7 @@ CreateThread(function()
         distance = 1.5
     })
 
-    exports['qb-target']:AddCircleZone("showroom1", vector3(-40.29, -1094.49, 27.52), 0.47, {
+    --[[ exports['qb-target']:AddCircleZone("showroom1", vector3(-40.29, -1094.49, 27.52), 0.47, {
       name = "showroom1",
       useZ=true,
       debugPoly = false,
@@ -265,5 +268,5 @@ CreateThread(function()
             },
         },
         distance = 1.5
-    })
+    }) ]]
 end)
