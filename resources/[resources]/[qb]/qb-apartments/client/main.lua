@@ -15,6 +15,25 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     isLoggedIn = true
 end)
 
+function DoRamAnimation(bool)
+    local ped = PlayerPedId()
+    local dict = "missheistfbi3b_ig7"
+    local anim = "lift_fibagent_loop"
+    if bool then
+        RequestAnimDict(dict)
+        while not HasAnimDictLoaded(dict) do
+            Wait(1)
+        end
+        TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 1, -1, false, false, false)
+    else
+        RequestAnimDict(dict)
+        while not HasAnimDictLoaded(dict) do
+            Wait(1)
+        end
+        TaskPlayAnim(ped, dict, "exit", 8.0, 8.0, -1, 1, -1, false, false, false)
+    end
+end
+
 RegisterNetEvent('qb-apartments:choose')
 AddEventHandler('qb-apartments:choose',function()
     local PlayerData = QBCore.Functions.GetPlayerData()
@@ -34,11 +53,41 @@ AddEventHandler('qb-apartments:choose',function()
     if dialog then
         QBCore.Functions.TriggerCallback('apartments:PoliceApartment', function(result)
             if result then
-                if PlayerData.job.grade.level > 5 then
-                    altaapartment = result.type
-                    EnterApartment(altaapartment, result.name)
+                if PlayerData.job.grade.level > 2 and PlayerData.job.onduty then
+                    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result2)
+                        if result2 then
+                            DoRamAnimation(true)
+                            --if exports['qb-buffs']:HasBuff("luck") then
+                                --[[ local seconds = math.random(7,10)
+                                local circles = math.random(3,6)
+                                local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
+                                if success then
+                                    altaapartment = result.type
+                                    EnterApartment(altaapartment, result.name)
+                                    DoRamAnimation(false)
+                                else
+                                    DoRamAnimation(false)
+                                    QBCore.Functions.Notify("Du hast versagt!", "error" , 5000)
+                                end ]]
+                            --else
+                                local seconds = math.random(5,8)
+                                local circles = math.random(6,9)
+                                local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
+                                if success then
+                                    altaapartment = result.type
+                                    EnterApartment(altaapartment, result.name)
+                                    DoRamAnimation(false)
+                                else
+                                    DoRamAnimation(false)
+                                    QBCore.Functions.Notify("Du hast versagt!", "error" , 5000)
+                                end
+                            --end
+                        else
+                            QBCore.Functions.Notify("Dir fehlt etwas..", "error" , 5000)
+                        end
+                    end, 'police_stormram')
                 else
-                    QBCore.Functions.Notify("You are not high enough rank.", "error")
+                    QBCore.Functions.Notify("Du bist nicht hoch genug oder nicht im Dienst!", "error")
                 end
             end
         end, dialog.citizenid)
@@ -87,14 +136,14 @@ end)
 
 -- Functions
 
-local function loadAnimDict(dict)
+function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
         RequestAnimDict(dict)
         Wait(5)
     end
 end
 
-local function openHouseAnim()
+function openHouseAnim()
     loadAnimDict("anim@heists@keycard@")
     TaskPlayAnim( PlayerPedId(), "anim@heists@keycard@", "exit", 5.0, 1.0, -1, 16, 0, 0, 0, 0 )
     Wait(400)
@@ -106,7 +155,7 @@ RegisterNetEvent('apartments:client:Logout', function(source)
     ExecuteCommand('logout')
 end)
 
-local function EnterApartment(house, apartmentId, new)
+function EnterApartment(house, apartmentId, new)
     TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.1)
     openHouseAnim()
     Wait(250)
@@ -267,7 +316,7 @@ exports['qb-target']:AddCircleZone("EnterAppartments", vector3(-269.79, -961.35,
     distance = 2.0
 })
 
-local function LeaveApartment(house)
+function LeaveApartment(house)
     TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.1)
     openHouseAnim()
     TriggerServerEvent("qb-apartments:returnBucket")
@@ -293,7 +342,7 @@ local function LeaveApartment(house)
     exports['qb-target']:RemoveZone("ApartmentLogout")
 end
 
-local function SetClosestApartment()
+function SetClosestApartment()
     local pos = GetEntityCoords(PlayerPedId())
     local current = nil
     local dist = nil
