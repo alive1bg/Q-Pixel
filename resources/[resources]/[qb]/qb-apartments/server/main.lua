@@ -85,9 +85,30 @@ RegisterNetEvent('apartments:server:CreateApartment', function(type, label, bool
             TriggerClientEvent('QBCore:Notify', src, 'You have new apartment.')
             TriggerClientEvent("apartments:client:SpawnInApartment", src, apartmentId, type)
             TriggerClientEvent("apartments:client:SetHomeBlip", src, type)
+            print("Starter Items Added.")
+            GiveStarterItems(src)
+
         end
     end)
 end)
+
+function GiveStarterItems(source)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+
+    for _, v in pairs(QBCore.Shared.StarterItems) do
+        local info = {}
+        if v.item == "id_card" then
+            info.citizenid = Player.PlayerData.citizenid
+            info.firstname = Player.PlayerData.charinfo.firstname
+            info.lastname = Player.PlayerData.charinfo.lastname
+            info.birthdate = Player.PlayerData.charinfo.birthdate
+            info.gender = Player.PlayerData.charinfo.gender
+            info.nationality = Player.PlayerData.charinfo.nationality
+        end
+        Player.Functions.AddItem(v.item, v.amount, false, info)
+    end
+end
 
 RegisterNetEvent('apartments:server:UpdateApartment', function(type, label)
     local src = source
