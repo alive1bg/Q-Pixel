@@ -1,4 +1,5 @@
 Apartments = {}
+Config = {}
 
 Apartments.Starting = true
 Apartments.Inventory = 'qb'

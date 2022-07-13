@@ -79,8 +79,7 @@ QBShared.FormatThousand = function(v)
 end
 
 QBShared.StarterItems = {
-    ['phone'] = { amount = 1, item = 'phone' },
-    ['id_card'] = { amount = 1, item = 'id_card' },
+    ['present'] = { amount = 1, item = 'present' },
 }
 
 QBShared.MaleNoGloves = {
