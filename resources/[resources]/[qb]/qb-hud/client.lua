@@ -1045,7 +1045,7 @@ end)
 
 -- Money HUD
 
---[[ RegisterNetEvent('hud:client:ShowAccounts', function(type, amount)
+RegisterNetEvent('hud:client:ShowAccounts', function(type, amount)
     if type == 'cash' then
         SendNUIMessage({
             action = 'show',
@@ -1072,7 +1072,7 @@ RegisterNetEvent('hud:client:OnMoneyChange', function(type, amount, isMinus)
         minus = isMinus,
         type = type
     })
-end) ]]
+end)
 
 -- Harness Check
 
