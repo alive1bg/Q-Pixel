@@ -843,6 +843,10 @@ RegisterNUICallback("GiveItem", function(data)
     end
 end)
 
+RegisterNUICallback('Notify', function(data)
+    QBCore.Functions.Notify(data.message, data.type)
+end)
+
 -- Threads
 
 CreateThread(function()
