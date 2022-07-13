@@ -327,7 +327,7 @@ Config.TargetModels = {
                 type= "client",
                 event = "clawmachine:client:use",
                 icon = "fas fa-user-secret",
-                label = "Use Claw Machine ($3000)"
+                label = "Use Claw Machine ($3000) 2% Chance"
             },
         },
         distance = 3.0
