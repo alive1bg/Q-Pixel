@@ -298,7 +298,7 @@ RegisterNetEvent('fishing:server:SellLegalFish', function(args)
 		local stingray = Player.Functions.GetItemByName("stingray1")
 		if stingray ~= nil then
 			local payment = Config.stingrayPrice
-			Player.Functions.RemoveItem("stingray", 1, k)
+			Player.Functions.RemoveItem("stingray1", 1, k) 
 			Player.Functions.AddMoney('bank', payment , "stingray-sell")
 			TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['stingray1'], "remove", 1)
 			TriggerClientEvent('QBCore:Notify', src, "1 Stingray Sold for $"..payment, "success")
