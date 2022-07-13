@@ -944,15 +944,15 @@ CreateThread(function() -- Not event sure what this is even for
                             print(fSteeringLock)
                             print("angle set 1")
                         elseif GetVehicleMod(myVeh, 15) == 1 then
-                            fSteeringLock = math.ceil((fSteeringLock * 0.53)) + 0.1
+                            fSteeringLock = math.ceil((fSteeringLock * 0.54)) + 0.1
                             print(fSteeringLock)
                             print("angle set 2")
                         elseif GetVehicleMod(myVeh, 15) == 2 then
-                            fSteeringLock = math.ceil((fSteeringLock * 0.54)) + 0.1
+                            fSteeringLock = math.ceil((fSteeringLock * 0.56)) + 0.1
                             print(fSteeringLock)
                             print("angle set 3")
                         elseif GetVehicleMod(myVeh, 15) == 3 then
-                            fSteeringLock = math.ceil((fSteeringLock * 0.56)) + 0.1
+                            fSteeringLock = math.ceil((fSteeringLock * 0.58)) + 0.1
                             print(fSteeringLock)
                             print("angle set 4")
                         end
