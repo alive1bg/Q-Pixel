@@ -69,132 +69,58 @@ RegisterNetEvent('randol_mib:client:pulloutmessage')
 AddEventHandler('randol_mib:client:pulloutmessage', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"parkingmeter"})
     LocalPlayer.state:set("inv_busy", true, true)
-            exports.rprogress:Custom({
-            Async = true,
-            canCancel = false,       -- Allow cancelling
-            cancelKey = 200,        -- Custom cancel key
-            x = 0.5,                -- Position on x-axis
-            y = 0.9,                -- Position on y-axis
-            From = 0,               -- Percentage to start from
-            To = 100,               -- Percentage to end
-            Duration = 5000,        -- Duration of the progress
-            Radius = 45,            -- Radius of the dial
-            Stroke = 7,            -- Thickness of the progress dial
-            Cap = 'butt',           -- or 'round'
-            Padding = 0,            -- Padding between the progress dial and the background dial
-            MaxAngle = 360,         -- Maximum sweep angle of the dial in degrees
-            Rotation = 0,           -- 2D rotation of the dial in degrees
-            Width = 300,            -- Width of bar in px if Type = 'linear'
-            Height = 40,            -- Height of bar in px if Type = 'linear'
-            ShowTimer = false,       -- Shows the timer countdown within the radial dial
-            ShowProgress = true,   -- Shows the progress % within the radial dial    
-            Easing = "easeLinear",
-            Label = "Popping open the bottle..",
-            LabelPosition = "right",
-            Color = "rgba(255, 255, 255, 1.0)",
-            BGColor = "rgba(0, 0, 0, 0.4)",
-            ZoneColor = "rgba(51, 105, 30, 1)",
-            DisableControls = {
-                Mouse = false,
-                Player = true,
-                Vehicle = false
-            },
-            onComplete = function(cancelled)
-            QBCore.Functions.Notify('You got the message out of the bottle!', 'success')
-            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-            Wait(500)
-            TriggerServerEvent('randol_mib:server:usebottle')
-            LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
-        end
-    })
+    local seconds = math.random(5,8)
+    local circles = math.random(6,9)
+    local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
+    if success then
+        QBCore.Functions.Notify('You got the message out of the bottle!', 'success')
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        Wait(500)
+        TriggerServerEvent('randol_mib:server:usebottle')
+        LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
+    else
+        DoRamAnimation(false)
+        QBCore.Functions.Notify("You slipped!", "error" , 5000)
+    end
 end)
 
 RegisterNetEvent('randol_mib:client:setloc') -- Event to set the location after using the scrumpled paper.
 AddEventHandler('randol_mib:client:setloc', function ()
     local coords = vector3(3062.47, 2219.01, 3.08)
     TriggerEvent('animations:client:EmoteCommandStart', {"map"})
-    LocalPlayer.state:set("inv_busy", true, true)
-            exports.rprogress:Custom({
-            Async = true,
-            canCancel = false,       -- Allow cancelling
-            cancelKey = 200,        -- Custom cancel key
-            x = 0.5,                -- Position on x-axis
-            y = 0.9,                -- Position on y-axis
-            From = 0,               -- Percentage to start from
-            To = 100,               -- Percentage to end
-            Duration = 5000,        -- Duration of the progress
-            Radius = 45,            -- Radius of the dial
-            Stroke = 7,            -- Thickness of the progress dial
-            Cap = 'butt',           -- or 'round'
-            Padding = 0,            -- Padding between the progress dial and the background dial
-            MaxAngle = 360,         -- Maximum sweep angle of the dial in degrees
-            Rotation = 0,           -- 2D rotation of the dial in degrees
-            Width = 300,            -- Width of bar in px if Type = 'linear'
-            Height = 40,            -- Height of bar in px if Type = 'linear'
-            ShowTimer = false,       -- Shows the timer countdown within the radial dial
-            ShowProgress = true,   -- Shows the progress % within the radial dial    
-            Easing = "easeLinear",
-            Label = "Locating the treasure..",
-            LabelPosition = "right",
-            Color = "rgba(255, 255, 255, 1.0)",
-            BGColor = "rgba(0, 0, 0, 0.4)",
-            ZoneColor = "rgba(51, 105, 30, 1)",
-            DisableControls = {
-                Mouse = false,
-                Player = true,
-                Vehicle = false
-            },
-            onComplete = function(cancelled)
-            QBCore.Functions.Notify('You found the location, it\'s on the East Cove!', 'primary', 6000)
-            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-            LootBlip() -- Add Blip on GPS
-			SetNewWaypoint(coords.x, coords.y) -- Set waypoint to chest
-            LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
-        end
-    })
+
+
+
+    local seconds = math.random(5,8)
+    local circles = math.random(6,9)
+    local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
+    if success then
+        QBCore.Functions.Notify('You found the location, it\'s on the East Cove!', 'primary', 6000)
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        LootBlip() -- Add Blip on GPS
+        SetNewWaypoint(coords.x, coords.y) -- Set waypoint to chest
+        LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
+    else
+        DoRamAnimation(false)
+        QBCore.Functions.Notify("You slipped!", "error" , 5000)
+    end
 end)
 
 
 RegisterNetEvent('randol_mib:client:lootingthechest')
 AddEventHandler('randol_mib:client:lootingthechest', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic3"})
-    LocalPlayer.state:set("inv_busy", true, true)
-            exports.rprogress:Custom({
-            Async = true,
-            canCancel = false,       -- Allow cancelling
-            cancelKey = 200,        -- Custom cancel key
-            x = 0.5,                -- Position on x-axis
-            y = 0.9,                -- Position on y-axis
-            From = 0,               -- Percentage to start from
-            To = 100,               -- Percentage to end
-            Duration = 15000,        -- Duration of the progress
-            Radius = 45,            -- Radius of the dial
-            Stroke = 7,            -- Thickness of the progress dial
-            Cap = 'butt',           -- or 'round'
-            Padding = 0,            -- Padding between the progress dial and the background dial
-            MaxAngle = 360,         -- Maximum sweep angle of the dial in degrees
-            Rotation = 0,           -- 2D rotation of the dial in degrees
-            Width = 300,            -- Width of bar in px if Type = 'linear'
-            Height = 40,            -- Height of bar in px if Type = 'linear'
-            ShowTimer = false,       -- Shows the timer countdown within the radial dial
-            ShowProgress = true,   -- Shows the progress % within the radial dial    
-            Easing = "easeLinear",
-            Label = "Looting the chest..",
-            LabelPosition = "right",
-            Color = "rgba(255, 255, 255, 1.0)",
-            BGColor = "rgba(0, 0, 0, 0.4)",
-            ZoneColor = "rgba(51, 105, 30, 1)",
-            DisableControls = {
-                Mouse = false,
-                Player = true,
-                Vehicle = false
-            },
-            onComplete = function(cancelled)
-            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-            TriggerServerEvent('randol_mib:server:lootchest') -- Loot from server side.
-            LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
-        end
-    })
+    local seconds = math.random(5,8)
+    local circles = math.random(6,9)
+    local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
+    if success then
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        TriggerServerEvent('randol_mib:server:lootchest') -- Loot from server side.
+        LocalPlayer.state:set("inv_busy", false, true) -- Make inventory accessible again.
+    else
+        DoRamAnimation(false)
+        QBCore.Functions.Notify("You slipped!", "error" , 5000)
+    end
 end)
 
 RegisterNetEvent('randol_mib:client:removeblip')
