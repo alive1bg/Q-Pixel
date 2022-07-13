@@ -70,7 +70,7 @@ AddEventHandler('randol_mib:client:pulloutmessage', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"parkingmeter"})
     LocalPlayer.state:set("inv_busy", true, true)
     local seconds = math.random(5,8)
-    local circles = math.random(6,9)
+    local circles = math.random(2,4)
     local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
     if success then
         QBCore.Functions.Notify('You got the message out of the bottle!', 'success')
@@ -92,7 +92,7 @@ AddEventHandler('randol_mib:client:setloc', function ()
 
 
     local seconds = math.random(5,8)
-    local circles = math.random(6,9)
+    local circles = math.random(2,4)
     local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
     if success then
         QBCore.Functions.Notify('You found the location, it\'s on the East Cove!', 'primary', 6000)
@@ -111,7 +111,7 @@ RegisterNetEvent('randol_mib:client:lootingthechest')
 AddEventHandler('randol_mib:client:lootingthechest', function ()
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic3"})
     local seconds = math.random(5,8)
-    local circles = math.random(6,9)
+    local circles = math.random(2,4)
     local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
     if success then
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
