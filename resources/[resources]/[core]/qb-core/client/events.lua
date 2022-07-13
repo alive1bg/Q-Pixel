@@ -98,11 +98,7 @@ RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
 end)
 
 RegisterNetEvent('QBCore:Player:UpdatePlayerData', function()
-    local hungerRate = 0
-    local thirstRate = 0
-    if exports["ps-buffs"]:HasBuff("super-hunger") then hungerRate = QBCore.Config.Player.HungerRate/2 else hungerRate = QBCore.Config.Player.HungerRate end
-    if exports["ps-buffs"]:HasBuff("super-thirst") then thirstRate = QBCore.Config.Player.ThirstRate/2 else thirstRate = QBCore.Config.Player.ThirstRate end
-    TriggerServerEvent('QBCore:UpdatePlayer', hungerRate, thirstRate)
+    TriggerServerEvent('QBCore:UpdatePlayer')
 end)
 
 RegisterNetEvent('QBCore:Notify', function(text, texttype, length)
