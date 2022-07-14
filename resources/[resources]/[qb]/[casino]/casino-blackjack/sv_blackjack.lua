@@ -405,7 +405,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
@@ -418,7 +418,7 @@ for i=0,31,1 do
                                                     if playerPing ~= nil then
                                                         if playerPing > 0 then
                                                             TriggerClientEvent("Blackjack:blackjackWin",source,tableId)
-                                                            TriggerClientEvent('QBCore:Notify', source, 'You have BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
+                                                            TriggerClientEvent('QBCore:Notify', source, 'BLACKJACK! +'..tostring(potentialWinAmount)..' chips', 'success')
                                                             if potentialPushAmount > 10000000 then
                                                                 TriggerClientEvent('chatMessage', -1, "Diamond Casino | " .. GetPlayerName(source) .. " has WON " .. tostring(getMoneyStringFormatted(potentialPushAmount)) .. " chips!")
                                                             end
