@@ -367,6 +367,45 @@ RegisterNetEvent('consumables:client:Crackbaggy', function()
     end)
 end)
 
+RegisterNetEvent('consumables:client:adrenshot', function()
+    local ped = PlayerPedId()
+    QBCore.Functions.Progressbar("use_oxy", "SPEED AND POWER", 2000, false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+		disableMouse = false,
+		disableCombat = true,
+    }, {
+		animDict = "mp_suicide",
+		anim = "pill",
+		flags = 49,
+    }, {}, {}, function() -- Done
+        TriggerServerEvent("QBCore:Server:RemoveItem", "adrenshot", 1)
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["adrenshot"], "remove")
+        TriggerEvent("evidence:client:SetStatus", "widepupils", 300)
+        AdrenalineShotEffect()
+    end, function() -- Cancel
+        QBCore.Functions.Notify("Canceled..", "error")
+    end)
+end)
+
+
+function AdrenalineShotEffect()
+    local startStamina = 8
+    local ped = PlayerPedId()
+    SetRunSprintMultiplierForPlayer(PlayerId(), 1.3)
+    while startStamina > 0 do
+        Wait(1000)
+        if math.random(1, 100) < 10 then
+            RestorePlayerStamina(PlayerId(), 1.0)
+        end
+        startStamina = startStamina - 1
+        if math.random(1, 100) < 60 and IsPedRunning(ped) then
+            SetPedToRagdoll(ped, math.random(1000, 2000), math.random(1000, 2000), 3, 0, 0, 0)
+        end
+    end
+    SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
+end
+
 RegisterNetEvent('consumables:client:EcstasyBaggy', function()
     QBCore.Functions.Progressbar("use_ecstasy", "Pops Pills", 3000, false, true, {
         disableMovement = false,

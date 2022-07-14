@@ -115,7 +115,7 @@ RegisterNetEvent('hospital:client:UsePainkillers', function()
         StopAnimTask(ped, "mp_suicide", "pill", 1.0)
         QBCore.Functions.Notify(Lang:t('error.canceled'), "error")
     end)
-end)
+end) 
 
 -- Threads
 
