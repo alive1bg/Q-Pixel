@@ -204,6 +204,7 @@ RegisterNetEvent('police:client:policeAlert', function(coords, text)
 end)
 
 RegisterNetEvent('police:client:SendToJail', function(time)
+    print("sending")
     TriggerServerEvent("police:server:SetHandcuffStatus", false)
     isHandcuffed = false
     isEscorted = false
