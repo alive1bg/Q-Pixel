@@ -380,7 +380,7 @@ Config.TargetModels = {
                 icon = "fas fa-clipboard",
                 label = "Change Sign",
             },
-        },
+        }, 
         distance = 3.0
     },
 }
