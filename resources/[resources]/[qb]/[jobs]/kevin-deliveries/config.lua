@@ -1,6 +1,6 @@
 Config = Config or {}
 
-Config.Interaction = 'radialmenu' --- target/radialmenu for the job interaction that you want
+Config.Interaction = 'target' --- target/radialmenu for the job interaction that you want
 
 Config.UseCoolDown = 'true' -- true/false
 Config.CoolDown = 1500 * 1000 --- Cooldown until can start next job, default its 25 minutes
