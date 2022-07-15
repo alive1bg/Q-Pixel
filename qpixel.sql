@@ -150,17 +150,6 @@ CREATE TABLE IF NOT EXISTS `apartments` (
   KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Dumping data for table arp3_0.apartments: ~8 rows (approximately)
-INSERT INTO `apartments` (`id`, `name`, `type`, `label`, `citizenid`) VALUES
-	(1, 'apartment17882', 'apartment1', 'Alta Street 7882', 'ORU99383'),
-	(2, 'apartment19112', 'apartment1', 'Alta Street 9112', 'SRO29016'),
-	(3, 'apartment13350', 'apartment1', 'Alta Street 3350', 'PYC59859'),
-	(4, 'apartment16572', 'apartment1', 'Alta Street 6572', 'XWU45723'),
-	(5, 'apartment16671', 'apartment1', 'Alta Street 6671', 'VEH95031'),
-	(6, 'apartment13834', 'apartment1', 'Alta Street 3834', 'ROH13585'),
-	(7, 'apartment12028', 'apartment1', 'Alta Street 2028', 'UIB00018'),
-	(8, 'apartment13432', 'apartment1', 'Alta Street 3432', 'ZQR60820');
-
 -- Dumping structure for table arp3_0.bags
 CREATE TABLE IF NOT EXISTS `bags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
