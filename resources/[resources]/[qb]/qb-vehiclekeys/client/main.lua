@@ -517,7 +517,7 @@ RegisterNetEvent('vehiclekeys:client:GiveKeys', function(target)
         TriggerServerEvent('vehiclekeys:server:GiveVehicleKeys', GetVehicleNumberPlateText(latestveh), GetPlayerServerId(t))
         TriggerEvent("debug", 'Keys: Give Vehicle Keys', 'success')
     else
-        RLCore.Functions.Notify("No player near you!", 'error')
+        QBCore.Functions.Notify("No player near you!", 'error')
         TriggerEvent("debug", 'Keys: No Player Nearby', 'error')
     end
 end)
