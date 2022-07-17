@@ -251,7 +251,39 @@ Config.Products = {
             type = "item",
             slot = 15,
             requiredJob = { "mechanic" }
-        },        
+        },
+        [16] = {
+            name = "backpack1",
+            price = 5,
+            amount = 750,
+            info = {},
+            type = "item",
+            slot = 16,
+       },
+       [17] = {
+            name = "backpack2",
+            price = 2500,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 17,
+       },
+       [18] = {
+            name = "briefcase",
+            price = 2500,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 18,
+       },
+       [19] = {
+            name = "paramedicbag",
+            price = 5000,
+            amount = 5,
+            info = {},
+            type = "item",
+            slot = 19,
+       },        
     },
     ["weedshop"] = {
         [1] = {
@@ -1090,5 +1122,5 @@ Config.Locations = {
         ["products"] = Config.Products["huntingshop"],
         ["showblip"] = true,
         ["blipsprite"] = 626,
-    }
+    },
 }
