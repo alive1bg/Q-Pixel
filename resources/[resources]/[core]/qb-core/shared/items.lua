@@ -1863,7 +1863,9 @@ QBShared.Items = {
 	["useable"] = true,
 	["shouldClose"] = true,
 	["combinable"] = nil,
-	["description"] = "Backpack"
+	["description"] = "Backpack",
+	['created'] = nil, 
+		['decay'] = 14.0
 	},
 	["backpack2"] = {
 		["name"] = "backpack2",
@@ -1875,7 +1877,9 @@ QBShared.Items = {
 		["useable"] = true,
 		["shouldClose"] = true,
 		["combinable"] = nil,
-		["description"] = "Backpack"
+		["description"] = "Backpack",
+		['created'] = nil, 
+		['decay'] = 14.0
 	},
 	["briefcase"] = {
 		["name"] = "briefcase",
@@ -1887,7 +1891,9 @@ QBShared.Items = {
 		["useable"] = true,
 		["shouldClose"] = true,
 		["combinable"] = nil,
-		["description"] = "Briefcase"
+		["description"] = "Briefcase",
+		['created'] = nil, 
+		['decay'] = 14.0
 	},
 	["paramedicbag"] = {
 		["name"] = "paramedicbag",
@@ -1899,6 +1905,12 @@ QBShared.Items = {
 		["useable"] = true,
 		["shouldClose"] = true,
 		["combinable"] = nil,
-		["description"] = "Paramedic bag"
+		["description"] = "Paramedic bag",
+		['created'] = nil, 
+		['decay'] = 14.0
 	},
+
+	--camera
+	["camera"] = {["name"] = "camera", ["label"] = "Camera", ["weight"] = 1000, ["type"] = "item", ["image"] = "camera.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "", ['created'] = nil, ['decay'] = 14.0},
+	["photo"] = {["name"] = "photo", ["label"] = "Photo", ["weight"] = 20, ["type"] = "item", ["image"] = "photo.png", ["unique"] = true, ["useable"] = true, ["shouldClose"] = true, ["combinable"] = nil, ["description"] = "", ['created'] = nil, ['decay'] = 14.0},
 }

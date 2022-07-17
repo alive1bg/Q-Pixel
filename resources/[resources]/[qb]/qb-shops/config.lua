@@ -284,6 +284,16 @@ Config.Products = {
             type = "item",
             slot = 19,
        },        
+       [20] = {
+        name = "camera",
+        price = 5000,
+        amount = 5,
+        info = {},
+        type = "item",
+        slot = 20,
+   },        
+
+       
     },
     ["weedshop"] = {
         [1] = {
