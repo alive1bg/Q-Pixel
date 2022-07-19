@@ -15,7 +15,7 @@ function popdownfunction() {
         $('.popupclass').fadeOut('slow');
         $('.popupclass').html("");
         up = false
-        $.post('https://wert-camera/Close', JSON.stringify({}));
+        $.post('https://qb-camera/Close', JSON.stringify({}));
     }
 }
 
