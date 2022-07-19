@@ -238,7 +238,6 @@ function DisplayMenu(state, slider1, slider2, slider3, slider4, slider5, slider6
         if isMenuShowing then
             ToggleMenu(state)
             DestroyMenu()
-
             isMenuShowing = false
         end
     end
@@ -250,6 +249,8 @@ function MenuManager(input)
             if currentItems.menu == "exitConfirmation" then
                 if currentItems.item == "yes" then
                     SyncWheelFitment()
+                    TriggerEvent("qb-wheelfitment_cl:forceMenuClose")
+                    print("Wheels Updated")
                     DisplayMenu(false)
                 elseif currentItems.item == "no" then
                     SwitchMenu("mainMenu")
