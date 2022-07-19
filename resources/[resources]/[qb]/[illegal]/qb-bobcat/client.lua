@@ -134,20 +134,23 @@ end
 
 -- Doorlocks
 
-RegisterNetEvent('gutso-bobcat:openFirstDoor', function()  
+RegisterNetEvent('gutso-bobcat:openFirstDoor', function()
     Wait(500)
-    TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatfirst', false, nil, false, true) 
+    -- TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatfirst', false, nil, false, true)
+    TriggerServerEvent("doors:change-lock-state", 240)
+    TriggerServerEvent("doors:change-lock-state", 241)
 end)
 
-RegisterNetEvent('gutso-bobcat:openSecondDoor', function()  
+RegisterNetEvent('gutso-bobcat:openSecondDoor', function()
     Wait(500)
-    TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatsecond', false, nil, false, true)
+    -- TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatsecond', false, nil, false, true)
+    TriggerServerEvent("doors:change-lock-state", 242)
 end)
 
-RegisterNetEvent('gutso-bobcat:openThirdDoor', function()    
+RegisterNetEvent('gutso-bobcat:openThirdDoor', function()
     local ped = PlayerPedId()
-    local coords = GetEntityCoords(ped)   
-    if #(coords - Config.ThirdDoor) < 2.0 then  
+    local coords = GetEntityCoords(ped)
+    if #(coords - Config.ThirdDoor) < 2.0 then
         local id_card = `p_ld_id_card_01`
         RequestModel(id_card)
         while not HasModelLoaded("p_ld_id_card_01") do
@@ -157,20 +160,22 @@ RegisterNetEvent('gutso-bobcat:openThirdDoor', function()
         idProp = CreateObject(id_card, coords, 1, 1, 0)
         local boneIndex = GetPedBoneIndex(ped, 28422)
         AttachEntityToEntity(idProp, ped, boneIndex, 0.12, 0.028, 0.001, 10.0, 175.0, 0.0, true, true, false, true, 1, true)
-        
+
         loadAnimDict("amb@prop_human_atm@male@enter")
         loadAnimDict("amb@prop_human_atm@male@idle_a")
         TaskPlayAnim(ped, "amb@prop_human_atm@male@enter", "enter", 1.0, 1.0, -1, 49, 0, 0, 0, 0)
 
         DetachEntity(idProp, false, false)
         Wait(1000)
-        if Config.SpawnGuards then 
-            TriggerEvent('gutso-bobcat:client:npcSync') 
+        if Config.SpawnGuards then
+            TriggerEvent('gutso-bobcat:client:npcSync')
         end
-        Wait(1000) 
-        TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatthird', false, nil, false, true)
+        Wait(1000)
+        -- TriggerServerEvent('qb-doorlock:server:updateState', 'bobcatthird', false, nil, false, true)
+        TriggerServerEvent("doors:change-lock-state", 243)
+        TriggerServerEvent("doors:change-lock-state", 244)
         Wait(500)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "bobcatsecuritycard", 1)   
+        TriggerServerEvent("QBCore:Server:RemoveItem", "bobcatsecuritycard", 1)
     end
 end)
 
@@ -428,7 +433,7 @@ function grabRifles()
 end
 
 -- Target Export 
-CreateThread(function() 
+CreateThread(function()
     exports['qb-target']:AddBoxZone("bobcatPed", vector3(870.22, -2288.59, 30.47), 0.5, 0.5, {
         name = "bobcatPed",
         heading = 0,
@@ -441,7 +446,7 @@ CreateThread(function()
                 type = "server",
                 event = "gutso-bobcat:server:commandPed",
                 icon = "fas fa-bomb",
-                label = "Explode Door!", 
+                label = "Explode Door!",
             }
         },
         distance = 2.5
@@ -458,7 +463,7 @@ CreateThread(function()
                 type = "client",
                 event = "gutso-bobcat:giveSmgs",
                 icon = "fas fa-circle",
-                label = "Grab!", 
+                label = "Grab!",
             },
         },
         distance = 2.5
