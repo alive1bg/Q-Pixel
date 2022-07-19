@@ -764,7 +764,7 @@ function QBCore.Functions.SetVehicleProperties(vehicle, props)
         end
         if props.doorStatus then
             for doorIndex, breakDoor in pairs(props.doorStatus) do
-                if breakDoor then SetVehicleDoorBroken(vehicle, doorIndex, true)  end
+                if breakDoor then SetVehicleDoorBroken(vehicle, tonumber(doorIndex), true)  end
             end 
         end
         if props.neonEnabled then
