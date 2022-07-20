@@ -5,75 +5,99 @@ local shopPeds = {}
 Citizen.CreateThread(function()
 	for k, v in pairs(Config.PedList) do
 		if v.clickable then
-			exports['qb-target']:AddBoxZone("CatPat"..k, vector3(v.coords.x, v.coords.y, v.coords.z-0.3), 0.7, 0.7, { name="CatPat"..k, heading = 0, debugPoly = false, minZ= v.coords.z-1.5, maxZ=v.coords.z-0.5 }, 
-				{ options = { { event = "qb-uwu:CatPat", icon = "fas fa-paw", item = 'uwucatfood', label = "Pat the Cat" }, },
-				  distance = 1.5
+
+			exports['qb-target']:AddBoxZone("CatPat"..k, vector3(v.coords.x, v.coords.y, v.coords.z-0.3), 0.7, 0.7, 
+			{ 
+			name="CatPat"..k, 
+			heading = 0, 
+			debugPoly = false, 
+			minZ= v.coords.z-1.5, 
+			maxZ=v.coords.z-0.5 }, 
+			{ 
+				options = { 
+					{ 
+						event = "qb-uwu:CatPat", 
+						icon = "fas fa-paw", 
+						label = "Pat the Cat" 
+					}, 
+				},
+				distance = 1.5
 			})
+
 		end
 	end
-	CreatePeds()
+	CreatePeds() 
 end)
+
+
+
 
 RegisterNetEvent('qb-uwu:CatPat')
 AddEventHandler('qb-uwu:CatPat', function()
-	local pid = PlayerPedId()
-	loadAnimDict("creatures@cat@amb@world_cat_sleeping_ground@exit")
-	loadAnimDict("creatures@cat@amb@world_cat_sleeping_ground@enter")
-	for k,v in pairs (shopPeds) do
-        pCoords = GetEntityCoords(PlayerPedId())
-        ppCoords = GetEntityCoords(v)
-        dist = #(pCoords - ppCoords)
+	QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
+		if result then
+			local pid = PlayerPedId()
+			loadAnimDict("creatures@cat@amb@world_cat_sleeping_ground@exit")
+			loadAnimDict("creatures@cat@amb@world_cat_sleeping_ground@enter")
+			for k,v in pairs (shopPeds) do
+				pCoords = GetEntityCoords(PlayerPedId())
+				ppCoords = GetEntityCoords(v)
+				dist = #(pCoords - ppCoords)
 
-		if dist < 2 then 
-			--Turn you to face the cat
-			TaskTurnPedToFaceEntity(pid, v, 1200)
-			Wait(1200)
-			
-			--Debugging the cat location
-			--TriggerEvent("QBCore:Notify", ppCoords.z, "error")
-			
-			--If cat is on floor, then kneel down
-			if ppCoords.z < 22 then TaskStartScenarioInPlace(pid, "CODE_HUMAN_MEDIC_TEND_TO_DEAD", 0, true)
-			--if higher, do the best animation I could find for harrassing a cat
-			elseif ppCoords.z > 22 then TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"}) end
-			
-			FreezeEntityPosition(pid, true)
-			Wait(1000)
-			TaskPlayAnim(v, "creatures@cat@amb@world_cat_sleeping_ground@exit", "exit", 2.0, 200.0, 0.3, 8, 0.2, 0, 0, 0)
-			
-			--An attempt to make the cat look at you, but doing it so "fast" people can't move the cat away.
-			Wait(4000)
-			RemoveAnimDict("creatures@cat@amb@world_cat_sleeping_ground@exit")
-			FreezeEntityPosition(v, false)
-			TaskTurnPedToFaceEntity(v, pid, 1000)
-			Wait(1000)
-			FreezeEntityPosition(v, true)
-			Wait(1500)
-			
-			--50% chance to do an ear scratch
-			if math.random(1,2) == 2 then
-				loadAnimDict("creatures@cat@player_action@")
-				TaskPlayAnim(v, "creatures@cat@player_action@", "action_a", 2.0, 200.0, 0.3, 8, 0.2, 0, 0, 0)
-			else end
-			
-			Wait(4000)
-			FreezeEntityPosition(pid, false)
-			
-			--Relieve stress and heal 2hp
-			TriggerServerEvent('hud:server:RelieveStress', 100)
-			SetEntityHealth(pid, GetEntityHealth(pid) + 1)
-			TriggerServerEvent("QBCore:Server:RemoveItem", "uwucatfood", 1)
-            TriggerEvent('inventory:client:ItemBox', QBCore.Shared.Items["uwucatfood"], "remove", 1)
-			
-			if ppCoords.z < 22 then TaskStartScenarioInPlace(pid, "CODE_HUMAN_MEDIC_TEND_TO_DEAD", 0, true) Wait(2800) ClearPedTasksImmediately(pid)
-			else TriggerEvent('animations:client:EmoteCommandStart', {"c"}) end
-			
-			Wait(3000)
-			TaskPlayAnim(v, "creatures@cat@amb@world_cat_sleeping_ground@enter", "enter", 2.0, 200.0, 0.3, 2, 0.2, 0, 0, 0)
-			SetEntityCoords(v, ppCoords.x, ppCoords.y, ppCoords.z-0.23, 0, 0, 0, true)
-			break
-		end
-	end
+				if dist < 2 then 
+					--Turn you to face the cat
+					TaskTurnPedToFaceEntity(pid, v, 1200)
+					Wait(1200)
+					
+					--Debugging the cat location
+					--TriggerEvent("QBCore:Notify", ppCoords.z, "error")
+					
+					--If cat is on floor, then kneel down
+					if ppCoords.z < 22 then TaskStartScenarioInPlace(pid, "CODE_HUMAN_MEDIC_TEND_TO_DEAD", 0, true)
+					--if higher, do the best animation I could find for harrassing a cat
+					elseif ppCoords.z > 22 then TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"}) end
+					
+					FreezeEntityPosition(pid, true)
+					Wait(1000)
+					TaskPlayAnim(v, "creatures@cat@amb@world_cat_sleeping_ground@exit", "exit", 2.0, 200.0, 0.3, 8, 0.2, 0, 0, 0)
+					
+					--An attempt to make the cat look at you, but doing it so "fast" people can't move the cat away.
+					Wait(4000)
+					RemoveAnimDict("creatures@cat@amb@world_cat_sleeping_ground@exit")
+					FreezeEntityPosition(v, false)
+					TaskTurnPedToFaceEntity(v, pid, 1000)
+					Wait(1000)
+					FreezeEntityPosition(v, true)
+					Wait(1500)
+					
+					--50% chance to do an ear scratch
+					if math.random(1,2) == 2 then
+						loadAnimDict("creatures@cat@player_action@")
+						TaskPlayAnim(v, "creatures@cat@player_action@", "action_a", 2.0, 200.0, 0.3, 8, 0.2, 0, 0, 0)
+					else end
+					
+					Wait(4000)
+					FreezeEntityPosition(pid, false)
+					
+					--Relieve stress and heal 2hp
+					TriggerServerEvent('hud:server:RelieveStress', 100)
+					SetEntityHealth(pid, GetEntityHealth(pid) + 1)
+					TriggerServerEvent("QBCore:Server:RemoveItem", "uwucatfood", 1)
+					TriggerEvent('inventory:client:ItemBox', QBCore.Shared.Items["uwucatfood"], "remove", 1)
+					
+					if ppCoords.z < 22 then TaskStartScenarioInPlace(pid, "CODE_HUMAN_MEDIC_TEND_TO_DEAD", 0, true) Wait(2800) ClearPedTasksImmediately(pid)
+					else TriggerEvent('animations:client:EmoteCommandStart', {"c"}) end
+					
+					Wait(3000)
+					TaskPlayAnim(v, "creatures@cat@amb@world_cat_sleeping_ground@enter", "enter", 2.0, 200.0, 0.3, 2, 0.2, 0, 0, 0)
+					SetEntityCoords(v, ppCoords.x, ppCoords.y, ppCoords.z-0.23, 0, 0, 0, true)
+					break
+				end
+			end
+			else
+				QBCore.Functions.Notify("You don't have any cat food", "error", 3000)
+			end
+		end, "uwucatfood")
 end)
 
 function loadAnimDict(dict)
