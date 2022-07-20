@@ -178,24 +178,24 @@ Citizen.CreateThread(function()
 	})
 	--Tables
 	exports['qb-target']:AddBoxZone("uWuTable", vector3(-573.43, -1059.76, 22.49), 1.9, 1.0, { name="uWuTable", heading = 91.0, debugPoly=debug, minZ=21.49, maxZ=22.89 }, 
-		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "uWu Table", stash = "Table_1" }, },
+		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "Table", stash = "Table_1" }, },
 		  distance = 2.5
 	})
 	exports['qb-target']:AddBoxZone("uWuTable2", vector3(-573.44, -1063.45, 22.34), 1.9, 1.0, { name="uWuTable2", heading = 91.0, debugPoly=debug, minZ=21.49, maxZ=22.89 }, 
-		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "uWu Table", stash = "Table_2" }, },
+		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "Table", stash = "Table_2" }, },
 		  distance = 2.5
 	})
 	exports['qb-target']:AddBoxZone("uWuTable3", vector3(-573.41, -1067.09, 22.49), 1.9, 1.0, { name="uWuTable3", heading = 91.0, debugPoly=debug, minZ=21.49, maxZ=22.89 }, 
-		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "uWu Table", stash = "Table_3" }, },
+		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "Table", stash = "Table_3" }, },
 		  distance = 2.5
 	})
 	exports['qb-target']:AddBoxZone("uWuTable4", vector3(-578.68, -1051.09, 22.35), 1.2, 0.9, { name="uWuTable4", heading = 91.0, debugPoly=debug, minZ=21.49, maxZ=22.89 }, 
-		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "uWu Table", stash = "Table_4" }, },
+		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "Table", stash = "Table_4" }, },
 		  distance = 2.5
 	})
 
 	exports['qb-target']:AddBoxZone("uWuTable5", vector3(-586.89, -1065.72, 22.34), 0.65, 0.55, { name="uWuTable5", heading = 0, debugPoly=debug, minZ=22.29, maxZ=22.54 }, 
-		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "uWu Table", stash = "Table_5" }, },
+		{ options = { {  event = "qb-uwu:Stash", icon = "fas fa-box-open", label = "Table", stash = "Table_5" }, },
 		  distance = 2.5
 	})
 
@@ -371,7 +371,7 @@ end
 
 RegisterNetEvent('qb-uwu:Ticket:Menu', function()
     exports['qb-menu']:openMenu({
-		{ isMenuHeader = true, header = "uWu Cafe Payment", txt = "Do you want trade your tickets for payment?" },
+		{ isMenuHeader = true, header = "Cafe Payment", txt = "Do you want trade your tickets for payment?" },
         { header = "Yes", server = true, params = { event = "qb-uwu:Tickets:Sell" } },
         { header = "No", event = "qb-uwu:Tickets:Sell:no" },
     })
@@ -383,10 +383,10 @@ RegisterNetEvent('qb-uwu:Menu:ChoppingBoard', function()
 	else
 		exports['qb-menu']:openMenu({
 			{ header = "| Sandwich Station |", isMenuHeader = true },
-			{ header = "• uWu Ham and Cheese Sandwich •", txt = "uWu Bread, uWu Ham, uWu Cheese, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuhamcheesesandwich' } } },
-			{ header = "• uWu Vanilla Sandwich •", txt = "uWu Bread, uWu Vanilla, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuvanillasandwich' } } },
-			{ header = "• uWu Chocolate Sandwich •", txt = "uWu Bread, uWu Chocolate, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuchocolatesandwich' } } },
-			{ header = "• uWu Strawberry Sandwich •", txt = "uWu Bread, uWu Starberry, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwustrawberrysandwich' } } },
+			{ header = "• Ham and Cheese Sandwich •", txt = "Bread, Ham, Cheese, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuhamcheesesandwich' } } },
+			{ header = "• Vanilla Sandwich •", txt = "Bread, Vanilla, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuvanillasandwich' } } },
+			{ header = "• Chocolate Sandwich •", txt = "Bread, Chocolate, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuchocolatesandwich' } } },
+			{ header = "• Strawberry Sandwich •", txt = "Bread, Starberry, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwustrawberrysandwich' } } },
 			{ header = "<• Close •>", txt = "Close this menu", params = { event = "qb-menu:client:closeMenu"} },
 		})
 	end
@@ -398,17 +398,17 @@ RegisterNetEvent('qb-uwu:Menu:Blender', function()
 	else
 		exports['qb-menu']:openMenu({
 			{ header = "| Mixture Station |", isMenuHeader = true },
-			{ header = "• uWu Neko Cake Mixture •", txt = "uWu Sugar, uWu Milk, uWu Flour, uWu Strawberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocakemixture' } } },
-			{ header = "• uWu Blue Mochi Mixture •", txt = "uWu Sugar, uWu Milk, uWu Flour, uWu Blueberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubmochimixture' } } },
-			{ header = "• uWu Green Mochi Mixture •", txt = "uWu Sugar, uWu Milk, uWu Flour, uWu Matcha", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugmochimixture' } } },
-			{ header = "• uWu Orange Mochi Mixture •", txt = "uWu Sugar, uWu Milk, uWu Flour, uWu Orange", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuomochimixture' } } },
-			{ header = "• uWu Pink Mochi Mixture •", txt = "uWu Sugar, uWu Milk, uWu Flour, uWu Starberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupmochimixture' } } },
-			{ header = "• uWu Neko Onigiri Mixture •", txt = "uWu Rice, uWu Milk, uWu Nori", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuriceballmixture' } } },
-			{ header = "• uWu Neko Cookie Mixture •", txt = "uWu Sugar, uWu Flour, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocookiemixture' } } },
-			{ header = "• uWu Neko Donut Mixture •", txt = "uWu Sugar, uWu Flour, uWu Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekodonutmixture' } } },
-			{ header = "• uWu Pancakes Mixture •", txt = "uWu Sugar, uWu Flour, uWu Eggs, uWu Water", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupancakesmixture' } } },
-			{ header = "• uWu Miso Soup Mixture •", txt = "uWu Miso Soup Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwumisosoupmixture' } } },
-			{ header = "• uWu Cat Food Mixture •", txt = "uWu Cat Food Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucatfoodmixture' } } },
+			{ header = "• Neko Cake Mixture •", txt = "Sugar, Milk, Flour, Strawberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocakemixture' } } },
+			{ header = "• Blue Mochi Mixture •", txt = "Sugar, Milk, Flour, Blueberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubmochimixture' } } },
+			{ header = "• Green Mochi Mixture •", txt = "Sugar, Milk, Flour, Matcha", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugmochimixture' } } },
+			{ header = "• Orange Mochi Mixture •", txt = "Sugar, Milk, Flour, Orange", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuomochimixture' } } },
+			{ header = "• Pink Mochi Mixture •", txt = "Sugar, Milk, Flour, Starberry", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupmochimixture' } } },
+			{ header = "• Neko Onigiri Mixture •", txt = "Rice, Milk, Nori", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuriceballmixture' } } },
+			{ header = "• Neko Cookie Mixture •", txt = "Sugar, Flour, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocookiemixture' } } },
+			{ header = "• Neko Donut Mixture •", txt = "Sugar, Flour, Milk", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekodonutmixture' } } },
+			{ header = "• Pancakes Mixture •", txt = "Sugar, Flour, Eggs, Water", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupancakesmixture' } } },
+			{ header = "• Miso Soup Mixture •", txt = "Miso Soup Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwumisosoupmixture' } } },
+			{ header = "• Cat Food Mixture •", txt = "Cat Food Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucatfoodmixture' } } },
 			{ header = "<• Close •>", txt = "Close this menu", params = { event = "qb-menu:client:closeMenu"} },
 		})
 	end
@@ -420,11 +420,11 @@ RegisterNetEvent('qb-uwu:Menu:HotPlates', function()
 	else
 		exports['qb-menu']:openMenu({
 			{ header = "| Hot Plates Station |", isMenuHeader = true },
-			{ header = "• uWu Miso Soup •", txt = "uWu Miso Soup Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwumisosoup' } } },
-			{ header = "• uWu Cat Food •", txt = "uWu Cat Food Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucatfood' } } },
-			{ header = "• uWu Pancakes •", txt = "uWu Pancakes Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupancakes' } } },
-			{ header = "• uWu Neko Onigiri •", txt = "uWu Neko Onigiri Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuriceball' } } },
-			{ header = "• uWu Neko Donut •", txt = "uWu Neko Donut Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekodonut' } } },
+			{ header = "• Miso Soup •", txt = "Miso Soup Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwumisosoup' } } },
+			{ header = "• Cat Food •", txt = "Cat Food Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucatfood' } } },
+			{ header = "• Pancakes •", txt = "Pancakes Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupancakes' } } },
+			{ header = "• Neko Onigiri •", txt = "Neko Onigiri Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuriceball' } } },
+			{ header = "• Neko Donut •", txt = "Neko Donut Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekodonut' } } },
 			{ header = "<• Close •>", txt = "Close this menu", params = { event = "qb-menu:client:closeMenu"} },
 		})
 	end
@@ -436,12 +436,12 @@ RegisterNetEvent('qb-uwu:Menu:Oven', function()
 	else
 		exports['qb-menu']:openMenu({
 			{ header = "| Hot Food Station |", isMenuHeader = true },
-			{ header = "• uWu Neko Cake •", txt = "uWu Neko Cake Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocake' } } },
-			{ header = "• uWu Blue Mochi •", txt = "uWu Blue Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubmochi' } } },
-			{ header = "• uWu Green Mochi •", txt = "uWu Green Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugmochi' } } },
-			{ header = "• uWu Orange Mochi •", txt = "uWu Orange Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuomochi' } } },
-			{ header = "• uWu Pink Mochi •", txt = "uWu Pink Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupmochi' } } },
-			{ header = "• uWu Neko Cookie •", txt = "uWu Neko Cookie Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocookie' } } },
+			{ header = "• Neko Cake •", txt = "Neko Cake Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocake' } } },
+			{ header = "• Blue Mochi •", txt = "Blue Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubmochi' } } },
+			{ header = "• Green Mochi •", txt = "Green Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugmochi' } } },
+			{ header = "• Orange Mochi •", txt = "Orange Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuomochi' } } },
+			{ header = "• Pink Mochi •", txt = "Pink Mochi Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupmochi' } } },
+			{ header = "• Neko Cookie •", txt = "Neko Cookie Mixture", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekocookie' } } },
 			{ header = "<• Close •>", txt = "Close this menu", params = { event = "qb-menu:client:closeMenu"} },
 		})
 	end
@@ -464,16 +464,16 @@ RegisterNetEvent('qb-uwu:Menu:Coffee', function()
 	else
 		exports['qb-menu']:openMenu({
 			{ header = "Drink Menu", isMenuHeader = true },
-			{ header = "• uWu Coffee •", txt = "uWu Coffee Beans, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucoffee' } } },
-			{ header = "• uWu Neko Latte •", txt = "uWu Coffee Beans, uWu Milk, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekolatte' } } },
-			{ header = "• uWu Hot Chocolate •", txt = "uWu Chocolate, uWu Milk, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuhotchocolate' } } },
-			{ header = "• uWu Capuchino •", txt = "uWu Chocolate, uWu Coffee Beans, uWu Milk, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucapuchino' } } },
-			{ header = "• uWu BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubobatea' } } },
-			{ header = "• uWu Blue BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Blueberry, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubbobatea' } } },
-			{ header = "• uWu Green BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Matcha, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugbobatea' } } },
-			{ header = "• uWu Pink BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Strawberry, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupbobatea' } } },
-			{ header = "• uWu Orange BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Orange, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuobobatea' } } },
-			{ header = "• uWu Rose BobaTea •", txt = "uWu Boba, uWu Tea, uWu Milk, uWu Rose, uWu Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwurbobatea' } } },
+			{ header = "• Coffee •", txt = "Coffee Beans, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucoffee' } } },
+			{ header = "• Neko Latte •", txt = "Coffee Beans, Milk, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwunekolatte' } } },
+			{ header = "• Hot Chocolate •", txt = "Chocolate, Milk, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuhotchocolate' } } },
+			{ header = "• Capuchino •", txt = "Chocolate, Coffee Beans, Milk, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwucapuchino' } } },
+			{ header = "• BobaTea •", txt = "Boba, Tea, Milk, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubobatea' } } },
+			{ header = "• Blue BobaTea •", txt = "Boba, Tea, Milk, Blueberry, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwubbobatea' } } },
+			{ header = "• Green BobaTea •", txt = "Boba, Tea, Milk, Matcha, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwugbobatea' } } },
+			{ header = "• Pink BobaTea •", txt = "Boba, Tea, Milk, Strawberry, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwupbobatea' } } },
+			{ header = "• Orange BobaTea •", txt = "Boba, Tea, Milk, Orange, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwuobobatea' } } },
+			{ header = "• Rose BobaTea •", txt = "Boba, Tea, Milk, Rose, Cup", params = { event = "qb-uwu:MakeItem", args = { item = 'uwurbobatea' } } },
 			{ header = "<• Close •>", txt = "Close this menu", params = { event = "qb-menu:client:closeMenu"} },
 		})
 	end
