@@ -29,7 +29,7 @@ QBCore.Functions.CreateUseableItem("cigarette", function(source, item)
 			if Player.Functions.RemoveItem(item.name, 1, item.slot) then
 				TriggerClientEvent("cigarettes:client:UseCigarette", src)
 			end
-    else
+    else 
         TriggerClientEvent("QBCore:Notify", source, "You don't have a lighter", "error")
     end
 end)
