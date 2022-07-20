@@ -262,6 +262,17 @@ local weapons = {
 	['weapon_katana'] 	                = 0.65,
 	['weapon_sledgehammer'] 	        = 0.65,
 
+	['weapon_shoe'] 			    = 0.45,
+    ['weapon_brick'] 			    = 0.45,
+    ['weapon_cash'] 			    = 0.45,
+    ['weapon_book'] 			    = 0.45,
+
+	['weapon_dragunov'] 		    = 0.65,
+	['weapon_m14'] 		    = 0.65,
+    ['weapon_sniperrifle2'] 		    = 0.65,
+    ['weapon_g22'] 		    = 0.65,
+    ['weapon_staff'] 		    = 0.65,
+
 }
 
 Citizen.CreateThread(function()
