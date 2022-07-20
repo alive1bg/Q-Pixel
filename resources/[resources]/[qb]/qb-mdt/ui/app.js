@@ -1604,7 +1604,7 @@ $(document).ready(() => {
         {
           className: "add-charge",
           icon: "fas fa-check",
-          text: "Add Charge",
+          text: "Modify Charges",
           info: $(this).data("name"),
           status: "",
         },
@@ -1666,12 +1666,14 @@ $(document).ready(() => {
         $(`[data-name="${cid}"]`).prepend(`<div class="white-tag" data-link="${randomNum}"data-id="${cid}">${$(this).find(".offense-item-offense").html()}</div>`);
         $("#current-charges-holder").prepend(`<div class="current-charges-tag" data-link="${randomNum}">${$(this).find(".offense-item-offense").html()}</div>`);
 
-        const CurrRfine = $(".fine-recommended-amount").val();
+        const CurrRfine = $(".fine-recommended-amount").filter(`[data-id="${cid}"]`).val();
         const NewFine = +CurrRfine + +Fine;
         $(".fine-recommended-amount").val(NewFine);
-        const CurrRsentence = $(".sentence-recommended-amount").val();
-        const NewSentence = +CurrRsentence + +Sentence;
-        $(".sentence-recommended-amount").val(NewSentence);
+        $(".fine-recommended-amount").filter(`[data-id="${cid}"]`).val(NewFine);
+
+        const CurrRsentence = $(".sentence-recommended-amount").filter(`[data-id="${cid}"]`).val();
+
+        $(".sentence-recommended-amount").filter(`[data-id="${cid}"]`).val(NewSentence);
       } else if (e.which == 3) {
         $(".associated-incidents-user-holder").children("div").each(function (index) {
           if ($(".associated-incidents-user-holder").children().eq(index).data("id") == cid) {
@@ -1692,12 +1694,13 @@ $(document).ready(() => {
                 }
               });
 
-              const CurrRfine = $(".fine-recommended-amount").val();
+              const CurrRfine = $(".fine-recommended-amount").filter(`[data-id="${cid}"]`).val();
               const NewFine = +CurrRfine - Fine;
-              $(".fine-recommended-amount").val(NewFine);
-              const CurrRsentence = $(".sentence-recommended-amount").val();
+              $(".fine-recommended-amount").filter(`[data-id="${cid}"]`).val(NewFine);
+
+              const CurrRsentence = $(".sentence-recommended-amount").filter(`[data-id="${cid}"]`).val();
               const NewSentence = +CurrRsentence - +Sentence;
-              $(".sentence-recommended-amount").val(NewSentence);
+              $(".sentence-recommended-amount").filter(`[data-id="${cid}"]`).val(NewSentence);
               return false;
             }
           }
