@@ -67,7 +67,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:DutyB",
                 icon = "far fa-clipboard",
                 label = "Clock In/Out",
@@ -88,7 +88,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:startjob",
                 icon = "far fa-clipboard",
                 label = "Start Job",
@@ -109,7 +109,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotmenu:burgershotmainmanu",
                 icon = "fas fa-hamburger",
                 label = "Burgershot Burger Menu",
@@ -131,7 +131,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershot:washHands",
                 icon = "fas fa-hand-holding-water",
                 label = "Wash your Hands!",
@@ -153,7 +153,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotmenu:DrinkMenu",
                 icon = "fas fa-filter",
                 label = "Burgershot Drink Menu",
@@ -175,7 +175,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:makeTomato",
                 icon = "fas fa-hamburger",
                 label = "Cut Tomatoes",
@@ -183,7 +183,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:makeOnions",
                 icon = "fas fa-hamburger",
                 label = "Cut Onions",
@@ -205,7 +205,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:PrepareFries",
                 icon = "fas fa-box",
                 label = "Make Fries",
@@ -213,7 +213,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:PrepareOnionRings",
                 icon = "fas fa-box",
                 label = "Make Onion Rings",
@@ -221,7 +221,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:PrepareChickenNuggets",
                 icon = "fas fa-box",
                 label = "Make Chicken Nuggets",
@@ -242,7 +242,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:BakeMeat",
                 icon = "fas fa-box",
                 label = "Grill Raw Meat",
@@ -263,7 +263,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:DriveThru",
                 icon = "fas fa-box",
                 label = "Drive Thru",
@@ -284,7 +284,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:Tray1",
                 icon = "fas fa-box",
                 label = "Tray 1",
@@ -304,7 +304,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:Tray2",
                 icon = "fas fa-box",
                 label = "Tray 2",
@@ -324,7 +324,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:Storage",
                 icon = "fas fa-box",
                 label = "BurgerShot Storage",
@@ -345,7 +345,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:FoodStorage",
                 icon = "fas fa-box",
                 label = "BurgerShot Fridge",
@@ -366,7 +366,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:Unloadbox",
                 icon = "fas fa-box",
                 label = "Unload Ingredients",
@@ -387,7 +387,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:icecream",
                 icon = "fas fa-ice-cream",
                 label = "Make Ice Cream",
@@ -408,7 +408,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:donut",
                 icon = "fas fa-box",
                 label = "Get a Donut",
@@ -416,7 +416,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:creampie",
                 icon = "fas fa-box",
                 label = "Get a Slice of Cream Pie",
@@ -437,7 +437,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershot:registermenu",
                 icon = "fas fa-credit-card",
                 label = "Open Register",
@@ -458,7 +458,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershot:registermenu",
                 icon = "fas fa-credit-card",
                 label = "Open Register",
@@ -480,7 +480,7 @@ Config.BoxZones = {
         options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershot:registermenu",
                 icon = "fas fa-credit-card",
                 label = "Open Register",
@@ -503,7 +503,7 @@ Config.BoxZones = {
             --pizza this
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-pizzathis:Warehousebuypallet",
                 icon = "far fa-clipboard",
                 label = "Pick Up Ingredients",
@@ -511,7 +511,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-uwujob:Warehousebuypallet",
                 icon = "far fa-clipboard",
                 label = "Pick Up Ingredients",
@@ -519,7 +519,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-bahama:Warehousebuypallet",
                 icon = "far fa-clipboard",
                 label = "Pick Up Ingredients",
@@ -527,7 +527,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-burgershotjob:Warehousebuypallet",
                 icon = "far fa-clipboard",
                 label = "Pick Up Ingredients",
@@ -535,7 +535,7 @@ Config.BoxZones = {
             },
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
                 event = "qb-pearls:Warehousebuypallet",
                 icon = "far fa-clipboard",
                 label = "Pick Up Ingredients",
@@ -732,7 +732,7 @@ Config.TargetModels = {
 		options = {
             {
                 type = "client",
-                targeticon = 'fas fa-eye', 
+                 
             	event = "qb-burgershotmenu:menu",
                 icon = "fas fa-car",
 				label = "BurgerShot Garage",
