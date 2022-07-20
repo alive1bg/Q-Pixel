@@ -5,7 +5,7 @@ local VehicleList = {}
 
 -- Functions
 
-local function CheckOwner(plate, identifier)
+function CheckOwner(plate, identifier)
     local retval = false
     if VehicleList then
         local found = VehicleList[plate]
@@ -67,14 +67,14 @@ end)
 
 -- callback
 
-QBCore.Functions.CreateCallback('vehiclekeys:server:CheckOwnership', function(source, cb, plate)
+QBCore.Functions.CreateCallback('vehiclekeys:CheckOwnership', function(source, cb, plate)
     local check = VehicleList[plate]
     local retval = check ~= nil
 
     cb(retval)
 end)
 
-QBCore.Functions.CreateCallback('vehiclekeys:server:CheckHasKey', function(source, cb, plate)
+QBCore.Functions.CreateCallback('vehiclekeys:CheckHasKey', function(source, cb, plate)
     local Player = QBCore.Functions.GetPlayer(source)
     cb(CheckOwner(plate, Player.PlayerData.citizenid))
 end)
@@ -97,41 +97,3 @@ QBCore.Functions.CreateUseableItem('security_system_device' , function(source, i
     TriggerClientEvent('qb-vehiclekeys:client:useSecuritySystem', src)
 end)
 
-
--- remove keys
-local function removeKeys(plate, citizenid)
-    local car = MySQL.single.await('SELECT * FROM player_vehicles WHERE citizenid = ? AND player = ?', {citizenid, plate})
-
-    if not car then return false, "failed_not_found" end
-
-    local removeKeys = MySQL.update.await('UPDATE player_vehicles SET citizenid = NULL, license = null WHERE id = ?', {car.id})
-    VehicleList[plate] = {}
-    return true, "success"
-end
-
-RegisterNetEvent('vehiclekeys:server:RemoveKeys', function(plate, citizenid)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    local PlayerData = Player.PlayerData
-    local isPrincipal = IsPlayerAceAllowed(src, 'removekeys')
-    local isGod = QBCore.Functions.HasPermission(src, 'god')
-    local isAdmin = QBCore.Functions.HasPermission(src, 'admin')
-
-    if isPrincipal or isGod or isAdmin or citizenid == PlayerData.citizenid then
-        local result, message = removeKeys(plate, citizenid)
-
-        if not result then
-            if message == "failed_not_found" then
-                TriggerClientEvent('QBCore:Notify', src,  "Vehicle is not found.", "error")
-            end
-            return false
-        end
-
-        TriggerClientEvent('QBCore:Notify', src,  ("You have removed the keys of vehicle %s"):format(plate), "success")
-
-    else
-        TriggerClientEvent('QBCore:Notify', src,  "You do not own this vehicle or lack the permissions.", "error")
-    end
-end)
-
-exports('RemoveKeys', removeKeys)
