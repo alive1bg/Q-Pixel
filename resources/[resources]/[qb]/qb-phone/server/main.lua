@@ -711,11 +711,13 @@ QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(so
     local Lawyers = {}
     for k, v in pairs(QBCore.Functions.GetPlayers()) do
         local Player = QBCore.Functions.GetPlayer(v)
-        if Player then
+        if Player ~= nil then
             if (Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "realestate" or
-                Player.PlayerData.job.name == "mechanic" or Player.PlayerData.job.name == "taxi" or
-                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance") and
-                Player.PlayerData.job.onduty then
+                Player.PlayerData.job.name == "hayes" or Player.PlayerData.job.name == "taxi" or
+                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance" or
+                Player.PlayerData.job.name == "burgershot" or Player.PlayerData.job.name == "pizzathis" or 
+                Player.PlayerData.job.name == "uwu" or Player.PlayerData.job.name == "bahama" or 
+                Player.PlayerData.job.name == "mechanic") and Player.PlayerData.job.onduty then
                 Lawyers[#Lawyers+1] = {
                     name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
                     phone = Player.PlayerData.charinfo.phone,

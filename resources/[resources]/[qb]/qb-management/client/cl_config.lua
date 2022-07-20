@@ -34,6 +34,9 @@ Config.BossMenus = {
     ['cardshop'] = {
         vector3(-162.7, 218.78, 95.12),
     },
+    ['burgershot'] = {
+        vector3(-1177.857, -895.3328, 13.984732),
+    },
 } 
 
 Config.BossMenuZones = {
@@ -66,6 +69,9 @@ Config.BossMenuZones = {
     },
     ['cardshop'] = {
         { coords = vector3(-162.7, 218.78, 95.12), length = 0.5, width = 0.5, heading = 189.0, minZ = 95.02, maxZ = 95.22 },
+    },
+    ['burgershot'] = {
+        { coords = vector3(-1178.07, -896.11, 13.984732), length = 0.35, width = 0.45, heading = 351.0, minZ = 12.58, maxZ = 14.68 }, -- DONE
     },
 }
 

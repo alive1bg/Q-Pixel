@@ -2283,4 +2283,35 @@ DP.PropEmotes = {
        EmoteLoop = true,
        EmoteMoving = true,
    }},
+   ["donut"] = {"mp_player_inteat@burger", "mp_player_int_eat_burger", "Donut", AnimationOptions =
+   {
+       Prop = 'prop_amb_donut',
+       PropBone = 18905,
+       PropPlacement = {0.13, 0.05, 0.02, -50.0, 16.0, 60.0},
+       EmoteMoving = true,
+   }},
+   ["fries"] = {"mp_player_inteat@burger", "mp_player_int_eat_burger_fp", "Eat", AnimationOptions =
+   {
+        Prop = "prop_food_bs_chips",
+        PropBone = 18905,
+        PropPlacement = {0.12, 0.028, 0.001, 10.0, 175.0},
+        EmoteMoving = true,
+        EmoteLoop = true,
+   }},
+   ["coffee"] = {"amb@world_human_drinking@coffee@male@idle_a", "idle_c", "Coffee", AnimationOptions =
+   {
+       Prop = 'p_amb_coffeecup_01',
+       PropBone = 28422,
+       PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+       EmoteLoop = true,
+       EmoteMoving = true,
+   }},
+   ["cup"] = {"amb@world_human_drinking@coffee@male@idle_a", "idle_c", "Cup", AnimationOptions =
+   {
+       Prop = 'prop_food_bs_juice02',
+       PropBone = 28422,
+       PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+       EmoteLoop = true,
+       EmoteMoving = true,
+   }},
 }
