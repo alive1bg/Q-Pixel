@@ -172,7 +172,7 @@ local function LockpickDoor(isAdvanced)
                     animstart = false
                     StopAnimTask(PlayerPedId(), "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 1.0)
                 else
-                    exports['ps-dispatch']:VehicleTheft(vehicle)
+                    exports['qb-dispatch']:VehicleTheft(vehicle)
                     animstart = false
                     StopAnimTask(PlayerPedId(), "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 1.0)
                 end
@@ -233,7 +233,7 @@ local function HackVeh()
                 SetVehicleEngineOn(vehicle, false, false, true)
             else
                 QBCore.Functions.Notify('You Failed To Get The Keys!', 'error')
-                exports['ps-dispatch']:VehicleTheft(vehicle)
+                exports['qb-dispatch']:VehicleTheft(vehicle)
             end
             IsHotwiring = false
             StopAnimTask(ped, "anim@amb@clubhouse@tutorial@bkr_tut_ig3@", "machinic_loop_mechandplayer", 1.0)
@@ -266,7 +266,7 @@ local function Hack()
                     lockpicked = true
                     lockpickedPlate = QBCore.Functions.GetPlate(vehicle)
                 else
-                    exports['ps-dispatch']:VehicleTheft(vehicle)
+                    exports['qb-dispatch']:VehicleTheft(vehicle)
                 end
                 StopAnimTask(PlayerPedId(), dict, anim, 1.0)
             end
