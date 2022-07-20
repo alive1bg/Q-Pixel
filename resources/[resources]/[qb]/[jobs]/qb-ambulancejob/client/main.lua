@@ -967,6 +967,12 @@ CreateThread(function()
                     icon = "fas fa-sign-in-alt",
                     label = "Check In",
                 },
+                {
+                    type = "client",
+                    event = "hospital:client:deskAlert",
+                    icon = "fas fa-sign-in-alt",
+                    label = "Page Doctors",
+                },
             },
             distance = 2.5
         })
