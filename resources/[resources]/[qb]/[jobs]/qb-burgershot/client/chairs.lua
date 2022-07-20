@@ -20,7 +20,7 @@ AddEventHandler('qb-burgershot:Chair', function(data)
 	if canSit then
 		TaskStartScenarioAtPosition(PlayerPedId(), "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER", data.loc.x, data.loc.y, data.loc.z-0.5, data.head, 0, 1, true)
 		burgerseat = data.seat
-		sitting = true
+		sitting = true 
 	end
 	while sitting do
 		local ped = PlayerPedId()
@@ -28,15 +28,9 @@ AddEventHandler('qb-burgershot:Chair', function(data)
 			if IsControlJustReleased(0, 202) and IsPedUsingScenario(ped, "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER") then
 				sitting = false
 				ClearPedTasks(ped)
+				Citizen.Wait(250)
+				if burgerseat == 1 then SetEntityCoords(ped, vector3(data.loc.x, data.loc.y, data.loc.z-0.5)) SetEntityHeading(ped, 90.0) end
 
-				if burgerseat == 1 then SetEntityCoords(ped, vector3(-575.37, -1059.79, 22.34-0.5)) SetEntityHeading(ped, 90.0) end
-				if burgerseat == 2 then SetEntityCoords(ped, vector3(-575.34, -1063.39, 22.34-0.5)) SetEntityHeading(ped, 90.0) end
-				if burgerseat == 3 then SetEntityCoords(ped, vector3(-575.49, -1067.04, 22.34-0.5)) SetEntityHeading(ped, 90.0) end
-				
-				if burgerseat == 4 then SetEntityCoords(ped, vector3(-585.72, -1064.75, 22.34)) SetEntityHeading(ped, 270.0) end
-				if burgerseat == 5 then SetEntityCoords(ped, vector3(-585.75, -1065.69, 22.34)) SetEntityHeading(ped, 270.0) end
-				if burgerseat == 6 then SetEntityCoords(ped, vector3(-585.84, -1066.7, 22.34)) SetEntityHeading(ped, 270.0) end
-				if burgerseat == 7 then SetEntityCoords(ped, vector3(-585.79, -1067.64, 22.34)) SetEntityHeading(ped, 270.0) end
 				burgerseat = 0
 				sitting = false
 			end

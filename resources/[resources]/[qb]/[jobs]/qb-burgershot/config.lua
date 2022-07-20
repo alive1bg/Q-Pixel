@@ -22,7 +22,7 @@ Config.Stoic = true -- Will the ped react to events around them?
 Config.FadeIn = true -- Will the ped fade in and out based on the distance. (Looks a lot better.)
 Config.DistanceSpawn = 20.0 -- Distance before spawning/despawning the ped. (GTA Units.)
 Config.MinusOne = true -- Leave this enabled if your coordinates grabber does not -1 from the player coords.
-Config.Fuel = 'lj-fuel' -- this is what fuel system you use 'LegacyFuel' , 'lj-fuel' , ect
+Config.Fuel = 'qb-fuel' -- this is what fuel system you use 'LegacyFuel' , 'lj-fuel' , ect
 
 Config.GenderNumbers = { -- No reason to touch these at all.
 	['male'] = 4,
