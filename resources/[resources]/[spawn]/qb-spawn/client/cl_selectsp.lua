@@ -54,11 +54,6 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		showSpawnMenu = true,
 	})
 
-	-- if Spawn.housingCoords == nil then
-	-- 	Spawn.housingCoords = exports["np-housing"]:retriveHousingTable();
-	-- end
-	Spawn.housingCoords = nil
-
 	local currentSpawns = Spawn.shallowCopy(Spawn.defaultSpawns)
 	local currentCheckList = {}
 
