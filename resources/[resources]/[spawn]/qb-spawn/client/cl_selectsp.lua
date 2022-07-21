@@ -1,3 +1,35 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local isJudge = false
+local isPolice = false
+local isTow = false
+local isTaxi = false
+local isMedic = false
+local isRealestate = false
+local isDead = false
+local myJob = "Unemployed"
+local onDuty = false
+
+AddEventHandler('onResourceStart', function(resource)
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
+    PlayerJob = job
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty')
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    onDuty = duty
+end)
+
 Spawn.defaultSpawns = {
 	[1] =  { ["pos"] = vector4(272.16, 185.44, 104.67, 320.57), ['info'] = ' Vinewood Blvd Taxi Stand'},
 	[2] =  { ["pos"] = vector4(-1833.96, -1223.5, 13.02, 310.63), ['info'] = ' The Boardwalk'},
@@ -13,6 +45,7 @@ Spawn.motel = {
 	-- [2] = { ["pos"] = vector4(-1236.27,-860.84,12.91,213.56), ['info'] = ' Apartments 2'},
 	-- [3] = { ["pos"] = vector4(173.96, -631.29, 47.08, 303.12), ['info'] = ' Apartments 3'}
 }
+
 
 Spawn.housingCoords = nil
 Spawn.isNew = false
@@ -80,6 +113,7 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	local infoTable = {}
 	for i=1,#currentSpawns do
 		local spawn = currentSpawns[i]
+		print("Setting spawn points")
 		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}
 	end
 
@@ -141,11 +175,21 @@ end
 function Spawn.getRoosterSpawn()
 	local spawn = nil
 
-
-	-- local rooster = exports["isPed"]:GroupRank("rooster_academy")
-	-- if rooster >= 2 then
-	-- 	spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Rooster Cab'}
-	-- end
+	if isPolice then
+		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' MRPD'} --COORDS NEED CHANGING
+	end
+	if isMedic then
+		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Pillbox Medical'} --COORDS NEED CHANGING
+	end
+	if isTow then
+		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Impound Yard'} --COORDS NEED CHANGING
+	end
+	if isTaxi then
+		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' TaxiCab Co'} --COORDS NEED CHANGING
+	end
+	if isRealestate then
+		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Real Estate Office'} --COORDS NEED CHANGING
+	end
 
 	return spawn
 end
@@ -270,3 +314,33 @@ function doCamera(x,y,z)
 		Wait(2/i)
 	end
 end
+
+RegisterNetEvent("QBCore:Client:OnJobUpdate") -- dont edit this unless you don't use qb-core
+AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
+    myJob = jobInfo.name
+    if isMedic and myJob ~= "ambulance" then isMedic = false end
+    if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isPolice and myJob ~= "police" then isPolice = false end
+    if isTow and myJob ~= "tow" then isTow = false end
+    if isTaxi and myJob ~= "taxi" then isTaxi = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
+    if myJob == "police" then isPolice = true end
+    if myJob == "tow" then isTow = true end
+    if myJob == "taxi" then isTaxi = true end
+    if myJob == "tuner" then isTuner = true end
+    if myJob == "ambulance" then isMedic = true end
+    if myJob == "realestate" then isRealestate = true end
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty') -- dont edit this unless you don't use qb-core
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    myJob = QBCore.Functions.GetPlayerData().job.name
+    if isMedic and myJob ~= "ambulance" then isMedic = false end
+    if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isPolice and myJob ~= "police" then isPolice = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
+    if myJob == "police" then isPolice = true onDuty = duty end
+    if myJob == "ambulance" then isMedic = true onDuty = duty end
+    if myJob == "realestate" then isRealestate = true onDuty = duty end
+    if myJob == "tuner" then isTuner = true onDuty = duty end
+end)
