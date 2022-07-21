@@ -20,6 +20,10 @@ Spawn.isNew = false
 Spawn.tempHousing = {}
 Spawn.defaultApartmentSpawn = {}
 
+RegisterNetEvent('qb-houses:client:setHouseConfig', function(houseConfig)
+    Spawn.housingCoords = houseConfig
+end)
+
 RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	Login.Selected = false
 	Login.CurrentPedInfo = nil
@@ -28,18 +32,18 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 
 	Login.SetTestCam()
 	DoScreenFadeIn(1)
-	
+
 	TriggerEvent('qb-weathersync:client:DisableSync')
 
 	if spawnData.hospital.illness == "dead" or spawnData.hospital.illness == "icu" then
-		return 
+		return
 	end
 
 	if spawnData.overwrites ~= nil then
 		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
 			Spawn.overwriteSpawn(spawnData.overwrites)
 		elseif spawnData.overwrites == "new" then
-			Spawn.isNew = true 
+			Spawn.isNew = true
 			Spawn.selectedSpawn(' Apartments 1')
 			TriggerEvent("backitems:start")
 		end
@@ -54,7 +58,7 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	-- 	Spawn.housingCoords = exports["np-housing"]:retriveHousingTable();
 	-- end
 	Spawn.housingCoords = nil
-	
+
 	local currentSpawns = Spawn.shallowCopy(Spawn.defaultSpawns)
 	local currentCheckList = {}
 
@@ -77,12 +81,12 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		end
 	end
 
-	
+
 	-- fuck json , makes me only send the info of the table :( , json does not support vector4 kek
 	local infoTable = {}
 	for i=1,#currentSpawns do
 		local spawn = currentSpawns[i]
-		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}	
+		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}
 	end
 
 
@@ -156,10 +160,11 @@ function Spawn.createDefaultData(housing_id)
 	local defaultData = nil
 
 	if Spawn.housingCoords == nil or Spawn.housingCoords[housing_id] == nil then return end
-	if Spawn.housingCoords[housing_id].assigned then return end
+	-- if Spawn.housingCoords[housing_id].assigned then return end
 
 	local housing = Spawn.housingCoords[housing_id]
-	defaultData = {["pos"] = vector4(housing[1]),["info"] = housing.Street}
+	local pos = vector4(housing.coords.enter.x, housing.coords.enter.y, housing.coords.enter.z, housing.coords.enter.h)
+	defaultData = {["pos"] = pos, ["info"] = housing.Street}
 
 	return defaultData
 end
@@ -187,12 +192,12 @@ function Spawn.selectedSpawn(spawnInfo)
 			DoScreenFadeOut(2)
 
 			Login.DeleteCamera()
-			
+
 			Wait(200)
-			
+
 			DoScreenFadeIn(2500)
 			TriggerEvent("cn-spawn:characterSpawned")
-		else 
+		else
 
 			local pos = Spawn.obtainHousingPos(spawnInfo)
 			if pos then
@@ -205,7 +210,7 @@ function Spawn.selectedSpawn(spawnInfo)
 				SetEntityHeading(PlayerPedId(),pos.w)
 				Wait(200)
 
-				DoScreenFadeIn(2500)	
+				DoScreenFadeIn(2500)
 				Login.characterSpawned()
 				TriggerEvent("housing:playerSpawned",spawnInfo)
 			end
@@ -217,7 +222,7 @@ end
 
 
 function Spawn.overwriteSpawn(overwrite)
-	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison 
+	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison
 
 	if overwrite == "maxsec" then
 		pos = vector4(1690.75,2593.14,45.61,178.75)
@@ -236,7 +241,7 @@ function Spawn.overwriteSpawn(overwrite)
 
 	Wait(200)
 
-	DoScreenFadeIn(2500)	
+	DoScreenFadeIn(2500)
 	Login.characterSpawned()
 end
 
