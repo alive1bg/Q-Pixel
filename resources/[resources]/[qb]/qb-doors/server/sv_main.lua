@@ -219,8 +219,8 @@ local AllDoors = {
 	--Beanmachine
 	[182] = {id = 182, active = true, model = 736699661, coords = vector3(-629.79980, 228.98980, 82.04890), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["beanmachine"] = true}}}, --BEANMACHINE_KITCHEN_DOOR
 	--Burgershot	
-	[183] = {id = 183, active = true, model = 1050821746, coords = vector3(-1199.03300, -885.16990, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
-	[184] = {id = 184, active = true, model = -1270304831, coords = vector3(-1196.53900, -883.48520, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
+	[183] = {id = 183, active = true, model = -1448591934, coords = vector3(-1201.11100, -892.96510, 14.24448), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, --BURGERSHOT SIDE DOOR
+	[184] = {id = 184, active = true, model = -1300743830, coords = vector3(-1199.35700, -903.87410, 14.07984), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}},  --BURGERSHOT REAR DOOR
 	[185] = {id = 185, active = true, model = 1050821746, coords = vector3(-1184.89200, -883.33770, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 	[186] = {id = 186, active = true, model = -1270304831, coords = vector3(-1183.20700, -885.83120, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 
