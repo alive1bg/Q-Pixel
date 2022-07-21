@@ -189,6 +189,8 @@ function Spawn.selectedSpawn(spawnInfo)
 
 			Wait(200)
 
+			TriggerEvent('qb-weathersync:client:EnableSync')
+
 			DoScreenFadeIn(2500)
 			TriggerEvent("cn-spawn:characterSpawned")
 		else
