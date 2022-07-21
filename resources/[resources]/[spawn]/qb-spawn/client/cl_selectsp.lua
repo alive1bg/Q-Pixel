@@ -76,7 +76,6 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		end
 	end
 
-
 	-- fuck json , makes me only send the info of the table :( , json does not support vector4 kek
 	local infoTable = {}
 	for i=1,#currentSpawns do
@@ -159,7 +158,7 @@ function Spawn.createDefaultData(housing_id)
 
 	local housing = Spawn.housingCoords[housing_id]
 	local pos = vector4(housing.coords.enter.x, housing.coords.enter.y, housing.coords.enter.z, housing.coords.enter.h)
-	defaultData = {["pos"] = pos, ["info"] = housing.Street}
+	defaultData = {["pos"] = pos, ["info"] = housing_id}
 
 	return defaultData
 end
