@@ -43,7 +43,7 @@ RegisterServerEvent("character:loadspawns", function()
 
                 for k,v in pairs(housing_keys) do
                     if v.keyholders ~= nil then
-                        spawnData["keys"][v.housing_ihoused] = true
+                        spawnData["keys"][v.house] = true
                     end
                 end
                 TriggerClientEvent("spawn:clientSpawnData",src,spawnData)
