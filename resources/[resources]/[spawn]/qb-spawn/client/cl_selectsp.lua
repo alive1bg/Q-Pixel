@@ -169,26 +169,26 @@ function Spawn.getDevSpawn()
 	-- end
 
 	return spawn
-end
+end 
 
 
 function Spawn.getRoosterSpawn()
 	local spawn = nil
 
-	if isPolice then
-		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' MRPD'} --COORDS NEED CHANGING
+	if PlayerJob.name == 'police' then
+		spawn = { ["pos"] = vector4(451.76196, -983.7982, 30.689517, 271.5689), ['info'] = ' MRPD'} 
 	end
-	if isMedic then
-		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Pillbox Medical'} --COORDS NEED CHANGING
+	if PlayerJob.name == 'ambulance' then
+		spawn = { ["pos"] = vector4(305.95043, -600.2199, 43.284053, 332.30572), ['info'] = ' Pillbox Medical'} --COORDS NEED CHANGING
 	end
-	if isTow then
-		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Impound Yard'} --COORDS NEED CHANGING
+	if PlayerJob.name == 'tow' then
+		spawn = { ["pos"] = vector4(-184.6686, -1163.749, 23.671413, 90.724411), ['info'] = ' Impound Yard'} --COORDS NEED CHANGING
 	end
-	if isTaxi then
-		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' TaxiCab Co'} --COORDS NEED CHANGING
+	if PlayerJob.name == 'taxi' then
+		spawn = { ["pos"] = vector4(895.64343, -179.1653, 74.700309, 330.78356), ['info'] = ' TaxiCab Co'} --COORDS NEED CHANGING
 	end
-	if isRealestate then
-		spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Real Estate Office'} --COORDS NEED CHANGING
+	if PlayerJob.name == 'realestate' then
+		spawn = { ["pos"] = vector4(-720.8521, 270.57437, 84.649864, 31.532089), ['info'] = ' Real Estate Office'} --COORDS NEED CHANGING
 	end
 
 	return spawn

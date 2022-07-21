@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <div id="tranCon" class="Transistion-Container">
+            <div id="tranCon" class="Transistion-Container"> 
                 <div class="logo"></div>
                 <div class="Transistion-col">
                     <div id="animTran1" class="Transistion-left"></div>
@@ -208,7 +208,13 @@
                         <i class="fas fa-chevron-circle-right" v-if="spawn.stacked"></i>
                         <i class="fas fa-star favorite" v-else-if="currentSpawnFav && spawn.info.trim() == currentSpawnFav.trim()"></i>
                         <i class="fas fa-building" :class="[spawn.info.trim().replace(' ', '')]" v-else-if="spawn.info.includes('Apartments')"></i>
-                        <i class="fas fa-taxi" v-else-if="spawn.info.includes('Rooster Cab')"></i>
+                        
+                        <i class="fas fa-helicopter" v-else-if="spawn.info.includes('MRPD')"></i>
+                        <i class="fas fa-hospital" v-else-if="spawn.info.includes('Pillbox Medical')"></i>
+                        <i class="fas fa-car-crash" v-else-if="spawn.info.includes('Impound Yard')"></i>
+                        <i class="fas fa-taxi" v-else-if="spawn.info.includes('TaxiCab Co')"></i>
+                        <i class="fas fa-building" v-else-if="spawn.info.includes('Real Estate Office')"></i>
+
                         <i class="fab fa-dev"  v-else-if="spawn.info.includes('Dev Spawn')"></i>
 
                         <!-- Default places -->
