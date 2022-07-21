@@ -98,13 +98,13 @@ CreateThread(function()
         end
     end
 end)
-
+local hunting_h = 0
 CreateThread(function()
     local hour
     local minute = 0
     local second = 0        --Add seconds for shadow smoothness
     while true do
-        if not disable then
+        if not disable then 
             Wait(0)
             local newBaseTime = baseTime
             if GetGameTimer() - 22  > timer then    --Generate seconds in client side to avoid communiation
@@ -121,9 +121,16 @@ CreateThread(function()
                 minute = math.floor((baseTime+timeOffset)%60)
                 second = 0
             end
+            hunting_h = hour
             NetworkOverrideClockTime(hour, minute, second)          --Send hour included seconds to network clock time
         else
             Wait(1000)
         end
     end
 end)
+
+function getHour() -- <------------- ADD THIS
+    return hunting_h -- <------------- ADD THIS
+end -- <------------- ADD THIS
+
+exports('getHour', getHour) -- <------------- ADD THIS
