@@ -102,13 +102,30 @@ QBShared.Jobs = {
     ['burgershot'] = {
 		label = 'BurgerShot',
 		defaultDuty = true,
+		offDutyPay = true,
 		grades = {
-            ['0'] = { name = 'Recruit', payment = 50 },
-			['1'] = { name = 'Novice', payment = 65 },
-			['2'] = { name = 'Experienced', payment = 75 },
-			['3'] = { name = 'Assistant Manager', payment = 85 },
-			['4'] = { name = 'Senior Manager', isboss = true, payment = 95 },
-        },
+			['0'] = {
+				name = 'Recruit',
+				payment = 50
+			},
+			['1'] = {
+				name = 'Crew Member',
+				payment = 65
+			},
+			['2'] = {
+				name = 'Shift Manager',
+				payment = 75
+			},
+			['3'] = {
+				name = 'Manager',
+				payment = 85
+			},
+			['4'] = {
+				name = 'Owner',
+				isboss = true,
+				payment = 95
+			},
+		},
 	},
     ['cerberus'] = {
 		label = 'Cerberus Business Incorporated',

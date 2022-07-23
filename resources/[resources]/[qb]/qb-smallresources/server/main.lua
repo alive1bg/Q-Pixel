@@ -23,15 +23,6 @@ QBCore.Functions.CreateUseableItem("harness", function(source, item)
     TriggerClientEvent('seatbelt:client:UseHarness', src, item)
 end)
 
-QBCore.Functions.CreateUseableItem("cigarette", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
-    if Player.Functions.GetItemByName('lighter') ~= nil then
-        TriggerClientEvent("consumables:client:smokeCigarette", source, item)
-    else
-        TriggerClientEvent('QBCore:Notify', source, "You need a lighter", "error")
-    end
-end)
-
 QBCore.Functions.CreateUseableItem("cigarettes", function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     if Player.Functions.GetItemByName('lighter') ~= nil then

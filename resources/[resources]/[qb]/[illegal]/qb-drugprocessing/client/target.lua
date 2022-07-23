@@ -1,14 +1,14 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-CreateThread(function()
+-- CreateThread(function()
     exports['qb-target']:SpawnPed({
         model = 'a_m_m_hillbilly_02',
-        coords = vector4(-1187.73, -445.27, 43.91, 289.45), 
-        minusOne = true, 
-        freeze = true, 
-        invincible = true, 
+        coords = vector4(-1187.73, -445.27, 43.91, 289.45),
+        minusOne = true,
+        freeze = true,
+        invincible = true,
         blockevents = true,
-        target = { 
+        target = {
             options = {
                 {
 					type = "client",
@@ -22,12 +22,12 @@ CreateThread(function()
     })
     exports['qb-target']:SpawnPed({
         model = 'a_m_m_mlcrisis_01',
-        coords = vector4(812.49, -2399.59, 23.66, 223.1), 
-        minusOne = true, 
-        freeze = true, 
-        invincible = true, 
+        coords = vector4(812.49, -2399.59, 23.66, 223.1),
+        minusOne = true,
+        freeze = true,
+        invincible = true,
         blockevents = true,
-        target = { 
+        target = {
             options = {
                 {
 					type = "client",
@@ -39,9 +39,9 @@ CreateThread(function()
           distance = 2.5,
         },
     })
-end)
+-- end)
 
-CreateThread(function()
+-- CreateThread(function()
     exports["qb-target"]:AddBoxZone("chemmenu", vector3(3535.66, 3661.69, 28.12), 1.65, 2.4, {
         name = "chemmenu",
         heading = 350.0,
@@ -290,9 +290,9 @@ CreateThread(function()
 			},
 	distance = 2.5
 	})
-end)
+-- end)
 
-CreateThread(function()
+-- CreateThread(function()
     exports['qb-target']:AddTargetModel("mw_coke_plant", {
         options = {
             {
@@ -370,4 +370,4 @@ CreateThread(function()
         },
         distance = 4.0
     })
-end)
+-- end)

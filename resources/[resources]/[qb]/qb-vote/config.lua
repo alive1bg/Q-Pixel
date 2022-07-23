@@ -3,15 +3,15 @@ Config = {}
 Config.Candidates = {
     ["1"] = {
         partyName = "Stole the vote menu",
-        name = "Ivak🅰_124#7630"
+        name = "Joe Blog"
     },
     ["2"] = {
         partyName = "Stole the vote menu",
-        name = "ex#1515"
+        name = "Bobby Sharp"
     },
     ["3"] = {
         partyName = "Stole the vote menu",
-        name = "lawless#6568"
+        name = "Jon Doe"
     }
 }
 

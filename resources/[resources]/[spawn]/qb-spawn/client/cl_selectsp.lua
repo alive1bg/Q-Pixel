@@ -1,3 +1,35 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+local isJudge = false
+local isPolice = false
+local isTow = false
+local isTaxi = false
+local isMedic = false
+local isRealestate = false
+local isDead = false
+local myJob = "Unemployed"
+local onDuty = false
+
+AddEventHandler('onResourceStart', function(resource)
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerJob = PlayerData.job
+    onDuty = PlayerJob.onduty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
+    PlayerJob = job
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty')
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    onDuty = duty
+end)
+
 Spawn.defaultSpawns = {
 	[1] =  { ["pos"] = vector4(272.16, 185.44, 104.67, 320.57), ['info'] = ' Vinewood Blvd Taxi Stand'},
 	[2] =  { ["pos"] = vector4(-1833.96, -1223.5, 13.02, 310.63), ['info'] = ' The Boardwalk'},
@@ -14,11 +46,16 @@ Spawn.motel = {
 	-- [3] = { ["pos"] = vector4(173.96, -631.29, 47.08, 303.12), ['info'] = ' Apartments 3'}
 }
 
+
 Spawn.housingCoords = nil
 Spawn.isNew = false
 
 Spawn.tempHousing = {}
 Spawn.defaultApartmentSpawn = {}
+
+RegisterNetEvent('qb-houses:client:setHouseConfig', function(houseConfig)
+    Spawn.housingCoords = houseConfig
+end)
 
 RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 	Login.Selected = false
@@ -28,18 +65,18 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 
 	Login.SetTestCam()
 	DoScreenFadeIn(1)
-	
+
 	TriggerEvent('qb-weathersync:client:DisableSync')
 
 	if spawnData.hospital.illness == "dead" or spawnData.hospital.illness == "icu" then
-		return 
+		return
 	end
 
 	if spawnData.overwrites ~= nil then
 		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
 			Spawn.overwriteSpawn(spawnData.overwrites)
 		elseif spawnData.overwrites == "new" then
-			Spawn.isNew = true 
+			Spawn.isNew = true
 			Spawn.selectedSpawn(' Apartments 1')
 			TriggerEvent("backitems:start")
 		end
@@ -50,11 +87,6 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		showSpawnMenu = true,
 	})
 
-	-- if Spawn.housingCoords == nil then
-	-- 	Spawn.housingCoords = exports["np-housing"]:retriveHousingTable();
-	-- end
-	Spawn.housingCoords = nil
-	
 	local currentSpawns = Spawn.shallowCopy(Spawn.defaultSpawns)
 	local currentCheckList = {}
 
@@ -77,12 +109,12 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		end
 	end
 
-	
 	-- fuck json , makes me only send the info of the table :( , json does not support vector4 kek
 	local infoTable = {}
 	for i=1,#currentSpawns do
 		local spawn = currentSpawns[i]
-		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}	
+		print("Setting spawn points")
+		infoTable[i] = {["info"] = spawn.info,["posX"] = spawn.pos.x,["posY"] = spawn.pos.y,["checkS"] = i}
 	end
 
 
@@ -137,17 +169,27 @@ function Spawn.getDevSpawn()
 	-- end
 
 	return spawn
-end
+end 
 
 
 function Spawn.getRoosterSpawn()
 	local spawn = nil
 
-
-	-- local rooster = exports["isPed"]:GroupRank("rooster_academy")
-	-- if rooster >= 2 then
-	-- 	spawn = { ["pos"] = vector4(-172.83,331.17,93.76,266.08), ['info'] = ' Rooster Cab'}
-	-- end
+	if PlayerJob.name == 'police' then
+		spawn = { ["pos"] = vector4(451.76196, -983.7982, 30.689517, 271.5689), ['info'] = ' MRPD'} 
+	end
+	if PlayerJob.name == 'ambulance' then
+		spawn = { ["pos"] = vector4(305.95043, -600.2199, 43.284053, 332.30572), ['info'] = ' Pillbox Medical'} --COORDS NEED CHANGING
+	end
+	if PlayerJob.name == 'tow' then
+		spawn = { ["pos"] = vector4(-184.6686, -1163.749, 23.671413, 90.724411), ['info'] = ' Impound Yard'} --COORDS NEED CHANGING
+	end
+	if PlayerJob.name == 'taxi' then
+		spawn = { ["pos"] = vector4(895.64343, -179.1653, 74.700309, 330.78356), ['info'] = ' TaxiCab Co'} --COORDS NEED CHANGING
+	end
+	if PlayerJob.name == 'realestate' then
+		spawn = { ["pos"] = vector4(-720.8521, 270.57437, 84.649864, 31.532089), ['info'] = ' Real Estate Office'} --COORDS NEED CHANGING
+	end
 
 	return spawn
 end
@@ -156,10 +198,11 @@ function Spawn.createDefaultData(housing_id)
 	local defaultData = nil
 
 	if Spawn.housingCoords == nil or Spawn.housingCoords[housing_id] == nil then return end
-	if Spawn.housingCoords[housing_id].assigned then return end
+	-- if Spawn.housingCoords[housing_id].assigned then return end
 
 	local housing = Spawn.housingCoords[housing_id]
-	defaultData = {["pos"] = vector4(housing[1]),["info"] = housing.Street}
+	local pos = vector4(housing.coords.enter.x, housing.coords.enter.y, housing.coords.enter.z, housing.coords.enter.h)
+	defaultData = {["pos"] = pos, ["info"] = housing_id}
 
 	return defaultData
 end
@@ -187,12 +230,14 @@ function Spawn.selectedSpawn(spawnInfo)
 			DoScreenFadeOut(2)
 
 			Login.DeleteCamera()
-			
+
 			Wait(200)
-			
+
+			TriggerEvent('qb-weathersync:client:EnableSync')
+
 			DoScreenFadeIn(2500)
 			TriggerEvent("cn-spawn:characterSpawned")
-		else 
+		else
 
 			local pos = Spawn.obtainHousingPos(spawnInfo)
 			if pos then
@@ -205,7 +250,7 @@ function Spawn.selectedSpawn(spawnInfo)
 				SetEntityHeading(PlayerPedId(),pos.w)
 				Wait(200)
 
-				DoScreenFadeIn(2500)	
+				DoScreenFadeIn(2500)
 				Login.characterSpawned()
 				TriggerEvent("housing:playerSpawned",spawnInfo)
 			end
@@ -217,7 +262,7 @@ end
 
 
 function Spawn.overwriteSpawn(overwrite)
-	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison 
+	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison
 
 	if overwrite == "maxsec" then
 		pos = vector4(1690.75,2593.14,45.61,178.75)
@@ -236,7 +281,7 @@ function Spawn.overwriteSpawn(overwrite)
 
 	Wait(200)
 
-	DoScreenFadeIn(2500)	
+	DoScreenFadeIn(2500)
 	Login.characterSpawned()
 end
 
@@ -269,3 +314,33 @@ function doCamera(x,y,z)
 		Wait(2/i)
 	end
 end
+
+RegisterNetEvent("QBCore:Client:OnJobUpdate") -- dont edit this unless you don't use qb-core
+AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
+    myJob = jobInfo.name
+    if isMedic and myJob ~= "ambulance" then isMedic = false end
+    if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isPolice and myJob ~= "police" then isPolice = false end
+    if isTow and myJob ~= "tow" then isTow = false end
+    if isTaxi and myJob ~= "taxi" then isTaxi = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
+    if myJob == "police" then isPolice = true end
+    if myJob == "tow" then isTow = true end
+    if myJob == "taxi" then isTaxi = true end
+    if myJob == "tuner" then isTuner = true end
+    if myJob == "ambulance" then isMedic = true end
+    if myJob == "realestate" then isRealestate = true end
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty') -- dont edit this unless you don't use qb-core
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    myJob = QBCore.Functions.GetPlayerData().job.name
+    if isMedic and myJob ~= "ambulance" then isMedic = false end
+    if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isPolice and myJob ~= "police" then isPolice = false end
+    if isTuner and myJob ~= "tuner" then isTuner = false end
+    if myJob == "police" then isPolice = true onDuty = duty end
+    if myJob == "ambulance" then isMedic = true onDuty = duty end
+    if myJob == "realestate" then isRealestate = true onDuty = duty end
+    if myJob == "tuner" then isTuner = true onDuty = duty end
+end)

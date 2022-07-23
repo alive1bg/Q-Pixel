@@ -519,7 +519,6 @@ end
 
 local playertables = {
     { table = 'players' },
-    { table = 'dpkeybinds' },
     { table = 'crypto_transactions' },
     { table = 'apartments' },
     { table = 'crypto_transactions' },
@@ -536,7 +535,6 @@ local playertables = {
     { table = 'player_houses' },
     { table = 'player_mails' },
     { table = 'player_vehicles' },
-    { table = 'scenes' },
     { table = 'transaction_history' },
     { table = 'users_current' },
     { table = 'users_face' },

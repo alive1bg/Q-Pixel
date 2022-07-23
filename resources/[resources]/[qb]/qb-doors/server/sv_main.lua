@@ -219,8 +219,8 @@ local AllDoors = {
 	--Beanmachine
 	[182] = {id = 182, active = true, model = 736699661, coords = vector3(-629.79980, 228.98980, 82.04890), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["beanmachine"] = true}}}, --BEANMACHINE_KITCHEN_DOOR
 	--Burgershot	
-	[183] = {id = 183, active = true, model = 1050821746, coords = vector3(-1199.03300, -885.16990, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
-	[184] = {id = 184, active = true, model = -1270304831, coords = vector3(-1196.53900, -883.48520, 14.25259), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
+	[183] = {id = 183, active = true, model = -1448591934, coords = vector3(-1201.11100, -892.96510, 14.24448), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, --BURGERSHOT SIDE DOOR
+	[184] = {id = 184, active = true, model = -1300743830, coords = vector3(-1199.35700, -903.87410, 14.07984), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}},  --BURGERSHOT REAR DOOR
 	[185] = {id = 185, active = true, model = 1050821746, coords = vector3(-1184.89200, -883.33770, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 	[186] = {id = 186, active = true, model = -1270304831, coords = vector3(-1183.20700, -885.83120, 14.25113), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["burgershot"] = true}}}, 
 
@@ -296,6 +296,13 @@ local AllDoors = {
 	--pdsalesgarage
 	[238] = {id = 238, active = true, model = -190780785, coords = vector3(459.54000, -1014.646, 29.153), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
 	[239] = {id = 239, active = true, model = -190780785, coords = vector3(459.53980, -1019.699, 29.134), automatic = {distance = 10.0,rate = 1.0}, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}, keyFob = true}, --gate
+	[240] = {id = 240, active = true, model = -1259801187, coords = vec3(883.480347, -2258.529785, 31.534859), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[241] = {id = 241, active = true, model = -1563799200, coords = vec3(880.895142, -2258.308350, 31.534859), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	-- bobcat second door
+	[242] = {id = 242, active = true, model = -551608542, coords = vec3(881.617065, -2264.669434, 31.591564), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	-- bobcat third door
+	[243] = {id = 243, active = true, model = 933053701, coords = vec3(882.619873, -2268.408203, 31.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[244] = {id = 244, active = true, model = 933053701, coords = vec3(880.029785, -2268.181641, 31.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 }
 
 ForcedDoors = {}

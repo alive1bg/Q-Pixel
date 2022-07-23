@@ -166,6 +166,7 @@ RegisterNetEvent('hospital:server:RevivePlayer', function(playerId, isOldMan)
 			Player.Functions.RemoveItem('firstaid', 1)
 			TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['firstaid'], "remove")
 			TriggerClientEvent('hospital:client:Revive', Patient.PlayerData.source)
+			exports['qb-management']:AddMoney("ambulance", Config.BillCost)
 		end
 	end
 end)

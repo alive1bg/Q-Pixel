@@ -340,11 +340,11 @@ end)
 
 RegisterNetEvent('inventory:client:OpenInventory', function(PlayerAmmo, inventory, other)
     if not IsEntityDead(PlayerPedId()) then
-        Wait(500)
+        --Wait(500)
         ToggleHotbar(false)
-        if showBlur == true then
-            TriggerScreenblurFadeIn(1000)
-        end
+        --if showBlur == true then
+        --    TriggerScreenblurFadeIn(1000)
+        --end
         SetNuiFocus(true, true)
         if other then
             currentOtherInventory = other.name
@@ -658,8 +658,9 @@ RegisterCommand('inventory', function()
                 ShopItems.slots = #Config.VendingItem
                 TriggerServerEvent("inventory:server:OpenInventory", "shop", "Vendingshop_"..math.random(1, 99), ShopItems)
             else
-                openAnim()
+                
                 TriggerServerEvent("inventory:server:OpenInventory")
+                openAnim()
             end
         end
     end

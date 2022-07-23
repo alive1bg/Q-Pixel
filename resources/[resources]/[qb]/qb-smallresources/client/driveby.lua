@@ -1,53 +1,76 @@
--- drive by shootings in FPP (first person)
+local INPUT_AIM = 0
+local INPUT_AIM = 0
+local UseFPS = false
+local justpressed = 0
 
-local shot = false
-local check = false
-local check2 = false
-local count = 0
+-- this prevents certain camera modes
+local disable = 0
+Citizen.CreateThread( function()
 
-CreateThread(function()
-    while true do
-        Wait(1)
-        if IsPlayerFreeAiming(PlayerId()) then
-            if GetFollowPedCamViewMode() == 4 and check == false then
-                check = false
-            else
-                SetFollowVehicleCamViewMode(4)
-                check = true
-            end
-        else
-            if check == true then
-                SetFollowVehicleCamViewMode(1)
-                check = false
+  while true do    
+    
+    Citizen.Wait(0)
+
+
+        if IsControlPressed(0, INPUT_AIM) then
+          justpressed = justpressed + 1
+        end
+
+        if IsControlJustReleased(0, INPUT_AIM) then
+
+        	if justpressed < 15 then
+        		UseFPS = true
+        	end
+        	justpressed = 0
+        end
+
+        if GetFollowPedCamViewMode() == 1 or GetFollowVehicleCamViewMode() == 1 then
+        	Citizen.Wait(1)
+        	SetFollowPedCamViewMode(0)
+        	SetFollowVehicleCamViewMode(0)
+        end
+
+
+        if UseFPS then
+        	if GetFollowPedCamViewMode() == 0 or GetFollowVehicleCamViewMode() == 0 then
+        		Citizen.Wait(0)
+        		
+        		SetFollowPedCamViewMode(4)
+        		SetFollowVehicleCamViewMode(4)
+        	else
+        		Citizen.Wait(0)
+        		
+        		SetFollowPedCamViewMode(0)
+        		SetFollowVehicleCamViewMode(0)
+        	end
+    		UseFPS = false
+        end
+
+
+        if IsPedArmed(ped,1) or not IsPedArmed(ped,7) then
+            if IsControlJustPressed(0,24) or IsControlJustPressed(0,141) or IsControlJustPressed(0,142) or IsControlJustPressed(0,140)  then
+               disable = 50
             end
         end
-    end
+
+        if disable > 0 then
+            disable = disable - 1
+            DisableControlAction(0,24)
+            DisableControlAction(0,140)
+            DisableControlAction(0,141)
+            DisableControlAction(0,142)
+        end
+  end
+
 end)
 
-
-
-CreateThread(function()
+Citizen.CreateThread(function()
     while true do
-        Wait(1)
-        if IsPedShooting(PlayerPedId()) and shot == false and GetFollowPedCamViewMode() ~= 4 then
-            check2 = true
-            shot = true
-            SetFollowVehicleCamViewMode(4)
-        end
-        if IsPedShooting(PlayerPedId()) and shot == true and GetFollowPedCamViewMode() == 4 then
-            count = 0
-        end
-        if not IsPedShooting(PlayerPedId()) and shot == true then
-            count = count + 1
-        end
-        if not IsPedShooting(PlayerPedId()) and shot == true then
-            if not IsPedShooting(PlayerPedId()) and shot == true and count > 20 then
-                if check2 == true then
-                    check2 = false
-                    shot = false
-                    SetFollowVehicleCamViewMode(1)
-                end
-            end
+        Citizen.Wait(0)
+        if IsPedArmed(PlayerPedId(), 6) then
+            DisableControlAction(1, 140, true)
+            DisableControlAction(1, 141, true)
+            DisableControlAction(1, 142, true)
         end
     end
 end)

@@ -925,7 +925,7 @@ Config.Locations = {
             [1] = vector3(45.55, -1749.01, 29.6)
         },
         ["products"] = Config.Products["hardware"],
-        ["showblip"] = false,
+        ["showblip"] = true,
         ["blipsprite"] = 402
     },
     ["hardware2"] = {
@@ -934,7 +934,7 @@ Config.Locations = {
             [1] = vector3(2747.8, 3472.86, 55.67)
         },
         ["products"] = Config.Products["hardware"],
-        ["showblip"] = false,
+        ["showblip"] = true,
         ["blipsprite"] = 402
     },
     ["hardware3"] = {
@@ -943,7 +943,7 @@ Config.Locations = {
             [1] = vector3(-421.84, 6136.09, 31.78)
         },
         ["products"] = Config.Products["hardware"],
-        ["showblip"] = false,
+        ["showblip"] = true,
         ["blipsprite"] = 402
     },
 
@@ -1090,7 +1090,7 @@ Config.Locations = {
             [1] = vector3(-1505.91, 1511.78, 115.29)
         },
         ["products"] = Config.Products["leisureshop"],
-        ["showblip"] = false,
+        ["showblip"] = true,
         ["blipsprite"] = 52
     },
 

@@ -112,7 +112,7 @@ function LocationInWorld(coords,camera)
     local ped = PlayerPedId()
     local raycast = StartShapeTestRay(position.x,position.y,position.z, coords.x,coords.y,coords.z, 8, ped, 0)
     local retval, hit, endCoords, surfaceNormal, entity = GetShapeTestResult(raycast)
-    
+
     return entity
 
 end
@@ -131,7 +131,7 @@ function SetSkin(model, setDefault)
         SetModelAsNoLongerNeeded(model)
         player = PlayerPedId()
         FreezePedCameraRotation(player, true)
-        
+
         if (model ~= `mp_f_freemode_01` and model ~= `mp_m_freemode_01`) then
             SetPedRandomComponentVariation(PlayerPedId(), true)
         else
@@ -148,7 +148,7 @@ function SetSkin(model, setDefault)
             SetPedHeadOverlay(player, 1, 0, 0.0)
             SetPedHairColor(player, 1, 1)
         end
-        
+
     end
     SetEntityInvincible(PlayerPedId(),false)
 end
@@ -157,7 +157,7 @@ end
 function Login.RequestModel(model, callback)
     CreateThread(function()
         local modelHash
-        
+
         if type(model) == "number" then
             modelHash = model
             model = false
@@ -228,17 +228,17 @@ end
 function Spawn.obtainApartmentType(spawnInfo)
     local found = false
     for k,v in pairs(Spawn.motel) do
-        if v.info == spawnInfo then 
+        if v.info == spawnInfo then
             found = k
         end
     end
-    return found 
+    return found
 end
 
 function Spawn.obtainWorldSpawnPos(spawnInfo)
     local found = false
     for k,v in pairs(Spawn.defaultSpawns) do
-        if v.info == spawnInfo then 
+        if v.info == spawnInfo then
             found = v.pos
         end
     end
@@ -246,15 +246,15 @@ function Spawn.obtainWorldSpawnPos(spawnInfo)
     local dev = Spawn.getDevSpawn()
     local rooster = Spawn.getRoosterSpawn()
 
-    if dev and dev.info == spawnInfo then 
+    if dev and dev.info == spawnInfo then
         found = dev.pos
     end
 
-    if rooster and rooster.info == spawnInfo then 
-        found = rooster.dev
+    if rooster and rooster.info == spawnInfo then
+        found = rooster.pos
     end
 
-    return found 
+    return found
 end
 
 function Spawn.shallowCopy(original)
@@ -265,15 +265,15 @@ function Spawn.shallowCopy(original)
     return copy
 end
 
--- temp function REMOVE WHEN REMOVING TEMPT FIX FOR HOUSING / OFFICES 
+-- temp function REMOVE WHEN REMOVING TEMPT FIX FOR HOUSING / OFFICES
 function Spawn.obtainHousingPos(spawnInfo)
     local found = false
     for k,v in pairs(Spawn.tempHousing) do
-        if v.info == spawnInfo then 
+        if v.info == spawnInfo then
             found = v.pos
         end
     end
-    return found 
+    return found
 end
 
 --[[
@@ -294,7 +294,7 @@ function findCharPed(ped,isHover)
     end
 
     if ped ~= 0 then
-        if ped == Login.CurrentPed and Login.CurrentPedInfo ~= nil then 
+        if ped == Login.CurrentPed and Login.CurrentPedInfo ~= nil then
             return Login.CurrentPedInfo
         else
             if (not isHover and Login.Selected) or (not Login.Selected) then

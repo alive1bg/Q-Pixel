@@ -155,7 +155,7 @@ Config.Items = {
     }
 }
 
-Config.BillCost = 2000
+Config.BillCost = math.random(250,650)
 Config.DeathTime = 300
 Config.CheckTime = 10
 

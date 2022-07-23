@@ -850,7 +850,7 @@ newSubMenus = { -- NOTE basicly, what will be happen after clicking these button
     ['medic:status'] = {
         title = "StatusCheck",
         icon = "#general-cuff",
-        functionName = "" 
+        functionName = "hospital:client:CheckStatus" 
     },
     ['medic:revive'] = {
         title = "Revive",

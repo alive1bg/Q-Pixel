@@ -49,6 +49,18 @@ let v = new Vue({
 				actionData: id
 			})
 			this.showDeleteConfirmation = null;
+
+			if (!this.refreshClicked) {
+				sendNuiMessage({
+					action: "refreshCharacters"
+				})
+	
+				this.refreshClicked = true
+	
+				setTimeout(() => {
+					this.refreshClicked = false
+				}, 5000)
+			}
 		},
 		hoverCharacter(id) {
 			sendNuiMessage({

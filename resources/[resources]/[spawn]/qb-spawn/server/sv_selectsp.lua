@@ -16,7 +16,7 @@ RegisterServerEvent("character:loadspawns", function()
     MySQL.Async.fetchAll("SELECT ho.*, cm.cid, cm.building_type, hp.level, hp.illness, hp.time FROM users_motel cm LEFT JOIN users_housing ho on ho.cid = cm.cid LEFT JOIN users_hospital_patients hp on hp.cid = cm.cid WHERE cm.cid = @cid ",{
         ["cid"] = char
     },function(housingMotels)
-        MySQL.Async.fetchAll("SELECT housing_id FROM users_housing_keys WHERE cid = @cid",{
+        MySQL.Async.fetchAll("SELECT * FROM player_houses WHERE citizenid = @cid",{
             ["cid"] = char
         },function(housing_keys)
             if housingMotels[1] then
@@ -35,15 +35,15 @@ RegisterServerEvent("character:loadspawns", function()
                     ["keys"] = {},
                 }
 
-                for k,v in pairs(housingMotels) do
-                    if v.housing_id ~= nil then
-                        spawnData["houses"][v.housing_id] = true
+                for k,v in pairs(housing_keys) do
+                    if v.house ~= nil then
+                        spawnData["houses"][v.house] = true
                     end
                 end
 
                 for k,v in pairs(housing_keys) do
-                    if v.housing_id ~= nil then
-                        spawnData["keys"][v.housing_id] = true
+                    if v.keyholders ~= nil then
+                        spawnData["keys"][v.house] = true
                     end
                 end
                 TriggerClientEvent("spawn:clientSpawnData",src,spawnData)
