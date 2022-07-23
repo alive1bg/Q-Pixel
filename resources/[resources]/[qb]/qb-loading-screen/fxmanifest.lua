@@ -6,6 +6,7 @@ files {
     'style.css',
     'script.js',
     'videos/*',
+    'music.mp3',
 }
 
 loadscreen 'index.html'

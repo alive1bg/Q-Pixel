@@ -9,7 +9,11 @@
 endpoint_add_tcp "0.0.0.0:30120"
 endpoint_add_udp "0.0.0.0:30120"
 sv_maxclients 48
+<<<<<<< Updated upstream
 set steam_webApiKey "02E80A2320F008EF4BE388DB63D06B05"
+=======
+set steam_webApiKey "F58F9850A48B00EB6DB66AF9D3A5D8C4"
+>>>>>>> Stashed changes
 set sv_enforceGameBuild 2612
 sets tags "Q-Pixel"
 
@@ -18,7 +22,7 @@ sv_licenseKey "cfxk_1E1Dy9D98TIuCSRv1oxbq_4P2KSc"
 sv_hostname "Drip City"
 sets banner_connecting "https://i.redd.it/iaakyixiz3e61.png"
 sets sv_projectName "Drip City "
-sets sv_projectDesc "Making the world a little Drippy"
+sets sv_projectDesc "In development"
 sets locale "en-US" 
 load_server_icon myLogo.png
 set mysql_connection_string "mysql://root@localhost/arp3_0?charset=utf8mb4"
