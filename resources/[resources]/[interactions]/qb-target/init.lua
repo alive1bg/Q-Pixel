@@ -53,7 +53,133 @@ Config.CircleZones = {
 
 }
 
+
 Config.BoxZones = {
+
+    --Music Booths
+
+    ["vudjbooth"] = {
+        name = "vudjbooth",
+        coords = vector3(119.74, -1282.03, 29.48),
+        length = 2.0,
+        width = 1.2,
+        heading = 30,
+        debugPoly = false,
+        minZ = 25.88,
+        maxZ = 29.88,
+        options = {
+            {
+                type = "client",
+                 
+                event = "vanilla:request:song",
+                icon = "fas fa-music",
+                label = "Request Song",
+                --job = "vanilla",
+            },
+            {
+                type = "client",
+                 
+                event = "vanilla:change:volume",
+                icon = "fas fa-volume-up",
+                label = "Change Song Volume",
+                --job = "vanilla",
+            },
+        },
+        distance = 3.0
+    }, 
+
+    ["badjbooth"] = {
+        name = "badjbooth",
+        coords = vector3(-1381.87, -616.63, 31.5),
+        length = 0.5,
+        width = 1.2,
+        heading = 303,
+        debugPoly = false,
+        minZ = 28.1, 
+        maxZ = 32.1,
+        options = {
+            {
+                type = "client",
+                 
+                event = "bahamas:request:song",
+                icon = "fas fa-music",
+                label = "Request Song",
+                --job = "vanilla",
+            },
+            { 
+                type = "client",
+                 
+                event = "bahamas:change:volume",
+                icon = "fas fa-volume-up",
+                label = "Change Song Volume",
+                --job = "vanilla",
+            },
+        },
+        distance = 3.0
+    },
+
+    ["tedjbooth"] = {
+        name = "tedjbooth",
+        coords = vector3(-552.39, 284.21, 82.98),
+        length = 0.6,
+        width = 0.6,
+        heading = 352, 
+        debugPoly = false,
+        minZ = 79.58, 
+        maxZ = 83.58,
+        options = {
+            {
+                type = "client",
+                 
+                event = "tequilala:request:song",
+                icon = "fas fa-music",
+                label = "Request Song",
+                --job = "vanilla",
+            },
+            {
+                type = "client",
+                 
+                event = "tequilala:change:volume",
+                icon = "fas fa-volume-up",
+                label = "Change Song Volume",
+                --job = "vanilla",
+            },
+        },
+        distance = 3.0
+    },
+
+    ["ardjbooth"] = {
+        name = "ardjbooth",
+        coords = vector3(-1288.54, -292.66, 36.05),
+        length = 0.6,
+        width = 1.0,
+        heading = 25, 
+        debugPoly = false,
+        minZ = 35.9, 
+        maxZ = 37.3,
+        options = {
+            {
+                type = "client",
+                 
+                event = "arcade:request:song",
+                icon = "fas fa-music",
+                label = "Request Song",
+                --job = "vanilla",
+            },
+            {
+                type = "client",
+                 
+                event = "arcade:change:volume",
+                icon = "fas fa-volume-up",
+                label = "Change Song Volume",
+                --job = "vanilla",
+            },
+        },
+        distance = 3.0
+    },
+
+
+    --BurgerShot
 
     ["BurgershotDuty"] = {
         name = "BurgershotDuty",
