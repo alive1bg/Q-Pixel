@@ -407,21 +407,26 @@ end
 
 CreateThread(function()
 	exports['qb-target']:AddBoxZone("PDBADGE", vector3(1239.4278, -3173.459, 7.1048631), 2, 2, {
-		name = "PD Badge",
+		name = "PDBADGE",
 		heading = 359,
 		debugPoly = false,
 		minZ = 6.1048631,
 		maxZ = 8.1048631,
-        options = {{
-            event = "oxydelivery:server",
-            type = "server",
-            icon = "delivery-man.svg",
-            label = "Delivery Job ($500)",
-        }},
+			}, 
+		{
+		options = {
+			{
+				event = "oxydelivery:server",
+				type = "server",
+				icon = "delivery-man.svg",
+				label = "Delivery Job ($500)",
+			},
+		},
 		condition = function()
 			return not OxyRun;
 		end
-    }, {
-        animation = 'clipboard'
-    });
+		}, {
+			animation = 'clipboard'
+		}
+		);
 end);
