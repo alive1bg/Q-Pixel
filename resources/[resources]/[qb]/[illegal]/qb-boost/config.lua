@@ -452,7 +452,7 @@ end
 
 
 ShowNotification = function(msg, type)
-    exports['mythic_notify']:SendAlert(type, msg)
+    --exports['mythic_notify']:SendAlert(type, msg)
     TriggerClientEvent('QBCore:Notify', src, msg, 'success')
 	--exports['co_notify']:SendNotify('boosting', type, msg)
 end
