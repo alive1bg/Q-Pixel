@@ -10,24 +10,11 @@ const OpenMenu = (data) => {
 
     let form = [
         "<form id='qb-input-form'>",
-        `<div class="heading">${
-            data.header != null ? data.header : "Form Title"
-        }</div>
-        <div class="info">${
-            data.info != null ? data.info : "Info"
-        }
-        </div>
-        `,
+        `<div class="heading">${ data.header != null ? data.header : "Form Title" }</div>`,
     ];
 
     data.inputs.forEach((item, index) => {
         switch (item.type) {
-            case "chat-channel-name":
-                form.push(renderChatChannelName(item));
-                break;
-            case "chat-channel-passcode":
-                form.push(renderChatChannelPasscode(item));
-                break;
             case "text":
                 form.push(renderTextInput(item));
                 break;
@@ -37,14 +24,11 @@ const OpenMenu = (data) => {
             case "number":
                 form.push(renderNumberInput(item));
                 break;
-            case "select":
-                form.push(renderSelectInput(item));
-                break;
-            case "url":
-                form.push(renderURLInput(item));
-                break;
             case "radio":
                 form.push(renderRadioInput(item));
+                break;
+            case "select":
+                form.push(renderSelectInput(item));
                 break;
             case "checkbox":
                 form.push(renderCheckboxInput(item));
@@ -54,9 +38,7 @@ const OpenMenu = (data) => {
         }
     });
     form.push(
-        `<div class="footer"><button type="submit" class="btn btn-success" id="submit">${
-            data.submitText ? data.submitText : "Submit"
-        }</button></div>`
+        `<div class="footer"><button type="submit" class="btn btn-success" id="submit">${data.submitText ? data.submitText : "Submit"}</button></div>`
     );
 
     form.push("</form>");
@@ -85,73 +67,30 @@ const OpenMenu = (data) => {
     });
 };
 
-/**
- * Converts a string to slug case.
- * 
- * @param {string} str 
- * @returns 
- */
- function slug( str ) {
-    str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ').toLowerCase();
-    str = str.replace(/^\s+|\s+$/gm,'');
-    str = str.replace(/\s+/g, '-');   
-
-    return str;
-}
-
-
-$(document).on('keyup', '#chat-channel-name', function(e) {
-    $('#chat-channel-name-slug').text("#" + slug($(this).val()))
-})
-
-const renderChatChannelName = (item) => {
-    const { text, name } = item;
-    formInputs[name] = "";
-
-    return ` <label for="${name} (max 20 letters)">${text} <span id="chat-channel-name-slug"></span></label> <input type="text" id="chat-channel-name" maxlength="20" class="form-control" name="${name}" required/>`;
-};
-
-const renderChatChannelPasscode = (item) => {
-    const { text, name } = item;
-    formInputs[name] = "";
-
-    return ` <label for="${name}">${text}</label> <input type="password" maxlength="50" class="form-control" placeholder="${item.placeholder}" name="${name}" />`;
-};
-
-const renderURLInput = (item) => {
-    const { text, name } = item;
-    formInputs[name] = "";
-    const isRequired =
-        item.isRequired == "true" || item.isRequired ? "required" : "";
-
-    return ` <label for="${name}">${text}</label><br> <input type="url" class="form-control" name="${name}" ${isRequired}/>`;
-};
-
 const renderTextInput = (item) => {
     const { text, name } = item;
-    formInputs[name] = "";
-    const isRequired =
-        item.isRequired == "true" || item.isRequired ? "required" : "";
+    formInputs[name] = item.default ? item.default : "";
+    const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
+    const defaultValue = item.default ? `value="${item.default}"` : ""
 
-    return ` <label for="${name}">${text}</label><br> <input type="text" class="form-control" name="${name}" ${isRequired}/>`;
+    return ` <input placeholder="${text}" type="text" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
 };
 const renderPasswordInput = (item) => {
     const { text, name } = item;
-    formInputs[name] = "";
-    const isRequired =
-        item.isRequired == "true" || item.isRequired ? "required" : "";
-    const flag = item.flag;
+    formInputs[name] = item.default ? item.default : "";
+    const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
+    const defaultValue = item.default ? `value="${item.default}"` : ""
 
-    return `<label for="${name}">${text}</label><br> <input ${flag} type="password" class="form-control" name="${name}" ${isRequired}/>`;
+    return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
 };
 const renderNumberInput = (item) => {
     try {
         const { text, name } = item;
-        formInputs[name] = "";
-        const isRequired =
-            item.isRequired == "true" || item.isRequired ? "required" : "";
+        formInputs[name] = item.default ? item.default : "";
+        const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
+        const defaultValue = item.default ? `value="${item.default}"` : ""
 
-        return `<label for="${name}">${text}</label><br><input type="number" class="form-control" name="${name}" ${isRequired}/>`;
+        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
     } catch (err) {
         console.log(err);
         return "";
@@ -165,9 +104,8 @@ const renderRadioInput = (item) => {
     let div = `<div class="form-input-group"> <div class="form-group-title">${text}</div>`;
     div += '<div class="input-group">';
     options.forEach((option, index) => {
-        div += `<label for="radio_${name}_${index}"> <input type="radio" id="radio_${name}_${index}" name="${name}" value="${
-            option.value
-        }" ${index == 0 ? "checked" : ""}> ${option.text}</label>`;
+        div += `<label for="radio_${name}_${index}"> <input type="radio" id="radio_${name}_${index}" name="${name}" value="${option.value}" 
+                ${(item.default ? item.default == option.value : index == 0) ? "checked" : ""}> ${option.text}</label>`;
     });
 
     div += "</div>";
@@ -183,7 +121,8 @@ const renderCheckboxInput = (item) => {
     div += '<div class="input-group-chk">';
 
     options.forEach((option, index) => {
-        div += `<label for="chk_${name}_${index}">${option.text} <input type="checkbox" id="chk_${name}_${index}" name="${name}" value="${option.value}"></label>`;
+        div += `<label for="chk_${name}_${index}">${option.text} <input type="checkbox" id="chk_${name}_${index}" name="${name}" value="${option.value}" ${option.checked ? 'checked' : ''}></label>`;
+        formInputs[option.value] = option.checked ? 'true' : 'false';
     });
 
     div += "</div>";
@@ -199,9 +138,9 @@ const renderSelectInput = (item) => {
     formInputs[name] = options[0].value;
 
     options.forEach((option, index) => {
-        div += `<option value="${option.value}" ${
-            option.checked != null ? "checked" : ""
-        }>${option.text}</option>`;
+        const isDefaultValue = item.default == option.value
+        div += `<option value="${option.value}" ${isDefaultValue ? 'selected' : '' }>${option.text}</option>`;
+        if(isDefaultValue){ formInputs[name] = option.value }
     });
     div += "</select>";
     return div;
