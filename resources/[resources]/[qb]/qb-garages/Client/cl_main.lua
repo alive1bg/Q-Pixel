@@ -816,7 +816,9 @@ end)
 RegisterNetEvent('qb-garages:client:SpawnVehicle', function(Data)
     SpawnVehicle(Data.vehicle, Data.garage, Data.fuel, Data.body, Data.engine, Data.plate, Data.gType, true, Data.isShared)
     QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-        TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, Data.vehicle)
+        if wheelfit ~= nil then
+            TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, Data.vehicle)
+        end
     end, Data.plate)
     if Data.isShared then
         TriggerServerEvent('qb-garages:server:UpdateParkingLog', Data.plate)

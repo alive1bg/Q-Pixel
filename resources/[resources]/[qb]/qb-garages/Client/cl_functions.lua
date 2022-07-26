@@ -286,8 +286,11 @@ function SpawnVehicle(vehicle, pGarage, Fuel, body, engine, plate, gType, IsView
             CurrentDisplayVehicle = veh
             QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                 QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-                    TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
-                end, plate)
+                    print(wheelfitment)
+                    if wheelfit ~= nil then
+                        TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                    end
+                end, plate) 
                 QBCore.Functions.SetVehicleProperties(veh, properties)
                 SetVehicleNumberPlateText(veh, plate)
                 exports['qb-fuel']:SetFuel(veh, Fuel)
@@ -351,7 +354,9 @@ function SpawnDepotVehicle(Data)
                                     end
                                     QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                                         QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-                                            TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                            if wheelfit ~= nil then
+                                                TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                            end
                                         end, Data.plate)
                                         QBCore.Functions.SetVehicleProperties(veh, properties)
                                         SetVehicleNumberPlateText(veh, Data.plate)
@@ -399,7 +404,9 @@ function SpawnDepotVehicle(Data)
                             end
                             QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                                 QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-                                    TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                    if wheelfit ~= nil then
+                                        TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                    end
                                 end, Data.plate)
                                 QBCore.Functions.SetVehicleProperties(veh, properties)
                                 SetVehicleNumberPlateText(veh, Data.plate)
@@ -440,7 +447,9 @@ function SpawnDepotVehicle(Data)
                         end
                         QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                             QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-                                TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                if wheelfit ~= nil then
+                                    TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                                end
                             end, Data.plate)
                             QBCore.Functions.SetVehicleProperties(veh, properties)
                             SetVehicleNumberPlateText(veh, Data.plate)
@@ -481,7 +490,9 @@ function SpawnDepotVehicle(Data)
                     end
                     QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                         QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
-                            TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                            if wheelfit ~= nil then
+                                TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
+                            end
                         end, Data.plate)
                         QBCore.Functions.SetVehicleProperties(veh, properties)
                         SetVehicleNumberPlateText(veh, Data.plate)
