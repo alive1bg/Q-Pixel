@@ -21,7 +21,7 @@ function isReady(divId, howler){
             if(sound.loaded() == false){
 
                 sound.setLoaded(true);
-                $.post('https://np-musicplayer/events', JSON.stringify(
+                $.post('https://qb-musicplayer/events', JSON.stringify(
                 {
                     type: "onPlay",
                     id: sound.getName(),
@@ -31,7 +31,7 @@ function isReady(divId, howler){
                 if(sound.getAudioPlayer() != null){time = sound.getAudioPlayer()._duration;}
                 if(sound.isDynamic()) sound.setVolume(0);
 
-                $.post('https://np-musicplayer/data_status', JSON.stringify(
+                $.post('https://qb-musicplayer/data_status', JSON.stringify(
                 {
                     time: time,
                     type: "maxDuration",
@@ -46,7 +46,7 @@ function isReady(divId, howler){
 	{
 		var sound = soundList[soundName];
         if(sound.getDivId() === divId){
-            $.post('https://np-musicplayer/events', JSON.stringify(
+            $.post('https://qb-musicplayer/events', JSON.stringify(
             {
                 type: "onPlay",
                 id: sound.getName(),
@@ -57,7 +57,7 @@ function isReady(divId, howler){
 			if(sound.isDynamic()) sound.setVolume(0);
             sound.setLoaded(true);
 
-            $.post('https://np-musicplayer/data_status', JSON.stringify(
+            $.post('https://qb-musicplayer/data_status', JSON.stringify(
             {
                 time: time,
                 type: "maxDuration",
@@ -79,8 +79,8 @@ function isLooped(divId){
             sound.setTimeStamp(0);
             sound.play();
 
-            $.post('https://np-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
-            $.post('https://np-musicplayer/events', JSON.stringify(
+            $.post('https://qb-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
+            $.post('https://qb-musicplayer/events', JSON.stringify(
             {
                 type: "onEnd",
                 id: sound.getName(),
@@ -89,7 +89,7 @@ function isLooped(divId){
             var time = 0;
             if(sound.getAudioPlayer() != null){time = sound.getAudioPlayer()._duration;}
             if(sound.getYoutubePlayer() != null){time = sound.getYoutubePlayer().getDuration();}
-            $.post('https://np-musicplayer/events', JSON.stringify(
+            $.post('https://qb-musicplayer/events', JSON.stringify(
             {
                 type: "resetTimeStamp",
                 id: sound.getName(),
@@ -108,8 +108,8 @@ function ended(divId){
             var sound = soundList[soundName];
             if(!sound.isPlaying())
             {
-                $.post('https://np-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
-                $.post('https://np-musicplayer/events', JSON.stringify(
+                $.post('https://qb-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
+                $.post('https://qb-musicplayer/events', JSON.stringify(
                 {
                     type: "onEnd",
                     id: sound.getName(),
@@ -118,7 +118,7 @@ function ended(divId){
                     var time = 0;
                     if(sound.getAudioPlayer() != null){time = sound.getAudioPlayer()._duration;}
                     if(sound.getYoutubePlayer() != null){time = sound.getYoutubePlayer().getDuration();}
-                    $.post('https://np-musicplayer/events', JSON.stringify(
+                    $.post('https://qb-musicplayer/events', JSON.stringify(
                     {
                         type: "resetTimeStamp",
                         id: sound.getName(),
@@ -138,8 +138,8 @@ function ended(divId){
     	{
             var sound = soundList[soundName];
             if(sound.getDivId() === divId && !sound.isLoop()){
-                $.post('https://np-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
-                $.post('https://np-musicplayer/events', JSON.stringify(
+                $.post('https://qb-musicplayer/data_status', JSON.stringify({ type: "finished",id: soundName }));
+                $.post('https://qb-musicplayer/events', JSON.stringify(
                 {
                     type: "onEnd",
                     id: sound.getName(),

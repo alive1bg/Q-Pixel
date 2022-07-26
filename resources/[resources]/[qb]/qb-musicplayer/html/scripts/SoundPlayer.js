@@ -86,7 +86,7 @@ class SoundPlayer
   
 	create()
 	{
-	    $.post('https://np-musicplayer/events', JSON.stringify(
+	    $.post('https://qb-musicplayer/events', JSON.stringify(
 	    {
             type: "onLoading",
             id: this.getName(),
