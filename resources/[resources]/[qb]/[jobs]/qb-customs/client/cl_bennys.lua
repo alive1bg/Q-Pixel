@@ -946,7 +946,7 @@ function BennyEngineRepair()
     local getFuel = GetVehicleFuelLevel(plyVeh)
     local RepairPrice = GetRepairPrice1()
 
-    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 150)
+    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 200)
 
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
@@ -965,7 +965,7 @@ function BennyBodyRepair()
     local getFuel = GetVehicleFuelLevel(plyVeh)
     local RepairPrice = GetRepairPrice2()
 
-    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 150)
+    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 200)
 
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
