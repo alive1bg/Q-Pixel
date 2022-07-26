@@ -906,19 +906,56 @@ RegisterNetEvent('event:control:tunershop', function(useID)
     end
 end)
 
+function math.round(num, numDecimalPlaces)
+    return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
+end
+
 -------------------------------------------------- benny repair point event + function
+
+function GetRepairPrice1()
+	local myVehicle = GetVehiclePedIsIn(PlayerPedId(),false)
+	local EngineHealth = GetVehicleEngineHealth(myVehicle)
+	local RepairPriceMultiplier = 1
+	local RepairPrice = math.random(39,49)
+	
+	EngineHealth = (EngineHealth - 1000)
+	RepairPriceMultiplier = ((EngineHealth - (EngineHealth* 2)) / 100)
+	RepairPriceEquals = RepairPrice * RepairPriceMultiplier
+	RoundedRepairPrice = math.round(RepairPriceEquals)
+
+	return RoundedRepairPrice
+end
+
+function GetRepairPrice2()
+	local myVehicle = GetVehiclePedIsIn(PlayerPedId(),false)
+	local BodyHealth = GetVehicleBodyHealth(myVehicle)
+	local RepairPriceMultiplier = 1
+	local RepairPrice = math.random(39,49)
+	
+	BodyHealth = (BodyHealth - 1000)
+	RepairPriceMultiplier = ((BodyHealth - (BodyHealth* 2)) / 100)
+	RepairPriceEquals = RepairPrice * RepairPriceMultiplier
+	RoundedRepairPrice = math.round(RepairPriceEquals)
+
+	return RoundedRepairPrice
+end
+
 function BennyEngineRepair()
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
     local getFuel = GetVehicleFuelLevel(plyVeh)
+    local RepairPrice = GetRepairPrice1()
+
+    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 150)
 
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehiclePetrolTankHealth(plyVeh, 4000.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
     SetVehicleEngineHealth(plyVeh, 1000.0)
     SetVehicleEngineOn(plyVeh, false, false, true)
-    QBCore.Functions.Notify("Engine Repaired!", "success")
-    TriggerServerEvent('qb-customs:paybiatch')
+    QBCore.Functions.Notify("Engine Repaired!", "success") 
+
+    
     TriggerEvent('veh.randomDegredation',10,plyVeh,3)
 end
 
@@ -926,6 +963,9 @@ function BennyBodyRepair()
     local plyPed = PlayerPedId()
     local plyVeh = GetVehiclePedIsIn(plyPed, false)
     local getFuel = GetVehicleFuelLevel(plyVeh)
+    local RepairPrice = GetRepairPrice2()
+
+    TriggerServerEvent('qb-customs:paybiatch', RepairPrice + 150)
 
 	SetVehicleDirtLevel(plyVeh, 0.0)
     SetVehicleFuelLevel(plyVeh, getFuel)
@@ -935,7 +975,7 @@ function BennyBodyRepair()
     SetVehicleBodyHealth(plyVeh, 1000.0)
     SetVehicleEngineOn(plyVeh, true, true, true)
     QBCore.Functions.Notify("Body Repaired!", "success")
-    TriggerServerEvent('qb-customs:paybiatch')
+    
 end
 
 local function playSoundEffect(soundEffect, volume)

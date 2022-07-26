@@ -76,8 +76,8 @@ function IsVehicleOwned(plate)
     return retval
 end
 
-RegisterNetEvent('qb-customs:paybiatch', function()
+RegisterNetEvent('qb-customs:paybiatch', function(RepairPrice)
     local src = source
 	local xPlayer = QBCore.Functions.GetPlayer(src)
-    xPlayer.Functions.RemoveMoney("bank", 500, "Bennys Repair")
+    xPlayer.Functions.RemoveMoney("bank", RepairPrice, "Bennys Repair")
 end)
