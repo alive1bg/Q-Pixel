@@ -261,6 +261,7 @@ local weapons = {
 	['weapon_shiv'] 	                = 0.65,
 	['weapon_katana'] 	                = 0.65,
 	['weapon_sledgehammer'] 	        = 0.65,
+	["weapon_stungun"] = 0.15
 
 	['weapon_shoe'] 			    = 0.45,
     ['weapon_brick'] 			    = 0.45,
