@@ -15,18 +15,18 @@ Citizen.CreateThread(function()
 			info.blip = AddBlipForCoord(info.x, info.y, info.z)
 			SetBlipSprite(info.blip, info.id)
 			SetBlipDisplay(info.blip, 4)
-			SetBlipScale(info.blip, 0.6)	
+			SetBlipScale(info.blip, 0.6)
 			SetBlipColour(info.blip, info.colour)
 			SetBlipAsShortRange(info.blip, true)
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentString(info.title)
 			EndTextCommandSetBlipName(info.blip)
 		end
-	end	
+	end
 end)
 
 --// PickUp Weed \\--
-RegisterNetEvent('qb-whitewidow:PickUpWeed', function()         
+RegisterNetEvent('qb-whitewidow:PickUpWeed', function()
 	loadAnimDict("anim@amb@business@weed@weed_inspecting_lo_med_hi@")
 	TaskPlayAnim(PlayerPedId(), 'anim@amb@business@weed@weed_inspecting_lo_med_hi@', 'weed_spraybottle_crouch_spraying_02_inspector', 8.0, -8, -1, 16, 0, 0, 0, 0, false, false, false)
 	QBCore.Functions.Progressbar("search_register", "Picking Up Weed...", 7500, false, true, {
@@ -36,7 +36,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeed', function()
 		disableCombat = true,
 	}, {}, {}, {}, function()
 		StopAnimTask(PlayerPedId(), "anim@amb@business@weed@weed_inspecting_lo_med_hi@", "weed_spraybottle_crouch_spraying_02_inspector", 1.0)
-		ClearPedTasks(GetPlayerPed(-1))		
+		ClearPedTasks(GetPlayerPed(-1))
 		TriggerServerEvent('qb-whitewidow:pickUpWeed')
 	end, function()
 		ClearPedTasks(GetPlayerPed(-1))
@@ -44,7 +44,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeed', function()
 end)
 
 --// PickUp Weed Skunk \\--
-RegisterNetEvent('qb-whitewidow:PickUpWeedSkunk', function()         
+RegisterNetEvent('qb-whitewidow:PickUpWeedSkunk', function()
 	loadAnimDict("anim@amb@business@weed@weed_inspecting_lo_med_hi@")
 	TaskPlayAnim(PlayerPedId(), 'anim@amb@business@weed@weed_inspecting_lo_med_hi@', 'weed_spraybottle_crouch_spraying_02_inspector', 8.0, -8, -1, 16, 0, 0, 0, 0, false, false, false)
 	QBCore.Functions.Progressbar("search_register", "Picking Up Skunk...", 7500, false, true, {
@@ -54,7 +54,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeedSkunk', function()
 		disableCombat = true,
 	}, {}, {}, {}, function()
 		StopAnimTask(PlayerPedId(), "anim@amb@business@weed@weed_inspecting_lo_med_hi@", "weed_spraybottle_crouch_spraying_02_inspector", 1.0)
-		ClearPedTasks(GetPlayerPed(-1))		
+		ClearPedTasks(GetPlayerPed(-1))
 		TriggerServerEvent('qb-whitewidow:pickUpSkunk')
 	end, function()
 		ClearPedTasks(GetPlayerPed(-1))
@@ -62,7 +62,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeedSkunk', function()
 end)
 
 --// PickUp Weed Ak47 \\--
-RegisterNetEvent('qb-whitewidow:PickUpWeedAk47', function()         
+RegisterNetEvent('qb-whitewidow:PickUpWeedAk47', function()
 	loadAnimDict("anim@amb@business@weed@weed_inspecting_lo_med_hi@")
 	TaskPlayAnim(PlayerPedId(), 'anim@amb@business@weed@weed_inspecting_lo_med_hi@', 'weed_spraybottle_crouch_spraying_02_inspector', 8.0, -8, -1, 16, 0, 0, 0, 0, false, false, false)
 	QBCore.Functions.Progressbar("search_register", "Picking Up AK-47...", 7500, false, true, {
@@ -72,7 +72,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeedAk47', function()
 		disableCombat = true,
 	}, {}, {}, {}, function()
 		StopAnimTask(PlayerPedId(), "anim@amb@business@weed@weed_inspecting_lo_med_hi@", "weed_spraybottle_crouch_spraying_02_inspector", 1.0)
-		ClearPedTasks(GetPlayerPed(-1))		
+		ClearPedTasks(GetPlayerPed(-1))
 		TriggerServerEvent('qb-whitewidow:pickUpAk47')
 	end, function()
 		ClearPedTasks(GetPlayerPed(-1))
@@ -80,7 +80,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeedAk47', function()
 end)
 
 --// PickUp Weed Og-Kush \\--
-RegisterNetEvent('qb-whitewidow:PickUpWeedOgKush', function()         
+RegisterNetEvent('qb-whitewidow:PickUpWeedOgKush', function()
 	loadAnimDict("anim@amb@business@weed@weed_inspecting_lo_med_hi@")
 	TaskPlayAnim(PlayerPedId(), 'anim@amb@business@weed@weed_inspecting_lo_med_hi@', 'weed_spraybottle_crouch_spraying_02_inspector', 8.0, -8, -1, 16, 0, 0, 0, 0, false, false, false)
 	QBCore.Functions.Progressbar("search_register", "Picking Up Og-Kush...", 7500, false, true, {
@@ -90,7 +90,7 @@ RegisterNetEvent('qb-whitewidow:PickUpWeedOgKush', function()
 		disableCombat = true,
 	}, {}, {}, {}, function()
 		StopAnimTask(PlayerPedId(), "anim@amb@business@weed@weed_inspecting_lo_med_hi@", "weed_spraybottle_crouch_spraying_02_inspector", 1.0)
-		ClearPedTasks(GetPlayerPed(-1))		
+		ClearPedTasks(GetPlayerPed(-1))
 		TriggerServerEvent('qb-whitewidow:pickUpOgKush')
 	end, function()
 		ClearPedTasks(GetPlayerPed(-1))
@@ -100,7 +100,7 @@ end)
 --// Trey \\--
 RegisterNetEvent("qb-whitewidow:OpenPlate", function()
 	TriggerServerEvent("inventory:server:OpenInventory", "stash", "WhiteWidow Tray", {maxweight = 30000, slots = 10})
-	TriggerEvent("inventory:client:SetCurrentStash", "WhiteWidow Tray") 
+	TriggerEvent("inventory:client:SetCurrentStash", "WhiteWidow Tray")
 end)
 
 --// Grab Cola \\--
@@ -180,7 +180,7 @@ end)
 
 --// Stash \\--
 RegisterNetEvent('qb-whitewidowShop:Stash', function()
-	TriggerServerEvent("inventory:server:OpenInventory", "stash", "WhiteWidow Storage") 
+	TriggerServerEvent("inventory:server:OpenInventory", "stash", "WhiteWidow Storage")
 	TriggerEvent("inventory:client:SetCurrentStash", "WhiteWidow Storage")
 end)
 
@@ -256,7 +256,7 @@ function BongEffect()
     local startStamina = 8
     SmokingBongEffect()
 	TriggerClientEvent("qb-hud:Server:RelieveStress")
-    while startStamina > 0 do 
+    while startStamina > 0 do
         Citizen.Wait(1000)
         if math.random(1, 100) < 10 then
             RestorePlayerStamina(PlayerId(), 1.0)
@@ -291,7 +291,7 @@ function SpawnBaller(vehicle)
         TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
         TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
         SetVehicleEngineOn(veh, true, true)
-    end, coords, true)     
+    end, coords, true)
 end
 
 --// WhiteWidows Garage Store Vehicle \\--
@@ -329,7 +329,7 @@ RegisterNetEvent('WhiteWidow:Garage:Menu', function()
             params = {
                 event = "qb-menu:client:closeMenu",
             }
-        },     
+        },
     })
 end)
 
@@ -342,18 +342,18 @@ CreateThread(function()
     while true do
         local plyPed = PlayerPedId()
         local plyCoords = GetEntityCoords(plyPed)
-        local letSleep = true        
+        local letSleep = true
 
         if PlayerJob ~= nil and PlayerJob.name == Config.Job then
             if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, 196.96069, -268.2592, 50.046707, true) < 10) then
                 letSleep = false
                 DrawMarker(2, 196.96069, -268.2592, 50.046707, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 0, 0, 0, 222, false, false, false, true, false, false, false)
 				if (GetDistanceBetweenCoords(plyCoords.x, plyCoords.y, plyCoords.z, 196.96069, -268.2592, 50.046707, true) < 1.5) then
-                    DrawText3D(196.96069, -268.2592, 50.046707, "~g~E~w~ - White Widow Garage") 
+                    DrawText3D(196.96069, -268.2592, 50.046707, "~g~E~w~ - White Widow Garage")
                     if IsControlJustReleased(0, 38) then
                         TriggerEvent("WhiteWidow:Garage:Menu")
                     end
-                end  
+                end
             end
         end
 
@@ -393,34 +393,34 @@ RegisterNetEvent('qb-whitewidow:Process:Menu', function()
 			params = {
 				event = "qb-whitewidow:Client:ProcessCannabis",
 			}
-        },       
+        },
 		{
             header = "Process Skunk",
             txt = "1X Skunk 1X Weed Scissors",
 			params = {
 				event = "qb-whitewidow:Client:ProcessSkunk",
 			}
-        },    
+        },
 		{
             header = "Process AK-47",
             txt = "1X AK-47 1X Weed Scissors",
 			params = {
 				event = "qb-whitewidow:Client:ProcessAk47",
 			}
-        },   
+        },
 		{
             header = "Process Og-Kush",
             txt = "1X Og-Kush 1X Weed Scissors",
 			params = {
 				event = "qb-whitewidow:Client:ProcessOgKush",
 			}
-        },   
+        },
 		{
             header = "Close Menu",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
-        }, 
+        },
     })
 end)
 
@@ -433,13 +433,13 @@ RegisterNetEvent('qb-whitewidow:OpenBong:Menu', function()
 			params = {
 				event = "qb-whitewidow:Client:Bong",
 			}
-        },        
+        },
 		{
             header = "Close Menu",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
-        }, 
+        },
     })
 end)
 
@@ -459,27 +459,27 @@ RegisterNetEvent('qb-whitewidowShop:Menu:Open', function()
 			params = {
 				event = "qb-whitewidow:Client:GrabCola",
 			}
-		},       
+		},
 		{
 			header = "Grab Snack",
 			txt = 'Buy Snack For ' .. snackprice,
 			params = {
 				event = "qb-whitewidow:Client:GrabSnack",
 			}
-		},    
+		},
 		{
 			header = "Grab Water",
 			txt = 'Buy Water For ' .. waterprice,
 			params = {
 				event = "qb-whitewidow:Client:GrabWater",
 			}
-		},   
+		},
 		{
             header = "Close Menu",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
-        }, 
+        },
     })
 end)
 
@@ -496,13 +496,13 @@ RegisterNetEvent('qb-whitewidow:ProcessJoints:Menu', function()
 			params = {
 				event = "qb-whitewidow:Client:Joints",
             }
-        },       
+        },
 		{
             header = "Close Menu",
             params = {
                 event = "qb-menu:client:closeMenu",
             }
-        }, 
+        },
     })
 end)
 
@@ -534,7 +534,7 @@ CreateThread(function()
 			},
 			distance = 1.0
 		})
-		
+
 		--// Drinks Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowDrinksMenu", vector3(187.12597, -245.377, 53.808071), 0.8, 0.8, {
 			name = "WhiteWidowDrinksMenu",
@@ -561,7 +561,7 @@ CreateThread(function()
 			},
 			distance = 1.0
 		})
-		
+
 		--// Pick 1 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowPick1", vector3(170.10705, -244.7768, 50.367435), 1.0, 3, {
 			name = "WhiteWidowPick1",
@@ -588,7 +588,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick 2 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowPick2", vector3(169.60479, -246.0026, 50.36737), 1.0, 3, {
 			name = "WhiteWidowPick2",
@@ -615,7 +615,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick 3 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowPick3", vector3(169.28524, -247.451, 50.36737), 1.0, 3, {
 			name = "WhiteWidowPick3",
@@ -642,7 +642,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick 4 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowPick4", vector3(168.66157, -248.5414, 50.36737), 1.0, 3, {
 			name = "WhiteWidowPick4",
@@ -669,7 +669,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick 5 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowPick5", vector3(168.39279, -249.3025, 50.135208), 1.0, 3, {
 			name = "WhiteWidowPick5",
@@ -696,7 +696,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Skunk 1 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowSkunkPick1", vector3(167.59107, -244.1141, 50.36737), 1.0, 3, {
 			name = "WhiteWidowSkunkPick1",
@@ -723,7 +723,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Skunk 2 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowSkunkPick2", vector3(167.08296, -245.2875, 50.36737), 1.0, 3, {
 			name = "WhiteWidowSkunkPick2",
@@ -750,7 +750,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Skunk 3 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowSkunkPick3", vector3(166.32737, -246.294, 50.055263), 1.0, 3, {
 			name = "WhiteWidowSkunkPick3",
@@ -777,7 +777,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Skunk 4 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowSkunkPick4", vector3(166.34451, -247.64, 50.36737), 1.0, 3, {
 			name = "WhiteWidowSkunkPick4",
@@ -804,7 +804,7 @@ CreateThread(function()
 			},
 			distance = 1.3
 		})
-		
+
 		--// Pick Skunk 5 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowSkunkPick5", vector3(165.78178, -248.8942, 50.36737), 1.0, 3, {
 			name = "WhiteWidowSkunkPick5",
@@ -831,7 +831,7 @@ CreateThread(function()
 			},
 			distance = 1.3
 		})
-		
+
 		--// Pick Ak47 1 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowAk47Pick1", vector3(165.09664, -243.0975, 50.36737), 1.0, 3, {
 			name = "WhiteWidowAk47Pick1",
@@ -858,7 +858,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Ak47 2 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowAk47Pick2", vector3(164.59544, -244.2542, 50.36737), 1.0, 3, {
 			name = "WhiteWidowAk47Pick2",
@@ -885,7 +885,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Ak47 3 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowAk47Pick3", vector3(164.09489, -245.5303, 50.36737), 1.0, 3, {
 			name = "WhiteWidoAk47Pick3",
@@ -912,7 +912,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Ak47 4 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowAk47Pick4", vector3(163.52682, -246.6997, 50.36737), 1.0, 3, {
 			name = "WhiteWidowAk47Pick4",
@@ -939,7 +939,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Ak47 5 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowAk47Pick5", vector3(163.30659, -247.5116, 50.364101), 1.0, 3, {
 			name = "WhiteWidowAk47Pick5",
@@ -966,7 +966,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Og-Kush 1 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowOgKushPick1", vector3(162.51042, -242.0645, 50.055507), 1.0, 3, {
 			name = "WhiteWidowOgKushPick1",
@@ -993,7 +993,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Og-Kush 2 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowOgKushPick2", vector3(162.11291, -243.459, 50.36737), 1.0, 3, {
 			name = "WhiteWidowOgKushPick2",
@@ -1020,7 +1020,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Og-Kush 3 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowOgKushPick3", vector3(162.03102, -244.4711, 50.054496), 1.0, 3, {
 			name = "WhiteWidowOgKushPick3",
@@ -1047,7 +1047,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Og-Kush 4 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowOgKushPick4", vector3(161.56398, -245.8443, 50.055507), 1.0, 3, {
 			name = "WhiteWidowOgKushPick4",
@@ -1074,7 +1074,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Pick Og-Kush 5 Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowOgKushPick5", vector3(161.15199, -246.9786, 50.055507), 1.0, 3, {
 			name = "WhiteWidowOgKushPick5",
@@ -1101,7 +1101,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Duty Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowDuty", vector3(184.8912, -241.8809, 54.069698), 0.6, 2.4, {
 			name = "WhiteWidowDuty",
@@ -1121,7 +1121,7 @@ CreateThread(function()
 			},
 			distance = 1.0
 		})
-		
+
 		--// Stash Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowStash", vector3(184.17364, -244.2578, 53.918201), 1.1, 1.2, {
 			name = "WhiteWidowStash",
@@ -1141,7 +1141,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Processing Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowProcess", vector3(165.55667, -235.6183, 50.681068), 1.0, 2.7, {
 			name = "WhiteWidowProcess",
@@ -1168,7 +1168,7 @@ CreateThread(function()
 			},
 			distance = 1.2
 		})
-		
+
 		--// Processing Joint Target \\--
 		exports['qb-target']:AddBoxZone("WhiteWidowProcessJoints", vector3(164.46914, -233.2938, 50.274959), 1.0, 2.7, {
 			name = "WhiteWidowProcessJoints",
@@ -1204,7 +1204,7 @@ CreateThread(function()
 				minZ = v.minZ,
 				maxZ = v.maxZ,
 				}, {
-					options = { 
+					options = {
 					{
 						type = "client",
 						event = "qb-whitewidow:OpenBong:Menu",
@@ -1216,11 +1216,11 @@ CreateThread(function()
 			})
 		end
 end)
-				
+
 local trayprops = {
 	'bkr_prop_meth_tray_01b',
 }
-		
+
 --// Trey Target \\--
 exports['qb-target']:AddTargetModel(trayprops, {
 	name = "WhiteWidowTray",
@@ -1309,7 +1309,7 @@ end
 
 --// Function For Processing Joints \\--
 function ProcessJoints()
-	TriggerServerEvent('qb-whitewidow:ProcessJoints')                                                       				
+	TriggerServerEvent('qb-whitewidow:ProcessJoints')
 	QBCore.Functions.Progressbar("search_register", "Rolling Joints...", 7000, false, true, {
 	  	disableMovement = true,
 	  	disableCarMovement = true,
@@ -1324,7 +1324,7 @@ function ProcessJoints()
 	  	TriggerServerEvent('qb-whitewidow:ProcessJointsAdd')
    	end, function()
 	  	ClearPedTasks(GetPlayerPed(-1))
-   	end)  
+   	end)
 end
 
 --// Function For Animations \\--
