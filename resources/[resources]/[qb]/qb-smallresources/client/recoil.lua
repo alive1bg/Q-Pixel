@@ -93,7 +93,7 @@ local recoils = {
 	[177293209] = 0.6,			--['weapon_heavysniper_mk2']
 	[1785463520] = 0.3,			--['weapon_marksmanrifle_mk2']
 
-	-- Heavy Weapons
+	-- Heavy Weapons 
 	[-1312131151] = 0.0,		--['weapon_rpg']
 	[-1568386805] = 1.0,		--['weapon_grenadelauncher']
 	[1305664598] = 1.0,			--['weapon_grenadelauncher_smoke']
