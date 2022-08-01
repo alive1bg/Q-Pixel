@@ -3,6 +3,7 @@ local lastPos = nil
 local anim = "back"
 local animscroll = 0
 local oPlayer = false
+local startThread = false
 
 --[[ CreateThread(function()
 	while true do
@@ -29,12 +30,12 @@ local oPlayer = false
 				end
 			end
 		end
-		
+
 	end
 end) ]]
 
 --- BEDS
-local beds = { 
+local beds = {
 	`v_med_bed1`,
 	`v_med_bed2`,
 	`v_med_emptybed`,
@@ -65,7 +66,7 @@ exports['qb-target']:AddTargetModel(beds, {
 })
 
 -- CHAIRS
-local chairs = { 
+local chairs = {
 	`v_serv_ct_chair02`,
 	`prop_off_chair_03`,
 	`prop_off_chair_04`,
@@ -383,6 +384,7 @@ function PlayAnimOnPlayer(object,vertx,verty,vertz,dir, isBed, ped, objectcoords
 	SetEntityCoords(ped, objectcoords.x, objectcoords.y, objectcoords.z+-1.4)
 	FreezeEntityPosition(ped, true)
 	using = false
+	startThread()
 	if isBed == false then
 		TaskStartScenarioAtPosition(ped, Config.objects.SitAnimation, objectcoords.x+vertx, objectcoords.y-verty, objectcoords.z-vertz, GetEntityHeading(object)+dir, 0, true, true)
 	else
@@ -394,4 +396,21 @@ function PlayAnimOnPlayer(object,vertx,verty,vertz,dir, isBed, ped, objectcoords
 			TaskStartScenarioAtPosition(ped, Config.objects.SitAnimation, objectcoords.x+vertx-0.1, objectcoords.y-verty+0.4, objectcoords.z-vertz-1.0, GetEntityHeading(object)+dir-80, 0, true, true)
 		end
 	end
+end
+
+function startThread()
+	startThread = true
+	Citizen.CreateThread(function()
+		while startThread do
+			Citizen.Wait(0)
+			local playerPed = PlayerPedId()
+
+
+			if IsControlPressed(0, 323) and IsInputDisabled(0) and IsPedOnFoot(playerPed) then
+				startThread = false
+				FreezeEntityPosition(playerPed, false)
+				ClearPedTasks(playerPed)
+			end
+		end
+	end)
 end
