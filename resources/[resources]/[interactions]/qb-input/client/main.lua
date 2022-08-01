@@ -5,7 +5,6 @@ RegisterNUICallback("buttonSubmit", function(data, cb)
     properties:resolve(data.data)
     properties = nil
     cb("ok")
-    TriggerEvent('qb-input:menuClosed')
 end)
 
 RegisterNUICallback("closeMenu", function(data, cb)
@@ -13,8 +12,6 @@ RegisterNUICallback("closeMenu", function(data, cb)
     properties:resolve(nil)
     properties = nil
     cb("ok")
-
-    TriggerEvent('qb-input:menuClosed')
 end)
 
 function ShowInput(data)
