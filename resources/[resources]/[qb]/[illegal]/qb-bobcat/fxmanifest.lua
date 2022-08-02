@@ -1,12 +1,16 @@
 fx_version 'cerulean'
 game 'gta5'
 
-lua54 'yes'
-
-escrow_ignore {
+client_scripts {
+    'bobcat.lua',
 }
 
+shared_scripts {
+    'config.lua',
+}
 
-shared_script 'config.lua'
-client_script 'client.lua'
-server_script 'server.lua'
+server_scripts {
+    'server.lua',
+}
+
+lua54 'yes'

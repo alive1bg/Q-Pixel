@@ -1,142 +1,75 @@
 Config = {}
 
-Config.MinimumPolice = 4 -- minimum police to start heist
+Config.Cops = 0
 
-Config.Cooldown = 120 -- seconds / reset vault time // check the server side line 77
+Config.Door1 = 11
+Config.Door2 = 12
+Config.Door3 = 13
 
-Config.FirstDoor = vector3(882.29, -2258.11, 30.54)
-Config.SecondDoor = vector3(880.64, -2264.07, 30.47)
-Config.ThirdDoor = vector3(883.05, -2267.8, 29.47)
+-- Thermite Minigame Settings
+Config.ThermiteBlocks = 18
+Config.ThermiteAttempts = 3
+Config.ThermiteShow = 5
+Config.ThermiteTime = 45
 
-Config.Smgs = {
-    "weapon_smg",
-    "weapon_pistol50"
-}
+-- laptop mingame settings anything more than 6 blocks will look ugly
+Config.LaptopTime = 8
+Config.LaptopBlocks = 6
+Config.LaptopRepeat = 5
 
-Config.Explosives = {
-    "weapon_bzgas",
-    "weapon_molotov",
-    "weapon_stickybomb",
-}
+Config.MarkedBagMin = 1
+Config.MarkedBagMax = 5
+Config.MarkedMin = 25000
+Config.MarkedMax = 50000
 
-Config.Rifles = {
-    "weapon_assaultrifle2", 
-    "weapon_compactrifle",
-    "weapon_mg",
-    "weapon_pumpshotgun",
-}
+Config.Time = 30 -- time in seconds for the bomb to explode 
 
-Config.SpawnGuards = true
-
-Config.Guards = {
+Config.Explosion = {
     [1] = {
-        pos = {889.25, -2277.2, 30.47, 45.51}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    },  
+        x = 891.89,
+        y = -2284.89,
+        z = 28.44,
+        h = 75.46,
+        hit = false
+    }   
+}
+
+
+Config.Trolleys = {
+    [1] = {
+        coords = vector3(888.44, -2287.37, 27.44), 
+        h =  5.92,
+        hit = false
+    },
     [2] = {
-        pos = {894.96, -2275.74, 30.47, 76.28}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    },  
+        coords = vector3(885.67, -2286.2, 27.44), 
+        h =  349.89,
+        hit = false
+    },
     [3] = {
-        pos = {895.44, -2279.01, 30.47, 68.48}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
+        coords = vector3(883.89, -2282.42, 27.44), 
+        h = 164.06,
+        hit = false
+    },
     [4] = {
-        pos = {893.06, -2289.42, 30.47, 18.59}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [5] = {
-        pos = {895.49, -2288.31, 30.47, 8.73}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [6] = {
-        pos = {893.15, -2294.35, 30.47, 357.54}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [7] = {
-        pos = {878.09, -2294.41, 30.47, 280.55}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [8] = {
-        pos = {871.41, -2295.3, 30.47, 280.26}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [9] = {
-        pos = {871.2, -22100.24, 30.47, 264.2}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
-    [10] = {
-        pos = {880.77, -22100.49, 30.47, 257.26}, -- guards position
-        ped = 's_m_m_prisguard_01', -- guards hash
-        weapon = 'WEAPON_M4', -- guards weapon
-        health = 2000, -- guards health
-        range = 2, -- guards range
-        accuracy = 100, -- guards accuracy from 0 to 100
-        aggresiveness = 3, -- guards aggresiveness - 0 stand / 1 defensive / 2 offensive / 3 ultra offensive 
-        alertness = 3, -- guards alertness 3 is the highest one - values from 0 to 3.
-        armor = 100 -- guards armor 
-    }, 
+        coords = vector3(881.89, -2284.64, 27.44), 
+        h = 324.95,
+        hit = false
+    }
+}
+
+-- Guards 
+Config['guards'] = {
+    ['npcguards'] = {
+        { coords = vector3(891.8, -2275.47, 28.44), heading = 81.91, model = 's_m_m_prisguard_01'},
+        { coords = vector3(892.86, -2278.36, 28.44), heading = 81.91, model = 's_m_m_prisguard_01'},
+        { coords = vector3(895.18, -2279.62, 28.44), heading = 81.91, model = 's_m_m_prisguard_01'},
+        { coords = vector3(895.95, -2281.63, 28.44), heading = 81.91, model = 's_m_m_prisguard_01'},
+        { coords = vector3(894.38, -2283.13, 28.44), heading = 10.64, model = 's_m_m_prisguard_01'},
+        { coords = vector3(891.0, -2293.46, 28.44), heading = 346.05, model = 's_m_m_prisguard_01'},
+        { coords = vector3(879.18, -2296.97, 28.44), heading = 346.05, model = 's_m_m_prisguard_01'},
+        { coords = vector3(870.02, -2296.56, 28.44), heading = 275.60, model = 's_m_m_prisguard_01'},
+        { coords = vector3(871.96, -2291.06, 28.44), heading = 275.60, model = 's_m_m_prisguard_01'},
+        { coords = vector3(869.15, -2292.16, 28.44), heading = 275.60, model = 's_m_m_prisguard_01'},
+    },
 }
