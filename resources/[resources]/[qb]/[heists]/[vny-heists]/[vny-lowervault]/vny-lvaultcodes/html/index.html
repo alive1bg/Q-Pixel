@@ -1,0 +1,32 @@
+<html>
+	<head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <link rel="stylesheet" href="index.css" type="text/css">
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="container">
+            <form id="form">
+                <input type="text" onkeypress="return onlyNumberKey(event)"  id="input"></input>
+                <access id="access">Access Code</access>
+                
+                <i class="icon fas fa-user-secret"></i>
+                <br>
+                <div class="line"></div>
+                <br>
+                <button id="submit" type="submit">SUBMIT</button>
+            </form>
+		</div>
+        <script src="./index.js" type="text/javascript"></script>
+	</body>
+    <script>
+        function onlyNumberKey(evt) {
+              
+            // Only ASCII character in that range allowed
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        }
+    </script>
+</html>
