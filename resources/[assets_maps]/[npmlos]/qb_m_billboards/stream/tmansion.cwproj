@@ -1,0 +1,17 @@
+<CodeWalkerProject>
+  <Name>New CodeWalker Project</Name>
+  <Version value="1" />
+  <YmapFilenames>
+    <Item>brofx_mansion09_mlo.ymap</Item>
+    <Item>hei_bh1_42_strm_1.ymap</Item>
+  </YmapFilenames>
+  <YtypFilenames>
+    <Item>brofx_mansion09_ytyp.ytyp</Item>
+  </YtypFilenames>
+  <YbnFilenames />
+  <YndFilenames />
+  <YnvFilenames />
+  <TrainsFilenames />
+  <ScenarioFilenames />
+  <AudioRelFilenames />
+</CodeWalkerProject>
