@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ShopVehicleDataArray>
+	<Vehicles>
+		<Item>
+			<lockHash>CU_HURALBNORMAL_VEH</lockHash>
+			<modelNameHash>huralbnormal</modelNameHash>
+			<cost value="100"/>
+			<textLabel>HURALBNORMAL</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+		<Item>
+			<lockHash>CU_HURALBCAMBER_VEH</lockHash>
+			<modelNameHash>huralbcamber</modelNameHash>
+			<cost value="100"/>
+			<textLabel>HURALBCAMBER</textLabel>
+			<vehicleMods></vehicleMods>
+		</Item>
+	</Vehicles>
+</ShopVehicleDataArray>
