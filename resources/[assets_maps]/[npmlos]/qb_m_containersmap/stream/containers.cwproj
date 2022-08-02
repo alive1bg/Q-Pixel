@@ -1,0 +1,49 @@
+<CodeWalkerProject>
+  <Name>New CodeWalker Project</Name>
+  <Version value="1" />
+  <YmapFilenames>
+    <Item>np_container_02_milo_.ymap</Item>
+    <Item>np_container_03_milo_ .ymap</Item>
+    <Item>np_container_04_milo_.ymap</Item>
+    <Item>np_container_05_milo_.ymap</Item>
+    <Item>np_container_06_milo_.ymap</Item>
+    <Item>np_container_07_milo_.ymap</Item>
+    <Item>np_container_08_milo_.ymap</Item>
+    <Item>np_container_09_milo_.ymap</Item>
+    <Item>np_container_10_milo_.ymap</Item>
+    <Item>np_container_11_milo_.ymap</Item>
+    <Item>np_container_12_milo_.ymap</Item>
+    <Item>np_container_13_milo_.ymap</Item>
+    <Item>np_container_14_milo_.ymap</Item>
+    <Item>np_container_15_milo_.ymap</Item>
+    <Item>np_container_16_milo_.ymap</Item>
+    <Item>np_container_exterior.ymap</Item>
+    <Item>np_container_exterior_02.ymap</Item>
+    <Item>np_container_exterior_03.ymap</Item>
+    <Item>np_container_exterior_04.ymap</Item>
+    <Item>np_container_exterior_05.ymap</Item>
+    <Item>np_container_exterior_06.ymap</Item>
+    <Item>np_container_exterior_07.ymap</Item>
+    <Item>np_container_exterior_08.ymap</Item>
+    <Item>np_container_exterior_09.ymap</Item>
+    <Item>np_container_exterior_10.ymap</Item>
+    <Item>np_container_exterior_11.ymap</Item>
+    <Item>np_container_exterior_12.ymap</Item>
+    <Item>np_container_exterior_13.ymap</Item>
+    <Item>np_container_exterior_14.ymap</Item>
+    <Item>np_container_exterior_15.ymap</Item>
+    <Item>np_container_exterior_16.ymap</Item>
+    <Item>np_container_milo_.ymap</Item>
+    <Item>np_container_17_milo_.ymap</Item>
+    <Item>np_container_exterior_17.ymap</Item>
+  </YmapFilenames>
+  <YtypFilenames>
+    <Item>np_containers.ytyp</Item>
+  </YtypFilenames>
+  <YbnFilenames />
+  <YndFilenames />
+  <YnvFilenames />
+  <TrainsFilenames />
+  <ScenarioFilenames />
+  <AudioRelFilenames />
+</CodeWalkerProject>
