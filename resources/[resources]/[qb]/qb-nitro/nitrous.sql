@@ -1,1 +1,0 @@
-ALTER TABLE player_vehicles ADD COLUMN `nitrous` int(11) NOT NULL DEFAULT 0;
