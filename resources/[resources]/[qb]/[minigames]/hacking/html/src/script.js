@@ -4,13 +4,13 @@ import { $, delay, playSound } from './helpers.js'
 import { doPuzzle } from './puzzle-handler.js'
 
 // runs on site load and handles entire  flow
-async function start(){
+async function start(duration,puzzlelength,amount){
 
     // reset from previous
     $('.try-again').classList.add('hidden')
     $('.spy-icon').src = 'assets/spy-icon.png'
 
-    playSound('assets/dialing.mp3', 0.1)
+    const dialing = playSound('assets/dialing.mp3', 0.1)
 
     // mock loading screen
     setInformationText('ESTABLISHING CONNECTION')
@@ -25,13 +25,13 @@ async function start(){
     $('#number-container').classList.toggle('hidden')
 
 
-    // activate puzzle 4 times, break on fail
+    // activate puzzle a times, break on fail
     let submitted
     let answer
     let result = true
 
-    for (let i = 0; i < 4 && result; i++) {
-        [submitted, answer] = await doPuzzle()
+    for (let i = 0; i < amount && result; i++) {
+        [submitted, answer] = await doPuzzle(duration,puzzlelength)
         result = (submitted?.toLowerCase() == answer)
     }
 
@@ -44,8 +44,8 @@ async function start(){
     setInformationText((result) ? 'the system has been bypassed.' : "The system didn't accept your answers")
     
     if(!result) {
-        $('.spy-icon').src = 'assets/failed.png'
-        $('#answer-reveal').textContent = answer
+    	$('.spy-icon').src = 'assets/failed.png'
+    	$('#answer-reveal').textContent = answer
         await delay(5)
     }
 
@@ -74,14 +74,14 @@ function setInformationText(text){
 
 // count visitors
 window.dataLayer = window.dataLayer || [];
-function gtag(){window.dataLayer.push(arguments);}
+function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-7E64QM2WXT');
 
 
 window.addEventListener('message', function(event){
     if (event.data.action == "open") {
-        start()
+        start(event.data.duration, event.data.length,event.data.amount)
         $(".bg").classList.remove('hidden');
     }
 })

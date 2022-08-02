@@ -5,11 +5,11 @@ import { getPuzzleSvg } from './svg-factory.js'
 const progressBar = $('.answer-progress-bar')
 const inputElement = $('.answer-input')
 
-let puzzleTime = 7
-let puzzleAmount = 4
-
 // handles generating puzzle and returning result
-export async function doPuzzle(){
+export async function doPuzzle(duration, puzzleA){
+    const puzzleTime = duration
+    const puzzleAmount = puzzleA
+
     // reset from previous run
     $('.answer-section').classList.add('hidden')
     $(".number-container").innerHTML = ''
@@ -22,7 +22,7 @@ export async function doPuzzle(){
         $('#number-container').appendChild(square)
         return square
     })
-    const puzzles = [...Array(puzzleAmount)].map(() => generateRandomPuzzle())
+    const puzzles = [...Array(puzzleAmount)].map(_ => generateRandomPuzzle())
       
     // generate numbers and display
     const nums = shuffleArray([...Array(puzzleAmount)].map((v, i) => i+1))
@@ -51,8 +51,11 @@ export async function doPuzzle(){
     // generate and display question
     const [question, answer] = generateQuestionAndAnswer(nums, puzzles) 
     $('.answer-question').textContent = question.toUpperCase()
+    
+    // for learning purposes
     console.log(answer)
-    return new Promise((resolve) => {
+
+    return new Promise(async (resolve) => {
 
         // return written input and answer
         inputElement.addEventListener("keyup", (event) => {
@@ -63,10 +66,9 @@ export async function doPuzzle(){
         });
 
         // return nothing by default if puzzleTime seconds go by
-        delay(puzzleTime).then(() => {
-            metronome.pause()
-            resolve([null, answer])
-        })
+        await delay(puzzleTime)
+        metronome.pause()
+        resolve([null, answer])
     });
 }
 
