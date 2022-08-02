@@ -1,0 +1,8 @@
+body {
+    overflow: hidden;
+    display: none;
+}
+.libro {
+    padding-top: 8%;
+    padding-left: 7%;
+}
