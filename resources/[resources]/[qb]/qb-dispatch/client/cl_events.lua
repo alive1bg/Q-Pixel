@@ -698,6 +698,32 @@ end
 
 exports('SuspiciousActivity', SuspiciousActivity)
 
+local function BobcatRobbery()
+    local currentPos = GetEntityCoords(PlayerPedId())
+    local locationInfo = getStreetandZone(currentPos)
+    local gender = GetPedGender()
+    TriggerServerEvent("dispatch:server:notify", {
+        dispatchcodename = "Bobcatrob", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
+        dispatchCode = "10-66",
+        firstStreet = locationInfo,
+        gender = gender,
+        model = nil,
+        plate = nil,
+        priority = 2, -- priority
+        firstColor = nil,
+        automaticGunfire = false,
+        origin = {
+            x = currentPos.x,
+            y = currentPos.y, 
+            z = currentPos.z
+        },
+        dispatchMessage = _U('Bobcatrob'), -- message
+        job = { "police" } -- jobs that will get the alerts
+    })
+end
+
+exports('BobcatRobbery', BobcatRobbery)
+
 RegisterCommand('testdispatch', function()
     TriggerEvent('qb-dispatch:client:reinforcement')
 end)

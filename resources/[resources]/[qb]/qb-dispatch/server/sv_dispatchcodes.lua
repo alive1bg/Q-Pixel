@@ -42,7 +42,8 @@ dispatchCodes = {
 	["vehicletheft"] =  {displayCode = '10-35', description = "Car Theft In Progress", radius = 0, recipientList = {'police'}, blipSprite = 595, blipColour = 60, blipScale = 0.5, blipLength = 2, sound = "Lose_1st", sound2 = "GTAO_FM_Events_Soundset", offset = "false", blipflash = "false"},
 	["susactivity"] =  {displayCode = '10-66', description = "Suspicious Activity", radius = 0, recipientList = {'police'}, blipSprite = 66, blipColour = 37, blipScale = 0.5, blipLength = 2, sound = "Lose_1st", sound2 = "GTAO_FM_Events_Soundset", offset = "false", blipflash = "false"},
 	["banktruckrobbery"] =  {displayCode = '10-90', description = "Fleeca Truck Robbery", radius = 0, recipientList = {'police'}, blipSprite = 67, blipColour = 2, blipScale = 0.5, blipLength = 2, sound = "robberysound", offset = "false"},
-
+	["Bobcatrob"] =  {displayCode = '10-66', description = "Bobcat Heist In Progress", radius = 0, recipientList = {'police'}, blipSprite = 66, blipColour = 37, blipScale = 0.5, blipLength = 2, sound = "Lose_1st", sound2 = "GTAO_FM_Events_Soundset", offset = "false", blipflash = "false"},
+	
 	-- Rainmad Heists
 
 	["artgalleryrobbery"] =  {displayCode = '10-90', description = "Art Gallery Robbery In Progress", radius = 0, recipientList = {'police'}, blipSprite = 269, blipColour = 59, blipScale = 0.5, blipLength = 2, sound = "robberysound", offset = "false", blipflash = "false"},

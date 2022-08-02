@@ -20,8 +20,7 @@ RegisterNetEvent('qb-police:CopCount', function()
 end)
 
 local function Alert()
-    print("POLICIA")
-    --exports['ps-dispatch']:BobcatRobbery()
+    exports['qb-dispatch']:BobcatRobbery()
 end
 
 local function loadAnimDict(dict)
@@ -31,12 +30,14 @@ local function loadAnimDict(dict)
     end
 end
 
+
+
 RegisterNetEvent('updatebobcat2', function()
+    --RequestIpl("prologue06_int_np")
     local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
-	ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
-	RemoveIpl(interiorid, "np_prolog_broken")
-	DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
-	RefreshInterior(interiorid)
+    DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
+    ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
+    RefreshInterior(interiorid)
 end)
 
 RegisterNetEvent('updatebobcat', function()
@@ -46,7 +47,10 @@ end)
 function Carts()
     local model = "ch_prop_cash_low_trolly_01c"
     RequestModel(model)
-    while not HasModelLoaded(model) do RequestModel(model) Wait(100) end
+    while not HasModelLoaded(model) do 
+        RequestModel(model) 
+        Wait(100) 
+    end
     ClearAreaOfObjects(989.14, 50.54, 10, 0)
     for i = 1, 4 do
         local obj = GetClosestObjectOfType(Config.Trolleys[i].coords, 3.0, `ch_prop_cash_low_trolly_01c`, false, false, false)
@@ -346,8 +350,8 @@ exports['qb-target']:AddBoxZone('bobcatthermite', vector3(882.18, -2258.11, 32.4
     name = 'bobcatthermite', 
     heading = 265.85,
     debugpoly = false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 32.46,
+    maxZ = 33.46,
     }, {
     options = {
         { 
@@ -371,7 +375,7 @@ function ThermitePlanting2()
 
     local ped = PlayerPedId()
     SetEntityHeading(ped, 179.93)
-    local pos = vector3(880.58, -2264.5, 28.44)
+    local pos = vector3(880.58, -2264.5, 32.44)
     Citizen.Wait(100)
     local rotx, roty, rotz = table.unpack(vec3(GetEntityRotation(ped)))
     local bagscene = NetworkCreateSynchronisedScene(pos.x, pos.y, pos.z, rotx, roty, rotz, 2, false, false, 1065353216, 0, 1.3)
@@ -415,7 +419,7 @@ function ThermiteEffect2()
     while not HasNamedPtfxAssetLoaded("scr_ornate_heist") do
         Citizen.Wait(1)
     end
-        ptfx = vector3(880.49, -2263.60, 28.441)
+        ptfx = vector3(880.49, -2263.60, 32.441)
     SetPtfxAssetNextCall("scr_ornate_heist")
     local effect = StartParticleFxLoopedAtCoord("scr_heist_ornate_thermal_burn", ptfx, 0.0, 0.0, 0.0, 1.0, false, false, false, false)
     Citizen.Wait(4000)
@@ -468,12 +472,12 @@ RegisterNetEvent('gc-bobcatheist:client:ThermitebobcatDoor2', function()
     DoorThermite2()
 end)
 
-exports['qb-target']:AddBoxZone('bobcatthermite2', vector3(880.96, -2264.15, 28.44), 1.00, 1.00, {
+exports['qb-target']:AddBoxZone('bobcatthermite2', vector3(880.96, -2264.15, 32.44), 1.00, 1.00, {
     name = 'bobcatthermite2', 
     heading = 265.85,
     debugpoly = false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 32.44,
+    maxZ = 33.44,
     }, {
     options = {
         { 
@@ -495,7 +499,7 @@ local function hackanim()
     local loc = {x,y,z,h}
     loc.x = 874.93
     loc.y = -2263.26
-    loc.z = 28.15
+    loc.z = 32.15
     loc.h = 358.84
     while not HasAnimDictLoaded(animDict)
         or not HasModelLoaded("hei_prop_hst_laptop")
@@ -568,7 +572,7 @@ function HackSuccess()
     TriggerServerEvent('gc-bobcatheist:success')
     TriggerServerEvent('qb-doorlock:server:updateState', Config.Door3, false)
     Wait(4000)
-    QBCore.Functions.PoliceNotify("Bobcat Robbery", "police", "6000")
+    --QBCore.Functions.PoliceNotify("Bobcat Robbery", "police", "6000")
 end
 
 function HackFailed()
@@ -587,14 +591,14 @@ exports['qb-target']:AddBoxZone('system', vector3(874.93, -2263.26, 31.99), 1, 1
     name = 'system',
     heading = 124.11,
     debugpoly = false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 31.99,
+    maxZ = 33.99,
     }, {
         options = {
             {
                 type = 'client',
                 event = 'gc-bobcatheist:client:Hack',
-                icon = 'fas fa-laptop', 
+                icon = 'fas fa-laptop',
                 label = 'Hack Computer System',
                 item = 'greenlaptop',
             },
@@ -665,12 +669,12 @@ RegisterNetEvent('gc-bobcatheist:client:Lockdown', function()
     RefreshInterior(interiorid)
 end)
 
-exports['qb-target']:AddBoxZone('lockdown', vector3(876.81, -2262.29, 28.44), 1, 1, {
+exports['qb-target']:AddBoxZone('lockdown', vector3(876.81, -2262.29, 32.44), 1, 1, {
     name='lockdown',
     heading=177.54,
     debugPoly=false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 32.44,
+    maxZ = 33.44,
     }, {
         options = {
             {
@@ -685,13 +689,9 @@ exports['qb-target']:AddBoxZone('lockdown', vector3(876.81, -2262.29, 28.44), 1,
 })
 
 -- test
---[[RegisterCommand('bobcat', function()
-    RequestIpl("prologue06_int_np")
-    local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
-    DeactivateInteriorEntitySet(interiorid, "np_prolog_broken")
-    ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
-    RefreshInterior(interiorid)
-end)--]]
+RegisterCommand('bobcat', function()
+    Carts()
+end)--
 
 function progresslocker()
     Anim = true
@@ -723,12 +723,12 @@ RegisterNetEvent('gc-bobcatheist:client:locker', function()
     progresslocker()
 end)
 
-exports['qb-target']:AddBoxZone('locker', vector3(883.8, -2281.91, 28.44), 1, 1, {
+exports['qb-target']:AddBoxZone('locker', vector3(883.8, -2281.91, 32.44), 1, 1, {
     name='locker',
     heading=355.19,
     debugPoly=false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 32.44,
+    maxZ = 33.44,
     }, {
         options = {
             {
@@ -755,7 +755,7 @@ function BombPlanting()
 
     local ped = PlayerPedId()
     SetEntityHeading(ped, 75.46)
-    local pos = vector3(890.50, -2284.89, 28.44)
+    local pos = vector3(890.50, -2284.89, 32.44)
     Citizen.Wait(100)
     local rotx, roty, rotz = table.unpack(vec3(GetEntityRotation(ped)))
     local bagscene = NetworkCreateSynchronisedScene(pos.x, pos.y, pos.z, rotx, roty, rotz, 2, false, false, 1065353216, 0, 1.3)
@@ -793,12 +793,12 @@ RegisterNetEvent('bomb-anim', function()
     locker = true
 end)
 
-exports['qb-target']:AddBoxZone('bomb', vector3(890.89, -2284.89, 28.44), 1, 1, {
+exports['qb-target']:AddBoxZone('bomb', vector3(890.89, -2284.89, 32.44), 1, 1, {
     name='bomb',
     heading=75.46,
     debugPoly=false,
-    minZ=27.74,
-    maxZ=31.74
+    minZ = 32.44,
+    maxZ = 33.44,
     }, {
         options = {
             {

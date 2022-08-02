@@ -1,4 +1,4 @@
-Citizen.CreateThread(function()
+--[[ Citizen.CreateThread(function()
 
 
 RequestIpl("prologue06_int_np")
@@ -7,4 +7,4 @@ RequestIpl("prologue06_int_np")
 	ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
 	RefreshInterior(interiorid)
 	
-end)
+end) ]]
