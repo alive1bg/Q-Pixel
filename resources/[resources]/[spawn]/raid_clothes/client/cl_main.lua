@@ -774,7 +774,7 @@ function SwitchCam(name)
         else
             bonepos = vector3(bonepos.x - 0.1, bonepos.y + 0.4, bonepos.z + 0.05)
         end
-        
+
     end
     if (name == "torso") then
         bonepos = GetPedBoneCoords(player, 11816)
@@ -797,7 +797,7 @@ function SwitchCam(name)
     else
         SetCamRot(cam, 0.0, 0.0, 180.0)
     end
-    
+
 end
 
 RegisterNetEvent("clothing:close", function()
@@ -809,7 +809,7 @@ RegisterNUICallback('escape', function(data, cb)
     local shouldSave = data['save'] or false
     local newFadeStyle = data["fadeStyle"] or 255
     if shouldSave and currentPrice > 0 then
-        QBCore.Functions.TriggerCallback("clothing:purchase", function(result) 
+        QBCore.Functions.TriggerCallback("clothing:purchase", function(result)
             if not result then
                 QBCore.Functions.Notify("You don't have enough money!")
                 --TriggerEvent("notify", "Yeteri kadar paran yok!", 2)
@@ -916,20 +916,20 @@ end
 
 function Save(save, close, newFadeStyle)
     if save then
-        currentFadeStyle = newFadeStyle 
+        currentFadeStyle = newFadeStyle
         data = GetCurrentPed()
         if (GetCurrentPed().model == GetHashKey("mp_f_freemode_01") or GetCurrentPed().model == GetHashKey("mp_m_freemode_01")) and startingMenu then
-            -- nothing 
+            -- nothing
         else
             passedClothing = true
         end
-        
+
         if not startingMenu or passedClothing then
             TriggerServerEvent("raid_clothes:insert_character_current", data)
             TriggerServerEvent("raid_clothes:insert_character_face", data)
             TriggerServerEvent("raid_clothes:set_tats", currentTats)
             TriggerEvent("qb-spawn:finishedClothing","Finished")
-        elseif not passedClothing then 
+        elseif not passedClothing then
             passedClothing = true
             Wait(2000)
             OpenMenu("barber_shop")
@@ -994,21 +994,21 @@ RegisterNetEvent("raid_clothes:setclothes", function(data,alreadyExist)
         --- decapritated function
     end
 
-	if not data.model and alreadyExist <= 0 then 
-        setDefault() 
-        return 
+	if not data.model and alreadyExist <= 0 then
+        setDefault()
+        return
     end
 
-    if not data.model and alreadyExist >= 1 then 
-        return 
+    if not data.model and alreadyExist >= 1 then
+        return
     end
 
     model = data.model
     model = model ~= nil and tonumber(model) or false
 
-	if not IsModelInCdimage(model) or not IsModelValid(model) then 
-        setDefault() 
-        return 
+	if not IsModelInCdimage(model) or not IsModelValid(model) then
+        setDefault()
+        return
     end
     TriggerEvent("backitems:displayItems", false)
     SetSkin(model, false)
@@ -1016,7 +1016,7 @@ RegisterNetEvent("raid_clothes:setclothes", function(data,alreadyExist)
     SetClothing(data.drawables, data.props, data.drawtextures, data.proptextures)
     Wait(500)
 	TriggerEvent("facewear:update")
-    TriggerServerEvent("raid_clothes:get_character_face", nil, data.fadeStyle) 
+    TriggerServerEvent("raid_clothes:get_character_face", nil, data.fadeStyle)
     TriggerServerEvent("raid_clothes:retrieve_tats")
     TriggerEvent("backitems:displayItems", true)
 end)
@@ -1042,8 +1042,8 @@ end)
 
 RegisterNetEvent("raid_clothes:settattoos", function(playerTattoosList)
     currentTats = playerTattoosList
-    --SetTats(GetTats())
-    setTattoosAndFacial(nil, currentFadeStyle)
+    SetTats(GetTats())
+    -- setTattoosAndFacial(nil, currentFadeStyle)
 end)
 
 RegisterNetEvent("raid_clothes:setpedfeatures", function(data)
@@ -1084,7 +1084,7 @@ RegisterNetEvent('raid_clothes:outfits', function(pAction, pId, pName)
         TriggerServerEvent("raid_clothes:set_outfit",pId, pName, GetCurrentPed())
     elseif pAction == 2 then
         TriggerServerEvent("raid_clothes:remove_outfit",pId)
-    elseif pAction == 3 then 
+    elseif pAction == 3 then
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.6)
         TriggerServerEvent("raid_clothes:get_outfit", pId)
         TriggerEvent("backitems:displayItems", true)
@@ -1099,7 +1099,7 @@ RegisterNetEvent('raid_clothes:outfits_boss', function(pAction, pId, pName)
         TriggerServerEvent("raid_clothes:set_outfit",pId, pName, GetCurrentPed())
     elseif pAction == 2 then
         TriggerServerEvent("raid_clothes:remove_outfit",pId)
-    elseif pAction == 3 then 
+    elseif pAction == 3 then
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "Clothes1", 0.6)
         TriggerServerEvent("raid_clothes:get_outfit", pId)
         TriggerEvent("backitems:displayItems", true)
@@ -1143,7 +1143,7 @@ function setTattoosAndFacial(pTattoos, pFadeStyle)
         end
     end
 
-    
+
     currentTats = {}
     if pTattoos then
         for k, v in pairs(pTattoos) do
@@ -1192,7 +1192,7 @@ end)
 local function listenForKeypress(zoneName, zoneData, isFree)
     listening = true
     CreateThread(function()
-        QBCore.Functions.TriggerCallback("PriceWithTaxString", function(result) 
+        QBCore.Functions.TriggerCallback("PriceWithTaxString", function(result)
             priceWithTax = result
         end, zoneData.basePrice, "Services")
         Wait(1000)
@@ -1370,7 +1370,7 @@ end)
 function dump(o)
 	if type(o) == 'table' then
 	   local s = '{ '
-	   for k,v in pairs(o) do 
+	   for k,v in pairs(o) do
 		  if type(k) ~= 'number' then k = '"'..k..'"' end
 		  s = s .. '['..k..'] = ' .. dump(v) .. ','
 	   end
@@ -1388,9 +1388,9 @@ RegisterUICallback("qb-ui:raid_clothes:addOutfit", function(data, cb)
     local outfitName = data[1].value
     if outfitName == nil then outfitName = "" end
 
-    TriggerServerEvent("raid_clothes:set_outfit", outfitSlot, outfitName, GetCurrentPed()) 
+    TriggerServerEvent("raid_clothes:set_outfit", outfitSlot, outfitName, GetCurrentPed())
 end)
- 
+
 RegisterUICallback("qb-ui:raid_clothes:changeOutfit", function(data, cb)
     cb({ data = {}, meta = { ok = true, message = 'done' } })
     TriggerServerEvent("raid_clothes:get_outfit", data.key)
@@ -1412,7 +1412,7 @@ RegisterNetEvent('raid_clothes:ListOutfits', function(skincheck)
         local takenSlots = {}
         for i = 1, #skincheck do
             local slot = tonumber(skincheck[i].slot)
-            takenSlots[slot] = true 
+            takenSlots[slot] = true
 
 
             menuData[1] = {

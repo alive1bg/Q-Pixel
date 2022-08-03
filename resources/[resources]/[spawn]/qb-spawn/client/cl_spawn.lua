@@ -63,7 +63,7 @@ function Login.Init()
         while not HasModelLoaded(GetHashKey("sp_01_station")) do
             Wait(0)
         end
-		
+
         Login.SetCharacterLoginCam()
         Wait(200)
         TriggerEvent("loading:disableLoading")
@@ -120,6 +120,7 @@ function Login.nativeStart(AlreadySpawned)
 		tatCategory = exports["raid_clothes"]:GetTatCategs()
 		tattooHashList = exports["raid_clothes"]:GetTatCategs()
 		Login.custompeds = exports["raid_clothes"]:GetCustomSkins()
+		TriggerServerEvent("raid_clothes:retrieve_tats")
 
 		--Prevent blur from getting stuck
 		while IsScreenblurFadeRunning() do
@@ -189,7 +190,7 @@ function Login.NUICallback(data)
 		    pedData = findCharPed(pedCaught,false)
 
 		    if pedData == nil then
-		    	Login.Selected = false 
+		    	Login.Selected = false
 		    else
 		    	Login.Selected = true
 		    end
@@ -219,10 +220,10 @@ function Login.NUICallback(data)
 		    end
 		end
 	end
-	
+
 	if data.action == "deleteCharacter" then
 		Login.actionsBlocked = true
-		QBCore.Functions.TriggerCallback("qb-spawn:deleteCharacter", function(deleted) 
+		QBCore.Functions.TriggerCallback("qb-spawn:deleteCharacter", function(deleted)
 			Login.getCharacters(true)
 		end, data.actionData)
 	end
@@ -239,9 +240,9 @@ function Login.NUICallback(data)
 			dateofbirth = cData.dateofbirth,
 			sex = sex
 		}
-		
+
         if not chardata then return end
-		QBCore.Functions.TriggerCallback("qb-spawn:createCharacter", function(created) 
+		QBCore.Functions.TriggerCallback("qb-spawn:createCharacter", function(created)
 			if not created then
 				QBCore.Functions.Notify("There was an error while creating your character, value returned nil or false. Contact an administrator if this persists.")
 				Login.CreatePlayerCharacterPeds(Login.CurrentClothing, true)
@@ -253,11 +254,11 @@ function Login.NUICallback(data)
 				Login.CreatePlayerCharacterPeds(Login.CurrentClothing, true)
                 return
 			end
-			
+
             Login.getCharacters(true)
 		end, chardata)
 	end
-	
+
 	if data.action == "refreshCharacters" then
 		Login.CreatePlayerCharacterPeds(Login.CurrentClothing, true)
 	end
@@ -310,7 +311,7 @@ function spawnTrain()
     local coords = vector3(-3948.49,2036.35,499.1)
     vehicle = CreateVehicle(tempmodel, coords, 160.0, false, false)
     FreezeEntityPosition(vehicle, true)
-     
+
     local heading = GetEntityHeading(vehicle)
     local coords = GetOffsetFromEntityInWorldCoords(vehicle, 0.0, -11.0, 0.0)
 
