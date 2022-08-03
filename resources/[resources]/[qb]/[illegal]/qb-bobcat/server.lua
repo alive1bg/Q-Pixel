@@ -3,7 +3,7 @@ local Cooldown = false
 MarkedMin = 25000
 MarkedMax = 50000
 
-RegisterServerEvent("gc-bobcatheist:successthermite") 
+RegisterServerEvent("gc-bobcatheist:successthermite")
 AddEventHandler("gc-bobcatheist:successthermite", function()
     local src = source
     local player = QBCore.Functions.GetPlayer(src)
@@ -47,7 +47,7 @@ RegisterServerEvent('gc-bobcatheist:server:ThermitePtfx', function(coords)
     TriggerClientEvent('gc-bobcatheist:client:ThermitePtfx', -1, coords)
 end)
 
-RegisterServerEvent("gc-bobcatheist:success") 
+RegisterServerEvent("gc-bobcatheist:success")
 AddEventHandler("gc-bobcatheist:success", function()
     local src = source
     local player = QBCore.Functions.GetPlayer(src)
@@ -89,5 +89,5 @@ RegisterNetEvent('sync', function(status)
 end)
 
 RegisterServerEvent('updatebobcat3', function()
-    TriggerClientEvent('updatebobcat2')
+    TriggerClientEvent('updatebobcat2', -1)
 end)

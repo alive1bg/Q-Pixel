@@ -20,7 +20,7 @@ RegisterNetEvent('qb-police:CopCount', function()
 end)
 
 local function Alert()
-    exports['qb-dispatch']:BobcatRobbery()
+    -- exports['ps-dispatch']:BobcatRobbery()
 end
 
 local function loadAnimDict(dict)
@@ -30,14 +30,13 @@ local function loadAnimDict(dict)
     end
 end
 
-
-
 RegisterNetEvent('updatebobcat2', function()
-    --RequestIpl("prologue06_int_np")
     local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
-    DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
-    ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
-    RefreshInterior(interiorid)
+	ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
+	RemoveIpl(interiorid, "np_prolog_broken")
+	DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
+	RefreshInterior(interiorid)
+
 end)
 
 RegisterNetEvent('updatebobcat', function()
@@ -45,15 +44,12 @@ RegisterNetEvent('updatebobcat', function()
 end)
 
 function Carts()
-    local model = "ch_prop_cash_low_trolly_01c"
+    local model = "hei_prop_hei_cash_trolly_01"
     RequestModel(model)
-    while not HasModelLoaded(model) do 
-        RequestModel(model) 
-        Wait(100) 
-    end
+    while not HasModelLoaded(model) do RequestModel(model) Wait(100) end
     ClearAreaOfObjects(989.14, 50.54, 10, 0)
     for i = 1, 4 do
-        local obj = GetClosestObjectOfType(Config.Trolleys[i].coords, 3.0, `ch_prop_cash_low_trolly_01c`, false, false, false)
+        local obj = GetClosestObjectOfType(Config.Trolleys[i].coords, 3.0, GetHashKey("hei_prop_hei_cash_trolly_01"), false, false, false)
         if obj ~= 0 then
             DeleteObject(obj)
             Wait(1)
@@ -100,7 +96,7 @@ function ThermitePlanting()
     local thermite = CreateObject(GetHashKey("hei_prop_heist_thermite"), x, y, z + 0.2,  true,  true, true)
     SetEntityCollision(thermite, false, true)
     AttachEntityToEntity(thermite, ped, GetPedBoneIndex(ped, 28422), 0, 0, 0, 0, 0, 200.0, true, true, false, true, 1, true)
-    
+
     NetworkAddPedToSynchronisedScene(ped, bagscene, "anim@heists@ornate_bank@thermal_charge", "thermal_charge", 1.5, -4.0, 1, 16, 1148846080, 0)
     NetworkAddEntityToSynchronisedScene(bag, bagscene, "anim@heists@ornate_bank@thermal_charge", "bag_thermal_charge", 4.0, -8.0, 1)
     SetPedComponentVariation(ped, 5, 0, 0, 0)
@@ -148,7 +144,7 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
     TriggerEvent('gc-bobcatheist:client:Closest', closestTrolley)
     local ped = PlayerPedId()
     local model = "hei_prop_heist_cash_pile"
-    Trolley = GetClosestObjectOfType(GetEntityCoords(ped), 1.0, `ch_prop_cash_low_trolly_01c`, false, false, false)
+    Trolley = GetClosestObjectOfType(GetEntityCoords(ped), 1.0, GetHashKey("hei_prop_hei_cash_trolly_01"), false, false, false)
     local CashAppear = function()
 	    local pedCoords = GetEntityCoords(ped)
         local grabmodel = GetHashKey(model)
@@ -167,12 +163,12 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
 		    while GetGameTimer() - startedGrabbing < 37000 do
 			    Wait(1)
 			    DisableControlAction(0, 73, true)
-			    if HasAnimEventFired(ped, `CASH_APPEAR`) then
+			    if HasAnimEventFired(ped, "CASH_APPEAR") then
 				    if not IsEntityVisible(grabobj) then
 					    SetEntityVisible(grabobj, true, false)
 				    end
 			    end
-			    if HasAnimEventFired(ped, `RELEASE_CASH_DESTROY`) then
+			    if HasAnimEventFired(ped, "RELEASE_CASH_DESTROY") then
 				    if IsEntityVisible(grabobj) then
                         SetEntityVisible(grabobj, false, false)
 				    end
@@ -182,7 +178,7 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
 	    end)
     end
 	local trollyobj = Trolley
-    local emptyobj = `hei_prop_hei_cash_trolly_03`
+    local emptyobj = "hei_prop_hei_cash_trolly_03"
 
 	if IsEntityPlayingAnim(trollyobj, "anim@heists@ornate_bank@grab_cash", "cart_cash_dissapear", 3) then
 		return
@@ -197,7 +193,7 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
     TaskGoStraightToCoord(ped, animPos, 0.025, 5000, targetHeading, 0.05)
     Wait(2500)
 
-    local baghash = `ch_p_m_bag_var02_arm_s`
+    local baghash = "ch_p_m_bag_var02_arm_s"
     RequestAnimDict("anim@heists@ornate_bank@grab_cash")
     RequestModel(baghash)
     RequestModel(emptyobj)
@@ -208,7 +204,7 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
 		Wait(1)
 		NetworkRequestControlOfEntity(trollyobj)
 	end
-	local bag = CreateObject(`ch_p_m_bag_var02_arm_s`, GetEntityCoords(PlayerPedId()), true, false, false)
+	local bag = CreateObject("ch_p_m_bag_var02_arm_s", GetEntityCoords(PlayerPedId()), true, false, false)
     local scene1 = NetworkCreateSynchronisedScene(GetEntityCoords(trollyobj), GetEntityRotation(trollyobj), 2, false, false, 1065353216, 0, 1.3)
 	NetworkAddPedToSynchronisedScene(ped, scene1, "anim@heists@ornate_bank@grab_cash", "intro", 1.5, -4.0, 1, 16, 1148846080, 0)
     NetworkAddEntityToSynchronisedScene(bag, scene1, "anim@heists@ornate_bank@grab_cash", "bag_intro", 4.0, -8.0, 1)
@@ -232,7 +228,7 @@ RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
     SetPedComponentVariation(ped, 5, 82, 0, 0)
 	RemoveAnimDict("anim@heists@ornate_bank@grab_cash")
 	SetModelAsNoLongerNeeded(emptyobj)
-    SetModelAsNoLongerNeeded(`ch_p_m_bag_var02_arm_s`)
+    SetModelAsNoLongerNeeded("ch_p_m_bag_var02_arm_s")
     LocalPlayer.state:set("inv_busy", false, true)
     print('closestTrolly',closestTrolly)
     Config.Trolleys[closestTrolly].hit = true
@@ -347,14 +343,14 @@ RegisterNetEvent('gc-bobcatheist:client:ThermitebobcatDoor', function()
 end)
 
 exports['qb-target']:AddBoxZone('bobcatthermite', vector3(882.18, -2258.11, 32.46), 1.00, 1.00, {
-    name = 'bobcatthermite', 
+    name = 'bobcatthermite',
     heading = 265.85,
     debugpoly = false,
     minZ = 32.46,
     maxZ = 33.46,
     }, {
     options = {
-        { 
+        {
             type = 'client',
             event = 'gc-bobcatheist:client:ThermitebobcatDoor',
             icon = 'fas fa-bomb',
@@ -386,7 +382,7 @@ function ThermitePlanting2()
     local thermite = CreateObject(GetHashKey("hei_prop_heist_thermite"), x, y, z + 0.2,  true,  true, true)
     SetEntityCollision(thermite, false, true)
     AttachEntityToEntity(thermite, ped, GetPedBoneIndex(ped, 28422), 0, 0, 0, 0, 0, 200.0, true, true, false, true, 1, true)
-    
+
     NetworkAddPedToSynchronisedScene(ped, bagscene, "anim@heists@ornate_bank@thermal_charge", "thermal_charge", 1.5, -4.0, 1, 16, 1148846080, 0)
     NetworkAddEntityToSynchronisedScene(bag, bagscene, "anim@heists@ornate_bank@thermal_charge", "bag_thermal_charge", 4.0, -8.0, 1)
     SetPedComponentVariation(ped, 5, 0, 0, 0)
@@ -473,14 +469,14 @@ RegisterNetEvent('gc-bobcatheist:client:ThermitebobcatDoor2', function()
 end)
 
 exports['qb-target']:AddBoxZone('bobcatthermite2', vector3(880.96, -2264.15, 32.44), 1.00, 1.00, {
-    name = 'bobcatthermite2', 
+    name = 'bobcatthermite2',
     heading = 265.85,
     debugpoly = false,
     minZ = 32.44,
     maxZ = 33.44,
     }, {
     options = {
-        { 
+        {
             type = 'client',
             event = 'gc-bobcatheist:client:ThermitebobcatDoor2',
             icon = 'fas fa-bomb',
@@ -495,7 +491,7 @@ local function hackanim()
     local animDict = "anim@heists@ornate_bank@hack"
     RequestAnimDict(animDict)
     RequestModel("hei_prop_hst_laptop")
-    RequestModel("ch_p_m_bag_var02_arm_s") 
+    RequestModel("ch_p_m_bag_var02_arm_s")
     local loc = {x,y,z,h}
     loc.x = 874.93
     loc.y = -2263.26
@@ -514,8 +510,8 @@ local function hackanim()
     local animPos3 = GetAnimInitialOffsetPosition(animDict, "hack_exit", loc.x + 0, loc.y + 0, loc.z + 1.15)
     QBCore.Functions.TriggerCallback('QBCore:HasItem', function(hasitem)
             if hasitem then
-                bag = CreateObject(`ch_p_m_bag_var02_arm_s`, targetPosition, 1, 1, 0)
-                laptop = CreateObject(`hei_prop_hst_laptop`, targetPosition, 1, 1, 0)
+                bag = CreateObject("ch_p_m_bag_var02_arm_s", targetPosition, 1, 1, 0)
+                laptop = CreateObject("hei_prop_hst_laptop", targetPosition, 1, 1, 0)
                 local IntroHack = NetworkCreateSynchronisedScene(animPos, targetRotation, 0, true, false, 1065353216, 0, 1.3)
                 NetworkAddPedToSynchronisedScene(ped, IntroHack, animDict, "hack_enter", 0, 0, 1, 16, 1148846080, 0)
                 NetworkAddEntityToSynchronisedScene(bag, IntroHack, animDict, "hack_enter_bag", 4.0, -8.0, 1)
@@ -572,7 +568,7 @@ function HackSuccess()
     TriggerServerEvent('gc-bobcatheist:success')
     TriggerServerEvent('qb-doorlock:server:updateState', Config.Door3, false)
     Wait(4000)
-    --QBCore.Functions.PoliceNotify("Bobcat Robbery", "police", "6000")
+    -- QBCore.Functions.PoliceNotify("Bobcat Robbery", "police", "6000")
 end
 
 function HackFailed()
@@ -625,7 +621,7 @@ end
 function SpawnGuards()
     local ped = PlayerPedId()
 
-    SetPedRelationshipGroupHash(ped, `PLAYER`)
+    SetPedRelationshipGroupHash(ped, "PLAYER")
     AddRelationshipGroup('npcguards')
 
     for k, v in pairs(Config['guards']['npcguards']) do
@@ -639,25 +635,25 @@ function SpawnGuards()
         SetPedRandomProps(guards['npcguards'][k])
         SetEntityAsMissionEntity(guards['npcguards'][k])
         SetEntityVisible(guards['npcguards'][k], true)
-        SetPedRelationshipGroupHash(guards['npcguards'][k], `npcguards`)
+        SetPedRelationshipGroupHash(guards['npcguards'][k], "npcguards")
         SetPedAccuracy(guards['npcguards'][k], 75)
         SetPedArmour(guards['npcguards'][k], 100)
         SetPedCanSwitchWeapon(guards['npcguards'][k], true)
         SetPedDropsWeaponsWhenDead(guards['npcguards'][k], false)
         SetPedFleeAttributes(guards['npcguards'][k], 0, false)
-        GiveWeaponToPed(guards['npcguards'][k], `WEAPON_CARBINERIFLE`, 255, false, false)
+        GiveWeaponToPed(guards['npcguards'][k], "WEAPON_CARBINERIFLE", 255, false, false)
         local random = math.random(1, 2)
         if random == 2 then
             TaskGuardCurrentPosition(guards['npcguards'][k], 10.0, 10.0, 1)
         end
     end
 
-    SetRelationshipBetweenGroups(0, `npcguards`, `npcguards`)
-    SetRelationshipBetweenGroups(5, `npcguards`, `PLAYER`)
-    SetRelationshipBetweenGroups(5, `PLAYER`, `npcguards`)
+    SetRelationshipBetweenGroups(0, "npcguards", "npcguards")
+    SetRelationshipBetweenGroups(5, "npcguards", "PLAYER")
+    SetRelationshipBetweenGroups(5, "PLAYER", "npcguards")
 end
 
-RegisterNetEvent('gc-bobcatheist:client:Lockdown', function() 
+RegisterNetEvent('gc-bobcatheist:client:Lockdown', function()
     QBCore.Functions.Notify("The building is now locked down!", "success", "6000")
     TriggerServerEvent('qb-doorlock:server:updateState', Config.Door1, true)
     TriggerServerEvent('qb-doorlock:server:updateState', Config.Door2, true)
@@ -690,8 +686,15 @@ exports['qb-target']:AddBoxZone('lockdown', vector3(876.81, -2262.29, 32.44), 1,
 
 -- test
 RegisterCommand('bobcat', function()
-    Carts()
-end)--
+    RequestIpl("prologue06_int_np")
+    local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
+    DeactivateInteriorEntitySet(interiorid, "np_prolog_broken")
+    ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
+
+    -- DeactivateInteriorEntitySet(interiorid, "np_prolog_clean")
+    -- ActivateInteriorEntitySet(interiorid, "np_prolog_broken")
+    RefreshInterior(interiorid)
+end)
 
 function progresslocker()
     Anim = true
@@ -736,7 +739,7 @@ exports['qb-target']:AddBoxZone('locker', vector3(883.8, -2281.91, 32.44), 1, 1,
                 event = 'gc-bobcatheist:client:locker',
                 icon = 'fas fa-magnifying-glass',
                 label = 'Search Armory...',
-                
+
                 canInteract = function()
                     if locker then return true else return false end
                 end
