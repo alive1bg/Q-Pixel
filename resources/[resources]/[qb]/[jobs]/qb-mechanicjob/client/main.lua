@@ -934,7 +934,7 @@ CreateThread(function() -- Not event sure what this is even for
                 print(fSteeringLock)
                 if not isModified then
                     if PlayerJob.name == 'police' or PlayerJob.name == 'ambulance' or GetVehiclePedIsIn(PlayerPedId(), 'flatbed') then
-                        fSteeringLock = math.ceil((fSteeringLock * 0.6)) + 0.1
+                        fSteeringLock = math.ceil((fSteeringLock * 0.61)) + 0.1
                             print(fSteeringLock)
                             print("angle set POLICE/TOW")
                     else
@@ -953,7 +953,7 @@ CreateThread(function() -- Not event sure what this is even for
                             print("angle set 3")
                         end
                         if GetVehicleMod(myVeh, 15) == 3 and GetVehicleMod(myVeh, 12) == 2 then
-                            fSteeringLock = math.ceil((fSteeringLock * 0.6)) + 0.1
+                            fSteeringLock = math.ceil((fSteeringLock * 0.61)) + 0.1
                             print(fSteeringLock)
                             print("angle set 5")
                         elseif GetVehicleMod(myVeh, 15) == 3 and not GetVehicleMod(myVeh, 12) == 2 then
