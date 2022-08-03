@@ -53,7 +53,7 @@ export async function doPuzzle(duration, puzzleA){
     $('.answer-question').textContent = question.toUpperCase()
     
     // for learning purposes
-    console.log(answer)
+    //console.log(answer)
 
     return new Promise(async (resolve) => {
 
