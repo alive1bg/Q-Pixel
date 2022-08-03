@@ -137,7 +137,10 @@ function ThermiteEffect()
     ClearPedTasks(ped)
     Citizen.Wait(2000)
     QBCore.Functions.Notify("The lock had been melted", "success")
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door1, false)
+
+    TriggerServerEvent('doors:change-lock-state', 245, false) --first door
+    TriggerServerEvent('doors:change-lock-state', 246, false) --first door
+
 end
 
 RegisterNetEvent('gc-bobcatheist:client:CashGrab', function()
@@ -314,7 +317,7 @@ function HackSuccessThermite()
     ClearPedTasksImmediately(PlayerPedId())
     TriggerServerEvent("gc-bobcatheist:successthermite")
     TriggerServerEvent('gc-bobcatheist:server:cooldown')
-    --TriggerServerEvent('qb-doorlock:server:updateState', Config.Door1, false)
+    --TriggerServerEvent('doors:change-lock-state', Config.Door1, false)
 end
 
 function progressthermite()
@@ -426,7 +429,9 @@ function ThermiteEffect2()
     ClearPedTasks(ped)
     Citizen.Wait(2000)
     QBCore.Functions.Notify("The lock had been melted", "success")
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door2, false)
+
+    TriggerServerEvent('doors:change-lock-state', 242, false) --second door 
+
 end
 
 function DoorThermite2()
@@ -574,9 +579,10 @@ local function hackanim()
 end
 
 function HackSuccess()
-    QBCore.Functions.Notify("Door opened", "success", "6000")
+    QBCore.Functions.Notify("Door opened", "success", "6000") 
     TriggerServerEvent('gc-bobcatheist:success')
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door3, false)
+    TriggerServerEvent('doors:change-lock-state', 243, false) 
+    TriggerServerEvent('doors:change-lock-state', 244, false) 
     Wait(4000)
     -- QBCore.Functions.PoliceNotify("Bobcat Robbery", "police", "6000")
 end
@@ -665,9 +671,12 @@ end
 
 RegisterNetEvent('gc-bobcatheist:client:Lockdown', function()
     QBCore.Functions.Notify("The building is now locked down!", "success", "6000")
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door1, true)
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door2, true)
-    TriggerServerEvent('qb-doorlock:server:updateState', Config.Door3, true)
+    TriggerServerEvent('doors:change-lock-state', 242, true) --second door 
+    TriggerServerEvent('doors:change-lock-state', 243, true) --third door
+    TriggerServerEvent('doors:change-lock-state', 244, true) --third door
+    TriggerServerEvent('doors:change-lock-state', 245, true) --first door
+    TriggerServerEvent('doors:change-lock-state', 246, true) --first door
+ 
     local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
     ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
     RemoveIpl(interiorid, "np_prolog_clean")

@@ -299,10 +299,15 @@ local AllDoors = {
 	[240] = {id = 240, active = true, model = -1259801187, coords = vec3(883.480347, -2258.529785, 31.534859), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	[241] = {id = 241, active = true, model = -1563799200, coords = vec3(880.895142, -2258.308350, 31.534859), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	-- bobcat second door
-	[242] = {id = 242, active = true, model = -551608542, coords = vec3(881.617065, -2264.669434, 31.591564), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[242] = {id = 242, active = true, model = -551608542, coords = vec3(881.617065, -2264.669434, 32.591564), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	-- bobcat third door
-	[243] = {id = 243, active = true, model = 933053701, coords = vec3(882.619873, -2268.408203, 31.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
-	[244] = {id = 244, active = true, model = 933053701, coords = vec3(880.029785, -2268.181641, 31.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[243] = {id = 243, active = true, model = 933053701, coords = vec3(882.619873, -2268.408203, 32.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[244] = {id = 244, active = true, model = 933053701, coords = vec3(880.029785, -2268.181641, 32.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	-- bobcat first doors
+	[245] = {id = 245, active = true, model = -1259801187, coords = vec3(883.48030, -2258.5300, 32.53486), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[246] = {id = 246, active = true, model = -1259801187, coords = vec3(880.89510, -2258.30800, 32.53486), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	
+
 }
 
 ForcedDoors = {}
