@@ -1,10 +1,6 @@
 Config = {}
 
-Config.Cops = 1
-
-Config.Door1 = 11
-Config.Door2 = 12
-Config.Door3 = 13
+Config.Cops = 4
 
 -- Thermite Minigame Settings
 Config.ThermiteBlocks = 18
@@ -22,7 +18,7 @@ Config.MarkedBagMax = 5
 Config.MarkedMin = 25000
 Config.MarkedMax = 50000
 
-Config.Time = 30 -- time in seconds for the bomb to explode 
+Config.Time = 40 -- time in seconds for the bomb to explode 
 
 Config.Explosion = {
     [1] = {
@@ -71,5 +67,10 @@ Config['guards'] = {
         { coords = vector3(870.02, -2296.56, 32.44), heading = 275.60, model = 's_m_m_prisguard_01'},
         { coords = vector3(871.96, -2291.06, 32.44), heading = 275.60, model = 's_m_m_prisguard_01'},
         { coords = vector3(869.15, -2292.16, 32.44), heading = 275.60, model = 's_m_m_prisguard_01'},
+
+        --additional
+        { coords = vector3(885.125, -2274.303, 32.441703), heading = 85.267, model = 's_m_m_prisguard_01'},
+        { coords = vector3(879.14959, -2296.649, 32.441703), heading = 5.88, model = 's_m_m_prisguard_01'},
+        { coords = vector3(882.73516, -2298.696, 32.441703), heading = 3.769, model = 's_m_m_prisguard_01'},
     },
 }
