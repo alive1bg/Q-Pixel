@@ -169,7 +169,7 @@ function getVehicleInDirection(coordFrom, coordTo)
 	local rayHandle
 	local vehicle
 	for i = 0, 100 do
-		rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)	
+		rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z + offset, 10, PlayerPedId(), 0)
 		a, b, c, d, vehicle = GetRaycastResult(rayHandle)
 		offset = offset - 1
 		if vehicle ~= 0 then break end
@@ -268,7 +268,7 @@ function SpawnVehicle(vehicle, pGarage, Fuel, body, engine, plate, gType, IsView
     end
 
     Citizen.Wait(math.random(100, 200))
-    
+
     if  ParkingSpot ~= nil then
         if not IsViewing then
             local model = GetHashKey(vehicle)
@@ -290,7 +290,7 @@ function SpawnVehicle(vehicle, pGarage, Fuel, body, engine, plate, gType, IsView
                     if wheelfit ~= nil then
                         TriggerServerEvent('qb-wheelfitment_sv:setfit', wheelfit, veh)
                     end
-                end, plate) 
+                end, plate)
                 QBCore.Functions.SetVehicleProperties(veh, properties)
                 SetVehicleNumberPlateText(veh, plate)
                 exports['qb-fuel']:SetFuel(veh, Fuel)
@@ -309,7 +309,8 @@ function SpawnVehicle(vehicle, pGarage, Fuel, body, engine, plate, gType, IsView
                     TriggerServerEvent('qb-garages:server:UpdateOutsideVehicles', OutsideVehicles)
                 end
             end
-            TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(CurrentDisplayVehicle))
+            -- TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(CurrentDisplayVehicle))
+            TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(CurrentDisplayVehicle))
             ParkingSpot = nil
             CurrentDisplayVehicle = nil
         end
@@ -350,7 +351,7 @@ function SpawnDepotVehicle(Data)
                                         DeleteVehicle(OutsideVehicles[Data.plate])
                                         OutsideVehicles[Data.plate] = veh
                                         TriggerServerEvent('qb-garages:server:UpdateOutsideVehicles', OutsideVehicles)
-                                        TriggerServerEvent('crpmofify:modifystate', vehicleProps) 
+                                        TriggerServerEvent('crpmofify:modifystate', vehicleProps)
                                     end
                                     QBCore.Functions.TriggerCallback('qb-garage:server:GetVehicleProperties', function(properties)
                                         QBCore.Functions.TriggerCallback('qb-garages:server:GetVehicleWheelfit', function(wheelfit)
@@ -520,7 +521,7 @@ function RemoveOutsideVeh(plate)
     end
 end
 
-function AddTemporaryBlip(vehicle)  
+function AddTemporaryBlip(vehicle)
     local VehicleCoords = GetEntityCoords(vehicle)
     local TempBlip = AddBlipForCoord(VehicleCoords)
     local vehname = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)):lower()
@@ -638,10 +639,10 @@ GetVehicleProperties = function(vehicle)
 
         for id = 1, 7 do
             local tyreId = IsVehicleTyreBurst(vehicle, id, false)
-        
+
             if tyreId then
                 vehicleProps["tyres"][#vehicleProps["tyres"] + 1] = tyreId
-        
+
                 if tyreId == false then
                     tyreId = IsVehicleTyreBurst(vehicle, id, true)
                     vehicleProps["tyres"][ #vehicleProps["tyres"]] = tyreId
@@ -660,10 +661,10 @@ GetVehicleProperties = function(vehicle)
                 vehicleProps["windows"][#vehicleProps["windows"] + 1] = true
             end
         end
-        
+
         for id = 0, 5 do
             local doorId = IsVehicleDoorDamaged(vehicle, id)
-        
+
             if doorId then
                 vehicleProps["doors"][#vehicleProps["doors"] + 1] = doorId
             else
