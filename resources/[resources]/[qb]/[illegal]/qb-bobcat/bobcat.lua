@@ -532,9 +532,19 @@ local function hackanim()
                 FreezeEntityPosition(PlayerPedId(), true)
                 NetworkStopSynchronisedScene(IntroHack)
                 NetworkStartSynchronisedScene(HackLoop)
+
+                --IPL FIX
+                RequestIpl("prologue06_int_np")
+                local interiorid = GetInteriorAtCoords(883.4142, -2282.372, 31.44168)
+                DeactivateInteriorEntitySet(interiorid, "np_prolog_broken")
+                ActivateInteriorEntitySet(interiorid, "np_prolog_clean")
+                RefreshInterior(interiorid)
+                --END
+
                     exports['hacking']:OpenHackingGame(Config.LaptopTime, Config.LaptopBlocks, Config.LaptopRepeat, function(Success)
                     if Success then -- success
                         Alert()
+                        TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 30, "bobcat", 0.6) 
                         NetworkStopSynchronisedScene(HackLoop)
                         NetworkStartSynchronisedScene(HackLoopFinish)
                         Wait(6000)
@@ -636,7 +646,7 @@ function SpawnGuards()
         SetEntityAsMissionEntity(guards['npcguards'][k])
         SetEntityVisible(guards['npcguards'][k], true)
         SetPedRelationshipGroupHash(guards['npcguards'][k], "npcguards")
-        SetPedAccuracy(guards['npcguards'][k], 75)
+        SetPedAccuracy(guards['npcguards'][k], 85)
         SetPedArmour(guards['npcguards'][k], 100)
         SetPedCanSwitchWeapon(guards['npcguards'][k], true)
         SetPedDropsWeaponsWhenDead(guards['npcguards'][k], false)
