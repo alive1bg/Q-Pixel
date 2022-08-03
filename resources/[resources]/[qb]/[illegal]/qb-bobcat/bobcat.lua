@@ -315,8 +315,7 @@ end
 function HackSuccessThermite()
     QBCore.Functions.Notify("Door opened", "success", "6000")
     ClearPedTasksImmediately(PlayerPedId())
-    TriggerServerEvent("gc-bobcatheist:successthermite")
-    TriggerServerEvent('gc-bobcatheist:server:cooldown')
+    TriggerServerEvent("gc-bobcatheist:successthermite") 
     --TriggerServerEvent('doors:change-lock-state', Config.Door1, false)
 end
 
