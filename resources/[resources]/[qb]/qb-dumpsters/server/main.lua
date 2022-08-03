@@ -1,10 +1,10 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 Loot = {
-    {'recycablematerial', math.random(1,3)},
+    {'recyclablematerial', math.random(1,3)}, -- spelled correctly
     {'weapon_bat', 1},
     {'phone', math.random(1,2)},
-    {'xs-condom', 1},
+    -- {'xs-condom', 1},  -- invalid item
     {'weed_ak47', math.random(1,13)},
     {'kurkakola', math.random(1,3)},
 }
@@ -18,6 +18,7 @@ RegisterNetEvent('qb-trashsearch:server:recieveItem', function()
     local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local chosenrandomItem = Loot[math.random(1, #Loot)]
+    print(chosenrandomItem[1], chosenrandomItem[2])
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[chosenrandomItem[1]], "add")
     ply.Functions.AddItem(chosenrandomItem[1], chosenrandomItem[2])
 end)
