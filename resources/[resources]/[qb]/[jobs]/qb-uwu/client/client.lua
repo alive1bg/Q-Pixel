@@ -289,14 +289,10 @@ end)
 
 RegisterNetEvent('qb-uwu:Stash')
 AddEventHandler('qb-uwu:Stash',function(data)
-	if not onDuty then
-		TriggerEvent('QBCore:Notify', "Not clocked in!", 'error')
-	else
-		TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
-		id = data.stash
-    	TriggerServerEvent("inventory:server:OpenInventory", "stash", "uWuCafe_"..id)
-    	TriggerEvent("inventory:client:SetCurrentStash", "uWuCafe_"..id)
-	end
+	TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
+	id = data.stash
+	TriggerServerEvent("inventory:server:OpenInventory", "stash", "uWuCafe_"..id)
+	TriggerEvent("inventory:client:SetCurrentStash", "uWuCafe_"..id)
 end)
 
 RegisterNetEvent('qb-uwu:Shop')

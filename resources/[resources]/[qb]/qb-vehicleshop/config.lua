@@ -66,6 +66,66 @@ Config.Shops = {
             },
         },
     },
+
+
+    ['luxcardealer'] = {
+        ['Type'] = 'managed', -- no player interaction is required to purchase a car
+        ['Zone'] = {
+            ['Shape'] = {--polygon that surrounds the shop
+            vector2(-63.035869598389, -1100.6953125),
+            vector2(-25.431182861328, -1114.3978271484),
+            vector2(-15.292338371277, -1088.6087646484),
+            vector2(-53.677623748779, -1075.9456787109)
+            },
+            ['minZ'] = 26.92, -- min height of the shop zone
+            ['maxZ'] = 27.26, -- max height of the shop zone
+            ['size'] = 2.75 -- size of the vehicles zones
+        },
+        ['Job'] = 'cardealer', -- Name of job or none
+        ['ShopLabel'] = 'Luxury Autos', -- Blip name
+        ['showBlip'] = true, -- true or false
+        ['blipSprite'] = 326, -- Blip sprite
+        ['blipColor'] = 4, -- Blip color
+        ['Categories'] = {-- Categories available to browse
+            ['luxury'] = 'Luxury',
+        },
+        ['TestDriveTimeLimit'] = 0.5, -- Time in minutes until the vehicle gets deleted
+        ['Location'] = vector3(-48.03913, -1095.47, 27.274839), -- Blip Location
+        ['ReturnLocation'] = vector3(-15.78557, -1080.431, 27.047246), -- Location to return vehicle, only enables if the vehicleshop has a job owned
+        ['VehicleSpawn'] = vector4(-23.60979, -1094.46, 26.893323, 339.48153), -- Spawn location when vehicle is bought
+        ['TestDriveSpawn'] = vector4(-23.60979, -1094.46, 26.893323, 339.48153), -- Spawn location for test drive
+        ['ShowroomVehicles'] = {
+            [1] = {
+                coords = vector4(-42.28479, -1101.327, 25.880916, 27.178356), -- where the vehicle will spawn on display
+                defaultVehicle = 't20', -- Default display vehicle
+                chosenVehicle = 't20', -- Same as default but is dynamically changed when swapping vehicles
+            },
+            [2] = {
+                coords = vector4(-54.72975, -1096.913, 25.891981, 356.53399),
+                defaultVehicle = 'nero2',
+                chosenVehicle = 'nero2',
+            },
+            [3] = {
+                coords = vector4(-47.4539, -1092.215, 25.892526, 220.07905),
+                defaultVehicle = 'comet2',
+                chosenVehicle = 'comet2',
+            },
+            [4] = {
+                coords = vector4(-36.58381, -1093.313, 25.8924, 83.905616),
+                defaultVehicle = 'tempesta',
+                chosenVehicle = 'tempesta',
+            },
+            [5] = {
+                coords = vector4(-49.97853, -1083.673, 26.892259, 217.18513),
+                defaultVehicle = 'vacca',
+                chosenVehicle = 'vacca',
+            },
+        },
+    },
+
+
+    
+
     ['tuner'] = {
         ['Type'] = 'managed', -- meaning a real player has to sell the car
         ['Zone'] = {

@@ -40,6 +40,7 @@ Config.Items = {
         [18] = { name = "uwucheese", price = 6, amount = 25, info = {}, type = "item", slot = 18, },
         [19] = { name = "uwuham", price = 6, amount = 25, info = {}, type = "item", slot = 19, },
         [20] = { name = "uwuchocolate", price = 6, amount = 25, info = {}, type = "item", slot = 20, },
+        [21] = { name = "uwucatfood", price = 6, amount = 25, info = {}, type = "item", slot = 21, },
 
     }
 }
