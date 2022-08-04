@@ -451,7 +451,7 @@ if cfg.torqueMultiplierEnabled or cfg.preventVehicleFlip or cfg.limpMode then
 							end
 						else
 							-- Stopped or almost stopped or sliding sideways
-							local entitySpeed = GetEntitySpeed(vehicle)
+							--[[ local entitySpeed = GetEntitySpeed(vehicle)
 							if entitySpeed < 1 then
 								-- Not sliding sideways
 								if isBrakingForward == true then
@@ -474,7 +474,7 @@ if cfg.torqueMultiplierEnabled or cfg.preventVehicleFlip or cfg.limpMode then
 									-- We let go of the reverse brake (Accelerator)
 									isBrakingReverse=false
 								end
-							end
+							end ]]
 						end
 						if brk > fBrakeForce - 0.02 then brk = fBrakeForce end -- Make sure we can brake max.
 						SetVehicleHandlingFloat(vehicle, 'CHandlingData', 'fBrakeForce', brk)  -- Set new Brake Force multiplier
