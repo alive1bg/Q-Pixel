@@ -235,7 +235,7 @@ AddEventHandler("qb-dispatch:client:AddCallBlip", function(coords, data, blipId)
 			local blip = nil
 			local radius = nil
 			local radiusAlpha = 128
-			local sprite, colour, scale = 161, 84, 1.0
+			local sprite, colour, scale = 161, 84, 2.0
 			local randomoffset = math.random(1,100)
 			if data.blipSprite then sprite = data.blipSprite end
 			if data.blipColour then colour = data.blipColour end
