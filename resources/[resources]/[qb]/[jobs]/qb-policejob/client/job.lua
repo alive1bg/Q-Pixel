@@ -970,25 +970,6 @@ exports['qb-target']:AddBoxZone("Trash1", vector3(442.47, -983.19, 30.69), 0.4, 
     distance = 1.5
 })
 
-exports['qb-target']:AddBoxZone("bossmrpd", vector3(461.51, -986.33, 30.69), 0.5, 0.5, {
-    name = "bossmrpd",
-    heading = 0,
-    debugPoly = false,
-    minZ=30.59,
-    maxZ=30.79
-    }, {
-    options = {
-        {
-            type = "client",
-            event = "qb-management:client:OpenMenu",
-            icon = "fas fa-circle",
-            label = "Boss Menu",
-            job = {["police"] = 9, ["sasp"] = 9, ["saspr"] = 9, ["sdso"] = 9, ["pbso"] = 9, ["bcso"] = 9},
-        },
-    },
-    distance = 2.5
-})
-
 exports['qb-target']:AddBoxZone("policeoutfits", vector3(460.2, -999.76, 30.69), 0.55, 1.05, {
     name = "policeoutfits",
     heading = 0,
