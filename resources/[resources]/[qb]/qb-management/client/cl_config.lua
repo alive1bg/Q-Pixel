@@ -77,7 +77,7 @@ Config.BossMenuZones = {
 
 Config.GangMenus = {
     ['lostmc'] = {
-        vector3(0, 0, 0),
+        vector3(988.72, -135.66, 74.06),
     },
     ['ballas'] = {
         vector3(0,0, 0),
@@ -94,9 +94,23 @@ Config.GangMenus = {
 }
 
 Config.GangMenuZones = {
-    --[[
-    ['gangname'] = {
-        { coords = vector3(0.0, 0.0, 0.0), length = 0.0, width = 0.0, heading = 0.0, minZ = 0.0, maxZ = 0.0 },
+    
+    ['lostmc'] = {
+        { coords = vector3(988.72, -135.66, 74.06), length = .06, width = 0.6, heading = 330, minZ = 73.66, maxZ = 74.62 },
     },
-    ]]
+    --[[ ['ballas'] = {
+        { coords = vector3(988.72, -135.66, 74.06), length = .06, width = 0.6, heading = 330, minZ = 73.66, maxZ = 74.62 },
+    },
+    ['vagos'] = {
+        { coords = vector3(988.72, -135.66, 74.06), length = .06, width = 0.6, heading = 330, minZ = 73.66, maxZ = 74.62 },
+    },
+    ['cartel'] = {
+        { coords = vector3(988.72, -135.66, 74.06), length = .06, width = 0.6, heading = 330, minZ = 73.66, maxZ = 74.62 },
+    },
+    ['families'] = {
+        { coords = vector3(988.72, -135.66, 74.06), length = .06, width = 0.6, heading = 330, minZ = 73.66, maxZ = 74.62 },
+    }, ]]
+   
 }
+
+  
