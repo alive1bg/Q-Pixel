@@ -244,6 +244,7 @@ RegisterNetEvent("qb-pawnshop:client:pawnitems", function(item)
 
 		if tonumber(sellingItem.amount) > 0 then
 			TriggerServerEvent('qb-pawnshop:server:sellPawnItems', item.name, sellingItem.amount, item.price)
+			TriggerEvent('qb-pawnshop:client:openMenu')
 		else
 			QBCore.Functions.Notify(Lang:t('error.negative'), 'error')
 		end

@@ -10,36 +10,45 @@ Config.SendMeltingEmail = true
 Config.PawnItems = {
     [1] = {
         item = "goldchain",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [2] = {
         item = "diamond_ring",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [3] = {
         item = "rolex",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [4] = {
         item = "10kgoldchain",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [5] = {
         item = "tablet",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [6] = {
         item = "iphone",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [7] = {
         item = "samsungphone",
-        price = math.random(50,100)
+        price = math.random(50,200)
     },
     [8] = {
         item = "laptop",
-        price = math.random(50,100)
+        price = math.random(50,200)
+    },
+    [9] = {
+        item = "diamond",
+        price = math.random(50,200)
+    },
+    [10] = {
+        item = "phone",
+        price = math.random(50,200)
     }
+
 }
 
 Config.MeltingItems = { -- meltTime is amount of time in minutes per item
@@ -51,7 +60,7 @@ Config.MeltingItems = { -- meltTime is amount of time in minutes per item
                 amount = 2
             }
         },
-        meltTime = 0.15
+        meltTime = 0.5
     },
     [2] = {
         item = "diamond_ring",
@@ -65,7 +74,7 @@ Config.MeltingItems = { -- meltTime is amount of time in minutes per item
                 amount = 1
             }
         },
-        meltTime = 0.15
+        meltTime = 0.5
     },
     [3] = {
         item = "rolex",
@@ -83,7 +92,7 @@ Config.MeltingItems = { -- meltTime is amount of time in minutes per item
                 amount = 1
             }
         },
-        meltTime = 0.15
+        meltTime = 0.5
     },
     [4] = {
         item = "10kgoldchain",
@@ -97,6 +106,6 @@ Config.MeltingItems = { -- meltTime is amount of time in minutes per item
                 amount = 1
             }
         },
-        meltTime = 0.15
+        meltTime = 0.5
     },
 }

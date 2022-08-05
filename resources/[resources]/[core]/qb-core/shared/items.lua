@@ -1102,6 +1102,7 @@ QBShared.Items = {
 	['lvaultusbcodes']		  = {['name'] = "lvaultusbcodes",				['label'] = "Codes",					['weight'] = 500,		['type'] = 'item', 		['image'] = 'lvaultusbcodes.png',			['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "Vault Codes", ['created'] = nil, ['decay'] = 14.0},
 	-- Vangelico Jewellery Robbery
 	['goldlaptop']			  = {['name'] = "goldlaptop",					['label'] = "Gold Laptop",				['weight'] = 500,		['type'] = 'item', 		['image'] = 'np_laptop_prac.png',			['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "A gold laptop used in PAC lower vault.", ['created'] = nil, ['decay'] = 14.0},
+	['diamond'] 			 	 	 = {['name'] = 'diamond', 			  			['label'] = 'Diamond', 					['weight'] = 100, 	    ['type'] = 'item', 		['image'] = 'np_gallery_diamond.png', 	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'Looks pretty expensive to me', ['created'] = nil, ['decay'] = 14.0},
 
 	-- FLEECA
 	['greenlaptop']			  = {['name'] = "greenlaptop",					['label'] = "Green Laptop",				['weight'] = 500,		['type'] = 'item', 		['image'] = 'np_laptop03.png',						['unique'] = false,		['useable']	= true,		['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = "A green laptop used for fleecas", ['created'] = nil, ['decay'] = 14.0},
