@@ -305,7 +305,7 @@ local AllDoors = {
 	[244] = {id = 244, active = true, model = 933053701, coords = vec3(880.029785, -2268.181641, 32.591602), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	-- bobcat first doors
 	[245] = {id = 245, active = true, model = -1259801187, coords = vec3(883.48030, -2258.5300, 32.53486), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
-	[246] = {id = 246, active = true, model = -1259801187, coords = vec3(880.89510, -2258.30800, 32.53486), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
+	[246] = {id = 246, active = true, model = -1563799200, coords = vec3(880.89510, -2258.30800, 32.53486), automatic = false, lock = 2, forceUnlocked = false, access = {job = {["PD"] = true}}},
 	
 
 }
