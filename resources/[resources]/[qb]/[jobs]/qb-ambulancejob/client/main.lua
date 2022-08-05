@@ -27,6 +27,7 @@ isHealingPerson = false
 healAnimDict = "mini@cpr@char_a@cpr_str"
 healAnim = "cpr_pumpchest"
 injured = {}
+isRecovering = false
 
 BodyParts = {
     ['HEAD'] =          { label = Lang:t('body.head'),          causeLimp = false, isDamaged = false, severity = 0 },
@@ -543,6 +544,7 @@ RegisterNetEvent('hospital:client:Revive', function()
         isDead = false
         SetEntityInvincible(player, false)
         SetLaststand(false)
+        isRecovering = true
     end
 
     if isInHospitalBed then
@@ -550,13 +552,19 @@ RegisterNetEvent('hospital:client:Revive', function()
         TaskPlayAnim(player, inBedDict , inBedAnim, 8.0, 1.0, -1, 1, 0, 0, 0, 0 )
         SetEntityInvincible(player, true)
         canLeaveBed = true
+        isRecovering = true
+    end
+
+    if isRecovering then
+        SetPlayerSprint(PlayerId(), false)
+        print('is recovering',isRecovering)
     end
 
     TriggerServerEvent("hospital:server:RestoreWeaponDamage")
     SetEntityMaxHealth(player, 200)
     SetEntityHealth(player, 200)
     ClearPedBloodDamage(player)
-    SetPlayerSprint(PlayerId(), true)
+    -- SetPlayerSprint(PlayerId(), true)
     ResetAll()
     ResetPedMovementClipset(player, 0.0)
     TriggerServerEvent('hud:server:RelieveStress', 100)
@@ -619,6 +627,23 @@ RegisterNetEvent('hospital:client:SendToBed', function(id, data, isRevive)
         if isRevive then
             QBCore.Functions.Notify(Lang:t('success.being_helped'), 'success')
             Wait(Config.AIHealTimer * 1000)
+            TriggerEvent("hospital:client:Revive")
+        else
+            canLeaveBed = true
+        end
+    end)
+end)
+
+RegisterNetEvent('hospital:client:PutInBed', function(id, data, isRevive, info)
+    bedOccupying = id
+    bedOccupyingData = data
+    SetBedCam()
+    CreateThread(function ()
+        Wait(5)
+        if isRevive then
+            QBCore.Functions.Notify(Lang:t('success.being_helped'), 'success')
+            Wait(info.time * 60000)
+            print(info.time)
             TriggerEvent("hospital:client:Revive")
         else
             canLeaveBed = true
@@ -810,7 +835,7 @@ CreateThread(function()
                     --else
                     --    exports['qb-ui']:showInteraction('Check In')
                     --end
-                    if IsControlJustReleased(0, 38) then                        
+                    if IsControlJustReleased(0, 38) then
                         if doctorCount >= Config.MinimalDoctors then
                             TriggerServerEvent("hospital:server:SendDoctorAlert")
                         else
@@ -868,29 +893,31 @@ AddEventHandler("ambulance:client:checkin", function()
         local pos = GetEntityCoords(PlayerPedId())
         for k, checkins in pairs(Config.Locations["checking"]) do
             if #(pos - checkins) < 1.0 then
-                sleep = 5                       
-                if doctorCount >= Config.MinimalDoctors then                           
-                    TriggerServerEvent("hospital:server:SendDoctorAlert")
-                else
-                    TriggerEvent('animations:client:EmoteCommandStart', {"notepad"})
-                    QBCore.Functions.Progressbar("hospital_checkin", Lang:t('progress.checking_in'), 2000, false, true, {
-                        disableMovement = true,
-                        disableCarMovement = true,
-                        disableMouse = false,
-                        disableCombat = true,
-                    }, {}, {}, {}, function() -- Done
-                        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-                        local bedId = GetAvailableBed()
-                        if bedId then
-                            TriggerServerEvent("hospital:server:SendToBed", bedId, true)
-                        else
-                            QBCore.Functions.Notify(Lang:t('error.beds_taken'), "error")
-                        end
-                    end, function() -- Cancel
-                        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-                        QBCore.Functions.Notify(Lang:t('error.canceled'), "error")
-                    end)
-                end
+                sleep = 5
+                QBCore.Functions.TriggerCallback("hospital:server:getEMS", function(enoughEMS)
+                    if enoughEMS >= 1 then
+                        TriggerServerEvent("hospital:server:SendDoctorAlert")
+                    else
+                        TriggerEvent('animations:client:EmoteCommandStart', {"notepad"})
+                        QBCore.Functions.Progressbar("hospital_checkin", Lang:t('progress.checking_in'), 2000, false, true, {
+                            disableMovement = true,
+                            disableCarMovement = true,
+                            disableMouse = false,
+                            disableCombat = true,
+                        }, {}, {}, {}, function() -- Done
+                            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+                            local bedId = GetAvailableBed()
+                            if bedId then
+                                TriggerServerEvent("hospital:server:SendToBed", bedId, true)
+                            else
+                                QBCore.Functions.Notify(Lang:t('error.beds_taken'), "error")
+                            end
+                        end, function() -- Cancel
+                            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+                            QBCore.Functions.Notify(Lang:t('error.canceled'), "error")
+                        end)
+                    end
+                end)
             end
         end
 
@@ -1009,7 +1036,7 @@ exports['qb-target']:AddBoxZone("emsArmory", vector3(306.02, -602.42, 43.28), 1.
             },
         },
         distance = 3
-}) 
+})
 
 -- EMS Toggle Duty
 exports['qb-target']:AddBoxZone("EMSDuty", vector3(307.36, -597.23, 43.28), 0.05, 0.25, {
@@ -1126,7 +1153,7 @@ exports['qb-target']:AddBoxZone("ViceemsArmory", vector3(-820.92, -1243.33, 7.34
             },
         },
         distance = 3
-}) 
+})
 
 -- EMS Toggle Duty
 exports['qb-target']:AddBoxZone("ViceEMSDuty", vector3(-817.88, -1238.88, 7.34), 0.05, 0.25, {
@@ -1166,3 +1193,52 @@ exports['qb-target']:AddBoxZone("EMSDuty2", vector3(-818.08, -1238.69, 7.34), 0.
         },
         distance = 1.5
 })
+
+
+RegisterNetEvent('hospital:putinbed')
+AddEventHandler('hospital:putinbed', function()
+    local data = exports['qb-input']:ShowInput({
+        header = "Put in Bed",
+        submitText = "Submit",
+        inputs = {
+            {
+                text = "City ID (#)", -- text you want to be displayed as a place holder
+                name = "citizenid", -- name of the input should be unique otherwise it might override
+                type = "number", -- type of the input
+                isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+                -- default = "CID-1234", -- Default text option, this is optional
+            },
+            {
+                text = "Recovery Time (in minutes)", -- text you want to be displayed as a place holder
+                name = "time", -- name of the input should be unique otherwise it might override
+                type = "number", -- type of the input
+                isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+                -- default = "password123", -- Default text option, this is optional
+            },
+            {
+                text = "Bill Price ($)", -- text you want to be displayed as a place holder
+                name = "billprice", -- name of the input should be unique otherwise it might override
+                type = "number", -- type of the input - number will not allow non-number characters in the field so only accepts 0-9
+                isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+                -- default = 1, -- Default number option, this is optional
+            },
+        },
+    })
+
+    if data ~= nil then
+        -- for k,v in pairs(data) do
+            -- print(k .. " : " .. v)
+            print(data.citizenid)
+            print(data.time)
+            local bedId = GetAvailableBed()
+            if bedId then
+                TriggerServerEvent("hospital:server:PutInBed", bedId, true, data)
+            else
+                QBCore.Functions.Notify(Lang:t('error.beds_taken'), "error")
+            end
+        -- end
+    end
+end, false)
+
+
+----

@@ -559,3 +559,5 @@ RegisterNetEvent('hospital:openEMSPersonal', function()
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "ems_"..QBCore.Functions.GetPlayerData().citizenid)
     TriggerEvent("inventory:client:SetCurrentStash", "ems_"..QBCore.Functions.GetPlayerData().citizenid)
 end)
+
+

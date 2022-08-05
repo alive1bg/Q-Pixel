@@ -25,6 +25,19 @@ RegisterNetEvent('hospital:server:SendToBed', function(bedId, isRevive)
 	TriggerClientEvent('hospital:client:SendBillEmail', src, Config.BillCost)
 end)
 
+RegisterNetEvent('hospital:server:PutInBed', function(bedId, isRevive, info)
+	-- print(info.billprice)
+	local src = info.citizenid
+	local Player = QBCore.Functions.GetPlayer(tonumber(src))
+	TriggerClientEvent('hospital:client:PutInBed', src, bedId, Config.Locations["beds"][bedId], isRevive, info)
+	TriggerClientEvent('hospital:client:SetBed', -1, bedId, true)
+	Player.Functions.RemoveMoney("bank", info.billprice , "Pillbox")
+	print(info.billprice)
+	--TriggerEvent('qb-management:server:addAccountMoney', "ambulance", Config.BillCost)
+	exports['qb-management']:AddMoney("ambulance", info.billprice)
+	TriggerClientEvent('hospital:client:SendBillEmail', src, info.billprice)
+end)
+
 RegisterNetEvent('hospital:server:RespawnAtHospital', function()
 	local src = source
 	local Player = QBCore.Functions.GetPlayer(src)
@@ -365,4 +378,15 @@ QBCore.Functions.CreateUseableItem("firstaid", function(source, item)
 	if Player.Functions.GetItemByName(item.name) ~= nil then
 		TriggerClientEvent("hospital:client:UseFirstAid", src)
 	end
+end)
+
+QBCore.Functions.CreateCallback('hospital:server:getEMS', function(source, cb)
+    local amount = 0
+    local players = QBCore.Functions.GetQBPlayers()
+    for _, Player in pairs(players) do
+        if Player.PlayerData.job.name == "ambulance" and Player.PlayerData.job.onduty then
+            amount = amount + 1
+        end
+    end
+    cb(amount)
 end)

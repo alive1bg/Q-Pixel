@@ -1,6 +1,6 @@
 Config = {}
 
-Config.MinimalDoctors = 2
+Config.MinimalDoctors = 1
 Config.WipeInventoryOnRespawn = false
 
 Config.Locations = {
@@ -42,9 +42,9 @@ Config.Locations = {
         [2] = {coords = vector4(313.96, -579.05, 43.53, 164.5), taken = false, model = 1631638868},
         [3] = {coords = vector4(314.58, -584.09, 43.53, 335.65), taken = false, model = 1631638868},
         [4] = {coords = vector4(317.74, -585.29, 43.53, 335.65), taken = false, model = 1631638868},
-        [5] = {coords = vector4(319.47, -581.04, 43.53, 164.5), taken = false, model = 1631638868}, 
-        [6] = {coords = vector4(366.43, -581.54, 43.28, 66.5), taken = false, model = 1631638868}, 
-        [7] = {coords = vector4(364.93, -585.86, 43.28, 67.5), taken = false, model = 1631638868}, 
+        [5] = {coords = vector4(319.47, -581.04, 43.53, 164.5), taken = false, model = 1631638868},
+        [6] = {coords = vector4(366.43, -581.54, 43.28, 66.5), taken = false, model = 1631638868},
+        [7] = {coords = vector4(364.93, -585.86, 43.28, 67.5), taken = false, model = 1631638868},
         [8] = {coords = vector4(363.82, -589.09, 43.28, 68.5), taken = false, model = 1631638868},
 	--- paleto
 	    [9] = {coords = vector4(-252.43, 6312.25, 32.34, 313.48), taken = false, model = 2117668672},
@@ -151,7 +151,7 @@ Config.Items = {
             type = "item",
             slot = 8,
         },
-        
+
     }
 }
 
