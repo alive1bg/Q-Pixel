@@ -187,6 +187,9 @@ function EnterApartment(house, apartmentId, new)
             if offset > 230 then
                 offset = 210
             end
+            if ClosestHouse == nil then
+                ClosestHouse = house
+            end
             CurrentOffset = offset
             TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.1)
             TriggerServerEvent("apartments:server:AddObject", apartmentId, house, CurrentOffset)
