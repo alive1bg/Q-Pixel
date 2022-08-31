@@ -245,6 +245,7 @@ function Spawn.obtainWorldSpawnPos(spawnInfo)
 
     local dev = Spawn.getDevSpawn()
     local rooster = Spawn.getRoosterSpawn()
+    local lastpos = Spawn.lastPos()
 
     if dev and dev.info == spawnInfo then
         found = dev.pos
@@ -252,6 +253,10 @@ function Spawn.obtainWorldSpawnPos(spawnInfo)
 
     if rooster and rooster.info == spawnInfo then
         found = rooster.pos
+    end
+
+    if lastpos and lastpos.info == spawnInfo then
+        found = lastpos.pos
     end
 
     return found

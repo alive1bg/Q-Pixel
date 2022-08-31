@@ -8,6 +8,7 @@ local isRealestate = false
 local isDead = false
 local myJob = "Unemployed"
 local onDuty = false
+local isJailed = 0
 
 AddEventHandler('onResourceStart', function(resource)
     PlayerData = QBCore.Functions.GetPlayerData()
@@ -19,6 +20,9 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     PlayerJob = PlayerData.job
     onDuty = PlayerJob.onduty
+	if PlayerData.metadata["injail"] > 0 then
+		isJailed = 1
+	end
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
@@ -29,6 +33,8 @@ RegisterNetEvent('QBCore:Client:SetDuty')
 AddEventHandler('QBCore:Client:SetDuty', function(duty)
     onDuty = duty
 end)
+
+
 
 Spawn.defaultSpawns = {
 	[1] =  { ["pos"] = vector4(272.16, 185.44, 104.67, 320.57), ['info'] = ' Vinewood Blvd Taxi Stand'},
@@ -42,8 +48,8 @@ Spawn.defaultSpawns = {
 
 Spawn.motel = {
 	[1] = { ["pos"] = vector4(-270.13,-957.28,31.23, 166.11), ['info'] = ' Apartments 1'},
-	-- [2] = { ["pos"] = vector4(-1236.27,-860.84,12.91,213.56), ['info'] = ' Apartments 2'},
-	-- [3] = { ["pos"] = vector4(173.96, -631.29, 47.08, 303.12), ['info'] = ' Apartments 3'}
+	--[2] = { ["pos"] = vector4(-1236.27,-860.84,12.91,213.56), ['info'] = ' Apartments 2'},
+	--[3] = { ["pos"] = vector4(173.96, -631.29, 47.08, 303.12), ['info'] = ' Apartments 3'}
 }
 
 
@@ -58,6 +64,7 @@ RegisterNetEvent('qb-houses:client:setHouseConfig', function(houseConfig)
 end)
 
 RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
+	print(isJailed)
 	Login.Selected = false
 	Login.CurrentPedInfo = nil
 	Login.CurrentPed = nil
@@ -72,13 +79,20 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 		return
 	end
 
+	if isJailed >= 1 then
+		print("OLA")
+		Spawn.overwriteSpawn(spawnData.overwrites)
+		return
+	end
+	
 	if spawnData.overwrites ~= nil then
-		if spawnData.overwrites == "jail" or spawnData.overwrites == "maxsec" or spawnData.overwrites == "rehab" then
+		if isJailed >= 1 then
+			print("OLA")
 			Spawn.overwriteSpawn(spawnData.overwrites)
 		elseif spawnData.overwrites == "new" then
 			Spawn.isNew = true
 			Spawn.selectedSpawn(' Apartments 1')
-			TriggerEvent("backitems:start")
+			TriggerEvent("backitems:start") 
 		end
 		return
 	end
@@ -92,9 +106,12 @@ RegisterNetEvent('spawn:clientSpawnData', function(spawnData)
 
 	currentSpawns[#currentSpawns + 1] = Spawn.getDevSpawn()
 	currentSpawns[#currentSpawns + 1] = Spawn.getRoosterSpawn()
+	currentSpawns[#currentSpawns + 1] = Spawn.lastPos()
 	currentSpawns[#currentSpawns + 1] = Spawn.motel[1]
 	Spawn.defaultApartmentSpawn = spawnData.motelRoom
 	Spawn.tempHousing = {}
+
+	
 
 	for k,v in pairs(spawnData.houses) do
 		local data = Spawn.createDefaultData(k)
@@ -170,6 +187,16 @@ function Spawn.getDevSpawn()
 
 	return spawn
 end 
+
+function Spawn.lastPos()
+	local spawn = nil
+
+	QBCore.Functions.GetPlayerData(function(PlayerData)
+		spawn = { ["pos"] = vector4(PlayerData.position.x, PlayerData.position.y, PlayerData.position.z, 31.532089), ['info'] = 'Last Location'}
+	end)
+
+	return spawn
+end
 
 
 function Spawn.getRoosterSpawn()
@@ -262,7 +289,8 @@ end
 
 
 function Spawn.overwriteSpawn(overwrite)
-	local pos = vector4(1802.51,2607.19,46.01,93.0) -- default prison
+	local pos = vector4(1770.2215, 2480.3691, 45.816719, 27.488483) -- default prison
+	
 
 	if overwrite == "maxsec" then
 		pos = vector4(1690.75,2593.14,45.61,178.75)
@@ -270,15 +298,17 @@ function Spawn.overwriteSpawn(overwrite)
 		pos = vector4(-1475.86,884.47,182.93,93.0)
 	end
 
+	SetEntityCoords(PlayerPedId(),pos.x,pos.y,pos.z)
+	SetEntityHeading(PlayerPedId(),pos.w)
+
 	Login.DeleteCamera()
 	SetNuiFocus(false,false)
- 	doCamera(pos.x,pos.y,pos.z)
+ 	--doCamera(pos.x,pos.y,pos.z)
  	Wait(300)
-	DoScreenFadeOut(2)
-	Login.DeleteCamera()
+	DoScreenFadeOut(5)
+	--Login.DeleteCamera()
 
 	TriggerServerEvent("jail:characterFullySpawend")
-
 	Wait(200)
 
 	DoScreenFadeIn(2500)

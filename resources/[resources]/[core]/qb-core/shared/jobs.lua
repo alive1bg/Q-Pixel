@@ -200,26 +200,25 @@ QBShared.Jobs = {
         },
     },
     ['casino'] = {
-		label = 'Diamond Casino',
-		defaultDuty = true,
-		offDutyPay = false,
-		grades = {
+        label = 'Diamond Casino',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
             ['0'] = {
-                name = 'Employee',
-                payment = 55
+                name = 'Employee', 
+                payment = 125
             },
             ['1'] = {
-                name = 'Manager',
-                isboss = true,
-                payment = 75
+                name = 'Manager', 
+                payment = 125
             },
             ['2'] = {
-                name = 'Casino Owner',
-                isboss = true,
-                payment = 100
-            },
+                name = 'Owner', 
+                isboss = true, 
+                payment = 150
+            }
         },
-	},
+    },
     ['cardshop'] = {
 		label = 'Card Shop',
 		defaultDuty = true,

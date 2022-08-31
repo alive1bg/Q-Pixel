@@ -1,4 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+
 function checkOverwrites(char)
     local rev = nil
     -- if char.jail then

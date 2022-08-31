@@ -79,8 +79,8 @@ function QBCore.Player.CheckPlayerData(source, PlayerData)
     PlayerData.metadata['dealerrep'] = PlayerData.metadata['dealerrep'] or 0
     PlayerData.metadata['craftingrep'] = PlayerData.metadata['craftingrep'] or 0
     PlayerData.metadata['attachmentcraftingrep'] = PlayerData.metadata['attachmentcraftingrep'] or 0
-    PlayerData.metadata['carboostclass'] = PlayerData.metadata['carboostclass'] or 'D'
-    PlayerData.metadata['carboostrep'] = PlayerData.metadata['carboostrep'] or 0
+    PlayerData.metadata['boostingrep'] = PlayerData.metadata['boostingrep'] or 0
+    PlayerData.metadata['boostingclass'] = PlayerData.metadata['boostingclass'] or 'D'
     PlayerData.metadata['laptopdata'] = PlayerData.metadata['laptopdata'] or {
         wallpaper = 'default',
         apps = {}

@@ -5,6 +5,7 @@ local isTow = false
 local isTaxi = false
 local isMedic = false
 local isRealestate = false
+local isCasino = false
 local isDead = false
 local myJob = "Unemployed"
 local onDuty = false
@@ -196,6 +197,18 @@ rootMenuConfig =  {
             return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isRealestate)
         end,
     },
+
+    {
+        id = "casinomenu",
+        displayName = "casino",
+        icon = "#animation-business",
+        functionName = "qb-casino:client:ManageCasino",
+        enableMenu = function()
+            local pData = QBCore.Functions.GetPlayerData()
+            return (not pData.metadata["isdead"] and not pData.metadata["inlaststand"] and isCasino)
+        end,
+    },
+
     {
         id = "HouseOptions",
         displayName = "Home",
@@ -1046,6 +1059,7 @@ AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
     myJob = jobInfo.name
     if isMedic and myJob ~= "ambulance" then isMedic = false end
     if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isRealestate and myJob ~= "casino" then isCasino = false end
     if isPolice and myJob ~= "police" then isPolice = false end
     if isTow and myJob ~= "tow" then isTow = false end
     if isTaxi and myJob ~= "taxi" then isTaxi = false end
@@ -1056,6 +1070,7 @@ AddEventHandler("QBCore:Client:OnJobUpdate", function(jobInfo)
     if myJob == "tuner" then isTuner = true end
     if myJob == "ambulance" then isMedic = true end
     if myJob == "realestate" then isRealestate = true end
+    if myJob == "casino" then isCasino = true end
 end)
 
 RegisterNetEvent('QBCore:Client:SetDuty') -- dont edit this unless you don't use qb-core
@@ -1063,11 +1078,13 @@ AddEventHandler('QBCore:Client:SetDuty', function(duty)
     myJob = QBCore.Functions.GetPlayerData().job.name
     if isMedic and myJob ~= "ambulance" then isMedic = false end
     if isRealestate and myJob ~= "realestate" then isRealestate = false end
+    if isCasino and myJob ~= "casino" then isCasino = false end
     if isPolice and myJob ~= "police" then isPolice = false end
     if isTuner and myJob ~= "tuner" then isTuner = false end
     if myJob == "police" then isPolice = true onDuty = duty end
     if myJob == "ambulance" then isMedic = true onDuty = duty end
     if myJob == "realestate" then isRealestate = true onDuty = duty end
+    if myJob == "casino" then isCasino = true onDuty = duty end
     if myJob == "tuner" then isTuner = true onDuty = duty end
 end)
 

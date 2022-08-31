@@ -225,6 +225,7 @@
                         <i class="fas fa-map-marker-alt" v-else-if="spawn.info.includes('Harmony Motel')"></i>
                         <i class="fas fa-map-marker-alt" v-else-if="spawn.info.includes('LS Bus Station')"></i>
                         <i class="fas fa-map-marker-alt" v-else-if="spawn.info.includes('The Richman Hotel')"></i>
+                        <i class="fas fa-map-pin pinLoc" v-else-if="spawn.info.includes('Last Location')"></i>
 
                         <!-- Else, the spawn is a home -->
                         <i class="fas fa-home homeIcon" v-else></i>

@@ -828,6 +828,9 @@ body {
   pointer-events:  none;
 }
 
+.pinLoc {
+  color: rgb(0, 207, 207);
+}
 
 .spawn-icon:hover {
   transform: scale(1.1);
