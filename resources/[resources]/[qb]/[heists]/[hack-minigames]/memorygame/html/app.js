@@ -38,13 +38,13 @@ ThermiteNew.Start = function(data) {
 
 
 window.addEventListener('message', function(event){
-var action = event.data.action;
-switch(action) {
-    case "Start":
-        ThermiteNew.Start(event.data);
-        break;
-    }
-});
+  var action = event.data.action;
+  switch(action) {
+      case "Start":
+          ThermiteNew.Start(event.data);
+          break;
+      }
+  });
 })
 
 $(document.body).on("click", ".block", onBlockClick);
@@ -108,7 +108,7 @@ function checkWinOrLost(){
     hideAllBlocks()
     window.activateClicking = false;
     $(".container").hide()
-    $.post('http://memorygame/ThermiteResult', JSON.stringify({
+    $.post('https://memorygame/ThermiteResult', JSON.stringify({
         success: true
     }));
   }
@@ -116,7 +116,7 @@ function checkWinOrLost(){
     hideAllBlocks();
     $(".container").hide()
     window.activateClicking = false;
-    $.post('http://memorygame/ThermiteResult', JSON.stringify({
+    $.post('https://memorygame/ThermiteResult', JSON.stringify({
         success: false
     }));
   }
@@ -135,7 +135,7 @@ function isGameForeited(){
         hideAllBlocks();
         $(".container").hide()
         window.activateClicking = false;
-        $.post('http://memorygame/ThermiteResult', JSON.stringify({
+        $.post('https://memorygame/ThermiteResult', JSON.stringify({
             success: false
         }));
     }       

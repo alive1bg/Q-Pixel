@@ -553,6 +553,16 @@ function FormatItemInfo(itemData, dom) {
             $(".item-info-description").html(
                 "<p>Gal: " + itemData.info.gal + "</p>" + "<p>Type: " + itemData.info.type + "</p>" + "<p>Octane: " + itemData.info.avg_gas_octane + "</p>"
             );
+
+        } else if (itemData.name == "casino_accesscode1") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html("<p>Part 1: " + itemData.info.code + "</p>");
+        } else if (itemData.name == "casino_accesscode2") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html("<p>Part 2: " + itemData.info.code + "</p>");
+        } else if (itemData.name == "casino_vaultcode") {
+            $(".item-info-title").html("<p>" + itemData.label + "</p>");
+            $(".item-info-description").html("<p>Access Codes: " + itemData.info.codes + "</p>");
         } else if (itemData.type == "weapon") {
             $(".item-info-title").html("<p>" + itemData.label + "</p>");
             if (itemData.info.ammo == undefined) {

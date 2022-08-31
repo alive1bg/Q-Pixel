@@ -168,8 +168,8 @@ FormatChatDate = function(date) {
 
 FormatMessageTime = function() {
     var NewDate = new Date();
-    var NewHour = NewDate.getHours();
-    var NewMinute = NewDate.getMinutes();
+    var NewHour = NewDate.getUTCHours();
+    var NewMinute = NewDate.getUTCMinutes();
     var Minutessss = NewMinute;
     var Hourssssss = NewHour;
     if (NewMinute < 10) {

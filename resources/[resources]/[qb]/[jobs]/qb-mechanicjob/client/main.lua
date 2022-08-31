@@ -980,7 +980,9 @@ CreateThread(function() -- Not event sure what this is even for
                     SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fEngineDamageMult', 0.120000)
                 else
                     --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fTractionCurveMin', 1.0)
-                    --SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fBrakeForce', 0.1)
+                    local fBrakeForce = GetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fBrakeForce')
+                    fBrakeForce = fBrakeForce * 0.5
+                    SetVehicleHandlingFloat(veh, 'CHandlingData', 'fBrakeForce', fBrakeForce)
                     print("handling data set")
                     SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fEngineDamageMult', 0.250000)
                     SetVehicleHandlingFloat(vehicleIdentifier, 'CHandlingData', 'fCollisionDamageMult', 1.000000)

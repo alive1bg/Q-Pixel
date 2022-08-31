@@ -280,4 +280,5 @@ function EjectFromVehicle()
     SetPedToRagdoll(ped, 5511, 5511, 0, 0, 0, 0)
     SetEntityVelocity(ped, veloc.x*4,veloc.y*4,veloc.z*4)
     local ejectspeed = math.ceil(GetEntitySpeed(ped) * 8)
+    SmashVehicleWindow(veh, 6)
 end

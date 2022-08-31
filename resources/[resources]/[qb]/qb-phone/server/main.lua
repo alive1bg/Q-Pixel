@@ -553,12 +553,12 @@ QBCore.Functions.CreateCallback('qb-phone:server:GetVehicleSearchResults', funct
 end)
 
 QBCore.Functions.CreateCallback('qb-phone:server:ScanPlate', function(source, cb, plate)
-    local src = source
+    local src = source 
     local vehicleData = {}
-    if plate then
-        local result = MySQL.query.await('SELECT * FROM player_vehicles WHERE plate = ?', {plate})
-        if result[1] then
-            local player = MySQL.query.await('SELECT * FROM players WHERE citizenid = ?', {result[1].citizenid})
+    if plate ~= nil then
+        local result = MySQL.Sync.fetchAll('SELECT * FROM player_vehicles WHERE plate = ?', {plate})
+        if result[1] and result[1].vinscratched == 0 then
+            local player = MySQL.Sync.fetchAll('SELECT * FROM players WHERE citizenid = ?', {result[1].citizenid})
             local charinfo = json.decode(player[1].charinfo)
             vehicleData = {
                 plate = plate,
@@ -566,7 +566,7 @@ QBCore.Functions.CreateCallback('qb-phone:server:ScanPlate', function(source, cb
                 owner = charinfo.firstname .. " " .. charinfo.lastname,
                 citizenid = result[1].citizenid
             }
-        elseif GeneratedPlates ~= nil and GeneratedPlates[plate] then
+        elseif GeneratedPlates ~= nil and GeneratedPlates[plate] ~= nil then
             vehicleData = GeneratedPlates[plate]
         else
             local ownerInfo = GenerateOwnerName()
